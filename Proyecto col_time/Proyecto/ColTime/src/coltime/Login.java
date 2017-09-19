@@ -67,7 +67,7 @@ public class Login extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 130, 30, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 130, 30, -1));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/close.png"))); // NOI18N
         jButton1.setBorderPainted(false);
@@ -88,7 +88,7 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("FrankRuehl", 1, 71)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(148, 177, 64));
         jLabel2.setText("Col");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 190, 140, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 190, 120, -1));
 
         jLabel3.setFont(new java.awt.Font("FrankRuehl", 0, 71)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(148, 177, 64));
@@ -98,7 +98,7 @@ public class Login extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("FrankRuehl", 0, 71)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(148, 177, 64));
         jLabel4.setText("TIME");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 190, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(527, 190, -1, -1));
         getContentPane().add(clockFace1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 110, 110));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconmonstr-password-10-32.png"))); // NOI18N
@@ -125,7 +125,7 @@ public class Login extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 450, 190, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 450, 160, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesEmpresa/logoT1.png"))); // NOI18N
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));

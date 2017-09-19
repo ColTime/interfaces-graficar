@@ -1,5 +1,6 @@
 package coltime;
 
+import Vistas.BuscarProyecto;
 import Vistas.Inicio;
 import Vistas.Usuarios1;
 import Vistas.proyecto;
@@ -21,10 +22,9 @@ public class Menu extends javax.swing.JFrame {
         btn1.setColorHover(cor);
         btn1.setColorNormal(cor);
         btn1.setColorPressed(cor);
-        btn4.setEnabled(false);
-        this.setIconImage(new ImageIcon(getClass().getResource("/imagenesEmpresa/loguinMin.png")).getImage());
+        this.setIconImage(new ImageIcon(getClass().getResource("/imagenesEmpresa/favicon.png")).getImage());
         this.setLocationRelativeTo(null);
-        new rojerusan.RSNotifyAnimated("Bienvenido", "Tienes 5 nuevas notificaciones", 5, RSNotifyAnimated.PositionNotify.BottomLeft, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+        new rojerusan.RSNotifyAnimated("Bienvenido", "Tienes 5 nuevas notificaciones", 6, RSNotifyAnimated.PositionNotify.BottomLeft, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
     }
     private int posX = 0;
     private int posY = 0;
@@ -410,11 +410,12 @@ public class Menu extends javax.swing.JFrame {
             btn3.setColorNormal(cor);
             btn3.setColorPressed(cor);
         }
+       BuscarProyecto bp=new BuscarProyecto();
+       bp.setVisible(true);
     }//GEN-LAST:event_btn4ActionPerformed
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
         int posicionX = jPMenu.getX();
-        int psiX = jPContenido.getX();
         if (posicionX > -1) {
             Animacion.Animacion.mover_izquierda(0, -542, 1, 2, jPMenu);
             Animacion.Animacion.mover_izquierda(202, 10, 1, 2, jPContenido);
@@ -473,7 +474,7 @@ public class Menu extends javax.swing.JFrame {
             btn3.setColorNormal(cor);
             btn3.setColorPressed(cor);
         }
-        new CambiaPanel(jPContenido, new Usuarios1());
+        new CambiaPanel(jPContenido, new  Usuarios1());
 
     }//GEN-LAST:event_btn3ActionPerformed
 
