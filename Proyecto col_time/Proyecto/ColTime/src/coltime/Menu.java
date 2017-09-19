@@ -1,6 +1,6 @@
 package coltime;
 
-import Vistas.BuscarProyecto;
+import Vistas.Producciones;
 import Vistas.Inicio;
 import Vistas.Usuarios1;
 import Vistas.proyecto;
@@ -410,7 +410,7 @@ public class Menu extends javax.swing.JFrame {
             btn3.setColorNormal(cor);
             btn3.setColorPressed(cor);
         }
-       BuscarProyecto bp=new BuscarProyecto();
+       Producciones bp=new Producciones();
        bp.setVisible(true);
     }//GEN-LAST:event_btn4ActionPerformed
 
