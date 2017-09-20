@@ -10,10 +10,10 @@ public class ColTime {
 //        Login lo=new Login();
 //        AWTUtilities.setWindowOpaque(lo, false);
 //        lo.setVisible(true);
-        Login log = new Login();
-        log.setVisible(true);
-        log.setLocationRelativeTo(null);
-//        Conexion con = new Conexion();
-//        con.establecerConexion();
+//        Login log = new Login();
+//        log.setVisible(true);
+//        log.setLocationRelativeTo(null);
+        Conexion con = new Conexion();
+        con.establecerConexion();
     }
 }

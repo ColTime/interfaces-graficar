@@ -7,8 +7,8 @@ public class Conexion {
 
     private Connection conexion;
     static String bd = "coltime";
-    static String user = "root";
-    static String password = "jorbol811";
+    static String user = "juan david";
+    static String password = "";
     static String server = "jdbc:mysql://localhost/" + bd;
 
     public Conexion() {
@@ -18,6 +18,9 @@ public class Conexion {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conexion = DriverManager.getConnection(server, user, password);
+            if (conexion != null) {
+                JOptionPane.showMessageDialog(null, "Conexion exitosa");
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Imposible realizar conexion con la BD" + e);
             e.printStackTrace();
