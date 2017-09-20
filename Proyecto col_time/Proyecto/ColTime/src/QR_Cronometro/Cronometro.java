@@ -1,4 +1,4 @@
-package Vistas;
+package QR_Cronometro;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
