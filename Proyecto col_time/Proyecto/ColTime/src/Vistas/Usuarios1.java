@@ -12,7 +12,7 @@ public class Usuarios1 extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTUsuario = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -24,21 +24,21 @@ public class Usuarios1 extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        textFieldRoundBackground1 = new elaprendiz.gui.textField.TextFieldRoundBackground();
-        textFieldRoundBackground2 = new elaprendiz.gui.textField.TextFieldRoundBackground();
-        textFieldRoundBackground3 = new elaprendiz.gui.textField.TextFieldRoundBackground();
-        comboBoxRound1 = new elaprendiz.gui.comboBox.ComboBoxRound();
-        comboBoxRound2 = new elaprendiz.gui.comboBox.ComboBoxRound();
+        jTApellidos = new elaprendiz.gui.textField.TextFieldRoundBackground();
+        jTdocumento = new elaprendiz.gui.textField.TextFieldRoundBackground();
+        jTNombre = new elaprendiz.gui.textField.TextFieldRoundBackground();
+        cbTipo = new elaprendiz.gui.comboBox.ComboBoxRound();
+        cBCargo = new elaprendiz.gui.comboBox.ComboBoxRound();
         jPanel3 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        textFieldRoundBackground4 = new elaprendiz.gui.textField.TextFieldRoundBackground();
-        textFieldRoundBackground5 = new elaprendiz.gui.textField.TextFieldRoundBackground();
-        comboBoxRound3 = new elaprendiz.gui.comboBox.ComboBoxRound();
+        jTdocumentoB = new elaprendiz.gui.textField.TextFieldRoundBackground();
+        jTNombreApellido = new elaprendiz.gui.textField.TextFieldRoundBackground();
+        cBCargoB = new elaprendiz.gui.comboBox.ComboBoxRound();
 
         setBackground(new java.awt.Color(219, 219, 219));
         setToolTipText("usuarios");
@@ -47,9 +47,9 @@ public class Usuarios1 extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(128, 128, 131)));
 
-        jTable1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jTable1.setForeground(new java.awt.Color(128, 128, 131));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTUsuario.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jTUsuario.setForeground(new java.awt.Color(128, 128, 131));
+        jTUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -74,11 +74,11 @@ public class Usuarios1 extends javax.swing.JPanel {
                 "Numero de documento", "Nombres", "Apellidos", "Cargo"
             }
         ));
-        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jTable1.setGridColor(new java.awt.Color(255, 255, 255));
-        jTable1.setSelectionBackground(new java.awt.Color(63, 179, 255));
-        jTable1.setSelectionForeground(new java.awt.Color(244, 244, 244));
-        jScrollPane1.setViewportView(jTable1);
+        jTUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jTUsuario.setGridColor(new java.awt.Color(255, 255, 255));
+        jTUsuario.setSelectionBackground(new java.awt.Color(63, 179, 255));
+        jTUsuario.setSelectionForeground(new java.awt.Color(244, 244, 244));
+        jScrollPane1.setViewportView(jTUsuario);
 
         jPanel2.setBackground(new java.awt.Color(244, 244, 244));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Usuarios", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18), new java.awt.Color(128, 128, 131))); // NOI18N
@@ -122,24 +122,24 @@ public class Usuarios1 extends javax.swing.JPanel {
         jLabel12.setForeground(new java.awt.Color(255, 51, 51));
         jLabel12.setText("*");
 
-        textFieldRoundBackground1.setColorDeBorde(new java.awt.Color(204, 204, 204));
-        textFieldRoundBackground1.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
+        jTApellidos.setColorDeBorde(new java.awt.Color(204, 204, 204));
+        jTApellidos.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
 
-        textFieldRoundBackground2.setColorDeBorde(new java.awt.Color(204, 204, 204));
-        textFieldRoundBackground2.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
+        jTdocumento.setColorDeBorde(new java.awt.Color(204, 204, 204));
+        jTdocumento.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
 
-        textFieldRoundBackground3.setColorDeBorde(new java.awt.Color(204, 204, 204));
-        textFieldRoundBackground3.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
+        jTNombre.setColorDeBorde(new java.awt.Color(204, 204, 204));
+        jTNombre.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
 
-        comboBoxRound1.setForeground(new java.awt.Color(102, 102, 102));
-        comboBoxRound1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "CE", "CC", "TI", " " }));
-        comboBoxRound1.setColorDeBorde(new java.awt.Color(204, 204, 204));
-        comboBoxRound1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        cbTipo.setForeground(new java.awt.Color(102, 102, 102));
+        cbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "CE", "CC", "TI", " " }));
+        cbTipo.setColorDeBorde(new java.awt.Color(204, 204, 204));
+        cbTipo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
 
-        comboBoxRound2.setForeground(new java.awt.Color(102, 102, 102));
-        comboBoxRound2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Gestor Comercial", "Encargado de FE y TE", "Encargado de EN", "Administrador", " " }));
-        comboBoxRound2.setColorDeBorde(new java.awt.Color(204, 204, 204));
-        comboBoxRound2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        cBCargo.setForeground(new java.awt.Color(102, 102, 102));
+        cBCargo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Gestor Comercial", "Encargado de FE y TE", "Encargado de EN", "Administrador", " " }));
+        cBCargo.setColorDeBorde(new java.awt.Color(204, 204, 204));
+        cBCargo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -154,15 +154,20 @@ public class Usuarios1 extends javax.swing.JPanel {
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153))); // NOI18N
-        jPanel7.setLayout(new java.awt.GridLayout());
+        jPanel7.setLayout(new java.awt.GridLayout(1, 0));
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setFocusable(false);
-        jButton1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save_roll1.png"))); // NOI18N
-        jPanel7.add(jButton1);
+        btnGuardar.setBackground(new java.awt.Color(255, 255, 255));
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
+        btnGuardar.setBorderPainted(false);
+        btnGuardar.setContentAreaFilled(false);
+        btnGuardar.setFocusable(false);
+        btnGuardar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save_roll1.png"))); // NOI18N
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+        jPanel7.add(btnGuardar);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -182,9 +187,9 @@ public class Usuarios1 extends javax.swing.JPanel {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addComponent(textFieldRoundBackground2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTdocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
-                            .addComponent(textFieldRoundBackground3, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
                         .addGap(70, 70, 70)
                         .addComponent(jLabel9)
@@ -192,14 +197,14 @@ public class Usuarios1 extends javax.swing.JPanel {
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGap(2, 2, 2)
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(textFieldRoundBackground1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel4)
-                                    .addComponent(comboBoxRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel2)))
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGap(100, 100, 100)
                                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(comboBoxRound2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cBCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -212,11 +217,11 @@ public class Usuarios1 extends javax.swing.JPanel {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(5, 5, 5)
-                        .addComponent(comboBoxRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25)
                         .addComponent(jLabel2)
                         .addGap(5, 5, 5)
-                        .addComponent(textFieldRoundBackground1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25)
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
@@ -228,15 +233,15 @@ public class Usuarios1 extends javax.swing.JPanel {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(5, 5, 5)
-                        .addComponent(textFieldRoundBackground2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTdocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25)
                         .addComponent(jLabel1)
                         .addGap(5, 5, 5)
-                        .addComponent(textFieldRoundBackground3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(15, 15, 15)
                         .addComponent(jLabel5)
                         .addGap(5, 5, 5)
-                        .addComponent(comboBoxRound2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cBCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel9))
                 .addGap(9, 23, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
@@ -262,16 +267,16 @@ public class Usuarios1 extends javax.swing.JPanel {
         jLabel8.setForeground(new java.awt.Color(128, 128, 131));
         jLabel8.setText("Cargo:");
 
-        textFieldRoundBackground4.setColorDeBorde(new java.awt.Color(204, 204, 204));
-        textFieldRoundBackground4.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
+        jTdocumentoB.setColorDeBorde(new java.awt.Color(204, 204, 204));
+        jTdocumentoB.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
 
-        textFieldRoundBackground5.setColorDeBorde(new java.awt.Color(204, 204, 204));
-        textFieldRoundBackground5.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
+        jTNombreApellido.setColorDeBorde(new java.awt.Color(204, 204, 204));
+        jTNombreApellido.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
 
-        comboBoxRound3.setForeground(new java.awt.Color(102, 102, 102));
-        comboBoxRound3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Gestor Comercial", "Encargado de FE y TE", "Encargado de EN", "Administrador", " " }));
-        comboBoxRound3.setColorDeBorde(new java.awt.Color(204, 204, 204));
-        comboBoxRound3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        cBCargoB.setForeground(new java.awt.Color(102, 102, 102));
+        cBCargoB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Gestor Comercial", "Encargado de FE y TE", "Encargado de EN", "Administrador", " " }));
+        cBCargoB.setColorDeBorde(new java.awt.Color(204, 204, 204));
+        cBCargoB.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -281,15 +286,15 @@ public class Usuarios1 extends javax.swing.JPanel {
                 .addGap(30, 30, 30)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
-                    .addComponent(textFieldRoundBackground4, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTdocumentoB, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(textFieldRoundBackground5, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTNombreApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
-                    .addComponent(comboBoxRound3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cBCargoB, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -304,9 +309,9 @@ public class Usuarios1 extends javax.swing.JPanel {
                             .addComponent(jLabel8))
                         .addGap(31, 31, 31))
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(textFieldRoundBackground4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(textFieldRoundBackground5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(comboBoxRound3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTdocumentoB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTNombreApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cBCargoB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -352,12 +357,16 @@ public class Usuarios1 extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        registrarMdificarUsuario(1,1);
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private elaprendiz.gui.comboBox.ComboBoxRound comboBoxRound1;
-    private elaprendiz.gui.comboBox.ComboBoxRound comboBoxRound2;
-    private elaprendiz.gui.comboBox.ComboBoxRound comboBoxRound3;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnGuardar;
+    private elaprendiz.gui.comboBox.ComboBoxRound cBCargo;
+    private elaprendiz.gui.comboBox.ComboBoxRound cBCargoB;
+    private elaprendiz.gui.comboBox.ComboBoxRound cbTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -377,11 +386,23 @@ public class Usuarios1 extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private elaprendiz.gui.textField.TextFieldRoundBackground textFieldRoundBackground1;
-    private elaprendiz.gui.textField.TextFieldRoundBackground textFieldRoundBackground2;
-    private elaprendiz.gui.textField.TextFieldRoundBackground textFieldRoundBackground3;
-    private elaprendiz.gui.textField.TextFieldRoundBackground textFieldRoundBackground4;
-    private elaprendiz.gui.textField.TextFieldRoundBackground textFieldRoundBackground5;
+    private elaprendiz.gui.textField.TextFieldRoundBackground jTApellidos;
+    private elaprendiz.gui.textField.TextFieldRoundBackground jTNombre;
+    private elaprendiz.gui.textField.TextFieldRoundBackground jTNombreApellido;
+    private javax.swing.JTable jTUsuario;
+    private elaprendiz.gui.textField.TextFieldRoundBackground jTdocumento;
+    private elaprendiz.gui.textField.TextFieldRoundBackground jTdocumentoB;
     // End of variables declaration//GEN-END:variables
+//Metodos---------------------------------------------------------------------------------------------->
+
+    public void registrarMdificarUsuario(int op, int estado) {
+        Controlador.Usuario obj = new Controlador.Usuario();
+        obj.setDocumento(jTdocumento.getText());
+        obj.setTipo(cbTipo.getSelectedIndex());
+        obj.setNombres(jTNombre.getText());
+        obj.setApellidos(jTApellidos.getText());
+        obj.setCargo(cBCargo.getSelectedIndex());
+        Boolean res=obj.registrar_Modificar_Usuario(op,estado);
+ 
+    }
 }

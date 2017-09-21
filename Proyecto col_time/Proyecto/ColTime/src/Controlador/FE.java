@@ -2,6 +2,11 @@ package Controlador;
 
 public class FE extends InfoProcesos {
 
+    //Constructores--------------------------------------------->
+    public FE() {
+
+    }
+
     //Metodos------------------------------------------------->
     @Override
     protected boolean cambiar_Estado_Proceso() {

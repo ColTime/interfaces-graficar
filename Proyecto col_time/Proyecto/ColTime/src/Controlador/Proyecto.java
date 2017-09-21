@@ -4,6 +4,10 @@ import javax.sql.rowset.CachedRowSet;
 
 public class Proyecto {
 
+    //Constructores------------------------------------------------->
+    public Proyecto() {
+
+    }
     //Variables----------------------------------------------------->
     private CachedRowSet crsP = null;
     //Atributos de la clase proyecto-------------------------------->

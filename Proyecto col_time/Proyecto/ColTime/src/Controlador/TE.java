@@ -1,6 +1,12 @@
 package Controlador;
 
-public class TE extends InfoProcesos{
+public class TE extends InfoProcesos {
+
+    //Constructor------------------------------------------------------->
+    public TE() {
+
+    }
+
     //Metodos----------------------------------------------------------->
     @Override
     protected boolean cambiar_Estado_Proceso() {
@@ -16,5 +22,5 @@ public class TE extends InfoProcesos{
     public boolean detener_Toma_Tiempo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

@@ -1,6 +1,9 @@
 package coltime;
 
 import com.sun.awt.AWTUtilities;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,6 +21,7 @@ public class screen extends javax.swing.JFrame implements Runnable {
         initComponents();
         this.setLocationRelativeTo(null);
         AWTUtilities.setWindowOpaque(this, false);
+        this.setIconImage(new ImageIcon(getClass().getResource("/imagenesEmpresa/favicon.png")).getImage());
         tiempo = new Thread(this);
         tiempo.start();
     }
@@ -168,5 +172,16 @@ public class screen extends javax.swing.JFrame implements Runnable {
             }
             tiempo = null;
         }
+        try {
+            finalize();
+        } catch (Throwable ex) {
+            Logger.getLogger(screen.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize(); 
+    }
+    
 }

@@ -1,18 +1,27 @@
 package Controlador;
 
+import Modelo.UsuarioM;
+import java.io.FileInputStream;
 import javax.sql.rowset.CachedRowSet;
+import javax.swing.JOptionPane;
 
 public class Usuario {
 
+    //Constructores--------------------------------------------------------->
+    public Usuario() {
+
+    }
     //Variables--------------------------------------------------->
     private CachedRowSet crs = null;
 
     //Atributos de la clase usuarios----------------------------->
     private String documento = "";
+    private int tipo = 0;
     private String nombres = "";
     private String apellidos = "";
-    private String cargo = "";
+    private int cargo = 0;
     private String contraseña = "";
+    private FileInputStream im = null;
 
     //get and set---------------------------------------------->
     public String getDocumento() {
@@ -39,11 +48,11 @@ public class Usuario {
         this.apellidos = apellidos;
     }
 
-    public String getCargo() {
+    public int getCargo() {
         return cargo;
     }
 
-    public void setCargo(String cargo) {
+    public void setCargo(int cargo) {
         this.cargo = cargo;
     }
 
@@ -63,10 +72,26 @@ public class Usuario {
         this.crs = crs;
     }
 
-    //Metodos de la clase usuarios--------------------------------------->
-    public boolean registrar_Modificar_Usuario() {
+    public FileInputStream getIm() {
+        return im;
+    }
 
-        return true;
+    public void setIm(FileInputStream im) {
+        this.im = im;
+    }
+
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
+    }
+
+    //Metodos de la clase usuarios--------------------------------------->
+    public boolean registrar_Modificar_Usuario(int op, int estado) {
+        Modelo.UsuarioM obj = new Modelo.UsuarioM();
+        return obj.registrar_Modificar_Usuario(documento, tipo, nombres, apellidos, cargo, op, estado);
     }
 
     public CachedRowSet consultar_Usuario() {
@@ -88,8 +113,16 @@ public class Usuario {
 
     }
 
-    public boolean validarUsuario() {
-
-        return true;
+    public boolean validarUsuario(String doc) {     
+        UsuarioM obj = new UsuarioM();
+        return obj.validarUsuario(doc);
     }
+    //Metodo de liberacion de memoria------------------------------------------>
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize(); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Clase usuario terminada");
+    }
+
 }

@@ -1,16 +1,21 @@
 package Controlador;
 
 public abstract class InfoProcesos {
+
+    //Constructores------------------------------------------------------->
+    public InfoProcesos() {
+
+    }
     //Variables-------------------------------------->
-    
+
     //Atributos---------------------------------------->
-    private String estado="";
-    private String fechaIngreso="";
-    private String fechaSalida="";
-    private String numeroCantidadesTerminadas="";
-    private String tempoUnidadProceso="";
-    private String tiempoTotalProceso="";
-    
+    private String estado = "";
+    private String fechaIngreso = "";
+    private String fechaSalida = "";
+    private String numeroCantidadesTerminadas = "";
+    private String tempoUnidadProceso = "";
+    private String tiempoTotalProceso = "";
+
     //GET and SET-------------------------------------------------------->
     public String getEstado() {
         return estado;
@@ -59,9 +64,11 @@ public abstract class InfoProcesos {
     public void setTiempoTotalProceso(String tiempoTotalProceso) {
         this.tiempoTotalProceso = tiempoTotalProceso;
     }
-    
+
     //Metodos--------------------------------------------------------->
     protected abstract boolean cambiar_Estado_Proceso();
+
     public abstract boolean iniciar_Toma_Tiempo();
+
     public abstract boolean detener_Toma_Tiempo();
 }
