@@ -2,13 +2,9 @@ package Vistas;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Rectangle;
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.border.Border;
 import paneles.CambiaPanel;
 
 public class Producciones extends javax.swing.JFrame implements Runnable {
@@ -91,21 +87,30 @@ public class Producciones extends javax.swing.JFrame implements Runnable {
             }
         });
 
+        rSButtonMetro1.setBackground(new java.awt.Color(63, 179, 255));
         rSButtonMetro1.setText("Formato estandar");
+        rSButtonMetro1.setBorderPainted(false);
+        rSButtonMetro1.setColorNormal(new java.awt.Color(63, 179, 255));
         rSButtonMetro1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rSButtonMetro1ActionPerformed(evt);
             }
         });
 
+        rSButtonMetro2.setBackground(new java.awt.Color(63, 179, 255));
         rSButtonMetro2.setText("Teclados");
+        rSButtonMetro2.setBorderPainted(false);
+        rSButtonMetro2.setColorNormal(new java.awt.Color(63, 179, 255));
         rSButtonMetro2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rSButtonMetro2ActionPerformed(evt);
             }
         });
 
+        rSButtonMetro3.setBackground(new java.awt.Color(63, 179, 255));
         rSButtonMetro3.setText("Ensamble");
+        rSButtonMetro3.setBorderPainted(false);
+        rSButtonMetro3.setColorNormal(new java.awt.Color(63, 179, 255));
         rSButtonMetro3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rSButtonMetro3ActionPerformed(evt);
@@ -124,13 +129,13 @@ public class Producciones extends javax.swing.JFrame implements Runnable {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(rSButtonMetro2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addComponent(rSButtonMetro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rSButtonMetro2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rSButtonMetro3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addGap(78, 78, 78)
                 .addComponent(agregar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -143,17 +148,14 @@ public class Producciones extends javax.swing.JFrame implements Runnable {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(rSButtonMetro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(rSButtonMetro2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(rSButtonMetro3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(agregar))
                     .addComponent(jButton10)
                     .addComponent(jButton9))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rSButtonMetro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rSButtonMetro2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rSButtonMetro3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(agregar))
-                .addContainerGap())
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -244,11 +246,11 @@ public class Producciones extends javax.swing.JFrame implements Runnable {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1114, Short.MAX_VALUE)
+            .addGap(0, 1124, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 495, Short.MAX_VALUE)
+            .addGap(0, 514, Short.MAX_VALUE)
         );
 
         Contenido.add(jPanel2);
@@ -270,8 +272,7 @@ public class Producciones extends javax.swing.JFrame implements Runnable {
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Contenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(Contenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -284,9 +285,10 @@ public class Producciones extends javax.swing.JFrame implements Runnable {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -321,16 +323,22 @@ public class Producciones extends javax.swing.JFrame implements Runnable {
     private void rSButtonMetro3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro3ActionPerformed
         new CambiaPanel(Contenido, new ProduccionEN());
     }//GEN-LAST:event_rSButtonMetro3ActionPerformed
-    static int x = 0, y = 0, cantidad = 0,filas=1, unidad=11;
+    static int x = 0, y = 0, cantidad = 0, filas = 1, unidad = 11, conta = 5;
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
-        JPanel jp = new JPanel();
-        jp.setBounds(0 + x, 0+y, 100, 100);
-        x += 100;
+        ProduccionFE.contenido.updateUI();
+        JButton jp = new JButton("Panle" + String.valueOf(panel));
+        jp.setBounds(0 + x, 0 + y, 98, 98);
+        x += 99;
         cantidad++;
-        if(cantidad==unidad*filas){
-         y+=100;
-         x=0;
-         filas++;
+        if (cantidad == unidad * filas) {
+            y += 100;
+            x = 0;
+            filas++;
+            if (cantidad == unidad * conta) {
+                ProduccionFE.contenido.setPreferredSize(new Dimension(1128, ProduccionFE.contenido.getHeight() + 496));
+                conta+=5;
+            }
+            this.Contenido.updateUI();
         }
         panel++;
         jp.setName("Panle" + String.valueOf(panel));
@@ -338,26 +346,7 @@ public class Producciones extends javax.swing.JFrame implements Runnable {
         ProduccionFE.contenido.add(jp);
         ProduccionFE.contenido.updateUI();
     }//GEN-LAST:event_agregarActionPerformed
-//    public void generarLabel(String id) {
-//        JPanel lb = new JPanel();
-//        int con = 0;
-//        if (jproyecto.getComponentCount() > -1) {
-//            con = jproyecto.getComponents().length;
-//            lb.setBounds(6+(133*pos), 0, 132, 30);
-//            lb.setName(id);
-////            lb.setText("00:00:00");
-//            lb.setFont(new Font("Hola", 0, 20));
-//            lb.setBackground(Color.red);
-//            jproyecto.add(lb);
-//            jproyecto.updateUI();
-//            pos++;
-//        }
-//    }
-//
-//    public String generarID() {
-//        int con = (int) Math.round(Math.random() * 100 + 1);
-//        return String.valueOf(con);
-//    }
+
 
     /**
      * @param args the command line arguments

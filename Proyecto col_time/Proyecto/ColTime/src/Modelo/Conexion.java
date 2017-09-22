@@ -18,9 +18,9 @@ public class Conexion {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conexion = DriverManager.getConnection(server, user, password);
-            if (conexion != null) {
-                JOptionPane.showMessageDialog(null, "Conexion exitosa");
-            }
+//            if (conexion != null) {
+//                JOptionPane.showMessageDialog(null, "Conexion exitosa");
+//            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Imposible realizar conexion con la BD" + e);
             e.printStackTrace();

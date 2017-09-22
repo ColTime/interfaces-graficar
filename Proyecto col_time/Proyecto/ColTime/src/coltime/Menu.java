@@ -14,9 +14,13 @@ public class Menu extends javax.swing.JFrame {
 
     private Color cor = new Color(189, 189, 189);
     private Color corF = new Color(219, 219, 219);
+    Producciones bp = null;
 
     public Menu() {
         initComponents();
+        if (!jPContenido.getComponent(0).getName().equals("Usuario")) {
+            new CambiaPanel(jPContenido, new Usuarios1());
+        }
         Animacion.Animacion.mover_derecha(935, 1135, 0, 2, jPanel3);
         new CambiaPanel(jPContenido, new Inicio());
         btn1.setColorHover(cor);
@@ -145,7 +149,7 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(194, 194, 194))
+                .addGap(195, 195, 195))
         );
         jPSuperiorLayout.setVerticalGroup(
             jPSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,6 +258,7 @@ public class Menu extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.setName("holaa"); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -385,7 +390,9 @@ public class Menu extends javax.swing.JFrame {
             btn2.setColorNormal(cor);
             btn2.setColorPressed(cor);
         }
-        new CambiaPanel(jPContenido, new proyecto());
+        if (!jPContenido.getComponent(0).getName().equals("proyectos")) {
+            new CambiaPanel(jPContenido, new proyecto());
+        }
     }//GEN-LAST:event_btn2ActionPerformed
 
     private void btn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn4ActionPerformed
@@ -410,8 +417,10 @@ public class Menu extends javax.swing.JFrame {
             btn3.setColorNormal(cor);
             btn3.setColorPressed(cor);
         }
-       Producciones bp=new Producciones();
-       bp.setVisible(true);
+        if (bp == null) {
+            bp = new Producciones();
+            bp.setVisible(true);
+        }
     }//GEN-LAST:event_btn4ActionPerformed
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
@@ -449,7 +458,9 @@ public class Menu extends javax.swing.JFrame {
             btn1.setColorNormal(cor);
             btn1.setColorPressed(cor);
         }
-        new CambiaPanel(jPContenido, new Inicio());
+        if (!jPContenido.getComponent(0).getName().equals("inicio")) {
+            new CambiaPanel(jPContenido, new Inicio());
+        }
     }//GEN-LAST:event_btn1ActionPerformed
 
     private void btn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3ActionPerformed
@@ -474,8 +485,9 @@ public class Menu extends javax.swing.JFrame {
             btn3.setColorNormal(cor);
             btn3.setColorPressed(cor);
         }
-        new CambiaPanel(jPContenido, new  Usuarios1());
-
+        if (!jPContenido.getComponent(0).getName().equals("usuarios")) {
+            new CambiaPanel(jPContenido, new Usuarios1());
+        }
     }//GEN-LAST:event_btn3ActionPerformed
 
     private void formWindowDeactivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowDeactivated

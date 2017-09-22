@@ -148,7 +148,7 @@
                       <Component id="jButton2" min="-2" pref="23" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButton1" min="-2" pref="23" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="194" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="195" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -440,6 +440,7 @@
                     <LineBorder/>
                   </Border>
                 </Property>
+                <Property name="name" type="java.lang.String" value="holaa" noResource="true"/>
               </Properties>
 
               <Layout>

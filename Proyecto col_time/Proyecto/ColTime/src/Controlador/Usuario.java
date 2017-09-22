@@ -16,7 +16,7 @@ public class Usuario {
 
     //Atributos de la clase usuarios----------------------------->
     private String documento = "";
-    private int tipo = 0;
+    private String tipo = "";
     private String nombres = "";
     private String apellidos = "";
     private int cargo = 0;
@@ -80,18 +80,18 @@ public class Usuario {
         this.im = im;
     }
 
-    public int getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(int tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 
     //Metodos de la clase usuarios--------------------------------------->
     public boolean registrar_Modificar_Usuario(int op, int estado) {
         Modelo.UsuarioM obj = new Modelo.UsuarioM();
-        return obj.registrar_Modificar_Usuario(documento, tipo, nombres, apellidos, cargo, op, estado);
+        return obj.registrar_Modificar_Usuario(documento, tipo, nombres, apellidos, cargo, op, true);
     }
 
     public CachedRowSet consultar_Usuario() {
