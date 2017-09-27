@@ -5,11 +5,16 @@
  */
 package coltime;
 
+import Atxy2k.CustomTextField.RestrictedTextField;
+import Vistas.Usuarios1;
 import com.sun.awt.AWTUtilities;
+import com.sun.glass.events.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import rojerusan.RSNotifyAnimated;
+
 /**
  *
  * @author Aprendiz
@@ -24,6 +29,11 @@ public class Login extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         AWTUtilities.setWindowOpaque(this, false);
         this.setIconImage(new ImageIcon(getClass().getResource("/imagenesEmpresa/favicon.png")).getImage());
+        jTUser.requestFocus();
+        RestrictedTextField obj= new RestrictedTextField(jTUser);
+        obj.setLimit(13);
+        RestrictedTextField obj1= new RestrictedTextField(jTPassword);
+        obj1.setLimit(20);
     }
     private int posX = 0;
     private int posY = 0;
@@ -37,18 +47,18 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        textFieldRoundBackground2 = new elaprendiz.gui.textField.TextFieldRoundBackground();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        passwordFieldRoundImage1 = new elaprendiz.gui.passwordField.PasswordFieldRoundImage();
+        jTUser = new elaprendiz.gui.textField.TextFieldRoundBackground();
+        btnMin = new javax.swing.JButton();
+        btnClose = new javax.swing.JButton();
+        jTPassword = new elaprendiz.gui.passwordField.PasswordFieldRoundImage();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         clockFace1 = new elaprendiz.gui.varios.ClockFace();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        buttonColoredAction1 = new elaprendiz.gui.button.ButtonColoredAction();
-        jButton3 = new javax.swing.JButton();
+        btnIniciar = new elaprendiz.gui.button.ButtonColoredAction();
+        btnRecuperar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
 
@@ -56,38 +66,53 @@ public class Login extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        textFieldRoundBackground2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        textFieldRoundBackground2.setColorDeBorde(new java.awt.Color(204, 204, 204));
-        textFieldRoundBackground2.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(textFieldRoundBackground2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 290, 260, 25));
-
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/minus1.png"))); // NOI18N
-        jButton2.setBorderPainted(false);
-        jButton2.setContentAreaFilled(false);
-        jButton2.setFocusPainted(false);
-        jButton2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/minus.png"))); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+        jTUser.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jTUser.setColorDeBorde(new java.awt.Color(204, 204, 204));
+        jTUser.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
+        jTUser.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTUser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTUserKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTUserKeyTyped(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 130, 30, -1));
+        getContentPane().add(jTUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 290, 260, 25));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/close.png"))); // NOI18N
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setFocusPainted(false);
-        jButton1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/close1.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnMin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/minus1.png"))); // NOI18N
+        btnMin.setBorderPainted(false);
+        btnMin.setContentAreaFilled(false);
+        btnMin.setFocusPainted(false);
+        btnMin.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/minus.png"))); // NOI18N
+        btnMin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnMinActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 130, 30, -1));
+        getContentPane().add(btnMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 130, 30, -1));
 
-        passwordFieldRoundImage1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        passwordFieldRoundImage1.setColorDeBorde(new java.awt.Color(204, 204, 204));
-        getContentPane().add(passwordFieldRoundImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 360, 260, 25));
+        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/close.png"))); // NOI18N
+        btnClose.setBorderPainted(false);
+        btnClose.setContentAreaFilled(false);
+        btnClose.setFocusPainted(false);
+        btnClose.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/close1.png"))); // NOI18N
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 130, 30, -1));
+
+        jTPassword.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jTPassword.setColorDeBorde(new java.awt.Color(204, 204, 204));
+        jTPassword.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jTPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTPasswordKeyPressed(evt);
+            }
+        });
+        getContentPane().add(jTPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 360, 260, 25));
 
         jLabel2.setFont(new java.awt.Font("FrankRuehl", 1, 71)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(148, 177, 64));
@@ -111,25 +136,25 @@ public class Login extends javax.swing.JFrame {
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconmonstr-user-20-32.png"))); // NOI18N
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 280, -1, 40));
 
-        buttonColoredAction1.setText("INICIAR");
-        buttonColoredAction1.addActionListener(new java.awt.event.ActionListener() {
+        btnIniciar.setText("INICIAR");
+        btnIniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonColoredAction1ActionPerformed(evt);
+                btnIniciarActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonColoredAction1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 410, -1, -1));
+        getContentPane().add(btnIniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 410, -1, -1));
 
-        jButton3.setForeground(new java.awt.Color(120, 198, 230));
-        jButton3.setText("¿Olvidaste tú contraseña?");
-        jButton3.setBorderPainted(false);
-        jButton3.setContentAreaFilled(false);
-        jButton3.setFocusPainted(false);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnRecuperar.setForeground(new java.awt.Color(120, 198, 230));
+        btnRecuperar.setText("¿Olvidaste tú contraseña?");
+        btnRecuperar.setBorderPainted(false);
+        btnRecuperar.setContentAreaFilled(false);
+        btnRecuperar.setFocusPainted(false);
+        btnRecuperar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnRecuperarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 450, 160, -1));
+        getContentPane().add(btnRecuperar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 450, 210, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesEmpresa/logoT1.png"))); // NOI18N
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -163,29 +188,54 @@ public class Login extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jLabel1MouseDragged
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnCloseActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinActionPerformed
         setExtendedState(JFrame.CROSSHAIR_CURSOR);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnMinActionPerformed
 
-    private void buttonColoredAction1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonColoredAction1ActionPerformed
-        screen sc = new screen();
-        sc.setVisible(true);
-        sc.setLocationRelativeTo(null);
-        this.dispose();
-        try {
-            finalize();
-        } catch (Throwable ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+    private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
+        if (!(jTUser.getText().equals("") && jTPassword.getText().equals(""))) {
+            boolean res = iniciarSesion(jTUser.getText(), jTPassword.getText());
+            if (res) {
+                screen sc = new screen();
+                sc.setVisible(true);
+                sc.setLocationRelativeTo(null);
+                sc.jDocumento.setText(jTUser.getText());
+                sc.jDocumento.setVisible(false);
+                this.dispose();
+            } else {
+                new rojerusan.RSNotifyAnimated("Listo!!", "El usuario o la contraseña es incorrecto, por favor intentelo nuevamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
+            }
+        } else {
+            new rojerusan.RSNotifyAnimated("Alerta!!", "debes llenar los dos campos que son obligatorios.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
         }
-    }//GEN-LAST:event_buttonColoredAction1ActionPerformed
+    }//GEN-LAST:event_btnIniciarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnRecuperarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecuperarActionPerformed
 
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnRecuperarActionPerformed
+
+    private void jTUserKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTUserKeyTyped
+        char cara = evt.getKeyChar();
+        if (Character.isLetter(cara) || evt.getKeyChar() == '.' || evt.getKeyChar() == '-' || evt.getKeyChar() == '_' || evt.getKeyChar() == ',' || evt.getKeyChar() == '@') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTUserKeyTyped
+
+    private void jTUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTUserKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnIniciar.doClick();
+        }
+    }//GEN-LAST:event_jTUserKeyPressed
+
+    private void jTPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTPasswordKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnIniciar.doClick();
+        }
+    }//GEN-LAST:event_jTPasswordKeyPressed
 
     /**
      * @param args the command line arguments
@@ -228,11 +278,11 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private elaprendiz.gui.button.ButtonColoredAction buttonColoredAction1;
+    private javax.swing.JButton btnClose;
+    private elaprendiz.gui.button.ButtonColoredAction btnIniciar;
+    private javax.swing.JButton btnMin;
+    private javax.swing.JButton btnRecuperar;
     private elaprendiz.gui.varios.ClockFace clockFace1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -240,9 +290,15 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private elaprendiz.gui.passwordField.PasswordFieldRoundImage passwordFieldRoundImage1;
-    private elaprendiz.gui.textField.TextFieldRoundBackground textFieldRoundBackground2;
+    private elaprendiz.gui.passwordField.PasswordFieldRoundImage jTPassword;
+    private elaprendiz.gui.textField.TextFieldRoundBackground jTUser;
     // End of variables declaration//GEN-END:variables
+
+//Metodos----------------------------------------------------------------------->
+    public boolean iniciarSesion(String user, String pasw) {
+        Controlador.Usuario obj = new Controlador.Usuario();
+        return obj.iniciarSesion(user, pasw);
+    }
 }
 
 //Notificaciones 

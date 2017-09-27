@@ -8,9 +8,15 @@ import javax.swing.JOptionPane;
 public class Usuario {
 
     //Constructores--------------------------------------------------------->
-    public Usuario() {
-
+    public Usuario(String documento, String nombreApe, int cargo) {
+        this.documento = documento;
+        this.nombres = nombreApe;
+        this.cargo = cargo;
     }
+
+    public Usuario() {
+    }
+
     //Variables--------------------------------------------------->
     private CachedRowSet crs = null;
 
@@ -95,34 +101,29 @@ public class Usuario {
     }
 
     public CachedRowSet consultar_Usuario() {
-
-        return crs;
+        Modelo.UsuarioM obj = new Modelo.UsuarioM();
+        setCrs(obj.consultar_Usuario(documento, nombres, cargo));
+        return getCrs();
     }
 
-    public boolean cambiar_Estado_Usuario() {
-
-        return true;
+    public boolean cambiar_Estado_Usuario(boolean estado) {
+        Modelo.UsuarioM obj = new Modelo.UsuarioM();
+        return obj.cambiar_Estado_Usuario(documento,estado);
     }
 
-    public boolean iniciarSesion() {
-
-        return true;
+    public boolean iniciarSesion(String user,String pasw) {
+        Modelo.UsuarioM obj= new Modelo.UsuarioM();
+        return obj.iniciarSesion(user,pasw);
     }
 
     public void cerrarSesion() {
 
     }
 
-    public boolean validarUsuario(String doc) {     
-        UsuarioM obj = new UsuarioM();
-        return obj.validarUsuario(doc);
-    }
     //Metodo de liberacion de memoria------------------------------------------>
-
     @Override
     protected void finalize() throws Throwable {
         super.finalize(); //To change body of generated methods, choose Tools | Templates.
-        System.out.println("Clase usuario terminada");
     }
 
 }

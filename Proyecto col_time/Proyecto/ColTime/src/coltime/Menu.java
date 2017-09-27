@@ -5,7 +5,9 @@ import Vistas.Inicio;
 import Vistas.Usuarios1;
 import Vistas.proyecto;
 import java.awt.Color;
+import java.io.FileInputStream;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import paneles.CambiaPanel;
 import rojerusan.RSNotifyAnimated;
@@ -15,12 +17,10 @@ public class Menu extends javax.swing.JFrame {
     private Color cor = new Color(189, 189, 189);
     private Color corF = new Color(219, 219, 219);
     Producciones bp = null;
+    private int longitudByte;
 
     public Menu() {
         initComponents();
-        if (!jPContenido.getComponent(0).getName().equals("Usuario")) {
-            new CambiaPanel(jPContenido, new Usuarios1());
-        }
         Animacion.Animacion.mover_derecha(935, 1135, 0, 2, jPanel3);
         new CambiaPanel(jPContenido, new Inicio());
         btn1.setColorHover(cor);
@@ -32,6 +32,7 @@ public class Menu extends javax.swing.JFrame {
     }
     private int posX = 0;
     private int posY = 0;
+    private FileInputStream strem;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -43,9 +44,10 @@ public class Menu extends javax.swing.JFrame {
         btnMenu = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jDocumento = new javax.swing.JLabel();
         jPMenu = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        rSFotoCircle2 = new rojerusan.RSFotoCircle();
+        rSUsuario = new rojerusan.RSFotoCircle();
         btn2 = new rsbuttom.RSButtonMetro();
         btn1 = new rsbuttom.RSButtonMetro();
         btn4 = new rsbuttom.RSButtonMetro();
@@ -58,6 +60,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         jInternalFrame1.setVisible(true);
@@ -138,6 +141,8 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        jDocumento.setText("Documento");
+
         javax.swing.GroupLayout jPSuperiorLayout = new javax.swing.GroupLayout(jPSuperior);
         jPSuperior.setLayout(jPSuperiorLayout);
         jPSuperiorLayout.setHorizontalGroup(
@@ -149,16 +154,22 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(195, 195, 195))
+                .addGap(169, 169, 169)
+                .addComponent(jDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPSuperiorLayout.setVerticalGroup(
             jPSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPSuperiorLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addGroup(jPSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
                     .addComponent(jButton1)
-                    .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPSuperiorLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jDocumento)
+                .addGap(22, 22, 22))
         );
 
         jPMenu.setBackground(new java.awt.Color(219, 219, 219));
@@ -167,9 +178,14 @@ public class Menu extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(219, 219, 219));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        rSFotoCircle2.setColorBordePopu(new java.awt.Color(204, 204, 204));
-        rSFotoCircle2.setColorButtonOptions(new java.awt.Color(128, 128, 131));
-        jPanel4.add(rSFotoCircle2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 5, 110, 100));
+        rSUsuario.setColorBordePopu(new java.awt.Color(204, 204, 204));
+        rSUsuario.setColorButtonOptions(new java.awt.Color(128, 128, 131));
+        rSUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rSUsuarioMouseClicked(evt);
+            }
+        });
+        jPanel4.add(rSUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 5, 110, 100));
 
         jPMenu.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 110));
 
@@ -358,6 +374,15 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar1.setForeground(new java.awt.Color(153, 153, 153));
 
         jMenu1.setText("Cuenta");
+
+        jMenuItem1.setText("Cambiar contraseña");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Salir");
@@ -515,6 +540,35 @@ public class Menu extends javax.swing.JFrame {
         setExtendedState(JFrame.CROSSHAIR_CURSOR);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void rSUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSUsuarioMouseClicked
+
+    }//GEN-LAST:event_rSUsuarioMouseClicked
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        traerimagen();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    public void traerimagen() {
+        ImageIcon obj = new ImageIcon(rSUsuario.image);
+        try {
+            strem = new FileInputStream(rSUsuario.getName());
+//            longitudByte=rSUsuario.;
+        } catch (Exception e) {
+        }
+    }
+
+    public void prueba() {
+        JFileChooser se = new JFileChooser();
+        se.setFileSelectionMode((int) se.getSelectedFile().length());
+        int estado = se.showOpenDialog(null);
+        if (estado == JFileChooser.APPROVE_OPTION) {
+            try {
+                strem = new FileInputStream(se.getSelectedFile());
+            } catch (Exception e) {
+            }
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -543,11 +597,13 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    public static javax.swing.JLabel jDocumento;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPContenido;
     private javax.swing.JPanel jPMenu;
     private javax.swing.JPanel jPSuperior;
@@ -557,6 +613,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private rojerusan.RSFotoCircle rSFotoCircle2;
+    private rojerusan.RSFotoCircle rSUsuario;
     // End of variables declaration//GEN-END:variables
 }

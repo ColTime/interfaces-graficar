@@ -35,6 +35,7 @@ public class screen extends javax.swing.JFrame implements Runnable {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDocumento = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -46,6 +47,9 @@ public class screen extends javax.swing.JFrame implements Runnable {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jDocumento.setText("Documento");
+        getContentPane().add(jDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 120, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesEmpresa/logo.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 190));
@@ -147,6 +151,7 @@ public class screen extends javax.swing.JFrame implements Runnable {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JLabel jDocumento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -166,6 +171,7 @@ public class screen extends javax.swing.JFrame implements Runnable {
                 Menu men = new Menu();
                 men.setVisible(true);
                 men.setLocationRelativeTo(null);
+                men.jDocumento.setText(this.jDocumento.getText());
                 this.dispose();
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, ex);
