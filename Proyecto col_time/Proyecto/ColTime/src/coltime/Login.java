@@ -207,7 +207,7 @@ public class Login extends javax.swing.JFrame {
                 sc.jDocumento.setVisible(false);
                 this.dispose();
             } else {
-                new rojerusan.RSNotifyAnimated("Listo!!", "El usuario o la contraseña es incorrecto, por favor intentelo nuevamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
+                new rojerusan.RSNotifyAnimated("¡Error!", "El usuario o la contraseña es incorrecto, por favor intentelo nuevamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
             }
         } else {
             new rojerusan.RSNotifyAnimated("Alerta!!", "debes llenar los dos campos que son obligatorios.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);

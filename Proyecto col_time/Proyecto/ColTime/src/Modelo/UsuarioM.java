@@ -104,7 +104,7 @@ public class UsuarioM {
         return res;
     }
 
-    public boolean iniciarSesion(String user,String pasw) {
+    public boolean iniciarSesion(String user, String pasw) {
         try {
             conexion = new Conexion();
             conexion.establecerConexion();
@@ -131,8 +131,32 @@ public class UsuarioM {
         return res;
     }
 
-    public void cerrarSesion() {
-
+    public boolean cambiarContraseña(String doc, String contra, String anti) {
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query y ejecución------------------------------------------------------------>
+            String Qry = "SELECT FU_IniciarSesion(?,?,?)";
+            ps = con.prepareCall(Qry);
+            ps.setString(1, doc);
+            ps.setString(2, contra);
+            ps.setString(3, anti);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                res = rs.getBoolean(1);
+            } else {
+                res = rs.getBoolean(1);
+            }
+            //Destrucción de conexiones
+            con.close();
+            conexion.destruir();
+            conexion.cerrar(rs);
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "¡Error!" + e);
+        }
+        return res;
     }
 
     @Override

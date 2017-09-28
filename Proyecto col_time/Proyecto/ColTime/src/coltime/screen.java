@@ -171,6 +171,7 @@ public class screen extends javax.swing.JFrame implements Runnable {
                 Menu men = new Menu();
                 men.setVisible(true);
                 men.setLocationRelativeTo(null);
+                men.jDocumento.setVisible(false);
                 men.jDocumento.setText(this.jDocumento.getText());
                 this.dispose();
             } catch (Exception ex) {
@@ -187,7 +188,7 @@ public class screen extends javax.swing.JFrame implements Runnable {
 
     @Override
     protected void finalize() throws Throwable {
-        super.finalize(); 
+        super.finalize();
     }
-    
+
 }

@@ -1,11 +1,14 @@
 package coltime;
 
+import Vistas.CambiarContraseña;
 import Vistas.Producciones;
 import Vistas.Inicio;
 import Vistas.Usuarios1;
 import Vistas.proyecto;
 import java.awt.Color;
 import java.io.FileInputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -141,7 +144,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jDocumento.setText("Documento");
+        jDocumento.setText("jLabel1");
 
         javax.swing.GroupLayout jPSuperiorLayout = new javax.swing.GroupLayout(jPSuperior);
         jPSuperior.setLayout(jPSuperiorLayout);
@@ -150,13 +153,13 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(jPSuperiorLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(275, 275, 275)
+                .addComponent(jDocumento)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(169, 169, 169)
-                .addComponent(jDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(195, 195, 195))
         );
         jPSuperiorLayout.setVerticalGroup(
             jPSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,11 +168,9 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(jPSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
                     .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2)))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPSuperiorLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jDocumento)
-                .addGap(22, 22, 22))
+                    .addGroup(jPSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jDocumento)
+                        .addComponent(jButton2))))
         );
 
         jPMenu.setBackground(new java.awt.Color(219, 219, 219));
@@ -445,7 +446,13 @@ public class Menu extends javax.swing.JFrame {
         if (bp == null) {
             bp = new Producciones();
             bp.setVisible(true);
+            try {
+                finalize();
+            } catch (Throwable ex) {
+                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        
     }//GEN-LAST:event_btn4ActionPerformed
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
@@ -545,7 +552,8 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_rSUsuarioMouseClicked
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        traerimagen();
+       CambiarContraseña obj=new CambiarContraseña();
+       obj.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     public void traerimagen() {
@@ -567,6 +575,11 @@ public class Menu extends javax.swing.JFrame {
             } catch (Exception e) {
             }
         }
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize(); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**

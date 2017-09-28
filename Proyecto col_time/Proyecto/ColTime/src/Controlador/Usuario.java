@@ -116,8 +116,9 @@ public class Usuario {
         return obj.iniciarSesion(user,pasw);
     }
 
-    public void cerrarSesion() {
-
+    public boolean CambiarContraseña(String anti) {
+        Modelo.UsuarioM obj=new UsuarioM();
+        return obj.cambiarContraseña(documento, contraseña,anti);
     }
 
     //Metodo de liberacion de memoria------------------------------------------>
