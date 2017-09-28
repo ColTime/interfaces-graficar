@@ -278,14 +278,14 @@ public class CambiarContraseña extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         Controlador.Usuario obj = new Usuario();
-//        obj.setDocumento(Menu.jDocumento.getText());
+        obj.setDocumento(Menu.jDocumento.getText());
         obj.setContraseña(jTpaswward2.getText());
         if (obj.CambiarContraseña(jTpaswward1.getText())) {
             new rojerusan.RSNotifyAnimated("Listo!!", "La contraseña fue cambiada correctamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+            this.dispose();
         } else {
             new rojerusan.RSNotifyAnimated("Alerta!!", "La contraseña antigua es incorrecta, por favor intentalo nuevamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
         }
-
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
@@ -353,10 +353,15 @@ public class CambiarContraseña extends javax.swing.JFrame {
     }//GEN-LAST:event_jTpaswward3KeyReleased
 
     private void jTpaswward1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTpaswward1KeyReleased
-        if (jTpaswward1.getText().length() >= 8) {
-            jTpaswward2.setEnabled(true);
+        if (!jTpaswward1.getText().equals("")) {
+            btnGuardar.setEnabled(true);
+            if (jTpaswward1.getText().length() >= 8) {
+                jTpaswward2.setEnabled(true);
+            } else {
+                jTpaswward2.setEnabled(false);
+            }
         } else {
-            jTpaswward2.setEnabled(false);
+           btnGuardar.setEnabled(false);
         }
     }//GEN-LAST:event_jTpaswward1KeyReleased
 

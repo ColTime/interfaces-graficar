@@ -137,7 +137,7 @@ public class UsuarioM {
             conexion.establecerConexion();
             con = conexion.getConexion();
             //Query y ejecución------------------------------------------------------------>
-            String Qry = "SELECT FU_IniciarSesion(?,?,?)";
+            String Qry = "SELECT FU_CambiarContraseña(?,?,?)";
             ps = con.prepareCall(Qry);
             ps.setString(1, doc);
             ps.setString(2, contra);

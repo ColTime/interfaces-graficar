@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-09-2017 a las 23:02:57
+-- Tiempo de generación: 28-09-2017 a las 06:43:54
 -- Versión del servidor: 10.1.26-MariaDB
 -- Versión de PHP: 7.1.9
 
@@ -26,23 +26,93 @@ DELIMITER $$
 --
 -- Procedimientos
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `correotalento` (IN `_numero` VARCHAR(13))  NO SQL
-SELECT numero_documento FROM usuario WHERE EXISTS (SELECT * FROM usuario where numero_documento=_numero)$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_ValidarUsuario` (IN `_doc` VARCHAR(13))  NO SQL
-SELECT numero_documento FROM usuario where numero_documento=_doc$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_ConsultarUsuarios` (IN `doc` VARCHAR(13), IN `nombreApe` VARCHAR(50), IN `cargo` TINYINT)  NO SQL
+IF doc='' AND nombreApe='' and cargo=0 THEN
+SELECT u.numero_documento,u.tipo_documento,u.nombres,u.apellidos,c.nombre,u.imagen,u.estado FROM usuario u INNER JOIN cargo c on u.cargo_idcargo=c.idcargo;
+ELSE
+  IF doc!='' AND nombreApe='' and cargo=0 THEN
+	SELECT u.numero_documento,u.tipo_documento,u.nombres,u.apellidos,c.nombre,u.imagen,u.estado FROM usuario u INNER JOIN cargo c on u.cargo_idcargo=c.idcargo WHERE u.numero_documento LIKE CONCAT(doc, '%');
+ ELSE
+     IF doc='' AND nombreApe!='' and cargo=0 THEN 
+	  SELECT u.numero_documento,u.tipo_documento,u.nombres,u.apellidos,c.nombre,u.imagen,u.estado FROM usuario u INNER JOIN cargo c on u.cargo_idcargo=c.idcargo WHERE u.nombres like CONCAT('%', nombreApe, '%') or u.apellidos like CONCAT('%', nombreApe, '%');
+     ELSE
+        IF doc='' AND nombreApe='' and cargo!=0 THEN
+        	  SELECT u.numero_documento,u.tipo_documento,u.nombres,u.apellidos,c.nombre,u.imagen,u.estado FROM usuario u INNER JOIN cargo c on u.cargo_idcargo=c.idcargo WHERE u.cargo_idcargo =cargo;
+        ELSE
+            IF doc='' AND nombreApe!='' and cargo!=0 THEN
+            	  SELECT u.numero_documento,u.tipo_documento,u.nombres,u.apellidos,c.nombre,u.imagen,u.estado FROM usuario u INNER JOIN cargo c on u.cargo_idcargo=c.idcargo WHERE u.cargo_idcargo =cargo AND u.nombres like CONCAT('%', nombreApe, '%') or u.apellidos like CONCAT('%', nombreApe, '%');
+             ELSE
+              IF doc!='' AND nombreApe!='' and cargo!=0 THEN
+                          	  SELECT u.numero_documento,u.tipo_documento,u.nombres,u.apellidos,c.nombre,u.imagen,u.estado FROM usuario u INNER JOIN cargo c on u.cargo_idcargo=c.idcargo WHERE u.nombres like CONCAT('%', nombreApe, '%') or u.apellidos like CONCAT('%', nombreApe, '%') AND u.cargo_idcargo =cargo AND u.numero_documento LIKE CONCAT(doc, '%');         ELSE
+                  IF doc!='' AND nombreApe='' and cargo!=0 THEN
+                                        	  SELECT u.numero_documento,u.tipo_documento,u.nombres,u.apellidos,c.nombre,u.imagen,u.estado FROM usuario u INNER JOIN cargo c on u.cargo_idcargo=c.idcargo WHERE u.cargo_idcargo =cargo AND u.numero_documento LIKE CONCAT(doc, '%');
+                    ELSE
+                    IF doc!='' AND nombreApe!='' and cargo=0 THEN
+                     SELECT u.numero_documento,u.tipo_documento,u.nombres,u.apellidos,c.nombre,u.imagen,u.estado FROM usuario u INNER JOIN cargo c on u.cargo_idcargo=c.idcargo WHERE u.numero_documento LIKE CONCAT(doc, '%') AND u.nombres like CONCAT('%', nombreApe, '%') or u.apellidos like CONCAT('%', nombreApe, '%');
+                    END IF;
+                  END IF;
+              END IF;
+            END IF;
+        END IF;
+    END IF;
+  END IF;
+END IF$$
 
 --
 -- Funciones
 --
-CREATE DEFINER=`root`@`localhost` FUNCTION `FU_InsertarModificarUsuar` (`_doc` VARCHAR(13), `_tipo` VARCHAR(3), `_nombre` VARCHAR(30), `_apellido` VARCHAR(30), `_cargo` INT, `_estado` BOOLEAN, `op` INT(1)) RETURNS TINYINT(1) NO SQL
-IF op=1 THEN
-INSERT INTO        usuario(numero_documento,tipo_documento,nombres,apellidos,cargo_idcargo,estado,contraeña)   VALUES (_doc,_tipo,_nombre,_apellido,_cargo,_estado,_doc);
+CREATE DEFINER=`root`@`localhost` FUNCTION `FU_ActualizarEstado` (`doc` VARCHAR(13), `est` BOOLEAN) RETURNS TINYINT(1) NO SQL
+BEGIN
+DECLARE val varchar(13);
+set val= (SELECT numero_documento from usuario where numero_documento=doc);
+
+IF val=doc THEN
+UPDATE usuario SET estado=est WHERE numero_documento=doc;
 RETURN 1;
- ELSEIF op =2 THEN
+ELSE
+RETURN 0;
+END IF;
+END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `FU_CambiarContraseña` (`doc` VARCHAR(13), `contra` VARCHAR(20), `anti` VARCHAR(20)) RETURNS TINYINT(1) NO SQL
+BEGIN
+DECLARE var varchar(20);
+set var=(SELECT u.contraeña FROM usuario u WHERE u.numero_documento = doc);
+IF var=anti THEN
+UPDATE usuario u SET u.contraeña=contra WHERE u.numero_documento=doc;
+RETURN 1;
+ELSE
+RETURN 0;
+END IF;
+END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `FU_IniciarSesion` (`usuario` VARCHAR(13), `pasw` VARCHAR(20)) RETURNS TINYINT(1) NO SQL
+BEGIN
+DECLARE val varchar(13);
+SET val=(SELECT u.numero_documento from usuario u WHERE u.numero_documento=usuario AND u.contraeña= pasw AND estado=1);
+if val!='' THEN
+  RETURN 1;
+ELSE
+  RETURN 0;
+END IF;
+END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `FU_InsertarModificarUsuar` (`_doc` VARCHAR(13), `_tipo` VARCHAR(3), `_nombre` VARCHAR(30), `_apellido` VARCHAR(30), `_cargo` TINYINT, `_estado` TINYINT, `op` TINYINT) RETURNS TINYINT(1) READS SQL DATA
+BEGIN
+ DECLARE val varchar(13);
+if op=1 THEN
+SET val=(SELECT numero_documento FROM usuario WHERE    numero_documento=_doc);
+  IF !(val=_doc) THEN
+     INSERT INTO        usuario(numero_documento,tipo_documento,nombres,apellidos,cargo_idcargo,estado,contraeña)   VALUES (_doc,_tipo,_nombre,_apellido,_cargo,_estado,_doc);
+  return 1;
+ ELSE 
+   RETURN 0;
+END IF;
+ELSE
 UPDATE usuario SET tipo_documento=_tipo,nombres=_nombre, apellidos=_apellido, cargo_idcargo=_cargo,estado=_estado where  numero_documento=_doc;
 RETURN 1;
-END IF$$
+END IF;
+END$$
 
 DELIMITER ;
 
@@ -254,10 +324,11 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`numero_documento`, `tipo_documento`, `nombres`, `apellidos`, `cargo_idcargo`, `imagen`, `estado`, `contraeña`) VALUES
-('1216727816', 'cc', 'juan david', 'marulanda p ', 1, NULL, 1, '1216727816'),
-('981130', 'CC', 'sivia hortensia', 'paniagua gomez', 1, NULL, 1, '981130'),
+('1216727816', 'CC', 'juan david', 'marulanda p ', 1, NULL, 1, '1216727816'),
+('981130', 'CC', 'sivia hortensia', 'paniagua gomez', 4, NULL, 1, '981130'),
 ('98113053', 'CC', 'Catalina', ' rosario', 1, NULL, 1, '98113053'),
-('9813053240', 'cc', 'sergio andres', 'marulanda', 2, NULL, 1, '9813053240');
+('98113053240', 'CC', 'juan david ', 'marulito', 1, NULL, 1, '98113053240marulanda'),
+('9813053240', 'CC', 'sergio andresss', 'marulanda', 2, NULL, 1, '9813053240');
 
 --
 -- Índices para tablas volcadas
