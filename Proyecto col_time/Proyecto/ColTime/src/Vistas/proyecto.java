@@ -600,7 +600,7 @@ public class proyecto extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        activarComponentes();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -614,10 +614,11 @@ public class proyecto extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnActivarActionPerformed
 //Metodos-------------------------------------------------------------------->
-    private void cambiarEstadoFalso(){
-        jPInformacion.setBackground( new Color(244, 244, 244));
-        jPDetalles1.setBackground( new Color(244, 244, 244));
-        jPDetalles1.setBackground( new Color(244, 244, 244));
+
+    private void cambiarEstadoFalso() {
+        jPInformacion.setBackground(new Color(244, 244, 244));
+        jPDetalles1.setBackground(new Color(244, 244, 244));
+        jPDetalles1.setBackground(new Color(244, 244, 244));
         jTNorden.setEnabled(false);
         jTNombreCliente.setEnabled(false);
         jTNombreProyecto.setEnabled(false);
@@ -643,6 +644,26 @@ public class proyecto extends javax.swing.JPanel {
         cbMaterialPCBTE.setEnabled(false);
         jCLexan.setEnabled(false);
         jTLexan.setEnabled(false);
+    }
+
+    private void activarComponentes() {
+        jTNombreCliente.setEnabled(true);
+        jTNombreProyecto.setEnabled(true);
+        jDentrega.setEnabled(true);
+        cbNegocio.setEnabled(true);
+        cbTipo.setEnabled(true);
+        jCAntisolder.setEnabled(true);
+        jCRuteo.setEnabled(true);
+        jCConversor.setEnabled(true);
+        jCTroquel.setEnabled(true);
+        jCRepujado.setEnabled(true);
+        jCStencil.setEnabled(true);
+        jCPCBFE.setEnabled(true);
+        jCPCBTE.setEnabled(true);
+        jCLexan.setEnabled(true);
+        jPInformacion.setBackground(new Color(255, 255, 255));
+        jPDetalles1.setBackground(new Color(255, 255, 255));
+        jPDetalles1.setBackground(new Color(255, 255, 255));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

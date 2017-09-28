@@ -449,11 +449,7 @@ public class Menu extends javax.swing.JFrame {
         if (bp == null) {
             bp = new Producciones();
             bp.setVisible(true);
-            try {
-                finalize();
-            } catch (Throwable ex) {
-                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            bp=null;
         }
         
     }//GEN-LAST:event_btn4ActionPerformed

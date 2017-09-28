@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-09-2017 a las 12:20:46
+-- Tiempo de generación: 28-09-2017 a las 13:24:47
 -- Versión del servidor: 10.1.26-MariaDB
 -- Versión de PHP: 7.1.9
 
@@ -230,7 +230,7 @@ CREATE TABLE `estado` (
 CREATE TABLE `negocio` (
   `idnegocio` tinyint(4) NOT NULL,
   `nom_negocio` varchar(6) NOT NULL,
-  `estado` bit(1) NOT NULL
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -242,7 +242,7 @@ CREATE TABLE `negocio` (
 CREATE TABLE `procesos` (
   `idproceso` tinyint(4) NOT NULL,
   `nombre_proceso` varchar(25) NOT NULL,
-  `estado` bit(1) NOT NULL,
+  `estado` tinyint(1) NOT NULL,
   `negocio_idnegocio` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -253,26 +253,26 @@ CREATE TABLE `procesos` (
 --
 
 CREATE TABLE `proyecto` (
-  `numero_orden` int(11) NOT NULL,
+  `numero_orden` int(11) NOT NULL DEFAULT '2300',
   `usuario_numero_documento` varchar(13) NOT NULL,
   `nombre_cliente` varchar(30) DEFAULT NULL,
   `nombre_proyecto` varchar(30) DEFAULT NULL,
   `tipo_proyecto` varchar(6) DEFAULT NULL,
-  `FE` bit(1) NOT NULL,
-  `TE` bit(1) NOT NULL,
-  `IN` bit(1) NOT NULL,
-  `pcb_FE` bit(1) NOT NULL,
-  `pcb_TE` bit(1) NOT NULL,
-  `Conversor` bit(1) NOT NULL,
-  `Repujado` bit(1) NOT NULL,
-  `troquel` bit(1) NOT NULL,
-  `stencil` bit(1) NOT NULL,
+  `FE` tinyint(1) NOT NULL,
+  `TE` tinyint(1) NOT NULL,
+  `IN` tinyint(1) NOT NULL,
+  `pcb_FE` tinyint(1) NOT NULL,
+  `pcb_TE` tinyint(1) NOT NULL,
+  `Conversor` tinyint(1) NOT NULL,
+  `Repujado` tinyint(1) NOT NULL,
+  `troquel` tinyint(1) NOT NULL,
+  `stencil` tinyint(1) NOT NULL,
   `fecha_ingreso` datetime NOT NULL,
   `fecha_entrega` date DEFAULT NULL,
   `fecha_salidal` datetime DEFAULT NULL,
-  `ruteo` bit(1) DEFAULT NULL,
-  `antisolder` bit(1) DEFAULT NULL,
-  `PNC` bit(1) NOT NULL,
+  `ruteo` tinyint(1) DEFAULT NULL,
+  `antisolder` tinyint(1) DEFAULT NULL,
+  `PNC` tinyint(1) NOT NULL,
   `estado_idestado` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -316,8 +316,8 @@ CREATE TABLE `usuario` (
   `apellidos` varchar(30) DEFAULT NULL,
   `cargo_idcargo` tinyint(4) NOT NULL,
   `imagen` longblob,
-  `estado` tinyint(1) DEFAULT NULL,
-  `contraeña` varchar(20) DEFAULT NULL
+  `estado` tinyint(1) NOT NULL,
+  `contraeña` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -462,6 +462,12 @@ ALTER TABLE `detalle_teclados`
   MODIFY `idDetalle_teclados` smallint(6) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `estado`
+--
+ALTER TABLE `estado`
+  MODIFY `idestado` tinyint(4) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `negocio`
 --
 ALTER TABLE `negocio`
@@ -472,12 +478,6 @@ ALTER TABLE `negocio`
 --
 ALTER TABLE `procesos`
   MODIFY `idproceso` tinyint(4) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `proyecto`
---
-ALTER TABLE `proyecto`
-  MODIFY `numero_orden` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_negocio`
