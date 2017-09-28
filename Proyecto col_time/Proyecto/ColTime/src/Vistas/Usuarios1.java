@@ -52,8 +52,8 @@ public class Usuarios1 extends javax.swing.JPanel {
         btnNuevo = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
-        btnActivar = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        btnActivar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -217,18 +217,6 @@ public class Usuarios1 extends javax.swing.JPanel {
         });
         jPanel7.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 1, 54, 43));
 
-        btnActivar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/chek-user.png"))); // NOI18N
-        btnActivar.setBorderPainted(false);
-        btnActivar.setContentAreaFilled(false);
-        btnActivar.setFocusPainted(false);
-        btnActivar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/chek-user1.png"))); // NOI18N
-        btnActivar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActivarActionPerformed(evt);
-            }
-        });
-        jPanel7.add(btnActivar, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 0, 54, 43));
-
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delete.png"))); // NOI18N
         btnDelete.setBorderPainted(false);
         btnDelete.setContentAreaFilled(false);
@@ -241,6 +229,18 @@ public class Usuarios1 extends javax.swing.JPanel {
         });
         jPanel7.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 0, 54, 43));
         btnDelete.getAccessibleContext().setAccessibleDescription("");
+
+        btnActivar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/chek-user.png"))); // NOI18N
+        btnActivar.setBorderPainted(false);
+        btnActivar.setContentAreaFilled(false);
+        btnActivar.setFocusPainted(false);
+        btnActivar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/chek-user1.png"))); // NOI18N
+        btnActivar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActivarActionPerformed(evt);
+            }
+        });
+        jPanel7.add(btnActivar, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 0, 54, 43));
 
         javax.swing.GroupLayout jpUserLayout = new javax.swing.GroupLayout(jpUser);
         jpUser.setLayout(jpUserLayout);
@@ -291,7 +291,6 @@ public class Usuarios1 extends javax.swing.JPanel {
                         .addComponent(jLabel12)
                         .addGap(43, 43, 43)
                         .addComponent(jLabel11))
-                    .addComponent(jLabel9)
                     .addGroup(jpUserLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(5, 5, 5)
@@ -304,16 +303,18 @@ public class Usuarios1 extends javax.swing.JPanel {
                         .addComponent(jLabel5)
                         .addGap(5, 5, 5)
                         .addComponent(cBCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpUserLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(5, 5, 5)
-                        .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25)
-                        .addComponent(jLabel2)
-                        .addGap(5, 5, 5)
-                        .addComponent(jTApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jpUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpUserLayout.createSequentialGroup()
+                            .addComponent(jLabel4)
+                            .addGap(5, 5, 5)
+                            .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(25, 25, 25)
+                            .addComponent(jLabel2)
+                            .addGap(5, 5, 5)
+                            .addComponent(jTApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(25, 25, 25)
+                            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpUserLayout.createSequentialGroup()
                 .addContainerGap()

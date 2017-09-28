@@ -6,12 +6,15 @@ import Vistas.Inicio;
 import Vistas.Usuarios1;
 import Vistas.proyecto;
 import java.awt.Color;
+import java.io.File;
 import java.io.FileInputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.plaf.IconUIResource;
 import paneles.CambiaPanel;
 import rojerusan.RSNotifyAnimated;
 
@@ -548,7 +551,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void rSUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSUsuarioMouseClicked
-
+     
     }//GEN-LAST:event_rSUsuarioMouseClicked
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -628,4 +631,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private rojerusan.RSFotoCircle rSUsuario;
     // End of variables declaration//GEN-END:variables
+//Metodos--------------------------------------->
+    public void CapturaImagen(){
+        File obj=new File(rSUsuario.image.toString());
+    }
 }
