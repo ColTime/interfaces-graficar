@@ -1,5 +1,6 @@
 package Controlador;
 
+import Modelo.ProyectoM;
 import javax.sql.rowset.CachedRowSet;
 
 public class Proyecto {
@@ -11,128 +12,91 @@ public class Proyecto {
     //Variables----------------------------------------------------->
     private CachedRowSet crsP = null;
     //Atributos de la clase proyecto-------------------------------->
-    private String idOrden = "";
+    private int idOrden;
     private String nombreCliente = "";
     private String nombreProyecto = "";
     private String tipoProyecto = "";
     private String negocio = "";
     private String fechaEntrega = "";
-    private String fechaEntrada = "";
     private String fechaSalida = "";
-    private int detalles[] = new int[9];//Converosr,Repujado
-    private boolean Ruteo;
-    private boolean antisolder;
-    private String estado = "";
+    private boolean FE = false;
+    private boolean TE = false;
+    private boolean IN = false;
+    private boolean detalles[] = new boolean[9];//Converosr,Repujado
+    private boolean PNC;
+    private int estado;
 
     //Get and set------------------------------------------------>
-    public String getIdOrden() {
-        return idOrden;
+    public void setCrsP(CachedRowSet crsP) {
+        this.crsP = crsP;
     }
 
-    public void setIdOrden(String idOrden) {
+    public void setIdOrden(int idOrden) {
         this.idOrden = idOrden;
-    }
-
-    public String getNombreCliente() {
-        return nombreCliente;
     }
 
     public void setNombreCliente(String nombreCliente) {
         this.nombreCliente = nombreCliente;
     }
 
-    public String getNombreProyecto() {
-        return nombreProyecto;
-    }
-
     public void setNombreProyecto(String nombreProyecto) {
         this.nombreProyecto = nombreProyecto;
-    }
-
-    public String getTipoProyecto() {
-        return tipoProyecto;
     }
 
     public void setTipoProyecto(String tipoProyecto) {
         this.tipoProyecto = tipoProyecto;
     }
 
-    public String getNegocio() {
-        return negocio;
-    }
-
     public void setNegocio(String negocio) {
         this.negocio = negocio;
-    }
-
-    public String getFechaEntrega() {
-        return fechaEntrega;
     }
 
     public void setFechaEntrega(String fechaEntrega) {
         this.fechaEntrega = fechaEntrega;
     }
 
-    public String getFechaEntrada() {
-        return fechaEntrada;
-    }
-
-    public void setFechaEntrada(String fechaEntrada) {
-        this.fechaEntrada = fechaEntrada;
-    }
-
-    public String getFechaSalida() {
-        return fechaSalida;
-    }
-
     public void setFechaSalida(String fechaSalida) {
         this.fechaSalida = fechaSalida;
     }
 
-    public int[] getDetalles() {
-        return detalles;
+    public void setFE(boolean FE) {
+        this.FE = FE;
     }
 
-    public void setDetalles(int[] detalles) {
+    public void setTE(boolean TE) {
+        this.TE = TE;
+    }
+
+    public void setIN(boolean IN) {
+        this.IN = IN;
+    }
+
+    public void setDetalles(boolean[] detalles) {
         this.detalles = detalles;
     }
 
-    public boolean isRuteo() {
-        return Ruteo;
+    public void setPNC(boolean PNC) {
+        this.PNC = PNC;
     }
 
-    public void setRuteo(boolean Ruteo) {
-        this.Ruteo = Ruteo;
-    }
-
-    public boolean isAntisolder() {
-        return antisolder;
-    }
-
-    public void setAntisolder(boolean antisolder) {
-        this.antisolder = antisolder;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
 
-    public CachedRowSet getCrsP() {
-        return crsP;
-    }
-
-    public void setCrs(CachedRowSet crsP) {
-        this.crsP = crsP;
-    }
-
     //Metodos y funciones------------------------------------------------>
-    public boolean registrar_Modificar_Proyecto() {
-
-        return true;
+    public boolean registrar_Modificar_Proyecto(String comercial, int op) {
+        ProyectoM obj = new ProyectoM();
+        String nego[] = negocio.split("/");
+        for (int i = 0; i < nego.length; i++) {
+            if (nego[i].equals("FE")) {
+                this.setFE(true);
+            } else if (nego[i].equals("TE")) {
+                this.setTE(true);
+            } else if (nego[i].equals("IN")) {
+                this.setIN(true);
+            }
+        }
+        return obj.registrar_Modificar_Proyecto(idOrden, comercial, nombreCliente, nombreProyecto, tipoProyecto, FE, TE, IN, detalles[0], detalles[1], detalles[2], detalles[3], detalles[4], detalles[5], detalles[6], fechaEntrega, detalles[7], detalles[8], PNC, op);
     }
 
     public CachedRowSet consultar_Proyecto() {
@@ -152,4 +116,21 @@ public class Proyecto {
     public void generar_Reportes() {
 
     }
+
+    public String consultarNumeroOrden() {
+        ProyectoM obj = new ProyectoM();
+        return obj.consultarNumeroOrden();
+    }
+
+    public String fecha() {
+        ProyectoM obj = new ProyectoM();
+        return obj.fecha();
+    }
+
+    //Finalizacion de la clase automatica---------------------------------------------------------------->
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize(); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

@@ -220,7 +220,7 @@ public class Login extends javax.swing.JFrame {
 
     private void jTUserKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTUserKeyTyped
         char cara = evt.getKeyChar();
-        if (Character.isLetter(cara) || evt.getKeyChar() == '.' || evt.getKeyChar() == '-' || evt.getKeyChar() == '_' || evt.getKeyChar() == ',' || evt.getKeyChar() == '@') {
+        if (Character.isLetter(cara) || evt.getKeyChar() == '.' || evt.getKeyChar() == '-' || evt.getKeyChar() == '_' || evt.getKeyChar() == ',' || evt.getKeyChar() == '@' || evt.getKeyChar() =='|') {
             evt.consume();
         }
     }//GEN-LAST:event_jTUserKeyTyped

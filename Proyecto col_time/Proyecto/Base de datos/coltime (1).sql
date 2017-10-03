@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-09-2017 a las 06:43:54
+-- Tiempo de generación: 03-10-2017 a las 05:01:37
 -- Versión del servidor: 10.1.26-MariaDB
 -- Versión de PHP: 7.1.9
 
@@ -26,6 +26,9 @@ DELIMITER $$
 --
 -- Procedimientos
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_ConsultarNumeroOrden` ()  NO SQL
+SHOW TABLE STATUS like 'proyecto'$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_ConsultarUsuarios` (IN `doc` VARCHAR(13), IN `nombreApe` VARCHAR(50), IN `cargo` TINYINT)  NO SQL
 IF doc='' AND nombreApe='' and cargo=0 THEN
 SELECT u.numero_documento,u.tipo_documento,u.nombres,u.apellidos,c.nombre,u.imagen,u.estado FROM usuario u INNER JOIN cargo c on u.cargo_idcargo=c.idcargo;
@@ -57,6 +60,9 @@ ELSE
     END IF;
   END IF;
 END IF$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_FechaServidor` ()  NO SQL
+SELECT DATE_FORMAT(CURDATE(),'%d-%M-%Y')$$
 
 --
 -- Funciones
@@ -102,17 +108,27 @@ BEGIN
  DECLARE val varchar(13);
 if op=1 THEN
 SET val=(SELECT numero_documento FROM usuario WHERE    numero_documento=_doc);
-  IF !(val=_doc) THEN
+  IF val=_doc THEN
+     RETURN 0;
+ ELSE 
      INSERT INTO        usuario(numero_documento,tipo_documento,nombres,apellidos,cargo_idcargo,estado,contraeña)   VALUES (_doc,_tipo,_nombre,_apellido,_cargo,_estado,_doc);
   return 1;
- ELSE 
-   RETURN 0;
+  
 END IF;
 ELSE
 UPDATE usuario SET tipo_documento=_tipo,nombres=_nombre, apellidos=_apellido, cargo_idcargo=_cargo,estado=_estado where  numero_documento=_doc;
 RETURN 1;
 END IF;
 END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `FU_RegistrarModificarProyecto` (`doc` VARCHAR(13), `cliente` VARCHAR(30), `proyecto` VARCHAR(30), `tipo` VARCHAR(6), `fe` TINYINT(1), `te` TINYINT(1), `inte` TINYINT(1), `pcbfe` TINYINT(1), `pcbte` TINYINT(1), `conv` TINYINT(1), `rep` TINYINT(1), `tro` TINYINT(1), `st` TINYINT(1), `lexan` TINYINT(1), `entrega` VARCHAR(10), `ruteo` TINYINT(1), `anti` TINYINT(1), `pnc` TINYINT(1), `norden` TINYINT(11), `op` TINYINT(1)) RETURNS INT(11) NO SQL
+IF op=1 THEN
+INSERT INTO `proyecto`(`usuario_numero_documento`, `nombre_cliente`, `nombre_proyecto`, `tipo_proyecto`, `FE`, `TE`, `IN`, `pcb_FE`, `pcb_TE`, `Conversor`, `Repujado`, `troquel`, `stencil`, `lexan`, `fecha_ingreso`, `fecha_entrega`, `ruteo`, `antisolder`, `PNC`, `estado_idestado`) VALUES (doc,cliente,proyecto,tipo,fe,te,inte,pcbfe,pcbte,conv,rep,tro,st,lexan,(SELECT now()),entrega,ruteo,anti,pnc,1);
+RETURN 1;
+ELSE 
+ UPDATE `proyecto` SET `nombre_cliente`=cliente,`nombre_proyecto`=proyecto,`tipo_proyecto`=tipo,`FE`=fe,`TE`=te,`IN`=inte,`pcb_FE`=pcbfe,`pcb_TE`=pcbte,`Conversor`=conv,`Repujado`=rep,`troquel`=tro,`stencil`=st,`lexan`=lexan,`fecha_entrega`=entrega,`ruteo`=ruteo,`antisolder`=anti,`PNC`=pnc WHERE numero_orden=norden;
+RETURN 1;
+END IF$$
 
 DELIMITER ;
 
@@ -186,7 +202,7 @@ CREATE TABLE `detalle_proyecto` (
   `idDetalle_proyecto` int(11) NOT NULL,
   `tipo_negocio_idtipo_negocio` tinyint(4) NOT NULL,
   `canitadad_total` varchar(6) NOT NULL,
-  `proyecto_numero_orden` varchar(6) NOT NULL,
+  `proyecto_numero_orden` int(11) NOT NULL,
   `negocio_idnegocio` tinyint(4) NOT NULL,
   `estado_idestado` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -201,6 +217,7 @@ CREATE TABLE `detalle_teclados` (
   `idDetalle_teclados` smallint(6) NOT NULL,
   `tiempo_por_unidad` varchar(6) DEFAULT NULL,
   `tiempo_total_proceso` varchar(6) DEFAULT NULL,
+  `cantidad_procesando` varchar(6) DEFAULT NULL,
   `cantidad_terminada` varchar(6) DEFAULT NULL,
   `fecha_inicio` date NOT NULL,
   `fecha_fin` date DEFAULT NULL,
@@ -220,6 +237,16 @@ CREATE TABLE `estado` (
   `nombre` varchar(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `estado`
+--
+
+INSERT INTO `estado` (`idestado`, `nombre`) VALUES
+(4, 'Ejecucion'),
+(2, 'Pausado'),
+(1, 'Por iniciar'),
+(3, 'Terminado');
+
 -- --------------------------------------------------------
 
 --
@@ -229,7 +256,7 @@ CREATE TABLE `estado` (
 CREATE TABLE `negocio` (
   `idnegocio` tinyint(4) NOT NULL,
   `nom_negocio` varchar(6) NOT NULL,
-  `estado` bit(1) NOT NULL
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -241,7 +268,7 @@ CREATE TABLE `negocio` (
 CREATE TABLE `procesos` (
   `idproceso` tinyint(4) NOT NULL,
   `nombre_proceso` varchar(25) NOT NULL,
-  `estado` bit(1) NOT NULL,
+  `estado` tinyint(1) NOT NULL,
   `negocio_idnegocio` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -252,28 +279,36 @@ CREATE TABLE `procesos` (
 --
 
 CREATE TABLE `proyecto` (
-  `numero_orden` varchar(6) NOT NULL,
+  `numero_orden` int(11) NOT NULL,
   `usuario_numero_documento` varchar(13) NOT NULL,
   `nombre_cliente` varchar(30) DEFAULT NULL,
   `nombre_proyecto` varchar(30) DEFAULT NULL,
   `tipo_proyecto` varchar(6) DEFAULT NULL,
-  `FE` bit(1) NOT NULL,
-  `TE` bit(1) NOT NULL,
-  `IN` bit(1) NOT NULL,
-  `pcb_FE` bit(1) NOT NULL,
-  `pcb_TE` bit(1) NOT NULL,
-  `Conversor` bit(1) NOT NULL,
-  `Repujado` bit(1) NOT NULL,
-  `troquel` bit(1) NOT NULL,
-  `stencil` bit(1) NOT NULL,
+  `FE` tinyint(1) NOT NULL,
+  `TE` tinyint(1) NOT NULL,
+  `IN` tinyint(1) NOT NULL,
+  `pcb_FE` tinyint(1) NOT NULL,
+  `pcb_TE` tinyint(1) NOT NULL,
+  `Conversor` tinyint(1) NOT NULL,
+  `Repujado` tinyint(1) NOT NULL,
+  `troquel` tinyint(1) NOT NULL,
+  `stencil` tinyint(1) NOT NULL,
+  `lexan` tinyint(1) NOT NULL,
   `fecha_ingreso` datetime NOT NULL,
   `fecha_entrega` date DEFAULT NULL,
   `fecha_salidal` datetime DEFAULT NULL,
-  `ruteo` bit(1) DEFAULT NULL,
-  `antisolder` bit(1) DEFAULT NULL,
-  `PNC` bit(1) NOT NULL,
+  `ruteo` tinyint(1) DEFAULT NULL,
+  `antisolder` tinyint(1) DEFAULT NULL,
+  `PNC` tinyint(1) NOT NULL,
   `estado_idestado` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `proyecto`
+--
+
+INSERT INTO `proyecto` (`numero_orden`, `usuario_numero_documento`, `nombre_cliente`, `nombre_proyecto`, `tipo_proyecto`, `FE`, `TE`, `IN`, `pcb_FE`, `pcb_TE`, `Conversor`, `Repujado`, `troquel`, `stencil`, `lexan`, `fecha_ingreso`, `fecha_entrega`, `fecha_salidal`, `ruteo`, `antisolder`, `PNC`, `estado_idestado`) VALUES
+(28506, '98113053240', 'valeria betancur', 'como me llamo', 'Normal', 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, '2017-10-02 15:26:28', '2017-10-20', NULL, 0, 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -315,8 +350,8 @@ CREATE TABLE `usuario` (
   `apellidos` varchar(30) DEFAULT NULL,
   `cargo_idcargo` tinyint(4) NOT NULL,
   `imagen` longblob,
-  `estado` tinyint(1) DEFAULT NULL,
-  `contraeña` varchar(20) DEFAULT NULL
+  `estado` tinyint(1) NOT NULL,
+  `contraeña` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -324,11 +359,13 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`numero_documento`, `tipo_documento`, `nombres`, `apellidos`, `cargo_idcargo`, `imagen`, `estado`, `contraeña`) VALUES
-('1216727816', 'CC', 'juan david', 'marulanda p ', 1, NULL, 1, '1216727816'),
+('109999999', 'CC', 'juan andres', 'asdasd', 1, NULL, 1, '109999999'),
+('1216727816', 'CC', 'juan david', 'marulanda p', 1, NULL, 1, '1216727816'),
 ('981130', 'CC', 'sivia hortensia', 'paniagua gomez', 4, NULL, 1, '981130'),
 ('98113053', 'CC', 'Catalina', ' rosario', 1, NULL, 1, '98113053'),
-('98113053240', 'CC', 'juan david ', 'marulito', 1, NULL, 1, '98113053240marulanda'),
-('9813053240', 'CC', 'sergio andresss', 'marulanda', 2, NULL, 1, '9813053240');
+('98113053240', 'CC', 'juan david ', 'marulito', 1, NULL, 1, '98113053240'),
+('9813053240', 'CC', 'sergio andresss', 'marulanda', 2, NULL, 1, '9813053240'),
+('99120101605', 'CC', 'sadasd', 'dasdas', 1, NULL, 1, '99120101605');
 
 --
 -- Índices para tablas volcadas
@@ -461,6 +498,12 @@ ALTER TABLE `detalle_teclados`
   MODIFY `idDetalle_teclados` smallint(6) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `estado`
+--
+ALTER TABLE `estado`
+  MODIFY `idestado` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT de la tabla `negocio`
 --
 ALTER TABLE `negocio`
@@ -471,6 +514,12 @@ ALTER TABLE `negocio`
 --
 ALTER TABLE `procesos`
   MODIFY `idproceso` tinyint(4) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `proyecto`
+--
+ALTER TABLE `proyecto`
+  MODIFY `numero_orden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28507;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_negocio`

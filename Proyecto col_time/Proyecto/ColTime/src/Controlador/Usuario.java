@@ -29,69 +29,38 @@ public class Usuario {
     private String contraseña = "";
     private FileInputStream im = null;
 
-    //get and set---------------------------------------------->
-    public String getDocumento() {
-        return documento;
+    //Set---------------------------------------------->
+
+    public void setCrs(CachedRowSet crs) {
+        this.crs = crs;
     }
 
     public void setDocumento(String documento) {
         this.documento = documento;
     }
 
-    public String getNombres() {
-        return nombres;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public void setNombres(String nombres) {
         this.nombres = nombres;
     }
 
-    public String getApellidos() {
-        return apellidos;
-    }
-
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
-    }
-
-    public int getCargo() {
-        return cargo;
     }
 
     public void setCargo(int cargo) {
         this.cargo = cargo;
     }
 
-    public String getContraseña() {
-        return contraseña;
-    }
-
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
 
-    public CachedRowSet getCrs() {
-        return crs;
-    }
-
-    public void setCrs(CachedRowSet crs) {
-        this.crs = crs;
-    }
-
-    public FileInputStream getIm() {
-        return im;
-    }
-
     public void setIm(FileInputStream im) {
         this.im = im;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
     }
 
     //Metodos de la clase usuarios--------------------------------------->
@@ -103,7 +72,7 @@ public class Usuario {
     public CachedRowSet consultar_Usuario() {
         Modelo.UsuarioM obj = new Modelo.UsuarioM();
         setCrs(obj.consultar_Usuario(documento, nombres, cargo));
-        return getCrs();
+        return crs;
     }
 
     public boolean cambiar_Estado_Usuario(boolean estado) {

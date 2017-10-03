@@ -1,5 +1,6 @@
 package Controlador;
 
+import Modelo.DetalleProyectoM;
 import javax.sql.rowset.CachedRowSet;
 
 public class DetalleProyecto {
@@ -14,9 +15,9 @@ public class DetalleProyecto {
     private String cantidad = "";
     private String negocio = "";
     private String tipoNegocio = "";
-    private String estado = "";
-
-    //GET ann SET-------------------------------------------------------->
+    private int estado=0;
+    private String material="";
+    //Set-------------------------------------------------------->
     public String getCantidad() {
         return cantidad;
     }
@@ -41,11 +42,11 @@ public class DetalleProyecto {
         this.tipoNegocio = tipoNegocio;
     }
 
-    public String getEstado() {
+    public int getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
 
@@ -59,8 +60,8 @@ public class DetalleProyecto {
 
     //Metodos----------------------------------------------------->
     public boolean registrar_Modificar_Detalle_Proycto() {
-
-        return true;
+        DetalleProyectoM obj=new DetalleProyectoM();
+        return obj.registrar_Modificar_Detalle_Proycto(cantidad,negocio,tipoNegocio,1);
     }
 
     public CachedRowSet consultar_Detalle_Proyecto() {

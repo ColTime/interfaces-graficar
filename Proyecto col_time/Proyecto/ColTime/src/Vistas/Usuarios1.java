@@ -139,9 +139,6 @@ public class Usuarios1 extends javax.swing.JPanel {
         jTdocumento.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
         jTdocumento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTdocumento.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTdocumentoKeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTdocumentoKeyReleased(evt);
             }
@@ -265,9 +262,8 @@ public class Usuarios1 extends javax.swing.JPanel {
                             .addComponent(jTNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(70, 70, 70)
                         .addComponent(jLabel9))
-                    .addGroup(jpUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel5)
-                        .addComponent(cBCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel5)
+                    .addComponent(cBCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(2, 2, 2)
                 .addGroup(jpUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -303,18 +299,17 @@ public class Usuarios1 extends javax.swing.JPanel {
                         .addComponent(jLabel5)
                         .addGap(5, 5, 5)
                         .addComponent(cBCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpUserLayout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addGap(5, 5, 5)
-                            .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(25, 25, 25)
-                            .addComponent(jLabel2)
-                            .addGap(5, 5, 5)
-                            .addComponent(jTApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(25, 25, 25)
-                            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabel9)
+                    .addGroup(jpUserLayout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(5, 5, 5)
+                        .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel2)
+                        .addGap(5, 5, 5)
+                        .addComponent(jTApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpUserLayout.createSequentialGroup()
                 .addContainerGap()
@@ -367,12 +362,9 @@ public class Usuarios1 extends javax.swing.JPanel {
         cBCargoB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccióne...", "Gestor Comercial", "Encargado de FE y TE", "Encargado de EN", "Administrador", "" }));
         cBCargoB.setColorDeBorde(new java.awt.Color(204, 204, 204));
         cBCargoB.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        cBCargoB.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                cBCargoBMouseExited(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                cBCargoBMouseReleased(evt);
+        cBCargoB.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cBCargoBItemStateChanged(evt);
             }
         });
 
@@ -434,6 +426,7 @@ public class Usuarios1 extends javax.swing.JPanel {
         jTUsuario.setFillsViewportHeight(true);
         jTUsuario.setFocusTraversalPolicyProvider(true);
         jTUsuario.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        jTUsuario.setMinimumSize(new java.awt.Dimension(0, 0));
         jTUsuario.setRequestFocusEnabled(false);
         jTUsuario.setRowHeight(17);
         jTUsuario.setSelectionBackground(new java.awt.Color(63, 179, 255));
@@ -458,8 +451,8 @@ public class Usuarios1 extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -496,6 +489,9 @@ public class Usuarios1 extends javax.swing.JPanel {
         btnGuardar.setEnabled(false);
         btnUpdate.setEnabled(false);
         btnDelete.setEnabled(false);
+        btnDelete.setVisible(true);
+        btnActivar.setVisible(false);
+        btnActivar.setEnabled(false);
         btnNuevo.setEnabled(false);
         jTdocumento.setEnabled(true);
         limpiar();
@@ -504,6 +500,7 @@ public class Usuarios1 extends javax.swing.JPanel {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         registrarMdificarUsuario(1, 1);
         consultarUsuarios("", "", 0);
+        estadoComponentes(false, new Color(244, 244, 244));
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void jTdocumentoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTdocumentoKeyReleased
@@ -544,6 +541,7 @@ public class Usuarios1 extends javax.swing.JPanel {
                 btnUpdate.setVisible(true);
             }
             jTdocumento.setEnabled(false);
+            btnNuevo.setEnabled(true);
         }
     }//GEN-LAST:event_jTUsuarioMouseClicked
 
@@ -559,6 +557,7 @@ public class Usuarios1 extends javax.swing.JPanel {
             btnDelete.setEnabled(false);
             btnUpdate.setEnabled(false);
             consultarUsuarios("", "", 0);
+            estadoComponentes(false, new Color(244, 244, 244));
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
@@ -569,14 +568,6 @@ public class Usuarios1 extends javax.swing.JPanel {
     private void jTNombreApellidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNombreApellidoKeyReleased
         consultarUsuarios(jTdocumentoB.getText(), jTNombreApellido.getText(), cBCargoB.getSelectedIndex());
     }//GEN-LAST:event_jTNombreApellidoKeyReleased
-
-    private void cBCargoBMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cBCargoBMouseExited
-        consultarUsuarios(jTdocumentoB.getText(), jTNombreApellido.getText(), cBCargoB.getSelectedIndex());
-    }//GEN-LAST:event_cBCargoBMouseExited
-
-    private void cBCargoBMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cBCargoBMouseReleased
-        consultarUsuarios(jTdocumentoB.getText(), jTNombreApellido.getText(), cBCargoB.getSelectedIndex());
-    }//GEN-LAST:event_cBCargoBMouseReleased
 
     private void btnActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActivarActionPerformed
         if (JOptionPane.showConfirmDialog(null, "¿Seguro desea volver activar esta persona?,"
@@ -593,16 +584,17 @@ public class Usuarios1 extends javax.swing.JPanel {
             btnActivar.setEnabled(false);
             btnUpdate.setEnabled(false);
             consultarUsuarios("", "", 0);
+            estadoComponentes(false, new Color(244, 244, 244));
         }
     }//GEN-LAST:event_btnActivarActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         registrarMdificarUsuario(2, 1);
+        jTdocumento.setEnabled(true);
+        btnUpdate.setEnabled(false);
+        btnDelete.setEnabled(false);
+        estadoComponentes(false, new Color(244, 244, 244));
     }//GEN-LAST:event_btnUpdateActionPerformed
-
-    private void jTdocumentoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTdocumentoKeyPressed
-
-    }//GEN-LAST:event_jTdocumentoKeyPressed
 
     private void jTdocumentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTdocumentoKeyTyped
         soloNumero(evt);
@@ -623,6 +615,10 @@ public class Usuarios1 extends javax.swing.JPanel {
     private void jTdocumentoBKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTdocumentoBKeyTyped
         soloNumero(evt);
     }//GEN-LAST:event_jTdocumentoBKeyTyped
+
+    private void cBCargoBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cBCargoBItemStateChanged
+        consultarUsuarios(jTdocumentoB.getText(), jTNombreApellido.getText(), cBCargoB.getSelectedIndex());
+    }//GEN-LAST:event_cBCargoBItemStateChanged
 
     public void estadoComponentes(boolean estado, Color es) {
         jTdocumento.setEnabled(estado);

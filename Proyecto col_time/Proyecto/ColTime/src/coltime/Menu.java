@@ -14,6 +14,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.plaf.IconUIResource;
 import paneles.CambiaPanel;
 import rojerusan.RSNotifyAnimated;
@@ -68,6 +69,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         jInternalFrame1.setVisible(true);
 
@@ -390,6 +392,15 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Salir");
+
+        jMenuItem2.setText("Cerrar sesión");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem2);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -449,9 +460,9 @@ public class Menu extends javax.swing.JFrame {
         if (bp == null) {
             bp = new Producciones();
             bp.setVisible(true);
-            bp=null;
+            bp = null;
         }
-        
+
     }//GEN-LAST:event_btn4ActionPerformed
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
@@ -547,13 +558,25 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void rSUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSUsuarioMouseClicked
-     
+
     }//GEN-LAST:event_rSUsuarioMouseClicked
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-       CambiarContraseña obj=new CambiarContraseña();
-       obj.setVisible(true);
+        CambiarContraseña obj = new CambiarContraseña();
+        obj.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        if (JOptionPane.showConfirmDialog(null, "¿Seguro desea cerrar sesión?") == 0) {
+            //Cierra el menu y abre el login
+            this.dispose();
+            try {
+                Thread.sleep(290);
+                new Login().setVisible(true);
+            } catch (Exception e) {
+            }
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     public void traerimagen() {
         ImageIcon obj = new ImageIcon(rSUsuario.image);
@@ -616,6 +639,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPContenido;
     private javax.swing.JPanel jPMenu;
     private javax.swing.JPanel jPSuperior;
@@ -628,7 +652,7 @@ public class Menu extends javax.swing.JFrame {
     private rojerusan.RSFotoCircle rSUsuario;
     // End of variables declaration//GEN-END:variables
 //Metodos--------------------------------------->
-    public void CapturaImagen(){
-        File obj=new File(rSUsuario.image.toString());
+    public void CapturaImagen() {
+        File obj = new File(rSUsuario.image.toString());
     }
 }
