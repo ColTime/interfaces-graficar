@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-10-2017 a las 05:01:37
+-- Tiempo de generación: 04-10-2017 a las 08:42:21
 -- Versión del servidor: 10.1.26-MariaDB
 -- Versión de PHP: 7.1.9
 
@@ -64,6 +64,21 @@ END IF$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_FechaServidor` ()  NO SQL
 SELECT DATE_FORMAT(CURDATE(),'%d-%M-%Y')$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_RegistrarDetalleEnsamble` (IN `proceso` TINYINT)  NO SQL
+BEGIN
+INSERT INTO `detalle_ensamble`(`tiempo_por_unidad`, `tiempo_total_por_proceso`, `cantidad_terminada`, `detalle_proyecto_idDetalle_proyecto`, `Procesos_idproceso`, `estado_idestado`) VALUES ('0','0','0',(SELECT MAX(idDetalle_proyecto) FROM detalle_proyecto),proceso,1);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_RegistrarDetalleFormatoEstandar` (IN `proceso` INT)  NO SQL
+INSERT INTO `detalle_formato_estandar`(`tiempo_por_unidad`, `tiempo_total_por_proceso`, `cantidad_terminada`, `detalle_proyecto_idDetalle_proyecto`, `Procesos_idproceso`, `estado_idestado`) VALUES
+('0','0','0',(SELECT MAX(idDetalle_proyecto) FROM detalle_proyecto),proceso,1)$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_RegistrarDetalleTeclados` (IN `proceso` INT)  NO SQL
+BEGIN
+INSERT INTO `detalle_teclados`(`tiempo_por_unidad`, `tiempo_total_proceso`, `cantidad_terminada`, `detalle_proyecto_idDetalle_proyecto`, `Procesos_idproceso`, `estado_idestado`)VALUES
+('0','0','0',(SELECT MAX(idDetalle_proyecto) FROM detalle_proyecto),proceso,1);
+END$$
+
 --
 -- Funciones
 --
@@ -121,6 +136,17 @@ RETURN 1;
 END IF;
 END$$
 
+CREATE DEFINER=`root`@`localhost` FUNCTION `FU_RegistrarDetalleProyecto` (`orden` INT(11), `tipoNegocio` VARCHAR(20), `cantidad` VARCHAR(6), `negocio` VARCHAR(20), `estado` TINYINT(1), `material` VARCHAR(6)) RETURNS TINYINT(1) NO SQL
+BEGIN
+IF material != '' THEN
+INSERT INTO `detalle_proyecto`(`tipo_negocio_idtipo_negocio`, `canitadad_total`, `proyecto_numero_orden`, `negocio_idnegocio`, `estado_idestado`,`material`) VALUES ((SELECT idtipo_negocio from tipo_negocio where nombre =tipoNegocio),cantidad,orden,(SELECT idnegocio FROM negocio WHERE nom_negocio =negocio),estado,material);
+RETURN 1;
+ELSE
+INSERT INTO `detalle_proyecto`(`tipo_negocio_idtipo_negocio`, `canitadad_total`, `proyecto_numero_orden`, `negocio_idnegocio`, `estado_idestado`) VALUES ((SELECT idtipo_negocio from tipo_negocio where nombre =tipoNegocio),cantidad,orden,(SELECT idnegocio FROM negocio WHERE nom_negocio =negocio),estado);
+RETURN 1;
+END IF;
+END$$
+
 CREATE DEFINER=`root`@`localhost` FUNCTION `FU_RegistrarModificarProyecto` (`doc` VARCHAR(13), `cliente` VARCHAR(30), `proyecto` VARCHAR(30), `tipo` VARCHAR(6), `fe` TINYINT(1), `te` TINYINT(1), `inte` TINYINT(1), `pcbfe` TINYINT(1), `pcbte` TINYINT(1), `conv` TINYINT(1), `rep` TINYINT(1), `tro` TINYINT(1), `st` TINYINT(1), `lexan` TINYINT(1), `entrega` VARCHAR(10), `ruteo` TINYINT(1), `anti` TINYINT(1), `pnc` TINYINT(1), `norden` TINYINT(11), `op` TINYINT(1)) RETURNS INT(11) NO SQL
 IF op=1 THEN
 INSERT INTO `proyecto`(`usuario_numero_documento`, `nombre_cliente`, `nombre_proyecto`, `tipo_proyecto`, `FE`, `TE`, `IN`, `pcb_FE`, `pcb_TE`, `Conversor`, `Repujado`, `troquel`, `stencil`, `lexan`, `fecha_ingreso`, `fecha_entrega`, `ruteo`, `antisolder`, `PNC`, `estado_idestado`) VALUES (doc,cliente,proyecto,tipo,fe,te,inte,pcbfe,pcbte,conv,rep,tro,st,lexan,(SELECT now()),entrega,ruteo,anti,pnc,1);
@@ -163,14 +189,25 @@ CREATE TABLE `detalle_ensamble` (
   `idDetalle_ensamble` smallint(6) NOT NULL,
   `tiempo_por_unidad` varchar(6) DEFAULT NULL,
   `tiempo_total_por_proceso` varchar(6) DEFAULT NULL,
-  `cantidad_procesando` varchar(6) DEFAULT NULL,
   `cantidad_terminada` varchar(6) DEFAULT NULL,
-  `fecha_inicio` date NOT NULL,
+  `fecha_inicio` date DEFAULT NULL,
   `fecha_fin` date DEFAULT NULL,
   `detalle_proyecto_idDetalle_proyecto` int(11) NOT NULL,
   `Procesos_idproceso` tinyint(4) NOT NULL,
   `estado_idestado` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `detalle_ensamble`
+--
+
+INSERT INTO `detalle_ensamble` (`idDetalle_ensamble`, `tiempo_por_unidad`, `tiempo_total_por_proceso`, `cantidad_terminada`, `fecha_inicio`, `fecha_fin`, `detalle_proyecto_idDetalle_proyecto`, `Procesos_idproceso`, `estado_idestado`) VALUES
+(20, '0', '0', '0', NULL, NULL, 31, 15, 1),
+(21, '0', '0', '0', NULL, NULL, 31, 16, 1),
+(22, '0', '0', '0', NULL, NULL, 31, 17, 1),
+(23, '0', '0', '0', NULL, NULL, 31, 18, 1),
+(24, '0', '0', '0', NULL, NULL, 31, 19, 1),
+(25, '0', '0', '0', NULL, NULL, 31, 20, 1);
 
 -- --------------------------------------------------------
 
@@ -180,17 +217,81 @@ CREATE TABLE `detalle_ensamble` (
 
 CREATE TABLE `detalle_formato_estandar` (
   `idDetalle_formato_estandar` smallint(6) NOT NULL,
-  `proceso` varchar(25) NOT NULL,
   `tiempo_por_unidad` varchar(6) DEFAULT NULL,
   `tiempo_total_por_proceso` varchar(6) DEFAULT NULL,
-  `cantidad_procesando` varchar(6) DEFAULT NULL,
   `cantidad_terminada` varchar(6) DEFAULT NULL,
-  `fecha_inicio` date NOT NULL,
+  `fecha_inicio` date DEFAULT NULL,
   `fecha_fin` date DEFAULT NULL,
   `detalle_proyecto_idDetalle_proyecto` int(11) NOT NULL,
   `Procesos_idproceso` tinyint(4) NOT NULL,
   `estado_idestado` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `detalle_formato_estandar`
+--
+
+INSERT INTO `detalle_formato_estandar` (`idDetalle_formato_estandar`, `tiempo_por_unidad`, `tiempo_total_por_proceso`, `cantidad_terminada`, `fecha_inicio`, `fecha_fin`, `detalle_proyecto_idDetalle_proyecto`, `Procesos_idproceso`, `estado_idestado`) VALUES
+(61, '0', '0', '0', NULL, NULL, 24, 1, 1),
+(62, '0', '0', '0', NULL, NULL, 24, 2, 1),
+(63, '0', '0', '0', NULL, NULL, 24, 3, 1),
+(64, '0', '0', '0', NULL, NULL, 24, 4, 1),
+(65, '0', '0', '0', NULL, NULL, 24, 5, 1),
+(66, '0', '0', '0', NULL, NULL, 24, 6, 1),
+(67, '0', '0', '0', NULL, NULL, 24, 7, 1),
+(68, '0', '0', '0', NULL, NULL, 24, 8, 1),
+(69, '0', '0', '0', NULL, NULL, 24, 9, 1),
+(70, '0', '0', '0', NULL, NULL, 24, 10, 1),
+(71, '0', '0', '0', NULL, NULL, 25, 1, 1),
+(72, '0', '0', '0', NULL, NULL, 25, 2, 1),
+(73, '0', '0', '0', NULL, NULL, 25, 3, 1),
+(74, '0', '0', '0', NULL, NULL, 25, 4, 1),
+(75, '0', '0', '0', NULL, NULL, 25, 5, 1),
+(76, '0', '0', '0', NULL, NULL, 25, 6, 1),
+(77, '0', '0', '0', NULL, NULL, 25, 7, 1),
+(78, '0', '0', '0', NULL, NULL, 25, 8, 1),
+(79, '0', '0', '0', NULL, NULL, 25, 9, 1),
+(80, '0', '0', '0', NULL, NULL, 25, 10, 1),
+(81, '0', '0', '0', NULL, NULL, 26, 1, 1),
+(82, '0', '0', '0', NULL, NULL, 26, 2, 1),
+(83, '0', '0', '0', NULL, NULL, 26, 3, 1),
+(84, '0', '0', '0', NULL, NULL, 26, 4, 1),
+(85, '0', '0', '0', NULL, NULL, 26, 5, 1),
+(86, '0', '0', '0', NULL, NULL, 26, 6, 1),
+(87, '0', '0', '0', NULL, NULL, 26, 7, 1),
+(88, '0', '0', '0', NULL, NULL, 26, 8, 1),
+(89, '0', '0', '0', NULL, NULL, 26, 9, 1),
+(90, '0', '0', '0', NULL, NULL, 26, 10, 1),
+(91, '0', '0', '0', NULL, NULL, 27, 1, 1),
+(92, '0', '0', '0', NULL, NULL, 27, 2, 1),
+(93, '0', '0', '0', NULL, NULL, 27, 3, 1),
+(94, '0', '0', '0', NULL, NULL, 27, 4, 1),
+(95, '0', '0', '0', NULL, NULL, 27, 5, 1),
+(96, '0', '0', '0', NULL, NULL, 27, 6, 1),
+(97, '0', '0', '0', NULL, NULL, 27, 7, 1),
+(98, '0', '0', '0', NULL, NULL, 27, 8, 1),
+(99, '0', '0', '0', NULL, NULL, 27, 9, 1),
+(100, '0', '0', '0', NULL, NULL, 27, 10, 1),
+(101, '0', '0', '0', NULL, NULL, 28, 1, 1),
+(102, '0', '0', '0', NULL, NULL, 28, 2, 1),
+(103, '0', '0', '0', NULL, NULL, 28, 3, 1),
+(104, '0', '0', '0', NULL, NULL, 28, 4, 1),
+(105, '0', '0', '0', NULL, NULL, 28, 5, 1),
+(106, '0', '0', '0', NULL, NULL, 28, 6, 1),
+(107, '0', '0', '0', NULL, NULL, 28, 7, 1),
+(108, '0', '0', '0', NULL, NULL, 28, 8, 1),
+(109, '0', '0', '0', NULL, NULL, 28, 9, 1),
+(110, '0', '0', '0', NULL, NULL, 28, 10, 1),
+(111, '0', '0', '0', NULL, NULL, 29, 1, 1),
+(112, '0', '0', '0', NULL, NULL, 29, 2, 1),
+(113, '0', '0', '0', NULL, NULL, 29, 3, 1),
+(114, '0', '0', '0', NULL, NULL, 29, 4, 1),
+(115, '0', '0', '0', NULL, NULL, 29, 5, 1),
+(116, '0', '0', '0', NULL, NULL, 29, 6, 1),
+(117, '0', '0', '0', NULL, NULL, 29, 7, 1),
+(118, '0', '0', '0', NULL, NULL, 29, 8, 1),
+(119, '0', '0', '0', NULL, NULL, 29, 9, 1),
+(120, '0', '0', '0', NULL, NULL, 29, 10, 1);
 
 -- --------------------------------------------------------
 
@@ -202,10 +303,25 @@ CREATE TABLE `detalle_proyecto` (
   `idDetalle_proyecto` int(11) NOT NULL,
   `tipo_negocio_idtipo_negocio` tinyint(4) NOT NULL,
   `canitadad_total` varchar(6) NOT NULL,
+  `material` varchar(6) DEFAULT NULL,
   `proyecto_numero_orden` int(11) NOT NULL,
   `negocio_idnegocio` tinyint(4) NOT NULL,
   `estado_idestado` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `detalle_proyecto`
+--
+
+INSERT INTO `detalle_proyecto` (`idDetalle_proyecto`, `tipo_negocio_idtipo_negocio`, `canitadad_total`, `material`, `proyecto_numero_orden`, `negocio_idnegocio`, `estado_idestado`) VALUES
+(24, 2, '100', 'FV', 28520, 1, 1),
+(25, 4, '1', 'FV', 28520, 1, 1),
+(26, 3, '100', 'FV', 28520, 1, 1),
+(27, 6, '1', NULL, 28520, 1, 1),
+(28, 1, '100', 'TH', 28520, 1, 1),
+(29, 7, '100', 'FV', 28520, 1, 1),
+(30, 5, '100', 'lexan', 28520, 2, 1),
+(31, 1, '90', NULL, 28520, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -217,14 +333,23 @@ CREATE TABLE `detalle_teclados` (
   `idDetalle_teclados` smallint(6) NOT NULL,
   `tiempo_por_unidad` varchar(6) DEFAULT NULL,
   `tiempo_total_proceso` varchar(6) DEFAULT NULL,
-  `cantidad_procesando` varchar(6) DEFAULT NULL,
   `cantidad_terminada` varchar(6) DEFAULT NULL,
-  `fecha_inicio` date NOT NULL,
+  `fecha_inicio` date DEFAULT NULL,
   `fecha_fin` date DEFAULT NULL,
   `detalle_proyecto_idDetalle_proyecto` int(11) NOT NULL,
   `Procesos_idproceso` tinyint(4) NOT NULL,
   `estado_idestado` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `detalle_teclados`
+--
+
+INSERT INTO `detalle_teclados` (`idDetalle_teclados`, `tiempo_por_unidad`, `tiempo_total_proceso`, `cantidad_terminada`, `fecha_inicio`, `fecha_fin`, `detalle_proyecto_idDetalle_proyecto`, `Procesos_idproceso`, `estado_idestado`) VALUES
+(9, '0', '0', '0', NULL, NULL, 30, 11, 1),
+(10, '0', '0', '0', NULL, NULL, 30, 12, 1),
+(11, '0', '0', '0', NULL, NULL, 30, 13, 1),
+(12, '0', '0', '0', NULL, NULL, 30, 14, 1);
 
 -- --------------------------------------------------------
 
@@ -259,6 +384,15 @@ CREATE TABLE `negocio` (
   `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `negocio`
+--
+
+INSERT INTO `negocio` (`idnegocio`, `nom_negocio`, `estado`) VALUES
+(1, 'FE', 1),
+(2, 'TE', 1),
+(3, 'IN', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -272,6 +406,32 @@ CREATE TABLE `procesos` (
   `negocio_idnegocio` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `procesos`
+--
+
+INSERT INTO `procesos` (`idproceso`, `nombre_proceso`, `estado`, `negocio_idnegocio`) VALUES
+(1, 'Perforado', 1, 1),
+(2, 'Quimicos', 1, 1),
+(3, 'Caminos', 1, 1),
+(4, 'Quemado', 1, 1),
+(5, 'C.C.TH', 1, 1),
+(6, 'Screen', 1, 1),
+(7, 'Estañado', 1, 1),
+(8, 'C.C.2', 1, 1),
+(9, 'Ruteo', 1, 1),
+(10, 'Maquinas', 1, 1),
+(11, 'Correas y Conversor', 1, 2),
+(12, 'Lexan', 1, 2),
+(13, 'Acople', 1, 2),
+(14, 'Control calidad', 1, 2),
+(15, 'Manual', 1, 3),
+(16, 'Limpieza', 1, 3),
+(17, 'Control Calidad', 1, 3),
+(18, 'Empaque', 1, 3),
+(19, 'Stencil', 1, 3),
+(20, 'Linea', 1, 3);
+
 -- --------------------------------------------------------
 
 --
@@ -281,8 +441,8 @@ CREATE TABLE `procesos` (
 CREATE TABLE `proyecto` (
   `numero_orden` int(11) NOT NULL,
   `usuario_numero_documento` varchar(13) NOT NULL,
-  `nombre_cliente` varchar(30) DEFAULT NULL,
-  `nombre_proyecto` varchar(30) DEFAULT NULL,
+  `nombre_cliente` varchar(45) DEFAULT NULL,
+  `nombre_proyecto` varchar(45) DEFAULT NULL,
   `tipo_proyecto` varchar(6) DEFAULT NULL,
   `FE` tinyint(1) NOT NULL,
   `TE` tinyint(1) NOT NULL,
@@ -308,7 +468,8 @@ CREATE TABLE `proyecto` (
 --
 
 INSERT INTO `proyecto` (`numero_orden`, `usuario_numero_documento`, `nombre_cliente`, `nombre_proyecto`, `tipo_proyecto`, `FE`, `TE`, `IN`, `pcb_FE`, `pcb_TE`, `Conversor`, `Repujado`, `troquel`, `stencil`, `lexan`, `fecha_ingreso`, `fecha_entrega`, `fecha_salidal`, `ruteo`, `antisolder`, `PNC`, `estado_idestado`) VALUES
-(28506, '98113053240', 'valeria betancur', 'como me llamo', 'Normal', 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, '2017-10-02 15:26:28', '2017-10-20', NULL, 0, 0, 0, 1);
+(28519, '98113053240', 'juan david marulanda', 'love and feeling', 'Quick', 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, '2017-10-04 10:46:31', '2017-10-12', NULL, 1, 1, 0, 1),
+(28520, '98113053240', 'juan david marulanda', 'rude', 'Normal', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2017-10-04 11:04:25', '2017-11-30', NULL, 1, 1, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -336,6 +497,19 @@ CREATE TABLE `tipo_negocio` (
   `idtipo_negocio` tinyint(4) NOT NULL,
   `nombre` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `tipo_negocio`
+--
+
+INSERT INTO `tipo_negocio` (`idtipo_negocio`, `nombre`) VALUES
+(1, 'Circuito'),
+(2, 'Conversor'),
+(3, 'Repujado'),
+(4, 'Troquel'),
+(5, 'Teclado'),
+(6, 'Stencil'),
+(7, 'PCB');
 
 -- --------------------------------------------------------
 
@@ -477,25 +651,25 @@ ALTER TABLE `cargo`
 -- AUTO_INCREMENT de la tabla `detalle_ensamble`
 --
 ALTER TABLE `detalle_ensamble`
-  MODIFY `idDetalle_ensamble` smallint(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `idDetalle_ensamble` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_formato_estandar`
 --
 ALTER TABLE `detalle_formato_estandar`
-  MODIFY `idDetalle_formato_estandar` smallint(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `idDetalle_formato_estandar` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_proyecto`
 --
 ALTER TABLE `detalle_proyecto`
-  MODIFY `idDetalle_proyecto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idDetalle_proyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_teclados`
 --
 ALTER TABLE `detalle_teclados`
-  MODIFY `idDetalle_teclados` smallint(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `idDetalle_teclados` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `estado`
@@ -507,25 +681,25 @@ ALTER TABLE `estado`
 -- AUTO_INCREMENT de la tabla `negocio`
 --
 ALTER TABLE `negocio`
-  MODIFY `idnegocio` tinyint(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `idnegocio` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `procesos`
 --
 ALTER TABLE `procesos`
-  MODIFY `idproceso` tinyint(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `idproceso` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `proyecto`
 --
 ALTER TABLE `proyecto`
-  MODIFY `numero_orden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28507;
+  MODIFY `numero_orden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28521;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_negocio`
 --
 ALTER TABLE `tipo_negocio`
-  MODIFY `idtipo_negocio` tinyint(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `idtipo_negocio` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Restricciones para tablas volcadas

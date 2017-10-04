@@ -328,7 +328,7 @@
                           <EmptySpace min="0" pref="74" max="32767" attributes="0"/>
                           <Component id="jLabel23" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="cbMaterialPCBFE" min="-2" pref="150" max="-2" attributes="0"/>
+                          <Component id="cbMaterialCircuito" min="-2" pref="150" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
                           <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
@@ -337,8 +337,8 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" attributes="0">
                                   <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                                   <Component id="jCConversor" min="-2" max="-2" attributes="0"/>
@@ -349,13 +349,13 @@
                                   <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
                                   <Component id="jCStencil" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="19" pref="19" max="-2" attributes="0"/>
-                                  <Component id="jCPCBFE" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCCircuito" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="17" pref="17" max="-2" attributes="0"/>
                                   <Component id="jCPCBTE" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                                   <Component id="jCTeclado" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
+                              <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                                   <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
@@ -367,7 +367,7 @@
                                   <EmptySpace min="11" pref="11" max="-2" attributes="0"/>
                                   <Component id="jTStencil" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="11" pref="11" max="-2" attributes="0"/>
-                                  <Component id="jTPCBFE" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jTCircuito" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="11" pref="11" max="-2" attributes="0"/>
                                   <Component id="jTPCBTE" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="11" pref="11" max="-2" attributes="0"/>
@@ -397,9 +397,8 @@
                                       <Component id="jCTroquel" min="-2" max="-2" attributes="0"/>
                                       <Component id="jCRepujado" min="-2" max="-2" attributes="0"/>
                                       <Component id="jCStencil" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jCPCBFE" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jCCircuito" min="-2" max="-2" attributes="0"/>
                                       <Component id="jCPCBTE" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jCTeclado" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="5" pref="5" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -408,13 +407,16 @@
                                       <Component id="jTTroquel" min="-2" pref="25" max="-2" attributes="0"/>
                                       <Component id="jTRepujado" min="-2" pref="25" max="-2" attributes="0"/>
                                       <Component id="jTStencil" min="-2" pref="25" max="-2" attributes="0"/>
-                                      <Component id="jTPCBFE" min="-2" pref="25" max="-2" attributes="0"/>
+                                      <Component id="jTCircuito" min="-2" pref="25" max="-2" attributes="0"/>
                                       <Component id="jTPCBTE" min="-2" pref="25" max="-2" attributes="0"/>
                                       <Component id="jTTeclado" min="-2" pref="25" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" attributes="0">
-                                  <Component id="jCIntegracion" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jCIntegracion" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jCTeclado" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                                   <EmptySpace min="5" pref="5" max="-2" attributes="0"/>
                                   <Component id="jTIntegracion" min="-2" pref="25" max="-2" attributes="0"/>
                               </Group>
@@ -423,7 +425,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                   <Component id="jLabel23" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cbMaterialPCBFE" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                  <Component id="cbMaterialCircuito" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                               </Group>
                               <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                   <Component id="jLabel22" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -535,7 +537,7 @@
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jCConversorMouseClicked"/>
                   </Events>
                 </Component>
-                <Component class="elaprendiz.gui.textField.TextFieldRoundBackground" name="jTPCBFE">
+                <Component class="elaprendiz.gui.textField.TextFieldRoundBackground" name="jTCircuito">
                   <Properties>
                     <Property name="colorDeBorde" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -606,7 +608,7 @@
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jCTroquelMouseClicked"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JCheckBox" name="jCPCBFE">
+                <Component class="javax.swing.JCheckBox" name="jCCircuito">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -617,10 +619,10 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="66" green="66" red="66" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="PCB FE"/>
+                    <Property name="text" type="java.lang.String" value="Circuito"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jCPCBFEMouseClicked"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jCCircuitoMouseClicked"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel9">
@@ -645,7 +647,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="66" green="66" red="66" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="PCB TE"/>
+                    <Property name="text" type="java.lang.String" value="PCB"/>
                   </Properties>
                   <Events>
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jCPCBTEMouseClicked"/>
@@ -690,7 +692,7 @@
                     <Property name="text" type="java.lang.String" value="Material de la PCB FE:"/>
                   </Properties>
                 </Component>
-                <Component class="elaprendiz.gui.comboBox.ComboBoxRound" name="cbMaterialPCBFE">
+                <Component class="elaprendiz.gui.comboBox.ComboBoxRound" name="cbMaterialCircuito">
                   <Properties>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="66" green="66" red="66" type="rgb"/>

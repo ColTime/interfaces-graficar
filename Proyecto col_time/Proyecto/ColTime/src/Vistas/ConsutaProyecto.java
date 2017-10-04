@@ -5,6 +5,7 @@
  */
 package Vistas;
 
+import javax.sql.rowset.CachedRowSet;
 import javax.swing.JFrame;
 
 /**
@@ -20,8 +21,10 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-    int posX=0;
-    int posY=0;
+    //VAriables globales
+    int posX = 0;
+    int posY = 0;
+    CachedRowSet crs=null;
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -40,6 +43,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         comboBoxRound1 = new elaprendiz.gui.comboBox.ComboBoxRound();
+        btnActualizar = new elaprendiz.gui.button.ButtonColoredAction();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -105,13 +109,10 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(jButton10))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(jButton9)))
+                    .addComponent(jButton10)
+                    .addComponent(jButton9))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
@@ -152,6 +153,8 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         comboBoxRound1.setColorDeBorde(new java.awt.Color(204, 204, 204));
         comboBoxRound1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
 
+        btnActualizar.setText("Actualizar");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -173,7 +176,9 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(comboBoxRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,12 +200,17 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                         .addComponent(textFieldRoundBackground3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(textFieldRoundBackground2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153)), "Proyecto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
         jPanel2.setLayout(new java.awt.CardLayout());
 
+        jTable2.setAutoCreateRowSorter(true);
         jTable2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jTable2.setForeground(new java.awt.Color(128, 128, 131));
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -214,11 +224,15 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                 "Orden °N", "Comerial", "Nombre cliente", "Nombre  proyecto", "Fecha ingreso", "Fecha de entrega", "Fecha de salida", "Estado"
             }
         ));
-        jTable2.setCellSelectionEnabled(false);
+        jTable2.setFillsViewportHeight(true);
+        jTable2.setFocusTraversalPolicyProvider(true);
+        jTable2.setFocusable(false);
         jTable2.setGridColor(new java.awt.Color(255, 255, 255));
-        jTable2.setRowSelectionAllowed(true);
+        jTable2.setIntercellSpacing(new java.awt.Dimension(0, 0));
         jTable2.setSelectionBackground(new java.awt.Color(63, 179, 255));
         jTable2.setSelectionForeground(new java.awt.Color(63, 179, 255));
+        jTable2.setShowHorizontalLines(false);
+        jTable2.setShowVerticalLines(false);
         jScrollPane2.setViewportView(jTable2);
 
         jPanel2.add(jScrollPane2, "card2");
@@ -227,6 +241,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153)), "PNC", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
         jPanel5.setLayout(new java.awt.CardLayout());
 
+        jTable1.setAutoCreateRowSorter(true);
         jTable1.setForeground(new java.awt.Color(128, 128, 131));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -239,8 +254,14 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                 "Negocio", "Cantidad", "Proceso", "Estado"
             }
         ));
+        jTable1.setFillsViewportHeight(true);
+        jTable1.setFocusTraversalPolicyProvider(true);
+        jTable1.setFocusable(false);
         jTable1.setGridColor(new java.awt.Color(255, 255, 255));
+        jTable1.setIntercellSpacing(new java.awt.Dimension(0, 0));
         jTable1.setSelectionBackground(new java.awt.Color(63, 179, 255));
+        jTable1.setShowHorizontalLines(false);
+        jTable1.setShowVerticalLines(false);
         jScrollPane1.setViewportView(jTable1);
 
         jPanel5.add(jScrollPane1, "card2");
@@ -249,6 +270,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153)), "Detalles delproyecto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
         jPanel6.setLayout(new java.awt.CardLayout());
 
+        jTable3.setAutoCreateRowSorter(true);
         jTable3.setForeground(new java.awt.Color(128, 128, 131));
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -261,8 +283,14 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                 "idDetalle", "Negocio", "Tipo de negocio", "Cantidad", "Estado"
             }
         ));
+        jTable3.setFillsViewportHeight(true);
+        jTable3.setFocusTraversalPolicyProvider(true);
+        jTable3.setFocusable(false);
         jTable3.setGridColor(new java.awt.Color(255, 255, 255));
+        jTable3.setIntercellSpacing(new java.awt.Dimension(0, 0));
         jTable3.setSelectionBackground(new java.awt.Color(63, 179, 255));
+        jTable3.setShowHorizontalLines(false);
+        jTable3.setShowVerticalLines(false);
         jScrollPane3.setViewportView(jTable3);
 
         jPanel6.add(jScrollPane3, "card2");
@@ -293,7 +321,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
                 .addGap(18, 18, 18))
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
@@ -329,12 +357,12 @@ public class ConsutaProyecto extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
-        this.setLocation(evt.getXOnScreen()-posX, evt.getYOnScreen()-posY);
+        this.setLocation(evt.getXOnScreen() - posX, evt.getYOnScreen() - posY);
     }//GEN-LAST:event_jPanel1MouseDragged
 
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
-        posX=evt.getX();
-        posY=evt.getY();
+        posX = evt.getX();
+        posY = evt.getY();
     }//GEN-LAST:event_jPanel1MousePressed
 
     /**
@@ -371,8 +399,23 @@ public class ConsutaProyecto extends javax.swing.JFrame {
             }
         });
     }
+//Metodos---------------------------------------------------------------------->
 
+    private void consultarProyectos(String numerOrden, String nombrecliente, String nombreProyecto, String tipoProyecto) {
+        Controlador.Proyecto obj = new Controlador.Proyecto();
+        if (!numerOrden.equals("")) {
+            obj.setIdOrden(Integer.parseInt(numerOrden));
+        }else{
+            obj.setIdOrden(0);
+        }
+        obj.setNombreCliente(nombrecliente);
+        obj.setNombreProyecto(nombreProyecto);
+        obj.setTipoProyecto(tipoProyecto);
+        //Se ejecuta la sencencia y recibimos los proyectos
+         crs=obj.consultar_Proyecto();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private elaprendiz.gui.button.ButtonColoredAction btnActualizar;
     private elaprendiz.gui.comboBox.ComboBoxRound comboBoxRound1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton9;

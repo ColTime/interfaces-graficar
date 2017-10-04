@@ -15,8 +15,9 @@ public class DetalleProyecto {
     private String cantidad = "";
     private String negocio = "";
     private String tipoNegocio = "";
-    private int estado=0;
-    private String material="";
+    private int estado = 0;
+    private String material = "";
+
     //Set-------------------------------------------------------->
     public String getCantidad() {
         return cantidad;
@@ -58,10 +59,19 @@ public class DetalleProyecto {
         this.crs = crs;
     }
 
+    public void setMaterial(String material) {
+        this.material = material;
+    }
+
     //Metodos----------------------------------------------------->
-    public boolean registrar_Modificar_Detalle_Proycto() {
-        DetalleProyectoM obj=new DetalleProyectoM();
-        return obj.registrar_Modificar_Detalle_Proycto(cantidad,negocio,tipoNegocio,1);
+    public boolean registrar_Detalle_Proycto(String numerOrden) {
+        DetalleProyectoM obj = new DetalleProyectoM();
+        return obj.registrar_Detalle_Proycto(cantidad, negocio, tipoNegocio, 1, numerOrden,material);
+    }
+
+    public boolean modificar_Detalle_Proycto(String numerOrden) {
+
+        return true;
     }
 
     public CachedRowSet consultar_Detalle_Proyecto() {

@@ -100,8 +100,8 @@ public class Proyecto {
     }
 
     public CachedRowSet consultar_Proyecto() {
-
-        return crsP;
+        Modelo.ProyectoM obj = new Modelo.ProyectoM();
+        return obj.consultar_Proyecto(idOrden, nombreCliente, nombreProyecto, tipoProyecto);
     }
 
     public boolean cambiar_Estado_Proyeto() {

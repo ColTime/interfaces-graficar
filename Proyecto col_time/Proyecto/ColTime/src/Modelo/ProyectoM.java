@@ -72,8 +72,25 @@ public class ProyectoM {
         return res;
     }
 
-    public CachedRowSet consultar_Proyecto() {
-
+    public CachedRowSet consultar_Proyecto(int numerOrden, String nombreCliente, String nombreProyecto, String tipoProyecto) {
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query------------------------------------------------------------>
+            String Qry = "CALL PA_FechaServidor()";
+            ps = con.prepareStatement(Qry);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                fecha = String.valueOf(rs.getString(1));
+            }
+            con.close();
+            conexion.destruir();
+            conexion.cerrar(rs);
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "¡Error!" + e);
+        }
         return crsP;
     }
 
