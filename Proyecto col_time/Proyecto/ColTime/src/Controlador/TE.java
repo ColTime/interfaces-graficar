@@ -22,5 +22,6 @@ public class TE extends InfoProcesos {
     public boolean detener_Toma_Tiempo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+//Metodo finalize
 
 }

@@ -83,4 +83,12 @@ public class DetalleProyecto {
 
         return true;
     }
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize(); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Se finalizo el controlador de detalleproyecto");
+    }
+    
+    
 }

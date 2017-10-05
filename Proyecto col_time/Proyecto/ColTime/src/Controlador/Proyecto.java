@@ -17,8 +17,7 @@ public class Proyecto {
     private String nombreProyecto = "";
     private String tipoProyecto = "";
     private String negocio = "";
-    private String fechaEntrega = "";
-    private String fechaSalida = "";
+    private String fecha = "";
     private boolean FE = false;
     private boolean TE = false;
     private boolean IN = false;
@@ -51,12 +50,8 @@ public class Proyecto {
         this.negocio = negocio;
     }
 
-    public void setFechaEntrega(String fechaEntrega) {
-        this.fechaEntrega = fechaEntrega;
-    }
-
-    public void setFechaSalida(String fechaSalida) {
-        this.fechaSalida = fechaSalida;
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
     public void setFE(boolean FE) {
@@ -96,12 +91,12 @@ public class Proyecto {
                 this.setIN(true);
             }
         }
-        return obj.registrar_Modificar_Proyecto(idOrden, comercial, nombreCliente, nombreProyecto, tipoProyecto, FE, TE, IN, detalles[0], detalles[1], detalles[2], detalles[3], detalles[4], detalles[5], detalles[6], fechaEntrega, detalles[7], detalles[8], PNC, op);
+        return obj.registrar_Modificar_Proyecto(idOrden, comercial, nombreCliente, nombreProyecto, tipoProyecto, FE, TE, IN, detalles[0], detalles[1], detalles[2], detalles[3], detalles[4], detalles[5], detalles[6], fecha, detalles[7], detalles[8], PNC, op);
     }
 
-    public CachedRowSet consultar_Proyecto() {
+    public CachedRowSet consultar_Proyecto(String tipo) {
         Modelo.ProyectoM obj = new Modelo.ProyectoM();
-        return obj.consultar_Proyecto(idOrden, nombreCliente, nombreProyecto, tipoProyecto);
+        return obj.consultar_Proyecto(idOrden, nombreCliente, nombreProyecto,fecha,tipo);
     }
 
     public boolean cambiar_Estado_Proyeto() {
@@ -131,6 +126,7 @@ public class Proyecto {
     @Override
     protected void finalize() throws Throwable {
         super.finalize(); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Se finalizo la clase");
     }
 
 }

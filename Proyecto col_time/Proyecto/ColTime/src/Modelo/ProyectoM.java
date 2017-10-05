@@ -1,6 +1,7 @@
 package Modelo;
 
 import Controlador.*;
+import com.sun.rowset.CachedRowSetImpl;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -72,22 +73,35 @@ public class ProyectoM {
         return res;
     }
 
-    public CachedRowSet consultar_Proyecto(int numerOrden, String nombreCliente, String nombreProyecto, String tipoProyecto) {
+    public CachedRowSet consultar_Proyecto(int numerOrden, String nombreCliente, String nombreProyecto, String fecha, String TipoFecha) {
         try {
             conexion = new Conexion();
             conexion.establecerConexion();
             con = conexion.getConexion();
             //Query------------------------------------------------------------>
-            String Qry = "CALL PA_FechaServidor()";
-            ps = con.prepareStatement(Qry);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                fecha = String.valueOf(rs.getString(1));
+            String Qry = Qry = "CALL PA_ConsultarProyectosIngreso(?,?,?,?)";
+            if (TipoFecha.equals("Ingreso")) {
+                //Query para buscar por fecha de Ingreso
+                Qry = "CALL PA_ConsultarProyectosIngreso(?,?,?,?)";
+            } else if (TipoFecha.equals("Entrega")) {
+                //Query para buscar por fecha de Entrega
+                Qry = "CALL PA_ConsultarProyectosEntrega(?,?,?,?)";
+            } else if (TipoFecha.equals("Salida")) {
+                //Query para buscar por fecha de Salida
+                Qry = "CALL PA_ConsultarProyectosSalida(?,?,?,?)";
             }
-            con.close();
-            conexion.destruir();
+            ps = con.prepareStatement(Qry);
+            ps.setInt(1, numerOrden);
+            ps.setString(2, nombreCliente);
+            ps.setString(3, nombreProyecto);
+            ps.setString(4, fecha);
+            rs = ps.executeQuery();
+            crsP = new CachedRowSetImpl();
+            crsP.populate(rs);
             conexion.cerrar(rs);
             ps.close();
+            con.close();
+            conexion.destruir();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "¡Error!" + e);
         }
@@ -152,4 +166,10 @@ public class ProyectoM {
         }
         return fecha;
     }
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize(); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }

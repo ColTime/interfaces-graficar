@@ -598,6 +598,7 @@ public class Menu extends javax.swing.JFrame {
     @Override
     protected void finalize() throws Throwable {
         super.finalize(); //To change body of generated methods, choose Tools | Templates.
+        System.out.print("Se finalizo la clase menu");
     }
 
     /**

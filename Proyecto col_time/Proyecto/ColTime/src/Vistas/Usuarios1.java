@@ -414,13 +414,13 @@ public class Usuarios1 extends javax.swing.JPanel {
         jTUsuario.setForeground(new java.awt.Color(128, 128, 131));
         jTUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nuero de documento", "Tipo documento", "Nombres", "Apellidos", "Cargo", "Imagen", "Estado"
             }
         ));
         jTUsuario.setFillsViewportHeight(true);
@@ -728,20 +728,34 @@ public class Usuarios1 extends javax.swing.JPanel {
     }
 
     public void modifcarColumnas() {
-        jTUsuario.getColumn("Numero de Documento").setMaxWidth(145);
-        jTUsuario.getColumn("Numero de Documento").setMinWidth(145);
-        jTUsuario.getColumn("Tipo documento").setMaxWidth(100);
-        jTUsuario.getColumn("Tipo documento").setMinWidth(100);
-        jTUsuario.getColumn("Nombres").setMaxWidth(200);
-        jTUsuario.getColumn("Nombres").setMinWidth(200);
-        jTUsuario.getColumn("Apellidos").setMaxWidth(200);
-        jTUsuario.getColumn("Apellidos").setMinWidth(200);
-        jTUsuario.getColumn("Cargo").setMaxWidth(159);
-        jTUsuario.getColumn("Cargo").setMinWidth(159);
-        jTUsuario.getColumn("Imagen").setMaxWidth(0);
-        jTUsuario.getColumn("Imagen").setMinWidth(0);
-        jTUsuario.getColumn("Estado").setMaxWidth(50);
-        jTUsuario.getColumn("Estado").setMinWidth(50);
+        jTUsuario.getColumnModel().getColumn(0).setMinWidth(145);
+        jTUsuario.getColumnModel().getColumn(0).setMaxWidth(145);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(145);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(0).setMinWidth(145);
+        jTUsuario.getColumnModel().getColumn(1).setMinWidth(100);
+        jTUsuario.getColumnModel().getColumn(1).setMaxWidth(100);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(100);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(1).setMinWidth(100);
+        jTUsuario.getColumnModel().getColumn(2).setMinWidth(206);
+        jTUsuario.getColumnModel().getColumn(2).setMaxWidth(206);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(206);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(2).setMinWidth(206);
+        jTUsuario.getColumnModel().getColumn(3).setMinWidth(206);
+        jTUsuario.getColumnModel().getColumn(3).setMaxWidth(206);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(206);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(3).setMinWidth(206);
+        jTUsuario.getColumnModel().getColumn(4).setMinWidth(159);
+        jTUsuario.getColumnModel().getColumn(4).setMaxWidth(159);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(159);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(4).setMinWidth(159);
+        jTUsuario.getColumnModel().getColumn(5).setMinWidth(0);
+        jTUsuario.getColumnModel().getColumn(5).setMaxWidth(0);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
+        jTUsuario.getColumnModel().getColumn(6).setMinWidth(50);
+        jTUsuario.getColumnModel().getColumn(6).setMaxWidth(50);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(50);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(6).setMinWidth(50);
     }
 
     public void limites() {

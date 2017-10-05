@@ -18,6 +18,7 @@ public class proyecto extends javax.swing.JPanel {
         cambiarEstadoBotones();
         btnNuevo.setEnabled(true);
         Notificacion1.setVisible(false);
+        
     }
     boolean v[] = new boolean[9];
 
@@ -724,7 +725,9 @@ public class proyecto extends javax.swing.JPanel {
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        new ConsutaProyecto().setVisible(true);
+        ConsutaProyecto obj = new ConsutaProyecto();
+        obj.setLocationRelativeTo(null);
+        obj.setVisible(true);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -743,7 +746,7 @@ public class proyecto extends javax.swing.JPanel {
             obj.setTipoProyecto(cbTipo.getSelectedItem().toString());
             obj.setNegocio(cbNegocio.getSelectedItem().toString());
             DateFormat fecha = new SimpleDateFormat("YYYY/MM/dd");
-            obj.setFechaEntrega(fecha.format(jDentrega.getDate()));
+            obj.setFecha(fecha.format(jDentrega.getDate()));
             v[0] = jCCircuito.isSelected() ? true : false;
             v[1] = jCPCBTE.isSelected() ? true : false;
             v[2] = jCConversor.isSelected() ? true : false;
