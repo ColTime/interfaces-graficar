@@ -28,13 +28,13 @@ public class ProyectoM {
     //Metodos y funciones------------------------------------------------>
     public boolean registrar_Modificar_Proyecto(int norden, String comercial, String cliente, String proyecto, String tipo, boolean fe, boolean te, boolean in, boolean pcbfe,
             boolean pcbte, boolean conversor, boolean repujado, boolean troquel, boolean stencil, boolean lexan, String fechaEntrega, boolean ruteo, boolean anti,
-            boolean pnc, int op) {
+            int op) {
         try {
             conexion = new Conexion();
             conexion.establecerConexion();
             con = conexion.getConexion();
             //Query------------------------------------------------------------>
-            String Qry = " SELECT FU_RegistrarModificarProyecto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String Qry = " SELECT FU_RegistrarModificarProyecto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             ps = con.prepareStatement(Qry);
             ps.setString(1, comercial);
             ps.setString(2, cliente);
@@ -53,9 +53,8 @@ public class ProyectoM {
             ps.setString(15, fechaEntrega);
             ps.setBoolean(16, ruteo);
             ps.setBoolean(17, anti);
-            ps.setBoolean(18, pnc);
-            ps.setInt(19, norden);
-            ps.setInt(20, op);
+            ps.setInt(18, norden);
+            ps.setInt(19, op);
             //Ejecución del Query---------------------------------------------->
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -171,5 +170,5 @@ public class ProyectoM {
     protected void finalize() throws Throwable {
         super.finalize(); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

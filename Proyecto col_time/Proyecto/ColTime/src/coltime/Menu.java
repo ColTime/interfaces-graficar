@@ -17,21 +17,22 @@ import rojerusan.RSNotifyAnimated;
 
 public class Menu extends javax.swing.JFrame {
 
-    private Color cor = new Color(189, 189, 189);
-    private Color corF = new Color(219, 219, 219);
+    public Color cor = new Color(189, 189, 189);
+    public Color corF = new Color(219, 219, 219);
     Producciones bp = null;
     private int longitudByte;
 
     public Menu() {
-        initComponents();
-        Animacion.Animacion.mover_derecha(935, 1135, 0, 2, jPanel3);
-        new CambiaPanel(jPContenido, new Inicio());
-        btn1.setColorHover(cor);
-        btn1.setColorNormal(cor);
-        btn1.setColorPressed(cor);
-        this.setIconImage(new ImageIcon(getClass().getResource("/imagenesEmpresa/favicon.png")).getImage());
-        this.setLocationRelativeTo(null);
-        new rojerusan.RSNotifyAnimated("Bienvenido", "Tienes 5 nuevas notificaciones", 6, RSNotifyAnimated.PositionNotify.BottomLeft, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+            initComponents();
+            Animacion.Animacion.mover_derecha(935, 1135, 0, 2, jPanel3);
+            new CambiaPanel(jPContenido, new Inicio());
+            btn1.setColorHover(cor);
+            btn1.setColorNormal(cor);
+            btn1.setColorPressed(cor);
+            this.setIconImage(new ImageIcon(getClass().getResource("/imagenesEmpresa/favicon.png")).getImage());
+            this.setLocationRelativeTo(null);
+            new rojerusan.RSNotifyAnimated("Bienvenido", "Tienes 5 nuevas notificaciones", 6, RSNotifyAnimated.PositionNotify.BottomLeft, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+ 
     }
     private int posX = 0;
     private int posY = 0;
@@ -426,9 +427,7 @@ public class Menu extends javax.swing.JFrame {
             btn2.setColorNormal(cor);
             btn2.setColorPressed(cor);
         }
-        if (!jPContenido.getComponent(0).getName().equals("proyectos")) {
-            new CambiaPanel(jPContenido, new proyecto());
-        }
+        cambiarpanelProyecto();
     }//GEN-LAST:event_btn2ActionPerformed
 
     private void btn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn4ActionPerformed
@@ -574,7 +573,13 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    public void traerimagen() {
+    public void cambiarpanelProyecto() {
+        if (!jPContenido.getComponent(0).getName().equals("proyectos")) {
+            new CambiaPanel(jPContenido, new proyecto(1));
+        }
+    }
+
+    public void traerimagen() {//Esta parte del proyecto esta en espera
         ImageIcon obj = new ImageIcon(rSUsuario.image);
         try {
             strem = new FileInputStream(rSUsuario.getName());
@@ -622,31 +627,31 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private rsbuttom.RSButtonMetro btn1;
-    private rsbuttom.RSButtonMetro btn2;
-    private rsbuttom.RSButtonMetro btn3;
-    private rsbuttom.RSButtonMetro btn4;
-    private javax.swing.JButton btnMenu;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    public rsbuttom.RSButtonMetro btn1;
+    public rsbuttom.RSButtonMetro btn2;
+    public rsbuttom.RSButtonMetro btn3;
+    public rsbuttom.RSButtonMetro btn4;
+    public javax.swing.JButton btnMenu;
+    public javax.swing.JButton jButton1;
+    public javax.swing.JButton jButton2;
     public static javax.swing.JLabel jDocumento;
-    private javax.swing.JInternalFrame jInternalFrame1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JPanel jPContenido;
-    private javax.swing.JPanel jPMenu;
-    private javax.swing.JPanel jPSuperior;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private rojerusan.RSFotoCircle rSUsuario;
+    public javax.swing.JInternalFrame jInternalFrame1;
+    public javax.swing.JLabel jLabel2;
+    public javax.swing.JMenu jMenu1;
+    public javax.swing.JMenu jMenu2;
+    public javax.swing.JMenuBar jMenuBar1;
+    public javax.swing.JMenuItem jMenuItem1;
+    public javax.swing.JMenuItem jMenuItem2;
+    public javax.swing.JPanel jPContenido;
+    public javax.swing.JPanel jPMenu;
+    public javax.swing.JPanel jPSuperior;
+    public javax.swing.JPanel jPanel1;
+    public javax.swing.JPanel jPanel2;
+    public javax.swing.JPanel jPanel3;
+    public javax.swing.JPanel jPanel4;
+    public javax.swing.JPanel jPanel5;
+    public javax.swing.JPanel jPanel6;
+    public rojerusan.RSFotoCircle rSUsuario;
     // End of variables declaration//GEN-END:variables
 //Metodos--------------------------------------->
     public void CapturaImagen() {

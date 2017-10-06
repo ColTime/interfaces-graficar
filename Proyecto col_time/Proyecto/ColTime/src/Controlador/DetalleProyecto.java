@@ -74,9 +74,9 @@ public class DetalleProyecto {
         return true;
     }
 
-    public CachedRowSet consultar_Detalle_Proyecto() {
-
-        return crs;
+    public CachedRowSet consultar_Detalle_Proyecto(String numerOrden) {
+        DetalleProyectoM obj=new DetalleProyectoM();
+        return obj.consultar_Detalle_Proyecto(numerOrden);
     }
 
     public boolean cambiar_Estado_Detalle() {

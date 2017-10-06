@@ -22,7 +22,6 @@ public class Proyecto {
     private boolean TE = false;
     private boolean IN = false;
     private boolean detalles[] = new boolean[9];//Converosr,Repujado
-    private boolean PNC;
     private int estado;
 
     //Get and set------------------------------------------------>
@@ -70,10 +69,6 @@ public class Proyecto {
         this.detalles = detalles;
     }
 
-    public void setPNC(boolean PNC) {
-        this.PNC = PNC;
-    }
-
     public void setEstado(int estado) {
         this.estado = estado;
     }
@@ -91,7 +86,7 @@ public class Proyecto {
                 this.setIN(true);
             }
         }
-        return obj.registrar_Modificar_Proyecto(idOrden, comercial, nombreCliente, nombreProyecto, tipoProyecto, FE, TE, IN, detalles[0], detalles[1], detalles[2], detalles[3], detalles[4], detalles[5], detalles[6], fecha, detalles[7], detalles[8], PNC, op);
+        return obj.registrar_Modificar_Proyecto(idOrden, comercial, nombreCliente, nombreProyecto, tipoProyecto, FE, TE, IN, detalles[0], detalles[1], detalles[2], detalles[3], detalles[4], detalles[5], detalles[6], fecha, detalles[7], detalles[8], op);
     }
 
     public CachedRowSet consultar_Proyecto(String tipo) {

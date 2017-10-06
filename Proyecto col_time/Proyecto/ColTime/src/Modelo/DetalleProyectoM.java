@@ -1,6 +1,7 @@
 package Modelo;
 
 import Controlador.*;
+import com.sun.rowset.CachedRowSetImpl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -76,8 +77,26 @@ public class DetalleProyectoM {
         return res;
     }
 
-    public CachedRowSet consultar_Detalle_Proyecto() {
-
+    public CachedRowSet consultar_Detalle_Proyecto(String numeOrden) {
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query------------------------------------------------------------>
+            String Qry = "CALL PA_ConsultarDetalleProyecto(?)";
+            ps = con.prepareStatement(Qry);
+            ps.setInt(1,Integer.parseInt(numeOrden));
+            rs = ps.executeQuery();
+            crs=new CachedRowSetImpl();
+            crs.populate(rs);
+            //Cierre de conexiones
+            conexion.cerrar(rs);
+            conexion.destruir();
+            ps.close();
+            con.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "¡Error!" + e);
+        }
         return crs;
     }
 
@@ -91,5 +110,5 @@ public class DetalleProyectoM {
         super.finalize(); //To change body of generated methods, choose Tools | Templates.
         System.out.println("Se finalizo la clase del modelo del detalle proyecto");
     }
-    
+
 }

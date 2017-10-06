@@ -12,13 +12,14 @@ import rojerusan.RSNotifyAnimated;
 
 public class proyecto extends javax.swing.JPanel {
 
-    public proyecto() {
-        initComponents();
-        cambiarEstadoFalso();
-        cambiarEstadoBotones();
-        btnNuevo.setEnabled(true);
-        Notificacion1.setVisible(false);
-        
+    public proyecto(int p) {
+        if (p == 1) {
+            initComponents();
+            cambiarEstadoFalso();
+            cambiarEstadoBotones();
+            btnNuevo.setEnabled(true);
+            Notificacion1.setVisible(false);
+        } 
     }
     boolean v[] = new boolean[9];
 
@@ -757,7 +758,6 @@ public class proyecto extends javax.swing.JPanel {
             v[7] = jCRuteo.isSelected() ? true : false;
             v[8] = jCAntisolder.isSelected() ? true : false;
             obj.setDetalles(v);
-            obj.setPNC(false);
             if (obj.registrar_Modificar_Proyecto(Menu.jDocumento.getText(), 1)) {
                 if (RegistrarModificarDetalle(jTNorden.getText())) {
                     new rojerusan.RSNotifyAnimated("Listo!!", "El Proyecto con el numero de orden: " + jTNorden.getText() + " fue registrada exitosamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
@@ -940,7 +940,7 @@ public class proyecto extends javax.swing.JPanel {
         jCTeclado.setSelected(false);
     }
 
-    private void activarComponentes() {
+    public void activarComponentes() {
         jTNombreCliente.setEnabled(true);
         jTNombreProyecto.setEnabled(true);
         jDentrega.setEnabled(true);
@@ -1131,29 +1131,29 @@ public class proyecto extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Notificacion1;
+    public static javax.swing.JLabel Notificacion1;
     private javax.swing.JButton btnActivar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnUpdate;
-    private elaprendiz.gui.comboBox.ComboBoxRound cbMaterialCircuito;
-    private elaprendiz.gui.comboBox.ComboBoxRound cbMaterialPCBTE;
-    private elaprendiz.gui.comboBox.ComboBoxRound cbNegocio;
-    private elaprendiz.gui.comboBox.ComboBoxRound cbTipo;
-    private javax.swing.JCheckBox jCAntisolder;
-    private javax.swing.JCheckBox jCCircuito;
-    private javax.swing.JCheckBox jCConversor;
-    private javax.swing.JCheckBox jCIntegracion;
-    private javax.swing.JCheckBox jCPCBTE;
-    private javax.swing.JCheckBox jCRepujado;
-    private javax.swing.JCheckBox jCRuteo;
-    private javax.swing.JCheckBox jCStencil;
-    private javax.swing.JCheckBox jCTeclado;
-    private javax.swing.JCheckBox jCTroquel;
-    private com.toedter.calendar.JDateChooser jDentrega;
-    private javax.swing.JLabel jLIngreso;
+    public static elaprendiz.gui.comboBox.ComboBoxRound cbMaterialCircuito;
+    public static elaprendiz.gui.comboBox.ComboBoxRound cbMaterialPCBTE;
+    public static elaprendiz.gui.comboBox.ComboBoxRound cbNegocio;
+    public static elaprendiz.gui.comboBox.ComboBoxRound cbTipo;
+    public static javax.swing.JCheckBox jCAntisolder;
+    public static javax.swing.JCheckBox jCCircuito;
+    public static javax.swing.JCheckBox jCConversor;
+    public static javax.swing.JCheckBox jCIntegracion;
+    public static javax.swing.JCheckBox jCPCBTE;
+    public static javax.swing.JCheckBox jCRepujado;
+    public static javax.swing.JCheckBox jCRuteo;
+    public static javax.swing.JCheckBox jCStencil;
+    public static javax.swing.JCheckBox jCTeclado;
+    public static javax.swing.JCheckBox jCTroquel;
+    public static com.toedter.calendar.JDateChooser jDentrega;
+    public static javax.swing.JLabel jLIngreso;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1172,22 +1172,22 @@ public class proyecto extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPDetalles;
-    private javax.swing.JPanel jPDetalles1;
-    private javax.swing.JPanel jPInformacion;
+    public static javax.swing.JPanel jPDetalles;
+    public static javax.swing.JPanel jPDetalles1;
+    public static javax.swing.JPanel jPInformacion;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
-    private elaprendiz.gui.textField.TextFieldRoundBackground jTCircuito;
-    private elaprendiz.gui.textField.TextFieldRoundBackground jTConversor;
-    private elaprendiz.gui.textField.TextFieldRoundBackground jTIntegracion;
-    private elaprendiz.gui.textField.TextFieldRoundBackground jTNombreCliente;
-    private elaprendiz.gui.textField.TextFieldRoundBackground jTNombreProyecto;
-    private elaprendiz.gui.textField.TextFieldRoundBackground jTNorden;
-    private elaprendiz.gui.textField.TextFieldRoundBackground jTPCBTE;
-    private elaprendiz.gui.textField.TextFieldRoundBackground jTRepujado;
-    private elaprendiz.gui.textField.TextFieldRoundBackground jTStencil;
-    private elaprendiz.gui.textField.TextFieldRoundBackground jTTeclado;
-    private elaprendiz.gui.textField.TextFieldRoundBackground jTTroquel;
+    public static elaprendiz.gui.textField.TextFieldRoundBackground jTCircuito;
+    public static elaprendiz.gui.textField.TextFieldRoundBackground jTConversor;
+    public static elaprendiz.gui.textField.TextFieldRoundBackground jTIntegracion;
+    public static elaprendiz.gui.textField.TextFieldRoundBackground jTNombreCliente;
+    public static elaprendiz.gui.textField.TextFieldRoundBackground jTNombreProyecto;
+    public static elaprendiz.gui.textField.TextFieldRoundBackground jTNorden;
+    public static elaprendiz.gui.textField.TextFieldRoundBackground jTPCBTE;
+    public static elaprendiz.gui.textField.TextFieldRoundBackground jTRepujado;
+    public static elaprendiz.gui.textField.TextFieldRoundBackground jTStencil;
+    public static elaprendiz.gui.textField.TextFieldRoundBackground jTTeclado;
+    public static elaprendiz.gui.textField.TextFieldRoundBackground jTTroquel;
     // End of variables declaration//GEN-END:variables
 }

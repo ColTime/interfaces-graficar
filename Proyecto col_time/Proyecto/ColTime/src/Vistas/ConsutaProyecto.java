@@ -5,8 +5,12 @@
  */
 package Vistas;
 
+import Controlador.DetalleProyecto;
+import coltime.Menu;
+import java.awt.Color;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -25,6 +29,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         initComponents();
         jDFecha.setEnabled(false);
         jRnulo.setVisible(false);
+        jTtipo.setText("");
         consultarProyectos("", "", "", "");
     }
     //VAriables globales
@@ -41,9 +46,8 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
+        jTtipo = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jTNumerOrden = new elaprendiz.gui.textField.TextFieldRoundBackground();
         jLabel3 = new javax.swing.JLabel();
@@ -57,15 +61,16 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         jRIngreso = new javax.swing.JRadioButton();
         jRSalida = new javax.swing.JRadioButton();
         jRnulo = new javax.swing.JRadioButton();
+        jTtipo1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TProyecto = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TPNC = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        TDetalle = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -105,16 +110,12 @@ public class ConsutaProyecto extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesEmpresa/favicon.png"))); // NOI18N
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(1163, Short.MAX_VALUE)
                 .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
                 .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -127,19 +128,18 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton10)
                     .addComponent(jButton9))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(128, 128, 131));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Tipo:");
-        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 110, 71, -1));
+        jTtipo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTtipo.setForeground(new java.awt.Color(128, 128, 131));
+        jTtipo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jTtipo.setText("Tipo:");
+        jPanel4.add(jTtipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 110, 71, -1));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(204, 204, 204)), "Busqueda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
@@ -187,13 +187,16 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         jLabel4.setText("Nombre del proyecto:");
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(409, 30, -1, -1));
 
-        jButton1.setText("jButton1");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/retro.png"))); // NOI18N
+        jButton1.setToolTipText("");
+        jButton1.setContentAreaFilled(false);
+        jButton1.setFocusable(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 20, 20, -1));
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1178, 12, 20, 20));
 
         jDFecha.setToolTipText("");
         jDFecha.setDateFormatString("dd/MM/yyyy");
@@ -268,10 +271,21 @@ public class ConsutaProyecto extends javax.swing.JFrame {
 
         jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 12, 1203, 92));
 
+        jTtipo1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTtipo1.setForeground(new java.awt.Color(128, 128, 131));
+        jTtipo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jTtipo1.setText("Tipo:");
+        jPanel4.add(jTtipo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 110, 71, -1));
+
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153)), "Proyecto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
         jPanel2.setLayout(new java.awt.CardLayout());
 
+        TProyecto = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false; //Disallow the editing of any cell
+            }
+        };
         TProyecto.setAutoCreateRowSorter(true);
         TProyecto.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         TProyecto.setForeground(new java.awt.Color(128, 128, 131));
@@ -296,6 +310,14 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         TProyecto.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         TProyecto.setShowHorizontalLines(false);
         TProyecto.setShowVerticalLines(false);
+        TProyecto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TProyectoMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                TProyectoMousePressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(TProyecto);
 
         jPanel2.add(jScrollPane2, "card2");
@@ -306,40 +328,42 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153)), "PNC", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
         jPanel5.setLayout(new java.awt.CardLayout());
 
-        jTable1.setAutoCreateRowSorter(true);
-        jTable1.setForeground(new java.awt.Color(128, 128, 131));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TPNC.setAutoCreateRowSorter(true);
+        TPNC.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        TPNC.setForeground(new java.awt.Color(128, 128, 131));
+        TPNC.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Negocio", "Cantidad", "Proceso", "Estado"
+                "idDetalle", "Negocio", "Tipo de negocio", "Cantidad", "Ubicación"
             }
         ));
-        jTable1.setFillsViewportHeight(true);
-        jTable1.setFocusTraversalPolicyProvider(true);
-        jTable1.setFocusable(false);
-        jTable1.setGridColor(new java.awt.Color(255, 255, 255));
-        jTable1.setIntercellSpacing(new java.awt.Dimension(0, 0));
-        jTable1.setSelectionBackground(new java.awt.Color(63, 179, 255));
-        jTable1.setShowHorizontalLines(false);
-        jTable1.setShowVerticalLines(false);
-        jScrollPane1.setViewportView(jTable1);
+        TPNC.setFillsViewportHeight(true);
+        TPNC.setFocusTraversalPolicyProvider(true);
+        TPNC.setFocusable(false);
+        TPNC.setGridColor(new java.awt.Color(255, 255, 255));
+        TPNC.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        TPNC.setSelectionBackground(new java.awt.Color(63, 179, 255));
+        TPNC.setShowHorizontalLines(false);
+        TPNC.setShowVerticalLines(false);
+        jScrollPane1.setViewportView(TPNC);
 
         jPanel5.add(jScrollPane1, "card2");
 
-        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 422, 474, 193));
+        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(654, 422, 560, 193));
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153)), "Detalles delproyecto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
         jPanel6.setLayout(new java.awt.CardLayout());
 
-        jTable3.setAutoCreateRowSorter(true);
-        jTable3.setForeground(new java.awt.Color(128, 128, 131));
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        TDetalle.setAutoCreateRowSorter(true);
+        TDetalle.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        TDetalle.setForeground(new java.awt.Color(128, 128, 131));
+        TDetalle.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -350,33 +374,34 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                 "idDetalle", "Negocio", "Tipo de negocio", "Cantidad", "Estado"
             }
         ));
-        jTable3.setFillsViewportHeight(true);
-        jTable3.setFocusTraversalPolicyProvider(true);
-        jTable3.setFocusable(false);
-        jTable3.setGridColor(new java.awt.Color(255, 255, 255));
-        jTable3.setIntercellSpacing(new java.awt.Dimension(0, 0));
-        jTable3.setSelectionBackground(new java.awt.Color(63, 179, 255));
-        jTable3.setShowHorizontalLines(false);
-        jTable3.setShowVerticalLines(false);
-        jScrollPane3.setViewportView(jTable3);
+        TDetalle.setFillsViewportHeight(true);
+        TDetalle.setFocusTraversalPolicyProvider(true);
+        TDetalle.setFocusable(false);
+        TDetalle.setGridColor(new java.awt.Color(255, 255, 255));
+        TDetalle.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        TDetalle.setSelectionBackground(new java.awt.Color(63, 179, 255));
+        TDetalle.setShowHorizontalLines(false);
+        TDetalle.setShowVerticalLines(false);
+        jScrollPane3.setViewportView(TDetalle);
 
         jPanel6.add(jScrollPane3, "card2");
 
-        jPanel4.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 422, 612, 193));
+        jPanel4.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 422, 600, 193));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1225, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -402,6 +427,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         consultarProyectos("", "", "", "");
+        limpiarCampos();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTNumerOrdenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNumerOrdenKeyReleased
@@ -419,21 +445,26 @@ public class ConsutaProyecto extends javax.swing.JFrame {
     private void jREntregaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jREntregaMouseClicked
         jRnulo.setVisible(true);
         jDFecha.setEnabled(true);
+        action();
     }//GEN-LAST:event_jREntregaMouseClicked
 
     private void jRIngresoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRIngresoMouseClicked
         jRnulo.setVisible(true);
         jDFecha.setEnabled(true);
+        action();
     }//GEN-LAST:event_jRIngresoMouseClicked
 
     private void jRSalidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRSalidaMouseClicked
         jRnulo.setVisible(true);
         jDFecha.setEnabled(true);
+        action();
     }//GEN-LAST:event_jRSalidaMouseClicked
 
     private void jRnuloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRnuloMouseClicked
         jRnulo.setVisible(false);
         jDFecha.setEnabled(false);
+        jDFecha.setDate(null);
+        consultarProyectos(jTNumerOrden.getText(), jTNombreCliente.getText(), jTNombreProyecto.getText(), "");
     }//GEN-LAST:event_jRnuloMouseClicked
 
     private void jDFechaInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jDFechaInputMethodTextChanged
@@ -443,14 +474,125 @@ public class ConsutaProyecto extends javax.swing.JFrame {
     }//GEN-LAST:event_jDFechaCaretPositionChanged
 
     private void jDFechaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDFechaPropertyChange
-         System.err.println("Ingreso");
-         if((jRIngreso.isSelected() || jREntrega.isSelected() || jRSalida.isSelected()) && jDFecha.getDate()!=null){
-             controlBusqueda();
-         }
+        if ((jRIngreso.isSelected() || jREntrega.isSelected() || jRSalida.isSelected()) && jDFecha.getDate() != null) {
+            controlBusqueda();
+        }
     }//GEN-LAST:event_jDFechaPropertyChange
 
     private void jDFechaVetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_jDFechaVetoableChange
     }//GEN-LAST:event_jDFechaVetoableChange
+
+    private void TProyectoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TProyectoMouseClicked
+//        if (evt.getClickCount() == 1) {
+//            if (TProyecto.getRowCount() > 0) {
+//                int f = TProyecto.getSelectedRow();
+//                String valor = TProyecto.getValueAt(f, 8).toString();
+//                jTtipo.setText(valor);
+//                if (valor.equals("Normal")) {
+//                    jTtipo.setForeground(new Color(128, 128, 131));
+//                } else if (valor.equals("Quick")) {
+//                    jTtipo.setForeground(Color.blue);
+//                } else if (valor.equals("RQT")) {
+//                    jTtipo.setForeground(Color.ORANGE);
+//                }
+//                consultarDetalle(TProyecto.getValueAt(f, 0).toString());
+//            }
+//        }
+//        if (evt.getClickCount() == 2) {
+//            Menu obj = new Menu();
+//            obj.cambiarpanelProyecto();
+//            obj.btn1.setColorHover(obj.cor);
+//            obj.btn1.setColorNormal(obj.corF);
+//            obj.btn1.setColorPressed(obj.cor);
+//            
+//            obj.btn2.setColorHover(obj.cor);
+//            obj.btn2.setColorNormal(obj.cor);
+//            obj.btn2.setColorPressed(obj.cor);
+//
+//            obj.btn3.setColorHover(obj.cor);
+//            obj.btn3.setColorNormal(obj.corF);
+//            obj.btn3.setColorPressed(obj.cor);
+//
+//            obj.btn4.setColorHover(obj.cor);
+//            obj.btn4.setColorNormal(obj.corF);
+//            obj.btn4.setColorPressed(obj.cor);
+//            this.dispose();
+//        }
+    }//GEN-LAST:event_TProyectoMouseClicked
+
+    private void TProyectoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TProyectoMousePressed
+        if (evt.getClickCount() == 1) {
+            if (TProyecto.getRowCount() > 0) {
+                int f = TProyecto.getSelectedRow();
+                String valor = TProyecto.getValueAt(f, 8).toString();
+                jTtipo.setText(valor);
+                if (valor.equals("Normal")) {
+                    jTtipo.setForeground(new Color(128, 128, 131));
+                } else if (valor.equals("Quick")) {
+                    jTtipo.setForeground(Color.blue);
+                } else if (valor.equals("RQT")) {
+                    jTtipo.setForeground(Color.ORANGE);
+                }
+                consultarDetalle(TProyecto.getValueAt(f, 0).toString());
+            }
+        }
+        if (evt.getClickCount() == 2) {
+            if (TProyecto.getRowCount() > 0) {
+                proyecto obj = new proyecto(2);
+                obj.setFocusable(true);
+                try {
+                    int f = TProyecto.getSelectedRow();
+                    //Activar componentes
+                    activarCamposproyecto(obj);
+                    //Asignar valores a componentes
+                    obj.jTNorden.setText(TProyecto.getValueAt(f, 0).toString());
+                    obj.jTNombreCliente.setText(TProyecto.getValueAt(f, 2).toString());
+                    obj.jTNombreProyecto.setText(TProyecto.getValueAt(f, 3).toString());
+                    String fet[] = TProyecto.getValueAt(f, 4).toString().split(" ");
+                    obj.jLIngreso.setText(fet[0]);
+//                    SimpleDateFormat fecha=new SimpleDateFormat("DD-MM-YY");
+//                    obj.jDentrega.setDate(fecha.parse(TProyecto.getValueAt(f, 5).toString()));
+                    obj.cbTipo.setSelectedItem(TProyecto.getValueAt(f, 8).toString());
+                    for (int i = 0; i < TDetalle.getRowCount(); i++) {
+                        //Buscamos que detalles tiene este proyecto para enviar a la vista de proyecto
+                        if (TDetalle.getValueAt(i, 2).toString().equals("Conversor")) {
+                            obj.jCConversor.setSelected(true);
+                            obj.jCConversor.setEnabled(true);
+                            obj.jTConversor.setText(TDetalle.getValueAt(i, 3).toString());
+                        } else if (TDetalle.getValueAt(i, 2).toString().equals("Troquel")) {
+                            obj.jCTroquel.setSelected(true);
+                            obj.jCTroquel.setEnabled(true);
+                            obj.jTTroquel.setText(TDetalle.getValueAt(i, 3).toString());
+                        } else if (TDetalle.getValueAt(i, 2).toString().equals("Repujado")) {
+                            obj.jCRepujado.setSelected(true);
+                            obj.jCRepujado.setEnabled(true);
+                            obj.jTRepujado.setText(TDetalle.getValueAt(i, 3).toString());
+                        } else if (TDetalle.getValueAt(i, 2).toString().equals("Stencil")) {
+                            obj.jCStencil.setSelected(true);
+                            obj.jCStencil.setEnabled(true);
+                            obj.jTStencil.setText(TDetalle.getValueAt(i, 3).toString());
+                        } else if (TDetalle.getValueAt(i, 2).toString().equals("PCB")) {
+                            obj.jCPCBTE.setSelected(true);
+                            obj.jCPCBTE.setEnabled(true);
+                            obj.jTPCBTE.setText(TDetalle.getValueAt(i, 3).toString());
+                        } else if (TDetalle.getValueAt(i, 2).toString().equals("Circuito") && TDetalle.getValueAt(i, 1).toString().equals("IN")) {
+                            obj.jCIntegracion.setSelected(true);
+                            obj.jCIntegracion.setEnabled(true);
+                            obj.jTIntegracion.setText(TDetalle.getValueAt(i, 3).toString());
+                        } else if (TDetalle.getValueAt(i, 2).toString().equals("Circuito") && TDetalle.getValueAt(i, 1).toString().equals("FE")) {
+                            obj.jCCircuito.setSelected(true);
+                            obj.jCCircuito.setEnabled(true);
+                            obj.jTCircuito.setText(TDetalle.getValueAt(i, 3).toString());
+                        }
+                    }
+                    this.dispose();
+                } catch (Exception e) {
+                    //Si se genera algun error a la hora del paso de informacion a la vista
+                    JOptionPane.showMessageDialog(null, "Error! " + e);
+                }
+            }
+        }
+    }//GEN-LAST:event_TProyectoMousePressed
 
     /**
      * @param args the command line arguments
@@ -478,7 +620,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(ConsutaProyecto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -487,7 +629,26 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         });
     }
 //Metodos---------------------------------------------------------------------->
-    //Se valida que si se pueda ejecutar la consulta sin tener ningun problema
+
+    private void activarCamposproyecto(proyecto obj) {
+        obj.jTNombreCliente.setEnabled(true);
+        obj.jTNombreProyecto.setEnabled(true);
+        obj.jDentrega.setEnabled(true);
+        obj.cbNegocio.setEnabled(true);
+        obj.cbTipo.setEnabled(true);
+        obj.jTIntegracion.setEnabled(true);
+        obj.jPInformacion.setBackground(new Color(255, 255, 255));
+        obj.jPDetalles1.setBackground(new Color(255, 255, 255));
+        obj.jPDetalles.setBackground(new Color(255, 255, 255));
+    }
+
+//Se valida que si se pueda ejecutar la consulta sin tener ningun problema
+    private void action() {
+        if ((jRIngreso.isSelected() || jREntrega.isSelected() || jRSalida.isSelected()) && jDFecha.getDate() != null) {
+            controlBusqueda();
+        }
+    }
+
     private void controlBusqueda() {
         String fecha = "";
         if (jDFecha.getDate() != null) {
@@ -520,8 +681,8 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         try {
             String v[] = {"N° Orden", "Comercial", "Nombre Cliente", "Nombre Proyecto", "Fecha Ingreso", "Fecha Entrega", "Fecha Salida", "Estado", "Tipo"};
             DefaultTableModel model = new DefaultTableModel(null, v);
+            String v1[] = new String[9];
             while (crs.next()) {
-                String v1[] = new String[9];
                 v1[0] = String.valueOf(crs.getInt(1));
                 v1[1] = crs.getString(2);
                 v1[2] = crs.getString(3);
@@ -533,6 +694,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                 v1[8] = crs.getString(9);
                 model.addRow(v1);
             }
+
             TProyecto.setModel(model);
             editarColumnas();
         } catch (Exception e) {
@@ -540,8 +702,49 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         }
     }
 
-    private void validarTabla() {
-        //Metodo para colocar las filas de color respecto a su tipo de proyecto
+    private void consultarDetalle(String numerOrden) {
+        DetalleProyecto obj = new DetalleProyecto();
+        try {
+            crs = obj.consultar_Detalle_Proyecto(numerOrden);
+            String encabezado1[] = {"idDetalle", "Negocio", "Tipo de negocio", "Cantidad", "Estado"};//Detalle del proyecto
+            String encabezado2[] = {"idDetalle", "Negocio", "Tipo de negocio", "Cantidad", "Ubicación"};
+            DefaultTableModel model1 = new DefaultTableModel(null, encabezado1);
+            DefaultTableModel model2 = new DefaultTableModel(null, encabezado2);
+            String v1[] = new String[5];
+            String v2[] = new String[6];
+            while (crs.next()) {
+                if (crs.getBoolean(6)) {
+                    v2[0] = String.valueOf(crs.getInt(1));//idDetalle
+                    v2[1] = crs.getString(2);//Negocio
+                    v2[2] = crs.getString(3);//Tipo negocio
+                    v2[3] = crs.getString(4);//Cantidad
+                    v2[4] = crs.getString(7);//Ubicacion del PNC
+                    v2[5] = crs.getString(5);//Estado
+                    model2.addRow(v2);
+                } else {
+                    v1[0] = String.valueOf(crs.getInt(1));//idDetalle
+                    v1[1] = crs.getString(2);//Negocio
+                    v1[2] = crs.getString(3);//Tipo negocio
+                    v1[3] = crs.getString(4);//Cantidad
+                    v1[4] = crs.getString(5);//Estado
+                    model1.addRow(v1);
+                }
+            }
+            TDetalle.setModel(model1);
+            TPNC.setModel(model2);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error! " + e);
+        }
+    }
+
+    private void limpiarCampos() {
+        jTNumerOrden.setText("");
+        jTNombreCliente.setText("");
+        jTNombreProyecto.setText("");
+        jDFecha.setDate(null);
+        jDFecha.setEnabled(false);
+        jRnulo.setSelected(true);
+        jRnulo.setVisible(false);
     }
 
     private void editarColumnas() {
@@ -591,17 +794,17 @@ public class ConsutaProyecto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TDetalle;
+    private javax.swing.JTable TPNC;
     private javax.swing.JTable TProyecto;
     private javax.swing.ButtonGroup fechas;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton9;
     private com.toedter.calendar.JDateChooser jDFecha;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -618,7 +821,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
     private elaprendiz.gui.textField.TextFieldRoundBackground jTNombreCliente;
     private elaprendiz.gui.textField.TextFieldRoundBackground jTNombreProyecto;
     private elaprendiz.gui.textField.TextFieldRoundBackground jTNumerOrden;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable3;
+    private javax.swing.JLabel jTtipo;
+    private javax.swing.JLabel jTtipo1;
     // End of variables declaration//GEN-END:variables
 }
