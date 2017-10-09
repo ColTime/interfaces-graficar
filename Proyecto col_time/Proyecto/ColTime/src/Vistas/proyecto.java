@@ -19,9 +19,25 @@ public class proyecto extends javax.swing.JPanel {
             cambiarEstadoBotones();
             btnNuevo.setEnabled(true);
             Notificacion1.setVisible(false);
-        } 
+            visibilidadID();
+        }
+        op = p;
+        btnUpdate.setEnabled(true);
+        limpiarCampos();
     }
+    static int op = 0;
     boolean v[] = new boolean[9];
+
+    private void visibilidadID() {
+        jLIDConversor.setVisible(false);
+        jLIDTroquel.setVisible(false);
+        jLIDRepujado.setVisible(false);
+        jLIDStencil.setVisible(false);
+        jLIDCircuito.setVisible(false);
+        jLIDPCB.setVisible(false);
+        jLIDTeclado.setVisible(false);
+        jLIDIntegracion.setVisible(false);
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -85,6 +101,14 @@ public class proyecto extends javax.swing.JPanel {
         btnActivar = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         Notificacion1 = new javax.swing.JLabel();
+        jLIDConversor = new javax.swing.JLabel();
+        jLIDTroquel = new javax.swing.JLabel();
+        jLIDRepujado = new javax.swing.JLabel();
+        jLIDStencil = new javax.swing.JLabel();
+        jLIDCircuito = new javax.swing.JLabel();
+        jLIDPCB = new javax.swing.JLabel();
+        jLIDTeclado = new javax.swing.JLabel();
+        jLIDIntegracion = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(219, 219, 219));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
@@ -309,17 +333,27 @@ public class proyecto extends javax.swing.JPanel {
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(128, 128, 131));
-        jLabel23.setText("Material de la PCB FE:");
+        jLabel23.setText("Material del Circuito:");
 
         cbMaterialCircuito.setForeground(new java.awt.Color(102, 102, 102));
         cbMaterialCircuito.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "TH", "FV" }));
         cbMaterialCircuito.setColorDeBorde(new java.awt.Color(204, 204, 204));
         cbMaterialCircuito.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        cbMaterialCircuito.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbMaterialCircuitoItemStateChanged(evt);
+            }
+        });
 
         cbMaterialPCBTE.setForeground(new java.awt.Color(102, 102, 102));
         cbMaterialPCBTE.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "TH", "FV" }));
         cbMaterialPCBTE.setColorDeBorde(new java.awt.Color(204, 204, 204));
         cbMaterialPCBTE.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        cbMaterialPCBTE.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbMaterialPCBTEItemStateChanged(evt);
+            }
+        });
 
         jTIntegracion.setColorDeBorde(new java.awt.Color(204, 204, 204));
         jTIntegracion.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
@@ -340,7 +374,7 @@ public class proyecto extends javax.swing.JPanel {
         jPDetalles1Layout.setHorizontalGroup(
             jPDetalles1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPDetalles1Layout.createSequentialGroup()
-                .addGap(0, 74, Short.MAX_VALUE)
+                .addGap(0, 79, Short.MAX_VALUE)
                 .addComponent(jLabel23)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cbMaterialCircuito, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -441,6 +475,13 @@ public class proyecto extends javax.swing.JPanel {
         jDentrega.setToolTipText("");
         jDentrega.setDateFormatString("dd/MM/yyyy");
         jDentrega.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jDentrega.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+                jDentregaCaretPositionChanged(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(128, 128, 131));
@@ -466,11 +507,21 @@ public class proyecto extends javax.swing.JPanel {
         jCAntisolder.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jCAntisolder.setForeground(new java.awt.Color(102, 102, 102));
         jCAntisolder.setText("A");
+        jCAntisolder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jCAntisolderMousePressed(evt);
+            }
+        });
 
         jCRuteo.setBackground(new java.awt.Color(255, 255, 255));
         jCRuteo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jCRuteo.setForeground(new java.awt.Color(102, 102, 102));
         jCRuteo.setText("R");
+        jCRuteo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jCRuteoMousePressed(evt);
+            }
+        });
 
         cbNegocio.setForeground(new java.awt.Color(102, 102, 102));
         cbNegocio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "FE", "TE", "IN", "FE/TE", "FE/IN", "FE/TE/IN" }));
@@ -498,6 +549,11 @@ public class proyecto extends javax.swing.JPanel {
         cbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "Normal", "RQT", "Quick" }));
         cbTipo.setColorDeBorde(new java.awt.Color(204, 204, 204));
         cbTipo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        cbTipo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbTipoItemStateChanged(evt);
+            }
+        });
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(128, 128, 131));
@@ -683,6 +739,30 @@ public class proyecto extends javax.swing.JPanel {
         Notificacion1.setText("Estado");
         jPanel2.add(Notificacion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, -1, -1));
 
+        jLIDConversor.setText("0");
+        jPanel2.add(jLIDConversor, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 210, 40, -1));
+
+        jLIDTroquel.setText("0");
+        jPanel2.add(jLIDTroquel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, -1, -1));
+
+        jLIDRepujado.setText("0");
+        jPanel2.add(jLIDRepujado, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, -1, -1));
+
+        jLIDStencil.setText("0");
+        jPanel2.add(jLIDStencil, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 210, -1, -1));
+
+        jLIDCircuito.setText("0");
+        jPanel2.add(jLIDCircuito, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 210, -1, -1));
+
+        jLIDPCB.setText("0");
+        jPanel2.add(jLIDPCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 210, -1, -1));
+
+        jLIDTeclado.setText("0");
+        jPanel2.add(jLIDTeclado, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 210, -1, -1));
+
+        jLIDIntegracion.setText("0");
+        jPanel2.add(jLIDIntegracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 210, -1, -1));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -732,7 +812,7 @@ public class proyecto extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-
+        validarRegistro(2);
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActivarActionPerformed
@@ -740,39 +820,7 @@ public class proyecto extends javax.swing.JPanel {
     }//GEN-LAST:event_btnActivarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        if (!jDentrega.getDateFormatString().equals("") && cbNegocio.getSelectedIndex() != 0 && cbTipo.getSelectedIndex() != 0) {
-            Controlador.Proyecto obj = new Controlador.Proyecto();
-            obj.setNombreCliente(jTNombreCliente.getText());
-            obj.setNombreProyecto(jTNombreProyecto.getText());
-            obj.setTipoProyecto(cbTipo.getSelectedItem().toString());
-            obj.setNegocio(cbNegocio.getSelectedItem().toString());
-            DateFormat fecha = new SimpleDateFormat("YYYY/MM/dd");
-            obj.setFecha(fecha.format(jDentrega.getDate()));
-            v[0] = jCCircuito.isSelected() ? true : false;
-            v[1] = jCPCBTE.isSelected() ? true : false;
-            v[2] = jCConversor.isSelected() ? true : false;
-            v[3] = jCRepujado.isSelected() ? true : false;
-            v[4] = jCTroquel.isSelected() ? true : false;
-            v[5] = jCStencil.isSelected() ? true : false;
-            v[6] = jCTeclado.isSelected() ? true : false;
-            v[7] = jCRuteo.isSelected() ? true : false;
-            v[8] = jCAntisolder.isSelected() ? true : false;
-            obj.setDetalles(v);
-            if (obj.registrar_Modificar_Proyecto(Menu.jDocumento.getText(), 1)) {
-                if (RegistrarModificarDetalle(jTNorden.getText())) {
-                    new rojerusan.RSNotifyAnimated("Listo!!", "El Proyecto con el numero de orden: " + jTNorden.getText() + " fue registrada exitosamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
-                    System.gc();
-                } else {
-                    new rojerusan.RSNotifyAnimated("¡Error!", "El detalle no pudo ser registrado satisfactoriamente", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
-                }
-            } else {
-                new rojerusan.RSNotifyAnimated("¡Error!", "El proyecto no pudo ser registrado.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
-            }
-            limpiarCampos();
-            cambiarEstadoFalso();
-            cambiarEstadoBotones();
-            btnNuevo.setEnabled(true);
-        }
+        validarRegistro(1);
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void jCConversorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCConversorMouseClicked
@@ -875,7 +923,86 @@ public class proyecto extends javax.swing.JPanel {
             desactivarBotonesjC();
         }
     }//GEN-LAST:event_cbNegocioItemStateChanged
+
+    private void cbTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbTipoItemStateChanged
+    }//GEN-LAST:event_cbTipoItemStateChanged
+
+    private void jDentregaCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jDentregaCaretPositionChanged
+    }//GEN-LAST:event_jDentregaCaretPositionChanged
+
+    private void jCAntisolderMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCAntisolderMousePressed
+    }//GEN-LAST:event_jCAntisolderMousePressed
+
+    private void jCRuteoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCRuteoMousePressed
+    }//GEN-LAST:event_jCRuteoMousePressed
+
+    private void cbMaterialCircuitoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbMaterialCircuitoItemStateChanged
+    }//GEN-LAST:event_cbMaterialCircuitoItemStateChanged
+
+    private void cbMaterialPCBTEItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbMaterialPCBTEItemStateChanged
+    }//GEN-LAST:event_cbMaterialPCBTEItemStateChanged
 //Metodos-------------------------------------------------------------------->
+
+    private void validarRegistro(int op) {
+        if (!jDentrega.getDate().equals("") && cbNegocio.getSelectedIndex() != 0 && cbTipo.getSelectedIndex() != 0 && !jTNombreCliente.getText().equals("")
+                && !jTNombreProyecto.getText().equals("") && ((jCConversor.isSelected() && !jTConversor.getText().equals("")) || (jCTroquel.isSelected() && !jTTroquel.getText().equals(""))
+                || (jCRepujado.isSelected() && !jTRepujado.getText().equals("")) || (jCStencil.isSelected() && !jTStencil.getText().equals(""))
+                || (jCCircuito.isSelected() && !jTCircuito.getText().equals("") && cbMaterialCircuito.getSelectedIndex() != 0)
+                || (jCPCBTE.isSelected() && !jTPCBTE.getText().equals("") && cbMaterialPCBTE.getSelectedIndex() != 0) || (jCTeclado.isSelected() && !jTTeclado.getText().equals(""))
+                || (jCIntegracion.isSelected() && !jTIntegracion.getText().equals("")))) {
+            registrarModificarProyecto(op);
+        } else {
+            new rojerusan.RSNotifyAnimated("¡Error!", "Falta algun campo por diligenciar.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
+        }
+    }
+
+    private void registrarModificarProyecto(int op) {
+        Controlador.Proyecto obj = new Controlador.Proyecto();
+        obj.setNombreCliente(jTNombreCliente.getText());
+        obj.setNombreProyecto(jTNombreProyecto.getText());
+        obj.setTipoProyecto(cbTipo.getSelectedItem().toString());
+        obj.setNegocio(cbNegocio.getSelectedItem().toString());
+        DateFormat fecha = new SimpleDateFormat("YYYY/MM/dd");
+        obj.setFecha(fecha.format(jDentrega.getDate()));
+        v[0] = jCCircuito.isSelected() ? true : false;
+        v[1] = jCPCBTE.isSelected() ? true : false;
+        v[2] = jCConversor.isSelected() ? true : false;
+        v[3] = jCRepujado.isSelected() ? true : false;
+        v[4] = jCTroquel.isSelected() ? true : false;
+        v[5] = jCStencil.isSelected() ? true : false;
+        v[6] = jCTeclado.isSelected() ? true : false;
+        v[7] = jCRuteo.isSelected() ? true : false;
+        v[8] = jCAntisolder.isSelected() ? true : false;
+        obj.setDetalles(v);
+        obj.setIdOrden(Integer.parseInt(jTNorden.getText()));
+        if (obj.registrar_Modificar_Proyecto(Menu.jDocumento.getText(), op)) {
+            if (op == 1) {
+                //Registrar el proyecto
+                if (RegistrarModificarDetalle(jTNorden.getText(), 1)) {
+                    //Mensaje de exito
+                    new rojerusan.RSNotifyAnimated("Listo!!", "El Proyecto con el numero de orden: " + jTNorden.getText() + " fue registrada exitosamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+                } else {
+                    //Mensaje de error
+                    new rojerusan.RSNotifyAnimated("¡Error!", "El detalle no pudo ser registrado satisfactoriamente", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
+                }
+            } else if (op == 2) {
+                //Modificar el detalle del proyecto
+                if (RegistrarModificarDetalle(jTNorden.getText(), 2)) {
+                    //Mensaje de exito
+                    new rojerusan.RSNotifyAnimated("Listo!!", "El Proyecto con el numero de orden: " + jTNorden.getText() + " fue modificado exitosamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+                } else {
+                    //Mensaje de error
+                }
+            }
+            System.gc();
+        } else {
+            new rojerusan.RSNotifyAnimated("¡Error!", "El proyecto no pudo ser registrado.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
+        }
+        limpiarCampos();
+        cambiarEstadoFalso();
+        cambiarEstadoBotones();
+        btnNuevo.setEnabled(true);
+    }
 
     private void cambiarEstadoFalso() {
         jPInformacion.setBackground(new Color(244, 244, 244));
@@ -970,8 +1097,10 @@ public class proyecto extends javax.swing.JPanel {
     }
 
     private void validarCampos() {
-        if (!jTNombreCliente.getText().equals("") && !jTNombreProyecto.getText().equals("")) {
-            btnGuardar.setEnabled(true);
+        if (op == 1) {
+            if (!jTNombreCliente.getText().equals("") && !jTNombreProyecto.getText().equals("")) {
+                btnGuardar.setEnabled(true);
+            }
         }
     }
 
@@ -1008,126 +1137,128 @@ public class proyecto extends javax.swing.JPanel {
         jTStencil.setText("");
         cbMaterialCircuito.setSelectedIndex(0);
         cbMaterialPCBTE.setSelectedIndex(0);
+        cbMaterialCircuito.setEnabled(false);
+        cbMaterialPCBTE.setEnabled(false);
     }
 
-    private boolean RegistrarModificarDetalle(String numeroOrden) {
+    private boolean RegistrarModificarDetalle(String numeroOrden, int op) {
         DetalleProyecto obj = new DetalleProyecto();
         boolean res = false;
         if (cbNegocio.getSelectedItem().equals("FE")) {
             //Se registra el detalle del proyecto con negocio "FE"
-            res = subRegistrarModificarProyecto(obj, jTCircuito.getText(), "FE", "Circuito", numeroOrden, cbMaterialCircuito.getSelectedItem().toString());
+            res = subRegistrarModificarProyecto(obj, jTCircuito.getText(), "FE", "Circuito", numeroOrden, cbMaterialCircuito.getSelectedItem().toString(), op,Integer.parseInt(jLIDCircuito.getText()));
         } else if (cbNegocio.getSelectedItem().equals("TE")) {
             //Se registra el detalle del proyecto con negocio "TE"
-            res = subRegistrarModificarProyecto(obj, jTTeclado.getText(), "TE", "Teclado", numeroOrden, "Lexan");
+            res = subRegistrarModificarProyecto(obj, jTTeclado.getText(), "TE", "Teclado", numeroOrden, "Lexan", op,Integer.parseInt(jLIDTeclado.getText()));
         } else if (cbNegocio.getSelectedItem().equals("IN")) {
             //Se registra el detalle del proyecto cuando el negocio es "IN"
-            res = subRegistrarModificarProyecto(obj, jTIntegracion.getText(), "IN", "Circuito", numeroOrden, "");
+            res = subRegistrarModificarProyecto(obj, jTIntegracion.getText(), "IN", "Circuito", numeroOrden, "", op,Integer.parseInt(jLIDIntegracion.getText()));
         } else if (cbNegocio.getSelectedItem().equals("FE/TE")) {
             //Se registra el detalle del proyecto cuando el negocio es "FE/TE"
             if (jCConversor.isSelected()) {
                 //Registrar Conversor------------------------------------------>
-                res = subRegistrarModificarProyecto(obj, jTConversor.getText(), "FE", "Conversor", numeroOrden, "FV");
+                res = subRegistrarModificarProyecto(obj, jTConversor.getText(), "FE", "Conversor", numeroOrden, "FV", op,Integer.parseInt(jLIDConversor.getText()));
                 //Fin del registro del Conversor
             }
             if (jCTroquel.isSelected()) {
                 //Registrar Troquel-------------------------------------------->
-                res = subRegistrarModificarProyecto(obj, jTTroquel.getText(), "FE", "Troquel", numeroOrden, "FV");
+                res = subRegistrarModificarProyecto(obj, jTTroquel.getText(), "FE", "Troquel", numeroOrden, "FV", op,Integer.parseInt(jLIDTroquel.getText()));
                 //Fin del registro del Troquel
             }
             if (jCRepujado.isSelected()) {
                 //Registrar Repujado------------------------------------------->
-                res = subRegistrarModificarProyecto(obj, jTRepujado.getText(), "FE", "Repujado", numeroOrden, "FV");
+                res = subRegistrarModificarProyecto(obj, jTRepujado.getText(), "FE", "Repujado", numeroOrden, "FV", op,Integer.parseInt(jLIDRepujado.getText()));
                 //Fin del registro del Repujado
             }
             if (jCStencil.isSelected()) {
                 //Registrar Stencil-------------------------------------------->
-                res = subRegistrarModificarProyecto(obj, jTStencil.getText(), "FE", "Stencil", numeroOrden, "");
+                res = subRegistrarModificarProyecto(obj, jTStencil.getText(), "FE", "Stencil", numeroOrden, "", op,Integer.parseInt(jLIDStencil.getText()));
                 //Fin del registro del Stencil
             }
             if (jCCircuito.isSelected()) {
                 //Registrar PCB de FE------------------------------------------>
-                res = subRegistrarModificarProyecto(obj, jTCircuito.getText(), "FE", "Circuito", numeroOrden, cbMaterialCircuito.getSelectedItem().toString());
+                res = subRegistrarModificarProyecto(obj, jTCircuito.getText(), "FE", "Circuito", numeroOrden, cbMaterialCircuito.getSelectedItem().toString(), op,Integer.parseInt(jLIDCircuito.getText()));
                 //Fin del registro del PCB FE
             }
             if (jCPCBTE.isSelected()) {
                 //Registrar PCB de TE------------------------------------------>
-                res = subRegistrarModificarProyecto(obj, jTPCBTE.getText(), "FE", "PCB", numeroOrden, cbMaterialPCBTE.getSelectedItem().toString());
+                res = subRegistrarModificarProyecto(obj, jTPCBTE.getText(), "FE", "PCB", numeroOrden, cbMaterialPCBTE.getSelectedItem().toString(), op,Integer.parseInt(jLIDPCB.getText()));
                 //Fin del registro del PCB TE
             }
             if (jCTeclado.isSelected()) {
                 //Registrar Teclado-------------------------------------------->
-                res = subRegistrarModificarProyecto(obj, jTTeclado.getText(), "TE", "Teclado", numeroOrden, "Lexan");
+                res = subRegistrarModificarProyecto(obj, jTTeclado.getText(), "TE", "Teclado", numeroOrden, "Lexan", op,Integer.parseInt(jLIDTeclado.getText()));
                 //Fin del registro del Teclado
             }
         } else if (cbNegocio.getSelectedItem().equals("FE/IN")) {
             //Se registra el detalle del proyecto cuando el negocio es "FE/IN"
             if (jCCircuito.isSelected()) {
                 //Registrar PCB de FE------------------------------------------>
-                res = subRegistrarModificarProyecto(obj, jTCircuito.getText(), "FE", "Circuito", numeroOrden, cbMaterialCircuito.getSelectedItem().toString());
+                res = subRegistrarModificarProyecto(obj, jTCircuito.getText(), "FE", "Circuito", numeroOrden, cbMaterialCircuito.getSelectedItem().toString(), op,Integer.parseInt(jLIDCircuito.getText()));
                 //Fin del registro del PCB FE
             }
             if (jCIntegracion.isSelected()) {
                 //REgistrar Integracion---------------------------------------->
-                res = subRegistrarModificarProyecto(obj, jTIntegracion.getText(), "IN", "Circuito", numeroOrden, "");
+                res = subRegistrarModificarProyecto(obj, jTIntegracion.getText(), "IN", "Circuito", numeroOrden, "", op,Integer.parseInt(jLIDIntegracion.getText()));
                 //Fin del registro de Integracion
             }
             if (jCStencil.isSelected()) {
                 //Registrar Stencil-------------------------------------------->
-                res = subRegistrarModificarProyecto(obj, jTStencil.getText(), "FE", "Stencil", numeroOrden, "");
+                res = subRegistrarModificarProyecto(obj, jTStencil.getText(), "FE", "Stencil", numeroOrden, "", op,Integer.parseInt(jLIDStencil.getText()));
                 //Fin del registro del Stencil
             }
         } else if (cbNegocio.getSelectedItem().equals("FE/TE/IN")) {
             //Se registra el detalle del proyecto cuando el negocio es "FE/TE/IN"
             if (jCConversor.isSelected()) {
                 //Registrar Conversor------------------------------------------>
-                res = subRegistrarModificarProyecto(obj, jTConversor.getText(), "FE", "Conversor", numeroOrden, "FV");
+                res = subRegistrarModificarProyecto(obj, jTConversor.getText(), "FE", "Conversor", numeroOrden, "FV", op,Integer.parseInt(jLIDConversor.getText()));
                 //Fin del registro del Conversor
             }
             if (jCTroquel.isSelected()) {
                 //Registrar Troquel-------------------------------------------->
-                res = subRegistrarModificarProyecto(obj, jTTroquel.getText(), "FE", "Troquel", numeroOrden, "FV");
+                res = subRegistrarModificarProyecto(obj, jTTroquel.getText(), "FE", "Troquel", numeroOrden, "FV", op,Integer.parseInt(jLIDTroquel.getText()));
                 //Fin del registro del Troquel
             }
             if (jCRepujado.isSelected()) {
                 //Registrar Repujado------------------------------------------->
-                res = subRegistrarModificarProyecto(obj, jTRepujado.getText(), "FE", "Repujado", numeroOrden, "FV");
+                res = subRegistrarModificarProyecto(obj, jTRepujado.getText(), "FE", "Repujado", numeroOrden, "FV", op,Integer.parseInt(jLIDRepujado.getText()));
                 //Fin del registro del Repujado
             }
             if (jCStencil.isSelected()) {
                 //Registrar Stencil-------------------------------------------->
-                res = subRegistrarModificarProyecto(obj, jTStencil.getText(), "FE", "Stencil", numeroOrden, "");
+                res = subRegistrarModificarProyecto(obj, jTStencil.getText(), "FE", "Stencil", numeroOrden, "", op,Integer.parseInt(jLIDStencil.getText()));
                 //Fin del registro del Stencil
             }
             if (jCCircuito.isSelected()) {
                 //Registrar PCB de FE------------------------------------------>
-                res = subRegistrarModificarProyecto(obj, jTCircuito.getText(), "FE", "Circuito", numeroOrden, cbMaterialCircuito.getSelectedItem().toString());
+                res = subRegistrarModificarProyecto(obj, jTCircuito.getText(), "FE", "Circuito", numeroOrden, cbMaterialCircuito.getSelectedItem().toString(), op,Integer.parseInt(jLIDCircuito.getText()));
                 //Fin del registro del PCB FE
             }
             if (jCPCBTE.isSelected()) {
                 //Registrar PCB de TE------------------------------------------>
-                res = subRegistrarModificarProyecto(obj, jTPCBTE.getText(), "FE", "PCB", numeroOrden, cbMaterialPCBTE.getSelectedItem().toString());
+                res = subRegistrarModificarProyecto(obj, jTPCBTE.getText(), "FE", "PCB", numeroOrden, cbMaterialPCBTE.getSelectedItem().toString(), op,Integer.parseInt(jLIDPCB.getText()));
                 //Fin del registro del PCB TE
             }
             if (jCTeclado.isSelected()) {
                 //Registrar Teclado-------------------------------------------->
-                res = subRegistrarModificarProyecto(obj, jTTeclado.getText(), "TE", "Teclado", numeroOrden, "lexan");
+                res = subRegistrarModificarProyecto(obj, jTTeclado.getText(), "TE", "Teclado", numeroOrden, "lexan", op,Integer.parseInt(jLIDTeclado.getText()));
                 //Fin del registro del Teclado
             }
             if (jCIntegracion.isSelected()) {
                 //REgistrar Integracion---------------------------------------->
-                res = subRegistrarModificarProyecto(obj, jTIntegracion.getText(), "IN", "Circuito", numeroOrden, "");
+                res = subRegistrarModificarProyecto(obj, jTIntegracion.getText(), "IN", "Circuito", numeroOrden, "", op,Integer.parseInt(jLIDIntegracion.getText()));
                 //Fin del registro de Integracion
             }
         }
         return res;
     }
 
-    private boolean subRegistrarModificarProyecto(DetalleProyecto obj, String cantidad, String Negocio, String TipoNegocio, String numeroOrden, String material) {
+    private boolean subRegistrarModificarProyecto(DetalleProyecto obj, String cantidad, String Negocio, String TipoNegocio, String numeroOrden, String material, int op,int id) {
         obj.setCantidad(cantidad);
         obj.setTipoNegocio(TipoNegocio);
         obj.setNegocio(Negocio);
         obj.setMaterial(material);
-        return obj.registrar_Detalle_Proycto(numeroOrden);
+        return obj.registrar_Detalle_Proycto(numeroOrden, op,id);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1137,7 +1268,7 @@ public class proyecto extends javax.swing.JPanel {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
-    private javax.swing.JButton btnUpdate;
+    public static javax.swing.JButton btnUpdate;
     public static elaprendiz.gui.comboBox.ComboBoxRound cbMaterialCircuito;
     public static elaprendiz.gui.comboBox.ComboBoxRound cbMaterialPCBTE;
     public static elaprendiz.gui.comboBox.ComboBoxRound cbNegocio;
@@ -1153,6 +1284,14 @@ public class proyecto extends javax.swing.JPanel {
     public static javax.swing.JCheckBox jCTeclado;
     public static javax.swing.JCheckBox jCTroquel;
     public static com.toedter.calendar.JDateChooser jDentrega;
+    public static javax.swing.JLabel jLIDCircuito;
+    public static javax.swing.JLabel jLIDConversor;
+    public static javax.swing.JLabel jLIDIntegracion;
+    public static javax.swing.JLabel jLIDPCB;
+    public static javax.swing.JLabel jLIDRepujado;
+    public static javax.swing.JLabel jLIDStencil;
+    public static javax.swing.JLabel jLIDTeclado;
+    public static javax.swing.JLabel jLIDTroquel;
     public static javax.swing.JLabel jLIngreso;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

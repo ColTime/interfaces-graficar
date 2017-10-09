@@ -91,7 +91,7 @@ public class Proyecto {
 
     public CachedRowSet consultar_Proyecto(String tipo) {
         Modelo.ProyectoM obj = new Modelo.ProyectoM();
-        return obj.consultar_Proyecto(idOrden, nombreCliente, nombreProyecto,fecha,tipo);
+        return obj.consultar_Proyecto(idOrden, nombreCliente, nombreProyecto, fecha, tipo);
     }
 
     public boolean cambiar_Estado_Proyeto() {
@@ -121,7 +121,6 @@ public class Proyecto {
     @Override
     protected void finalize() throws Throwable {
         super.finalize(); //To change body of generated methods, choose Tools | Templates.
-        System.out.println("Se finalizo la clase");
     }
 
 }

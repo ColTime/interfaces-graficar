@@ -3,15 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Administrador/Desktop/interfaces-graficar/interfaces-graficar/Proyecto%20col_time/Proyecto/ColTime/src/Controlador/TE.java</file>
-            <file>file:/C:/Users/Administrador/Desktop/interfaces-graficar/interfaces-graficar/Proyecto%20col_time/Proyecto/ColTime/src/Vistas/Inicio.java</file>
-            <file>file:/C:/Users/Administrador/Desktop/interfaces-graficar/interfaces-graficar/Proyecto%20col_time/Proyecto/ColTime/src/coltime/Menu.java</file>
-            <file>file:/C:/Users/Administrador/Desktop/interfaces-graficar/interfaces-graficar/Proyecto%20col_time/Proyecto/ColTime/src/Vistas/ConsutaProyecto.java</file>
-            <file>file:/C:/Users/Administrador/Desktop/interfaces-graficar/interfaces-graficar/Proyecto%20col_time/Proyecto/ColTime/src/Controlador/Usuario.java</file>
-            <file>file:/C:/Users/Administrador/Desktop/interfaces-graficar/interfaces-graficar/Proyecto%20col_time/Proyecto/ColTime/src/Controlador/Proyecto.java</file>
-            <file>file:/C:/Users/Administrador/Desktop/interfaces-graficar/interfaces-graficar/Proyecto%20col_time/Proyecto/ColTime/src/Controlador/DetalleProyecto.java</file>
-            <file>file:/C:/Users/Administrador/Desktop/interfaces-graficar/interfaces-graficar/Proyecto%20col_time/Proyecto/ColTime/src/Vistas/proyecto.java</file>
-            <file>file:/C:/Users/Administrador/Desktop/interfaces-graficar/interfaces-graficar/Proyecto%20col_time/Proyecto/ColTime/src/Modelo/ProyectoM.java</file>
+            <file>file:/C:/Users/Aprendiz/Desktop/proyecto/interfaces-graficar/Proyecto%20col_time/Proyecto/ColTime/src/Vistas/proyecto.java</file>
+            <file>file:/C:/Users/Aprendiz/Desktop/proyecto/interfaces-graficar/Proyecto%20col_time/Proyecto/ColTime/src/Controlador/Proyecto.java</file>
+            <file>file:/C:/Users/Aprendiz/Desktop/proyecto/interfaces-graficar/Proyecto%20col_time/Proyecto/ColTime/src/Modelo/Conexion.java</file>
+            <file>file:/C:/Users/Aprendiz/Desktop/proyecto/interfaces-graficar/Proyecto%20col_time/Proyecto/ColTime/src/Modelo/ProyectoM.java</file>
+            <file>file:/C:/Users/Aprendiz/Desktop/proyecto/interfaces-graficar/Proyecto%20col_time/Proyecto/ColTime/src/coltime/Menu.java</file>
+            <file>file:/C:/Users/Aprendiz/Desktop/proyecto/interfaces-graficar/Proyecto%20col_time/Proyecto/ColTime/src/Vistas/ConsutaProyecto.java</file>
+            <file>file:/C:/Users/Aprendiz/Desktop/proyecto/interfaces-graficar/Proyecto%20col_time/Proyecto/ColTime/src/Controlador/DetalleProyecto.java</file>
+            <file>file:/C:/Users/Aprendiz/Desktop/proyecto/interfaces-graficar/Proyecto%20col_time/Proyecto/ColTime/src/Modelo/DetalleProyectoM.java</file>
         </group>
     </open-files>
 </project-private>

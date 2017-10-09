@@ -64,9 +64,9 @@ public class DetalleProyecto {
     }
 
     //Metodos----------------------------------------------------->
-    public boolean registrar_Detalle_Proycto(String numerOrden) {
+    public boolean registrar_Detalle_Proycto(String numerOrden, int op,int id) {
         DetalleProyectoM obj = new DetalleProyectoM();
-        return obj.registrar_Detalle_Proycto(cantidad, negocio, tipoNegocio, 1, numerOrden,material);
+        return obj.registrar_Detalle_Proycto(cantidad, negocio, tipoNegocio, 1, numerOrden,material,op,id);
     }
 
     public boolean modificar_Detalle_Proycto(String numerOrden) {
@@ -87,7 +87,6 @@ public class DetalleProyecto {
     @Override
     protected void finalize() throws Throwable {
         super.finalize(); //To change body of generated methods, choose Tools | Templates.
-        System.out.println("Se finalizo el controlador de detalleproyecto");
     }
     
     
