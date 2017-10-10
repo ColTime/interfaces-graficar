@@ -74,12 +74,14 @@ public class DetalleProyectoM {
                 Qry = "SELECT FU_ModificarDetalleProyecto(?,?,?,?)";
                 //PreparedSteamate y detalle----------------------------------->
                 ps = con.prepareStatement(Qry);
-                ps.setInt(1, id);
-                ps.setString(2, tipoNegocio);
+                ps.setInt(1, Integer.parseInt(numerOrden));
+                ps.setInt(2, id);
                 ps.setString(3, cantidad);
-                ps.setString(4, negocio);
-                ps.setInt(5, estado);
-                ps.setString(6, material);--------/
+                ps.setString(4, material);
+
+                rs = ps.executeQuery();
+                rs.next();
+                res = rs.getBoolean(1);
             }
             //Cierre de conexiones
             conexion.cerrar(rs);
@@ -118,6 +120,44 @@ public class DetalleProyectoM {
     public boolean cambiar_Estado_Detalle() {
 
         return true;
+    }
+
+    public boolean eliminarDetallersProyecto(int idDetalle, int numeOrden, String negocio) {
+        //Eliminar detalle del proyecto, detalle de formato estandar, detalle de teclado y detalle de ensamble
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query------------------------------------------------------------>
+            String Qry = "";/////
+            if (negocio.equals("FE")) {
+                //Quiery para eliminar el detalle de formato estandar
+                Qry = "SELECT FU_EliminarDetalleProyectoFormatoestandar(?,?)";
+            } else if (negocio.equals("TE")) {
+
+                Qry = "SELECT FU_EliminarDetalleProyectoTeclados(?,?)";
+
+            } else if (negocio.equals("IN")) {
+                Qry = "SELECT FU_EliminarDetalleProyectoEnsamble(?,?)";
+
+            }
+            ps = con.prepareStatement(Qry);
+            ps.setInt(1, idDetalle);
+            ps.setInt(2, numeOrden);
+            //Ejecucion
+            rs = ps.executeQuery();
+            rs.next();
+
+            //Cierre de conexiones
+            conexion.cerrar(rs);
+            conexion.destruir();
+            ps.close();
+            con.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "¡Error!" + e);
+        }
+        return res;
+
     }
 
     @Override

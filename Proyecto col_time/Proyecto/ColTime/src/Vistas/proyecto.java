@@ -476,10 +476,10 @@ public class proyecto extends javax.swing.JPanel {
         jDentrega.setDateFormatString("dd/MM/yyyy");
         jDentrega.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jDentrega.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jDentregaCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
 
@@ -740,28 +740,28 @@ public class proyecto extends javax.swing.JPanel {
         jPanel2.add(Notificacion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, -1, -1));
 
         jLIDConversor.setText("0");
-        jPanel2.add(jLIDConversor, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 210, 40, -1));
+        jPanel2.add(jLIDConversor, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, 10, -1));
 
         jLIDTroquel.setText("0");
-        jPanel2.add(jLIDTroquel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, -1, -1));
+        jPanel2.add(jLIDTroquel, new org.netbeans.lib.awtextra.AbsoluteConstraints(236, 210, 10, -1));
 
         jLIDRepujado.setText("0");
-        jPanel2.add(jLIDRepujado, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, -1, -1));
+        jPanel2.add(jLIDRepujado, new org.netbeans.lib.awtextra.AbsoluteConstraints(316, 210, 10, -1));
 
         jLIDStencil.setText("0");
-        jPanel2.add(jLIDStencil, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 210, -1, -1));
+        jPanel2.add(jLIDStencil, new org.netbeans.lib.awtextra.AbsoluteConstraints(396, 210, 10, -1));
 
         jLIDCircuito.setText("0");
-        jPanel2.add(jLIDCircuito, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 210, -1, -1));
+        jPanel2.add(jLIDCircuito, new org.netbeans.lib.awtextra.AbsoluteConstraints(476, 210, 10, -1));
 
         jLIDPCB.setText("0");
-        jPanel2.add(jLIDPCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 210, -1, -1));
+        jPanel2.add(jLIDPCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(556, 210, 10, -1));
 
         jLIDTeclado.setText("0");
-        jPanel2.add(jLIDTeclado, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 210, -1, -1));
+        jPanel2.add(jLIDTeclado, new org.netbeans.lib.awtextra.AbsoluteConstraints(636, 210, 10, -1));
 
         jLIDIntegracion.setText("0");
-        jPanel2.add(jLIDIntegracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 210, -1, -1));
+        jPanel2.add(jLIDIntegracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(716, 210, 10, -1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1144,121 +1144,317 @@ public class proyecto extends javax.swing.JPanel {
     private boolean RegistrarModificarDetalle(String numeroOrden, int op) {
         DetalleProyecto obj = new DetalleProyecto();
         boolean res = false;
+        int op1 = 0;
         if (cbNegocio.getSelectedItem().equals("FE")) {
             //Se registra el detalle del proyecto con negocio "FE"
-            res = subRegistrarModificarProyecto(obj, jTCircuito.getText(), "FE", "Circuito", numeroOrden, cbMaterialCircuito.getSelectedItem().toString(), op,Integer.parseInt(jLIDCircuito.getText()));
+            res = subRegistrarModificarProyecto(obj, jTCircuito.getText(), "FE", "Circuito", numeroOrden, cbMaterialCircuito.getSelectedItem().toString(), op, Integer.parseInt(jLIDCircuito.getText()));
         } else if (cbNegocio.getSelectedItem().equals("TE")) {
             //Se registra el detalle del proyecto con negocio "TE"
-            res = subRegistrarModificarProyecto(obj, jTTeclado.getText(), "TE", "Teclado", numeroOrden, "Lexan", op,Integer.parseInt(jLIDTeclado.getText()));
+            res = subRegistrarModificarProyecto(obj, jTTeclado.getText(), "TE", "Teclado", numeroOrden, "Lexan", op, Integer.parseInt(jLIDTeclado.getText()));
         } else if (cbNegocio.getSelectedItem().equals("IN")) {
             //Se registra el detalle del proyecto cuando el negocio es "IN"
-            res = subRegistrarModificarProyecto(obj, jTIntegracion.getText(), "IN", "Circuito", numeroOrden, "", op,Integer.parseInt(jLIDIntegracion.getText()));
+            res = subRegistrarModificarProyecto(obj, jTIntegracion.getText(), "IN", "Circuito", numeroOrden, "", op, Integer.parseInt(jLIDIntegracion.getText()));
         } else if (cbNegocio.getSelectedItem().equals("FE/TE")) {
             //Se registra el detalle del proyecto cuando el negocio es "FE/TE"
             if (jCConversor.isSelected()) {
                 //Registrar Conversor------------------------------------------>
-                res = subRegistrarModificarProyecto(obj, jTConversor.getText(), "FE", "Conversor", numeroOrden, "FV", op,Integer.parseInt(jLIDConversor.getText()));
+                if (jLIDConversor.getText().equals("0")) {
+                    op1 = op;
+                    op = 1;
+                }
+                res = subRegistrarModificarProyecto(obj, jTConversor.getText(), "FE", "Conversor", numeroOrden, "FV", op, Integer.parseInt(jLIDConversor.getText()));
+                if (jLIDConversor.getText().equals("0")) {
+                    op = op1;
+                }
                 //Fin del registro del Conversor
+            } else if (!jLIDConversor.getText().equals("0")) {
+                //Eliminar el detalle del proyecto si ya no esta seleccionado
+                subEliminardetalle(obj, Integer.parseInt(jLIDConversor.getText()), Integer.parseInt(jTNorden.getText()), "FE","Conversor");
             }
             if (jCTroquel.isSelected()) {
                 //Registrar Troquel-------------------------------------------->
-                res = subRegistrarModificarProyecto(obj, jTTroquel.getText(), "FE", "Troquel", numeroOrden, "FV", op,Integer.parseInt(jLIDTroquel.getText()));
+                if (jLIDTroquel.getText().equals("0")) {
+                    op1 = op;
+                    op = 1;
+                }
+                res = subRegistrarModificarProyecto(obj, jTTroquel.getText(), "FE", "Troquel", numeroOrden, "FV", op, Integer.parseInt(jLIDTroquel.getText()));
+                if (jLIDTroquel.getText().equals("0")) {
+                    op = op1;
+                }
                 //Fin del registro del Troquel
+            } else if (!jLIDTroquel.getText().equals("0")) {
+                //Eliminar el detalle del proyecto si ya no esta seleccionado
+                subEliminardetalle(obj, Integer.parseInt(jLIDTroquel.getText()), Integer.parseInt(jTNorden.getText()), "FE","Troquel");
             }
             if (jCRepujado.isSelected()) {
                 //Registrar Repujado------------------------------------------->
-                res = subRegistrarModificarProyecto(obj, jTRepujado.getText(), "FE", "Repujado", numeroOrden, "FV", op,Integer.parseInt(jLIDRepujado.getText()));
+                if (jLIDRepujado.getText().equals("0")) {
+                    op1 = op;
+                    op = 1;
+                }
+                res = subRegistrarModificarProyecto(obj, jTRepujado.getText(), "FE", "Repujado", numeroOrden, "FV", op, Integer.parseInt(jLIDRepujado.getText()));
+                if (jLIDRepujado.getText().equals("0")) {
+                    op = op1;
+                }
                 //Fin del registro del Repujado
+            } else if (!jLIDRepujado.getText().equals("0")) {
+                //Eliminar el detalle del proyecto si ya no esta seleccionado
+                subEliminardetalle(obj, Integer.parseInt(jLIDRepujado.getText()), Integer.parseInt(jTNorden.getText()), "FE","Repujado");
             }
             if (jCStencil.isSelected()) {
                 //Registrar Stencil-------------------------------------------->
-                res = subRegistrarModificarProyecto(obj, jTStencil.getText(), "FE", "Stencil", numeroOrden, "", op,Integer.parseInt(jLIDStencil.getText()));
+                if (jLIDStencil.getText().equals("0")) {
+                    op1 = op;
+                    op = 1;
+                }
+                res = subRegistrarModificarProyecto(obj, jTStencil.getText(), "FE", "Stencil", numeroOrden, "", op, Integer.parseInt(jLIDStencil.getText()));
+                if (jLIDStencil.getText().equals("0")) {
+                    op = op1;
+                }
                 //Fin del registro del Stencil
+            } else if (!jLIDStencil.getText().equals("0")) {
+                //Eliminar el detalle del proyecto si ya no esta seleccionado
+                subEliminardetalle(obj, Integer.parseInt(jLIDStencil.getText()), Integer.parseInt(jTNorden.getText()), "FE","Stencil");
             }
             if (jCCircuito.isSelected()) {
                 //Registrar PCB de FE------------------------------------------>
-                res = subRegistrarModificarProyecto(obj, jTCircuito.getText(), "FE", "Circuito", numeroOrden, cbMaterialCircuito.getSelectedItem().toString(), op,Integer.parseInt(jLIDCircuito.getText()));
+                if (jLIDCircuito.getText().equals("0")) {
+                    op1 = op;
+                    op = 1;
+                }
+                res = subRegistrarModificarProyecto(obj, jTCircuito.getText(), "FE", "Circuito", numeroOrden, cbMaterialCircuito.getSelectedItem().toString(), op, Integer.parseInt(jLIDCircuito.getText()));
+                if (jLIDCircuito.getText().equals("0")) {
+                    op = op1;
+                }
                 //Fin del registro del PCB FE
+            } else if (!jLIDCircuito.getText().equals("0")) {
+                //Eliminar el detalle del proyecto si ya no esta seleccionado
+                subEliminardetalle(obj, Integer.parseInt(jLIDCircuito.getText()), Integer.parseInt(jTNorden.getText()), "FE"," Circuito");
             }
             if (jCPCBTE.isSelected()) {
                 //Registrar PCB de TE------------------------------------------>
-                res = subRegistrarModificarProyecto(obj, jTPCBTE.getText(), "FE", "PCB", numeroOrden, cbMaterialPCBTE.getSelectedItem().toString(), op,Integer.parseInt(jLIDPCB.getText()));
+                if (jLIDPCB.getText().equals("0")) {
+                    op1 = op;
+                    op = 1;
+                }
+                res = subRegistrarModificarProyecto(obj, jTPCBTE.getText(), "FE", "PCB", numeroOrden, cbMaterialPCBTE.getSelectedItem().toString(), op, Integer.parseInt(jLIDPCB.getText()));
+                if (jLIDPCB.getText().equals("0")) {
+                    op = op1;
+                }
                 //Fin del registro del PCB TE
+            } else if (!jLIDPCB.getText().equals("0")) {
+                //Eliminar el detalle del proyecto si ya no esta seleccionado
+                subEliminardetalle(obj, Integer.parseInt(jLIDPCB.getText()), Integer.parseInt(jTNorden.getText()), "FE","PCB");
             }
             if (jCTeclado.isSelected()) {
                 //Registrar Teclado-------------------------------------------->
-                res = subRegistrarModificarProyecto(obj, jTTeclado.getText(), "TE", "Teclado", numeroOrden, "Lexan", op,Integer.parseInt(jLIDTeclado.getText()));
+                if (jLIDTeclado.getText().equals("0")) {
+                    op1 = op;
+                    op = 1;
+                }
+                res = subRegistrarModificarProyecto(obj, jTTeclado.getText(), "TE", "Teclado", numeroOrden, "Lexan", op, Integer.parseInt(jLIDTeclado.getText()));
+                if (jLIDTeclado.getText().equals("0")) {
+                    op = op1;
+                }
                 //Fin del registro del Teclado
+            } else if (!jLIDTeclado.getText().equals("0")) {
+                //Eliminar el detalle del proyecto si ya no esta seleccionado
+                subEliminardetalle(obj, Integer.parseInt(jLIDTeclado.getText()), Integer.parseInt(jTNorden.getText()), "TE","Teclado");
             }
         } else if (cbNegocio.getSelectedItem().equals("FE/IN")) {
             //Se registra el detalle del proyecto cuando el negocio es "FE/IN"
             if (jCCircuito.isSelected()) {
                 //Registrar PCB de FE------------------------------------------>
-                res = subRegistrarModificarProyecto(obj, jTCircuito.getText(), "FE", "Circuito", numeroOrden, cbMaterialCircuito.getSelectedItem().toString(), op,Integer.parseInt(jLIDCircuito.getText()));
+                if (jLIDCircuito.getText().equals("0")) {
+                    op1 = op;
+                    op = 1;
+                }
+                res = subRegistrarModificarProyecto(obj, jTCircuito.getText(), "FE", "Circuito", numeroOrden, cbMaterialCircuito.getSelectedItem().toString(), op, Integer.parseInt(jLIDCircuito.getText()));
+                if (jLIDCircuito.getText().equals("0")) {
+                    op = op1;
+                }
                 //Fin del registro del PCB FE
+            } else if (!jLIDCircuito.getText().equals("0")) {
+                //Eliminar el detalle del proyecto si ya no esta seleccionado
+                subEliminardetalle(obj, Integer.parseInt(jLIDCircuito.getText()), Integer.parseInt(jTNorden.getText()), "FE","Circuito");
             }
             if (jCIntegracion.isSelected()) {
                 //REgistrar Integracion---------------------------------------->
-                res = subRegistrarModificarProyecto(obj, jTIntegracion.getText(), "IN", "Circuito", numeroOrden, "", op,Integer.parseInt(jLIDIntegracion.getText()));
+                if (jLIDIntegracion.getText().equals("0")) {
+                    op1 = op;
+                    op = 1;
+                }
+                res = subRegistrarModificarProyecto(obj, jTIntegracion.getText(), "IN", "Circuito", numeroOrden, "", op, Integer.parseInt(jLIDIntegracion.getText()));
+                if (jLIDIntegracion.getText().equals("0")) {
+                    op = op1;
+                }
                 //Fin del registro de Integracion
+            } else if (!jLIDIntegracion.getText().equals("0")) {
+                //Eliminar el detalle del proyecto si ya no esta seleccionado
+                subEliminardetalle(obj, Integer.parseInt(jLIDIntegracion.getText()), Integer.parseInt(jTNorden.getText()), "IN","Circuito");
             }
             if (jCStencil.isSelected()) {
                 //Registrar Stencil-------------------------------------------->
-                res = subRegistrarModificarProyecto(obj, jTStencil.getText(), "FE", "Stencil", numeroOrden, "", op,Integer.parseInt(jLIDStencil.getText()));
+                if (jLIDStencil.getText().equals("0")) {
+                    op1 = op;
+                    op = 1;
+                }
+                res = subRegistrarModificarProyecto(obj, jTStencil.getText(), "FE", "Stencil", numeroOrden, "", op, Integer.parseInt(jLIDStencil.getText()));
+                if (jLIDStencil.getText().equals("0")) {
+                    op = op1;
+                }
                 //Fin del registro del Stencil
+            } else if (!jLIDStencil.getText().equals("0")) {
+                //Eliminar el detalle del proyecto si ya no esta seleccionado
+                subEliminardetalle(obj, Integer.parseInt(jLIDStencil.getText()), Integer.parseInt(jTNorden.getText()), "FE","Stencil");
             }
         } else if (cbNegocio.getSelectedItem().equals("FE/TE/IN")) {
             //Se registra el detalle del proyecto cuando el negocio es "FE/TE/IN"
             if (jCConversor.isSelected()) {
                 //Registrar Conversor------------------------------------------>
-                res = subRegistrarModificarProyecto(obj, jTConversor.getText(), "FE", "Conversor", numeroOrden, "FV", op,Integer.parseInt(jLIDConversor.getText()));
+                if (jLIDConversor.getText().equals("0")) {
+                    op1 = op;
+                    op = 1;
+                }
+                res = subRegistrarModificarProyecto(obj, jTConversor.getText(), "FE", "Conversor", numeroOrden, "FV", op, Integer.parseInt(jLIDConversor.getText()));
+                if (jLIDConversor.getText().equals("0")) {
+                    op = op1;
+                }
                 //Fin del registro del Conversor
+            } else if (!jLIDConversor.getText().equals("0")) {
+                //Eliminar el detalle del proyecto si ya no esta seleccionado
+                subEliminardetalle(obj, Integer.parseInt(jLIDConversor.getText()), Integer.parseInt(jTNorden.getText()), "FE","Conversor");
             }
             if (jCTroquel.isSelected()) {
                 //Registrar Troquel-------------------------------------------->
-                res = subRegistrarModificarProyecto(obj, jTTroquel.getText(), "FE", "Troquel", numeroOrden, "FV", op,Integer.parseInt(jLIDTroquel.getText()));
+                if (jLIDTroquel.getText().equals("0")) {
+                    op1 = op;
+                    op = 1;
+                }
+                res = subRegistrarModificarProyecto(obj, jTTroquel.getText(), "FE", "Troquel", numeroOrden, "FV", op, Integer.parseInt(jLIDTroquel.getText()));
+                if (jLIDTroquel.getText().equals("0")) {
+                    op = op1;
+                }
                 //Fin del registro del Troquel
+            } else if (!jLIDTroquel.getText().equals("0")) {
+                //Eliminar el detalle del proyecto si ya no esta seleccionado
+                subEliminardetalle(obj, Integer.parseInt(jLIDTroquel.getText()), Integer.parseInt(jTNorden.getText()), "FE","Troquel");
             }
             if (jCRepujado.isSelected()) {
                 //Registrar Repujado------------------------------------------->
-                res = subRegistrarModificarProyecto(obj, jTRepujado.getText(), "FE", "Repujado", numeroOrden, "FV", op,Integer.parseInt(jLIDRepujado.getText()));
+                if (jLIDRepujado.getText().equals("0")) {
+                    op1 = op;
+                    op = 1;
+                }
+                res = subRegistrarModificarProyecto(obj, jTRepujado.getText(), "FE", "Repujado", numeroOrden, "FV", op, Integer.parseInt(jLIDRepujado.getText()));
+                if (jLIDRepujado.getText().equals("0")) {
+                    op = op1;
+                }
                 //Fin del registro del Repujado
+            } else if (!jLIDRepujado.getText().equals("0")) {
+                //Eliminar el detalle del proyecto si ya no esta seleccionado
+                subEliminardetalle(obj, Integer.parseInt(jLIDRepujado.getText()), Integer.parseInt(jTNorden.getText()), "FE","Repujado");
             }
             if (jCStencil.isSelected()) {
                 //Registrar Stencil-------------------------------------------->
-                res = subRegistrarModificarProyecto(obj, jTStencil.getText(), "FE", "Stencil", numeroOrden, "", op,Integer.parseInt(jLIDStencil.getText()));
+                if (jLIDStencil.getText().equals("0")) {
+                    op1 = op;
+                    op = 1;
+                }
+                res = subRegistrarModificarProyecto(obj, jTStencil.getText(), "FE", "Stencil", numeroOrden, "", op, Integer.parseInt(jLIDStencil.getText()));
+                if (jLIDStencil.getText().equals("0")) {
+                    op = op1;
+                }
                 //Fin del registro del Stencil
+            } else if (!jLIDStencil.getText().equals("0")) {
+                //Eliminar el detalle del proyecto si ya no esta seleccionado
+                subEliminardetalle(obj, Integer.parseInt(jLIDStencil.getText()), Integer.parseInt(jTNorden.getText()), "FE","Stencil");
             }
             if (jCCircuito.isSelected()) {
                 //Registrar PCB de FE------------------------------------------>
-                res = subRegistrarModificarProyecto(obj, jTCircuito.getText(), "FE", "Circuito", numeroOrden, cbMaterialCircuito.getSelectedItem().toString(), op,Integer.parseInt(jLIDCircuito.getText()));
+                if (jLIDCircuito.getText().equals("0")) {
+                    op1 = op;
+                    op = 1;
+                }
+                res = subRegistrarModificarProyecto(obj, jTCircuito.getText(), "FE", "Circuito", numeroOrden, cbMaterialCircuito.getSelectedItem().toString(), op, Integer.parseInt(jLIDCircuito.getText()));
+                if (jLIDCircuito.getText().equals("0")) {
+                    op = op1;
+                }
                 //Fin del registro del PCB FE
+            } else if (!jLIDCircuito.getText().equals("0")) {
+                //Eliminar el detalle del proyecto si ya no esta seleccionado
+                subEliminardetalle(obj, Integer.parseInt(jLIDCircuito.getText()), Integer.parseInt(jTNorden.getText()), "FE","Circuito");
             }
             if (jCPCBTE.isSelected()) {
                 //Registrar PCB de TE------------------------------------------>
-                res = subRegistrarModificarProyecto(obj, jTPCBTE.getText(), "FE", "PCB", numeroOrden, cbMaterialPCBTE.getSelectedItem().toString(), op,Integer.parseInt(jLIDPCB.getText()));
+                if (jLIDPCB.getText().equals("0")) {
+                    op1 = op;
+                    op = 1;
+                }
+                res = subRegistrarModificarProyecto(obj, jTPCBTE.getText(), "FE", "PCB", numeroOrden, cbMaterialPCBTE.getSelectedItem().toString(), op, Integer.parseInt(jLIDPCB.getText()));
+                if (jLIDPCB.getText().equals("0")) {
+                    op = op1;
+                }
                 //Fin del registro del PCB TE
+            } else if (!jLIDPCB.getText().equals("0")) {
+                //Eliminar el detalle del proyecto si ya no esta seleccionado
+                subEliminardetalle(obj, Integer.parseInt(jLIDPCB.getText()), Integer.parseInt(jTNorden.getText()), "FE","PCB");
             }
             if (jCTeclado.isSelected()) {
                 //Registrar Teclado-------------------------------------------->
-                res = subRegistrarModificarProyecto(obj, jTTeclado.getText(), "TE", "Teclado", numeroOrden, "lexan", op,Integer.parseInt(jLIDTeclado.getText()));
+                if (jLIDTeclado.getText().equals("0")) {
+                    op1 = op;
+                    op = 1;
+                }
+                res = subRegistrarModificarProyecto(obj, jTTeclado.getText(), "TE", "Teclado", numeroOrden, "lexan", op, Integer.parseInt(jLIDTeclado.getText()));
+                if (jLIDTeclado.getText().equals("0")) {
+                    op = op1;
+                }
                 //Fin del registro del Teclado
+            } else if (!jLIDTeclado.getText().equals("0")) {
+                //Eliminar el detalle del proyecto si ya no esta seleccionado
+                subEliminardetalle(obj, Integer.parseInt(jLIDTeclado.getText()), Integer.parseInt(jTNorden.getText()), "TE","Teclado");
             }
             if (jCIntegracion.isSelected()) {
-                //REgistrar Integracion---------------------------------------->
-                res = subRegistrarModificarProyecto(obj, jTIntegracion.getText(), "IN", "Circuito", numeroOrden, "", op,Integer.parseInt(jLIDIntegracion.getText()));
+                //Registrar Integracion---------------------------------------->
+                if (jLIDIntegracion.getText().equals("0")) {
+                    op1 = op;
+                    op = 1;
+                }
+                res = subRegistrarModificarProyecto(obj, jTIntegracion.getText(), "IN", "Circuito", numeroOrden, "", op, Integer.parseInt(jLIDIntegracion.getText()));
+                if (jLIDIntegracion.getText().equals("0")) {
+                    op = op1;
+                }
                 //Fin del registro de Integracion
+            } else if (!jLIDIntegracion.getText().equals("0")) {
+                //Eliminar el detalle del proyecto si ya no esta seleccionado
+                subEliminardetalle(obj, Integer.parseInt(jLIDIntegracion.getText()), Integer.parseInt(jTNorden.getText()), "IN", "Circuito");
             }
         }
         return res;
     }
 
-    private boolean subRegistrarModificarProyecto(DetalleProyecto obj, String cantidad, String Negocio, String TipoNegocio, String numeroOrden, String material, int op,int id) {
+    private boolean subRegistrarModificarProyecto(DetalleProyecto obj, String cantidad, String Negocio, String TipoNegocio, String numeroOrden, String material, int op, int id) {
         obj.setCantidad(cantidad);
         obj.setTipoNegocio(TipoNegocio);
         obj.setNegocio(Negocio);
         obj.setMaterial(material);
-        return obj.registrar_Detalle_Proycto(numeroOrden, op,id);
+        return obj.registrar_Detalle_Proycto(numeroOrden, op, id);
+    }
+
+    private void subEliminardetalle(DetalleProyecto obj, int idDetalle, int numerOrden, String negocio, String tipo) {
+
+        if (obj.eliminarDetallersProyecto(idDetalle, numerOrden, negocio)) {
+            //Mensaje de eliminacion exitosa
+            new rojerusan.RSNotifyAnimated("Listo!!", "Se elimino el detalle del proyecto: " + tipo +" "+ negocio + " de la orden " + jTNorden.getText(), 5, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+            try {
+                Thread.sleep(500);
+            } catch (Exception e) {
+            }
+        } else {
+            //Mensaje de la eliminacion no se pudo realizar por que ya comenzo su ejecucion
+            new rojerusan.RSNotifyAnimated("Listo!!", "el detalle "+ tipo +" "+negocio+" de la orden" + jTNorden.getText() + " no pudo ser eliminada porque ya esta en ejecución.", 5, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

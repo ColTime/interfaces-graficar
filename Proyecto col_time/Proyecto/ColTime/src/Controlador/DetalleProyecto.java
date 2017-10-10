@@ -64,9 +64,9 @@ public class DetalleProyecto {
     }
 
     //Metodos----------------------------------------------------->
-    public boolean registrar_Detalle_Proycto(String numerOrden, int op,int id) {
+    public boolean registrar_Detalle_Proycto(String numerOrden, int op, int id) {
         DetalleProyectoM obj = new DetalleProyectoM();
-        return obj.registrar_Detalle_Proycto(cantidad, negocio, tipoNegocio, 1, numerOrden,material,op,id);
+        return obj.registrar_Detalle_Proycto(cantidad, negocio, tipoNegocio, 1, numerOrden, material, op, id);
     }
 
     public boolean modificar_Detalle_Proycto(String numerOrden) {
@@ -75,7 +75,7 @@ public class DetalleProyecto {
     }
 
     public CachedRowSet consultar_Detalle_Proyecto(String numerOrden) {
-        DetalleProyectoM obj=new DetalleProyectoM();
+        DetalleProyectoM obj = new DetalleProyectoM();
         return obj.consultar_Detalle_Proyecto(numerOrden);
     }
 
@@ -84,10 +84,14 @@ public class DetalleProyecto {
         return true;
     }
 
+    public boolean eliminarDetallersProyecto(int idDetalle, int numerOrden,String negocio) {
+        DetalleProyectoM obj = new DetalleProyectoM();
+        return obj.eliminarDetallersProyecto(idDetalle,numerOrden,negocio);
+    }
+
     @Override
     protected void finalize() throws Throwable {
         super.finalize(); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
+
 }
