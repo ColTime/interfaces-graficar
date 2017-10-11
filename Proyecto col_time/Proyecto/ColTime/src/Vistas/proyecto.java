@@ -4,8 +4,12 @@ import Atxy2k.CustomTextField.RestrictedTextField;
 import Controlador.DetalleProyecto;
 import Controlador.Proyecto;
 import coltime.Menu;
+import com.barcodelib.barcode.QRCode;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.pdf.PdfWriter;
 import elaprendiz.gui.textField.TextFieldRoundBackground;
 import java.awt.Color;
+import java.io.FileOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import javax.swing.JCheckBox;
@@ -28,6 +32,8 @@ public class proyecto extends javax.swing.JPanel {
     }
     static int op = 0;
     boolean v[] = new boolean[9];
+    int udm = 0, resol = 90, rot = 0;
+    float mi = 0.000f, md = 0.000f, ms = 0.000f, min = 0.000f, tam = 8.000f;
 
     private void visibilidadID() {
         jLIDConversor.setVisible(false);
@@ -133,6 +139,7 @@ public class proyecto extends javax.swing.JPanel {
         jLIDPCB = new javax.swing.JLabel();
         jLIDTeclado = new javax.swing.JLabel();
         jLIDIntegracion = new javax.swing.JLabel();
+        btnGenerarQR = new elaprendiz.gui.button.ButtonColoredAction();
 
         setBackground(new java.awt.Color(219, 219, 219));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
@@ -817,6 +824,14 @@ public class proyecto extends javax.swing.JPanel {
         jLIDIntegracion.setText("0");
         jPanel2.add(jLIDIntegracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(716, 210, 10, -1));
 
+        btnGenerarQR.setText("Generar QR");
+        btnGenerarQR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarQRActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnGenerarQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 360, -1, -1));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -1019,7 +1034,7 @@ public class proyecto extends javax.swing.JPanel {
     }//GEN-LAST:event_jTCircuitoKeyTyped
 
     private void jTPCBTEKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTPCBTEKeyTyped
-
+        numerosT(evt);
     }//GEN-LAST:event_jTPCBTEKeyTyped
 
     private void jTTecladoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTTecladoKeyTyped
@@ -1029,6 +1044,31 @@ public class proyecto extends javax.swing.JPanel {
     private void jTIntegracionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTIntegracionKeyTyped
         numerosT(evt);
     }//GEN-LAST:event_jTIntegracionKeyTyped
+
+    private void btnGenerarQRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarQRActionPerformed
+        try {
+            //se creo y se abrio el documento
+            Document doc = new Document();
+            PdfWriter pdf = PdfWriter.getInstance(doc, new FileOutputStream("user.home/pdfs/" + "28523"));
+            doc.open();
+            //se genera el codigo QR
+            QRCode cod = new QRCode();
+            String texto = jtext.getText();
+            cod.setData(texto);
+            cod.setDataMode(QRCode.MODE_BYTE);
+
+            cod.setUOM(udm);
+            cod.setLeftMargin(mi);
+            cod.setResolution(resol);
+            cod.setRightMargin(md);
+            cod.setTopMargin(ms);
+            cod.setBottomMargin(min);
+            cod.setRotate(rot);
+            cod.setModuleSize(tam);
+        } catch (Exception e) {
+        }
+
+    }//GEN-LAST:event_btnGenerarQRActionPerformed
 //Metodos-------------------------------------------------------------------->
 
     private void validarRegistro(int op) {
@@ -1574,6 +1614,7 @@ public class proyecto extends javax.swing.JPanel {
     private javax.swing.JButton btnActivar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnDelete;
+    private elaprendiz.gui.button.ButtonColoredAction btnGenerarQR;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
     public static javax.swing.JButton btnUpdate;
