@@ -104,7 +104,8 @@ public class UsuarioM {
         return res;
     }
 
-    public boolean iniciarSesion(String user, String pasw) {
+    public int iniciarSesion(String user, String pasw) {
+        int cargo = 0;  
         try {
             conexion = new Conexion();
             conexion.establecerConexion();
@@ -116,9 +117,7 @@ public class UsuarioM {
             ps.setString(2, pasw);
             rs = ps.executeQuery();
             if (rs.next()) {
-                res = rs.getBoolean(1);
-            } else {
-                res = rs.getBoolean(1);
+                cargo = rs.getInt(1);
             }
             //Destrucción de conexiones
             con.close();
@@ -128,7 +127,7 @@ public class UsuarioM {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "¡Error!" + e);
         }
-        return res;
+        return cargo;
     }
 
     public boolean cambiarContraseña(String doc, String contra, String anti) {

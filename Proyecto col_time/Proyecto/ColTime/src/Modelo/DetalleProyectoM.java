@@ -147,7 +147,7 @@ public class DetalleProyectoM {
             //Ejecucion
             rs = ps.executeQuery();
             rs.next();
-
+            res = rs.getBoolean(1);
             //Cierre de conexiones
             conexion.cerrar(rs);
             conexion.destruir();
@@ -157,7 +157,6 @@ public class DetalleProyectoM {
             JOptionPane.showMessageDialog(null, "¡Error!" + e);
         }
         return res;
-
     }
 
     @Override

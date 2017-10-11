@@ -40,7 +40,7 @@ public class Inicio extends javax.swing.JPanel {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(106, Short.MAX_VALUE)
+                .addContainerGap(101, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(82, 82, 82))
         );
@@ -110,7 +110,7 @@ public class Inicio extends javax.swing.JPanel {
                 .addComponent(jLabel4)
                 .addGap(101, 101, 101)
                 .addComponent(jLabel5)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel2)
@@ -173,8 +173,7 @@ public class Inicio extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        NewJFrame obj=new NewJFrame();
-        obj.setVisible(true);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

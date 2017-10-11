@@ -16,9 +16,10 @@ public class screen extends javax.swing.JFrame implements Runnable {
      * Creates new form screen
      */
     private Thread tiempo = null;
-
+    
     public screen() {
         initComponents();
+        jLCargo.setVisible(false);
         this.setLocationRelativeTo(null);
         AWTUtilities.setWindowOpaque(this, false);
         this.setIconImage(new ImageIcon(getClass().getResource("/imagenesEmpresa/favicon.png")).getImage());
@@ -36,6 +37,7 @@ public class screen extends javax.swing.JFrame implements Runnable {
     private void initComponents() {
 
         jDocumento = new javax.swing.JLabel();
+        jLCargo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -50,6 +52,9 @@ public class screen extends javax.swing.JFrame implements Runnable {
 
         jDocumento.setText("Documento");
         getContentPane().add(jDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 120, -1));
+
+        jLCargo.setText("Cargo");
+        getContentPane().add(jLCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesEmpresa/logo.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 640, 190));
@@ -153,6 +158,7 @@ public class screen extends javax.swing.JFrame implements Runnable {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JLabel jDocumento;
+    public static javax.swing.JLabel jLCargo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -169,8 +175,9 @@ public class screen extends javax.swing.JFrame implements Runnable {
                 Thread.sleep(10000);
                 this.dispose();
                 Thread.sleep(500);
-                Menu men = new Menu();
+                Menu men = new Menu(Integer.parseInt(jLCargo.getText()));
                 men.setVisible(true);
+                
                 men.setLocationRelativeTo(null);
                 men.jDocumento.setVisible(false);
                 men.jDocumento.setText(this.jDocumento.getText());
@@ -186,10 +193,10 @@ public class screen extends javax.swing.JFrame implements Runnable {
             Logger.getLogger(screen.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     @Override
     protected void finalize() throws Throwable {
         super.finalize();
     }
-
+    
 }

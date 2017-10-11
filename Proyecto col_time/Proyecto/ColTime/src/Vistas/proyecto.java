@@ -1,5 +1,6 @@
 package Vistas;
 
+import Atxy2k.CustomTextField.RestrictedTextField;
 import Controlador.DetalleProyecto;
 import Controlador.Proyecto;
 import coltime.Menu;
@@ -20,9 +21,9 @@ public class proyecto extends javax.swing.JPanel {
             btnNuevo.setEnabled(true);
             Notificacion1.setVisible(false);
             visibilidadID();
+            limites();
         }
         op = p;
-        btnUpdate.setEnabled(true);
         limpiarCampos();
     }
     static int op = 0;
@@ -37,6 +38,29 @@ public class proyecto extends javax.swing.JPanel {
         jLIDPCB.setVisible(false);
         jLIDTeclado.setVisible(false);
         jLIDIntegracion.setVisible(false);
+    }
+
+    private void limites() {
+        RestrictedTextField obj = new RestrictedTextField(jTConversor);
+        obj.setLimit(6);
+        RestrictedTextField obj1 = new RestrictedTextField(jTRepujado);
+        obj1.setLimit(6);
+        RestrictedTextField obj2 = new RestrictedTextField(jTTroquel);
+        obj2.setLimit(6);
+        RestrictedTextField obj3 = new RestrictedTextField(jTCircuito);
+        obj3.setLimit(6);
+        RestrictedTextField obj4 = new RestrictedTextField(jTStencil);
+        obj4.setLimit(6);
+        RestrictedTextField obj5 = new RestrictedTextField(jTIntegracion);
+        obj5.setLimit(6);
+        RestrictedTextField obj6 = new RestrictedTextField(jTTeclado);
+        obj6.setLimit(6);
+        RestrictedTextField obj7 = new RestrictedTextField(jTPCBTE);
+        obj7.setLimit(6);
+        RestrictedTextField obj8 = new RestrictedTextField(jTNombreCliente);
+        obj7.setLimit(45);
+        RestrictedTextField obj9 = new RestrictedTextField(jTNombreProyecto);
+        obj7.setLimit(45);
     }
 
     @SuppressWarnings("unchecked")
@@ -224,6 +248,11 @@ public class proyecto extends javax.swing.JPanel {
         jTTeclado.setColorDeBorde(new java.awt.Color(204, 204, 204));
         jTTeclado.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
         jTTeclado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTTeclado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTTecladoKeyTyped(evt);
+            }
+        });
 
         jCTeclado.setBackground(new java.awt.Color(255, 255, 255));
         jCTeclado.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -238,18 +267,38 @@ public class proyecto extends javax.swing.JPanel {
         jTConversor.setColorDeBorde(new java.awt.Color(204, 204, 204));
         jTConversor.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
         jTConversor.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTConversor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTConversorKeyTyped(evt);
+            }
+        });
 
         jTTroquel.setColorDeBorde(new java.awt.Color(204, 204, 204));
         jTTroquel.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
         jTTroquel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTTroquel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTTroquelKeyTyped(evt);
+            }
+        });
 
         jTRepujado.setColorDeBorde(new java.awt.Color(204, 204, 204));
         jTRepujado.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
         jTRepujado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTRepujado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTRepujadoKeyTyped(evt);
+            }
+        });
 
         jTStencil.setColorDeBorde(new java.awt.Color(204, 204, 204));
         jTStencil.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
         jTStencil.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTStencil.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTStencilKeyTyped(evt);
+            }
+        });
 
         jCConversor.setBackground(new java.awt.Color(255, 255, 255));
         jCConversor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -264,6 +313,11 @@ public class proyecto extends javax.swing.JPanel {
         jTCircuito.setColorDeBorde(new java.awt.Color(204, 204, 204));
         jTCircuito.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
         jTCircuito.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTCircuito.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTCircuitoKeyTyped(evt);
+            }
+        });
 
         jCRepujado.setBackground(new java.awt.Color(255, 255, 255));
         jCRepujado.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -278,6 +332,11 @@ public class proyecto extends javax.swing.JPanel {
         jTPCBTE.setColorDeBorde(new java.awt.Color(204, 204, 204));
         jTPCBTE.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
         jTPCBTE.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTPCBTE.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTPCBTEKeyTyped(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(128, 128, 131));
@@ -339,25 +398,20 @@ public class proyecto extends javax.swing.JPanel {
         cbMaterialCircuito.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "TH", "FV" }));
         cbMaterialCircuito.setColorDeBorde(new java.awt.Color(204, 204, 204));
         cbMaterialCircuito.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        cbMaterialCircuito.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbMaterialCircuitoItemStateChanged(evt);
-            }
-        });
 
         cbMaterialPCBTE.setForeground(new java.awt.Color(102, 102, 102));
         cbMaterialPCBTE.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "TH", "FV" }));
         cbMaterialPCBTE.setColorDeBorde(new java.awt.Color(204, 204, 204));
         cbMaterialPCBTE.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        cbMaterialPCBTE.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbMaterialPCBTEItemStateChanged(evt);
-            }
-        });
 
         jTIntegracion.setColorDeBorde(new java.awt.Color(204, 204, 204));
         jTIntegracion.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
         jTIntegracion.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTIntegracion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTIntegracionKeyTyped(evt);
+            }
+        });
 
         jCIntegracion.setBackground(new java.awt.Color(255, 255, 255));
         jCIntegracion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -769,7 +823,7 @@ public class proyecto extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 864, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 863, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -867,10 +921,18 @@ public class proyecto extends javax.swing.JPanel {
 
     private void jTNombreClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNombreClienteKeyTyped
         validarCampos();
+        char cara = evt.getKeyChar();
+        if (Character.isDigit(cara) || evt.getKeyChar() == '.' || evt.getKeyChar() == '|') {
+            evt.consume();
+        }
     }//GEN-LAST:event_jTNombreClienteKeyTyped
 
     private void jTNombreProyectoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNombreProyectoKeyTyped
         validarCampos();
+        char cara = evt.getKeyChar();
+        if (Character.isDigit(cara) || evt.getKeyChar() == '.' || evt.getKeyChar() == '|') {
+            evt.consume();
+        }
     }//GEN-LAST:event_jTNombreProyectoKeyTyped
 
     private void cbNegocioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbNegocioItemStateChanged
@@ -936,25 +998,68 @@ public class proyecto extends javax.swing.JPanel {
     private void jCRuteoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCRuteoMousePressed
     }//GEN-LAST:event_jCRuteoMousePressed
 
-    private void cbMaterialCircuitoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbMaterialCircuitoItemStateChanged
-    }//GEN-LAST:event_cbMaterialCircuitoItemStateChanged
+    private void jTConversorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTConversorKeyTyped
+        numerosT(evt);
+    }//GEN-LAST:event_jTConversorKeyTyped
 
-    private void cbMaterialPCBTEItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbMaterialPCBTEItemStateChanged
-    }//GEN-LAST:event_cbMaterialPCBTEItemStateChanged
+    private void jTTroquelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTTroquelKeyTyped
+        numerosT(evt);
+    }//GEN-LAST:event_jTTroquelKeyTyped
+
+    private void jTRepujadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTRepujadoKeyTyped
+        numerosT(evt);
+    }//GEN-LAST:event_jTRepujadoKeyTyped
+
+    private void jTStencilKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTStencilKeyTyped
+        numerosT(evt);
+    }//GEN-LAST:event_jTStencilKeyTyped
+
+    private void jTCircuitoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTCircuitoKeyTyped
+        numerosT(evt);
+    }//GEN-LAST:event_jTCircuitoKeyTyped
+
+    private void jTPCBTEKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTPCBTEKeyTyped
+
+    }//GEN-LAST:event_jTPCBTEKeyTyped
+
+    private void jTTecladoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTTecladoKeyTyped
+        numerosT(evt);
+    }//GEN-LAST:event_jTTecladoKeyTyped
+
+    private void jTIntegracionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTIntegracionKeyTyped
+        numerosT(evt);
+    }//GEN-LAST:event_jTIntegracionKeyTyped
 //Metodos-------------------------------------------------------------------->
 
     private void validarRegistro(int op) {
+        //VAlidar los campos principales del proyecto-------------------------->
         if (!jDentrega.getDate().equals("") && cbNegocio.getSelectedIndex() != 0 && cbTipo.getSelectedIndex() != 0 && !jTNombreCliente.getText().equals("")
-                && !jTNombreProyecto.getText().equals("") && ((jCConversor.isSelected() && !jTConversor.getText().equals("")) || (jCTroquel.isSelected() && !jTTroquel.getText().equals(""))
+                && !jTNombreProyecto.getText().equals("") && ((jCConversor.isSelected() && !jTConversor.getText().equals("")) && (jCTroquel.isSelected() && !jTTroquel.getText().equals(""))
                 || (jCRepujado.isSelected() && !jTRepujado.getText().equals("")) || (jCStencil.isSelected() && !jTStencil.getText().equals(""))
-                || (jCCircuito.isSelected() && !jTCircuito.getText().equals("") && cbMaterialCircuito.getSelectedIndex() != 0)
-                || (jCPCBTE.isSelected() && !jTPCBTE.getText().equals("") && cbMaterialPCBTE.getSelectedIndex() != 0) || (jCTeclado.isSelected() && !jTTeclado.getText().equals(""))
+                || (jCTeclado.isSelected() && !jTTeclado.getText().equals(""))
                 || (jCIntegracion.isSelected() && !jTIntegracion.getText().equals("")))) {
-            registrarModificarProyecto(op);
+            if (!jCCircuito.isSelected() == false || !jCPCBTE.isSelected() == false) {
+                //Si solo es seleccionado el circuito.
+                if ((jCCircuito.isSelected() && (cbMaterialCircuito.getSelectedIndex() != 0 && !jTCircuito.getText().equals(""))) && jCPCBTE.isSelected() == false) {
+                    registrarModificarProyecto(op);
+                    //Si solo es seleccionado la PCB.
+                } else if ((jCPCBTE.isSelected() && (cbMaterialPCBTE.getSelectedIndex() != 0 && !jTPCBTE.getText().equals(""))) && jCCircuito.isSelected() == false) {
+                    registrarModificarProyecto(op);
+                    //Sí selecciona los dos (Circuito y PCB).
+                } else if ((jCPCBTE.isSelected() && (cbMaterialPCBTE.getSelectedIndex() != 0 && !jTPCBTE.getText().equals(""))) && (jCPCBTE.isSelected() && (cbMaterialPCBTE.getSelectedIndex() != 0 && !jTPCBTE.getText().equals("")))) {
+                    registrarModificarProyecto(op);
+                    //Si no cumplio ninguna de las condiciones anteriores.
+                } else {
+                    new rojerusan.RSNotifyAnimated("¡Error!", "Falta algun campo por diligenciar.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
+                }
+            } else {
+                registrarModificarProyecto(op);
+            }
         } else {
             new rojerusan.RSNotifyAnimated("¡Error!", "Falta algun campo por diligenciar.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
         }
     }
+//     && 
 
     private void registrarModificarProyecto(int op) {
         Controlador.Proyecto obj = new Controlador.Proyecto();
@@ -1169,7 +1274,7 @@ public class proyecto extends javax.swing.JPanel {
                 //Fin del registro del Conversor
             } else if (!jLIDConversor.getText().equals("0")) {
                 //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDConversor.getText()), Integer.parseInt(jTNorden.getText()), "FE","Conversor");
+                subEliminardetalle(obj, Integer.parseInt(jLIDConversor.getText()), Integer.parseInt(jTNorden.getText()), "FE", "Conversor");
             }
             if (jCTroquel.isSelected()) {
                 //Registrar Troquel-------------------------------------------->
@@ -1184,7 +1289,7 @@ public class proyecto extends javax.swing.JPanel {
                 //Fin del registro del Troquel
             } else if (!jLIDTroquel.getText().equals("0")) {
                 //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDTroquel.getText()), Integer.parseInt(jTNorden.getText()), "FE","Troquel");
+                subEliminardetalle(obj, Integer.parseInt(jLIDTroquel.getText()), Integer.parseInt(jTNorden.getText()), "FE", "Troquel");
             }
             if (jCRepujado.isSelected()) {
                 //Registrar Repujado------------------------------------------->
@@ -1199,7 +1304,7 @@ public class proyecto extends javax.swing.JPanel {
                 //Fin del registro del Repujado
             } else if (!jLIDRepujado.getText().equals("0")) {
                 //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDRepujado.getText()), Integer.parseInt(jTNorden.getText()), "FE","Repujado");
+                subEliminardetalle(obj, Integer.parseInt(jLIDRepujado.getText()), Integer.parseInt(jTNorden.getText()), "FE", "Repujado");
             }
             if (jCStencil.isSelected()) {
                 //Registrar Stencil-------------------------------------------->
@@ -1214,7 +1319,7 @@ public class proyecto extends javax.swing.JPanel {
                 //Fin del registro del Stencil
             } else if (!jLIDStencil.getText().equals("0")) {
                 //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDStencil.getText()), Integer.parseInt(jTNorden.getText()), "FE","Stencil");
+                subEliminardetalle(obj, Integer.parseInt(jLIDStencil.getText()), Integer.parseInt(jTNorden.getText()), "FE", "Stencil");
             }
             if (jCCircuito.isSelected()) {
                 //Registrar PCB de FE------------------------------------------>
@@ -1229,7 +1334,7 @@ public class proyecto extends javax.swing.JPanel {
                 //Fin del registro del PCB FE
             } else if (!jLIDCircuito.getText().equals("0")) {
                 //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDCircuito.getText()), Integer.parseInt(jTNorden.getText()), "FE"," Circuito");
+                subEliminardetalle(obj, Integer.parseInt(jLIDCircuito.getText()), Integer.parseInt(jTNorden.getText()), "FE", " Circuito");
             }
             if (jCPCBTE.isSelected()) {
                 //Registrar PCB de TE------------------------------------------>
@@ -1244,7 +1349,7 @@ public class proyecto extends javax.swing.JPanel {
                 //Fin del registro del PCB TE
             } else if (!jLIDPCB.getText().equals("0")) {
                 //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDPCB.getText()), Integer.parseInt(jTNorden.getText()), "FE","PCB");
+                subEliminardetalle(obj, Integer.parseInt(jLIDPCB.getText()), Integer.parseInt(jTNorden.getText()), "FE", "PCB");
             }
             if (jCTeclado.isSelected()) {
                 //Registrar Teclado-------------------------------------------->
@@ -1259,7 +1364,7 @@ public class proyecto extends javax.swing.JPanel {
                 //Fin del registro del Teclado
             } else if (!jLIDTeclado.getText().equals("0")) {
                 //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDTeclado.getText()), Integer.parseInt(jTNorden.getText()), "TE","Teclado");
+                subEliminardetalle(obj, Integer.parseInt(jLIDTeclado.getText()), Integer.parseInt(jTNorden.getText()), "TE", "Teclado");
             }
         } else if (cbNegocio.getSelectedItem().equals("FE/IN")) {
             //Se registra el detalle del proyecto cuando el negocio es "FE/IN"
@@ -1276,7 +1381,7 @@ public class proyecto extends javax.swing.JPanel {
                 //Fin del registro del PCB FE
             } else if (!jLIDCircuito.getText().equals("0")) {
                 //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDCircuito.getText()), Integer.parseInt(jTNorden.getText()), "FE","Circuito");
+                subEliminardetalle(obj, Integer.parseInt(jLIDCircuito.getText()), Integer.parseInt(jTNorden.getText()), "FE", "Circuito");
             }
             if (jCIntegracion.isSelected()) {
                 //REgistrar Integracion---------------------------------------->
@@ -1291,7 +1396,7 @@ public class proyecto extends javax.swing.JPanel {
                 //Fin del registro de Integracion
             } else if (!jLIDIntegracion.getText().equals("0")) {
                 //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDIntegracion.getText()), Integer.parseInt(jTNorden.getText()), "IN","Circuito");
+                subEliminardetalle(obj, Integer.parseInt(jLIDIntegracion.getText()), Integer.parseInt(jTNorden.getText()), "IN", "Circuito");
             }
             if (jCStencil.isSelected()) {
                 //Registrar Stencil-------------------------------------------->
@@ -1306,7 +1411,7 @@ public class proyecto extends javax.swing.JPanel {
                 //Fin del registro del Stencil
             } else if (!jLIDStencil.getText().equals("0")) {
                 //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDStencil.getText()), Integer.parseInt(jTNorden.getText()), "FE","Stencil");
+                subEliminardetalle(obj, Integer.parseInt(jLIDStencil.getText()), Integer.parseInt(jTNorden.getText()), "FE", "Stencil");
             }
         } else if (cbNegocio.getSelectedItem().equals("FE/TE/IN")) {
             //Se registra el detalle del proyecto cuando el negocio es "FE/TE/IN"
@@ -1323,7 +1428,7 @@ public class proyecto extends javax.swing.JPanel {
                 //Fin del registro del Conversor
             } else if (!jLIDConversor.getText().equals("0")) {
                 //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDConversor.getText()), Integer.parseInt(jTNorden.getText()), "FE","Conversor");
+                subEliminardetalle(obj, Integer.parseInt(jLIDConversor.getText()), Integer.parseInt(jTNorden.getText()), "FE", "Conversor");
             }
             if (jCTroquel.isSelected()) {
                 //Registrar Troquel-------------------------------------------->
@@ -1338,7 +1443,7 @@ public class proyecto extends javax.swing.JPanel {
                 //Fin del registro del Troquel
             } else if (!jLIDTroquel.getText().equals("0")) {
                 //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDTroquel.getText()), Integer.parseInt(jTNorden.getText()), "FE","Troquel");
+                subEliminardetalle(obj, Integer.parseInt(jLIDTroquel.getText()), Integer.parseInt(jTNorden.getText()), "FE", "Troquel");
             }
             if (jCRepujado.isSelected()) {
                 //Registrar Repujado------------------------------------------->
@@ -1353,7 +1458,7 @@ public class proyecto extends javax.swing.JPanel {
                 //Fin del registro del Repujado
             } else if (!jLIDRepujado.getText().equals("0")) {
                 //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDRepujado.getText()), Integer.parseInt(jTNorden.getText()), "FE","Repujado");
+                subEliminardetalle(obj, Integer.parseInt(jLIDRepujado.getText()), Integer.parseInt(jTNorden.getText()), "FE", "Repujado");
             }
             if (jCStencil.isSelected()) {
                 //Registrar Stencil-------------------------------------------->
@@ -1368,7 +1473,7 @@ public class proyecto extends javax.swing.JPanel {
                 //Fin del registro del Stencil
             } else if (!jLIDStencil.getText().equals("0")) {
                 //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDStencil.getText()), Integer.parseInt(jTNorden.getText()), "FE","Stencil");
+                subEliminardetalle(obj, Integer.parseInt(jLIDStencil.getText()), Integer.parseInt(jTNorden.getText()), "FE", "Stencil");
             }
             if (jCCircuito.isSelected()) {
                 //Registrar PCB de FE------------------------------------------>
@@ -1383,7 +1488,7 @@ public class proyecto extends javax.swing.JPanel {
                 //Fin del registro del PCB FE
             } else if (!jLIDCircuito.getText().equals("0")) {
                 //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDCircuito.getText()), Integer.parseInt(jTNorden.getText()), "FE","Circuito");
+                subEliminardetalle(obj, Integer.parseInt(jLIDCircuito.getText()), Integer.parseInt(jTNorden.getText()), "FE", "Circuito");
             }
             if (jCPCBTE.isSelected()) {
                 //Registrar PCB de TE------------------------------------------>
@@ -1398,7 +1503,7 @@ public class proyecto extends javax.swing.JPanel {
                 //Fin del registro del PCB TE
             } else if (!jLIDPCB.getText().equals("0")) {
                 //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDPCB.getText()), Integer.parseInt(jTNorden.getText()), "FE","PCB");
+                subEliminardetalle(obj, Integer.parseInt(jLIDPCB.getText()), Integer.parseInt(jTNorden.getText()), "FE", "PCB");
             }
             if (jCTeclado.isSelected()) {
                 //Registrar Teclado-------------------------------------------->
@@ -1413,7 +1518,7 @@ public class proyecto extends javax.swing.JPanel {
                 //Fin del registro del Teclado
             } else if (!jLIDTeclado.getText().equals("0")) {
                 //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDTeclado.getText()), Integer.parseInt(jTNorden.getText()), "TE","Teclado");
+                subEliminardetalle(obj, Integer.parseInt(jLIDTeclado.getText()), Integer.parseInt(jTNorden.getText()), "TE", "Teclado");
             }
             if (jCIntegracion.isSelected()) {
                 //Registrar Integracion---------------------------------------->
@@ -1446,14 +1551,21 @@ public class proyecto extends javax.swing.JPanel {
 
         if (obj.eliminarDetallersProyecto(idDetalle, numerOrden, negocio)) {
             //Mensaje de eliminacion exitosa
-            new rojerusan.RSNotifyAnimated("Listo!!", "Se elimino el detalle del proyecto: " + tipo +" "+ negocio + " de la orden " + jTNorden.getText(), 5, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+            new rojerusan.RSNotifyAnimated("Listo!!", "Se elimino el detalle del proyecto: " + tipo + " " + negocio + " de la orden " + jTNorden.getText(), 5, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
             try {
                 Thread.sleep(500);
             } catch (Exception e) {
             }
         } else {
             //Mensaje de la eliminacion no se pudo realizar por que ya comenzo su ejecucion
-            new rojerusan.RSNotifyAnimated("Listo!!", "el detalle "+ tipo +" "+negocio+" de la orden" + jTNorden.getText() + " no pudo ser eliminada porque ya esta en ejecución.", 5, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+            new rojerusan.RSNotifyAnimated("Listo!!", "el detalle " + tipo + " " + negocio + " de la orden" + jTNorden.getText() + " no pudo ser eliminada porque ya esta en ejecución.", 5, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
+        }
+    }
+
+    private void numerosT(java.awt.event.KeyEvent evt) {
+        char cara = evt.getKeyChar();
+        if (Character.isLetter(cara) || evt.getKeyChar() == '.' || evt.getKeyChar() == '|') {
+            evt.consume();
         }
     }
 

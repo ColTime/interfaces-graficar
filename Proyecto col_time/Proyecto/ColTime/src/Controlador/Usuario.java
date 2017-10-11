@@ -80,7 +80,7 @@ public class Usuario {
         return obj.cambiar_Estado_Usuario(documento,estado);
     }
 
-    public boolean iniciarSesion(String user,String pasw) {
+    public int iniciarSesion(String user,String pasw) {
         Modelo.UsuarioM obj= new Modelo.UsuarioM();
         return obj.iniciarSesion(user,pasw);
     }

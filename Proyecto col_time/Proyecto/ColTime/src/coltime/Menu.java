@@ -5,6 +5,7 @@ import Vistas.Producciones;
 import Vistas.Inicio;
 import Vistas.Usuarios1;
 import Vistas.proyecto;
+import coltime.Login;
 import java.awt.Color;
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,21 +23,23 @@ public class Menu extends javax.swing.JFrame {
     Producciones bp = null;
     private int longitudByte;
 
-    public Menu() {
-            initComponents();
-            Animacion.Animacion.mover_derecha(935, 1135, 0, 2, jPanel3);
-            new CambiaPanel(jPContenido, new Inicio());
-            btn1.setColorHover(cor);
-            btn1.setColorNormal(cor);
-            btn1.setColorPressed(cor);
-            this.setIconImage(new ImageIcon(getClass().getResource("/imagenesEmpresa/favicon.png")).getImage());
-            this.setLocationRelativeTo(null);
-            new rojerusan.RSNotifyAnimated("Bienvenido", "Tienes 5 nuevas notificaciones", 6, RSNotifyAnimated.PositionNotify.BottomLeft, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
- 
+    public Menu(int cargo) {
+        initComponents();
+        this.cargo = cargo;
+        Animacion.Animacion.mover_derecha(935, 1135, 0, 2, jPanel3);
+        new CambiaPanel(jPContenido, new Inicio());
+        btn1.setColorHover(cor);
+        btn1.setColorNormal(cor);
+        btn1.setColorPressed(cor);
+        this.setIconImage(new ImageIcon(getClass().getResource("/imagenesEmpresa/favicon.png")).getImage());
+        this.setLocationRelativeTo(null);
+        funcionalidades(cargo);
+        new rojerusan.RSNotifyAnimated("Bienvenido", "Tienes 5 nuevas notificaciones", 6, RSNotifyAnimated.PositionNotify.BottomLeft, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
     }
     private int posX = 0;
     private int posY = 0;
     private FileInputStream strem;
+    private static int cargo = 0;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -404,7 +407,20 @@ public class Menu extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private void funcionalidades(int cargo) {
+        if (cargo == 1) {
+            //Gestor comercial
+            btn3.setEnabled(false);
+        } else if (cargo == 2) {
+            //Encargado FE y TE
+            btn3.setEnabled(false);
+            btn2.setEnabled(false);
+        } else if (cargo == 3) {
+            //Encargado de EN
+            btn3.setEnabled(false);
+            btn2.setEnabled(false);
+        }
+    }
     private void btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2ActionPerformed
         if (!btn2.isSelected()) {
             btn1.setColorHover(cor);
@@ -465,11 +481,11 @@ public class Menu extends javax.swing.JFrame {
         if (posicionX > -1) {
             Animacion.Animacion.mover_izquierda(0, -542, 1, 2, jPMenu);
             Animacion.Animacion.mover_izquierda(202, 10, 1, 2, jPContenido);
-            Animacion.Animacion.mover_izquierda(1135, 935, 1, 2, jPanel3);
+            Animacion.Animacion.mover_izquierda(1135, 934, 1, 2, jPanel3);
         } else {
             Animacion.Animacion.mover_derecha(-542, 0, 1, 2, jPMenu);
             Animacion.Animacion.mover_derecha(10, 202, 1, 2, jPContenido);
-            Animacion.Animacion.mover_derecha(935, 1135, 1, 2, jPanel3);
+            Animacion.Animacion.mover_derecha(934, 1135, 1, 2, jPanel3);
         }
     }//GEN-LAST:event_btnMenuActionPerformed
 
@@ -621,7 +637,7 @@ public class Menu extends javax.swing.JFrame {
 //                } catch (Exception e) {
 //                    JOptionPane.showMessageDialog(null, e);
 //                }
-                new Menu().setVisible(true);
+                new Menu(0).setVisible(true);
             }
         });
     }

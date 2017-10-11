@@ -198,13 +198,14 @@ public class Login extends javax.swing.JFrame {
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
         if (!(jTUser.getText().equals("") && jTPassword.getText().equals(""))) {
-            boolean res = iniciarSesion(jTUser.getText(), jTPassword.getText());
-            if (res) {
+            int car = iniciarSesion(jTUser.getText(), jTPassword.getText());
+            if (car!=0) {
                 screen sc = new screen();
                 sc.setVisible(true);
                 sc.setLocationRelativeTo(null);
                 sc.jDocumento.setText(jTUser.getText());
                 sc.jDocumento.setVisible(false);
+                sc.jLCargo.setText(String.valueOf(car));
                 this.dispose();
             } else {
                 new rojerusan.RSNotifyAnimated("¡Error!", "El usuario o la contraseña es incorrecto, por favor intentelo nuevamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
@@ -295,7 +296,7 @@ public class Login extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
 //Metodos----------------------------------------------------------------------->
-    public boolean iniciarSesion(String user, String pasw) {
+    public int iniciarSesion(String user, String pasw) {
         Controlador.Usuario obj = new Controlador.Usuario();
         return obj.iniciarSesion(user, pasw);
     }

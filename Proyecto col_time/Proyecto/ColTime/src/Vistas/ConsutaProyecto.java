@@ -205,11 +205,11 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         jDFecha.setDateFormatString("dd/MM/yyyy");
         jDFecha.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jDFecha.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                jDFechaInputMethodTextChanged(evt);
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jDFechaCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                jDFechaInputMethodTextChanged(evt);
             }
         });
         jDFecha.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -278,7 +278,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         jTtipo1.setForeground(new java.awt.Color(128, 128, 131));
         jTtipo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jTtipo1.setText("Tipo:");
-        jPanel4.add(jTtipo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 110, 71, -1));
+        jPanel4.add(jTtipo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 110, 60, -1));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153)), "Proyecto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
