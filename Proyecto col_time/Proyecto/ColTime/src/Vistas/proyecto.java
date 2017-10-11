@@ -12,6 +12,7 @@ import java.awt.Color;
 import java.io.FileOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import javax.sql.rowset.CachedRowSet;
 import javax.swing.JCheckBox;
 import rojerusan.RSNotifyAnimated;
 
@@ -31,7 +32,7 @@ public class proyecto extends javax.swing.JPanel {
         limpiarCampos();
     }
     static int op = 0;
-    boolean v[] = new boolean[9];
+    boolean v[] = new boolean[11];
     int udm = 0, resol = 90, rot = 0;
     float mi = 0.000f, md = 0.000f, ms = 0.000f, min = 0.000f, tam = 8.000f;
 
@@ -107,15 +108,19 @@ public class proyecto extends javax.swing.JPanel {
         cbMaterialPCBTE = new elaprendiz.gui.comboBox.ComboBoxRound();
         jTIntegracion = new elaprendiz.gui.textField.TextFieldRoundBackground();
         jCIntegracion = new javax.swing.JCheckBox();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jCRuteoC = new javax.swing.JCheckBox();
+        jCAntisolderC = new javax.swing.JCheckBox();
+        jCAntisolderP = new javax.swing.JCheckBox();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jCRuteoP = new javax.swing.JCheckBox();
         jPDetalles = new javax.swing.JPanel();
         jDentrega = new com.toedter.calendar.JDateChooser();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jCAntisolder = new javax.swing.JCheckBox();
-        jCRuteo = new javax.swing.JCheckBox();
         cbNegocio = new elaprendiz.gui.comboBox.ComboBoxRound();
         jLabel7 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -149,11 +154,11 @@ public class proyecto extends javax.swing.JPanel {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(128, 128, 131)));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Proyecto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18), new java.awt.Color(128, 128, 131))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Proyecto", 0, 0, new java.awt.Font("Tahoma", 1, 18), new java.awt.Color(128, 128, 131))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPInformacion.setBackground(new java.awt.Color(255, 255, 255));
-        jPInformacion.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Información filtraria", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
+        jPInformacion.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Información filtraria", 0, 0, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
 
         jTNorden.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTNorden.setColorDeBorde(new java.awt.Color(204, 204, 204));
@@ -250,7 +255,8 @@ public class proyecto extends javax.swing.JPanel {
         jPanel2.add(jPInformacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 430, 180));
 
         jPDetalles1.setBackground(new java.awt.Color(255, 255, 255));
-        jPDetalles1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Detalles", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
+        jPDetalles1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Detalles", 0, 0, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
+        jPDetalles1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTTeclado.setColorDeBorde(new java.awt.Color(204, 204, 204));
         jTTeclado.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
@@ -260,6 +266,7 @@ public class proyecto extends javax.swing.JPanel {
                 jTTecladoKeyTyped(evt);
             }
         });
+        jPDetalles1.add(jTTeclado, new org.netbeans.lib.awtextra.AbsoluteConstraints(616, 49, -1, 25));
 
         jCTeclado.setBackground(new java.awt.Color(255, 255, 255));
         jCTeclado.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -270,6 +277,7 @@ public class proyecto extends javax.swing.JPanel {
                 jCTecladoMouseClicked(evt);
             }
         });
+        jPDetalles1.add(jCTeclado, new org.netbeans.lib.awtextra.AbsoluteConstraints(616, 19, -1, -1));
 
         jTConversor.setColorDeBorde(new java.awt.Color(204, 204, 204));
         jTConversor.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
@@ -279,6 +287,7 @@ public class proyecto extends javax.swing.JPanel {
                 jTConversorKeyTyped(evt);
             }
         });
+        jPDetalles1.add(jTConversor, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 49, -1, 25));
 
         jTTroquel.setColorDeBorde(new java.awt.Color(204, 204, 204));
         jTTroquel.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
@@ -288,6 +297,7 @@ public class proyecto extends javax.swing.JPanel {
                 jTTroquelKeyTyped(evt);
             }
         });
+        jPDetalles1.add(jTTroquel, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 49, -1, 25));
 
         jTRepujado.setColorDeBorde(new java.awt.Color(204, 204, 204));
         jTRepujado.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
@@ -297,6 +307,7 @@ public class proyecto extends javax.swing.JPanel {
                 jTRepujadoKeyTyped(evt);
             }
         });
+        jPDetalles1.add(jTRepujado, new org.netbeans.lib.awtextra.AbsoluteConstraints(296, 49, -1, 25));
 
         jTStencil.setColorDeBorde(new java.awt.Color(204, 204, 204));
         jTStencil.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
@@ -306,6 +317,7 @@ public class proyecto extends javax.swing.JPanel {
                 jTStencilKeyTyped(evt);
             }
         });
+        jPDetalles1.add(jTStencil, new org.netbeans.lib.awtextra.AbsoluteConstraints(376, 49, -1, 25));
 
         jCConversor.setBackground(new java.awt.Color(255, 255, 255));
         jCConversor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -316,6 +328,7 @@ public class proyecto extends javax.swing.JPanel {
                 jCConversorMouseClicked(evt);
             }
         });
+        jPDetalles1.add(jCConversor, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 19, -1, -1));
 
         jTCircuito.setColorDeBorde(new java.awt.Color(204, 204, 204));
         jTCircuito.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
@@ -325,6 +338,7 @@ public class proyecto extends javax.swing.JPanel {
                 jTCircuitoKeyTyped(evt);
             }
         });
+        jPDetalles1.add(jTCircuito, new org.netbeans.lib.awtextra.AbsoluteConstraints(456, 49, -1, 25));
 
         jCRepujado.setBackground(new java.awt.Color(255, 255, 255));
         jCRepujado.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -335,6 +349,7 @@ public class proyecto extends javax.swing.JPanel {
                 jCRepujadoMouseClicked(evt);
             }
         });
+        jPDetalles1.add(jCRepujado, new org.netbeans.lib.awtextra.AbsoluteConstraints(296, 19, -1, -1));
 
         jTPCBTE.setColorDeBorde(new java.awt.Color(204, 204, 204));
         jTPCBTE.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
@@ -344,10 +359,12 @@ public class proyecto extends javax.swing.JPanel {
                 jTPCBTEKeyTyped(evt);
             }
         });
+        jPDetalles1.add(jTPCBTE, new org.netbeans.lib.awtextra.AbsoluteConstraints(536, 49, -1, 25));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(128, 128, 131));
         jLabel8.setText("Cantidades:");
+        jPDetalles1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 49, -1, -1));
 
         jCTroquel.setBackground(new java.awt.Color(255, 255, 255));
         jCTroquel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -358,6 +375,7 @@ public class proyecto extends javax.swing.JPanel {
                 jCTroquelMouseClicked(evt);
             }
         });
+        jPDetalles1.add(jCTroquel, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 19, 80, -1));
 
         jCCircuito.setBackground(new java.awt.Color(255, 255, 255));
         jCCircuito.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -368,10 +386,12 @@ public class proyecto extends javax.swing.JPanel {
                 jCCircuitoMouseClicked(evt);
             }
         });
+        jPDetalles1.add(jCCircuito, new org.netbeans.lib.awtextra.AbsoluteConstraints(456, 19, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(128, 128, 131));
         jLabel9.setText("Otras ordenes:");
+        jPDetalles1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 29, -1, -1));
 
         jCPCBTE.setBackground(new java.awt.Color(255, 255, 255));
         jCPCBTE.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -382,6 +402,7 @@ public class proyecto extends javax.swing.JPanel {
                 jCPCBTEMouseClicked(evt);
             }
         });
+        jPDetalles1.add(jCPCBTE, new org.netbeans.lib.awtextra.AbsoluteConstraints(538, 19, -1, -1));
 
         jCStencil.setBackground(new java.awt.Color(255, 255, 255));
         jCStencil.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -392,24 +413,29 @@ public class proyecto extends javax.swing.JPanel {
                 jCStencilMouseClicked(evt);
             }
         });
+        jPDetalles1.add(jCStencil, new org.netbeans.lib.awtextra.AbsoluteConstraints(376, 19, -1, -1));
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(128, 128, 131));
         jLabel22.setText("Material de la PCB TE:");
+        jPDetalles1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 97, -1, -1));
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(128, 128, 131));
         jLabel23.setText("Material del Circuito:");
+        jPDetalles1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(79, 97, -1, -1));
 
         cbMaterialCircuito.setForeground(new java.awt.Color(102, 102, 102));
         cbMaterialCircuito.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "TH", "FV" }));
         cbMaterialCircuito.setColorDeBorde(new java.awt.Color(204, 204, 204));
         cbMaterialCircuito.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jPDetalles1.add(cbMaterialCircuito, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 92, 150, 25));
 
         cbMaterialPCBTE.setForeground(new java.awt.Color(102, 102, 102));
         cbMaterialPCBTE.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "TH", "FV" }));
         cbMaterialPCBTE.setColorDeBorde(new java.awt.Color(204, 204, 204));
         cbMaterialPCBTE.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jPDetalles1.add(cbMaterialPCBTE, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 92, 150, 25));
 
         jTIntegracion.setColorDeBorde(new java.awt.Color(204, 204, 204));
         jTIntegracion.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
@@ -419,6 +445,7 @@ public class proyecto extends javax.swing.JPanel {
                 jTIntegracionKeyTyped(evt);
             }
         });
+        jPDetalles1.add(jTIntegracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(695, 47, -1, 25));
 
         jCIntegracion.setBackground(new java.awt.Color(255, 255, 255));
         jCIntegracion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -429,109 +456,76 @@ public class proyecto extends javax.swing.JPanel {
                 jCIntegracionMouseClicked(evt);
             }
         });
+        jPDetalles1.add(jCIntegracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(695, 19, -1, -1));
 
-        javax.swing.GroupLayout jPDetalles1Layout = new javax.swing.GroupLayout(jPDetalles1);
-        jPDetalles1.setLayout(jPDetalles1Layout);
-        jPDetalles1Layout.setHorizontalGroup(
-            jPDetalles1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPDetalles1Layout.createSequentialGroup()
-                .addGap(0, 79, Short.MAX_VALUE)
-                .addComponent(jLabel23)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cbMaterialCircuito, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79)
-                .addComponent(jLabel22)
-                .addGap(18, 18, 18)
-                .addComponent(cbMaterialPCBTE, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66))
-            .addGroup(jPDetalles1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(jPDetalles1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPDetalles1Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(10, 10, 10)
-                        .addComponent(jCConversor)
-                        .addGap(11, 11, 11)
-                        .addComponent(jCTroquel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jCRepujado)
-                        .addGap(3, 3, 3)
-                        .addComponent(jCStencil)
-                        .addGap(19, 19, 19)
-                        .addComponent(jCCircuito)
-                        .addGap(17, 17, 17)
-                        .addComponent(jCPCBTE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jCTeclado))
-                    .addGroup(jPDetalles1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel8)
-                        .addGap(8, 8, 8)
-                        .addComponent(jTConversor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)
-                        .addComponent(jTTroquel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)
-                        .addComponent(jTRepujado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)
-                        .addComponent(jTStencil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)
-                        .addComponent(jTCircuito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)
-                        .addComponent(jTPCBTE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)
-                        .addComponent(jTTeclado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPDetalles1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCIntegracion)
-                    .addComponent(jTIntegracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPDetalles1Layout.setVerticalGroup(
-            jPDetalles1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPDetalles1Layout.createSequentialGroup()
-                .addGroup(jPDetalles1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPDetalles1Layout.createSequentialGroup()
-                        .addGroup(jPDetalles1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPDetalles1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabel9))
-                            .addComponent(jCConversor)
-                            .addComponent(jCTroquel)
-                            .addComponent(jCRepujado)
-                            .addComponent(jCStencil)
-                            .addComponent(jCCircuito)
-                            .addComponent(jCPCBTE))
-                        .addGap(5, 5, 5)
-                        .addGroup(jPDetalles1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jTConversor, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTTroquel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTRepujado, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTStencil, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTCircuito, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTPCBTE, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTTeclado, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPDetalles1Layout.createSequentialGroup()
-                        .addGroup(jPDetalles1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCIntegracion)
-                            .addComponent(jCTeclado))
-                        .addGap(5, 5, 5)
-                        .addComponent(jTIntegracion, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addGroup(jPDetalles1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPDetalles1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel23)
-                        .addComponent(cbMaterialCircuito, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPDetalles1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel22)
-                        .addComponent(cbMaterialPCBTE, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(128, 128, 131));
+        jLabel14.setText("¿Lleva antisolder?");
+        jPDetalles1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, -1));
 
-        jPanel2.add(jPDetalles1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 820, 130));
+        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(128, 128, 131));
+        jLabel19.setText("¿Lleva ruteo?");
+        jPDetalles1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, -1, -1));
+
+        jCRuteoC.setBackground(new java.awt.Color(255, 255, 255));
+        jCRuteoC.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCRuteoC.setForeground(new java.awt.Color(102, 102, 102));
+        jCRuteoC.setText("R");
+        jCRuteoC.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jCRuteoCMousePressed(evt);
+            }
+        });
+        jPDetalles1.add(jCRuteoC, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 135, -1, -1));
+
+        jCAntisolderC.setBackground(new java.awt.Color(255, 255, 255));
+        jCAntisolderC.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCAntisolderC.setForeground(new java.awt.Color(102, 102, 102));
+        jCAntisolderC.setText("A");
+        jCAntisolderC.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jCAntisolderCMousePressed(evt);
+            }
+        });
+        jPDetalles1.add(jCAntisolderC, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 135, -1, -1));
+
+        jCAntisolderP.setBackground(new java.awt.Color(255, 255, 255));
+        jCAntisolderP.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCAntisolderP.setForeground(new java.awt.Color(102, 102, 102));
+        jCAntisolderP.setText("A");
+        jCAntisolderP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jCAntisolderPMousePressed(evt);
+            }
+        });
+        jPDetalles1.add(jCAntisolderP, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 135, -1, -1));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(128, 128, 131));
+        jLabel11.setText("¿Lleva antisolder?");
+        jPDetalles1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, -1, -1));
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(128, 128, 131));
+        jLabel16.setText("¿Lleva ruteo?");
+        jPDetalles1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 140, -1, -1));
+
+        jCRuteoP.setBackground(new java.awt.Color(255, 255, 255));
+        jCRuteoP.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCRuteoP.setForeground(new java.awt.Color(102, 102, 102));
+        jCRuteoP.setText("R");
+        jCRuteoP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jCRuteoPMousePressed(evt);
+            }
+        });
+        jPDetalles1.add(jCRuteoP, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 135, -1, -1));
+
+        jPanel2.add(jPDetalles1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 820, 170));
 
         jPDetalles.setBackground(new java.awt.Color(255, 255, 255));
-        jPDetalles.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Detalles", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
+        jPDetalles.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Detalles", 0, 0, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
 
         jDentrega.setToolTipText("");
         jDentrega.setDateFormatString("dd/MM/yyyy");
@@ -548,14 +542,6 @@ public class proyecto extends javax.swing.JPanel {
         jLabel10.setForeground(new java.awt.Color(128, 128, 131));
         jLabel10.setText("Fecha de entraga:");
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(128, 128, 131));
-        jLabel11.setText("¿Lleva antisolder?");
-
-        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(128, 128, 131));
-        jLabel16.setText("¿Lleva ruteo?");
-
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 51, 51));
         jLabel17.setText("*");
@@ -563,26 +549,6 @@ public class proyecto extends javax.swing.JPanel {
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(128, 128, 131));
         jLabel18.setText("Fecha de ingreso:");
-
-        jCAntisolder.setBackground(new java.awt.Color(255, 255, 255));
-        jCAntisolder.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jCAntisolder.setForeground(new java.awt.Color(102, 102, 102));
-        jCAntisolder.setText("A");
-        jCAntisolder.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jCAntisolderMousePressed(evt);
-            }
-        });
-
-        jCRuteo.setBackground(new java.awt.Color(255, 255, 255));
-        jCRuteo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jCRuteo.setForeground(new java.awt.Color(102, 102, 102));
-        jCRuteo.setText("R");
-        jCRuteo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jCRuteoMousePressed(evt);
-            }
-        });
 
         cbNegocio.setForeground(new java.awt.Color(102, 102, 102));
         cbNegocio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "FE", "TE", "IN", "FE/TE", "FE/IN", "FE/TE/IN" }));
@@ -630,60 +596,51 @@ public class proyecto extends javax.swing.JPanel {
         jPDetallesLayout.setHorizontalGroup(
             jPDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPDetallesLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addContainerGap()
                 .addGroup(jPDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPDetallesLayout.createSequentialGroup()
                         .addComponent(cbNegocio, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPDetallesLayout.createSequentialGroup()
-                        .addGroup(jPDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPDetallesLayout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addGap(18, 18, 18)
-                                .addComponent(jCAntisolder)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel16)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCRuteo))
+                        .addGroup(jPDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPDetallesLayout.createSequentialGroup()
                                 .addGroup(jPDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPDetallesLayout.createSequentialGroup()
-                                        .addGroup(jPDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPDetallesLayout.createSequentialGroup()
-                                                .addComponent(jLabel15)
-                                                .addGap(3, 3, 3)
-                                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPDetallesLayout.createSequentialGroup()
-                                                .addGap(14, 14, 14)
-                                                .addComponent(jLabel18)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE))
-                                    .addGroup(jPDetallesLayout.createSequentialGroup()
-                                        .addComponent(jLIngreso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(28, 28, 28)))
-                                .addGroup(jPDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jDentrega, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPDetallesLayout.createSequentialGroup()
-                                        .addComponent(jLabel17)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel10))
-                                    .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPDetallesLayout.createSequentialGroup()
-                                        .addComponent(jLabel20)
+                                        .addComponent(jLabel15)
                                         .addGap(3, 3, 3)
-                                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(17, 17, 17))))
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPDetallesLayout.createSequentialGroup()
+                                        .addGap(14, 14, 14)
+                                        .addComponent(jLabel18)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE))
+                            .addGroup(jPDetallesLayout.createSequentialGroup()
+                                .addComponent(jLIngreso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(28, 28, 28)))
+                        .addGroup(jPDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jDentrega, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPDetallesLayout.createSequentialGroup()
+                                .addComponent(jLabel17)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel10))
+                            .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPDetallesLayout.createSequentialGroup()
+                                .addComponent(jLabel20)
+                                .addGap(3, 3, 3)
+                                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(14, 14, 14))
         );
         jPDetallesLayout.setVerticalGroup(
             jPDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPDetallesLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
                 .addGroup(jPDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(jLabel17)
                     .addComponent(jLabel18))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jDentrega, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
-                    .addComponent(jLIngreso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jDentrega, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPDetallesLayout.createSequentialGroup()
@@ -698,20 +655,13 @@ public class proyecto extends javax.swing.JPanel {
                             .addComponent(jLabel15))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cbNegocio, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                .addGroup(jPDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jCRuteo)
-                        .addComponent(jLabel16))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jCAntisolder)
-                        .addComponent(jLabel11))))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         jPanel2.add(jPDetalles, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, 370, 180));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(204, 204, 204))); // NOI18N
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", 0, 0, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(204, 204, 204))); // NOI18N
         jPanel5.setLayout(null);
 
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add_Proyect.png"))); // NOI18N
@@ -793,7 +743,7 @@ public class proyecto extends javax.swing.JPanel {
         jPanel5.add(btnDelete);
         btnDelete.setBounds(232, 0, 57, 45);
 
-        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 292, 50));
+        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 292, 50));
 
         Notificacion1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         Notificacion1.setForeground(new java.awt.Color(128, 128, 131));
@@ -830,7 +780,7 @@ public class proyecto extends javax.swing.JPanel {
                 btnGenerarQRActionPerformed(evt);
             }
         });
-        jPanel2.add(btnGenerarQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 360, -1, -1));
+        jPanel2.add(btnGenerarQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 400, -1, -1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -955,8 +905,8 @@ public class proyecto extends javax.swing.JPanel {
             desactivarBotonesjC();
             if (cbNegocio.getSelectedItem().toString().equals("FE")) {
                 //Activa solo los jcheckbos necesarios para ese negocío "FE"
-                jCAntisolder.setEnabled(true);
-                jCRuteo.setEnabled(true);
+                jCAntisolderP.setEnabled(true);
+                jCRuteoP.setEnabled(true);
                 jCCircuito.setEnabled(true);
             } else if (cbNegocio.getSelectedItem().toString().equals("TE")) {
                 //Activa solo los jcheckbos necesarios para ese negocío "TE"
@@ -967,8 +917,8 @@ public class proyecto extends javax.swing.JPanel {
             } else if (cbNegocio.getSelectedItem().toString().equals("FE/TE")) {
                 //Activa solo los jcheckbos necesarios para ese negocío "FE/TE"
                 jCTeclado.setEnabled(true);
-                jCAntisolder.setEnabled(true);
-                jCRuteo.setEnabled(true);
+                jCAntisolderP.setEnabled(true);
+                jCRuteoP.setEnabled(true);
                 jCCircuito.setEnabled(true);
                 jCPCBTE.setEnabled(true);
                 jCConversor.setEnabled(true);
@@ -977,8 +927,8 @@ public class proyecto extends javax.swing.JPanel {
                 jCStencil.setEnabled(true);
             } else if (cbNegocio.getSelectedItem().toString().equals("FE/IN")) {
                 //Activa solo los jcheckbos necesarios para ese negocío "FE/IN"
-                jCAntisolder.setEnabled(true);
-                jCRuteo.setEnabled(true);
+                jCAntisolderP.setEnabled(true);
+                jCRuteoP.setEnabled(true);
                 jCCircuito.setEnabled(true);
                 jCStencil.setEnabled(true);
                 jCIntegracion.setEnabled(true);
@@ -986,8 +936,8 @@ public class proyecto extends javax.swing.JPanel {
                 //Activa solo los jcheckbos necesarios para ese negocío "FE/TE/IN"
                 jCTeclado.setEnabled(true);
                 jCPCBTE.setEnabled(true);
-                jCAntisolder.setEnabled(true);
-                jCRuteo.setEnabled(true);
+                jCAntisolderP.setEnabled(true);
+                jCRuteoP.setEnabled(true);
                 jCCircuito.setEnabled(true);
                 jCConversor.setEnabled(true);
                 jCRepujado.setEnabled(true);
@@ -1007,11 +957,11 @@ public class proyecto extends javax.swing.JPanel {
     private void jDentregaCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jDentregaCaretPositionChanged
     }//GEN-LAST:event_jDentregaCaretPositionChanged
 
-    private void jCAntisolderMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCAntisolderMousePressed
-    }//GEN-LAST:event_jCAntisolderMousePressed
+    private void jCAntisolderPMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCAntisolderPMousePressed
+    }//GEN-LAST:event_jCAntisolderPMousePressed
 
-    private void jCRuteoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCRuteoMousePressed
-    }//GEN-LAST:event_jCRuteoMousePressed
+    private void jCRuteoPMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCRuteoPMousePressed
+    }//GEN-LAST:event_jCRuteoPMousePressed
 
     private void jTConversorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTConversorKeyTyped
         numerosT(evt);
@@ -1051,24 +1001,21 @@ public class proyecto extends javax.swing.JPanel {
             Document doc = new Document();
             PdfWriter pdf = PdfWriter.getInstance(doc, new FileOutputStream("user.home/pdfs/" + "28523"));
             doc.open();
-            //se genera el codigo QR
-            QRCode cod = new QRCode();
-            String texto = jtext.getText();
-            cod.setData(texto);
-            cod.setDataMode(QRCode.MODE_BYTE);
-
-            cod.setUOM(udm);
-            cod.setLeftMargin(mi);
-            cod.setResolution(resol);
-            cod.setRightMargin(md);
-            cod.setTopMargin(ms);
-            cod.setBottomMargin(min);
-            cod.setRotate(rot);
-            cod.setModuleSize(tam);
+            //Informacion del QR desde la base de datos
+            Controlador.Proyecto obj=new Controlador.Proyecto();
+            CachedRowSet crs=obj.Consultar_informacion_para_el_QR(Integer.parseInt(jTNorden.getText()));
         } catch (Exception e) {
         }
 
     }//GEN-LAST:event_btnGenerarQRActionPerformed
+
+    private void jCAntisolderCMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCAntisolderCMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCAntisolderCMousePressed
+
+    private void jCRuteoCMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCRuteoCMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCRuteoCMousePressed
 //Metodos-------------------------------------------------------------------->
 
     private void validarRegistro(int op) {
@@ -1077,6 +1024,7 @@ public class proyecto extends javax.swing.JPanel {
                 && !jTNombreProyecto.getText().equals("") && ((jCConversor.isSelected() && !jTConversor.getText().equals("")) && (jCTroquel.isSelected() && !jTTroquel.getText().equals(""))
                 || (jCRepujado.isSelected() && !jTRepujado.getText().equals("")) || (jCStencil.isSelected() && !jTStencil.getText().equals(""))
                 || (jCTeclado.isSelected() && !jTTeclado.getText().equals(""))
+                || (jCCircuito.isSelected()) || (jCPCBTE.isSelected())
                 || (jCIntegracion.isSelected() && !jTIntegracion.getText().equals("")))) {
             if (!jCCircuito.isSelected() == false || !jCPCBTE.isSelected() == false) {
                 //Si solo es seleccionado el circuito.
@@ -1116,8 +1064,8 @@ public class proyecto extends javax.swing.JPanel {
         v[4] = jCTroquel.isSelected() ? true : false;
         v[5] = jCStencil.isSelected() ? true : false;
         v[6] = jCTeclado.isSelected() ? true : false;
-        v[7] = jCRuteo.isSelected() ? true : false;
-        v[8] = jCAntisolder.isSelected() ? true : false;
+        v[7] = jCRuteoP.isSelected() ? true : false;
+        v[8] = jCAntisolderP.isSelected() ? true : false;
         obj.setDetalles(v);
         obj.setIdOrden(Integer.parseInt(jTNorden.getText()));
         if (obj.registrar_Modificar_Proyecto(Menu.jDocumento.getText(), op)) {
@@ -1159,8 +1107,8 @@ public class proyecto extends javax.swing.JPanel {
         jDentrega.setEnabled(false);
         cbNegocio.setEnabled(false);
         cbTipo.setEnabled(false);
-        jCAntisolder.setEnabled(false);
-        jCRuteo.setEnabled(false);
+        jCAntisolderP.setEnabled(false);
+        jCRuteoP.setEnabled(false);
         jCConversor.setEnabled(false);
         jTConversor.setEnabled(false);
         jCTroquel.setEnabled(false);
@@ -1190,8 +1138,8 @@ public class proyecto extends javax.swing.JPanel {
     }
 
     private void desactivarBotonesjC() {
-        jCAntisolder.setEnabled(false);
-        jCRuteo.setEnabled(false);
+        jCAntisolderP.setEnabled(false);
+        jCRuteoP.setEnabled(false);
         jCConversor.setEnabled(false);
         jCTroquel.setEnabled(false);
         jCRepujado.setEnabled(false);
@@ -1200,8 +1148,8 @@ public class proyecto extends javax.swing.JPanel {
         jCPCBTE.setEnabled(false);
         jCIntegracion.setEnabled(false);
         jCTeclado.setEnabled(false);
-        jCAntisolder.setSelected(false);
-        jCRuteo.setSelected(false);
+        jCAntisolderP.setSelected(false);
+        jCRuteoP.setSelected(false);
         jCConversor.setSelected(false);
         jCTroquel.setSelected(false);
         jCRepujado.setSelected(false);
@@ -1262,8 +1210,8 @@ public class proyecto extends javax.swing.JPanel {
         jLIngreso.setText("DD-MM-YYYY");
         cbNegocio.setSelectedIndex(0);
         cbTipo.setSelectedIndex(0);
-        jCRuteo.setSelected(false);
-        jCAntisolder.setSelected(false);
+        jCRuteoP.setSelected(false);
+        jCAntisolderP.setSelected(false);
         jCConversor.setSelected(false);
         jCRepujado.setSelected(false);
         jCTroquel.setSelected(false);
@@ -1622,13 +1570,15 @@ public class proyecto extends javax.swing.JPanel {
     public static elaprendiz.gui.comboBox.ComboBoxRound cbMaterialPCBTE;
     public static elaprendiz.gui.comboBox.ComboBoxRound cbNegocio;
     public static elaprendiz.gui.comboBox.ComboBoxRound cbTipo;
-    public static javax.swing.JCheckBox jCAntisolder;
+    public static javax.swing.JCheckBox jCAntisolderC;
+    public static javax.swing.JCheckBox jCAntisolderP;
     public static javax.swing.JCheckBox jCCircuito;
     public static javax.swing.JCheckBox jCConversor;
     public static javax.swing.JCheckBox jCIntegracion;
     public static javax.swing.JCheckBox jCPCBTE;
     public static javax.swing.JCheckBox jCRepujado;
-    public static javax.swing.JCheckBox jCRuteo;
+    public static javax.swing.JCheckBox jCRuteoC;
+    public static javax.swing.JCheckBox jCRuteoP;
     public static javax.swing.JCheckBox jCStencil;
     public static javax.swing.JCheckBox jCTeclado;
     public static javax.swing.JCheckBox jCTroquel;
@@ -1646,10 +1596,12 @@ public class proyecto extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;

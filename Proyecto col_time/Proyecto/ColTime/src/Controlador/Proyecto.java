@@ -99,8 +99,9 @@ public class Proyecto {
         return true;
     }
 
-    public void generar_CodigoQR_Proyecto() {
-
+    public CachedRowSet Consultar_informacion_para_el_QR(int orden) {
+        ProyectoM obj=new ProyectoM();
+        return obj.Consultar_informacion_para_el_QR(orden);
     }
 
     public void generar_Reportes() {

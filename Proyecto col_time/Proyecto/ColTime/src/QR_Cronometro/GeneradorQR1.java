@@ -85,7 +85,7 @@ public class GeneradorQR1 extends javax.swing.JFrame {
             cod.setBottomMargin(min);
             cod.setRotate(rot);
             cod.setModuleSize(tam);
-            Image image=cod.renderBarcode();
+//            Image image=cod.renderBarcode();
             String archivo = System.getProperty("user.home") + "/pdfs" + "/28402.png";
             cod.renderBarcode(archivo);
 

@@ -1,6 +1,7 @@
 package Vistas;
 
 import Atxy2k.CustomTextField.RestrictedTextField;
+import coltime.Menu;
 import java.awt.Color;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.Icon;
@@ -711,15 +712,17 @@ public class Usuarios1 extends javax.swing.JPanel {
             DefaultTableModel ds = new DefaultTableModel(null, names);
             while (crs.next()) {
                 //Filas de la tabla
-                String v[] = new String[7];
-                v[0] = crs.getString(1);
-                v[1] = crs.getString(2);
-                v[2] = crs.getString(3);
-                v[3] = crs.getString(4);
-                v[4] = crs.getString(5);
-                v[5] = crs.getString(6);
-                v[6] = (crs.getString(7).equals("true") ? "Activo" : "Inactivo");
-                ds.addRow(v);
+                if (!crs.getString(1).equals(Menu.jDocumento.getText())) {
+                    String v[] = new String[7];
+                    v[0] = crs.getString(1);
+                    v[1] = crs.getString(2);
+                    v[2] = crs.getString(3);
+                    v[3] = crs.getString(4);
+                    v[4] = crs.getString(5);
+                    v[5] = crs.getString(6);
+                    v[6] = (crs.getString(7).equals("true") ? "Activo" : "Inactivo");
+                    ds.addRow(v);
+                }
             }
             jTUsuario.setModel(ds);
         } catch (Exception e) {

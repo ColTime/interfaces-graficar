@@ -112,8 +112,25 @@ public class ProyectoM {
         return true;
     }
 
-    public void generar_CodigoQR_Proyecto() {
+    public CachedRowSet Consultar_informacion_para_el_QR(int orden) {
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query------------------------------------------------------------>
+            String Qry = "CALL PA_ConsultarNumeroOrden()";
+            ps = con.prepareStatement(Qry);
+            rs = ps.executeQuery();
+            crsP=new CachedRowSetImpl();
+            crsP.populate(rs);
+            con.close();
+            conexion.destruir();
+            conexion.cerrar(rs);
+            ps.close();
+        } catch (Exception e) {
 
+        }
+        return crsP;
     }
 
     public void generar_Reportes() {

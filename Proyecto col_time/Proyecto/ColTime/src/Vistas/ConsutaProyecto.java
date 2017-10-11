@@ -579,15 +579,15 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                     }
                     //Ruteo y antisolder
                     if (TProyecto.getValueAt(f, 12).toString().equals("true")) {
-                        obj.jCRuteo.setSelected(true);
+                        obj.jCRuteoP.setSelected(true);
                     } else {
-                        obj.jCRuteo.setSelected(false);
+                        obj.jCRuteoP.setSelected(false);
                     }
 
                     if (TProyecto.getValueAt(f, 13).toString().equals("true")) {
-                        obj.jCAntisolder.setSelected(true);
+                        obj.jCAntisolderP.setSelected(true);
                     } else {
-                        obj.jCAntisolder.setSelected(false);
+                        obj.jCAntisolderP.setSelected(false);
                     }
                     //Limpiar labes de id de detalle
                     obj.jLIDConversor.setText("0");
