@@ -62,13 +62,9 @@ public class DetalleProyectoM {
                     }
                 } else if (negocio.equals("FE")) {
                     //Se registran los procesos de FE para este subproyecto 
-                    //Falta completar esta parte del codigo
-                    for (int i = 1; i <= 10; i++) {
-                        Qry = "CALL PA_RegistrarDetalleFormatoEstandar(?)";
-                        ps = con.prepareStatement(Qry);
-                        ps.setInt(1, i);
-                        ps.execute();
-                    }
+                    Qry = "CALL PA_RegistrarDetalleFormatoEstandar()";
+                    ps = con.prepareStatement(Qry);
+                    ps.execute();
                 }
             } else if (op == 2) {
                 Qry = "SELECT FU_ModificarDetalleProyecto(?,?,?,?)";

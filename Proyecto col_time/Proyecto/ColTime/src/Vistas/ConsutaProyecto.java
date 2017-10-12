@@ -331,6 +331,11 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153)), "PNC", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
         jPanel5.setLayout(new java.awt.CardLayout());
 
+        TPNC = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false; //Disallow the editing of any cell
+            }
+        };
         TPNC.setAutoCreateRowSorter(true);
         TPNC.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         TPNC.setForeground(new java.awt.Color(128, 128, 131));
@@ -363,6 +368,11 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153)), "Detalles delproyecto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
         jPanel6.setLayout(new java.awt.CardLayout());
 
+        TDetalle = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false; //Disallow the editing of any cell
+            }
+        };
         TDetalle.setAutoCreateRowSorter(true);
         TDetalle.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         TDetalle.setForeground(new java.awt.Color(128, 128, 131));
@@ -577,14 +587,26 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                     if (TProyecto.getValueAt(f, 9).toString().equals("true") && TProyecto.getValueAt(f, 10).toString().equals("true") && TProyecto.getValueAt(f, 11).toString().equals("true")) {
                         obj.cbNegocio.setSelectedIndex(6);
                     }
-                    //Ruteo y antisolder
+                    //RuteoC y antisolderC
                     if (TProyecto.getValueAt(f, 12).toString().equals("true")) {
+                        obj.jCRuteoC.setSelected(true);
+                    } else {
+                        obj.jCRuteoC.setSelected(false);
+                    }
+
+                    if (TProyecto.getValueAt(f, 13).toString().equals("true")) {
+                        obj.jCAntisolderC.setSelected(true);
+                    } else {
+                        obj.jCAntisolderC.setSelected(false);
+                    }
+                    //RuteoP y AntisolderP
+                    if (TProyecto.getValueAt(f, 14).toString().equals("true")) {
                         obj.jCRuteoP.setSelected(true);
                     } else {
                         obj.jCRuteoP.setSelected(false);
                     }
 
-                    if (TProyecto.getValueAt(f, 13).toString().equals("true")) {
+                    if (TProyecto.getValueAt(f, 15).toString().equals("true")) {
                         obj.jCAntisolderP.setSelected(true);
                     } else {
                         obj.jCAntisolderP.setSelected(false);
@@ -627,6 +649,8 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                             obj.jTStencil.setText(TDetalle.getValueAt(i, 3).toString());
                         } else if (TDetalle.getValueAt(i, 2).toString().equals("PCB")) {
                             obj.jLIDPCB.setText(TDetalle.getValueAt(i, 0).toString());
+                            obj.jCRuteoP.setEnabled(true);
+                            obj.jCAntisolderP.setEnabled(true);
                             obj.jCPCBTE.setSelected(true);
                             obj.jCPCBTE.setEnabled(true);
                             obj.jTPCBTE.setEnabled(true);
@@ -647,6 +671,8 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                             obj.jTTeclado.setText(TDetalle.getValueAt(i, 3).toString());
                         } else if (TDetalle.getValueAt(i, 2).toString().equals("Circuito") && TDetalle.getValueAt(i, 1).toString().equals("FE")) {
                             obj.jLIDCircuito.setText(TDetalle.getValueAt(i, 0).toString());
+                            obj.jCRuteoC.setEnabled(true);
+                            obj.jCAntisolderC.setEnabled(true);
                             obj.jCCircuito.setSelected(true);
                             obj.jCCircuito.setEnabled(true);
                             obj.jTCircuito.setEnabled(true);
@@ -750,9 +776,9 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         //Se ejecuta la sencencia y recibimos los proyectos
         crs = obj.consultar_Proyecto(tipo);
         try {
-            String v[] = {"N° Orden", "Comercial", "Nombre Cliente", "Nombre Proyecto", "Fecha Ingreso", "Fecha Entrega", "Fecha Salida", "Estado", "Tipo", "FE", "TE", "IN", "Ruteo", "Antisolder"};
+            String v[] = {"N° Orden", "Comercial", "Nombre Cliente", "Nombre Proyecto", "Fecha Ingreso", "Fecha Entrega", "Fecha Salida", "Estado", "Tipo", "FE", "TE", "IN", "RuteoC", "AntisolderC", "RuteoP", "AntisolderP"};
             DefaultTableModel model = new DefaultTableModel(null, v);
-            String v1[] = new String[14];
+            String v1[] = new String[16];
             while (crs.next()) {
                 v1[0] = String.valueOf(crs.getInt(1));
                 v1[1] = crs.getString(2);
@@ -768,6 +794,8 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                 v1[11] = String.valueOf(crs.getBoolean(12));
                 v1[12] = String.valueOf(crs.getBoolean(13));
                 v1[13] = String.valueOf(crs.getBoolean(14));
+                v1[14] = String.valueOf(crs.getBoolean(15));
+                v1[15] = String.valueOf(crs.getBoolean(16));
                 model.addRow(v1);
             }
 

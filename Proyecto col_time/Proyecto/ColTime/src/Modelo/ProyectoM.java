@@ -28,13 +28,13 @@ public class ProyectoM {
     //Metodos y funciones------------------------------------------------>
     public boolean registrar_Modificar_Proyecto(int norden, String comercial, String cliente, String proyecto, String tipo, boolean fe, boolean te, boolean in, boolean pcbfe,
             boolean pcbte, boolean conversor, boolean repujado, boolean troquel, boolean stencil, boolean lexan, String fechaEntrega, boolean ruteo, boolean anti,
-            int op) {
+            int op, boolean antisolderP, boolean ruteoP) {
         try {
             conexion = new Conexion();
             conexion.establecerConexion();
             con = conexion.getConexion();
             //Query------------------------------------------------------------>
-            String Qry = " SELECT FU_RegistrarModificarProyecto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String Qry = " SELECT FU_RegistrarModificarProyecto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             ps = con.prepareStatement(Qry);
             ps.setString(1, comercial);
             ps.setString(2, cliente);
@@ -55,6 +55,8 @@ public class ProyectoM {
             ps.setBoolean(17, anti);
             ps.setInt(18, norden);
             ps.setInt(19, op);
+            ps.setBoolean(20, ruteoP);
+            ps.setBoolean(21, antisolderP);
             //Ejecución del Query---------------------------------------------->
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -118,17 +120,18 @@ public class ProyectoM {
             conexion.establecerConexion();
             con = conexion.getConexion();
             //Query------------------------------------------------------------>
-            String Qry = "CALL PA_ConsultarNumeroOrden()";
+            String Qry = "CALL PA_InformacionQR(?)";
             ps = con.prepareStatement(Qry);
+            ps.setInt(1, orden);
             rs = ps.executeQuery();
-            crsP=new CachedRowSetImpl();
+            crsP = new CachedRowSetImpl();
             crsP.populate(rs);
             con.close();
             conexion.destruir();
             conexion.cerrar(rs);
             ps.close();
         } catch (Exception e) {
-
+            JOptionPane.showMessageDialog(null, "Error! " + e);
         }
         return crsP;
     }
