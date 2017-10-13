@@ -78,6 +78,14 @@ public class DetalleProyectoM {
                 rs = ps.executeQuery();
                 rs.next();
                 res = rs.getBoolean(1);
+                if (negocio.equals("FE") && (tipoNegocio.equals("Circuito") || tipoNegocio.equals("PCB"))) {
+                    //Modificar procesos de formato estandar
+                    Qry = "CALL PA_ModificarDetalleFormatoEstandar(?,?)";
+                    ps = con.prepareStatement(Qry);
+                    ps.setInt(1, Integer.parseInt(numerOrden));
+                    ps.setInt(2, id);
+                    rs = ps.executeQuery();
+                }
             }
             //Cierre de conexiones
             conexion.cerrar(rs);

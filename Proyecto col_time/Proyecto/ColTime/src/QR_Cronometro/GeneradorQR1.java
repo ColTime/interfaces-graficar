@@ -7,15 +7,14 @@ package QR_Cronometro;
 
 import com.barcodelib.barcode.QRCode;
 import com.itextpdf.text.Image;
-import com.sun.org.apache.bcel.internal.classfile.Code;
 import java.awt.Desktop;
 import java.io.File;
 import javax.swing.JOptionPane;
 
 public class GeneradorQR1 extends javax.swing.JFrame {
 
-    int udm = 0, resol = 90, rot = 0;
-    float mi = 0.000f, md = 0.000f, ms = 0.000f, min = 0.000f, tam = 8.000f;
+    int udm = 0, resol = 80, rot = 0;
+    float mi = 0.000f, md = 0.000f, ms = 0.000f, min = 0.000f, tam = 9.000f;
 
     /**
      * Creates new form GeneradorQR1

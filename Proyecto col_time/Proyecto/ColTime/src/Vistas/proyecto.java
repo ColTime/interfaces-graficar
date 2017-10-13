@@ -2,13 +2,15 @@ package Vistas;
 
 import Atxy2k.CustomTextField.RestrictedTextField;
 import Controlador.DetalleProyecto;
-import Controlador.MyQRCreator;
 import Controlador.Proyecto;
 import coltime.Menu;
 import com.barcodelib.barcode.QRCode;
 import com.itextpdf.text.Document;
-import com.itextpdf.text.Element;
 import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import elaprendiz.gui.textField.TextFieldRoundBackground;
 import java.awt.Color;
@@ -18,7 +20,6 @@ import java.io.FileOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import javax.sql.rowset.CachedRowSet;
-import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import rojerusan.RSNotifyAnimated;
@@ -41,9 +42,7 @@ public class proyecto extends javax.swing.JPanel {
     static int op = 0;
     boolean v[] = new boolean[11];
     int udm = 0, resol = 90, rot = 0;
-    float mi = 0.000f, md = 0.000f, ms = 0.000f, min = 0.000f, tam = 8.000f;
-    BufferedImage iconoSys = null;
-    MyQRCreator qr = new MyQRCreator();
+    float mi = 0.000f, md = 0.000f, ms = 0.000f, min = 0.000f, tam = 6.000f;
 
     private void visibilidadID() {
         jLIDConversor.setVisible(false);
@@ -1024,34 +1023,65 @@ public class proyecto extends javax.swing.JPanel {
     }//GEN-LAST:event_jTIntegracionKeyTyped
 
     private void btnGenerarQRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarQRActionPerformed
-        String cadenaQR = "";
         try {
             //Validar o crear carpeta
-            File folder=new File("user.home\\imagenesQR");
-            if(folder.exists()){
-                
-            }else{
-                folder.createNewFile();
+            File folder = new File("ImágenesQR");
+            if (folder.exists()) {
+            } else {
+                folder.mkdirs();
             }
+            //Generar codigos QR
             //Informacion del QR desde la base de datos
             Controlador.Proyecto obj = new Controlador.Proyecto();
             CachedRowSet crs = obj.Consultar_informacion_para_el_QR(Integer.parseInt(jTNorden.getText()));
+
+            //Tabla y encabezado
+            PdfPTable tabla = new PdfPTable(3);
+            PdfPCell header = new PdfPCell(new Paragraph("Orden numero: 28522"));
+
+            header.setColspan(3);
+            tabla.addCell(header);
+            tabla.setWidthPercentage(100);
+            tabla.setWidths(new float[]{3, 3, 3});
             //se creo y se abrio el documento
             Document doc = new Document();
-            PdfWriter pdf = PdfWriter.getInstance(doc, new FileOutputStream(jTNorden.getText()));
+            PdfWriter pdf = PdfWriter.getInstance(doc, new FileOutputStream("C:\\Users\\Aprendiz\\Desktop\\actual\\interfaces-graficar\\Proyecto col_time\\Proyecto\\ColTime\\PDF\\" + jTNorden.getText() + ".pdf"));
             doc.open();
-            //Creo la cadena de texto que contendra el QR
             while (crs.next()) {
-                cadenaQR = jTNorden.getText() + ';' + crs.getInt(1) + ';' + crs.getInt(2);
-                iconoSys = new BufferedImage(345, 345, BufferedImage.TYPE_INT_RGB);
-                iconoSys=qr.createQR(cadenaQR,345, Color.WHITE, Color.black);
-                ImageIcon QR=new ImageIcon(iconoSys);
-                
-                doc.add((Element) QR.getImage());
+                //Creo la cadena de texto que contendra el QR
+                QRCode cod = new QRCode();
+                String texto = jTNorden.getText() + ';' + crs.getInt(1) + ';' + crs.getInt(2);
+                cod.setData(texto);
+                cod.setDataMode(QRCode.MODE_BYTE);
+
+                cod.setUOM(udm);
+                cod.setLeftMargin(mi);
+                cod.setResolution(resol);
+                cod.setRightMargin(md);
+                cod.setTopMargin(ms);
+                cod.setBottomMargin(min);
+                cod.setRotate(rot);
+                cod.setModuleSize(tam);
+                cod.renderBarcode("C:\\Users\\Aprendiz\\Desktop\\actual\\interfaces-graficar\\Proyecto col_time\\Proyecto\\ColTime\\ImágenesQR\\" + texto + ".png");
+
+                Image imagenQR = Image.getInstance("C:\\Users\\Aprendiz\\Desktop\\actual\\interfaces-graficar\\Proyecto col_time\\Proyecto\\ColTime\\ImágenesQR\\" + texto + ".png");
+                imagenQR.setWidthPercentage(100);
+                //Personalizar cell
+                PdfPCell celda = new PdfPCell(new Paragraph("Conversor"));
+                celda.setBorder(Rectangle.NO_BORDER);
+                celda.addElement(imagenQR);
+                tabla.addCell(celda);
+
+                File QRdelet = new File("C:\\Users\\Aprendiz\\Desktop\\actual\\interfaces-graficar\\Proyecto col_time\\Proyecto\\ColTime\\ImágenesQR\\" + texto + ".png");
+                QRdelet.delete();
             }
+            header.setBorder(Rectangle.NO_BORDER);
+            tabla.addCell(header);
+            doc.add(tabla);
             doc.close();
+
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Error! "+e);
+            JOptionPane.showMessageDialog(null, "Error! " + e);
         }
     }//GEN-LAST:event_btnGenerarQRActionPerformed
 
@@ -1080,7 +1110,7 @@ public class proyecto extends javax.swing.JPanel {
                 } else if ((jCPCBTE.isSelected() && (cbMaterialPCBTE.getSelectedIndex() != 0 && !jTPCBTE.getText().equals(""))) && jCCircuito.isSelected() == false) {
                     registrarModificarProyecto(op);
                     //Sí selecciona los dos (Circuito y PCB).
-                } else if ((jCPCBTE.isSelected() && (cbMaterialPCBTE.getSelectedIndex() != 0 && !jTPCBTE.getText().equals(""))) && (jCPCBTE.isSelected() && (cbMaterialPCBTE.getSelectedIndex() != 0 && !jTPCBTE.getText().equals("")))) {
+                } else if ((jCCircuito.isSelected() && (cbMaterialCircuito.getSelectedIndex() != 0 && !jTCircuito.getText().equals(""))) && (jCPCBTE.isSelected() && (cbMaterialPCBTE.getSelectedIndex() != 0 && !jTPCBTE.getText().equals("")))) {
                     registrarModificarProyecto(op);
                     //Si no cumplio ninguna de las condiciones anteriores.
                 } else {
