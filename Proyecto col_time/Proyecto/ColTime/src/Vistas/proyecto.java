@@ -6,7 +6,9 @@ import Controlador.Proyecto;
 import coltime.Menu;
 import com.barcodelib.barcode.QRCode;
 import com.itextpdf.text.Document;
+import com.itextpdf.text.Font;
 import com.itextpdf.text.Image;
+import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfPCell;
@@ -14,7 +16,6 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import elaprendiz.gui.textField.TextFieldRoundBackground;
 import java.awt.Color;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.DateFormat;
@@ -33,6 +34,7 @@ public class proyecto extends javax.swing.JPanel {
             cambiarEstadoBotones();
             btnNuevo.setEnabled(true);
             Notificacion1.setVisible(false);
+            btnGenerarQR.setEnabled(false);
             visibilidadID();
             limites();
         }
@@ -41,8 +43,9 @@ public class proyecto extends javax.swing.JPanel {
     }
     static int op = 0;
     boolean v[] = new boolean[11];
-    int udm = 0, resol = 90, rot = 0;
-    float mi = 0.000f, md = 0.000f, ms = 0.000f, min = 0.000f, tam = 6.000f;
+    int udm = 0, resol = 100, rot = 0;
+    float mi = 0.000f, md = 0.000f, ms = 0.000f, min = 0.000f, tam = 4.000f;
+    static String fecha = "";
 
     private void visibilidadID() {
         jLIDConversor.setVisible(false);
@@ -162,11 +165,11 @@ public class proyecto extends javax.swing.JPanel {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(128, 128, 131)));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Proyecto", 0, 0, new java.awt.Font("Tahoma", 1, 18), new java.awt.Color(128, 128, 131))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Proyecto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18), new java.awt.Color(128, 128, 131))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPInformacion.setBackground(new java.awt.Color(255, 255, 255));
-        jPInformacion.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Información filtraria", 0, 0, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
+        jPInformacion.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Información filtraria", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
 
         jTNorden.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTNorden.setColorDeBorde(new java.awt.Color(204, 204, 204));
@@ -263,7 +266,7 @@ public class proyecto extends javax.swing.JPanel {
         jPanel2.add(jPInformacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 430, 180));
 
         jPDetalles1.setBackground(new java.awt.Color(255, 255, 255));
-        jPDetalles1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Detalles", 0, 0, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
+        jPDetalles1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Detalles", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
         jPDetalles1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTTeclado.setColorDeBorde(new java.awt.Color(204, 204, 204));
@@ -533,16 +536,16 @@ public class proyecto extends javax.swing.JPanel {
         jPanel2.add(jPDetalles1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 820, 170));
 
         jPDetalles.setBackground(new java.awt.Color(255, 255, 255));
-        jPDetalles.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Detalles", 0, 0, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
+        jPDetalles.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Detalles", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
 
         jDentrega.setToolTipText("");
         jDentrega.setDateFormatString("dd/MM/yyyy");
         jDentrega.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jDentrega.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jDentregaCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
 
@@ -669,7 +672,7 @@ public class proyecto extends javax.swing.JPanel {
         jPanel2.add(jPDetalles, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, 370, 180));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", 0, 0, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(204, 204, 204))); // NOI18N
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(204, 204, 204))); // NOI18N
         jPanel5.setLayout(null);
 
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add_Proyect.png"))); // NOI18N
@@ -840,7 +843,13 @@ public class proyecto extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        validarRegistro(2);
+        int seleccion = JOptionPane.showOptionDialog(null, "Seguro desea modificar este proyecto",
+                "seleccione...", JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
+                new Object[]{"SI", "NO"}, "SI");
+        if (seleccion == 0) {
+            validarRegistro(2);
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActivarActionPerformed
@@ -849,6 +858,7 @@ public class proyecto extends javax.swing.JPanel {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         validarRegistro(1);
+        generarQR();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void jCConversorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCConversorMouseClicked
@@ -1023,6 +1033,67 @@ public class proyecto extends javax.swing.JPanel {
     }//GEN-LAST:event_jTIntegracionKeyTyped
 
     private void btnGenerarQRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarQRActionPerformed
+        generarQR();
+    }//GEN-LAST:event_btnGenerarQRActionPerformed
+
+    private void jCAntisolderCMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCAntisolderCMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCAntisolderCMousePressed
+
+    private void jCRuteoCMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCRuteoCMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCRuteoCMousePressed
+//Metodos-------------------------------------------------------------------->
+
+    private Paragraph tipoProyecto(int tipo, int negocio) {
+        Paragraph tipoPrpyecto = new Paragraph();
+        String tip = "", negoci = "";
+        switch (negocio) {
+            case 1:
+                negoci = "FE";
+                break;
+            case 2:
+                negoci = "TE";
+                break;
+            case 3:
+                negoci = "IN";
+                break;
+            default:
+                break;
+        }
+
+        switch (tipo) {
+            case 1:
+                tip = "Circuito";
+                break;
+            case 2:
+                tip = "Conversor";
+                break;
+            case 3:
+                tip = "Repujado";
+                break;
+            case 4:
+                tip = "Troquel";
+                break;
+            case 5:
+                tip = "Teclado";
+                break;
+            case 6:
+                tip = "Stencil";
+                break;
+            case 7:
+                tip = "PCB";
+                break;
+            default:
+                break;
+        }
+        tipoPrpyecto.setFont(new Font(Font.FontFamily.HELVETICA, 10, Font.NORMAL));
+        tipoPrpyecto.add(negoci + " - " + tip + "\n");
+        tipoPrpyecto.setSpacingAfter(10);
+        return tipoPrpyecto;
+    }
+
+    private void generarQR() {
         try {
             //Validar o crear carpeta
             File folder = new File("ImágenesQR");
@@ -1037,16 +1108,23 @@ public class proyecto extends javax.swing.JPanel {
 
             //Tabla y encabezado
             PdfPTable tabla = new PdfPTable(3);
-            PdfPCell header = new PdfPCell(new Paragraph("Orden numero: 28522"));
+            PdfPCell header = new PdfPCell(new Paragraph("Orden numero: " + jTNorden.getText() + "\n"));
+            Image logo = Image.getInstance("C:\\Users\\Aprendiz\\Desktop\\actual\\interfaces-graficar\\Proyecto col_time\\Proyecto\\ColTime\\src\\imagenesEmpresa\\logo.png");
+            logo.scaleAbsolute(300, 125);
+            logo.setAlignment(Image.ALIGN_CENTER);
 
+            header.setBorder(Rectangle.NO_BORDER);
             header.setColspan(3);
             tabla.addCell(header);
             tabla.setWidthPercentage(100);
             tabla.setWidths(new float[]{3, 3, 3});
             //se creo y se abrio el documento
-            Document doc = new Document();
+            Document doc = new Document(PageSize.A4, 20, 20, 30, 30);
             PdfWriter pdf = PdfWriter.getInstance(doc, new FileOutputStream("C:\\Users\\Aprendiz\\Desktop\\actual\\interfaces-graficar\\Proyecto col_time\\Proyecto\\ColTime\\PDF\\" + jTNorden.getText() + ".pdf"));
             doc.open();
+            doc.add(logo);
+            fecha();
+            doc.add(new Paragraph("Generado: " + fecha));
             while (crs.next()) {
                 //Creo la cadena de texto que contendra el QR
                 QRCode cod = new QRCode();
@@ -1065,10 +1143,12 @@ public class proyecto extends javax.swing.JPanel {
                 cod.renderBarcode("C:\\Users\\Aprendiz\\Desktop\\actual\\interfaces-graficar\\Proyecto col_time\\Proyecto\\ColTime\\ImágenesQR\\" + texto + ".png");
 
                 Image imagenQR = Image.getInstance("C:\\Users\\Aprendiz\\Desktop\\actual\\interfaces-graficar\\Proyecto col_time\\Proyecto\\ColTime\\ImágenesQR\\" + texto + ".png");
-                imagenQR.setWidthPercentage(100);
+                imagenQR.setWidthPercentage(90);
+                imagenQR.setAlignment(Image.ALIGN_CENTER);
                 //Personalizar cell
-                PdfPCell celda = new PdfPCell(new Paragraph("Conversor"));
+                PdfPCell celda = new PdfPCell();
                 celda.setBorder(Rectangle.NO_BORDER);
+                celda.addElement(tipoProyecto(crs.getInt(2), crs.getInt(3)));
                 celda.addElement(imagenQR);
                 tabla.addCell(celda);
 
@@ -1076,23 +1156,16 @@ public class proyecto extends javax.swing.JPanel {
                 QRdelet.delete();
             }
             header.setBorder(Rectangle.NO_BORDER);
+            header.addElement(new Paragraph());
+            header.setColspan(3);
             tabla.addCell(header);
             doc.add(tabla);
             doc.close();
-
+            new rojerusan.RSNotifyAnimated("¡Listo!", "Los codigos QR de la orden N°" + jTNorden.getText() + " fueron generados exitosamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error! " + e);
         }
-    }//GEN-LAST:event_btnGenerarQRActionPerformed
-
-    private void jCAntisolderCMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCAntisolderCMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCAntisolderCMousePressed
-
-    private void jCRuteoCMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCRuteoCMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCRuteoCMousePressed
-//Metodos-------------------------------------------------------------------->
+    }
 
     private void validarRegistro(int op) {
         //Validar los campos principales del proyecto-------------------------->
@@ -1102,6 +1175,7 @@ public class proyecto extends javax.swing.JPanel {
                 || (jCTeclado.isSelected() && !jTTeclado.getText().equals(""))
                 || (jCCircuito.isSelected()) || (jCPCBTE.isSelected())
                 || (jCIntegracion.isSelected() && !jTIntegracion.getText().equals("")))) {
+                //Flata que la validacion de campos funcione
             if (!jCCircuito.isSelected() == false || !jCPCBTE.isSelected() == false) {
                 //Si solo es seleccionado el circuito.
                 if ((jCCircuito.isSelected() && (cbMaterialCircuito.getSelectedIndex() != 0 && !jTCircuito.getText().equals(""))) && jCPCBTE.isSelected() == false) {
@@ -1161,6 +1235,7 @@ public class proyecto extends javax.swing.JPanel {
                 if (RegistrarModificarDetalle(jTNorden.getText(), 2)) {
                     //Mensaje de exito
                     new rojerusan.RSNotifyAnimated("Listo!!", "El Proyecto con el numero de orden: " + jTNorden.getText() + " fue modificado exitosamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+                    btnGenerarQR.setEnabled(false);
                 } else {
                     //Mensaje de error
                 }
@@ -1282,6 +1357,7 @@ public class proyecto extends javax.swing.JPanel {
     private void fecha() {
         Proyecto obj = new Proyecto();
         jLIngreso.setText(obj.fecha());
+        fecha = jLIngreso.getText();
     }
 
     private void limpiarCampos() {
@@ -1335,8 +1411,7 @@ public class proyecto extends javax.swing.JPanel {
                     op = op1;
                 }
                 //Fin del registro del PCB FE
-            }
-            if (!jLIDCircuito.getText().equals("0")) {
+            } else if (!jLIDCircuito.getText().equals("0")) {
                 //Eliminar el detalle del proyecto si ya no esta seleccionado
                 subEliminardetalle(obj, Integer.parseInt(jLIDCircuito.getText()), Integer.parseInt(jTNorden.getText()), "FE", " Circuito");
             } else if (!jLIDTeclado.getText().equals("0")) {
@@ -1357,8 +1432,7 @@ public class proyecto extends javax.swing.JPanel {
                     op = op1;
                 }
                 //Fin del registro del PCB FE
-            }
-            if (!jLIDCircuito.getText().equals("0")) {
+            } else if (!jLIDCircuito.getText().equals("0")) {
                 //Eliminar el detalle del proyecto si ya no esta seleccionado
                 subEliminardetalle(obj, Integer.parseInt(jLIDCircuito.getText()), Integer.parseInt(jTNorden.getText()), "FE", " Circuito");
             } else if (jLIDTeclado.getText().equals("0")) {
@@ -1379,8 +1453,7 @@ public class proyecto extends javax.swing.JPanel {
                     op = op1;
                 }
                 //Fin del registro del PCB FE
-            }
-            if (!jLIDCircuito.getText().equals("0")) {
+            } else if (!jLIDCircuito.getText().equals("0")) {
                 //Eliminar el detalle del proyecto si ya no esta seleccionado
                 subEliminardetalle(obj, Integer.parseInt(jLIDCircuito.getText()), Integer.parseInt(jTNorden.getText()), "FE", " Circuito");
             } else if (!jLIDTeclado.getText().equals("0")) {
@@ -1703,7 +1776,7 @@ public class proyecto extends javax.swing.JPanel {
     private javax.swing.JButton btnActivar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnDelete;
-    private elaprendiz.gui.button.ButtonColoredAction btnGenerarQR;
+    public static elaprendiz.gui.button.ButtonColoredAction btnGenerarQR;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
     public static javax.swing.JButton btnUpdate;

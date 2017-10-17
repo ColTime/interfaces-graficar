@@ -125,6 +125,30 @@ public class DetalleProyectoM {
 
         return true;
     }
+//Este es el detalle del la orden deacuerdo en donde se encuentren los detalles
+    public CachedRowSet consultarDetalleProyectoProduccion(int orden,int negocio) {
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query------------------------------------------------------------>
+            String Qry = "CALL PA_DetalleProyectosProduccion(?,?)";
+            ps = con.prepareStatement(Qry);
+            ps.setInt(1, orden);
+            ps.setInt(2, negocio);
+            rs = ps.executeQuery();
+            crs = new CachedRowSetImpl();
+            crs.populate(rs);
+            //Cierre de conexiones
+            conexion.cerrar(rs);
+            conexion.destruir();
+            ps.close();
+            con.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "¡Error!" + e);
+        }
+        return crs;
+    }
 
     public boolean eliminarDetallersProyecto(int idDetalle, int numeOrden, String negocio) {
         //Eliminar detalle del proyecto, detalle de formato estandar, detalle de teclado y detalle de ensamble

@@ -186,6 +186,28 @@ public class ProyectoM {
         return fecha;
     }
 
+    public CachedRowSet proyectosNegocio(int negocio) {
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query------------------------------------------------------------>
+            String Qry = "CALL PA_InformacionProyectosProduccion(?)";
+            ps = con.prepareStatement(Qry);
+            ps.setInt(1, negocio);
+            rs = ps.executeQuery();
+            crsP=new CachedRowSetImpl();
+            crsP.populate(rs);
+            con.close();
+            conexion.destruir();
+            conexion.cerrar(rs);
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "¡Error!" + e);
+        }
+        return crsP;
+    }
+
     @Override
     protected void finalize() throws Throwable {
         super.finalize(); //To change body of generated methods, choose Tools | Templates.

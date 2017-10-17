@@ -408,17 +408,23 @@ public class Menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private void funcionalidades(int cargo) {
-        if (cargo == 1) {
-            //Gestor comercial
-            btn3.setEnabled(false);
-        } else if (cargo == 2) {
-            //Encargado FE y TE
-            btn3.setEnabled(false);
-            btn2.setEnabled(false);
-        } else if (cargo == 3) {
-            //Encargado de EN
-            btn3.setEnabled(false);
-            btn2.setEnabled(false);
+        switch (cargo) {
+            case 1:
+                //Gestor comercial
+                btn3.setEnabled(false);
+                break;
+            case 2:
+                //Encargado FE y TE
+                btn3.setEnabled(false);
+                btn2.setEnabled(false);
+                break;
+            case 3:
+                //Encargado de EN
+                btn3.setEnabled(false);
+                btn2.setEnabled(false);
+                break;
+            default:
+                break;
         }
     }
     private void btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2ActionPerformed

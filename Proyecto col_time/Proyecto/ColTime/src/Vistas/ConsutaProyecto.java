@@ -556,6 +556,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                 proyecto obj = new proyecto(2);
                 obj.setFocusable(true);
                 try {
+                    obj.btnGenerarQR.setEnabled(true);
                     int f = TProyecto.getSelectedRow();
                     //Activar componentes
                     activarCamposproyecto(obj);

@@ -86,7 +86,7 @@ public class Proyecto {
                 this.setIN(true);
             }
         }
-        return obj.registrar_Modificar_Proyecto(idOrden, comercial, nombreCliente, nombreProyecto, tipoProyecto, FE, TE, IN, detalles[0], detalles[1], detalles[2], detalles[3], detalles[4], detalles[5], detalles[6], fecha, detalles[7], detalles[8], op,detalles[9],detalles[10]);
+        return obj.registrar_Modificar_Proyecto(idOrden, comercial, nombreCliente, nombreProyecto, tipoProyecto, FE, TE, IN, detalles[0], detalles[1], detalles[2], detalles[3], detalles[4], detalles[5], detalles[6], fecha, detalles[7], detalles[8], op, detalles[9], detalles[10]);
     }
 
     public CachedRowSet consultar_Proyecto(String tipo) {
@@ -100,7 +100,7 @@ public class Proyecto {
     }
 
     public CachedRowSet Consultar_informacion_para_el_QR(int orden) {
-        ProyectoM obj=new ProyectoM();
+        ProyectoM obj = new ProyectoM();
         return obj.Consultar_informacion_para_el_QR(orden);
     }
 
@@ -116,6 +116,11 @@ public class Proyecto {
     public String fecha() {
         ProyectoM obj = new ProyectoM();
         return obj.fecha();
+    }
+
+    public CachedRowSet proyectosNegocio(int negocio) {
+        ProyectoM obj = new ProyectoM();
+        return obj.proyectosNegocio(negocio);
     }
 
     //Finalizacion de la clase automatica---------------------------------------------------------------->

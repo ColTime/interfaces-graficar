@@ -84,9 +84,14 @@ public class DetalleProyecto {
         return true;
     }
 
-    public boolean eliminarDetallersProyecto(int idDetalle, int numerOrden,String negocio) {
+    public boolean eliminarDetallersProyecto(int idDetalle, int numerOrden, String negocio) {
         DetalleProyectoM obj = new DetalleProyectoM();
-        return obj.eliminarDetallersProyecto(idDetalle,numerOrden,negocio);
+        return obj.eliminarDetallersProyecto(idDetalle, numerOrden, negocio);
+    }
+
+    public CachedRowSet consultarDetalleProyectoProduccion(int orden,int negocio) {
+        DetalleProyectoM obj = new DetalleProyectoM();
+        return obj.consultarDetalleProyectoProduccion(orden,negocio);
     }
 
     @Override

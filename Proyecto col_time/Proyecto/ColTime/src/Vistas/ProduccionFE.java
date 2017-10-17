@@ -28,28 +28,28 @@ public class ProduccionFE extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        contenido = new javax.swing.JPanel();
+        contenidoFE = new javax.swing.JPanel();
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setPreferredSize(new java.awt.Dimension(1094, 300));
 
-        contenido.setBackground(new java.awt.Color(255, 255, 255));
-        contenido.setMaximumSize(new java.awt.Dimension(40000, 40000));
-        contenido.setPreferredSize(new java.awt.Dimension(0, 500));
+        contenidoFE.setBackground(new java.awt.Color(255, 255, 255));
+        contenidoFE.setMaximumSize(new java.awt.Dimension(40000, 40000));
+        contenidoFE.setPreferredSize(new java.awt.Dimension(0, 500));
 
-        javax.swing.GroupLayout contenidoLayout = new javax.swing.GroupLayout(contenido);
-        contenido.setLayout(contenidoLayout);
-        contenidoLayout.setHorizontalGroup(
-            contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout contenidoFELayout = new javax.swing.GroupLayout(contenidoFE);
+        contenidoFE.setLayout(contenidoFELayout);
+        contenidoFELayout.setHorizontalGroup(
+            contenidoFELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        contenidoLayout.setVerticalGroup(
-            contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        contenidoFELayout.setVerticalGroup(
+            contenidoFELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 500, Short.MAX_VALUE)
         );
 
-        jScrollPane1.setViewportView(contenido);
-        contenido.getAccessibleContext().setAccessibleParent(contenido);
+        jScrollPane1.setViewportView(contenidoFE);
+        contenidoFE.getAccessibleContext().setAccessibleParent(contenidoFE);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -71,7 +71,7 @@ public class ProduccionFE extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JPanel contenido;
+    public static javax.swing.JPanel contenidoFE;
     public static javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

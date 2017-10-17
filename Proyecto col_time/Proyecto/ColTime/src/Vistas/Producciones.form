@@ -64,8 +64,6 @@
                   <Component id="rSButtonMetro2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="rSButtonMetro3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
-                  <Component id="agregar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="jButton10" min="-2" pref="23" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -83,7 +81,6 @@
                           <Component id="rSButtonMetro1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="rSButtonMetro2" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="rSButtonMetro3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="agregar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jButton10" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jButton9" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -169,14 +166,6 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSButtonMetro3ActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="agregar">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Agregar"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="agregarActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

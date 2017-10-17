@@ -28,63 +28,27 @@ public class ProduccionTE extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jPanel2 = new javax.swing.JPanel();
-        jButton8 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
-        jButton15 = new javax.swing.JButton();
-        jButton16 = new javax.swing.JButton();
-        jButton17 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        contenidoTE = new javax.swing.JPanel();
 
-        jScrollPane1.setBackground(new java.awt.Color(204, 204, 204));
-        jScrollPane1.setForeground(new java.awt.Color(153, 153, 153));
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(1094, 300));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(204, 204, 204))); // NOI18N
+        contenidoTE.setBackground(new java.awt.Color(255, 255, 255));
+        contenidoTE.setMaximumSize(new java.awt.Dimension(40000, 40000));
+        contenidoTE.setPreferredSize(new java.awt.Dimension(0, 500));
 
-        jButton8.setText("jButton8");
-        jPanel2.add(jButton8);
+        javax.swing.GroupLayout contenidoTELayout = new javax.swing.GroupLayout(contenidoTE);
+        contenidoTE.setLayout(contenidoTELayout);
+        contenidoTELayout.setHorizontalGroup(
+            contenidoTELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        contenidoTELayout.setVerticalGroup(
+            contenidoTELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 500, Short.MAX_VALUE)
+        );
 
-        jButton7.setText("jButton7");
-        jPanel2.add(jButton7);
-
-        jButton3.setText("jButton3");
-        jPanel2.add(jButton3);
-
-        jButton6.setText("jButton6");
-        jPanel2.add(jButton6);
-
-        jButton11.setText("jButton11");
-        jPanel2.add(jButton11);
-
-        jButton12.setText("jButton12");
-        jPanel2.add(jButton12);
-
-        jButton13.setText("jButton13");
-        jPanel2.add(jButton13);
-
-        jButton14.setText("jButton14");
-        jPanel2.add(jButton14);
-
-        jButton15.setText("jButton15");
-        jPanel2.add(jButton15);
-
-        jButton16.setText("jButton16");
-        jPanel2.add(jButton16);
-
-        jButton17.setText("jButton17");
-        jPanel2.add(jButton17);
-
-        jButton2.setText("jButton2");
-        jPanel2.add(jButton2);
-
-        jScrollPane1.setViewportView(jPanel2);
+        jScrollPane1.setViewportView(contenidoTE);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -106,19 +70,7 @@ public class ProduccionTE extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
+    public static javax.swing.JPanel contenidoTE;
+    public static javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
