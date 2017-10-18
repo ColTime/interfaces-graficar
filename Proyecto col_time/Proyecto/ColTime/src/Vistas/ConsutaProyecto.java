@@ -421,7 +421,6 @@ public class ConsutaProyecto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        jDFecha.setDate(null);
         this.dispose();
     }//GEN-LAST:event_jButton9ActionPerformed
 

@@ -1262,6 +1262,8 @@ public class proyecto extends javax.swing.JPanel {
         cbTipo.setEnabled(false);
         jCAntisolderP.setEnabled(false);
         jCRuteoP.setEnabled(false);
+        jCAntisolderC.setEnabled(false);
+        jCRuteoC.setEnabled(false);
         jCConversor.setEnabled(false);
         jTConversor.setEnabled(false);
         jCTroquel.setEnabled(false);

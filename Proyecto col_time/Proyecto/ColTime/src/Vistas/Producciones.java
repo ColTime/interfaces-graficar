@@ -1,17 +1,22 @@
 package Vistas;
 
 import Controlador.Proyecto;
+import com.itextpdf.text.Image;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.sql.rowset.CachedRowSet;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import paneles.CambiaPanel;
 
-public class Producciones extends javax.swing.JFrame implements Runnable, ActionListener {
+public class Producciones extends javax.swing.JFrame implements ActionListener {
 
     public Producciones() {
         initComponents();
@@ -24,7 +29,8 @@ public class Producciones extends javax.swing.JFrame implements Runnable, Action
     int panel = 0;
     CachedRowSet crs = null;
     int x = 0, y = 0, cantidad = 0, filas = 1, unidad = 11, conta = 5;
-    static int negocio =0;
+    static int negocio = 0;
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -67,6 +73,7 @@ public class Producciones extends javax.swing.JFrame implements Runnable, Action
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/close.png"))); // NOI18N
         jButton9.setBorderPainted(false);
         jButton9.setContentAreaFilled(false);
+        jButton9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton9.setFocusPainted(false);
         jButton9.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/close1.png"))); // NOI18N
         jButton9.addActionListener(new java.awt.event.ActionListener() {
@@ -90,6 +97,7 @@ public class Producciones extends javax.swing.JFrame implements Runnable, Action
         rSButtonMetro1.setText("Formato estandar");
         rSButtonMetro1.setBorderPainted(false);
         rSButtonMetro1.setColorNormal(new java.awt.Color(63, 179, 255));
+        rSButtonMetro1.setFocusPainted(false);
         rSButtonMetro1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rSButtonMetro1ActionPerformed(evt);
@@ -100,6 +108,7 @@ public class Producciones extends javax.swing.JFrame implements Runnable, Action
         rSButtonMetro2.setText("Teclados");
         rSButtonMetro2.setBorderPainted(false);
         rSButtonMetro2.setColorNormal(new java.awt.Color(63, 179, 255));
+        rSButtonMetro2.setFocusPainted(false);
         rSButtonMetro2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rSButtonMetro2ActionPerformed(evt);
@@ -110,6 +119,7 @@ public class Producciones extends javax.swing.JFrame implements Runnable, Action
         rSButtonMetro3.setText("Ensamble");
         rSButtonMetro3.setBorderPainted(false);
         rSButtonMetro3.setColorNormal(new java.awt.Color(63, 179, 255));
+        rSButtonMetro3.setFocusPainted(false);
         rSButtonMetro3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rSButtonMetro3ActionPerformed(evt);
@@ -303,21 +313,21 @@ public class Producciones extends javax.swing.JFrame implements Runnable, Action
     private void rSButtonMetro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro2ActionPerformed
         new CambiaPanel(Contenido, new ProduccionTE());
         reinicializarVariables();
-        negocio=2;
+        negocio = 2;
         agregarProyectoEnTabla(2);
     }//GEN-LAST:event_rSButtonMetro2ActionPerformed
 
     private void rSButtonMetro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro1ActionPerformed
         new CambiaPanel(Contenido, new ProduccionFE());
         reinicializarVariables();
-        negocio=1;
+        negocio = 1;
         agregarProyectoEnTabla(1);
     }//GEN-LAST:event_rSButtonMetro1ActionPerformed
 
     private void rSButtonMetro3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro3ActionPerformed
         new CambiaPanel(Contenido, new ProduccionEN());
         reinicializarVariables();
-        negocio=3;
+        negocio = 3;
         agregarProyectoEnTabla(3);
     }//GEN-LAST:event_rSButtonMetro3ActionPerformed
 
@@ -331,7 +341,20 @@ public class Producciones extends javax.swing.JFrame implements Runnable, Action
                 JButton jp = new JButton(String.valueOf(crs.getInt(1)));
                 jp.setBounds(0 + x, 0 + y, 98, 98);
                 jp.addActionListener(this);
+                jp.setFont(new Font("Tahoma", 1, 15));
+                jp.setFocusPainted(false);
+                //Icono del boton
+                ImageIcon icon = new ImageIcon("src\\img\\proyect.png");
+                Icon image = new ImageIcon(icon.getImage().getScaledInstance(jp.getWidth(), jp.getHeight(), Image.SECTION));
+                jp.setIcon(image);
+                this.repaint();
+                //Texto del boton
+                jp.setText(String.valueOf(crs.getInt(1)));
+                jp.setHorizontalTextPosition(JButton.CENTER);
+                jp.setContentAreaFilled(false);
+                jp.setForeground(Color.BLACK);
                 jp.setActionCommand(String.valueOf(crs.getInt(1)));
+                jp.setCursor(Cursor.getPredefinedCursor(12));
                 x += 99;
                 cantidad++;
                 if (cantidad == unidad * filas) {
@@ -354,7 +377,7 @@ public class Producciones extends javax.swing.JFrame implements Runnable, Action
                     }
                     this.Contenido.updateUI();
                 }
-                jp.setBackground(Color.gray);
+                jp.setBackground(Color.WHITE);
                 switch (negocio) {
                     case 1:
                         ProduccionFE.contenidoFE.add(jp);
@@ -386,10 +409,11 @@ public class Producciones extends javax.swing.JFrame implements Runnable, Action
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int orden=Integer.parseInt(e.getActionCommand());
-        detalleProduccion obj= new detalleProduccion(this,true, orden,negocio);
+        int orden = Integer.parseInt(e.getActionCommand());
+        detalleProduccion obj = new detalleProduccion(this, true, orden, negocio);
         obj.setLocationRelativeTo(null);
         obj.setVisible(true);
+        obj.dispose();
     }
 
     /**
@@ -449,8 +473,4 @@ public class Producciones extends javax.swing.JFrame implements Runnable, Action
     private elaprendiz.gui.textField.TextFieldRoundBackground textFieldRoundBackground4;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void run() {
-
-    }
 }

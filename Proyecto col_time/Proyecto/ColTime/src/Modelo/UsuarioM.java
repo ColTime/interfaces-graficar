@@ -18,6 +18,26 @@ public class UsuarioM {
     boolean res;
 //Metodos---------------------------------------------------------------------->
 
+    public void sesion(int sec,String doc) {
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query y ejecución------------------------------------------------------------>
+            String Qry = "CALL PA_Sesion(?,?)";
+            ps = con.prepareCall(Qry);
+            ps.setInt(1, sec);
+            ps.setString(2,doc);
+            ps.execute();
+            //Destrucción de conexiones
+            con.close();
+            conexion.destruir();
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "¡Error!" + e);
+        }
+    }
+
     public boolean registrar_Modificar_Usuario(String doc, String tipo, String nombres, String apellidos, int cargo, int op, boolean estado) {
         try {
             conexion = new Conexion();
@@ -105,7 +125,7 @@ public class UsuarioM {
     }
 
     public int iniciarSesion(String user, String pasw) {
-        int cargo = 0;  
+        int cargo = 0;
         try {
             conexion = new Conexion();
             conexion.establecerConexion();

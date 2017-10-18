@@ -5,6 +5,7 @@ import Vistas.Producciones;
 import Vistas.Inicio;
 import Vistas.Usuarios1;
 import Vistas.proyecto;
+import Vistas.proyecto1;
 import coltime.Login;
 import java.awt.Color;
 import java.io.File;
@@ -13,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import paneles.CambiaPanel;
 import rojerusan.RSNotifyAnimated;
 
@@ -39,7 +41,7 @@ public class Menu extends javax.swing.JFrame {
     private int posX = 0;
     private int posY = 0;
     private FileInputStream strem;
-    private static int cargo = 0;
+    public static int cargo = 0;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -94,6 +96,12 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
             public void windowDeactivated(java.awt.event.WindowEvent evt) {
                 formWindowDeactivated(evt);
             }
@@ -416,12 +424,12 @@ public class Menu extends javax.swing.JFrame {
             case 2:
                 //Encargado FE y TE
                 btn3.setEnabled(false);
-                btn2.setEnabled(false);
+                btn4.setEnabled(false);
                 break;
             case 3:
                 //Encargado de EN
                 btn3.setEnabled(false);
-                btn2.setEnabled(false);
+                btn4.setEnabled(false);
                 break;
             default:
                 break;
@@ -449,7 +457,18 @@ public class Menu extends javax.swing.JFrame {
             btn2.setColorNormal(cor);
             btn2.setColorPressed(cor);
         }
-        cambiarpanelProyecto();
+        switch (cargo) {
+            case 1:
+            case 4:
+                cambiarpanelProyecto("proyectos");
+                break;
+            case 2:
+                cambiarpanelProyecto("proyectos1");
+                break;
+            case 3:
+                cambiarpanelProyecto("proyectos2");
+                break;
+        }
     }//GEN-LAST:event_btn2ActionPerformed
 
     private void btn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn4ActionPerformed
@@ -567,6 +586,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_formMousePressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        sesion(0, jDocumento.getText());
         System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -588,6 +608,7 @@ public class Menu extends javax.swing.JFrame {
             //Cierra el menu y abre el login
             this.dispose();
             try {
+                sesion(0, jDocumento.getText());
                 Thread.sleep(290);
                 new Login().setVisible(true);
             } catch (Exception e) {
@@ -595,9 +616,33 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    public void cambiarpanelProyecto() {
-        if (!jPContenido.getComponent(0).getName().equals("proyectos")) {
-            new CambiaPanel(jPContenido, new proyecto(1));
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        sesion(0, jDocumento.getText());
+    }//GEN-LAST:event_formWindowClosing
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+
+    }//GEN-LAST:event_formWindowClosed
+
+    public void sesion(int sec, String doc) {
+        Controlador.Usuario obj = new Controlador.Usuario();
+        obj.sesion(sec, doc);
+    }
+
+    public void cambiarpanelProyecto(String name) {
+        if (!jPContenido.getComponent(0).getName().equals(name)) {
+            switch (cargo) {
+                case 1:
+                case 4:
+                    new CambiaPanel(jPContenido, new proyecto(1));
+                    break;
+                case 2:
+                    new CambiaPanel(jPContenido, new proyecto1(1));
+                    break;
+                case 3:
+                    new CambiaPanel(jPContenido, new proyecto1(1));
+                    break;
+            }
         }
     }
 

@@ -126,7 +126,8 @@ public class DetalleProyectoM {
         return true;
     }
 //Este es el detalle del la orden deacuerdo en donde se encuentren los detalles
-    public CachedRowSet consultarDetalleProyectoProduccion(int orden,int negocio) {
+
+    public CachedRowSet consultarDetalleProyectoProduccion(int orden, int negocio) {
         try {
             conexion = new Conexion();
             conexion.establecerConexion();
@@ -185,6 +186,30 @@ public class DetalleProyectoM {
             JOptionPane.showMessageDialog(null, "¡Error!" + e);
         }
         return res;
+    }
+
+    public CachedRowSet consultarDetalleProduccion(int detalle,int negocio) {
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query------------------------------------------------------------>
+            String Qry = "CALL PA_DetalleDelDetalleDelproyecto(?,?)";
+            ps = con.prepareStatement(Qry);
+            ps.setInt(1, detalle);
+            ps.setInt(2, negocio);
+            rs = ps.executeQuery();
+            crs = new CachedRowSetImpl();
+            crs.populate(rs);
+            //Cierre de conexiones
+            conexion.cerrar(rs);
+            conexion.destruir();
+            ps.close();
+            con.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "¡Error!" + e);
+        }
+        return crs;
     }
 
     @Override

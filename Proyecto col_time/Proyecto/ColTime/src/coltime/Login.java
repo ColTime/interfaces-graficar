@@ -6,11 +6,8 @@
 package coltime;
 
 import Atxy2k.CustomTextField.RestrictedTextField;
-import Vistas.Usuarios1;
 import com.sun.awt.AWTUtilities;
 import com.sun.glass.events.KeyEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import rojerusan.RSNotifyAnimated;
@@ -30,9 +27,9 @@ public class Login extends javax.swing.JFrame {
         AWTUtilities.setWindowOpaque(this, false);
         this.setIconImage(new ImageIcon(getClass().getResource("/imagenesEmpresa/favicon.png")).getImage());
         jTUser.requestFocus();
-        RestrictedTextField obj= new RestrictedTextField(jTUser);
+        RestrictedTextField obj = new RestrictedTextField(jTUser);
         obj.setLimit(13);
-        RestrictedTextField obj1= new RestrictedTextField(jTPassword);
+        RestrictedTextField obj1 = new RestrictedTextField(jTPassword);
         obj1.setLimit(20);
     }
     private int posX = 0;
@@ -199,7 +196,8 @@ public class Login extends javax.swing.JFrame {
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
         if (!(jTUser.getText().equals("") && jTPassword.getText().equals(""))) {
             int car = iniciarSesion(jTUser.getText(), jTPassword.getText());
-            if (car!=0) {
+            if (car != 0) {
+                sesion(1,jTUser.getText());
                 screen sc = new screen();
                 sc.setVisible(true);
                 sc.setLocationRelativeTo(null);
@@ -221,7 +219,7 @@ public class Login extends javax.swing.JFrame {
 
     private void jTUserKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTUserKeyTyped
         char cara = evt.getKeyChar();
-        if (Character.isLetter(cara) || evt.getKeyChar() == '.' || evt.getKeyChar() == '-' || evt.getKeyChar() == '_' || evt.getKeyChar() == ',' || evt.getKeyChar() == '@' || evt.getKeyChar() =='|') {
+        if (Character.isLetter(cara) || evt.getKeyChar() == '.' || evt.getKeyChar() == '-' || evt.getKeyChar() == '_' || evt.getKeyChar() == ',' || evt.getKeyChar() == '@' || evt.getKeyChar() == '|') {
             evt.consume();
         }
     }//GEN-LAST:event_jTUserKeyTyped
@@ -300,10 +298,15 @@ public class Login extends javax.swing.JFrame {
         Controlador.Usuario obj = new Controlador.Usuario();
         return obj.iniciarSesion(user, pasw);
     }
+
+    public void sesion(int sec,String doc) {
+        Controlador.Usuario obj=new Controlador.Usuario();
+        obj.sesion(sec,doc);
+    }
 }
 
 //Notificaciones 
-//        new rojerusan.RSNotifyFade("¡ERROR!", "Este es un mensaje de errordel sistema.", 7, RSNotifyFade.PositionNotify.BottomRight, RSNotifyFade.TypeNotify.ERROR).setVisible(true);
-//        new rojerusan.RSNotifyAnimated("Bien Hecho", "Ádios lokita", 7, RSNotifyAnimated.PositionNotify.BottomLeft, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+//       new rojerusan.RSNotifyFade("¡ERROR!", "Este es un mensaje de errordel sistema.", 7, RSNotifyFade.PositionNotify.BottomRight, RSNotifyFade.TypeNotify.ERROR).setVisible(true);
+//       new rojerusan.RSNotifyAnimated("Bien Hecho", "Ádios lokita", 7, RSNotifyAnimated.PositionNotify.BottomLeft, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
 //       new rojerusan.RSNotifyShadowAnimated("Error", "What so you doing?", 7, RSNotifyShadowAnimated.PositionNotify.TopLef, RSNotifyShadowAnimated.AnimationNotify.UpBottom, RSNotifyShadowAnimated.TypeNotify.ERROR).setVisible(true);
 //       new rojerusan.RSNotifyShadowFade("Error", "Holamundo", 7, RSNotifyShadowFade.PositionNotify.TopRight, RSNotifyShadowFade.TypeNotify.ERROR).setVisible(true);

@@ -3,7 +3,6 @@ package Controlador;
 import Modelo.UsuarioM;
 import java.io.FileInputStream;
 import javax.sql.rowset.CachedRowSet;
-import javax.swing.JOptionPane;
 
 public class Usuario {
 
@@ -88,6 +87,10 @@ public class Usuario {
     public boolean CambiarContraseña(String anti) {
         Modelo.UsuarioM obj=new UsuarioM();
         return obj.cambiarContraseña(documento, contraseña,anti);
+    }
+    public void sesion(int sec,String doc){
+        Modelo.UsuarioM obj=new UsuarioM();
+        obj.sesion(sec,doc);
     }
 
     //Metodo de liberacion de memoria------------------------------------------>
