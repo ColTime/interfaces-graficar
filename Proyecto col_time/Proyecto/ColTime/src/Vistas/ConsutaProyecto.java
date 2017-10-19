@@ -258,6 +258,11 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                 jRSalidaMouseClicked(evt);
             }
         });
+        jRSalida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRSalidaActionPerformed(evt);
+            }
+        });
         jPanel3.add(jRSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 20, -1, -1));
 
         jRnulo.setBackground(new java.awt.Color(255, 255, 255));
@@ -439,6 +444,8 @@ public class ConsutaProyecto extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         consultarProyectos("", "", "", "");
+        TDetalle.setModel(null);
+        TPNC.setModel(null);
         limpiarCampos();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -690,6 +697,10 @@ public class ConsutaProyecto extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_TProyectoMousePressed
+
+    private void jRSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRSalidaActionPerformed
+            // TODO add your handling code here:
+    }//GEN-LAST:event_jRSalidaActionPerformed
 
     /**
      * @param args the command line arguments

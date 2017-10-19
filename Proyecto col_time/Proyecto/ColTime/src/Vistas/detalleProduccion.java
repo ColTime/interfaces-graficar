@@ -31,13 +31,14 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
         initComponents();
         this.orden = orden;
         this.negocio = negocio;
+        this.setTitle(String.valueOf(orden));
         consultarDetalleProyectoProduccion();
     }
     //Variables
     static int orden = 0, negocio = 0;
     static CachedRowSet crs = null;
     int x = 0, y = 0, cantidad = 0;
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -89,7 +90,7 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPNCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPNCActionPerformed
-      
+
     }//GEN-LAST:event_btnPNCActionPerformed
 
     //Metodos
@@ -122,7 +123,6 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
                 detalle.setContentAreaFilled(false);
                 detalle.setBackground(Color.white);
                 jDetalle.add(detalle);
-                jDetalle.updateUI();
                 if (cantidad == 8) {
                     y = 99;
                     x = 0;
@@ -131,16 +131,17 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
                 }
                 cantidad += 1;
             }
+            jDetalle.updateUI();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Error!"+ e);
+            JOptionPane.showMessageDialog(null, "Error!" + e);
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int detalle=Integer.parseInt(e.getActionCommand());
-        Producciones obj1=new Producciones();
-        detalleProyecto obj=new detalleProyecto(obj1, true,detalle , negocio);
+        int detalle = Integer.parseInt(e.getActionCommand());
+        Producciones obj1 = new Producciones();
+        detalleProyecto obj = new detalleProyecto(obj1, true, detalle, negocio, String.valueOf(orden),e.getSource().getClass().getName());
         obj.setVisible(true);
         obj.setLocationRelativeTo(this);
     }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-10-2017 a las 23:53:15
+-- Tiempo de generación: 19-10-2017 a las 23:35:08
 -- Versión del servidor: 10.1.26-MariaDB
 -- Versión de PHP: 7.1.9
 
@@ -37,6 +37,13 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_ConsultarNumeroOrden` ()  NO SQL
 SHOW TABLE STATUS like 'proyecto'$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_ConsultarProcesosFE` (IN `detalle` INT)  NO SQL
+begin
+
+SELECT p.nombre_proceso FROM detalle_formato_estandar f JOIN procesos p on f.Procesos_idproceso=p.idproceso WHERE f.detalle_proyecto_idDetalle_proyecto=detalle;
+
+END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_ConsultarProyectosEntrega` (IN `orden` INT, IN `nombreC` VARCHAR(45), IN `nombreP` VARCHAR(45), IN `fecha` VARCHAR(10))  NO SQL
 BEGIN
@@ -109,7 +116,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_ConsultarProyectosIngreso` (IN `
 BEGIN
 
 IF orden='' and nombreC='' and nombreP='' and fecha='' THEN
-SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteoC,p.antisolderC,p.ruteoP,p.antisolderP FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado;
+SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteoC,p.antisolderC,p.ruteoP,p.antisolderP FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado; 
 ELSE
   IF orden!='' and nombreC='' and nombreP='' and fecha='' THEN
 SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as     ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteoC,p.antisolderC,p.ruteoP,p.antisolderP FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado WHERE p.numero_orden LIKE concat(orden,'%');
@@ -176,51 +183,51 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_ConsultarProyectosSalida` (IN `o
 BEGIN
 
 IF orden='' and nombreC='' and nombreP='' and fecha='' THEN
-SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteo,p.antisolder FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado;
+SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteoC,p.antisolderC,p.ruteoP,p.antisolderP FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado;
 ELSE
   IF orden!='' and nombreC='' and nombreP='' and fecha='' THEN
-SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as     ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteo,p.antisolder FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado WHERE p.numero_orden LIKE concat(orden,'%');
+SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as     ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteoC,p.antisolderC,p.ruteoP,p.antisolderP FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado WHERE p.numero_orden LIKE concat(orden,'%');
   ELSE 
     IF orden='' and nombreC!='' and nombreP='' and fecha='' THEN
-SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as     ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteo,p.antisolder FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado WHERE p.nombre_cliente LIKE concat(nombreC,'%');
+SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as     ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteoC,p.antisolderC,p.ruteoP,p.antisolderP FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado WHERE p.nombre_cliente LIKE concat(nombreC,'%');
     ELSE
       IF orden='' and nombreC='' and nombreP!='' and fecha='' THEN
-SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as     ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteo,p.antisolder FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado WHERE p.nombre_proyecto LIKE concat(nombreP,'%');
+SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as     ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteoC,p.antisolderC,p.ruteoP,p.antisolderP FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado WHERE p.nombre_proyecto LIKE concat(nombreP,'%');
        ELSE
          IF orden!='' and nombreC!='' and nombreP='' and fecha='' THEN
-SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as     ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteo,p.antisolder,p.ruteo,p.antisolder FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado WHERE p.numero_orden LIKE concat(orden,'%') AND p.nombre_cliente LIKE concat(nombreC,'%');
+SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as     ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteoC,p.antisolderC,p.ruteoP,p.antisolderP FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado WHERE p.numero_orden LIKE concat(orden,'%') AND p.nombre_cliente LIKE concat(nombreC,'%');
 	      ELSE
             IF orden='' and nombreC!='' and nombreP!='' and fecha='' THEN
-SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as     ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteo,p.antisolder FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado WHERE p.nombre_cliente LIKE concat(nombreC,'%') AND p.nombre_proyecto LIKE concat(nombreP,'%');
+SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as     ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteoC,p.antisolderC,p.ruteoP,p.antisolderP FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado WHERE p.nombre_cliente LIKE concat(nombreC,'%') AND p.nombre_proyecto LIKE concat(nombreP,'%');
             ELSE
               IF orden!='' and nombreC='' and nombreP!='' and fecha='' THEN
-SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as     ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteo,p.antisolder FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado WHERE p.numero_orden LIKE concat(orden,'%') AND p.nombre_proyecto LIKE concat(nombreP,'%');
+SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as     ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteoC,p.antisolderC,p.ruteoP,p.antisolderP FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado WHERE p.numero_orden LIKE concat(orden,'%') AND p.nombre_proyecto LIKE concat(nombreP,'%');
               ELSE
                 IF orden!='' and nombreC!='' and nombreP!='' and fecha='' THEN
-SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as     ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteo,p.antisolder FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado WHERE p.numero_orden LIKE concat(orden,'%') AND p.nombre_cliente LIKE concat(nombreC,'%') AND p.nombre_proyecto LIKE concat(nombreP,'%');
+SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as     ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteoC,p.antisolderC,p.ruteoP,p.antisolderP FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado WHERE p.numero_orden LIKE concat(orden,'%') AND p.nombre_cliente LIKE concat(nombreC,'%') AND p.nombre_proyecto LIKE concat(nombreP,'%');
                 ELSE
                   IF orden='' and nombreC='' and nombreP='' and fecha!='' THEN
-SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as     ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteo,p.antisolder FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado WHERE DATE_FORMAT(p.fecha_salidal,'%Y-%m-%d')=fecha;
+SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as     ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteoC,p.antisolderC,p.ruteoP,p.antisolderP FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado WHERE DATE_FORMAT(p.fecha_salidal,'%Y-%m-%d')=fecha;
 				  ELSE
                     IF orden!='' and nombreC='' and nombreP='' and fecha!='' THEN
-SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as     ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteo,p.antisolder FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado WHERE p.numero_orden LIKE concat(orden,'%') AND DATE_FORMAT(p.fecha_salidal,'%Y-%m-%d')=fecha;
+SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as     ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteoC,p.antisolderC,p.ruteoP,p.antisolderP FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado WHERE p.numero_orden LIKE concat(orden,'%') AND DATE_FORMAT(p.fecha_salidal,'%Y-%m-%d')=fecha;
  					ELSE
                       IF orden='' and nombreC!='' and nombreP='' and fecha!='' THEN
-SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as     ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteo,p.antisolder FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado WHERE p.nombre_cliente LIKE concat(nombreC,'%') AND DATE_FORMAT(p.fecha_salidal,'%Y-%m-%d')=fecha;                     					  ELSE
+SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as     ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteoC,p.antisolderC,p.ruteoP,p.antisolderP FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado WHERE p.nombre_cliente LIKE concat(nombreC,'%') AND DATE_FORMAT(p.fecha_salidal,'%Y-%m-%d')=fecha;                     					  ELSE
 					     IF orden='' and nombreC='' and nombreP!='' and fecha!='' THEN
-SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as     ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteo,p.antisolder FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado WHERE p.nombre_proyecto LIKE concat(nombreP,'%') AND DATE_FORMAT(p.fecha_salidal,'%Y-%m-%d')=fecha;  
+SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as     ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteoC,p.antisolderC,p.ruteoP,p.antisolderP FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado WHERE p.nombre_proyecto LIKE concat(nombreP,'%') AND DATE_FORMAT(p.fecha_salidal,'%Y-%m-%d')=fecha;  
                           ELSE
                             IF orden!='' and nombreC!='' and nombreP='' and fecha!='' THEN
-SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as     ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteo,p.antisolder FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado WHERE p.nombre_cliente LIKE concat(nombreC,'%') AND p.numero_orden LIKE concat(orden,'%') AND DATE_FORMAT(p.fecha_salidal,'%Y-%m-%d')=fecha;  
+SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as     ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteoC,p.antisolderC,p.ruteoP,p.antisolderP FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado WHERE p.nombre_cliente LIKE concat(nombreC,'%') AND p.numero_orden LIKE concat(orden,'%') AND DATE_FORMAT(p.fecha_salidal,'%Y-%m-%d')=fecha;  
 						     ELSE
                                IF orden!='' and nombreC='' and nombreP!='' and fecha!='' THEN
-SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as     ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteo,p.antisolder FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado WHERE p.nombre_proyecto LIKE concat(nombreP,'%') AND p.numero_orden LIKE concat(orden,'%') AND DATE_FORMAT(p.fecha_salidal,'%Y-%m-%d')=fecha;  
+SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as     ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteoC,p.antisolderC,p.ruteoP,p.antisolderP FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado WHERE p.nombre_proyecto LIKE concat(nombreP,'%') AND p.numero_orden LIKE concat(orden,'%') AND DATE_FORMAT(p.fecha_salidal,'%Y-%m-%d')=fecha;  
                                ELSE
                                  IF orden='' and nombreC!='' and nombreP!='' and fecha!='' THEN
-SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as     ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteo,p.antisolder FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado WHERE p.nombre_cliente LIKE concat(nombreC,'%') AND p.nombre_proyecto LIKE concat(nombreP,'%') AND DATE_FORMAT(p.fecha_salidal,'%Y-%m-%d')=fecha;
+SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as     ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteoC,p.antisolderC,p.ruteoP,p.antisolderP FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado WHERE p.nombre_cliente LIKE concat(nombreC,'%') AND p.nombre_proyecto LIKE concat(nombreP,'%') AND DATE_FORMAT(p.fecha_salidal,'%Y-%m-%d')=fecha;
                                  ELSE
                                    IF orden!='' and nombreC!='' and nombreP!='' and fecha!='' THEN 
-SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as     ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteo,p.antisolder FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado WHERE p.numero_orden LIKE concat(orden,'%') AND p.nombre_cliente LIKE concat(nombreC,'%') AND p.nombre_proyecto LIKE concat(nombreP,'%') AND DATE_FORMAT(p.fecha_salidal,'%Y-%m-%d')=fecha;                                   
+SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as     ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteoC,p.antisolderC,p.ruteoP,p.antisolderP FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado WHERE p.numero_orden LIKE concat(orden,'%') AND p.nombre_cliente LIKE concat(nombreC,'%') AND p.nombre_proyecto LIKE concat(nombreP,'%') AND DATE_FORMAT(p.fecha_salidal,'%Y-%m-%d')=fecha;                                   
                                    END IF;
                                  END IF;
                                END IF;
@@ -540,6 +547,13 @@ UPDATE usuario u SET u.sesion=sec WHERE u.numero_documento=ced;
 
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_validarPNC` (IN `orden` INT, IN `proceso` VARCHAR(30))  NO SQL
+BEGIN
+
+SELECT p.idDetalle_proyecto FROM detalle_proyecto p WHERE p.ubicacion=proceso and p.proyecto_numero_orden=orden;
+
+END$$
+
 --
 -- Funciones
 --
@@ -650,13 +664,13 @@ UPDATE `detalle_proyecto` SET `canitadad_total`=cantidad,`material`=material WHE
 RETURN 1;
 END$$
 
-CREATE DEFINER=`root`@`localhost` FUNCTION `FU_RegistrarDetalleProyecto` (`orden` INT(11), `tipoNegocio` VARCHAR(20), `cantidad` VARCHAR(6), `negocio` VARCHAR(20), `estado` TINYINT(1), `material` VARCHAR(6)) RETURNS TINYINT(1) NO SQL
+CREATE DEFINER=`root`@`localhost` FUNCTION `FU_RegistrarDetalleProyecto` (`orden` INT(11), `tipoNegocio` VARCHAR(20), `cantidad` VARCHAR(6), `negocio` VARCHAR(20), `estado` TINYINT(1), `material` VARCHAR(6), `pnc` TINYINT(1), `ubic` VARCHAR(30)) RETURNS TINYINT(1) NO SQL
 BEGIN
 IF material != '' THEN
-INSERT INTO `detalle_proyecto`(`tipo_negocio_idtipo_negocio`, `canitadad_total`, `proyecto_numero_orden`, `negocio_idnegocio`, `estado_idestado`,`material`) VALUES ((SELECT idtipo_negocio from tipo_negocio where nombre =tipoNegocio),cantidad,orden,(SELECT idnegocio FROM negocio WHERE nom_negocio =negocio),estado,material);
+INSERT INTO `detalle_proyecto`(`tipo_negocio_idtipo_negocio`, `canitadad_total`, `proyecto_numero_orden`, `negocio_idnegocio`, `estado_idestado`,`material`,`PNC`,`ubicacion`) VALUES ((SELECT idtipo_negocio from tipo_negocio where nombre =tipoNegocio),cantidad,orden,(SELECT idnegocio FROM negocio WHERE nom_negocio =negocio),estado,material,pnc,ubic);
 RETURN 1;
 ELSE
-INSERT INTO `detalle_proyecto`(`tipo_negocio_idtipo_negocio`, `canitadad_total`, `proyecto_numero_orden`, `negocio_idnegocio`, `estado_idestado`) VALUES ((SELECT idtipo_negocio from tipo_negocio where nombre =tipoNegocio),cantidad,orden,(SELECT idnegocio FROM negocio WHERE nom_negocio =negocio),estado);
+INSERT INTO `detalle_proyecto`(`tipo_negocio_idtipo_negocio`, `canitadad_total`, `proyecto_numero_orden`, `negocio_idnegocio`, `estado_idestado`,`PNC`,`ubicacion`) VALUES ((SELECT idtipo_negocio from tipo_negocio where nombre =tipoNegocio),cantidad,orden,(SELECT idnegocio FROM negocio WHERE nom_negocio =negocio),estado,pnc,ubic);
 RETURN 1;
 END IF;
 END$$
@@ -738,142 +752,172 @@ CREATE TABLE `detalle_formato_estandar` (
   `fecha_fin` date DEFAULT NULL,
   `detalle_proyecto_idDetalle_proyecto` int(11) NOT NULL,
   `Procesos_idproceso` tinyint(4) NOT NULL,
-  `estado_idestado` tinyint(4) NOT NULL
+  `estado_idestado` tinyint(4) NOT NULL,
+  `hora_ejecucion` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `detalle_formato_estandar`
 --
 
-INSERT INTO `detalle_formato_estandar` (`idDetalle_formato_estandar`, `tiempo_por_unidad`, `tiempo_total_por_proceso`, `cantidad_terminada`, `fecha_inicio`, `fecha_fin`, `detalle_proyecto_idDetalle_proyecto`, `Procesos_idproceso`, `estado_idestado`) VALUES
-(141, '0', '0', '0', NULL, NULL, 36, 1, 1),
-(142, '0', '0', '0', NULL, NULL, 36, 2, 1),
-(143, '0', '0', '0', NULL, NULL, 36, 3, 1),
-(144, '0', '0', '0', NULL, NULL, 36, 4, 1),
-(145, '0', '0', '0', NULL, NULL, 36, 5, 1),
-(146, '0', '0', '0', NULL, NULL, 36, 6, 1),
-(147, '0', '0', '0', NULL, NULL, 36, 7, 1),
-(148, '0', '0', '0', NULL, NULL, 36, 8, 1),
-(149, '0', '0', '0', NULL, NULL, 36, 9, 1),
-(150, '0', '0', '0', NULL, NULL, 36, 10, 1),
-(151, '0', '0', '0', NULL, NULL, 37, 1, 1),
-(152, '0', '0', '0', NULL, NULL, 37, 2, 1),
-(153, '0', '0', '0', NULL, NULL, 37, 3, 1),
-(154, '0', '0', '0', NULL, NULL, 37, 4, 1),
-(155, '0', '0', '0', NULL, NULL, 37, 5, 1),
-(156, '0', '0', '0', NULL, NULL, 37, 6, 1),
-(157, '0', '0', '0', NULL, NULL, 37, 7, 1),
-(158, '0', '0', '0', NULL, NULL, 37, 8, 1),
-(159, '0', '0', '0', NULL, NULL, 37, 9, 1),
-(160, '0', '0', '0', NULL, NULL, 37, 10, 1),
-(171, '0', '0', '0', NULL, NULL, 41, 1, 1),
-(172, '0', '0', '0', NULL, NULL, 41, 2, 1),
-(173, '0', '0', '0', NULL, NULL, 41, 3, 1),
-(174, '0', '0', '0', NULL, NULL, 41, 4, 1),
-(175, '0', '0', '0', NULL, NULL, 41, 5, 1),
-(176, '0', '0', '0', NULL, NULL, 41, 6, 1),
-(177, '0', '0', '0', NULL, NULL, 41, 7, 1),
-(178, '0', '0', '0', NULL, NULL, 41, 8, 1),
-(179, '0', '0', '0', NULL, NULL, 41, 9, 1),
-(180, '0', '0', '0', NULL, NULL, 41, 10, 1),
-(181, '0', '0', '0', NULL, NULL, 42, 1, 1),
-(182, '0', '0', '0', NULL, NULL, 42, 2, 1),
-(183, '0', '0', '0', NULL, NULL, 42, 3, 1),
-(184, '0', '0', '0', NULL, NULL, 42, 4, 1),
-(185, '0', '0', '0', NULL, NULL, 42, 5, 1),
-(186, '0', '0', '0', NULL, NULL, 42, 6, 1),
-(187, '0', '0', '0', NULL, NULL, 42, 7, 1),
-(188, '0', '0', '0', NULL, NULL, 42, 8, 1),
-(189, '0', '0', '0', NULL, NULL, 42, 9, 1),
-(190, '0', '0', '0', NULL, NULL, 42, 10, 1),
-(191, '0', '0', '0', NULL, NULL, 43, 1, 1),
-(192, '0', '0', '0', NULL, NULL, 43, 2, 1),
-(193, '0', '0', '0', NULL, NULL, 43, 3, 1),
-(194, '0', '0', '0', NULL, NULL, 43, 4, 1),
-(195, '0', '0', '0', NULL, NULL, 43, 5, 1),
-(197, '0', '0', '0', NULL, NULL, 43, 7, 1),
-(198, '0', '0', '0', NULL, NULL, 43, 8, 1),
-(199, '0', '0', '0', NULL, NULL, 43, 9, 1),
-(200, '0', '0', '0', NULL, NULL, 43, 10, 1),
-(201, '0', '0', '0', NULL, NULL, 44, 1, 1),
-(202, '0', '0', '0', NULL, NULL, 44, 2, 1),
-(203, '0', '0', '0', NULL, NULL, 44, 3, 1),
-(204, '0', '0', '0', NULL, NULL, 44, 4, 1),
-(205, '0', '0', '0', NULL, NULL, 44, 5, 1),
-(207, '0', '0', '0', NULL, NULL, 44, 7, 1),
-(208, '0', '0', '0', NULL, NULL, 44, 8, 1),
-(209, '0', '0', '0', NULL, NULL, 44, 9, 1),
-(210, '0', '0', '0', NULL, NULL, 44, 10, 1),
-(211, '0', '0', '0', NULL, NULL, 45, 1, 1),
-(212, '0', '0', '0', NULL, NULL, 45, 2, 1),
-(213, '0', '0', '0', NULL, NULL, 45, 3, 1),
-(214, '0', '0', '0', NULL, NULL, 45, 4, 1),
-(215, '0', '0', '0', NULL, NULL, 45, 5, 1),
-(216, '0', '0', '0', NULL, NULL, 45, 6, 1),
-(217, '0', '0', '0', NULL, NULL, 45, 7, 1),
-(218, '0', '0', '0', NULL, NULL, 45, 8, 1),
-(219, '0', '0', '0', NULL, NULL, 45, 9, 1),
-(220, '0', '0', '0', NULL, NULL, 45, 10, 1),
-(221, '0', '0', '0', NULL, NULL, 46, 1, 1),
-(222, '0', '0', '0', NULL, NULL, 46, 2, 1),
-(223, '0', '0', '0', NULL, NULL, 46, 3, 1),
-(224, '0', '0', '0', NULL, NULL, 46, 4, 1),
-(225, '0', '0', '0', NULL, NULL, 46, 5, 1),
-(227, '0', '0', '0', NULL, NULL, 46, 7, 1),
-(228, '0', '0', '0', NULL, NULL, 46, 8, 1),
-(229, '0', '0', '0', NULL, NULL, 46, 9, 1),
-(230, '0', '0', '0', NULL, NULL, 46, 10, 1),
-(433, '0', '0', '0', NULL, NULL, 65, 1, 1),
-(434, '0', '0', '0', NULL, NULL, 65, 3, 1),
-(435, '0', '0', '0', NULL, NULL, 65, 4, 1),
-(436, '0', '0', '0', NULL, NULL, 65, 5, 1),
-(437, '0', '0', '0', NULL, NULL, 65, 6, 1),
-(438, '0', '0', '0', NULL, NULL, 65, 7, 1),
-(439, '0', '0', '0', NULL, NULL, 65, 8, 1),
-(440, '0', '0', '0', NULL, NULL, 65, 9, 1),
-(441, '0', '0', '0', NULL, NULL, 65, 10, 1),
-(442, '0', '0', '0', NULL, NULL, 66, 1, 1),
-(450, '0', '0', '0', NULL, NULL, 69, 1, 1),
-(451, '0', '0', '0', NULL, NULL, 69, 2, 1),
-(452, '0', '0', '0', NULL, NULL, 69, 3, 1),
-(453, '0', '0', '0', NULL, NULL, 69, 4, 1),
-(454, '0', '0', '0', NULL, NULL, 69, 5, 1),
-(456, '0', '0', '0', NULL, NULL, 69, 7, 1),
-(457, '0', '0', '0', NULL, NULL, 69, 8, 1),
-(459, '0', '0', '0', NULL, NULL, 69, 10, 1),
-(461, '0', '0', '0', NULL, NULL, 66, 9, 1),
-(462, '0', '0', '0', NULL, NULL, 52, 9, 1),
-(484, '0', '0', '0', NULL, NULL, 72, 1, 1),
-(485, '0', '0', '0', NULL, NULL, 72, 2, 1),
-(486, '0', '0', '0', NULL, NULL, 72, 3, 1),
-(487, '0', '0', '0', NULL, NULL, 72, 4, 1),
-(488, '0', '0', '0', NULL, NULL, 72, 5, 1),
-(489, '0', '0', '0', NULL, NULL, 72, 6, 1),
-(490, '0', '0', '0', NULL, NULL, 72, 7, 1),
-(491, '0', '0', '0', NULL, NULL, 72, 8, 1),
-(492, '0', '0', '0', NULL, NULL, 72, 10, 1),
-(493, '0', '0', '0', NULL, NULL, 72, 9, 1),
-(494, '0', '0', '0', NULL, NULL, 74, 1, 1),
-(495, '0', '0', '0', NULL, NULL, 74, 3, 1),
-(496, '0', '0', '0', NULL, NULL, 74, 4, 1),
-(497, '0', '0', '0', NULL, NULL, 74, 5, 1),
-(498, '0', '0', '0', NULL, NULL, 74, 7, 1),
-(499, '0', '0', '0', NULL, NULL, 74, 8, 1),
-(500, '0', '0', '0', NULL, NULL, 74, 9, 1),
-(501, '0', '0', '0', NULL, NULL, 74, 10, 1),
-(502, '0', '0', '0', NULL, NULL, 75, 1, 1),
-(503, '0', '0', '0', NULL, NULL, 75, 3, 1),
-(504, '0', '0', '0', NULL, NULL, 75, 4, 1),
-(505, '0', '0', '0', NULL, NULL, 75, 5, 1),
-(506, '0', '0', '0', NULL, NULL, 75, 7, 1),
-(507, '0', '0', '0', NULL, NULL, 75, 8, 1),
-(508, '0', '0', '0', NULL, NULL, 75, 9, 1),
-(509, '0', '0', '0', NULL, NULL, 75, 10, 1),
-(510, '0', '0', '0', NULL, NULL, 76, 1, 1),
-(511, '0', '0', '0', NULL, NULL, 77, 1, 1),
-(512, '0', '0', '0', NULL, NULL, 77, 4, 1),
-(513, '0', '0', '0', NULL, NULL, 78, 1, 1),
-(514, '0', '0', '0', NULL, NULL, 78, 4, 1);
+INSERT INTO `detalle_formato_estandar` (`idDetalle_formato_estandar`, `tiempo_por_unidad`, `tiempo_total_por_proceso`, `cantidad_terminada`, `fecha_inicio`, `fecha_fin`, `detalle_proyecto_idDetalle_proyecto`, `Procesos_idproceso`, `estado_idestado`, `hora_ejecucion`) VALUES
+(141, '0', '0', '0', NULL, NULL, 36, 1, 1, NULL),
+(142, '0', '0', '0', NULL, NULL, 36, 2, 1, NULL),
+(143, '0', '0', '0', NULL, NULL, 36, 3, 1, NULL),
+(144, '0', '0', '0', NULL, NULL, 36, 4, 1, NULL),
+(145, '0', '0', '0', NULL, NULL, 36, 5, 1, NULL),
+(146, '0', '0', '0', NULL, NULL, 36, 6, 1, NULL),
+(147, '0', '0', '0', NULL, NULL, 36, 7, 1, NULL),
+(148, '0', '0', '0', NULL, NULL, 36, 8, 1, NULL),
+(149, '0', '0', '0', NULL, NULL, 36, 9, 1, NULL),
+(150, '0', '0', '0', NULL, NULL, 36, 10, 1, NULL),
+(151, '0', '0', '0', NULL, NULL, 37, 1, 1, NULL),
+(152, '0', '0', '0', NULL, NULL, 37, 2, 1, NULL),
+(153, '0', '0', '0', NULL, NULL, 37, 3, 1, NULL),
+(154, '0', '0', '0', NULL, NULL, 37, 4, 1, NULL),
+(155, '0', '0', '0', NULL, NULL, 37, 5, 1, NULL),
+(156, '0', '0', '0', NULL, NULL, 37, 6, 1, NULL),
+(157, '0', '0', '0', NULL, NULL, 37, 7, 1, NULL),
+(158, '0', '0', '0', NULL, NULL, 37, 8, 1, NULL),
+(159, '0', '0', '0', NULL, NULL, 37, 9, 1, NULL),
+(160, '0', '0', '0', NULL, NULL, 37, 10, 1, NULL),
+(171, '0', '0', '0', NULL, NULL, 41, 1, 1, NULL),
+(172, '0', '0', '0', NULL, NULL, 41, 2, 1, NULL),
+(173, '0', '0', '0', NULL, NULL, 41, 3, 1, NULL),
+(174, '0', '0', '0', NULL, NULL, 41, 4, 1, NULL),
+(175, '0', '0', '0', NULL, NULL, 41, 5, 1, NULL),
+(176, '0', '0', '0', NULL, NULL, 41, 6, 1, NULL),
+(177, '0', '0', '0', NULL, NULL, 41, 7, 1, NULL),
+(178, '0', '0', '0', NULL, NULL, 41, 8, 1, NULL),
+(179, '0', '0', '0', NULL, NULL, 41, 9, 1, NULL),
+(180, '0', '0', '0', NULL, NULL, 41, 10, 1, NULL),
+(181, '0', '0', '0', NULL, NULL, 42, 1, 1, NULL),
+(182, '0', '0', '0', NULL, NULL, 42, 2, 1, NULL),
+(183, '0', '0', '0', NULL, NULL, 42, 3, 1, NULL),
+(184, '0', '0', '0', NULL, NULL, 42, 4, 1, NULL),
+(185, '0', '0', '0', NULL, NULL, 42, 5, 1, NULL),
+(186, '0', '0', '0', NULL, NULL, 42, 6, 1, NULL),
+(187, '0', '0', '0', NULL, NULL, 42, 7, 1, NULL),
+(188, '0', '0', '0', NULL, NULL, 42, 8, 1, NULL),
+(189, '0', '0', '0', NULL, NULL, 42, 9, 1, NULL),
+(190, '0', '0', '0', NULL, NULL, 42, 10, 1, NULL),
+(191, '0', '0', '0', NULL, NULL, 43, 1, 1, NULL),
+(192, '0', '0', '0', NULL, NULL, 43, 2, 1, NULL),
+(193, '0', '0', '0', NULL, NULL, 43, 3, 1, NULL),
+(194, '0', '0', '0', NULL, NULL, 43, 4, 1, NULL),
+(195, '0', '0', '0', NULL, NULL, 43, 5, 1, NULL),
+(197, '0', '0', '0', NULL, NULL, 43, 7, 1, NULL),
+(198, '0', '0', '0', NULL, NULL, 43, 8, 1, NULL),
+(199, '0', '0', '0', NULL, NULL, 43, 9, 1, NULL),
+(200, '0', '0', '0', NULL, NULL, 43, 10, 1, NULL),
+(201, '0', '0', '0', NULL, NULL, 44, 1, 1, NULL),
+(202, '0', '0', '0', NULL, NULL, 44, 2, 1, NULL),
+(203, '0', '0', '0', NULL, NULL, 44, 3, 1, NULL),
+(204, '0', '0', '0', NULL, NULL, 44, 4, 1, NULL),
+(205, '0', '0', '0', NULL, NULL, 44, 5, 1, NULL),
+(207, '0', '0', '0', NULL, NULL, 44, 7, 1, NULL),
+(208, '0', '0', '0', NULL, NULL, 44, 8, 1, NULL),
+(209, '0', '0', '0', NULL, NULL, 44, 9, 1, NULL),
+(210, '0', '0', '0', NULL, NULL, 44, 10, 1, NULL),
+(211, '0', '0', '0', NULL, NULL, 45, 1, 1, NULL),
+(212, '0', '0', '0', NULL, NULL, 45, 2, 1, NULL),
+(213, '0', '0', '0', NULL, NULL, 45, 3, 1, NULL),
+(214, '0', '0', '0', NULL, NULL, 45, 4, 1, NULL),
+(215, '0', '0', '0', NULL, NULL, 45, 5, 1, NULL),
+(216, '0', '0', '0', NULL, NULL, 45, 6, 1, NULL),
+(217, '0', '0', '0', NULL, NULL, 45, 7, 1, NULL),
+(218, '0', '0', '0', NULL, NULL, 45, 8, 1, NULL),
+(219, '0', '0', '0', NULL, NULL, 45, 9, 1, NULL),
+(220, '0', '0', '0', NULL, NULL, 45, 10, 1, NULL),
+(221, '0', '0', '0', NULL, NULL, 46, 1, 1, NULL),
+(222, '0', '0', '0', NULL, NULL, 46, 2, 1, NULL),
+(223, '0', '0', '0', NULL, NULL, 46, 3, 1, NULL),
+(224, '0', '0', '0', NULL, NULL, 46, 4, 1, NULL),
+(225, '0', '0', '0', NULL, NULL, 46, 5, 1, NULL),
+(227, '0', '0', '0', NULL, NULL, 46, 7, 1, NULL),
+(228, '0', '0', '0', NULL, NULL, 46, 8, 1, NULL),
+(229, '0', '0', '0', NULL, NULL, 46, 9, 1, NULL),
+(230, '0', '0', '0', NULL, NULL, 46, 10, 1, NULL),
+(433, '0', '0', '0', NULL, NULL, 65, 1, 1, NULL),
+(434, '0', '0', '0', NULL, NULL, 65, 3, 1, NULL),
+(435, '0', '0', '0', NULL, NULL, 65, 4, 1, NULL),
+(436, '0', '0', '0', NULL, NULL, 65, 5, 1, NULL),
+(437, '0', '0', '0', NULL, NULL, 65, 6, 1, NULL),
+(438, '0', '0', '0', NULL, NULL, 65, 7, 1, NULL),
+(439, '0', '0', '0', NULL, NULL, 65, 8, 1, NULL),
+(440, '0', '0', '0', NULL, NULL, 65, 9, 1, NULL),
+(441, '0', '0', '0', NULL, NULL, 65, 10, 1, NULL),
+(450, '0', '0', '0', NULL, NULL, 69, 1, 1, NULL),
+(451, '0', '0', '0', NULL, NULL, 69, 2, 1, NULL),
+(452, '0', '0', '0', NULL, NULL, 69, 3, 1, NULL),
+(453, '0', '0', '0', NULL, NULL, 69, 4, 1, NULL),
+(454, '0', '0', '0', NULL, NULL, 69, 5, 1, NULL),
+(456, '0', '0', '0', NULL, NULL, 69, 7, 1, NULL),
+(457, '0', '0', '0', NULL, NULL, 69, 8, 1, NULL),
+(459, '0', '0', '0', NULL, NULL, 69, 10, 1, NULL),
+(462, '0', '0', '0', NULL, NULL, 52, 9, 1, NULL),
+(484, '0', '0', '0', NULL, NULL, 72, 1, 1, NULL),
+(485, '0', '0', '0', NULL, NULL, 72, 2, 1, NULL),
+(486, '0', '0', '0', NULL, NULL, 72, 3, 1, NULL),
+(487, '0', '0', '0', NULL, NULL, 72, 4, 1, NULL),
+(488, '0', '0', '0', NULL, NULL, 72, 5, 1, NULL),
+(489, '0', '0', '0', NULL, NULL, 72, 6, 1, NULL),
+(490, '0', '0', '0', NULL, NULL, 72, 7, 1, NULL),
+(491, '0', '0', '0', NULL, NULL, 72, 8, 1, NULL),
+(492, '0', '0', '0', NULL, NULL, 72, 10, 1, NULL),
+(493, '0', '0', '0', NULL, NULL, 72, 9, 1, NULL),
+(494, '0', '0', '0', NULL, NULL, 74, 1, 1, NULL),
+(495, '0', '0', '0', NULL, NULL, 74, 3, 1, NULL),
+(496, '0', '0', '0', NULL, NULL, 74, 4, 1, NULL),
+(497, '0', '0', '0', NULL, NULL, 74, 5, 1, NULL),
+(498, '0', '0', '0', NULL, NULL, 74, 7, 1, NULL),
+(499, '0', '0', '0', NULL, NULL, 74, 8, 1, NULL),
+(500, '0', '0', '0', NULL, NULL, 74, 9, 1, NULL),
+(501, '0', '0', '0', NULL, NULL, 74, 10, 1, NULL),
+(502, '0', '0', '0', NULL, NULL, 75, 1, 1, NULL),
+(503, '0', '0', '0', NULL, NULL, 75, 3, 1, NULL),
+(504, '0', '0', '0', NULL, NULL, 75, 4, 1, NULL),
+(505, '0', '0', '0', NULL, NULL, 75, 5, 1, NULL),
+(506, '0', '0', '0', NULL, NULL, 75, 7, 1, NULL),
+(507, '0', '0', '0', NULL, NULL, 75, 8, 1, NULL),
+(508, '0', '0', '0', NULL, NULL, 75, 9, 1, NULL),
+(509, '0', '0', '0', NULL, NULL, 75, 10, 1, NULL),
+(510, '0', '0', '0', NULL, NULL, 76, 1, 1, NULL),
+(511, '0', '0', '0', NULL, NULL, 77, 1, 1, NULL),
+(512, '0', '0', '0', NULL, NULL, 77, 4, 1, NULL),
+(513, '0', '0', '0', NULL, NULL, 78, 1, 1, NULL),
+(514, '0', '0', '0', NULL, NULL, 78, 4, 1, NULL),
+(515, '0', '0', '0', NULL, NULL, 79, 1, 1, NULL),
+(516, '0', '0', '0', NULL, NULL, 80, 1, 1, NULL),
+(517, '0', '0', '0', NULL, NULL, 80, 4, 1, NULL),
+(518, '0', '0', '0', NULL, NULL, 81, 1, 1, NULL),
+(519, '0', '0', '0', NULL, NULL, 81, 2, 1, NULL),
+(520, '0', '0', '0', NULL, NULL, 81, 3, 1, NULL),
+(521, '0', '0', '0', NULL, NULL, 81, 4, 1, NULL),
+(522, '0', '0', '0', NULL, NULL, 81, 5, 1, NULL),
+(523, '0', '0', '0', NULL, NULL, 81, 6, 1, NULL),
+(524, '0', '0', '0', NULL, NULL, 81, 7, 1, NULL),
+(525, '0', '0', '0', NULL, NULL, 81, 8, 1, NULL),
+(526, '0', '0', '0', NULL, NULL, 81, 9, 1, NULL),
+(527, '0', '0', '0', NULL, NULL, 81, 10, 1, NULL),
+(528, '0', '0', '0', NULL, NULL, 82, 1, 1, NULL),
+(529, '0', '0', '0', NULL, NULL, 82, 3, 1, NULL),
+(530, '0', '0', '0', NULL, NULL, 82, 4, 1, NULL),
+(531, '0', '0', '0', NULL, NULL, 82, 5, 1, NULL),
+(532, '0', '0', '0', NULL, NULL, 82, 7, 1, NULL),
+(533, '0', '0', '0', NULL, NULL, 82, 8, 1, NULL),
+(534, '0', '0', '0', NULL, NULL, 82, 9, 1, NULL),
+(535, '0', '0', '0', NULL, NULL, 82, 10, 1, NULL),
+(536, '0', '0', '0', NULL, NULL, 83, 1, 1, NULL),
+(537, '0', '0', '0', NULL, NULL, 83, 2, 1, NULL),
+(538, '0', '0', '0', NULL, NULL, 83, 3, 1, NULL),
+(539, '0', '0', '0', NULL, NULL, 83, 4, 1, NULL),
+(540, '0', '0', '0', NULL, NULL, 83, 5, 1, NULL),
+(541, '0', '0', '0', NULL, NULL, 83, 6, 1, NULL),
+(542, '0', '0', '0', NULL, NULL, 83, 7, 1, NULL),
+(543, '0', '0', '0', NULL, NULL, 83, 8, 1, NULL),
+(544, '0', '0', '0', NULL, NULL, 83, 9, 1, NULL),
+(545, '0', '0', '0', NULL, NULL, 83, 10, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -890,37 +934,42 @@ CREATE TABLE `detalle_proyecto` (
   `negocio_idnegocio` tinyint(4) NOT NULL,
   `estado_idestado` tinyint(4) NOT NULL,
   `PNC` tinyint(1) NOT NULL,
-  `ubicacion` varchar(25) DEFAULT NULL
+  `ubicacion` varchar(25) DEFAULT NULL,
+  `ejecucion` tinyint(1) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `detalle_proyecto`
 --
 
-INSERT INTO `detalle_proyecto` (`idDetalle_proyecto`, `tipo_negocio_idtipo_negocio`, `canitadad_total`, `material`, `proyecto_numero_orden`, `negocio_idnegocio`, `estado_idestado`, `PNC`, `ubicacion`) VALUES
-(30, 5, '100', 'lexan', 28520, 2, 1, 0, NULL),
-(31, 1, '100', '', 28520, 3, 1, 0, NULL),
-(34, 2, '2', 'FV', 28520, 1, 1, 1, 'Quimicos'),
-(36, 2, '100', 'FV', 28524, 1, 1, 0, NULL),
-(37, 3, '2', 'FV', 28524, 1, 1, 0, NULL),
-(41, 4, '1', 'FV', 28524, 1, 1, 0, NULL),
-(42, 6, '1', '', 28524, 1, 1, 0, NULL),
-(43, 1, '100', 'TH', 28524, 1, 1, 0, NULL),
-(44, 1, '10', 'TH', 28525, 1, 1, 0, NULL),
-(45, 1, '100', 'TH', 28526, 1, 1, 0, NULL),
-(46, 7, '100', 'FV', 28526, 1, 1, 0, NULL),
-(52, 5, '70', 'Lexan', 28522, 2, 1, 0, NULL),
-(65, 7, '80', 'TH', 28522, 1, 1, 0, NULL),
-(66, 6, '10', '', 28522, 1, 1, 0, NULL),
-(67, 5, '10', 'Lexan', 28521, 2, 1, 0, NULL),
-(69, 1, '90', 'TH', 28522, 1, 1, 0, NULL),
-(72, 1, '30', 'TH', 28523, 1, 1, 0, NULL),
-(73, 5, '10', 'Lexan', 28524, 2, 1, 0, NULL),
-(74, 2, '100', 'FV', 28522, 1, 1, 0, NULL),
-(75, 2, '10', 'FV', 28520, 1, 1, 0, NULL),
-(76, 6, '1', '', 28520, 1, 1, 0, NULL),
-(77, 3, '10', 'FV', 28520, 1, 1, 0, NULL),
-(78, 4, '10', 'FV', 28520, 1, 1, 0, NULL);
+INSERT INTO `detalle_proyecto` (`idDetalle_proyecto`, `tipo_negocio_idtipo_negocio`, `canitadad_total`, `material`, `proyecto_numero_orden`, `negocio_idnegocio`, `estado_idestado`, `PNC`, `ubicacion`, `ejecucion`) VALUES
+(30, 5, '100', 'lexan', 28520, 2, 1, 0, NULL, 0),
+(31, 1, '100', '', 28520, 3, 1, 0, NULL, 0),
+(34, 2, '2', 'FV', 28520, 1, 1, 1, 'Quimicos', 0),
+(36, 2, '100', 'FV', 28524, 1, 1, 0, NULL, 0),
+(37, 3, '2', 'FV', 28524, 1, 1, 0, NULL, 0),
+(41, 4, '1', 'FV', 28524, 1, 1, 0, NULL, 0),
+(42, 6, '1', '', 28524, 1, 1, 0, NULL, 0),
+(43, 1, '100', 'TH', 28524, 1, 1, 0, NULL, 0),
+(44, 1, '10', 'TH', 28525, 1, 1, 0, NULL, 0),
+(45, 1, '100', 'TH', 28526, 1, 1, 0, NULL, 0),
+(46, 7, '100', 'FV', 28526, 1, 1, 0, NULL, 0),
+(52, 5, '70', 'Lexan', 28522, 2, 1, 0, NULL, 0),
+(65, 7, '80', 'TH', 28522, 1, 1, 0, NULL, 0),
+(67, 5, '10', 'Lexan', 28521, 2, 1, 0, NULL, 0),
+(69, 1, '90', 'TH', 28522, 1, 1, 0, NULL, 0),
+(72, 1, '30', 'TH', 28523, 1, 1, 0, NULL, 0),
+(73, 5, '10', 'Lexan', 28524, 2, 1, 0, NULL, 0),
+(74, 2, '100', 'FV', 28522, 1, 1, 0, NULL, 0),
+(75, 2, '10', 'FV', 28520, 1, 1, 0, NULL, 0),
+(76, 6, '1', '', 28520, 1, 1, 0, NULL, 0),
+(77, 3, '10', 'FV', 28520, 1, 1, 0, NULL, 0),
+(78, 4, '10', 'FV', 28520, 1, 1, 0, NULL, 0),
+(79, 6, '1', '', 28522, 1, 1, 0, NULL, 0),
+(80, 4, '10', 'FV', 28522, 1, 1, 0, NULL, 0),
+(81, 7, '10', NULL, 28522, 1, 1, 1, 'Screen', 0),
+(82, 2, '10', NULL, 28522, 1, 1, 1, 'Quemado', 0),
+(83, 7, '10', NULL, 28522, 1, 1, 1, 'Estañado', 0);
 
 -- --------------------------------------------------------
 
@@ -1082,7 +1131,7 @@ CREATE TABLE `proyecto` (
 INSERT INTO `proyecto` (`numero_orden`, `usuario_numero_documento`, `nombre_cliente`, `nombre_proyecto`, `tipo_proyecto`, `FE`, `TE`, `IN`, `pcb_FE`, `pcb_TE`, `Conversor`, `Repujado`, `troquel`, `stencil`, `lexan`, `fecha_ingreso`, `fecha_entrega`, `fecha_salidal`, `ruteoC`, `antisolderC`, `estado_idestado`, `antisolderP`, `ruteoP`) VALUES
 (28520, '98113053240', 'juan david marulanda', 'rude', 'Normal', 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, '2017-10-04 11:04:25', '2017-11-30', NULL, 0, 0, 1, 0, 0),
 (28521, '98113053240', 'el viejo ', 'roller foreverl life', 'RQT', 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, '2017-10-06 08:13:27', '2017-10-14', NULL, 0, 0, 1, 0, 0),
-(28522, '98113053240', 'gato', 'el gato', 'Quick', 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, '2017-10-06 09:22:41', '2017-10-07', NULL, 0, 0, 1, 1, 1),
+(28522, '98113053240', 'gato', 'el gato', 'Quick', 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, '2017-10-06 09:22:41', '2017-10-07', NULL, 0, 0, 1, 1, 1),
 (28523, '98113053240', 'anderson', 'i\'am into you', 'Quick', 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, '2017-10-09 23:10:10', '2017-10-13', NULL, 1, 1, 1, 0, 0),
 (28524, '98113053240', 'camilo rios', 'el tecnoparque nodo medellin', 'Quick', 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, '2017-10-10 19:55:03', '2017-10-11', NULL, 1, 0, 1, 0, 0),
 (28525, '98113053240', 'Tecrea', 'cronometrosFE', 'Normal', 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, '2017-10-11 15:21:41', '2017-10-13', NULL, 1, 0, 1, 0, 0),
@@ -1155,8 +1204,8 @@ INSERT INTO `usuario` (`numero_documento`, `tipo_documento`, `nombres`, `apellid
 ('1216727816', 'CC', 'juan david', 'marulanda p', 1, NULL, 1, '1216727816', 0),
 ('981130', 'CC', 'sivia hortensia', 'paniagua gomez', 4, NULL, 1, '981130', 0),
 ('98113053', 'CC', 'Catalina', ' rosario', 1, NULL, 1, '98113053', 0),
-('98113053240', 'CC', 'juan david ', 'marulito', 1, NULL, 1, '98113053240', 0),
-('9813053240', 'CC', 'sergio andresss', 'marulanda', 2, NULL, 1, '9813053240', 1),
+('98113053240', 'CC', 'juan david ', 'marulito', 1, NULL, 1, '98113053240', 1),
+('9813053240', 'CC', 'sergio andresss', 'marulanda', 2, NULL, 1, '9813053240', 0),
 ('99120101605', 'CC', 'sadasd', 'dasdas', 1, NULL, 1, '99120101605', 0);
 
 --
@@ -1275,13 +1324,13 @@ ALTER TABLE `detalle_ensamble`
 -- AUTO_INCREMENT de la tabla `detalle_formato_estandar`
 --
 ALTER TABLE `detalle_formato_estandar`
-  MODIFY `idDetalle_formato_estandar` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=515;
+  MODIFY `idDetalle_formato_estandar` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=546;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_proyecto`
 --
 ALTER TABLE `detalle_proyecto`
-  MODIFY `idDetalle_proyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `idDetalle_proyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_teclados`

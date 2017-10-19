@@ -7,9 +7,10 @@ import javax.swing.table.DefaultTableModel;
 
 public class detalleProyecto extends javax.swing.JDialog {
 
-    public detalleProyecto(java.awt.Frame parent, boolean modal, int detalle, int negocio) {
+    public detalleProyecto(java.awt.Frame parent, boolean modal, int detalle, int negocio,String orden,String tipo) {
         super(parent, modal);
         initComponents();
+        this.setTitle(orden+" - "+tipo);
         this.detalle = detalle;
         this.negocio = negocio;
         this.setLocationRelativeTo(null);
@@ -151,7 +152,7 @@ public class detalleProyecto extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                detalleProyecto dialog = new detalleProyecto(new javax.swing.JFrame(), true, 0, 0);
+                detalleProyecto dialog = new detalleProyecto(new javax.swing.JFrame(), true, 0, 0,"","");
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

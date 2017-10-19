@@ -23,7 +23,8 @@ public class DetalleProyectoM {
     boolean res = false;
 
     //Metodos----------------------------------------------------->
-    public boolean registrar_Detalle_Proycto(String cantidad, String negocio, String tipoNegocio, int estado, String numerOrden, String material, int op, int id) {
+    //Este metodo también funcionara para registrar y modificar los productos no conformes PNC.
+    public boolean registrar_Detalle_Proycto(String cantidad, String negocio, String tipoNegocio, int estado, String numerOrden, String material, int op, int id,int pnc,String ubicacion) {
         try {
             conexion = new Conexion();
             conexion.establecerConexion();
@@ -31,7 +32,7 @@ public class DetalleProyectoM {
             //Query------------------------------------------------------------>
             String Qry = "";
             if (op == 1) {
-                Qry = "SELECT FU_RegistrarDetalleProyecto(?,?,?,?,?,?)";
+                Qry = "SELECT FU_RegistrarDetalleProyecto(?,?,?,?,?,?,?,?)";
                 ps = con.prepareStatement(Qry);
                 ps.setInt(1, Integer.parseInt(numerOrden));
                 ps.setString(2, tipoNegocio);
@@ -39,6 +40,8 @@ public class DetalleProyectoM {
                 ps.setString(4, negocio);
                 ps.setInt(5, estado);
                 ps.setString(6, material);
+                ps.setInt(7, pnc);
+                ps.setString(8, ubicacion);
                 //Ejecucion de la sentencia 
                 rs = ps.executeQuery();
                 rs.next();
@@ -98,6 +101,12 @@ public class DetalleProyectoM {
         return res;
     }
 
+    public boolean regitrarPNC() {
+        
+
+        return true;
+    }
+
     public CachedRowSet consultar_Detalle_Proyecto(String numeOrden) {
         try {
             conexion = new Conexion();
@@ -107,6 +116,29 @@ public class DetalleProyectoM {
             String Qry = "CALL PA_ConsultarDetalleProyecto(?)";
             ps = con.prepareStatement(Qry);
             ps.setInt(1, Integer.parseInt(numeOrden));
+            rs = ps.executeQuery();
+            crs = new CachedRowSetImpl();
+            crs.populate(rs);
+            //Cierre de conexiones
+            conexion.cerrar(rs);
+            conexion.destruir();
+            ps.close();
+            con.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "¡Error!" + e);
+        }
+        return crs;
+    }
+
+    public CachedRowSet consultarprocesosFE(int detalle) {
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query------------------------------------------------------------>
+            String Qry = "CALL PA_ConsultarProcesosFE(?)";
+            ps = con.prepareStatement(Qry);
+            ps.setInt(1, detalle);
             rs = ps.executeQuery();
             crs = new CachedRowSetImpl();
             crs.populate(rs);
@@ -188,7 +220,7 @@ public class DetalleProyectoM {
         return res;
     }
 
-    public CachedRowSet consultarDetalleProduccion(int detalle,int negocio) {
+    public CachedRowSet consultarDetalleProduccion(int detalle, int negocio) {
         try {
             conexion = new Conexion();
             conexion.establecerConexion();

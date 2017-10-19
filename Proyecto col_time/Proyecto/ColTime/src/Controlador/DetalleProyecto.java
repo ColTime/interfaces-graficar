@@ -66,7 +66,12 @@ public class DetalleProyecto {
     //Metodos----------------------------------------------------->
     public boolean registrar_Detalle_Proycto(String numerOrden, int op, int id) {
         DetalleProyectoM obj = new DetalleProyectoM();
-        return obj.registrar_Detalle_Proycto(cantidad, negocio, tipoNegocio, 1, numerOrden, material, op, id);
+        return obj.registrar_Detalle_Proycto(cantidad, negocio, tipoNegocio, 1, numerOrden, material, op, id, 0,null);
+    }
+
+    public boolean registrarModificarPNC(String numerOrden, int op, int id,String ubicacion) {
+        DetalleProyectoM obj = new DetalleProyectoM();
+        return obj.registrar_Detalle_Proycto(cantidad, negocio, tipoNegocio, 1, numerOrden, material, op, id, 1,ubicacion);
     }
 
     public boolean modificar_Detalle_Proycto(String numerOrden) {
@@ -77,6 +82,11 @@ public class DetalleProyecto {
     public CachedRowSet consultar_Detalle_Proyecto(String numerOrden) {
         DetalleProyectoM obj = new DetalleProyectoM();
         return obj.consultar_Detalle_Proyecto(numerOrden);
+    }
+
+    public CachedRowSet consultarProcesosFE(int detalle) {
+        DetalleProyectoM obj = new DetalleProyectoM();
+        return obj.consultarprocesosFE(detalle);
     }
 
     public boolean cambiar_Estado_Detalle() {

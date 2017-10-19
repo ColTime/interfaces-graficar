@@ -1197,7 +1197,6 @@ public class proyecto extends javax.swing.JPanel {
             new rojerusan.RSNotifyAnimated("¡Error!", "Falta algun campo por diligenciar.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
         }
     }
-//     && 
 
     private void registrarModificarProyecto(int op) {
         Controlador.Proyecto obj = new Controlador.Proyecto();

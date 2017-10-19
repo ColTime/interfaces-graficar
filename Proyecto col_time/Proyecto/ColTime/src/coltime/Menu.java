@@ -1,6 +1,7 @@
 package coltime;
 
 import Vistas.CambiarContraseña;
+import Vistas.ControlDelTiempo;
 import Vistas.Producciones;
 import Vistas.Inicio;
 import Vistas.Usuarios1;
@@ -11,6 +12,7 @@ import java.awt.Color;
 import java.io.File;
 import java.io.FileInputStream;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -42,6 +44,7 @@ public class Menu extends javax.swing.JFrame {
     private int posY = 0;
     private FileInputStream strem;
     public static int cargo = 0;
+    ControlDelTiempo produc = null;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -61,6 +64,9 @@ public class Menu extends javax.swing.JFrame {
         btn1 = new rsbuttom.RSButtonMetro();
         btn4 = new rsbuttom.RSButtonMetro();
         btn3 = new rsbuttom.RSButtonMetro();
+        jTLector = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
+        agregar = new javax.swing.JButton();
         jPContenido = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -283,6 +289,23 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jPMenu.add(btn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 194, 190, 42));
+        jPMenu.add(jTLector, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, 150, 20));
+
+        jButton3.setText("producir");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPMenu.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, -1, -1));
+
+        agregar.setText("agregar");
+        agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarActionPerformed(evt);
+            }
+        });
+        jPMenu.add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 470, 70, -1));
 
         jPContenido.setLayout(new javax.swing.BoxLayout(jPContenido, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -463,6 +486,7 @@ public class Menu extends javax.swing.JFrame {
                 cambiarpanelProyecto("proyectos");
                 break;
             case 2:
+                proyecto1.cargo = cargo;
                 cambiarpanelProyecto("proyectos1");
                 break;
             case 3:
@@ -624,6 +648,26 @@ public class Menu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_formWindowClosed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if (produc == null) {
+            produc = new ControlDelTiempo();
+            produc.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+    int px = 0;
+    int py = 0;
+    private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
+        produc.RegistrarTomaTiempoNegocio(jTLector.getText());    
+    }//GEN-LAST:event_agregarActionPerformed
+//Metodos de la clase menu----------------------------------------------------->
+
+    public void permisoUtilizarLector() {
+        if (cargo !=1 || cargo !=4 ) {
+           jTLector.setEnabled(false);
+           jTLector.setVisible(false);
+        }
+    }
+
     public void sesion(int sec, String doc) {
         Controlador.Usuario obj = new Controlador.Usuario();
         obj.sesion(sec, doc);
@@ -694,6 +738,7 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton agregar;
     public rsbuttom.RSButtonMetro btn1;
     public rsbuttom.RSButtonMetro btn2;
     public rsbuttom.RSButtonMetro btn3;
@@ -701,6 +746,7 @@ public class Menu extends javax.swing.JFrame {
     public javax.swing.JButton btnMenu;
     public javax.swing.JButton jButton1;
     public javax.swing.JButton jButton2;
+    public javax.swing.JButton jButton3;
     public static javax.swing.JLabel jDocumento;
     public javax.swing.JInternalFrame jInternalFrame1;
     public javax.swing.JLabel jLabel2;
@@ -718,9 +764,11 @@ public class Menu extends javax.swing.JFrame {
     public javax.swing.JPanel jPanel4;
     public javax.swing.JPanel jPanel5;
     public javax.swing.JPanel jPanel6;
+    public javax.swing.JTextField jTLector;
     public rojerusan.RSFotoCircle rSUsuario;
     // End of variables declaration//GEN-END:variables
 //Metodos--------------------------------------->
+    //La parte de capturar y gusrdadr la imagen de perfil no se a realizado.
     public void CapturaImagen() {
         File obj = new File(rSUsuario.image.toString());
     }
