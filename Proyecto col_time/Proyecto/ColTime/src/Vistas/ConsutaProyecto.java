@@ -739,6 +739,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
 //Metodos---------------------------------------------------------------------->
 
     private void activarCamposproyecto(proyecto obj) {
+        obj.btnNuevo.setEnabled(true);
         obj.jTNombreCliente.setEnabled(true);
         obj.jTNombreProyecto.setEnabled(true);
         obj.jDentrega.setEnabled(true);

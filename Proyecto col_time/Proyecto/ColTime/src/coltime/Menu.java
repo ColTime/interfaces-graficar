@@ -26,6 +26,7 @@ public class Menu extends javax.swing.JFrame {
     public Color corF = new Color(219, 219, 219);
     Producciones bp = null;
     private int longitudByte;
+    int cont = 0;
 
     public Menu(int cargo) {
         initComponents();
@@ -44,7 +45,11 @@ public class Menu extends javax.swing.JFrame {
     private int posY = 0;
     private FileInputStream strem;
     public static int cargo = 0;
-    ControlDelTiempo produc = null;
+    static ControlDelTiempo producF = null;
+    static ControlDelTiempo producT = null;
+    static ControlDelTiempo producE = null;
+    int px = 0, cantidad = 0, unidad = 13;
+    int py = 0, filas = 1;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -65,7 +70,6 @@ public class Menu extends javax.swing.JFrame {
         btn4 = new rsbuttom.RSButtonMetro();
         btn3 = new rsbuttom.RSButtonMetro();
         jTLector = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
         agregar = new javax.swing.JButton();
         jPContenido = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -290,14 +294,6 @@ public class Menu extends javax.swing.JFrame {
         });
         jPMenu.add(btn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 194, 190, 42));
         jPMenu.add(jTLector, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, 150, 20));
-
-        jButton3.setText("producir");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jPMenu.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, -1, -1));
 
         agregar.setText("agregar");
         agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -648,23 +644,42 @@ public class Menu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_formWindowClosed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if (produc == null) {
-            produc = new ControlDelTiempo();
-            produc.setVisible(true);
-        }
-    }//GEN-LAST:event_jButton3ActionPerformed
-    int px = 0;
-    int py = 0;
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
-        produc.RegistrarTomaTiempoNegocio(jTLector.getText());    
+        String infoP[] = jTLector.getText().split(";");
+        switch (Integer.parseInt(infoP[2])) {
+            case 1:
+                if (producF == null) {
+                    producF = new ControlDelTiempo();
+                    producF.setTitle("Formato estandar");
+                    producF.setVisible(true);
+                }
+                producF.RegistrarTomaTiempoNegocio(infoP, cargo, producF);
+                break;
+            case 2:
+                if (producT == null) {
+                    producF = new ControlDelTiempo();
+                    producF.setTitle("Formato estandar");
+                    producF.setVisible(true);
+                }
+                producT.RegistrarTomaTiempoNegocio(infoP, cargo, producT);
+                break;
+            case 3:
+                if (producE==null) {
+                    producE = new ControlDelTiempo();
+                    producE.setTitle("Ensamble");
+                    producE.setVisible(true);
+                }
+                producE.RegistrarTomaTiempoNegocio(infoP, cargo, producE);
+                break;
+        }
     }//GEN-LAST:event_agregarActionPerformed
 //Metodos de la clase menu----------------------------------------------------->
 
+    //Este procedimiento es para validar quienes tienen permiso de utilizar el lector (Encargados FE-TE-EN)
     public void permisoUtilizarLector() {
-        if (cargo !=1 || cargo !=4 ) {
-           jTLector.setEnabled(false);
-           jTLector.setVisible(false);
+        if (cargo != 1 || cargo != 4) {
+            jTLector.setEnabled(false);
+            jTLector.setVisible(false);
         }
     }
 
@@ -746,7 +761,6 @@ public class Menu extends javax.swing.JFrame {
     public javax.swing.JButton btnMenu;
     public javax.swing.JButton jButton1;
     public javax.swing.JButton jButton2;
-    public javax.swing.JButton jButton3;
     public static javax.swing.JLabel jDocumento;
     public javax.swing.JInternalFrame jInternalFrame1;
     public javax.swing.JLabel jLabel2;

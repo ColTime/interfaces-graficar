@@ -5,13 +5,21 @@
  */
 package Vistas;
 
+import Controlador.FE_TE_IN;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import rojerusan.RSNotifyAnimated;
 
 /**
  *
  * @author Aprendiz
  */
-public class ControlDelTiempo extends javax.swing.JFrame {
+public class ControlDelTiempo extends javax.swing.JFrame implements ActionListener {
 
     /**
      * Creates new form ControlDelTiempo
@@ -24,7 +32,8 @@ public class ControlDelTiempo extends javax.swing.JFrame {
     //Variables---------------------------------------------------------------->
     int px = 0;
     int py = 0;
-    int cantidad = 0;
+    static int cantidad = 0, filas = 1, unidad = 14, conta = 8;
+    boolean res = false;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -36,6 +45,11 @@ public class ControlDelTiempo extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1456, 1456));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -89,23 +103,76 @@ public class ControlDelTiempo extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+         if(this.contenidoFE.getComponentCount()==0){
+             this.dispose();
+         }else{
+             new rojerusan.RSNotifyAnimated("¡Alerta!", "No puedes cerrar esta ventana mientras esta en ejecucion la toma de tiempos", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
+         }
+    }//GEN-LAST:event_formWindowClosed
     //Metodos para la campura del tiempo--------------------------------------->
 
-    public void validarExitenciadeBotones(int orden) {
-
+    //
+    //Se valida que el bono no exista en el panle para no reprtirlo***  
+    public void validarExitenciadeBotones(int orden, ControlDelTiempo vista) {
+        int cantidad = vista.contenidoFE.getComponentCount();
+        if (cantidad == 0) {
+            //Se agrega el boton con el numero de la orden al cual se le registro la toma de tiempo inicial.
+            agregarBotones(vista, orden);
+        } else {
+            //Se valida que el boton no vuleva a existir
+            for (int i = 0; i < cantidad; i++) {
+                String nombre = vista.getComponent(i).getName();
+                //Se valida el nombre de cada componenete para no repetirlo
+            }
+        }
     }
 
-    public void RegistrarTomaTiempoNegocio(String datos) {
-        
+    public void RegistrarTomaTiempoNegocio(String datos[], int cargo, ControlDelTiempo vista) {
+        FE_TE_IN obj = new FE_TE_IN();
+        if (cargo == 2 && (Integer.parseInt(datos[2]) == 1 || Integer.parseInt(datos[2]) == 2)) {
+            res = obj.iniciar_Toma_Tiempo(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]), Integer.parseInt(datos[2]), Integer.parseInt(datos[3]));
+        } else if (cargo == 3 && Integer.parseInt(datos[2]) == 3) {
+            res = obj.iniciar_Toma_Tiempo(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]), Integer.parseInt(datos[2]), Integer.parseInt(datos[3]));
+        } else {
+            new rojerusan.RSNotifyAnimated("¡Alerta!", "No tienes permiso de leer el QR", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
+            vista.dispose();
+        }
+        if (res) {
+            validarExitenciadeBotones(Integer.parseInt(datos[0]), vista);
+        }
     }
 
-    public void agregarBotones() {
-        JButton obj = new JButton();
+    public void agregarBotones(ControlDelTiempo vista, int orden) {
+        JButton obj = new JButton(String.valueOf(orden));
+        obj.setActionCommand(String.valueOf(orden));
+        obj.setName(String.valueOf(orden));
         obj.setBounds(px, py, 100, 100);
+        obj.addActionListener(this);
+        //Icono del boton
+        ImageIcon icono = new ImageIcon("src\\img\\detalle.png");
+        Icon imagen = new ImageIcon(icono.getImage().getScaledInstance(obj.getWidth() - 5, obj.getHeight() - 5, Image.SCALE_DEFAULT));
+        obj.setIcon(imagen);
         px += 101;
         cantidad++;
-        ControlDelTiempo.contenidoFE.add(obj);
-        ControlDelTiempo.contenidoFE.updateUI();
+       if (cantidad == unidad * filas) {
+                    py += 101;
+                    px = 0;
+                    filas++;
+                    if (cantidad == unidad * conta) {
+                        vista.contenidoFE.setPreferredSize(new Dimension(vista.contenidoFE.getWidth(), vista.contenidoFE.getHeight()+496));
+                        conta += 8;
+                    }
+                    vista.contenidoFE.updateUI();
+                }
+        vista.contenidoFE.add(obj);
+        vista.contenidoFE.updateUI();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -144,8 +211,9 @@ public class ControlDelTiempo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JPanel contenidoFE;
+    public javax.swing.JPanel contenidoFE;
     private javax.swing.JPanel jPanel1;
     public static javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
 }

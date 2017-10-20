@@ -7,10 +7,10 @@ import javax.swing.table.DefaultTableModel;
 
 public class detalleProyecto extends javax.swing.JDialog {
 
-    public detalleProyecto(java.awt.Frame parent, boolean modal, int detalle, int negocio,String orden,String tipo) {
+    public detalleProyecto(java.awt.Frame parent, boolean modal, int detalle, int negocio, String orden, String tipo) {
         super(parent, modal);
         initComponents();
-        this.setTitle(orden+" - "+tipo);
+        this.setTitle(orden + " - " + tipo);
         this.detalle = detalle;
         this.negocio = negocio;
         this.setLocationRelativeTo(null);
@@ -30,7 +30,7 @@ public class detalleProyecto extends javax.swing.JDialog {
         TDetalleProduccion = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(900, 300));
+        setMinimumSize(new java.awt.Dimension(955, 300));
         setPreferredSize(new java.awt.Dimension(900, 300));
 
         TDetalleProduccion = new javax.swing.JTable(){
@@ -69,7 +69,7 @@ public class detalleProyecto extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 863, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -100,9 +100,9 @@ public class detalleProyecto extends javax.swing.JDialog {
     }
 
     private void cargarTabla() {
-        String encabezado[] = {"Proceso", "Fecha inicio", "Fecha fin", "Cantidad procesada", "Tiempo total min", "Tiempo unidad min", "Estado"};
+        String encabezado[] = {"Proceso", "Fecha inicio", "Fecha fin", "Cantidad procesada", "Tiempo total min", "Tiempo unidad min", "Estado", "Hora de ejecución"};
         DefaultTableModel ds = new DefaultTableModel(null, encabezado);
-        String v[] = new String[7];
+        String v[] = new String[8];
         try {
             crs = consuldateDetalleProduccion();
             while (crs.next()) {
@@ -113,12 +113,22 @@ public class detalleProyecto extends javax.swing.JDialog {
                 v[4] = crs.getString(5);
                 v[5] = crs.getString(6);
                 v[6] = crs.getString(7);
-
+                v[7] = crs.getString(8);
                 ds.addRow(v);
             }
             TDetalleProduccion.setModel(ds);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error!" + e);
+        }
+    }
+    //La funcion de este metodo es cambiar el color de la celda estada deacuedo a l contenido de este
+    private void ColorCeldas() {
+        int filas = TDetalleProduccion.getRowCount();
+        for (int i = 0; i <filas; i++) {
+            String estado=TDetalleProduccion.getValueAt(i,6).toString();
+            if(estado.equals("Ejecucion")){
+//                TDetalleProduccion.setC
+            }
         }
     }
 
@@ -152,7 +162,7 @@ public class detalleProyecto extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                detalleProyecto dialog = new detalleProyecto(new javax.swing.JFrame(), true, 0, 0,"","");
+                detalleProyecto dialog = new detalleProyecto(new javax.swing.JFrame(), true, 0, 0, "", "");
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

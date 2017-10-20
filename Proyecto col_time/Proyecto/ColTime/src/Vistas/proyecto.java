@@ -44,7 +44,7 @@ public class proyecto extends javax.swing.JPanel {
     static int op = 0;
     boolean v[] = new boolean[11];
     int udm = 0, resol = 100, rot = 0;
-    float mi = 0.000f, md = 0.000f, ms = 0.000f, min = 0.000f, tam = 4.000f;
+    float mi = 0.000f, md = 0.000f, ms = 0.000f, min = 0.000f, tam = 20.000f;
     static String fecha = "";
 
     private void visibilidadID() {
@@ -542,10 +542,10 @@ public class proyecto extends javax.swing.JPanel {
         jDentrega.setDateFormatString("dd/MM/yyyy");
         jDentrega.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jDentrega.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jDentregaCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
 
@@ -1109,7 +1109,7 @@ public class proyecto extends javax.swing.JPanel {
             //Tabla y encabezado
             PdfPTable tabla = new PdfPTable(3);
             PdfPCell header = new PdfPCell(new Paragraph("Orden numero: " + jTNorden.getText() + "\n"));
-            Image logo = Image.getInstance("C:\\Users\\Aprendiz\\Desktop\\actual\\interfaces-graficar\\Proyecto col_time\\Proyecto\\ColTime\\src\\imagenesEmpresa\\logo.png");
+            Image logo = Image.getInstance("src\\imagenesEmpresa\\logo.png");
             logo.scaleAbsolute(300, 125);
             logo.setAlignment(Image.ALIGN_CENTER);
 
@@ -1120,7 +1120,9 @@ public class proyecto extends javax.swing.JPanel {
             tabla.setWidths(new float[]{3, 3, 3});
             //se creo y se abrio el documento
             Document doc = new Document(PageSize.A4, 20, 20, 30, 30);
-            PdfWriter pdf = PdfWriter.getInstance(doc, new FileOutputStream("C:\\Users\\Aprendiz\\Desktop\\actual\\interfaces-graficar\\Proyecto col_time\\Proyecto\\ColTime\\PDF\\" + jTNorden.getText() + ".pdf"));
+            //se obtine la ruta del proyecto en tiempo de ejecucion.
+            String ruta = System.getProperty("user.dir");
+            PdfWriter pdf = PdfWriter.getInstance(doc, new FileOutputStream(ruta + "\\PDF\\" + jTNorden.getText() + ".pdf"));
             doc.open();
             doc.add(logo);
             fecha();
@@ -1128,7 +1130,7 @@ public class proyecto extends javax.swing.JPanel {
             while (crs.next()) {
                 //Creo la cadena de texto que contendra el QR
                 QRCode cod = new QRCode();
-                String texto = jTNorden.getText() + ';' + crs.getInt(1) + ';' + crs.getInt(2);
+                String texto = jTNorden.getText() + ';' + crs.getInt(1) + ';' + crs.getInt(3);
                 cod.setData(texto);
                 cod.setDataMode(QRCode.MODE_BYTE);
 
@@ -1140,9 +1142,9 @@ public class proyecto extends javax.swing.JPanel {
                 cod.setBottomMargin(min);
                 cod.setRotate(rot);
                 cod.setModuleSize(tam);
-                cod.renderBarcode("C:\\Users\\Aprendiz\\Desktop\\actual\\interfaces-graficar\\Proyecto col_time\\Proyecto\\ColTime\\ImágenesQR\\" + texto + ".png");
+                cod.renderBarcode(ruta + "\\ImágenesQR\\" + texto + ".png");
 
-                Image imagenQR = Image.getInstance("C:\\Users\\Aprendiz\\Desktop\\actual\\interfaces-graficar\\Proyecto col_time\\Proyecto\\ColTime\\ImágenesQR\\" + texto + ".png");
+                Image imagenQR = Image.getInstance(ruta + "\\ImágenesQR\\" + texto + ".png");
                 imagenQR.setWidthPercentage(90);
                 imagenQR.setAlignment(Image.ALIGN_CENTER);
                 //Personalizar cell
@@ -1152,8 +1154,8 @@ public class proyecto extends javax.swing.JPanel {
                 celda.addElement(imagenQR);
                 tabla.addCell(celda);
 
-                File QRdelet = new File("C:\\Users\\Aprendiz\\Desktop\\actual\\interfaces-graficar\\Proyecto col_time\\Proyecto\\ColTime\\ImágenesQR\\" + texto + ".png");
-                QRdelet.delete();
+//                File QRdelet = new File(ruta + "\\ImágenesQR\\" + texto + ".png");
+//                QRdelet.delete();
             }
             header.setBorder(Rectangle.NO_BORDER);
             header.addElement(new Paragraph());
@@ -1175,7 +1177,7 @@ public class proyecto extends javax.swing.JPanel {
                 || (jCTeclado.isSelected() && !jTTeclado.getText().equals(""))
                 || (jCCircuito.isSelected()) || (jCPCBTE.isSelected())
                 || (jCIntegracion.isSelected() && !jTIntegracion.getText().equals("")))) {
-                //Flata que la validacion de campos funcione
+            //Flata que la validacion de campos funcione
             if (!jCCircuito.isSelected() == false || !jCPCBTE.isSelected() == false) {
                 //Si solo es seleccionado el circuito.
                 if ((jCCircuito.isSelected() && (cbMaterialCircuito.getSelectedIndex() != 0 && !jTCircuito.getText().equals(""))) && jCPCBTE.isSelected() == false) {
@@ -1779,7 +1781,7 @@ public class proyecto extends javax.swing.JPanel {
     private javax.swing.JButton btnDelete;
     public static elaprendiz.gui.button.ButtonColoredAction btnGenerarQR;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnNuevo;
+    public static javax.swing.JButton btnNuevo;
     public static javax.swing.JButton btnUpdate;
     public static elaprendiz.gui.comboBox.ComboBoxRound cbMaterialCircuito;
     public static elaprendiz.gui.comboBox.ComboBoxRound cbMaterialPCBTE;
