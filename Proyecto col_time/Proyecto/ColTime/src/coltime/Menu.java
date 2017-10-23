@@ -45,9 +45,9 @@ public class Menu extends javax.swing.JFrame {
     private int posY = 0;
     private FileInputStream strem;
     public static int cargo = 0;
-    static ControlDelTiempo producF = null;
-    static ControlDelTiempo producT = null;
-    static ControlDelTiempo producE = null;
+    public static ControlDelTiempo producF = null;
+    public static ControlDelTiempo producT = null;
+    public static ControlDelTiempo producE = null;
     int px = 0, cantidad = 0, unidad = 13;
     int py = 0, filas = 1;
 
@@ -657,9 +657,9 @@ public class Menu extends javax.swing.JFrame {
                 break;
             case 2:
                 if (producT == null) {
-                    producF = new ControlDelTiempo();
-                    producF.setTitle("Formato estandar");
-                    producF.setVisible(true);
+                    producT = new ControlDelTiempo();
+                    producT.setTitle("Teclados");
+                    producT.setVisible(true);
                 }
                 producT.RegistrarTomaTiempoNegocio(infoP, cargo, producT);
                 break;

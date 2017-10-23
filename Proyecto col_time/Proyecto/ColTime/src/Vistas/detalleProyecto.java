@@ -1,6 +1,7 @@
 package Vistas;
 
 import Controlador.DetalleProyecto;
+import Controlador.FormatoTabla;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -100,9 +101,9 @@ public class detalleProyecto extends javax.swing.JDialog {
     }
 
     private void cargarTabla() {
-        String encabezado[] = {"Proceso", "Fecha inicio", "Fecha fin", "Cantidad procesada", "Tiempo total min", "Tiempo unidad min", "Estado", "Hora de ejecución"};
+        String encabezado[] = {"Proceso", "Fecha inicio", "Fecha fin", "Cantidad procesada", "Tiempo total min", "Tiempo unidad min", "Estado", "Hora de ejecución","Tiempo Ejecucion"};
         DefaultTableModel ds = new DefaultTableModel(null, encabezado);
-        String v[] = new String[8];
+        String v[] = new String[9];
         try {
             crs = consuldateDetalleProduccion();
             while (crs.next()) {
@@ -114,12 +115,17 @@ public class detalleProyecto extends javax.swing.JDialog {
                 v[5] = crs.getString(6);
                 v[6] = crs.getString(7);
                 v[7] = crs.getString(8);
+                v[8] = crs.getString(9);
                 ds.addRow(v);
             }
             TDetalleProduccion.setModel(ds);
+            FormatoTabla ft=new FormatoTabla(6);
+            TDetalleProduccion.setDefaultRenderer(Object.class, ft);
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error!" + e);
         }
+        
     }
     //La funcion de este metodo es cambiar el color de la celda estada deacuedo a l contenido de este
     private void ColorCeldas() {
@@ -127,7 +133,7 @@ public class detalleProyecto extends javax.swing.JDialog {
         for (int i = 0; i <filas; i++) {
             String estado=TDetalleProduccion.getValueAt(i,6).toString();
             if(estado.equals("Ejecucion")){
-//                TDetalleProduccion.setC
+               
             }
         }
     }

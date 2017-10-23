@@ -6,13 +6,16 @@
 package Vistas;
 
 import Controlador.FE_TE_IN;
+import coltime.Menu;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.sql.rowset.CachedRowSet;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import rojerusan.RSNotifyAnimated;
 
 /**
@@ -34,6 +37,8 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
     int py = 0;
     static int cantidad = 0, filas = 1, unidad = 14, conta = 8;
     boolean res = false;
+    ControlDelTiempo vista = null;
+    CachedRowSet crs = null;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -46,8 +51,8 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1456, 1456));
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
             }
         });
 
@@ -104,43 +109,64 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-         if(this.contenidoFE.getComponentCount()==0){
-             this.dispose();
-         }else{
-             new rojerusan.RSNotifyAnimated("¡Alerta!", "No puedes cerrar esta ventana mientras esta en ejecucion la toma de tiempos", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
-         }
-    }//GEN-LAST:event_formWindowClosed
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        if (this.contenidoFE.getComponentCount() == 0) {
+            this.dispose();
+            //Si la ventana es cerrada la variable de instancia es igualada a null
+            if (Menu.producF == vista) {
+                
+            } else if (Menu.producE == vista) {
+
+            } else if (Menu.producT == vista) {
+
+            }
+        } else {
+            new rojerusan.RSNotifyAnimated("¡Alerta!", "No puedes cerrar esta ventana mientras esta en ejecucion la toma de tiempos", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
+            this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        }
+    }//GEN-LAST:event_formWindowClosing
     //Metodos para la campura del tiempo--------------------------------------->
 
     //
     //Se valida que el bono no exista en el panle para no reprtirlo***  
-    public void validarExitenciadeBotones(int orden, ControlDelTiempo vista) {
+    public void validarExitenciadeBotones(int orden, int negocio, ControlDelTiempo vista) {
         int cantidad = vista.contenidoFE.getComponentCount();
         if (cantidad == 0) {
             //Se agrega el boton con el numero de la orden al cual se le registro la toma de tiempo inicial.
             agregarBotones(vista, orden);
         } else {
-            //Se valida que el boton no vuleva a existir
+            FE_TE_IN obj = new FE_TE_IN();
+            //Buscamos los proyectos que estan en ejecucion.
+            crs = obj.consultarProyectosEnEjecucion(negocio);
+            //Se valida que el boton no vuleva a existir.
             for (int i = 0; i < cantidad; i++) {
                 String nombre = vista.getComponent(i).getName();
-                //Se valida el nombre de cada componenete para no repetirlo
+                //Se valida el nombre de cada componenete para no repetirlo.
+
             }
         }
     }
 
     public void RegistrarTomaTiempoNegocio(String datos[], int cargo, ControlDelTiempo vista) {
         FE_TE_IN obj = new FE_TE_IN();
+        this.vista = vista;
         if (cargo == 2 && (Integer.parseInt(datos[2]) == 1 || Integer.parseInt(datos[2]) == 2)) {
-            res = obj.iniciar_Toma_Tiempo(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]), Integer.parseInt(datos[2]), Integer.parseInt(datos[3]));
+            res = obj.iniciar_Pausar_Reiniciar_Toma_Tiempo(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]), Integer.parseInt(datos[2]), Integer.parseInt(datos[3]),Integer.parseInt(datos[4]));
         } else if (cargo == 3 && Integer.parseInt(datos[2]) == 3) {
-            res = obj.iniciar_Toma_Tiempo(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]), Integer.parseInt(datos[2]), Integer.parseInt(datos[3]));
+            res = obj.iniciar_Pausar_Reiniciar_Toma_Tiempo(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]), Integer.parseInt(datos[2]), Integer.parseInt(datos[3]),Integer.parseInt(datos[4]));
         } else {
             new rojerusan.RSNotifyAnimated("¡Alerta!", "No tienes permiso de leer el QR", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
+            if(Menu.producF==vista){
+                Menu.producF=null;
+            }else if(Menu.producT==vista){
+                Menu.producT=null;
+            }else if(Menu.producE==vista){
+                Menu.producE=null;
+            }
             vista.dispose();
         }
         if (res) {
-            validarExitenciadeBotones(Integer.parseInt(datos[0]), vista);
+            validarExitenciadeBotones(Integer.parseInt(datos[0]), Integer.parseInt(datos[2]), vista);
         }
     }
 
@@ -156,16 +182,16 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
         obj.setIcon(imagen);
         px += 101;
         cantidad++;
-       if (cantidad == unidad * filas) {
-                    py += 101;
-                    px = 0;
-                    filas++;
-                    if (cantidad == unidad * conta) {
-                        vista.contenidoFE.setPreferredSize(new Dimension(vista.contenidoFE.getWidth(), vista.contenidoFE.getHeight()+496));
-                        conta += 8;
-                    }
-                    vista.contenidoFE.updateUI();
-                }
+        if (cantidad == unidad * filas) {
+            py += 101;
+            px = 0;
+            filas++;
+            if (cantidad == unidad * conta) {
+                vista.contenidoFE.setPreferredSize(new Dimension(vista.contenidoFE.getWidth(), vista.contenidoFE.getHeight() + 496));
+                conta += 8;
+            }
+            vista.contenidoFE.updateUI();
+        }
         vista.contenidoFE.add(obj);
         vista.contenidoFE.updateUI();
     }
