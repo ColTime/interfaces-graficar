@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vistas;
 
 import Controlador.FE_TE_IN;
 import coltime.Menu;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,15 +14,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import rojerusan.RSNotifyAnimated;
 
-/**
- *
- * @author Aprendiz
- */
 public class ControlDelTiempo extends javax.swing.JFrame implements ActionListener {
 
-    /**
-     * Creates new form ControlDelTiempo
-     */
     public ControlDelTiempo() {
         initComponents();
         this.setExtendedState(ControlDelTiempo.MAXIMIZED_BOTH);
@@ -114,11 +103,11 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
             this.dispose();
             //Si la ventana es cerrada la variable de instancia es igualada a null
             if (Menu.producF == vista) {
-                
+                Menu.producF = null;
             } else if (Menu.producE == vista) {
-
+                Menu.producE = null;
             } else if (Menu.producT == vista) {
-
+                Menu.producT = null;
             }
         } else {
             new rojerusan.RSNotifyAnimated("¡Alerta!", "No puedes cerrar esta ventana mientras esta en ejecucion la toma de tiempos", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
@@ -130,20 +119,26 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
     //
     //Se valida que el bono no exista en el panle para no reprtirlo***  
     public void validarExitenciadeBotones(int orden, int negocio, ControlDelTiempo vista) {
-        int cantidad = vista.contenidoFE.getComponentCount();
-        if (cantidad == 0) {
-            //Se agrega el boton con el numero de la orden al cual se le registro la toma de tiempo inicial.
-            agregarBotones(vista, orden);
-        } else {
-            FE_TE_IN obj = new FE_TE_IN();
-            //Buscamos los proyectos que estan en ejecucion.
-            crs = obj.consultarProyectosEnEjecucion(negocio);
-            //Se valida que el boton no vuleva a existir.
-            for (int i = 0; i < cantidad; i++) {
-                String nombre = vista.getComponent(i).getName();
-                //Se valida el nombre de cada componenete para no repetirlo.
-
+        FE_TE_IN obj = new FE_TE_IN();
+        //Buscamos los proyectos que estan en ejecucion.
+        crs = obj.consultarProyectosEnEjecucion(negocio);
+        //Se sulven a posicionar todos los botones.
+        try {
+            //Se vuleven a reiniciar las variables con los valores pre determinados
+            px = 0;
+            py = 0;
+            this.cantidad = 0;
+            filas = 1;
+            unidad = 14;
+            conta = 8;
+            //Se limpa el panel para volver a organizar los botones
+            vista.contenidoFE.removeAll();
+            vista.contenidoFE.updateUI();
+            //Se posicionan todos los botones
+            while (crs.next()) {
+                agregarBotones(vista, Integer.parseInt(crs.getString(1)));
             }
+        } catch (Exception e) {
         }
     }
 
@@ -151,17 +146,17 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
         FE_TE_IN obj = new FE_TE_IN();
         this.vista = vista;
         if (cargo == 2 && (Integer.parseInt(datos[2]) == 1 || Integer.parseInt(datos[2]) == 2)) {
-            res = obj.iniciar_Pausar_Reiniciar_Toma_Tiempo(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]), Integer.parseInt(datos[2]), Integer.parseInt(datos[3]),Integer.parseInt(datos[4]));
+            res = obj.iniciar_Pausar_Reiniciar_Toma_Tiempo(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]), Integer.parseInt(datos[2]), Integer.parseInt(datos[3]), Integer.parseInt(datos[4]));
         } else if (cargo == 3 && Integer.parseInt(datos[2]) == 3) {
-            res = obj.iniciar_Pausar_Reiniciar_Toma_Tiempo(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]), Integer.parseInt(datos[2]), Integer.parseInt(datos[3]),Integer.parseInt(datos[4]));
+            res = obj.iniciar_Pausar_Reiniciar_Toma_Tiempo(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]), Integer.parseInt(datos[2]), Integer.parseInt(datos[3]), Integer.parseInt(datos[4]));
         } else {
             new rojerusan.RSNotifyAnimated("¡Alerta!", "No tienes permiso de leer el QR", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
-            if(Menu.producF==vista){
-                Menu.producF=null;
-            }else if(Menu.producT==vista){
-                Menu.producT=null;
-            }else if(Menu.producE==vista){
-                Menu.producE=null;
+            if (Menu.producF == vista) {
+                Menu.producF = null;
+            } else if (Menu.producT == vista) {
+                Menu.producT = null;
+            } else if (Menu.producE == vista) {
+                Menu.producE = null;
             }
             vista.dispose();
         }
@@ -174,8 +169,11 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
         JButton obj = new JButton(String.valueOf(orden));
         obj.setActionCommand(String.valueOf(orden));
         obj.setName(String.valueOf(orden));
+        obj.setFont(new Font("Tahoma", 1, 15));
+        obj.setText(String.valueOf(orden));
         obj.setBounds(px, py, 100, 100);
         obj.addActionListener(this);
+        obj.setHorizontalTextPosition(JButton.CENTER);
         //Icono del boton
         ImageIcon icono = new ImageIcon("src\\img\\detalle.png");
         Icon imagen = new ImageIcon(icono.getImage().getScaledInstance(obj.getWidth() - 5, obj.getHeight() - 5, Image.SCALE_DEFAULT));
@@ -215,16 +213,24 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ControlDelTiempo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ControlDelTiempo.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ControlDelTiempo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ControlDelTiempo.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ControlDelTiempo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ControlDelTiempo.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ControlDelTiempo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ControlDelTiempo.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 

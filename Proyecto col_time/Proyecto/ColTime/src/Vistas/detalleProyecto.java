@@ -31,7 +31,7 @@ public class detalleProyecto extends javax.swing.JDialog {
         TDetalleProduccion = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(955, 300));
+        setMinimumSize(new java.awt.Dimension(1195, 300));
         setPreferredSize(new java.awt.Dimension(900, 300));
 
         TDetalleProduccion = new javax.swing.JTable(){
@@ -44,13 +44,13 @@ public class detalleProyecto extends javax.swing.JDialog {
         TDetalleProduccion.setForeground(new java.awt.Color(128, 128, 131));
         TDetalleProduccion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Proceso", "Fecha inicio", "Fecha fin", "Cantidad terminada", "Tiempo total", "Tiempo por unidad", "Estado"
+                "Proceso", "Fecha inicio", "Fecha fin", "Cantidad Procesada", "Tiempo total min", "Tiempo por unidad min", "Estado", "Hora Ejecucion", "Tiempo Ejecucion", "Hora Terminacion"
             }
         ));
         TDetalleProduccion.setFillsViewportHeight(true);
@@ -70,7 +70,7 @@ public class detalleProyecto extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 863, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1180, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -101,9 +101,9 @@ public class detalleProyecto extends javax.swing.JDialog {
     }
 
     private void cargarTabla() {
-        String encabezado[] = {"Proceso", "Fecha inicio", "Fecha fin", "Cantidad procesada", "Tiempo total min", "Tiempo unidad min", "Estado", "Hora de ejecución","Tiempo Ejecucion"};
+        String encabezado[] = {"Proceso", "Fecha inicio", "Fecha fin", "Cantidad procesada", "Tiempo total min", "Tiempo unidad min", "Estado", "Hora de ejecución", "Tiempo Ejecución", "Hora de Terminación"};
         DefaultTableModel ds = new DefaultTableModel(null, encabezado);
-        String v[] = new String[9];
+        String v[] = new String[10];
         try {
             crs = consuldateDetalleProduccion();
             while (crs.next()) {
@@ -115,25 +115,31 @@ public class detalleProyecto extends javax.swing.JDialog {
                 v[5] = crs.getString(6);
                 v[6] = crs.getString(7);
                 v[7] = crs.getString(8);
-                v[8] = crs.getString(9);
+                if (crs.getString(10)!=null) {
+                    v[8] = crs.getString(11);
+                } else {
+                    v[8] = crs.getString(9);
+                }
+                v[9] = crs.getString(10);
                 ds.addRow(v);
             }
             TDetalleProduccion.setModel(ds);
-            FormatoTabla ft=new FormatoTabla(6);
+            FormatoTabla ft = new FormatoTabla(6);
             TDetalleProduccion.setDefaultRenderer(Object.class, ft);
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error!" + e);
         }
-        
+
     }
+
     //La funcion de este metodo es cambiar el color de la celda estada deacuedo a l contenido de este
     private void ColorCeldas() {
         int filas = TDetalleProduccion.getRowCount();
-        for (int i = 0; i <filas; i++) {
-            String estado=TDetalleProduccion.getValueAt(i,6).toString();
-            if(estado.equals("Ejecucion")){
-               
+        for (int i = 0; i < filas; i++) {
+            String estado = TDetalleProduccion.getValueAt(i, 6).toString();
+            if (estado.equals("Ejecucion")) {
+
             }
         }
     }

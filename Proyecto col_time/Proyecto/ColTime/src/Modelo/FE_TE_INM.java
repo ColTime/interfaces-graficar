@@ -23,9 +23,12 @@ public class FE_TE_INM {
     String orden = "";
     String fecha = "";
     int T_Total = 0;
-   //Metodos------------------------------------------------->
+    int cantidadAntigua = 0;
+    int estado = 0;
+
+    //Metodos------------------------------------------------->
     //No se te olvide tener en cuenta el id del lector y concatenar a la informacion despues de leer el codigo***
-    public boolean iniciar_Pausar_Reiniciar_Toma_Tiempo(int orden, int detalle, int negocio, int lector,int cantidadTerminada) {
+    public boolean iniciar_Pausar_Reiniciar_Toma_Tiempo(int orden, int detalle, int negocio, int lector, int cantidadTerminada) {
         try {
             conexion = new Conexion();
             conexion.establecerConexion();
@@ -40,8 +43,8 @@ public class FE_TE_INM {
             rs = ps.executeQuery();
             rs.next();
             if (rs.getBoolean(1)) {
-                //Si existe se ejecutara el procedimiento para parar el tiempo
-                Qry = "CALL PA_CalcularTiempoMinutos(?,?,?,?)";
+                //-------------------------------------------------------------->
+                Qry = "CALL PA_ValidarCantidadDetalleProyecto(?,?,?,?)";
                 ps = con.prepareStatement(Qry);
                 ps.setInt(1, orden);
                 ps.setInt(2, detalle);
@@ -49,16 +52,45 @@ public class FE_TE_INM {
                 ps.setInt(4, negocio);
                 rs = ps.executeQuery();
                 rs.next();
-                T_Total = convertirHorasAMinutos(Integer.parseInt(rs.getString(1)), rs.getString(2).split(":"));
-                Qry = "CALL PA_PausarTomaDeTiempoDeProcesos(?,?,?,?,?,?)";
-                ps = con.prepareStatement(Qry);
-                ps.setInt(1, orden);
-                ps.setInt(2, detalle);
-                ps.setInt(3, lector);
-                ps.setInt(4, negocio);
-                ps.setString(5, String.valueOf(T_Total));
-                ps.setInt(6, cantidadTerminada);
-                res = !ps.execute();
+                //Si la cantidad terminada ingresada es menos a la cantidad que en total se deben realizar.
+                if (rs.getInt(2) + cantidadTerminada < rs.getInt(1)) {
+                    //Si existe se ejecutara el procedimiento para parar el tiempo.
+                    cantidadAntigua = rs.getInt(2);
+                    estado = 2;
+                    //Si la cantidad terminada ingresada es igual a la cantidad que en total se deben realizar.
+                } else if (rs.getInt(2) + cantidadTerminada == rs.getInt(1)) {
+                    cantidadAntigua = rs.getInt(2);
+                    estado = 3;
+                    //Si la cantidad terminada ingresada es mayor a la cantidad que en total se deben realizar.
+                } else {
+                    cantidadAntigua = rs.getInt(2);
+                    estado = 0;
+                }
+                // si el estado es dos o tres (2 o 3) procedera a realizar la actualización.
+                if (estado != 0) {
+                    Qry = "CALL PA_CalcularTiempoMinutos(?,?,?,?)";
+                    ps = con.prepareStatement(Qry);
+                    ps.setInt(1, orden);
+                    ps.setInt(2, detalle);
+                    ps.setInt(3, lector);
+                    ps.setInt(4, negocio);
+                    rs = ps.executeQuery();
+                    rs.next();
+                    T_Total = convertirHorasAMinutos(Integer.parseInt(rs.getString(1)), rs.getString(2).split(":"));
+                    Qry = "CALL PA_PausarTomaDeTiempoDeProcesos(?,?,?,?,?,?,?)";
+                    ps = con.prepareStatement(Qry);
+                    ps.setInt(1, orden);
+                    ps.setInt(2, detalle);
+                    ps.setInt(3, lector);
+                    ps.setInt(4, negocio);
+                    ps.setString(5, String.valueOf(T_Total));
+                    ps.setInt(6, cantidadTerminada + cantidadAntigua);
+                    ps.setInt(7, estado);
+                    res = !ps.execute();
+                    //Si no cumple la condición va a retornar un falso y monstrara una mensaje de advertencia.
+                } else {
+                    res = false;
+                }
 
             } else {
                 //Si no existe se ejecutara el procedimiento para iniciar o renaudar el tiempo
@@ -70,7 +102,6 @@ public class FE_TE_INM {
                 ps.setInt(4, negocio);
                 res = !ps.execute();
             }
-
             con.close();
             conexion.destruir();
             conexion.cerrar(rs);
@@ -108,18 +139,9 @@ public class FE_TE_INM {
         return crsP;
     }
 
-//    protected boolean cambiar_Estado_Proceso() {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-//
-//    public boolean detener_Toma_Tiempo() {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-
     @Override
     protected void finalize() throws Throwable {
         super.finalize();//Este metodo obliga a la intancia se elimine sola y libere el espacio en el puntero.
     }
-    
-    
+
 }

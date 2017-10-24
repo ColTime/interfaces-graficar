@@ -438,19 +438,21 @@ public class Menu extends javax.swing.JFrame {
         switch (cargo) {
             case 1:
                 //Gestor comercial
+                this.setTitle("Gestor Comercial");
                 btn3.setEnabled(false);
                 break;
             case 2:
                 //Encargado FE y TE
+                this.setTitle("Encargado FE y TE");
                 btn3.setEnabled(false);
-                btn4.setEnabled(false);
                 break;
             case 3:
                 //Encargado de EN
+                this.setTitle("Encargado EN");
                 btn3.setEnabled(false);
-                btn4.setEnabled(false);
                 break;
             default:
+                this.setTitle("Administrador");
                 break;
         }
     }
@@ -606,8 +608,12 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_formMousePressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        sesion(0, jDocumento.getText());
-        System.exit(0);
+        if (producE == null && producF == null && producT == null) {
+            sesion(0, jDocumento.getText());
+            System.exit(0);
+        }else{
+           new rojerusan.RSNotifyAnimated("¡Alerta!", "No puedes cerrar la aplicacion mientras un producto en ejecución.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -664,7 +670,7 @@ public class Menu extends javax.swing.JFrame {
                 producT.RegistrarTomaTiempoNegocio(infoP, cargo, producT);
                 break;
             case 3:
-                if (producE==null) {
+                if (producE == null) {
                     producE = new ControlDelTiempo();
                     producE.setTitle("Ensamble");
                     producE.setVisible(true);
