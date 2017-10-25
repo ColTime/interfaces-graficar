@@ -186,17 +186,51 @@ public class ProyectoM {
         return fecha;
     }
 
-    public CachedRowSet proyectosNegocio(int negocio) {
+    public CachedRowSet fechaYdatosProduccion() {
         try {
             conexion = new Conexion();
             conexion.establecerConexion();
             con = conexion.getConexion();
             //Query------------------------------------------------------------>
-            String Qry = "CALL PA_InformacionProyectosProduccion(?)";
+            String Qry = "CALL PA_InformacionDeTodaElAreaDeProduccion()";
             ps = con.prepareStatement(Qry);
-            ps.setInt(1, negocio);
             rs = ps.executeQuery();
             crsP=new CachedRowSetImpl();
+            crsP.populate(rs);
+            
+            con.close();
+            conexion.destruir();
+            conexion.cerrar(rs);
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "¡Error!" + e);
+        }
+        return crsP;
+    }
+
+    public CachedRowSet proyectosNegocio(int negocio, String orden, String cliente, String proyecto, String tipo) {
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query------------------------------------------------------------>
+            String Qry = "CALL PA_InformacionProyectosProduccion(?,?,?,?,?)";
+            ps = con.prepareStatement(Qry);
+            ps.setInt(1, negocio);
+            if (!orden.equals("")) {
+                ps.setInt(2, Integer.parseInt(orden));
+            } else {
+                ps.setInt(2, 0);
+            }
+            ps.setString(3, cliente);
+            ps.setString(4, proyecto);
+            if (!tipo.equals("Seleccione...")) {
+                ps.setString(5, tipo);
+            } else {
+                ps.setString(5, "");
+            }
+            rs = ps.executeQuery();
+            crsP = new CachedRowSetImpl();
             crsP.populate(rs);
             con.close();
             conexion.destruir();

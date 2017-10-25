@@ -858,7 +858,7 @@ public class proyecto extends javax.swing.JPanel {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         validarRegistro(1);
-        generarQR();
+
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void jCConversorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCConversorMouseClicked
@@ -1163,6 +1163,7 @@ public class proyecto extends javax.swing.JPanel {
             tabla.addCell(header);
             doc.add(tabla);
             doc.close();
+            Thread.sleep(7000);
             new rojerusan.RSNotifyAnimated("¡Listo!", "Los codigos QR de la orden N°" + jTNorden.getText() + " fueron generados exitosamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error! " + e);
@@ -1227,6 +1228,7 @@ public class proyecto extends javax.swing.JPanel {
                 if (RegistrarModificarDetalle(jTNorden.getText(), 1)) {
                     //Mensaje de exito
                     new rojerusan.RSNotifyAnimated("Listo!!", "El Proyecto con el numero de orden: " + jTNorden.getText() + " fue registrada exitosamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+                    generarQR();
                 } else {
                     //Mensaje de error
                     new rojerusan.RSNotifyAnimated("¡Error!", "El detalle no pudo ser registrado satisfactoriamente", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
@@ -1241,7 +1243,7 @@ public class proyecto extends javax.swing.JPanel {
                     //Mensaje de error
                 }
             }
-            System.gc();
+            System.gc();//Garbage collector
         } else {
             new rojerusan.RSNotifyAnimated("¡Error!", "El proyecto no pudo ser registrado.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
         }

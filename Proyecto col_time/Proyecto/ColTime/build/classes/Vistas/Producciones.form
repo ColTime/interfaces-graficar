@@ -234,21 +234,21 @@
                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel3" min="-2" pref="71" max="-2" attributes="0"/>
-                          <Component id="textFieldRoundBackground2" min="-2" pref="90" max="-2" attributes="0"/>
+                          <Component id="jTOrden" min="-2" pref="90" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="textFieldRoundBackground3" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
-                          <Component id="jLabel5" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                          <Component id="jTNombre" min="-2" pref="239" max="-2" attributes="0"/>
+                          <Component id="jLabel5" min="-2" pref="225" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                          <Component id="textFieldRoundBackground4" min="-2" pref="223" max="-2" attributes="0"/>
+                          <Component id="jTProyecto" min="-2" pref="223" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="comboBoxRound1" min="-2" pref="162" max="-2" attributes="0"/>
+                          <Component id="cbTipo" min="-2" pref="162" max="-2" attributes="0"/>
                           <Component id="jLabel6" min="-2" pref="119" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -266,18 +266,18 @@
                                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="comboBoxRound1" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="cbTipo" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="textFieldRoundBackground4" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="jTProyecto" min="-2" pref="25" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="textFieldRoundBackground3" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="jTNombre" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="textFieldRoundBackground2" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="jTOrden" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -285,7 +285,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="elaprendiz.gui.textField.TextFieldRoundBackground" name="textFieldRoundBackground2">
+            <Component class="elaprendiz.gui.textField.TextFieldRoundBackground" name="jTOrden">
               <Properties>
                 <Property name="colorDeBorde" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -294,6 +294,10 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTOrdenKeyReleased"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTOrdenKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
@@ -306,7 +310,7 @@
                 <Property name="text" type="java.lang.String" value=" Orden &#xb0;N:"/>
               </Properties>
             </Component>
-            <Component class="elaprendiz.gui.textField.TextFieldRoundBackground" name="textFieldRoundBackground3">
+            <Component class="elaprendiz.gui.textField.TextFieldRoundBackground" name="jTNombre">
               <Properties>
                 <Property name="colorDeBorde" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -315,6 +319,9 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTNombreKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
@@ -327,7 +334,7 @@
                 <Property name="text" type="java.lang.String" value="Nombre del cliente:"/>
               </Properties>
             </Component>
-            <Component class="elaprendiz.gui.textField.TextFieldRoundBackground" name="textFieldRoundBackground4">
+            <Component class="elaprendiz.gui.textField.TextFieldRoundBackground" name="jTProyecto">
               <Properties>
                 <Property name="colorDeBorde" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -336,6 +343,9 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTProyectoKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
@@ -359,7 +369,7 @@
                 <Property name="text" type="java.lang.String" value="Tipo de proyecto:"/>
               </Properties>
             </Component>
-            <Component class="elaprendiz.gui.comboBox.ComboBoxRound" name="comboBoxRound1">
+            <Component class="elaprendiz.gui.comboBox.ComboBoxRound" name="cbTipo">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="66" red="66" type="rgb"/>

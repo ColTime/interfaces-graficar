@@ -118,9 +118,14 @@ public class Proyecto {
         return obj.fecha();
     }
 
-    public CachedRowSet proyectosNegocio(int negocio) {
+    public CachedRowSet fechaYdatosProduccion() {
         ProyectoM obj = new ProyectoM();
-        return obj.proyectosNegocio(negocio);
+        return obj.fechaYdatosProduccion();
+    }
+
+    public CachedRowSet proyectosNegocio(int negocio, String orden, String cliente, String proyecto, String tipo) {
+        ProyectoM obj = new ProyectoM();
+        return obj.proyectosNegocio(negocio, orden, cliente, proyecto, tipo);
     }
 
     //Finalizacion de la clase automatica---------------------------------------------------------------->

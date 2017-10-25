@@ -1,9 +1,13 @@
 package Vistas;
 
+import Controlador.Proyecto;
+import javax.sql.rowset.CachedRowSet;
+
 public class Inicio extends javax.swing.JPanel {
 
     public Inicio() {
         initComponents();
+        fechaYdatosProduccion();
     }
 
     @SuppressWarnings("unchecked")
@@ -14,13 +18,15 @@ public class Inicio extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        jLFecha = new javax.swing.JLabel();
+        jLCantidadF = new javax.swing.JLabel();
+        jLCantidadT = new javax.swing.JLabel();
+        jLCantidadE = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(219, 219, 219));
         setName("inicio"); // NOI18N
@@ -52,13 +58,6 @@ public class Inicio extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jButton1.setText("Frame");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -67,19 +66,13 @@ public class Inicio extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(368, 368, 368)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
+                .addContainerGap(139, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(219, 219, 219)));
@@ -96,27 +89,45 @@ public class Inicio extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Proyectos de Ensamble:");
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel6.setText("Fecha: dd/mm/yyyy");
+        jLFecha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLFecha.setText("Fecha: dd/mm/yyyy");
+
+        jLCantidadF.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLCantidadF.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLCantidadF.setText("0");
+
+        jLCantidadT.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLCantidadT.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLCantidadT.setText("0");
+
+        jLCantidadE.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLCantidadE.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLCantidadE.setText("0");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addComponent(jLabel3)
-                .addGap(87, 87, 87)
-                .addComponent(jLabel4)
-                .addGap(101, 101, 101)
-                .addComponent(jLabel5)
-                .addContainerGap(52, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addGap(20, 20, 20))
+                .addComponent(jLFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(72, 72, 72)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLCantidadF, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(87, 87, 87)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLCantidadT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(101, 101, 101)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLCantidadE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,13 +135,18 @@ public class Inicio extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel6))
+                    .addComponent(jLFecha))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addGap(8, 8, 8)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLCantidadT)
+                    .addComponent(jLCantidadF)
+                    .addComponent(jLCantidadE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -172,19 +188,38 @@ public class Inicio extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+    //Variables
+    CachedRowSet crs = null;    //Cantidad de proyectos para cada área respectiva
+    private void fechaYdatosProduccion() {
+        try {
+            Proyecto obj = new Proyecto();
+            crs = obj.fechaYdatosProduccion();
+            //Hora y formato estandar
+            crs.next();
+            jLFecha.setText("Fecha: "+crs.getString(1));
+            jLCantidadF.setText(crs.getString(2));
+            //Teclados
+            crs.next();
+            jLCantidadT.setText(crs.getString(2));
+            //Ensamble
+            crs.next();
+            jLCantidadE.setText(crs.getString(2));
+            
+        } catch (Exception e) {
+            //Mensaje de alerta
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLCantidadE;
+    private javax.swing.JLabel jLCantidadF;
+    private javax.swing.JLabel jLCantidadT;
+    private javax.swing.JLabel jLFecha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

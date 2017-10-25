@@ -43,14 +43,14 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         rSButtonMetro3 = new rsbuttom.RSButtonMetro();
         jPanel4 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        textFieldRoundBackground2 = new elaprendiz.gui.textField.TextFieldRoundBackground();
+        jTOrden = new elaprendiz.gui.textField.TextFieldRoundBackground();
         jLabel3 = new javax.swing.JLabel();
-        textFieldRoundBackground3 = new elaprendiz.gui.textField.TextFieldRoundBackground();
+        jTNombre = new elaprendiz.gui.textField.TextFieldRoundBackground();
         jLabel5 = new javax.swing.JLabel();
-        textFieldRoundBackground4 = new elaprendiz.gui.textField.TextFieldRoundBackground();
+        jTProyecto = new elaprendiz.gui.textField.TextFieldRoundBackground();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        comboBoxRound1 = new elaprendiz.gui.comboBox.ComboBoxRound();
+        cbTipo = new elaprendiz.gui.comboBox.ComboBoxRound();
         Contenido = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -164,22 +164,40 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(204, 204, 204)), "Busqueda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
 
-        textFieldRoundBackground2.setColorDeBorde(new java.awt.Color(204, 204, 204));
-        textFieldRoundBackground2.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
+        jTOrden.setColorDeBorde(new java.awt.Color(204, 204, 204));
+        jTOrden.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
+        jTOrden.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTOrdenKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTOrdenKeyTyped(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(128, 128, 131));
         jLabel3.setText(" Orden °N:");
 
-        textFieldRoundBackground3.setColorDeBorde(new java.awt.Color(204, 204, 204));
-        textFieldRoundBackground3.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
+        jTNombre.setColorDeBorde(new java.awt.Color(204, 204, 204));
+        jTNombre.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
+        jTNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTNombreKeyTyped(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(128, 128, 131));
         jLabel5.setText("Nombre del cliente:");
 
-        textFieldRoundBackground4.setColorDeBorde(new java.awt.Color(204, 204, 204));
-        textFieldRoundBackground4.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
+        jTProyecto.setColorDeBorde(new java.awt.Color(204, 204, 204));
+        jTProyecto.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
+        jTProyecto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTProyectoKeyTyped(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(128, 128, 131));
@@ -189,10 +207,10 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         jLabel6.setForeground(new java.awt.Color(128, 128, 131));
         jLabel6.setText("Tipo de proyecto:");
 
-        comboBoxRound1.setForeground(new java.awt.Color(102, 102, 102));
-        comboBoxRound1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "Normal", "RQT", "Quick" }));
-        comboBoxRound1.setColorDeBorde(new java.awt.Color(204, 204, 204));
-        comboBoxRound1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        cbTipo.setForeground(new java.awt.Color(102, 102, 102));
+        cbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "Normal", "RQT", "Quick" }));
+        cbTipo.setColorDeBorde(new java.awt.Color(204, 204, 204));
+        cbTipo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -202,18 +220,18 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                 .addGap(34, 34, 34)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textFieldRoundBackground2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(textFieldRoundBackground3, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(textFieldRoundBackground4, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(comboBoxRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -227,15 +245,15 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                             .addComponent(jLabel6)
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboBoxRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(textFieldRoundBackground4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textFieldRoundBackground3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(textFieldRoundBackground2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -342,29 +360,71 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         new CambiaPanel(Contenido, new ProduccionTE());
         reinicializarVariables();
         negocio = 2;
-        agregarProyectoEnTabla(2);
+        agregarProyectoEnTabla(2, "", "", "", "");
     }//GEN-LAST:event_rSButtonMetro2ActionPerformed
 
     private void rSButtonMetro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro1ActionPerformed
         new CambiaPanel(Contenido, new ProduccionFE());
         reinicializarVariables();
         negocio = 1;
-        agregarProyectoEnTabla(1);
+        agregarProyectoEnTabla(1, "", "", "", "");
     }//GEN-LAST:event_rSButtonMetro1ActionPerformed
 
     private void rSButtonMetro3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro3ActionPerformed
         new CambiaPanel(Contenido, new ProduccionEN());
         reinicializarVariables();
         negocio = 3;
-        agregarProyectoEnTabla(3);
+        agregarProyectoEnTabla(3, "", "", "", "");
     }//GEN-LAST:event_rSButtonMetro3ActionPerformed
 
+    private void jTOrdenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTOrdenKeyReleased
+        busqueda();
+    }//GEN-LAST:event_jTOrdenKeyReleased
+
+    private void jTOrdenKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTOrdenKeyTyped
+        char letra = evt.getKeyChar();
+        if (Character.isLetter(letra) || evt.getKeyChar() == '|' || evt.getKeyChar() == '.' || evt.getKeyChar() == '-' || evt.getKeyChar() == '@') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTOrdenKeyTyped
+
+    private void jTNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNombreKeyTyped
+        char letra = evt.getKeyChar();
+        if (Character.isDigit(letra) || evt.getKeyChar() == '|' || evt.getKeyChar() == '.' || evt.getKeyChar() == '-' || evt.getKeyChar() == '@') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTNombreKeyTyped
+
+    private void jTProyectoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTProyectoKeyTyped
+        char letra = evt.getKeyChar();
+        if (Character.isDigit(letra) || evt.getKeyChar() == '|' || evt.getKeyChar() == '.' || evt.getKeyChar() == '-' || evt.getKeyChar() == '@') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTProyectoKeyTyped
+
 //Metodos
-    public void agregarProyectoEnTabla(int negocio) {
+    private void busqueda() {
+        agregarProyectoEnTabla(negocio, jTOrden.getText(), jTNombre.getText(), jTProyecto.getText(), cbTipo.getSelectedItem().toString());
+    }
+
+    public void agregarProyectoEnTabla(int negocio, String orden, String cliente, String proyecto, String tipo) {
         try {
             //Se realiza la consulta para traer en numero de orden de todos los proyectos registrados
             Proyecto obj = new Proyecto();
-            crs = obj.proyectosNegocio(negocio);
+            crs = obj.proyectosNegocio(negocio, orden, cliente, proyecto, tipo);
+            reinicializarVariables();
+            //Se valida cual de los tres contenedores se valida primero
+            switch (negocio) {
+                case 1:
+                    ProduccionFE.contenidoFE.removeAll();
+                    break;
+                case 2:
+                    ProduccionTE.contenidoTE.removeAll();
+                    break;
+                case 3:
+                    ProduccionEN.contenidoEN.removeAll();
+                    break;
+            }
             while (crs.next()) {
                 JButton jp = new JButton(String.valueOf(crs.getInt(1)));
                 jp.setBounds(0 + x, 0 + y, 98, 98);
@@ -482,7 +542,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Contenido;
-    private elaprendiz.gui.comboBox.ComboBoxRound comboBoxRound1;
+    private elaprendiz.gui.comboBox.ComboBoxRound cbTipo;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
@@ -495,12 +555,12 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private elaprendiz.gui.textField.TextFieldRoundBackground jTNombre;
+    private elaprendiz.gui.textField.TextFieldRoundBackground jTOrden;
+    private elaprendiz.gui.textField.TextFieldRoundBackground jTProyecto;
     private rsbuttom.RSButtonMetro rSButtonMetro1;
     private rsbuttom.RSButtonMetro rSButtonMetro2;
     private rsbuttom.RSButtonMetro rSButtonMetro3;
-    private elaprendiz.gui.textField.TextFieldRoundBackground textFieldRoundBackground2;
-    private elaprendiz.gui.textField.TextFieldRoundBackground textFieldRoundBackground3;
-    private elaprendiz.gui.textField.TextFieldRoundBackground textFieldRoundBackground4;
     // End of variables declaration//GEN-END:variables
 
 }
