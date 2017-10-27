@@ -127,7 +127,7 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().setLayout(new java.awt.CardLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
         jPSuperior.setBackground(new java.awt.Color(63, 179, 255));
         jPSuperior.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {

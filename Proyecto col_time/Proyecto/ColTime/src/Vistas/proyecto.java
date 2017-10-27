@@ -1168,7 +1168,7 @@ public class proyecto extends javax.swing.JPanel {
             tabla.addCell(header);
             doc.add(tabla);
             doc.close();
-            Thread.sleep(7000);
+//            Thread.sleep(7000);
             new rojerusan.RSNotifyAnimated("¡Listo!", "Los codigos QR de la orden N°" + jTNorden.getText() + " fueron generados exitosamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error! " + e);
