@@ -53,8 +53,8 @@ public class Menu extends javax.swing.JFrame {
     public static ControlDelTiempo producE = null;
     int px = 0, cantidad = 0, unidad = 13;
     int py = 0, filas = 1;
-    CachedRowSet crs=null;
-    
+    CachedRowSet crs = null;
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -768,6 +768,11 @@ public class Menu extends javax.swing.JFrame {
         }
     }
 
+    //La parte de capturar y gusrdadr la imagen de perfil no se a realizado.
+    public void CapturaImagen() {
+        File obj = new File(rSUsuario.image.toString());
+    }
+
     public void traerimagen() {//Esta parte del proyecto esta en espera
         ImageIcon obj = new ImageIcon(rSUsuario.image);
         try {
@@ -787,12 +792,6 @@ public class Menu extends javax.swing.JFrame {
             } catch (Exception e) {
             }
         }
-    }
-
-    @Override
-    protected void finalize() throws Throwable {
-        super.finalize(); //To change body of generated methods, choose Tools | Templates.
-        System.out.print("Se finalizo la clase menu");
     }
 
     /**
@@ -848,9 +847,8 @@ public class Menu extends javax.swing.JFrame {
     public javax.swing.JTextField jTLector;
     public rojerusan.RSFotoCircle rSUsuario;
     // End of variables declaration//GEN-END:variables
-//Metodos--------------------------------------->
-    //La parte de capturar y gusrdadr la imagen de perfil no se a realizado.
-    public void CapturaImagen() {
-        File obj = new File(rSUsuario.image.toString());
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize(); //To change body of generated methods, choose Tools | Templates.
     }
 }

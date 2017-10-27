@@ -9,7 +9,7 @@ public class Conexion {
     static String bd = "coltime";
     static String user = "coltime";
     static String password = "";
-    static String server = "jdbc:mysql://192.168.0.103/" + bd;
+    static String server = "jdbc:mysql://192.168.0.101/" + bd;
 
     public Conexion() {
     }

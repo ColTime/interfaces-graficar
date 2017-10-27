@@ -54,7 +54,7 @@ public class FE_TE_INM {
                 rs.next();
                 //Si la cantidad terminada ingresada es menos a la cantidad que en total se deben realizar.
                 if (rs.getInt(2) + cantidadTerminada < rs.getInt(1)) {
-                    //Si existe se ejecutara el procedimiento para parar el tiempo.
+                    //Si la afirmación es correcta se ejecutara el procedimiento para parar el tiempo.
                     cantidadAntigua = rs.getInt(2);
                     estado = 2;
                     //Si la cantidad terminada ingresada es igual a la cantidad que en total se deben realizar.

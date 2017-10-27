@@ -138,6 +138,7 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
             while (crs.next()) {
                 agregarBotones(vista, Integer.parseInt(crs.getString(1)));
             }
+            crs.close();
         } catch (Exception e) {
         }
     }
@@ -248,4 +249,9 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
     public static javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize(); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }

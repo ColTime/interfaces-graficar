@@ -1,9 +1,7 @@
 package Modelo;
 
-import Controlador.*;
 import com.sun.rowset.CachedRowSetImpl;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.sql.rowset.CachedRowSet;

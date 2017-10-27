@@ -829,6 +829,7 @@ public class proyecto extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        op=1;
         activarComponentes();
         cambiarEstadoBotones();
         limpiarCampos();
@@ -1097,9 +1098,12 @@ public class proyecto extends javax.swing.JPanel {
         try {
             //Validar o crear carpeta
             File folder = new File("ImágenesQR");
-            if (folder.exists()) {
-            } else {
+            if (!folder.exists()) {
                 folder.mkdirs();
+            }
+            File folderPDF = new File("PDF");
+            if (!folderPDF.exists()) {
+                folderPDF.mkdirs();
             }
             //Generar codigos QR
             //Informacion del QR desde la base de datos
@@ -1157,6 +1161,7 @@ public class proyecto extends javax.swing.JPanel {
 //                File QRdelet = new File(ruta + "\\ImágenesQR\\" + texto + ".png");
 //                QRdelet.delete();
             }
+            crs.close();
             header.setBorder(Rectangle.NO_BORDER);
             header.addElement(new Paragraph());
             header.setColspan(3);
@@ -1355,6 +1360,8 @@ public class proyecto extends javax.swing.JPanel {
         if (op == 1) {
             if (!jTNombreCliente.getText().equals("") && !jTNombreProyecto.getText().equals("")) {
                 btnGuardar.setEnabled(true);
+            }else{
+                btnGuardar.setEnabled(false);
             }
         }
     }
@@ -1849,4 +1856,8 @@ public class proyecto extends javax.swing.JPanel {
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTTeclado;
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTTroquel;
     // End of variables declaration//GEN-END:variables
+@Override
+    protected void finalize() throws Throwable {
+        super.finalize(); //To change body of generated methods, choose Tools | Templates.
+    }
 }

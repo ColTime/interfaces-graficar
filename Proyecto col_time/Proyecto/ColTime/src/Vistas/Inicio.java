@@ -190,13 +190,14 @@ public class Inicio extends javax.swing.JPanel {
 
     //Variables
     CachedRowSet crs = null;    //Cantidad de proyectos para cada área respectiva
+
     private void fechaYdatosProduccion() {
         try {
             Proyecto obj = new Proyecto();
             crs = obj.fechaYdatosProduccion();
             //Hora y formato estandar
             crs.next();
-            jLFecha.setText("Fecha: "+crs.getString(1));
+            jLFecha.setText("Fecha: " + crs.getString(1));
             jLCantidadF.setText(crs.getString(2));
             //Teclados
             crs.next();
@@ -204,7 +205,7 @@ public class Inicio extends javax.swing.JPanel {
             //Ensamble
             crs.next();
             jLCantidadE.setText(crs.getString(2));
-            
+
         } catch (Exception e) {
             //Mensaje de alerta
         }
@@ -225,4 +226,8 @@ public class Inicio extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     // End of variables declaration//GEN-END:variables
+ @Override
+    protected void finalize() throws Throwable {
+        super.finalize(); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -115,7 +115,7 @@ public class detalleProyecto extends javax.swing.JDialog {
                 v[5] = crs.getString(6);
                 v[6] = crs.getString(7);
                 v[7] = crs.getString(8);
-                if (crs.getString(10)!=null) {
+                if (crs.getString(10) != null) {
                     v[8] = crs.getString(11);
                 } else {
                     v[8] = crs.getString(9);
@@ -191,4 +191,8 @@ public class detalleProyecto extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
+ @Override
+    protected void finalize() throws Throwable {
+        super.finalize(); //To change body of generated methods, choose Tools | Templates.
+    }
 }

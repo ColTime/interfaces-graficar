@@ -361,7 +361,7 @@ public class CambiarContraseña extends javax.swing.JFrame {
                 jTpaswward2.setEnabled(false);
             }
         } else {
-           btnGuardar.setEnabled(false);
+            btnGuardar.setEnabled(false);
         }
     }//GEN-LAST:event_jTpaswward1KeyReleased
 
@@ -417,4 +417,8 @@ public class CambiarContraseña extends javax.swing.JFrame {
     private elaprendiz.gui.passwordField.PasswordFieldRoundImage jTpaswward2;
     private elaprendiz.gui.passwordField.PasswordFieldRoundImage jTpaswward3;
     // End of variables declaration//GEN-END:variables
+ @Override
+    protected void finalize() throws Throwable {
+        super.finalize(); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -34,6 +34,8 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         consultarProyectos("", "", "", "");
         editarColumnasPNC();
         editarColumnasDetalle();
+        System.out.println("width: "+jPEncabezado.getWidth()+"\n"
+                + "Heigth: "+jPEncabezado.getHeight());
     }
     //VAriables globales
     int posX = 0;
@@ -46,7 +48,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
     private void initComponents() {
 
         fechas = new javax.swing.ButtonGroup();
-        jPanel1 = new javax.swing.JPanel();
+        jPEncabezado = new javax.swing.JPanel();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
@@ -78,16 +80,16 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
 
-        jPanel1.setBackground(new java.awt.Color(63, 179, 255));
-        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        jPEncabezado.setBackground(new java.awt.Color(63, 179, 255));
+        jPEncabezado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPEncabezado.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jPanel1MouseDragged(evt);
+                jPEncabezadoMouseDragged(evt);
             }
         });
-        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jPEncabezado.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel1MousePressed(evt);
+                jPEncabezadoMousePressed(evt);
             }
         });
 
@@ -113,22 +115,22 @@ public class ConsutaProyecto extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPEncabezadoLayout = new javax.swing.GroupLayout(jPEncabezado);
+        jPEncabezado.setLayout(jPEncabezadoLayout);
+        jPEncabezadoLayout.setHorizontalGroup(
+            jPEncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPEncabezadoLayout.createSequentialGroup()
                 .addContainerGap(1163, Short.MAX_VALUE)
                 .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
                 .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jPEncabezadoLayout.setVerticalGroup(
+            jPEncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPEncabezadoLayout.createSequentialGroup()
                 .addGap(11, 11, 11)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPEncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton10)
                     .addComponent(jButton9))
                 .addContainerGap(35, Short.MAX_VALUE))
@@ -410,13 +412,13 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPEncabezado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1225, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPEncabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -433,14 +435,14 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         setExtendedState(JFrame.CROSSHAIR_CURSOR);
     }//GEN-LAST:event_jButton10ActionPerformed
 
-    private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
+    private void jPEncabezadoMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPEncabezadoMouseDragged
         this.setLocation(evt.getXOnScreen() - posX, evt.getYOnScreen() - posY);
-    }//GEN-LAST:event_jPanel1MouseDragged
+    }//GEN-LAST:event_jPEncabezadoMouseDragged
 
-    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
+    private void jPEncabezadoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPEncabezadoMousePressed
         posX = evt.getX();
         posY = evt.getY();
-    }//GEN-LAST:event_jPanel1MousePressed
+    }//GEN-LAST:event_jPEncabezadoMousePressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         consultarProyectos("", "", "", "");
@@ -810,7 +812,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                 v1[15] = String.valueOf(crs.getBoolean(16));
                 model.addRow(v1);
             }
-
+            crs.close();
             TProyecto.setModel(model);
             editarColumnasProyecto();
         } catch (Exception e) {
@@ -849,6 +851,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                     model1.addRow(v1);
                 }
             }
+            crs.close();
             TDetalle.setModel(model1);
             editarColumnasDetalle();
             TPNC.setModel(model2);
@@ -979,7 +982,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPEncabezado;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

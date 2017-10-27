@@ -182,6 +182,9 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         jTNombre.setColorDeBorde(new java.awt.Color(204, 204, 204));
         jTNombre.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
         jTNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTNombreKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTNombreKeyTyped(evt);
             }
@@ -194,6 +197,9 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         jTProyecto.setColorDeBorde(new java.awt.Color(204, 204, 204));
         jTProyecto.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
         jTProyecto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTProyectoKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTProyectoKeyTyped(evt);
             }
@@ -211,6 +217,11 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         cbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "Normal", "RQT", "Quick" }));
         cbTipo.setColorDeBorde(new java.awt.Color(204, 204, 204));
         cbTipo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        cbTipo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbTipoItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -315,9 +326,8 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Contenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -331,8 +341,8 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -402,6 +412,18 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         }
     }//GEN-LAST:event_jTProyectoKeyTyped
 
+    private void jTNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNombreKeyReleased
+        busqueda();
+    }//GEN-LAST:event_jTNombreKeyReleased
+
+    private void jTProyectoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTProyectoKeyReleased
+        busqueda();
+    }//GEN-LAST:event_jTProyectoKeyReleased
+
+    private void cbTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbTipoItemStateChanged
+        busqueda();
+    }//GEN-LAST:event_cbTipoItemStateChanged
+
 //Metodos
     private void busqueda() {
         agregarProyectoEnTabla(negocio, jTOrden.getText(), jTNombre.getText(), jTProyecto.getText(), cbTipo.getSelectedItem().toString());
@@ -417,12 +439,15 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
             switch (negocio) {
                 case 1:
                     ProduccionFE.contenidoFE.removeAll();
+                    ProduccionFE.contenidoFE.updateUI();
                     break;
                 case 2:
                     ProduccionTE.contenidoTE.removeAll();
+                    ProduccionTE.contenidoTE.updateUI();
                     break;
                 case 3:
                     ProduccionEN.contenidoEN.removeAll();
+                    ProduccionEN.contenidoEN.updateUI();
                     break;
             }
             while (crs.next()) {
@@ -481,6 +506,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                         break;
                 }
             }
+            crs.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error!!! " + e);
         }
@@ -562,5 +588,8 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
     private rsbuttom.RSButtonMetro rSButtonMetro2;
     private rsbuttom.RSButtonMetro rSButtonMetro3;
     // End of variables declaration//GEN-END:variables
-
+@Override
+    protected void finalize() throws Throwable {
+        super.finalize(); //To change body of generated methods, choose Tools | Templates.
+    }
 }

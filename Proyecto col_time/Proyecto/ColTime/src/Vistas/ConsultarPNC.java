@@ -429,4 +429,8 @@ public class ConsultarPNC extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTNorden;
     // End of variables declaration//GEN-END:variables
+ @Override
+    protected void finalize() throws Throwable {
+        super.finalize(); //To change body of generated methods, choose Tools | Templates.
+    }
 }

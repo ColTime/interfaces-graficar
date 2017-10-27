@@ -404,4 +404,8 @@ public class proyecto1 extends javax.swing.JPanel {
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTNorden;
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTTipoNegocio;
     // End of variables declaration//GEN-END:variables
+ @Override
+    protected void finalize() throws Throwable {
+        super.finalize(); //To change body of generated methods, choose Tools | Templates.
+    }
 }

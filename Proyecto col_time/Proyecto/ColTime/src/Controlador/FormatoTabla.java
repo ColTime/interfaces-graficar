@@ -30,4 +30,9 @@ public class FormatoTabla extends DefaultTableCellRenderer {
         super.getTableCellRendererComponent(table, value, selected, focused, row, column);
         return this;
     }
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize(); //To change body of generated methods, choose Tools | Templates.
+    }
 }

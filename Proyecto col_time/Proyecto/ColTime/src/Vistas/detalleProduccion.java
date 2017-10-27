@@ -131,6 +131,7 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
                 }
                 cantidad += 1;
             }
+            crs.close();
             jDetalle.updateUI();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error!" + e);
@@ -141,7 +142,7 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
     public void actionPerformed(ActionEvent e) {
         int detalle = Integer.parseInt(e.getActionCommand());
         Producciones obj1 = new Producciones();
-        detalleProyecto obj = new detalleProyecto(obj1, true, detalle, negocio, String.valueOf(orden),e.getSource().getClass().getName());
+        detalleProyecto obj = new detalleProyecto(obj1, true, detalle, negocio, String.valueOf(orden), e.getSource().getClass().getName());
         obj.setVisible(true);
         obj.setLocationRelativeTo(this);
     }
@@ -192,5 +193,8 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
     public static elaprendiz.gui.button.ButtonColoredAction btnPNC;
     private javax.swing.JPanel jDetalle;
     // End of variables declaration//GEN-END:variables
-
+@Override
+    protected void finalize() throws Throwable {
+        super.finalize(); //To change body of generated methods, choose Tools | Templates.
+    }
 }

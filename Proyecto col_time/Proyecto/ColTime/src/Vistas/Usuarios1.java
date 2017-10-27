@@ -4,11 +4,8 @@ import Atxy2k.CustomTextField.RestrictedTextField;
 import coltime.Menu;
 import java.awt.Color;
 import javax.sql.rowset.CachedRowSet;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import paneles.CambiaPanel;
 import rojerusan.RSNotifyAnimated;
 
 public class Usuarios1 extends javax.swing.JPanel {
@@ -668,6 +665,10 @@ public class Usuarios1 extends javax.swing.JPanel {
     private elaprendiz.gui.textField.TextFieldRoundBackground jTdocumentoB;
     private javax.swing.JPanel jpUser;
     // End of variables declaration//GEN-END:variables
+ @Override
+    protected void finalize() throws Throwable {
+        super.finalize(); //To change body of generated methods, choose Tools | Templates.
+    }
 //Metodos---------------------------------------------------------------------------------------------->
 
     public void registrarMdificarUsuario(int op, int estado) {
