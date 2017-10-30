@@ -28,6 +28,7 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
     boolean res = false;
     ControlDelTiempo vista = null;
     CachedRowSet crs = null;
+    int negocio = 0;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -169,7 +170,7 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
             res = obj.iniciar_Pausar_Reiniciar_Toma_Tiempo(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]), Integer.parseInt(datos[2]), Integer.parseInt(datos[3]), Integer.parseInt(datos[4]));
         } else {
             new rojerusan.RSNotifyAnimated("¡Alerta!", "No tienes permiso de leer el QR", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
-            if (Menu.producF == vista) {
+            if (Menu.producF == vista) {//Se valida que la vista que no se este utilizando se apunte a null y se finalice
                 Menu.producF = null;
             } else if (Menu.producT == vista) {
                 Menu.producT = null;
@@ -177,6 +178,7 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
                 Menu.producE = null;
             }
             vista.dispose();
+            negocio = cargo;
         }
         if (res) {
             validarExitenciadeBotones(Integer.parseInt(datos[0]), Integer.parseInt(datos[2]), vista);
@@ -194,7 +196,7 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
         obj.setHorizontalTextPosition(JButton.CENTER);
         //Icono del boton
         ImageIcon icono = new ImageIcon("src\\img\\detalle.png");
-        Icon imagen = new ImageIcon(icono.getImage().getScaledInstance(obj.getWidth() - 5, obj.getHeight() - 5, Image.SCALE_DEFAULT));
+        Icon imagen = new ImageIcon(icono.getImage().getScaledInstance(obj.getWidth() - 6, obj.getHeight() - 6, Image.SCALE_DEFAULT));
         obj.setIcon(imagen);
         px += 101;
         cantidad++;
@@ -213,8 +215,12 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void actionPerformed(ActionEvent e) {//Estas linean van a mostrar un jDialog pero solo los detalles del proyecto que estan en ejecución "2"
+        int orden = Integer.parseInt(e.getActionCommand());
+        detalleProduccion obj = new detalleProduccion(this, true, orden, negocio,2);
+        obj.setLocationRelativeTo(null);
+        obj.setVisible(true);
+        obj.dispose();
     }
 
     /**
@@ -271,5 +277,5 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
     protected void finalize() throws Throwable {
         super.finalize(); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

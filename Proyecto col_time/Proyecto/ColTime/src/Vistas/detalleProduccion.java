@@ -26,13 +26,13 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
     /**
      * Creates new form detalleProduccion
      */
-    public detalleProduccion(java.awt.Frame parent, boolean modal, int orden, int negocio) {
+    public detalleProduccion(java.awt.Frame parent, boolean modal, int orden, int negocio,int vistaC) {
         super(parent, modal);
         initComponents();
         this.orden = orden;
         this.negocio = negocio;
         this.setTitle(String.valueOf(orden));
-        consultarDetalleProyectoProduccion();
+        consultarDetalleProyectoProduccion(vistaC);
     }
     //Variables
     static int orden = 0, negocio = 0;
@@ -94,10 +94,10 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
     }//GEN-LAST:event_btnPNCActionPerformed
 
     //Metodos
-    private void consultarDetalleProyectoProduccion() {
+    private void consultarDetalleProyectoProduccion(int vistaC) {
         try {
             DetalleProyecto obj = new DetalleProyecto();
-            crs = obj.consultarDetalleProyectoProduccion(orden, negocio);
+            crs = obj.consultarDetalleProyectoProduccion(orden, negocio,vistaC);
             agregarBotones(crs);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error!" + e);
@@ -177,7 +177,7 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                detalleProduccion dialog = new detalleProduccion(new javax.swing.JFrame(), true, 0, 0);
+                detalleProduccion dialog = new detalleProduccion(new javax.swing.JFrame(), true, 0, 0,0);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

@@ -24,7 +24,7 @@ public class DetalleProyectoM {
 
     //Metodos----------------------------------------------------->
     //Este metodo también funcionara para registrar y modificar los productos no conformes PNC.
-    public boolean registrar_Detalle_Proycto(String cantidad, String negocio, String tipoNegocio, int estado, String numerOrden, String material, int op, int id,int pnc,String ubicacion) {
+    public boolean registrar_Detalle_Proycto(String cantidad, String negocio, String tipoNegocio, int estado, String numerOrden, String material, int op, int id, int pnc, String ubicacion) {
         try {
             conexion = new Conexion();
             conexion.establecerConexion();
@@ -102,7 +102,6 @@ public class DetalleProyectoM {
     }
 
     public boolean regitrarPNC() {
-        
 
         return true;
     }
@@ -159,13 +158,19 @@ public class DetalleProyectoM {
     }
 //Este es el detalle del la orden deacuerdo en donde se encuentren los detalles
 
-    public CachedRowSet consultarDetalleProyectoProduccion(int orden, int negocio) {
+    public CachedRowSet consultarDetalleProyectoProduccion(int orden, int negocio, int vistaC) {
         try {
             conexion = new Conexion();
             conexion.establecerConexion();
             con = conexion.getConexion();
             //Query------------------------------------------------------------>
-            String Qry = "CALL PA_DetalleProyectosProduccion(?,?)";
+            String Qry = "";
+            if (vistaC == 1) {
+                Qry = "CALL PA_DetalleProyectosProduccion(?,?)";
+            } else {
+                Qry = "CALL PA_DetalleDeProduccionProyectosActivos(?,?)";
+            }
+            //----------------------------------------------------------------->
             ps = con.prepareStatement(Qry);
             ps.setInt(1, orden);
             ps.setInt(2, negocio);

@@ -524,9 +524,9 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e) {//Estas lines me van a mostrar todos los detalles del proyecto sin importar se estan en ejecucion o no "1"
         int orden = Integer.parseInt(e.getActionCommand());
-        detalleProduccion obj = new detalleProduccion(this, true, orden, negocio);
+        detalleProduccion obj = new detalleProduccion(this, true, orden, negocio,1);
         obj.setLocationRelativeTo(null);
         obj.setVisible(true);
         obj.dispose();

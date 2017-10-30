@@ -99,9 +99,9 @@ public class DetalleProyecto {
         return obj.eliminarDetallersProyecto(idDetalle, numerOrden, negocio);
     }
 
-    public CachedRowSet consultarDetalleProyectoProduccion(int orden, int negocio) {
+    public CachedRowSet consultarDetalleProyectoProduccion(int orden, int negocio,int vistaC) {
         DetalleProyectoM obj = new DetalleProyectoM();
-        return obj.consultarDetalleProyectoProduccion(orden, negocio);
+        return obj.consultarDetalleProyectoProduccion(orden, negocio,vistaC);
     }
 
     public CachedRowSet consultarDetalleProduccion(int detalle, int negocio) {
