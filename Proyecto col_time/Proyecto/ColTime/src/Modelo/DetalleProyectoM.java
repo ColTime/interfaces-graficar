@@ -165,15 +165,24 @@ public class DetalleProyectoM {
             con = conexion.getConexion();
             //Query------------------------------------------------------------>
             String Qry = "";
-            if (vistaC == 1) {
-                Qry = "CALL PA_DetalleProyectosProduccion(?,?)";
-            } else {
-                Qry = "CALL PA_DetalleDeProduccionProyectosActivos(?,?)";
+            switch (vistaC) {
+                case 1:
+                case 2:
+                    Qry = "CALL PA_DetalleProyectosProduccion(?,?,?)";
+                    break;
+                case 3:
+                    Qry = "CALL PA_DetalleDeProduccionProyectosActivos(?,?,?)";
+                    break;
             }
             //----------------------------------------------------------------->
             ps = con.prepareStatement(Qry);
             ps.setInt(1, orden);
             ps.setInt(2, negocio);
+            if (vistaC == 1 || vistaC == 3) {
+                ps.setInt(3,0);
+            } else {
+                ps.setInt(3,1);
+            }
             rs = ps.executeQuery();
             crs = new CachedRowSetImpl();
             crs.populate(rs);

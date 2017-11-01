@@ -268,6 +268,7 @@ public class ConsultarPNC extends javax.swing.JFrame {
         proyecto1.jTTipoNegocio.setText(TDetalle.getValueAt(pos, 2).toString());
         proyecto1.cbProcedoPNC.removeAllItems();
         proyecto1.cbProcedoPNC.addItem("Seleccione...");
+        proyecto1.btnModificarPNC.setEnabled(true);
         if (TDetalle.getValueAt(pos, 1).toString().equals("FE")) {
             try {
                 crs = consultarProcesos(Integer.parseInt(TDetalle.getValueAt(pos, 0).toString()));

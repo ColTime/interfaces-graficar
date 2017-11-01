@@ -217,7 +217,7 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
     @Override
     public void actionPerformed(ActionEvent e) {//Estas linean van a mostrar un jDialog pero solo los detalles del proyecto que estan en ejecución "2"
         int orden = Integer.parseInt(e.getActionCommand());
-        detalleProduccion obj = new detalleProduccion(this, true, orden, negocio,2);
+        detalleProduccion obj = new detalleProduccion(this, true, orden, negocio,3);
         obj.setLocationRelativeTo(null);
         obj.setVisible(true);
         obj.dispose();

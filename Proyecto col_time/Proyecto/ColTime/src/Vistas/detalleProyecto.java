@@ -133,16 +133,6 @@ public class detalleProyecto extends javax.swing.JDialog {
 
     }
 
-    //La funcion de este metodo es cambiar el color de la celda estada deacuedo a l contenido de este
-    private void ColorCeldas() {
-        int filas = TDetalleProduccion.getRowCount();
-        for (int i = 0; i < filas; i++) {
-            String estado = TDetalleProduccion.getValueAt(i, 6).toString();
-            if (estado.equals("Ejecucion")) {
-
-            }
-        }
-    }
 
     /**
      * @param args the command line arguments

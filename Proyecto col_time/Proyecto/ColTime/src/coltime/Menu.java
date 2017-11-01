@@ -1,6 +1,5 @@
 package coltime;
 
-import Controlador.Proyecto;
 import Vistas.CambiarContraseña;
 import Vistas.ControlDelTiempo;
 import Vistas.Producciones;
@@ -8,17 +7,14 @@ import Vistas.Inicio;
 import Vistas.Usuarios1;
 import Vistas.proyecto;
 import Vistas.proyecto1;
-import coltime.Login;
 import java.awt.Color;
 import java.io.File;
 import java.io.FileInputStream;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import paneles.CambiaPanel;
 import rojerusan.RSNotifyAnimated;
 
@@ -687,16 +683,21 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        if (JOptionPane.showConfirmDialog(null, "¿Seguro desea cerrar sesión?") == 0) {
-            //Cierra el menu y abre el login
-            this.dispose();
-            try {
-                sesion(0, jDocumento.getText());
-                Thread.sleep(290);
-                new Login().setVisible(true);
-            } catch (Exception e) {
+        if (producE == null && producF == null && producT == null) {
+            if (JOptionPane.showConfirmDialog(null, "¿Seguro desea cerrar sesión?") == 0) {
+                //Cierra el menu y abre el login
+                this.dispose();
+                try {
+                    sesion(0, jDocumento.getText());
+                    Thread.sleep(290);
+                    new Login().setVisible(true);
+                } catch (Exception e) {
+                }
             }
+        } else {
+            new rojerusan.RSNotifyAnimated("¡Alerta!", "No puedes cerrar la aplicacion mientras un producto en ejecución.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
         }
+
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing

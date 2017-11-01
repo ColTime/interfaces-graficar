@@ -6,7 +6,9 @@
 package Vistas;
 
 import Controlador.DetalleProyecto;
+import com.sun.rowset.CachedRowSetImpl;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -26,23 +28,35 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
     /**
      * Creates new form detalleProduccion
      */
-    public detalleProduccion(java.awt.Frame parent, boolean modal, int orden, int negocio,int vistaC) {
+    public detalleProduccion(java.awt.Frame parent, boolean modal, int orden, int negocio, int vistaC) {
         super(parent, modal);
         initComponents();
         this.orden = orden;
         this.negocio = negocio;
-        this.setTitle(String.valueOf(orden));
+        this.vistaC = vistaC;
+        if (vistaC == 1) {
+            //Detalles del proyecto
+            this.setTitle(String.valueOf(orden));
+        } else if (vistaC == 2) {
+            //Productos no condormes
+            this.setTitle(String.valueOf(orden) + " - PNC");
+        } else if (vistaC == 3) {
+            //Proyecto en produccion
+        }
         consultarDetalleProyectoProduccion(vistaC);
     }
     //Variables
     static int orden = 0, negocio = 0;
     static CachedRowSet crs = null;
     int x = 0, y = 0, cantidad = 0;
+    static boolean res = false;
+    static int vistaC = 0;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
         jDetalle = new javax.swing.JPanel();
         btnPNC = new elaprendiz.gui.button.ButtonColoredAction();
 
@@ -63,50 +77,61 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
         jDetalleLayout.setHorizontalGroup(
             jDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDetalleLayout.createSequentialGroup()
-                .addContainerGap(509, Short.MAX_VALUE)
+                .addContainerGap(507, Short.MAX_VALUE)
                 .addComponent(btnPNC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jDetalleLayout.setVerticalGroup(
             jDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDetalleLayout.createSequentialGroup()
-                .addContainerGap(208, Short.MAX_VALUE)
+                .addContainerGap(215, Short.MAX_VALUE)
                 .addComponent(btnPNC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
+
+        jScrollPane1.setViewportView(jDetalle);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDetalle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane1)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPNCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPNCActionPerformed
+        Producciones obj1 = new Producciones();
+        res = false;
+        detalleProduccion obj = new detalleProduccion(obj1, true, orden, negocio, 2);
+        if (res) {
+            obj.btnPNC.setVisible(false);
+            obj.setLocationRelativeTo(null);
+            obj.setVisible(true);
 
+        }
     }//GEN-LAST:event_btnPNCActionPerformed
 
     //Metodos
     private void consultarDetalleProyectoProduccion(int vistaC) {
         try {
             DetalleProyecto obj = new DetalleProyecto();
-            crs = obj.consultarDetalleProyectoProduccion(orden, negocio,vistaC);
-            agregarBotones(crs);
+            crs = obj.consultarDetalleProyectoProduccion(orden, negocio, vistaC);
+            agregarBotones(crs, vistaC);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error!" + e);
         }
     }
 
-    private void agregarBotones(CachedRowSet crs) {
+    private void agregarBotones(CachedRowSet crs, int vistaC) {
         try {
             while (crs.next()) {
+                res = true;
                 JButton detalle = new JButton(crs.getString(2));
                 detalle.setName(String.valueOf(crs.getInt(1)));
                 detalle.setBounds(x, y, 110, 98);
@@ -126,13 +151,19 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
                 if (cantidad == 8) {
                     y = 99;
                     x = 0;
+                    jDetalle.setPreferredSize(new Dimension(633, jDetalle.getHeight() + 100));
                 } else {
                     x += 111;
                 }
                 cantidad += 1;
             }
+            if (vistaC == 2 && res == false) {
+                JOptionPane.showMessageDialog(null, " Este proyecto no tiene PNC ");
+            } else {
+                jDetalle.updateUI();
+            }
             crs.close();
-            jDetalle.updateUI();
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error!" + e);
         }
@@ -177,7 +208,7 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                detalleProduccion dialog = new detalleProduccion(new javax.swing.JFrame(), true, 0, 0,0);
+                detalleProduccion dialog = new detalleProduccion(new javax.swing.JFrame(), true, 0, 0, 0);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -191,7 +222,8 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static elaprendiz.gui.button.ButtonColoredAction btnPNC;
-    private javax.swing.JPanel jDetalle;
+    public static javax.swing.JPanel jDetalle;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 @Override
     protected void finalize() throws Throwable {

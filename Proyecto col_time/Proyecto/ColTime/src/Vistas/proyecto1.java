@@ -1,18 +1,21 @@
 package Vistas;
 
 import Controlador.DetalleProyecto;
+import com.barcodelib.barcode.QRCode;
 import java.awt.Color;
+import java.io.File;
+import javax.swing.JFileChooser;
 import rojerusan.RSNotifyAnimated;
 
 public class proyecto1 extends javax.swing.JPanel {
-    
+
     public proyecto1(int p) {
         if (p == 1) {
             initComponents();
             desactivarComponentes();
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -174,6 +177,14 @@ public class proyecto1 extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPInformacionLayout.createSequentialGroup()
+                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBuscarPNC, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnModificarPNC, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPInformacionLayout.createSequentialGroup()
                         .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTNorden, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -196,34 +207,23 @@ public class proyecto1 extends javax.swing.JPanel {
                         .addGap(33, 33, 33)
                         .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTCantindad, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(164, Short.MAX_VALUE))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPInformacionLayout.createSequentialGroup()
-                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBuscarPNC, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnModificarPNC, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(btnGenerarQR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnConsultarDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-            .addGroup(jPInformacionLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jLDetalle)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(12, 12, 12)
+                        .addComponent(jLDetalle)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnGenerarQR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnConsultarDetalle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPInformacionLayout.setVerticalGroup(
             jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPInformacionLayout.createSequentialGroup()
                 .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPInformacionLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnGenerarQR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnConsultarDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnGenerarQR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnConsultarDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPInformacionLayout.createSequentialGroup()
                         .addComponent(jLDetalle)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -299,6 +299,8 @@ public class proyecto1 extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
     public static int cargo = 0;
+    int udm = 0, resol = 80, rot = 0;
+    float mi = 0.000f, md = 0.000f, ms = 0.000f, min = 0.000f, tam = 15.000f;
 
     private void btnConsultarDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarDetalleActionPerformed
         ConsultarPNC obj = new ConsultarPNC(cargo, 1);
@@ -314,6 +316,7 @@ public class proyecto1 extends javax.swing.JPanel {
         jPInformacion.setBackground(new Color(255, 255, 255));
         btnConsultarDetalle.setEnabled(true);
         btnNuevo.setEnabled(false);
+        btnModificarPNC.setEnabled(false);
         limpiar();
     }//GEN-LAST:event_btnNuevoActionPerformed
 
@@ -327,8 +330,6 @@ public class proyecto1 extends javax.swing.JPanel {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         RegistrarPNCModificar(1);
-        limpiar();
-        btnNuevo.setEnabled(true);
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnBuscarPNCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPNCActionPerformed
@@ -342,10 +343,53 @@ public class proyecto1 extends javax.swing.JPanel {
     }//GEN-LAST:event_btnModificarPNCActionPerformed
 
     private void btnGenerarQRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarQRActionPerformed
-        
+
+        rutaGuardado();
     }//GEN-LAST:event_btnGenerarQRActionPerformed
 //Metodos-------------------------------------------------------------------->
-    private void limpiar(){
+
+    private String rutaGuardado() {
+        //Se obtiene la ruta donde se quiere guardar codigo QR
+        try {
+            JFileChooser Chocer = new JFileChooser();
+            Chocer.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            Chocer.showOpenDialog(this);
+            File guardar = Chocer.getSelectedFile();
+            if (guardar != null) {
+                QRCode cod = new QRCode();
+                String negocio = "";
+                switch (jTNegocio.getText()) {
+                    case "FE":
+                        negocio = "1";
+                        break;
+                    case "TE":
+                        negocio = "2";
+                        break;
+                    case "EN":
+                        negocio = "3";
+                        break;
+                }
+                String texto = jTNorden.getText() + ';' + jLDetalle.getText() + ';' + negocio;
+                cod.setData(texto);
+                cod.setDataMode(QRCode.MODE_BYTE);
+
+                cod.setUOM(udm);
+                cod.setLeftMargin(mi);
+                cod.setResolution(resol);
+                cod.setRightMargin(md);
+                cod.setTopMargin(ms);
+                cod.setBottomMargin(min);
+                cod.setRotate(rot);
+                cod.setModuleSize(tam);
+                cod.renderBarcode(guardar + "\\" + texto + ".png");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    private void limpiar() {
         jTNorden.setText("");
         jTNegocio.setText("");
         jTTipoNegocio.setText("");
@@ -353,8 +397,9 @@ public class proyecto1 extends javax.swing.JPanel {
         jTCantindad.setEnabled(false);
         cbProcedoPNC.setSelectedItem(0);
         cbProcedoPNC.setEnabled(false);
-        
+
     }
+
     private void RegistrarPNCModificar(int op) {
         if (cbProcedoPNC.getSelectedIndex() != 0) {
             DetalleProyecto obj = new DetalleProyecto();
@@ -365,11 +410,15 @@ public class proyecto1 extends javax.swing.JPanel {
             obj.registrarModificarPNC(jTNorden.getText(), op, Integer.parseInt(jLDetalle.getText()), cbProcedoPNC.getSelectedItem().toString());
             desactivarComponentes();
             new rojerusan.RSNotifyAnimated("¡listo!", "El PNC fue registrado correctamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+            limpiar();
+            btnNuevo.setEnabled(true);
+            btnGuardar.setEnabled(false);
+            btnConsultarDetalle.setEnabled(false);
         } else {
             new rojerusan.RSNotifyAnimated("¡Alerta!", "Debes seleccionar el proceso donde se genero el PNC.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
         }
     }
-    
+
     public void desactivarComponentes() {
         jPInformacion.setBackground(new Color(244, 244, 244));
         btnConsultarDetalle.setEnabled(false);
@@ -387,7 +436,7 @@ public class proyecto1 extends javax.swing.JPanel {
     public static elaprendiz.gui.button.ButtonColoredAction btnConsultarDetalle;
     public static elaprendiz.gui.button.ButtonColoredAction btnGenerarQR;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnModificarPNC;
+    public static javax.swing.JButton btnModificarPNC;
     private javax.swing.JButton btnNuevo;
     public static elaprendiz.gui.comboBox.ComboBoxRound cbProcedoPNC;
     public static javax.swing.JLabel jLDetalle;

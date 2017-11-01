@@ -44,7 +44,7 @@ public class proyecto extends javax.swing.JPanel {
     static int op = 0;
     boolean v[] = new boolean[12];
     int udm = 0, resol = 100, rot = 0;
-    float mi = 0.000f, md = 0.000f, ms = 0.000f, min = 0.000f, tam = 20.000f;
+    float mi = 0.000f, md = 0.000f, ms = 0.000f, min = 0.000f, tam = 21.000f;
     static String fecha = "";
 
     private void visibilidadID() {
@@ -829,14 +829,24 @@ public class proyecto extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        op=1;
+        op = 1;
         activarComponentes();
         cambiarEstadoBotones();
         limpiarCampos();
         NumeroDeOrden();
         fecha();
+        limpiarID();
     }//GEN-LAST:event_btnNuevoActionPerformed
-
+    private void limpiarID() {
+        jLIDConversor.setText("0");
+        jLIDRepujado.setText("0");
+        jLIDTroquel.setText("0");
+        jLIDStencil.setText("0");
+        jLIDCircuito.setText("0");
+        jLIDPCB.setText("0");
+        jLIDTeclado.setText("0");
+        jLIDIntegracion.setText("0");
+    }
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         ConsutaProyecto obj = new ConsutaProyecto();
         obj.setLocationRelativeTo(null);
@@ -848,7 +858,7 @@ public class proyecto extends javax.swing.JPanel {
                 "seleccione...", JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
                 new Object[]{"SI", "NO"}, "SI");
-        
+
         if (seleccion == 0) {
             validarRegistro(2);
         }
@@ -1301,6 +1311,7 @@ public class proyecto extends javax.swing.JPanel {
         btnUpdate.setEnabled(false);
         btnGuardar.setEnabled(false);
         btnNuevo.setEnabled(false);
+        btnGenerarQR.setEnabled(false);
     }
 
     private void desactivarBotonesjC() {
@@ -1363,7 +1374,7 @@ public class proyecto extends javax.swing.JPanel {
         if (op == 1) {
             if (!jTNombreCliente.getText().equals("") && !jTNombreProyecto.getText().equals("")) {
                 btnGuardar.setEnabled(true);
-            }else{
+            } else {
                 btnGuardar.setEnabled(false);
             }
         }
@@ -1448,7 +1459,7 @@ public class proyecto extends javax.swing.JPanel {
                     op = op1;
                 }
                 //Fin del registro del PCB FE
-            } 
+            }
             if (!jLIDCircuito.getText().equals("0")) {
                 //Eliminar el detalle del proyecto si ya no esta seleccionado
                 subEliminardetalle(obj, Integer.parseInt(jLIDCircuito.getText()), Integer.parseInt(jTNorden.getText()), "FE", " Circuito");

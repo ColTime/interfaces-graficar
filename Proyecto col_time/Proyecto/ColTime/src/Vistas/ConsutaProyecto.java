@@ -6,6 +6,7 @@
 package Vistas;
 
 import Controlador.DetalleProyecto;
+import Controlador.FormatoTabla;
 import coltime.Menu;
 import java.awt.Color;
 import java.text.DateFormat;
@@ -51,6 +52,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         jPEncabezado = new javax.swing.JPanel();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jTtipo = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -92,6 +94,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                 jPEncabezadoMousePressed(evt);
             }
         });
+        jPEncabezado.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/close.png"))); // NOI18N
         jButton9.setBorderPainted(false);
@@ -103,6 +106,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                 jButton9ActionPerformed(evt);
             }
         });
+        jPEncabezado.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1192, 11, 23, -1));
 
         jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/minus1.png"))); // NOI18N
         jButton10.setBorderPainted(false);
@@ -114,27 +118,10 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                 jButton10ActionPerformed(evt);
             }
         });
+        jPEncabezado.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1163, 11, 23, -1));
 
-        javax.swing.GroupLayout jPEncabezadoLayout = new javax.swing.GroupLayout(jPEncabezado);
-        jPEncabezado.setLayout(jPEncabezadoLayout);
-        jPEncabezadoLayout.setHorizontalGroup(
-            jPEncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPEncabezadoLayout.createSequentialGroup()
-                .addContainerGap(1163, Short.MAX_VALUE)
-                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPEncabezadoLayout.setVerticalGroup(
-            jPEncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPEncabezadoLayout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addGroup(jPEncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton10)
-                    .addComponent(jButton9))
-                .addContainerGap(35, Short.MAX_VALUE))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesEmpresa/encabezado.jpg"))); // NOI18N
+        jPEncabezado.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 1090, 70));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
@@ -856,6 +843,10 @@ public class ConsutaProyecto extends javax.swing.JFrame {
             editarColumnasDetalle();
             TPNC.setModel(model2);
             editarColumnasPNC();
+            FormatoTabla ft=new FormatoTabla(4);
+            TDetalle.setDefaultRenderer(Object.class, ft);
+            FormatoTabla ftP=new FormatoTabla(5);
+            TPNC.setDefaultRenderer(Object.class, ftP);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error! " + e);
         }
@@ -979,6 +970,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton9;
     private com.toedter.calendar.JDateChooser jDFecha;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
