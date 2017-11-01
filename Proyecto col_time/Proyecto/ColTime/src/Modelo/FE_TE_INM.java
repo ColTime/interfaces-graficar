@@ -1,6 +1,7 @@
 package Modelo;
 
 import com.sun.rowset.CachedRowSetImpl;
+import elaprendiz.gui.label.LabelCustom;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,7 +23,7 @@ public class FE_TE_INM {
     boolean res;
     String orden = "";
     String fecha = "";
-    int T_Total = 0;
+    String T_Total = "";
     int cantidadAntigua = 0;
     int estado = 0;
 
@@ -76,7 +77,7 @@ public class FE_TE_INM {
                     ps.setInt(4, negocio);
                     rs = ps.executeQuery();
                     rs.next();
-                    T_Total = convertirHorasAMinutos(Integer.parseInt(rs.getString(1)), rs.getString(2).split(":"));
+                    T_Total = convertirHorasAMinutos(rs.getString(1).split(":"), rs.getString(2).split(":"));
                     Qry = "CALL PA_PausarTomaDeTiempoDeProcesos(?,?,?,?,?,?,?)";
                     ps = con.prepareStatement(Qry);
                     ps.setInt(1, orden);
@@ -112,9 +113,30 @@ public class FE_TE_INM {
         return res;
     }
 
-    private int convertirHorasAMinutos(int total, String hora[]) {
-        total += ((Integer.parseInt(hora[0]) * 60) + Integer.parseInt(hora[1]));
-        return total;
+    private String convertirHorasAMinutos(String total[], String hora[]) {
+        int h = 0, m = 0, s = 0, ma = 0, sa = 0;
+        String tiempoMS = "";
+        //Horas, minutos y segundos
+        h = Integer.parseInt(hora[0]);
+        m = Integer.parseInt(hora[1]);
+        s = Integer.parseInt(hora[2]);
+        //Minutos y segundos antiguos
+        ma = Integer.parseInt(total[0]);
+        sa = Integer.parseInt(total[1]);
+        if (h >= 1) {
+            //Vamos a convertir las horas en minutos siempre y cuando sean mayores a 0 y sumarle los minutos antiguos
+            m += (h * 60);
+        }
+        //Sumamos los segundos nuevos con los segundos antiguos
+        s += sa;
+        m += ma;
+        while (s >= 60) {
+            s = (s - 60);
+            m += 1;
+        }
+        tiempoMS = ((m < 9) ? "0" : "") + m + ":" + ((s<9)?"0":"")+s;
+
+        return tiempoMS;
     }
 
     public CachedRowSet consultarProyectosEnEjecucion(int negocio) {

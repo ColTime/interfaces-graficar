@@ -35,14 +35,16 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         consultarProyectos("", "", "", "");
         editarColumnasPNC();
         editarColumnasDetalle();
-        System.out.println("width: "+jPEncabezado.getWidth()+"\n"
-                + "Heigth: "+jPEncabezado.getHeight());
+        System.out.println("width: " + jPEncabezado.getWidth() + "\n"
+                + "Heigth: " + jPEncabezado.getHeight());
     }
     //VAriables globales
     int posX = 0;
     int posY = 0;
     CachedRowSet crs;
     //Botones de radio
+    String encabezado1[] = {"idDetalle", "Negocio", "Tipo de negocio", "Cantidad", "Estado", "Material"};//Detalle del proyecto
+    String encabezado2[] = {"idDetalle", "Negocio", "Tipo de negocio", "Cantidad", "Ubicación", "Estado"};//PNC
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -433,9 +435,10 @@ public class ConsutaProyecto extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         consultarProyectos("", "", "", "");
-        TDetalle.setModel(null);
-        TPNC.setModel(null);
+        TDetalle.setModel(new DefaultTableModel(null, encabezado1));
+        TPNC.setModel(new DefaultTableModel(null, encabezado2));
         limpiarCampos();
+        editarColumnasDetalle();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTNumerOrdenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNumerOrdenKeyReleased
@@ -688,7 +691,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
     }//GEN-LAST:event_TProyectoMousePressed
 
     private void jRSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRSalidaActionPerformed
-            // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_jRSalidaActionPerformed
 
     /**
@@ -811,8 +814,6 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         DetalleProyecto obj = new DetalleProyecto();
         try {
             crs = obj.consultar_Detalle_Proyecto(numerOrden);
-            String encabezado1[] = {"idDetalle", "Negocio", "Tipo de negocio", "Cantidad", "Estado", "Material"};//Detalle del proyecto
-            String encabezado2[] = {"idDetalle", "Negocio", "Tipo de negocio", "Cantidad", "Ubicación", "Estado"};
             DefaultTableModel model1 = new DefaultTableModel(null, encabezado1);
             DefaultTableModel model2 = new DefaultTableModel(null, encabezado2);
             String v1[] = new String[6];
@@ -843,9 +844,9 @@ public class ConsutaProyecto extends javax.swing.JFrame {
             editarColumnasDetalle();
             TPNC.setModel(model2);
             editarColumnasPNC();
-            FormatoTabla ft=new FormatoTabla(4);
+            FormatoTabla ft = new FormatoTabla(4);
             TDetalle.setDefaultRenderer(Object.class, ft);
-            FormatoTabla ftP=new FormatoTabla(5);
+            FormatoTabla ftP = new FormatoTabla(5);
             TPNC.setDefaultRenderer(Object.class, ftP);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error! " + e);
