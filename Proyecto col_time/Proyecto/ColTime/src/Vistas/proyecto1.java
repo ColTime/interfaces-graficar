@@ -3,8 +3,18 @@ package Vistas;
 import Controlador.DetalleProyecto;
 import com.barcodelib.barcode.QRCode;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import javafx.embed.swing.SwingFXUtils;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 import rojerusan.RSNotifyAnimated;
 
 public class proyecto1 extends javax.swing.JPanel {
@@ -13,6 +23,7 @@ public class proyecto1 extends javax.swing.JPanel {
         if (p == 1) {
             initComponents();
             desactivarComponentes();
+            grafica();
         }
     }
 
@@ -40,6 +51,7 @@ public class proyecto1 extends javax.swing.JPanel {
         jLDetalle = new javax.swing.JLabel();
         btnGenerarQR = new elaprendiz.gui.button.ButtonColoredAction();
         jPEstadistica = new javax.swing.JPanel();
+        grafica = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(219, 219, 219));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
@@ -116,6 +128,9 @@ public class proyecto1 extends javax.swing.JPanel {
         jTCantindad.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
         jTCantindad.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTCantindad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTCantindadKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTCantindadKeyTyped(evt);
             }
@@ -183,47 +198,51 @@ public class proyecto1 extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBuscarPNC, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnModificarPNC, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnModificarPNC, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnGenerarQR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
                     .addGroup(jPInformacionLayout.createSequentialGroup()
-                        .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTNorden, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnConsultarDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPInformacionLayout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPInformacionLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTNegocio, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(39, 39, 39)))
-                        .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTTipoNegocio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
-                        .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbProcedoPNC, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(33, 33, 33)
-                        .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTCantindad, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPInformacionLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jLDetalle)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnGenerarQR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnConsultarDetalle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPInformacionLayout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addComponent(jLDetalle))
+                                    .addComponent(jTNorden, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPInformacionLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTNegocio, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(39, 39, 39))
+                                    .addGroup(jPInformacionLayout.createSequentialGroup()
+                                        .addGap(45, 45, 45)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(30, 30, 30)))
+                                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTTipoNegocio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(30, 30, 30)
+                                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbProcedoPNC, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(33, 33, 33)
+                                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTCantindad, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(134, 134, 134))))
         );
         jPInformacionLayout.setVerticalGroup(
             jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPInformacionLayout.createSequentialGroup()
                 .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPInformacionLayout.createSequentialGroup()
-                        .addComponent(btnGenerarQR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnConsultarDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnConsultarDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnGenerarQR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPInformacionLayout.createSequentialGroup()
                         .addComponent(jLDetalle)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -249,15 +268,19 @@ public class proyecto1 extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        grafica.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout jPEstadisticaLayout = new javax.swing.GroupLayout(jPEstadistica);
         jPEstadistica.setLayout(jPEstadisticaLayout);
         jPEstadisticaLayout.setHorizontalGroup(
             jPEstadisticaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 863, Short.MAX_VALUE)
+            .addGroup(jPEstadisticaLayout.createSequentialGroup()
+                .addComponent(grafica, javax.swing.GroupLayout.PREFERRED_SIZE, 863, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPEstadisticaLayout.setVerticalGroup(
             jPEstadisticaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 355, Short.MAX_VALUE)
+            .addComponent(grafica, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -277,8 +300,8 @@ public class proyecto1 extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPEstadistica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addComponent(jPEstadistica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -301,9 +324,9 @@ public class proyecto1 extends javax.swing.JPanel {
     public static int cargo = 0;
     int udm = 0, resol = 80, rot = 0;
     float mi = 0.000f, md = 0.000f, ms = 0.000f, min = 0.000f, tam = 15.000f;
-
+    boolean res = false;
     private void btnConsultarDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarDetalleActionPerformed
-        ConsultarPNC obj = new ConsultarPNC(cargo, 1);
+        ConsultarPNC obj = new ConsultarPNC(cargo, 1,1);
         obj.setLocationRelativeTo(null);
         obj.setVisible(true);
     }//GEN-LAST:event_btnConsultarDetalleActionPerformed
@@ -321,11 +344,7 @@ public class proyecto1 extends javax.swing.JPanel {
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void jTCantindadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTCantindadKeyTyped
-        if (!jTCantindad.getText().equals("")) {
-            btnGuardar.setEnabled(true);
-        } else {
-            btnGuardar.setEnabled(false);
-        }
+        //Borrar
     }//GEN-LAST:event_jTCantindadKeyTyped
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -333,19 +352,26 @@ public class proyecto1 extends javax.swing.JPanel {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnBuscarPNCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPNCActionPerformed
-        ConsultarPNC obj = new ConsultarPNC(cargo, 2);
+        ConsultarPNC obj = new ConsultarPNC(cargo, 2,2);
         obj.setLocationRelativeTo(null);
         obj.setVisible(true);
     }//GEN-LAST:event_btnBuscarPNCActionPerformed
 
     private void btnModificarPNCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarPNCActionPerformed
-        // TODO add your handling code here:
+        RegistrarPNCModificar(2);
     }//GEN-LAST:event_btnModificarPNCActionPerformed
 
     private void btnGenerarQRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarQRActionPerformed
-
         rutaGuardado();
     }//GEN-LAST:event_btnGenerarQRActionPerformed
+
+    private void jTCantindadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTCantindadKeyReleased
+        if (!jTCantindad.getText().equals("")) {
+            btnGuardar.setEnabled(true);
+        } else {
+            btnGuardar.setEnabled(false);
+        }
+    }//GEN-LAST:event_jTCantindadKeyReleased
 //Metodos-------------------------------------------------------------------->
 
     private String rutaGuardado() {
@@ -382,6 +408,7 @@ public class proyecto1 extends javax.swing.JPanel {
                 cod.setRotate(rot);
                 cod.setModuleSize(tam);
                 cod.renderBarcode(guardar + "\\" + texto + ".png");
+                new rojerusan.RSNotifyAnimated("¡listo!", "El codigo fue generado en la ruta: " + guardar, 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -397,23 +424,31 @@ public class proyecto1 extends javax.swing.JPanel {
         jTCantindad.setEnabled(false);
         cbProcedoPNC.setSelectedItem(0);
         cbProcedoPNC.setEnabled(false);
-
     }
 
     private void RegistrarPNCModificar(int op) {
         if (cbProcedoPNC.getSelectedIndex() != 0) {
             DetalleProyecto obj = new DetalleProyecto();
-            obj.setCantidad(jTCantindad.getText());
-            obj.setNegocio(jTNegocio.getText());
-            obj.setTipoNegocio(jTTipoNegocio.getText());
-            obj.setMaterial("");
-            obj.registrarModificarPNC(jTNorden.getText(), op, Integer.parseInt(jLDetalle.getText()), cbProcedoPNC.getSelectedItem().toString());
-            desactivarComponentes();
-            new rojerusan.RSNotifyAnimated("¡listo!", "El PNC fue registrado correctamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
-            limpiar();
-            btnNuevo.setEnabled(true);
-            btnGuardar.setEnabled(false);
-            btnConsultarDetalle.setEnabled(false);
+            int cantidad = obj.ValidarCnatidadPNC(jTNorden.getText(), Integer.parseInt(jLDetalle.getText()), op, jTTipoNegocio.getText(), jTNegocio.getText());
+            if (Integer.parseInt(jTCantindad.getText()) <=cantidad) {
+                obj.setCantidad(jTCantindad.getText());
+                obj.setNegocio(jTNegocio.getText());
+                obj.setTipoNegocio(jTTipoNegocio.getText());
+                obj.setMaterial("");
+                res = obj.registrarModificarPNC(jTNorden.getText(), op, Integer.parseInt(jLDetalle.getText()), cbProcedoPNC.getSelectedItem().toString());
+                if (res) {
+                    desactivarComponentes();
+                    new rojerusan.RSNotifyAnimated("¡listo!", "El PNC fue registrado correctamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+                    limpiar();
+                    btnNuevo.setEnabled(true);
+                    btnGuardar.setEnabled(false);
+                    btnConsultarDetalle.setEnabled(false);
+                } else {
+                    new rojerusan.RSNotifyAnimated("¡Alerta!", "La cantidad ingresada es mayor a la cantidad del proyecto.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
+                }
+            } else {
+                new rojerusan.RSNotifyAnimated("¡Alerta!", "El PNC no pudo ser registrado.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
+            }
         } else {
             new rojerusan.RSNotifyAnimated("¡Alerta!", "Debes seleccionar el proceso donde se genero el PNC.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
         }
@@ -431,14 +466,35 @@ public class proyecto1 extends javax.swing.JPanel {
         jTCantindad.setEnabled(false);
     }
 
+    private void grafica() {
+        try {
+            DefaultCategoryDataset ds = new DefaultCategoryDataset();
+            ds.addValue(70, "Formato estandar", "FE");
+            ds.addValue(20, "Teclados", "TE");
+            ds.addValue(30, "Ensamble", "EN");
+
+            JFreeChart jf = ChartFactory.createBarChart3D("Cantidad de proyectos por area", "Nombres", "Edades", ds, PlotOrientation.VERTICAL, true, true, true);
+
+            grafica.setIcon(new ImageIcon(jf.createBufferedImage(859, 366)));
+//            ChartFrame f = new ChartFrame("Edades", jf);
+//            f.setSize(1000, 600);
+//            f.setLocationRelativeTo(null);
+//            f.setVisible(true);
+
+        } catch (Exception e) {
+        }
+
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscarPNC;
+    public static javax.swing.JButton btnBuscarPNC;
     public static elaprendiz.gui.button.ButtonColoredAction btnConsultarDetalle;
     public static elaprendiz.gui.button.ButtonColoredAction btnGenerarQR;
-    private javax.swing.JButton btnGuardar;
+    public static javax.swing.JButton btnGuardar;
     public static javax.swing.JButton btnModificarPNC;
-    private javax.swing.JButton btnNuevo;
+    public static javax.swing.JButton btnNuevo;
     public static elaprendiz.gui.comboBox.ComboBoxRound cbProcedoPNC;
+    private javax.swing.JLabel grafica;
     public static javax.swing.JLabel jLDetalle;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

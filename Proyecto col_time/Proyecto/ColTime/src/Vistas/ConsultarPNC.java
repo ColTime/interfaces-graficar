@@ -1,6 +1,7 @@
 package Vistas;
 
 import Controlador.DetalleProyecto;
+import java.awt.Color;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -15,10 +16,11 @@ public class ConsultarPNC extends javax.swing.JFrame {
     /**
      * Creates new form ConsultarPNC
      */
-    public ConsultarPNC(int cargo, int vista) {
+    public ConsultarPNC(int cargo, int vista, int accion) {
         initComponents();
         this.cargo = cargo;
         this.vista = vista;
+        this.accion = accion;
         titulo();
         editarColumnasDetalle();
     }
@@ -29,6 +31,7 @@ public class ConsultarPNC extends javax.swing.JFrame {
     int y = 0;
     public static int cargo = 0;
     public static int vista = 0;
+    public static int accion = 0;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -262,13 +265,23 @@ public class ConsultarPNC extends javax.swing.JFrame {
     //Metodos de consultarPNC--------------------------------------------------->
 
     private void exportarInformacion(int pos) {
+        proyecto1.jPInformacion.setBackground(new Color(255, 255, 255));//Se activan los componentes
+        proyecto1.btnConsultarDetalle.setEnabled(true);
+        proyecto1.btnNuevo.setEnabled(true);
+        proyecto1.btnModificarPNC.setEnabled(true);
         proyecto1.jLDetalle.setText(TDetalle.getValueAt(pos, 0).toString());
         proyecto1.jTNorden.setText(jTNorden.getText());
         proyecto1.jTNegocio.setText(TDetalle.getValueAt(pos, 1).toString());
         proyecto1.jTTipoNegocio.setText(TDetalle.getValueAt(pos, 2).toString());
         proyecto1.cbProcedoPNC.removeAllItems();
         proyecto1.cbProcedoPNC.addItem("Seleccione...");
-        proyecto1.btnModificarPNC.setEnabled(true);
+        //Se valida si la accion va ser crear o modificar
+        if (accion == 2) {
+            proyecto1.btnModificarPNC.setEnabled(true);
+        } else {
+            proyecto1.btnModificarPNC.setEnabled(false);
+        }
+
         if (TDetalle.getValueAt(pos, 1).toString().equals("FE")) {
             try {
                 crs = consultarProcesos(Integer.parseInt(TDetalle.getValueAt(pos, 0).toString()));
@@ -414,7 +427,7 @@ public class ConsultarPNC extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ConsultarPNC(0, 0).setVisible(true);
+                new ConsultarPNC(0, 0, 0).setVisible(true);
             }
         });
     }

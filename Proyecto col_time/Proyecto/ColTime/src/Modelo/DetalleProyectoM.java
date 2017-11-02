@@ -23,6 +23,65 @@ public class DetalleProyectoM {
     boolean res = false;
 
     //Metodos----------------------------------------------------->
+    public int ValidarCnatidadPNCM(String numerOrden, int detalle, int op, String tipo, String negocio) {
+        int cantidad = 0;
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query------------------------------------------------------------>
+            String Qry = "CALL PA_ValidarCantidadPNCOrigen(?,?,?,?,?)";
+            ps = con.prepareStatement(Qry);
+            ps.setInt(1, Integer.parseInt(numerOrden));
+            ps.setInt(2, detalle);
+            ps.setInt(3, op);
+            //Tipo de negocio
+            switch (tipo) {
+                case "Circuito":
+                    ps.setInt(4, 1);
+                    break;
+                case "Conversor":
+                    ps.setInt(4, 2);
+                    break;
+                case "PCB":
+                    ps.setInt(4, 3);
+                    break;
+                case "Repujado":
+                    ps.setInt(4, 4);
+                    break;
+                case "Stencil":
+                    ps.setInt(4, 5);
+                    break;
+                case "Teclado":
+                    ps.setInt(4, 6);
+                    break;
+                case "Troquel":
+                    ps.setInt(4, 7);
+                    break;
+            }
+            //Negocio
+            if (negocio.equals("FE")) {
+                ps.setInt(5, 1);
+            } else if (negocio.equals("TE")) {
+                ps.setInt(5, 2);
+            } else {
+                ps.setInt(5, 3);
+            }
+
+            rs = ps.executeQuery();
+            rs.next();
+            cantidad = rs.getInt(1);
+            //Cierre de conexiones
+            conexion.cerrar(rs);
+            conexion.destruir();
+            ps.close();
+            con.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "¡Error!" + e);
+        }
+        return cantidad;
+    }
+
     //Este metodo también funcionara para registrar y modificar los productos no conformes PNC.
     public boolean registrar_Detalle_Proycto(String cantidad, String negocio, String tipoNegocio, int estado, String numerOrden, String material, int op, int id, int pnc, String ubicacion) {
         try {
@@ -32,63 +91,58 @@ public class DetalleProyectoM {
             //Query------------------------------------------------------------>
             String Qry = "";
             if (op == 1) {
-                Qry = "SELECT FU_RegistrarDetalleProyecto(?,?,?,?,?,?,?,?)";
+                //Se valida si el proyecto ya tenia antecedentes registrados en esa misma ubicacion
+                Qry = "CALL PA_ValidarUbicacionPNC(?,?)";
                 ps = con.prepareStatement(Qry);
                 ps.setInt(1, Integer.parseInt(numerOrden));
-                ps.setString(2, tipoNegocio);
-                ps.setString(3, cantidad);
-                ps.setString(4, negocio);
-                ps.setInt(5, estado);
-                ps.setString(6, material);
-                ps.setInt(7, pnc);
-                ps.setString(8, ubicacion);
-                //Ejecucion de la sentencia 
+                ps.setString(2, ubicacion);
                 rs = ps.executeQuery();
                 rs.next();
-                res = rs.getBoolean(1);
-
-                if (negocio.equals("IN")) {
-                    //Se registran los procesos de IN para este subproyecto
-                    for (int i = 15; i <= 20; i++) {
-                        Qry = "CALL PA_RegistrarDetalleEnsamble(?)";
-                        ps = con.prepareStatement(Qry);
-                        ps.setInt(1, i);
-                        ps.execute();
-                    }
-                } else if (negocio.equals("TE")) {
-                    //Se registran los procesos de TE para este subproyecto 
-                    for (int i = 11; i <= 14; i++) {
-                        Qry = "CALL PA_RegistrarDetalleTeclados(?)";
-                        ps = con.prepareStatement(Qry);
-                        ps.setInt(1, i);
-                        ps.execute();
-                    }
-                } else if (negocio.equals("FE")) {
-                    //Se registran los procesos de FE para este subproyecto 
-                    Qry = "CALL PA_RegistrarDetalleFormatoEstandar()";
-                    ps = con.prepareStatement(Qry);
-                    ps.execute();
-                }
-            } else if (op == 2) {
-                Qry = "SELECT FU_ModificarDetalleProyecto(?,?,?,?)";
-                //PreparedSteamate y detalle----------------------------------->
-                ps = con.prepareStatement(Qry);
-                ps.setInt(1, Integer.parseInt(numerOrden));
-                ps.setInt(2, id);
-                ps.setString(3, cantidad);
-                ps.setString(4, material);
-
-                rs = ps.executeQuery();
-                rs.next();
-                res = rs.getBoolean(1);
-                if (negocio.equals("FE") && (tipoNegocio.equals("Circuito") || tipoNegocio.equals("PCB"))) {
-                    //Modificar procesos de formato estandar
-                    Qry = "CALL PA_ModificarDetalleFormatoEstandar(?,?)";
+                if (rs.getInt(1)!=0) {
+                    //Se modifica siempre y cuando el proyecto tenga un PNC ya registrado en la misma ubicacion
+                    modificarPNC(numerOrden, rs.getInt(1), cantidad, material, negocio, tipoNegocio);
+                } else {
+                    //Si no se registra el producto no conforme desde 0 
+                    Qry = "SELECT FU_RegistrarDetalleProyecto(?,?,?,?,?,?,?,?)";
                     ps = con.prepareStatement(Qry);
                     ps.setInt(1, Integer.parseInt(numerOrden));
-                    ps.setInt(2, id);
+                    ps.setString(2, tipoNegocio);
+                    ps.setString(3, cantidad);
+                    ps.setString(4, negocio);
+                    ps.setInt(5, estado);
+                    ps.setString(6, material);
+                    ps.setInt(7, pnc);
+                    ps.setString(8, ubicacion);
+                    //Ejecucion de la sentencia 
                     rs = ps.executeQuery();
+                    rs.next();
+                    res = rs.getBoolean(1);
+
+                    if (negocio.equals("IN")) {
+                        //Se registran los procesos de IN para este subproyecto
+                        for (int i = 15; i <= 20; i++) {
+                            Qry = "CALL PA_RegistrarDetalleEnsamble(?)";
+                            ps = con.prepareStatement(Qry);
+                            ps.setInt(1, i);
+                            ps.execute();
+                        }
+                    } else if (negocio.equals("TE")) {
+                        //Se registran los procesos de TE para este subproyecto 
+                        for (int i = 11; i <= 14; i++) {
+                            Qry = "CALL PA_RegistrarDetalleTeclados(?)";
+                            ps = con.prepareStatement(Qry);
+                            ps.setInt(1, i);
+                            ps.execute();
+                        }
+                    } else if (negocio.equals("FE")) {
+                        //Se registran los procesos de FE para este subproyecto 
+                        Qry = "CALL PA_RegistrarDetalleFormatoEstandar()";
+                        ps = con.prepareStatement(Qry);
+                        ps.execute();
+                    }
                 }
+            } else if (op == 2) {
+                modificarPNC(numerOrden, id, cantidad, material, negocio, tipoNegocio);
             }
             //Cierre de conexiones
             conexion.cerrar(rs);
@@ -101,11 +155,35 @@ public class DetalleProyectoM {
         return res;
     }
 
-    public boolean regitrarPNC() {
+    private void modificarPNC(String numerOrden, int id, String cantidad, String material, String negocio, String tipoNegocio) {
+        //PreparedSteamate y detalle----------------------------------->
+        try {
+            String Qry = "SELECT FU_ModificarDetalleProyecto(?,?,?,?)";
+            ps = con.prepareStatement(Qry);
+            ps.setInt(1, Integer.parseInt(numerOrden));
+            ps.setInt(2, id);
+            ps.setString(3, cantidad);
+            ps.setString(4, material);
 
-        return true;
+            rs = ps.executeQuery();
+            rs.next();
+            res = rs.getBoolean(1);
+            if (negocio.equals("FE") && (tipoNegocio.equals("Circuito") || tipoNegocio.equals("PCB"))) {
+                //Modificar procesos de formato estandar
+                Qry = "CALL PA_ModificarDetalleFormatoEstandar(?,?)";
+                ps = con.prepareStatement(Qry);
+                ps.setInt(1, Integer.parseInt(numerOrden));
+                ps.setInt(2, id);
+                rs = ps.executeQuery();
+            }
+        } catch (Exception e) {
+        }
     }
 
+//    public boolean regitrarPNC() {
+//
+//        return true;
+//    }
     public CachedRowSet consultar_Detalle_Proyecto(String numeOrden) {
         try {
             conexion = new Conexion();
@@ -179,9 +257,9 @@ public class DetalleProyectoM {
             ps.setInt(1, orden);
             ps.setInt(2, negocio);
             if (vistaC == 1 || vistaC == 3) {
-                ps.setInt(3,0);
+                ps.setInt(3, 0);
             } else {
-                ps.setInt(3,1);
+                ps.setInt(3, 1);
             }
             rs = ps.executeQuery();
             crs = new CachedRowSetImpl();

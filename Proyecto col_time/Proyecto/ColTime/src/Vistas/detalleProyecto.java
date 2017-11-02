@@ -31,8 +31,10 @@ public class detalleProyecto extends javax.swing.JDialog {
         TDetalleProduccion = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1195, 300));
+        setMinimumSize(new java.awt.Dimension(1270, 300));
         setPreferredSize(new java.awt.Dimension(900, 300));
+
+        jPanel1.setPreferredSize(new java.awt.Dimension(1270, 300));
 
         TDetalleProduccion = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -70,7 +72,7 @@ public class detalleProyecto extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1180, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1250, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
