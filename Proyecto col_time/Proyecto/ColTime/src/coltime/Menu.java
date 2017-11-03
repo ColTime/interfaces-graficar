@@ -39,6 +39,10 @@ public class Menu extends javax.swing.JFrame {
         funcionalidades(cargo);
         new rojerusan.RSNotifyAnimated("Bienvenido", "Tienes 5 nuevas notificaciones", 6, RSNotifyAnimated.PositionNotify.BottomLeft, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
     }
+
+    public Menu() {
+
+    }
     //Variables en uso de la clase
     private int posX = 0;
     private int posY = 0;

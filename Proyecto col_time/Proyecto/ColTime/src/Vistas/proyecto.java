@@ -22,6 +22,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.JCheckBox;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import rojerusan.RSNotifyAnimated;
 
@@ -34,7 +35,7 @@ public class proyecto extends javax.swing.JPanel {
             cambiarEstadoBotones();
             btnNuevo.setEnabled(true);
             Notificacion1.setVisible(false);
-            btnGenerarQR.setEnabled(false);
+            GenerarQR.setEnabled(false);
             visibilidadID();
             limites();
         }
@@ -155,7 +156,8 @@ public class proyecto extends javax.swing.JPanel {
         jLIDPCB = new javax.swing.JLabel();
         jLIDTeclado = new javax.swing.JLabel();
         jLIDIntegracion = new javax.swing.JLabel();
-        btnGenerarQR = new elaprendiz.gui.button.ButtonColoredAction();
+        GenerarQR = new elaprendiz.gui.button.ButtonColoredAction();
+        btnGraficaArea = new elaprendiz.gui.button.ButtonColoredAction();
 
         setBackground(new java.awt.Color(219, 219, 219));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
@@ -785,13 +787,21 @@ public class proyecto extends javax.swing.JPanel {
         jLIDIntegracion.setText("0");
         jPanel2.add(jLIDIntegracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(716, 210, 10, -1));
 
-        btnGenerarQR.setText("Generar QR");
-        btnGenerarQR.addActionListener(new java.awt.event.ActionListener() {
+        GenerarQR.setText("GenerarQR");
+        GenerarQR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGenerarQRActionPerformed(evt);
+                GenerarQRActionPerformed(evt);
             }
         });
-        jPanel2.add(btnGenerarQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 400, -1, -1));
+        jPanel2.add(GenerarQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 400, -1, -1));
+
+        btnGraficaArea.setText("Áreas");
+        btnGraficaArea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGraficaAreaActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnGraficaArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, -1, -1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1043,9 +1053,9 @@ public class proyecto extends javax.swing.JPanel {
         numerosT(evt);
     }//GEN-LAST:event_jTIntegracionKeyTyped
 
-    private void btnGenerarQRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarQRActionPerformed
+    private void GenerarQRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerarQRActionPerformed
         generarQR();
-    }//GEN-LAST:event_btnGenerarQRActionPerformed
+    }//GEN-LAST:event_GenerarQRActionPerformed
 
     private void jCAntisolderCMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCAntisolderCMousePressed
         // TODO add your handling code here:
@@ -1054,6 +1064,15 @@ public class proyecto extends javax.swing.JPanel {
     private void jCRuteoCMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCRuteoCMousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCRuteoCMousePressed
+
+    private void btnGraficaAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficaAreaActionPerformed
+        //Muestra la estadistica de las areas y permitira buscar por rango de fechas
+        proyecto1 diagrama = new proyecto1();
+        Diagramas vista = new Diagramas(new Menu(), true);
+        vista.jLGrafica.setIcon(diagrama.grafica(1));
+        vista.setLocationRelativeTo(null);
+        vista.setVisible(true);
+    }//GEN-LAST:event_btnGraficaAreaActionPerformed
 //Metodos-------------------------------------------------------------------->
 
     private Paragraph tipoProyecto(int tipo, int negocio) {
@@ -1255,7 +1274,7 @@ public class proyecto extends javax.swing.JPanel {
                 if (RegistrarModificarDetalle(jTNorden.getText(), 2)) {
                     //Mensaje de exito
                     new rojerusan.RSNotifyAnimated("Listo!!", "El Proyecto con el numero de orden: " + jTNorden.getText() + " fue modificado exitosamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
-                    btnGenerarQR.setEnabled(false);
+                    GenerarQR.setEnabled(false);
                 } else {
                     //Mensaje de error
                 }
@@ -1310,7 +1329,7 @@ public class proyecto extends javax.swing.JPanel {
         btnUpdate.setEnabled(false);
         btnGuardar.setEnabled(false);
         btnNuevo.setEnabled(false);
-        btnGenerarQR.setEnabled(false);
+        GenerarQR.setEnabled(false);
     }
 
     private void desactivarBotonesjC() {
@@ -1800,11 +1819,12 @@ public class proyecto extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static elaprendiz.gui.button.ButtonColoredAction GenerarQR;
     public static javax.swing.JLabel Notificacion1;
     private javax.swing.JButton btnActivar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnDelete;
-    public static elaprendiz.gui.button.ButtonColoredAction btnGenerarQR;
+    public static elaprendiz.gui.button.ButtonColoredAction btnGraficaArea;
     private javax.swing.JButton btnGuardar;
     public static javax.swing.JButton btnNuevo;
     public static javax.swing.JButton btnUpdate;

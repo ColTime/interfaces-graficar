@@ -1591,19 +1591,35 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="elaprendiz.gui.button.ButtonColoredAction" name="btnGenerarQR">
+            <Component class="elaprendiz.gui.button.ButtonColoredAction" name="GenerarQR">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Generar QR"/>
+                <Property name="text" type="java.lang.String" value="GenerarQR"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGenerarQRActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="GenerarQRActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="710" y="400" width="-1" height="-1"/>
+                  <AbsoluteConstraints x="720" y="400" width="-1" height="-1"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="elaprendiz.gui.button.ButtonColoredAction" name="btnGraficaArea">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#xc1;reas"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGraficaAreaActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="20" y="470" width="-1" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>

@@ -27,6 +27,7 @@ public class Inicio extends javax.swing.JPanel {
         jLCantidadF = new javax.swing.JLabel();
         jLCantidadT = new javax.swing.JLabel();
         jLCantidadE = new javax.swing.JLabel();
+        jLCantidadP = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(219, 219, 219));
         setName("inicio"); // NOI18N
@@ -72,7 +73,7 @@ public class Inicio extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addContainerGap(126, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(219, 219, 219)));
@@ -104,6 +105,9 @@ public class Inicio extends javax.swing.JPanel {
         jLCantidadE.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLCantidadE.setText("0");
 
+        jLCantidadP.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLCantidadP.setText("0");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -111,7 +115,9 @@ public class Inicio extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jLCantidadP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(307, 307, 307)
                 .addComponent(jLFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -127,7 +133,7 @@ public class Inicio extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLCantidadE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,7 +141,8 @@ public class Inicio extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLFecha))
+                    .addComponent(jLFecha)
+                    .addComponent(jLCantidadP, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -189,7 +196,7 @@ public class Inicio extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     //Variables
-    CachedRowSet crs = null;    //Cantidad de proyectos para cada área respectiva
+    CachedRowSet crs = null;//Cantidad de proyectos para cada área respectiva
 
     private void fechaYdatosProduccion() {
         try {
@@ -199,6 +206,7 @@ public class Inicio extends javax.swing.JPanel {
             crs.next();
             jLFecha.setText("Fecha: " + crs.getString(1));
             jLCantidadF.setText(crs.getString(2));
+            jLCantidadP.setText(crs.getString(3));
             //Teclados
             crs.next();
             jLCantidadT.setText(crs.getString(2));
@@ -214,6 +222,7 @@ public class Inicio extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLCantidadE;
     private javax.swing.JLabel jLCantidadF;
+    private javax.swing.JLabel jLCantidadP;
     private javax.swing.JLabel jLCantidadT;
     private javax.swing.JLabel jLFecha;
     private javax.swing.JLabel jLabel1;

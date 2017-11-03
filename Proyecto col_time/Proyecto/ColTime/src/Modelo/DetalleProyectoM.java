@@ -98,7 +98,7 @@ public class DetalleProyectoM {
                 ps.setString(2, ubicacion);
                 rs = ps.executeQuery();
                 rs.next();
-                if (rs.getInt(1)!=0) {
+                if (rs.getInt(1) != 0) {
                     //Se modifica siempre y cuando el proyecto tenga un PNC ya registrado en la misma ubicacion
                     modificarPNC(numerOrden, rs.getInt(1), cantidad, material, negocio, tipoNegocio);
                 } else {
@@ -120,7 +120,7 @@ public class DetalleProyectoM {
 
                     if (negocio.equals("IN")) {
                         //Se registran los procesos de IN para este subproyecto
-                        for (int i = 15; i <= 20; i++) {
+                        for (int i = 15; i <= 21; i++) {
                             Qry = "CALL PA_RegistrarDetalleEnsamble(?)";
                             ps = con.prepareStatement(Qry);
                             ps.setInt(1, i);
@@ -283,16 +283,17 @@ public class DetalleProyectoM {
             con = conexion.getConexion();
             //Query------------------------------------------------------------>
             String Qry = "";/////
-            if (negocio.equals("FE")) {
-                //Quiery para eliminar el detalle de formato estandar
-                Qry = "SELECT FU_EliminarDetalleProyectoFormatoestandar(?,?)";
-            } else if (negocio.equals("TE")) {
-
-                Qry = "SELECT FU_EliminarDetalleProyectoTeclados(?,?)";
-
-            } else if (negocio.equals("IN")) {
-                Qry = "SELECT FU_EliminarDetalleProyectoEnsamble(?,?)";
-
+            switch (negocio) {
+                case "FE":
+                    //Quiery para eliminar el detalle de formato estandar
+                    Qry = "SELECT FU_EliminarDetalleProyectoFormatoestandar(?,?)";
+                    break;
+                case "TE":
+                    Qry = "SELECT FU_EliminarDetalleProyectoTeclados(?,?)";
+                    break;
+                case "IN":
+                    Qry = "SELECT FU_EliminarDetalleProyectoEnsamble(?,?)";
+                    break;
             }
             ps = con.prepareStatement(Qry);
             ps.setInt(1, idDetalle);

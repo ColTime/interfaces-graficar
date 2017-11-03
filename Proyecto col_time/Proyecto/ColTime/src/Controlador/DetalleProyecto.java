@@ -94,7 +94,7 @@ public class DetalleProyecto {
         return obj.consultarprocesosFE(detalle);
     }
 
-    public boolean cambiar_Estado_Detalle() {
+    public boolean Eliminar_Detalle_PNC() {
 
         return true;
     }

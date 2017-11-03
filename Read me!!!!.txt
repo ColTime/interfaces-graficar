@@ -1,0 +1,8 @@
+No olvides hacer la validacion del pnc, si ya existe un pnc ubicado en un proceso y quieren volver a registrar otro en ese proceso lo actualice (cantidades) en vez de registrar otro adicional. Nota ten en cuenta que que solo lo puede actualizar siempre y cuando el estado no este terminado el del PNC. 
+
+Tampoco olvides hacer algo con el cual se pueda identificar facilmente en que parte del procesos se genero el PNC.
+
+La cantidad del producto no conforme no puede ser mayor a la cantidad registrada anteriormente en el proyecto.
+
+Tener en cuenta que la forma en que se va a realizar el diparador de seguridad por si ocurre alguna falla de energia o mostrar los proyectos a los cuales no se les cerro la toma de tiempo (tendras que dejar que el encargado modifique la hora de cierre manualmente).
+

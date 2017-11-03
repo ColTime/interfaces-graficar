@@ -3,18 +3,16 @@ package Vistas;
 import Controlador.DetalleProyecto;
 import com.barcodelib.barcode.QRCode;
 import java.awt.Color;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import javafx.embed.swing.SwingFXUtils;
-import javax.swing.Icon;
+import java.util.Locale;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 import rojerusan.RSNotifyAnimated;
 
 public class proyecto1 extends javax.swing.JPanel {
@@ -23,14 +21,22 @@ public class proyecto1 extends javax.swing.JPanel {
         if (p == 1) {
             initComponents();
             desactivarComponentes();
-            grafica();
+            grafica.setIcon(grafica(1));
         }
+    }
+
+    public proyecto1() {
+
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPDiagrama = new javax.swing.JPopupMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jPInformacion = new javax.swing.JPanel();
         jTNorden = new elaprendiz.gui.textField.TextFieldRoundBackground();
@@ -50,8 +56,36 @@ public class proyecto1 extends javax.swing.JPanel {
         btnModificarPNC = new javax.swing.JButton();
         jLDetalle = new javax.swing.JLabel();
         btnGenerarQR = new elaprendiz.gui.button.ButtonColoredAction();
+        btnDelete = new javax.swing.JButton();
         jPEstadistica = new javax.swing.JPanel();
         grafica = new javax.swing.JLabel();
+
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Vbar.png"))); // NOI18N
+        jMenuItem1.setText("Vertical");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jPDiagrama.add(jMenuItem1);
+
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Hvar.png"))); // NOI18N
+        jMenuItem2.setText("Horizontal");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jPDiagrama.add(jMenuItem2);
+
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/torta.png"))); // NOI18N
+        jMenuItem3.setText("Torta");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jPDiagrama.add(jMenuItem3);
 
         setBackground(new java.awt.Color(219, 219, 219));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
@@ -184,6 +218,17 @@ public class proyecto1 extends javax.swing.JPanel {
             }
         });
 
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delete.png"))); // NOI18N
+        btnDelete.setBorderPainted(false);
+        btnDelete.setContentAreaFilled(false);
+        btnDelete.setFocusPainted(false);
+        btnDelete.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delete1 (2).png"))); // NOI18N
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPInformacionLayout = new javax.swing.GroupLayout(jPInformacion);
         jPInformacion.setLayout(jPInformacionLayout);
         jPInformacionLayout.setHorizontalGroup(
@@ -203,8 +248,12 @@ public class proyecto1 extends javax.swing.JPanel {
                         .addComponent(btnGenerarQR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(jPInformacionLayout.createSequentialGroup()
-                        .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnConsultarDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPInformacionLayout.createSequentialGroup()
+                                .addGap(193, 193, 193)
+                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnConsultarDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPInformacionLayout.createSequentialGroup()
                                 .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPInformacionLayout.createSequentialGroup()
@@ -240,7 +289,7 @@ public class proyecto1 extends javax.swing.JPanel {
                 .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPInformacionLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnConsultarDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnGenerarQR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPInformacionLayout.createSequentialGroup()
@@ -264,11 +313,19 @@ public class proyecto1 extends javax.swing.JPanel {
                             .addComponent(btnNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnBuscarPNC, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnModificarPNC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnModificarPNC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPInformacionLayout.createSequentialGroup()
+                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
 
         grafica.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        grafica.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                graficaMouseReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPEstadisticaLayout = new javax.swing.GroupLayout(jPEstadistica);
         jPEstadistica.setLayout(jPEstadisticaLayout);
@@ -280,7 +337,7 @@ public class proyecto1 extends javax.swing.JPanel {
         );
         jPEstadisticaLayout.setVerticalGroup(
             jPEstadisticaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(grafica, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+            .addComponent(grafica, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -324,9 +381,11 @@ public class proyecto1 extends javax.swing.JPanel {
     public static int cargo = 0;
     int udm = 0, resol = 80, rot = 0;
     float mi = 0.000f, md = 0.000f, ms = 0.000f, min = 0.000f, tam = 15.000f;
+    static int op = 0;
     boolean res = false;
+
     private void btnConsultarDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarDetalleActionPerformed
-        ConsultarPNC obj = new ConsultarPNC(cargo, 1,1);
+        ConsultarPNC obj = new ConsultarPNC(cargo, 1, 1);
         obj.setLocationRelativeTo(null);
         obj.setVisible(true);
     }//GEN-LAST:event_btnConsultarDetalleActionPerformed
@@ -340,11 +399,16 @@ public class proyecto1 extends javax.swing.JPanel {
         btnConsultarDetalle.setEnabled(true);
         btnNuevo.setEnabled(false);
         btnModificarPNC.setEnabled(false);
+        op = 1;
         limpiar();
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void jTCantindadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTCantindadKeyTyped
-        //Borrar
+        //No se debe permitir el ingreso de nungun caracter que no sea un numero
+        if (Character.isLetter(evt.getKeyChar()) || evt.getKeyChar() == '|' || evt.getKeyChar() == '@' || evt.getKeyChar() == '.' || evt.getKeyChar() == '-' || evt.getKeyChar() == '_'
+                || evt.getKeyChar() == '!' || evt.getKeyChar() == '#') {
+            evt.consume();
+        }
     }//GEN-LAST:event_jTCantindadKeyTyped
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -352,7 +416,7 @@ public class proyecto1 extends javax.swing.JPanel {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnBuscarPNCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPNCActionPerformed
-        ConsultarPNC obj = new ConsultarPNC(cargo, 2,2);
+        ConsultarPNC obj = new ConsultarPNC(cargo, 2, 2);
         obj.setLocationRelativeTo(null);
         obj.setVisible(true);
     }//GEN-LAST:event_btnBuscarPNCActionPerformed
@@ -366,12 +430,44 @@ public class proyecto1 extends javax.swing.JPanel {
     }//GEN-LAST:event_btnGenerarQRActionPerformed
 
     private void jTCantindadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTCantindadKeyReleased
-        if (!jTCantindad.getText().equals("")) {
-            btnGuardar.setEnabled(true);
+        if (op == 1) {
+            if (!jTCantindad.getText().equals("")) {
+                btnGuardar.setEnabled(true);
+            } else {
+                btnGuardar.setEnabled(false);
+            }
         } else {
-            btnGuardar.setEnabled(false);
+            if (!jTCantindad.getText().equals("")) {
+                btnModificarPNC.setEnabled(true);
+            } else {
+                btnModificarPNC.setEnabled(false);
+            }
         }
+
     }//GEN-LAST:event_jTCantindadKeyReleased
+
+    private void graficaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_graficaMouseReleased
+        if (evt.isPopupTrigger()) {
+            jPDiagrama.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_graficaMouseReleased
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+       grafica.setIcon(grafica(1));
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+       grafica.setIcon(grafica(2));
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+       grafica.setIcon(grafica(3));
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+       DetalleProyecto obj = new DetalleProyecto();
+       obj.eliminarDetallersProyecto(Integer.parseInt(jLDetalle.getText()),Integer.parseInt(jTNorden.getText()),jTNegocio.getText());
+    }//GEN-LAST:event_btnDeleteActionPerformed
 //Metodos-------------------------------------------------------------------->
 
     private String rutaGuardado() {
@@ -379,6 +475,7 @@ public class proyecto1 extends javax.swing.JPanel {
         try {
             JFileChooser Chocer = new JFileChooser();
             Chocer.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            Chocer.setLocation(500, 500);
             Chocer.showOpenDialog(this);
             File guardar = Chocer.getSelectedFile();
             if (guardar != null) {
@@ -395,10 +492,11 @@ public class proyecto1 extends javax.swing.JPanel {
                         negocio = "3";
                         break;
                 }
+                //Se asigna el valor al QR
                 String texto = jTNorden.getText() + ';' + jLDetalle.getText() + ';' + negocio;
                 cod.setData(texto);
                 cod.setDataMode(QRCode.MODE_BYTE);
-
+                //se crea el QR y se guarda en la direccion seleccionada
                 cod.setUOM(udm);
                 cod.setLeftMargin(mi);
                 cod.setResolution(resol);
@@ -430,24 +528,33 @@ public class proyecto1 extends javax.swing.JPanel {
         if (cbProcedoPNC.getSelectedIndex() != 0) {
             DetalleProyecto obj = new DetalleProyecto();
             int cantidad = obj.ValidarCnatidadPNC(jTNorden.getText(), Integer.parseInt(jLDetalle.getText()), op, jTTipoNegocio.getText(), jTNegocio.getText());
-            if (Integer.parseInt(jTCantindad.getText()) <=cantidad) {
-                obj.setCantidad(jTCantindad.getText());
-                obj.setNegocio(jTNegocio.getText());
-                obj.setTipoNegocio(jTTipoNegocio.getText());
-                obj.setMaterial("");
-                res = obj.registrarModificarPNC(jTNorden.getText(), op, Integer.parseInt(jLDetalle.getText()), cbProcedoPNC.getSelectedItem().toString());
-                if (res) {
-                    desactivarComponentes();
-                    new rojerusan.RSNotifyAnimated("¡listo!", "El PNC fue registrado correctamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
-                    limpiar();
-                    btnNuevo.setEnabled(true);
-                    btnGuardar.setEnabled(false);
-                    btnConsultarDetalle.setEnabled(false);
+            if (Integer.parseInt(jTCantindad.getText()) > 0) {
+                if (Integer.parseInt(jTCantindad.getText()) <= cantidad) {
+                    obj.setCantidad(jTCantindad.getText());
+                    obj.setNegocio(jTNegocio.getText());
+                    obj.setTipoNegocio(jTTipoNegocio.getText());
+                    obj.setMaterial("");
+                    res = obj.registrarModificarPNC(jTNorden.getText(), op, Integer.parseInt(jLDetalle.getText()), cbProcedoPNC.getSelectedItem().toString());
+                    if (res) {
+                        desactivarComponentes();
+                        if (op == 1) {
+                            new rojerusan.RSNotifyAnimated("¡listo!", "El PNC fue registrado correctamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+                        } else {
+                            new rojerusan.RSNotifyAnimated("¡listo!", "El PNC fue Modificado correctamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+                        }
+                        limpiar();
+                        btnNuevo.setEnabled(true);
+                        btnGuardar.setEnabled(false);
+                        btnConsultarDetalle.setEnabled(false);
+                    } else {
+                        new rojerusan.RSNotifyAnimated("¡Alerta!", "El PNC no pudo ser registrado.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
+                    }
                 } else {
-                    new rojerusan.RSNotifyAnimated("¡Alerta!", "La cantidad ingresada es mayor a la cantidad del proyecto.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
+                    new rojerusan.RSNotifyAnimated("¡Alerta!", "La cantidad ingresada es mayor a la cantidad del proyecto (" + cantidad + ").", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR
+                    ).setVisible(true);
                 }
             } else {
-                new rojerusan.RSNotifyAnimated("¡Alerta!", "El PNC no pudo ser registrado.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
+                new rojerusan.RSNotifyAnimated("¡Alerta!", "La cantidad de un producto no conforme no puede ser menor o igual a 0.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
             }
         } else {
             new rojerusan.RSNotifyAnimated("¡Alerta!", "Debes seleccionar el proceso donde se genero el PNC.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
@@ -459,36 +566,55 @@ public class proyecto1 extends javax.swing.JPanel {
         btnConsultarDetalle.setEnabled(false);
         btnGuardar.setEnabled(false);
         btnModificarPNC.setEnabled(false);
+        btnGenerarQR.setEnabled(false);
         jTNorden.setEnabled(false);
         jTNegocio.setEnabled(false);
         jTTipoNegocio.setEnabled(false);
         cbProcedoPNC.setEnabled(false);
         jTCantindad.setEnabled(false);
     }
+//Graficas de la cantidad de proyectos que tiene cada area
 
-    private void grafica() {
+    public ImageIcon grafica(int tipoGrafica) {
+        ImageIcon iconG = null;
         try {
-            DefaultCategoryDataset ds = new DefaultCategoryDataset();
-            ds.addValue(70, "Formato estandar", "FE");
-            ds.addValue(20, "Teclados", "TE");
-            ds.addValue(30, "Ensamble", "EN");
-
-            JFreeChart jf = ChartFactory.createBarChart3D("Cantidad de proyectos por area", "Nombres", "Edades", ds, PlotOrientation.VERTICAL, true, true, true);
-
-            grafica.setIcon(new ImageIcon(jf.createBufferedImage(859, 366)));
+            if (tipoGrafica == 1 || tipoGrafica == 2) {
+                DefaultCategoryDataset ds = new DefaultCategoryDataset();
+                ds.addValue(70, "Formato estandar", "FE");
+                ds.addValue(20, "Teclados", "TE");
+                ds.addValue(30, "Ensamble", "EN");
+                if (tipoGrafica == 1) {
+                    //Diagrama de barras vertical
+                    JFreeChart jf = ChartFactory.createBarChart3D("Cantidad de proyectos por area", "Nombres", "Edades", ds, PlotOrientation.VERTICAL, true, true, true);
+                    iconG = new ImageIcon(jf.createBufferedImage(859, 366));
+                } else if (tipoGrafica == 2) {
+                    //Diagrama de barras Horizontales
+                    JFreeChart jf = ChartFactory.createBarChart3D("Cantidad de proyectos por area", "Nombres", "Edades", ds, PlotOrientation.HORIZONTAL, true, true, true);
+                    iconG = new ImageIcon(jf.createBufferedImage(859, 366));
+                }
+            } else if (tipoGrafica == 3) {
+                DefaultPieDataset porciones = new DefaultPieDataset();
+                porciones.setValue("FE: " + 70, 70);
+                porciones.setValue("TE: " + 30, 30);
+                porciones.setValue("EN: " + 20, 20);
+                //Torta
+                JFreeChart jf1 = ChartFactory.createPieChart("Produccion", porciones, true, true, Locale.ITALY);
+                iconG = new ImageIcon(jf1.createBufferedImage(859, 366));
+            }
 //            ChartFrame f = new ChartFrame("Edades", jf);
 //            f.setSize(1000, 600);
 //            f.setLocationRelativeTo(null);
 //            f.setVisible(true);
-
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error! " + e);
         }
-
+        return iconG;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton btnBuscarPNC;
     public static elaprendiz.gui.button.ButtonColoredAction btnConsultarDetalle;
+    private javax.swing.JButton btnDelete;
     public static elaprendiz.gui.button.ButtonColoredAction btnGenerarQR;
     public static javax.swing.JButton btnGuardar;
     public static javax.swing.JButton btnModificarPNC;
@@ -501,6 +627,10 @@ public class proyecto1 extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JPopupMenu jPDiagrama;
     private javax.swing.JPanel jPEstadistica;
     public static javax.swing.JPanel jPInformacion;
     private javax.swing.JPanel jPanel1;
