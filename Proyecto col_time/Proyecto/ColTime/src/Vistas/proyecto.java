@@ -22,7 +22,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.JCheckBox;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import rojerusan.RSNotifyAnimated;
 
@@ -158,6 +157,8 @@ public class proyecto extends javax.swing.JPanel {
         jLIDIntegracion = new javax.swing.JLabel();
         GenerarQR = new elaprendiz.gui.button.ButtonColoredAction();
         btnGraficaArea = new elaprendiz.gui.button.ButtonColoredAction();
+        jTProyectoQR = new elaprendiz.gui.textField.TextFieldRoundBackground();
+        jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(219, 219, 219));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
@@ -801,7 +802,20 @@ public class proyecto extends javax.swing.JPanel {
                 btnGraficaAreaActionPerformed(evt);
             }
         });
-        jPanel2.add(btnGraficaArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, -1, -1));
+        jPanel2.add(btnGraficaArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, -1, -1));
+
+        jTProyectoQR.setColorDeBorde(new java.awt.Color(204, 204, 204));
+        jTProyectoQR.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
+        jTProyectoQR.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTProyectoQR.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTProyectoQRKeyTyped(evt);
+            }
+        });
+        jPanel2.add(jTProyectoQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 400, 220, 23));
+
+        jButton1.setText("jButton1");
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 400, -1, -1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1073,6 +1087,10 @@ public class proyecto extends javax.swing.JPanel {
         vista.setLocationRelativeTo(null);
         vista.setVisible(true);
     }//GEN-LAST:event_btnGraficaAreaActionPerformed
+
+    private void jTProyectoQRKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTProyectoQRKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTProyectoQRKeyTyped
 //Metodos-------------------------------------------------------------------->
 
     private Paragraph tipoProyecto(int tipo, int negocio) {
@@ -1832,6 +1850,7 @@ public class proyecto extends javax.swing.JPanel {
     public static elaprendiz.gui.comboBox.ComboBoxRound cbMaterialPCBTE;
     public static elaprendiz.gui.comboBox.ComboBoxRound cbNegocio;
     public static elaprendiz.gui.comboBox.ComboBoxRound cbTipo;
+    private javax.swing.JButton jButton1;
     public static javax.swing.JCheckBox jCAntisolderC;
     public static javax.swing.JCheckBox jCAntisolderP;
     public static javax.swing.JCheckBox jCCircuito;
@@ -1887,6 +1906,7 @@ public class proyecto extends javax.swing.JPanel {
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTNombreProyecto;
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTNorden;
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTPCBTE;
+    public static elaprendiz.gui.textField.TextFieldRoundBackground jTProyectoQR;
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTRepujado;
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTStencil;
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTTeclado;
