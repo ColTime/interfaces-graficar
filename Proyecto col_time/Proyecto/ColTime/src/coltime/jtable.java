@@ -1,8 +1,7 @@
 package coltime;
 
+import Controlador.DetalleProyecto;
 import Controlador.Tabla;
-import Vistas.Producciones;
-import Vistas.detalleProyecto;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,9 +9,9 @@ public class jtable extends javax.swing.JFrame implements ActionListener {
     Tabla t=new Tabla();
     public jtable() {
         initComponents();
-        t.visualizar(jTable1);
+//        t.visualizar(jTable1);
     }
-
+    int rown=-1;
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -43,6 +42,11 @@ public class jtable extends javax.swing.JFrame implements ActionListener {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -77,6 +81,17 @@ public class jtable extends javax.swing.JFrame implements ActionListener {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+            rown=jTable1.rowAtPoint(evt.getPoint());
+            
+            int colum=jTable1.getColumnModel().getColumnIndexAtX(evt.getX());
+            int row= evt.getY()/jTable1.getRowHeight();
+            
+            DetalleProyecto obj=new DetalleProyecto();
+//            obj.ReiniciarDetalle(detalle, negocio);
+            
+    }//GEN-LAST:event_jTable1MouseClicked
   
 
 //   TableColumn sportColumn = jTable1.getColumnModel().getColumn(1);

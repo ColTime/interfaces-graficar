@@ -1,5 +1,6 @@
 package coltime;
 
+import Controlador.FE_TE_IN;
 import Vistas.CambiarContraseña;
 import Vistas.ControlDelTiempo;
 import Vistas.Producciones;
@@ -37,6 +38,7 @@ public class Menu extends javax.swing.JFrame {
         this.setIconImage(new ImageIcon(getClass().getResource("/imagenesEmpresa/favicon.png")).getImage());
         this.setLocationRelativeTo(null);
         funcionalidades(cargo);
+        EnCasodeFallaDeLuz();
         new rojerusan.RSNotifyAnimated("Bienvenido", "Tienes 5 nuevas notificaciones", 6, RSNotifyAnimated.PositionNotify.BottomLeft, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
     }
 
@@ -487,6 +489,56 @@ public class Menu extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void EnCasodeFallaDeLuz() {
+        //Es metodo se hace con la finalidad de saber que proyectos no pausaron/terminaron el tiempo satisfactoriamente antes de que sucediera la falla de energia.
+        //Solo se le realizara esta acción a los cargos de encargado ensamble, encargado de FE y TE 
+        FE_TE_IN obj = new FE_TE_IN();
+        if (cargo == 2) {
+            try {
+                //Buscamos los proyectos de FE que estan en ejecucion.
+                crs = obj.consultarProyectosEnEjecucion(1);
+                ControlDelTiempo agregar1 = new ControlDelTiempo();
+                while (crs.next()) {
+                    if (producF == null) {
+                        producF = new ControlDelTiempo();
+                        producF.setVisible(true);
+                    }
+                    agregar1.agregarBotones(producF, Integer.parseInt(crs.getString(1)));
+                }
+                agregar1.negocio=1;
+                //Buscamos los proyectos de TE que estan en ejecucion.
+                crs = obj.consultarProyectosEnEjecucion(2);
+                ControlDelTiempo agregar2 = new ControlDelTiempo();
+                while (crs.next()) {
+                    if (producF == null) {
+                        producF = new ControlDelTiempo();
+                        producF.setVisible(true);
+                    }
+                    agregar2.agregarBotones(producT, Integer.parseInt(crs.getString(1)));
+                }
+                agregar2.negocio=2;//Faltan estos negocioiooooodoaosdnajilansjdnja_----------------------------------->
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error!!" + e);
+            }
+        } else if (cargo == 3) {
+            try {
+                crs = obj.consultarProyectosEnEjecucion(3);
+                ControlDelTiempo agregar3 = new ControlDelTiempo();
+                while (crs.next()) {
+                    if (producF == null) {
+                        producF = new ControlDelTiempo();
+                        producF.setVisible(true);
+                    }
+                    agregar3.agregarBotones(producE, Integer.parseInt(crs.getString(1)));
+                }
+                agregar3.negocio=1;
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error!!" + e);
+            }
+        }
+    }
+
     private void funcionalidades(int cargo) {
         switch (cargo) {
             case 1:
@@ -509,6 +561,7 @@ public class Menu extends javax.swing.JFrame {
                 break;
         }
     }
+
     private void btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2ActionPerformed
         btnMenu.setEnabled(false);
         if (!btn2.isSelected()) {

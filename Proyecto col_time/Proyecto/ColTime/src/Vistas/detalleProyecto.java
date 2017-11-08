@@ -2,7 +2,10 @@ package Vistas;
 
 import Controlador.DetalleProyecto;
 import Controlador.FormatoTabla;
+import Controlador.Tabla;
+import coltime.Menu;
 import javax.sql.rowset.CachedRowSet;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -31,10 +34,10 @@ public class detalleProyecto extends javax.swing.JDialog {
         TDetalleProduccion = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1270, 300));
-        setPreferredSize(new java.awt.Dimension(900, 300));
+        setMinimumSize(new java.awt.Dimension(1285, 300));
+        setPreferredSize(new java.awt.Dimension(1285, 300));
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(1270, 300));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1285, 300));
 
         TDetalleProduccion = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -46,13 +49,13 @@ public class detalleProyecto extends javax.swing.JDialog {
         TDetalleProduccion.setForeground(new java.awt.Color(128, 128, 131));
         TDetalleProduccion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Proceso", "Fecha inicio", "Fecha fin", "Cantidad Procesada", "Tiempo total min", "Tiempo por unidad min", "Estado", "Hora Ejecucion", "Tiempo Ejecucion", "Hora Terminacion"
+                "Proceso", "Fecha inicio", "Fecha fin", "Cantidad Procesada", "Tiempo total min", "Tiempo por unidad min", "Estado", "Hora Ejecucion", "Tiempo Ejecucion", "Hora Terminacion", "reiniciar"
             }
         ));
         TDetalleProduccion.setFillsViewportHeight(true);
@@ -61,9 +64,15 @@ public class detalleProyecto extends javax.swing.JDialog {
         TDetalleProduccion.setGridColor(new java.awt.Color(255, 255, 255));
         TDetalleProduccion.setIntercellSpacing(new java.awt.Dimension(0, 0));
         TDetalleProduccion.setMinimumSize(new java.awt.Dimension(900, 300));
+        TDetalleProduccion.setRowHeight(18);
         TDetalleProduccion.setSelectionBackground(new java.awt.Color(63, 179, 255));
         TDetalleProduccion.setShowHorizontalLines(false);
         TDetalleProduccion.setShowVerticalLines(false);
+        TDetalleProduccion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TDetalleProduccionMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(TDetalleProduccion);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -72,8 +81,8 @@ public class detalleProyecto extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 1253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1265, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,7 +96,7 @@ public class detalleProyecto extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1273, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,46 +106,25 @@ public class detalleProyecto extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private CachedRowSet consuldateDetalleProduccion() {
-        DetalleProyecto obj = new DetalleProyecto();
-        return obj.consultarDetalleProduccion(detalle, negocio);
-    }
+    private void TDetalleProduccionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TDetalleProduccionMouseClicked
+        
+    }//GEN-LAST:event_TDetalleProduccionMouseClicked
 
     private void cargarTabla() {
-        //String encabezado1[] = {"Proceso", "Fecha inicio", "Fecha fin", "Cantidad procesada", "Tiempo total min", "Tiempo unidad min", "Estado", "Hora de ejecución", "Tiempo Ejecución", "Hora de Terminación","Limpiar"};
-        String encabezado[] = {"Proceso", "Fecha inicio", "Fecha fin", "Cantidad procesada", "Tiempo total min", "Tiempo unidad min", "Estado", "Hora de ejecución", "Tiempo Ejecución", "Hora de Terminación"};
-        DefaultTableModel ds = new DefaultTableModel(null, encabezado);
-        String v[] = new String[10];
-        try {
-            crs = consuldateDetalleProduccion();
-            while (crs.next()) {
-                v[0] = crs.getString(1);
-                v[1] = crs.getString(2);
-                v[2] = crs.getString(3);
-                v[3] = String.valueOf(crs.getInt(4));
-                v[4] = crs.getString(5);
-                v[5] = crs.getString(6);
-                v[6] = crs.getString(7);
-                v[7] = crs.getString(8);
-                if (crs.getString(10) != null) {
-                    v[8] = crs.getString(11);
-                } else {
-                    v[8] = crs.getString(9);
-                }
-                v[9] = crs.getString(10);
-                ds.addRow(v);
-                
-            }
-            TDetalleProduccion.setModel(ds);
-            FormatoTabla ft = new FormatoTabla(6);
-            TDetalleProduccion.setDefaultRenderer(Object.class, ft);
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error!" + e);
+        Tabla personalizar = new Tabla();
+        personalizar.visualizar(TDetalleProduccion, detalle, negocio);
+        Menu cargo = new Menu();
+        if (cargo.cargo == 3 || cargo.cargo == 2) {
+            editarTamañoColumnas();
         }
-
     }
 
+    public void editarTamañoColumnas() {
+        TDetalleProduccion.getColumnModel().getColumn(10).setMinWidth(0);
+        TDetalleProduccion.getColumnModel().getColumn(10).setMaxWidth(0);
+        TDetalleProduccion.getTableHeader().getColumnModel().getColumn(10).setMaxWidth(0);
+        TDetalleProduccion.getTableHeader().getColumnModel().getColumn(10).setMinWidth(0);
+    }
 
     /**
      * @param args the command line arguments

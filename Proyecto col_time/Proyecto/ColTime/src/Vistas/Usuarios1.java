@@ -549,13 +549,18 @@ public class Usuarios1 extends javax.swing.JPanel {
                 + " si lo cambia el usuario ya no podra interacturar con el sistema.") == 0) {
             Controlador.Usuario obj = new Controlador.Usuario();
             obj.setDocumento(jTdocumento.getText());
-            boolean res = obj.cambiar_Estado_Usuario(false);
-            new rojerusan.RSNotifyAnimated("Listo!!", "El usuario con el documento:  " + jTdocumento.getText() + " se le cambio el estado a 'inactivo'.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
-            limpiar();
-            btnDelete.setEnabled(false);
-            btnUpdate.setEnabled(false);
-            consultarUsuarios("", "", 0);
-            estadoComponentes(false, new Color(244, 244, 244));
+            if (obj.validarSiEstaActivo()) {
+                new rojerusan.RSNotifyAnimated("Alerta!!", "El usuario esta logiado en el sistema de información.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
+            }else{
+                //Si el usuario no esta activo se podra cambiar el estado de la session.
+                boolean res = obj.cambiar_Estado_Usuario(false);
+                new rojerusan.RSNotifyAnimated("Listo!!", "El usuario con el documento:  " + jTdocumento.getText() + " se le cambio el estado a 'inactivo'.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+                limpiar();
+                btnDelete.setEnabled(false);
+                btnUpdate.setEnabled(false);
+                consultarUsuarios("", "", 0);
+                estadoComponentes(false, new Color(244, 244, 244));
+            }
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 

@@ -28,7 +28,7 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
     boolean res = false;
     ControlDelTiempo vista = null;
     CachedRowSet crs = null;
-    static int negocio = 0;
+    public static int negocio = 0;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -136,7 +136,7 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
 
     //
     //Se valida que el bono no exista en el panle para no reprtirlo***  
-    public void validarExitenciadeBotones(int orden, int negocio, ControlDelTiempo vista) {
+    public void validarExitenciadeBotones(int negocio, ControlDelTiempo vista) {
         FE_TE_IN obj = new FE_TE_IN();
         //Buscamos los proyectos que estan en ejecucion.
         crs = obj.consultarProyectosEnEjecucion(negocio);
@@ -161,7 +161,7 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
         }
     }
 
-    public void RegistrarTomaTiempoNegocio(String datos[], int cargo, ControlDelTiempo vista) {
+        public void RegistrarTomaTiempoNegocio(String datos[], int cargo, ControlDelTiempo vista) {
         FE_TE_IN obj = new FE_TE_IN();
         this.vista = vista;
         if (cargo == 2 && (Integer.parseInt(datos[2]) == 1 || Integer.parseInt(datos[2]) == 2)) {
@@ -187,7 +187,7 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
             negocio = 0;
         }
         if (res) {
-            validarExitenciadeBotones(Integer.parseInt(datos[0]), Integer.parseInt(datos[2]), vista);
+            validarExitenciadeBotones(Integer.parseInt(datos[2]), vista);
         }
     }
 

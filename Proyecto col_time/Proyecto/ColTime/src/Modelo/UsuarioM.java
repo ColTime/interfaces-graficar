@@ -18,7 +18,7 @@ public class UsuarioM {
     boolean res;
 //Metodos---------------------------------------------------------------------->
 
-    public void sesion(int sec,String doc) {
+    public void sesion(int sec, String doc) {
         try {
             conexion = new Conexion();
             conexion.establecerConexion();
@@ -27,7 +27,7 @@ public class UsuarioM {
             String Qry = "CALL PA_Sesion(?,?)";
             ps = con.prepareCall(Qry);
             ps.setInt(1, sec);
-            ps.setString(2,doc);
+            ps.setString(2, doc);
             ps.execute();
             //Destrucción de conexiones
             con.close();
@@ -161,6 +161,32 @@ public class UsuarioM {
             ps.setString(1, doc);
             ps.setString(2, contra);
             ps.setString(3, anti);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                res = rs.getBoolean(1);
+            } else {
+                res = rs.getBoolean(1);
+            }
+            //Destrucción de conexiones
+            con.close();
+            conexion.destruir();
+            conexion.cerrar(rs);
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "¡Error!" + e);
+        }
+        return res;
+    }
+
+    public boolean validarSiEstaActivo(String doc) {
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query y ejecución------------------------------------------------------------>
+            String Qry = "SELECT FU_validarActividad(?)";
+            ps = con.prepareCall(Qry);
+            ps.setString(1, doc);
             rs = ps.executeQuery();
             if (rs.next()) {
                 res = rs.getBoolean(1);

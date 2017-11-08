@@ -29,7 +29,6 @@ public class Usuario {
     private FileInputStream im = null;
 
     //Set---------------------------------------------->
-
     public void setCrs(CachedRowSet crs) {
         this.crs = crs;
     }
@@ -76,21 +75,27 @@ public class Usuario {
 
     public boolean cambiar_Estado_Usuario(boolean estado) {
         Modelo.UsuarioM obj = new Modelo.UsuarioM();
-        return obj.cambiar_Estado_Usuario(documento,estado);
+        return obj.cambiar_Estado_Usuario(documento, estado);
     }
 
-    public int iniciarSesion(String user,String pasw) {
-        Modelo.UsuarioM obj= new Modelo.UsuarioM();
-        return obj.iniciarSesion(user,pasw);
+    public boolean validarSiEstaActivo() {
+        Modelo.UsuarioM obj = new Modelo.UsuarioM();
+        return obj.validarSiEstaActivo(documento);
+    }
+
+    public int iniciarSesion(String user, String pasw) {
+        Modelo.UsuarioM obj = new Modelo.UsuarioM();
+        return obj.iniciarSesion(user, pasw);
     }
 
     public boolean CambiarContraseña(String anti) {
-        Modelo.UsuarioM obj=new UsuarioM();
-        return obj.cambiarContraseña(documento, contraseña,anti);
+        Modelo.UsuarioM obj = new UsuarioM();
+        return obj.cambiarContraseña(documento, contraseña, anti);
     }
-    public void sesion(int sec,String doc){
-        Modelo.UsuarioM obj=new UsuarioM();
-        obj.sesion(sec,doc);
+
+    public void sesion(int sec, String doc) {
+        Modelo.UsuarioM obj = new UsuarioM();
+        obj.sesion(sec, doc);
     }
 
     //Metodo de liberacion de memoria------------------------------------------>

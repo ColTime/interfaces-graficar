@@ -337,6 +337,11 @@ public class DetalleProyectoM {
         return crs;
     }
 
+    public boolean ReiniciarDetalle(int detalle, int negocio) {
+        //Cuerpo del procedimiento
+        return true;
+    }
+
     @Override
     protected void finalize() throws Throwable {
         super.finalize(); //To change body of generated methods, choose Tools | Templates.

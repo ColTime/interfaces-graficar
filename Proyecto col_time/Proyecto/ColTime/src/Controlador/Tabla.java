@@ -1,21 +1,31 @@
 package Controlador;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.sql.rowset.CachedRowSet;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import static org.apache.poi.hslf.model.ShapeTypes.types;
 
 public class Tabla {
 
-    private boolean[] editable = {false, false, false, true};
-
-    public void visualizar(JTable tabla) {
-
-        tabla.setDefaultRenderer(Object.class, new Render());
-        DefaultTableModel model = new DefaultTableModel(null, new String[]{"Nombre", "Apellido", "Telefono", "Estado"}) {
+    private boolean[] editable = {false, false, false, false, false, false, false, false, false, false, false};
+    private static int detalle = 0, negocio = 0;
+    private CachedRowSet crs = null;
+    
+    //Se encarga de generar la tabla con la informacion traida de la base de datos
+    public void visualizar(JTable tabla,int detalle, int negocio) {
+        this.detalle=detalle;
+        this.negocio=negocio;
+        tabla.setDefaultRenderer(Object.class, new Render(6));
+        String encabezado[] = {"Proceso", "Fecha inicio", "Fecha fin", "Cantidad procesada", "Tiempo total min", "Tiempo unidad min", "Estado", "Hora de ejecución", "Tiempo Ejecución", "Hora de Terminación", "Reiniciar"};
+        DefaultTableModel ds = new DefaultTableModel(null, encabezado) {
 
             Class[] types = new Class[]{
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -26,18 +36,45 @@ public class Tabla {
                 return editable[column];
             }
         };
-        JButton reiniciarTiempo = new JButton("Reiniciar");
-        reiniciarTiempo.setName("9");
 
-        Object row[] = new Object[4];
+        Object v[] = new Object[11];
+        JButton btn = new JButton("Reiniciar");
 
-        for (int i = 0; i < 4; i++) {
-            row[0] = "juan";
-            row[1] = "marulanda";
-            row[2] = "2528099";
-            row[3] = reiniciarTiempo;
-            model.addRow(row);
+        btn.setName("11");
+        
+        try {
+            crs = consuldateDetalleProduccion();
+            while (crs.next()) {
+                v[0] = crs.getString(1);
+                v[1] = crs.getString(2);
+                v[2] = crs.getString(3);
+                v[3] = String.valueOf(crs.getInt(4));
+                v[4] = crs.getString(5);
+                v[5] = crs.getString(6);
+                v[6] = crs.getString(7);//Estado del producto
+                v[7] = crs.getString(8);
+                if (crs.getString(10) != null) {
+                    v[8] = crs.getString(11);
+                } else {
+                    v[8] = crs.getString(9);
+                }
+                v[9] = crs.getString(10);
+                v[10] = btn;
+                ds.addRow(v);
+            }
+            tabla.setModel(ds);
+//            FormatoTabla ft = new FormatoTabla(6);
+//            tabla.setDefaultRenderer(Object.class, ft);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error!" + e);
         }
-        tabla.setModel(model);
     }
+    //Se encarga de traer la informacion de la base de datos
+    private CachedRowSet consuldateDetalleProduccion() {
+        DetalleProyecto obj = new DetalleProyecto();
+        return obj.consultarDetalleProduccion(detalle, negocio);
+    }
+    
+    
 }

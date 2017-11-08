@@ -74,9 +74,9 @@ public class DetalleProyecto {
         return obj.registrar_Detalle_Proycto(cantidad, negocio, tipoNegocio, 1, numerOrden, material, op, id, 1, ubicacion);
     }
 
-    public int ValidarCnatidadPNC(String numerOrden, int detalle, int op, String tipo,String negocio) {
+    public int ValidarCnatidadPNC(String numerOrden, int detalle, int op, String tipo, String negocio) {
         DetalleProyectoM obj = new DetalleProyectoM();
-        return obj.ValidarCnatidadPNCM(numerOrden, detalle,op,tipo,negocio);
+        return obj.ValidarCnatidadPNCM(numerOrden, detalle, op, tipo, negocio);
     }
 
     public boolean modificar_Detalle_Proycto(String numerOrden) {
@@ -97,6 +97,11 @@ public class DetalleProyecto {
     public boolean Eliminar_Detalle_PNC() {
 
         return true;
+    }
+    //Reiniciar toma de tiempo
+    public boolean ReiniciarDetalle(int detalle, int negocio) {
+        DetalleProyectoM obj = new DetalleProyectoM();
+        return obj.ReiniciarDetalle(detalle, negocio);
     }
 
     public boolean eliminarDetallersProyecto(int idDetalle, int numerOrden, String negocio) {
