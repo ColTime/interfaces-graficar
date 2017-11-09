@@ -98,7 +98,7 @@ public class DetalleProyecto {
 
         return true;
     }
-    //Reiniciar toma de tiempo
+//    Reiniciar toma de tiempo
     public boolean ReiniciarDetalle(int detalle, int negocio) {
         DetalleProyectoM obj = new DetalleProyectoM();
         return obj.ReiniciarDetalle(detalle, negocio);

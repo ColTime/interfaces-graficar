@@ -5,6 +5,7 @@ import Controlador.Tabla;
 import coltime.Menu;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.JButton;
+import rojerusan.RSNotifyAnimated;
 
 public class detalleProyecto extends javax.swing.JDialog {
 
@@ -19,21 +20,31 @@ public class detalleProyecto extends javax.swing.JDialog {
     }
     //variables
     private CachedRowSet crs = null;
-    private int detalle = 0;
-    private int negocio = 0;
+    private static int detalle = 0;
+    private static int negocio = 0;
     int rows = -1;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        popMenu = new javax.swing.JPopupMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         TDetalleProduccion = new javax.swing.JTable();
 
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/retro.png"))); // NOI18N
+        jMenuItem1.setText("Actualizar");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        popMenu.add(jMenuItem1);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1285, 300));
-        setPreferredSize(new java.awt.Dimension(1285, 300));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1285, 300));
 
@@ -70,6 +81,9 @@ public class detalleProyecto extends javax.swing.JDialog {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TDetalleProduccionMouseClicked(evt);
             }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                TDetalleProduccionMouseReleased(evt);
+            }
         });
         jScrollPane3.setViewportView(TDetalleProduccion);
 
@@ -105,6 +119,7 @@ public class detalleProyecto extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TDetalleProduccionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TDetalleProduccionMouseClicked
+
         rows = TDetalleProduccion.rowAtPoint(evt.getPoint());
 
         int column = TDetalleProduccion.getColumnModel().getColumnIndexAtX(evt.getX());
@@ -115,12 +130,30 @@ public class detalleProyecto extends javax.swing.JDialog {
             if (value instanceof JButton) {
                 ((JButton) value).doClick();
                 JButton boton = (JButton) value;
-                
+                if (boton.getActionCommand().equals("1")) {
+                    String idDetalle = String.valueOf(TDetalleProduccion.getValueAt(row, 11));
+                    DetalleProyecto obj = new DetalleProyecto();
+                    if (obj.ReiniciarDetalle(Integer.parseInt(idDetalle), negocio)) {
+                        new rojerusan.RSNotifyAnimated("¡Listo!", "El proceso: " + TDetalleProduccion.getValueAt(row, 0) + " fue reinicializado corresctamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+                        cargarTabla();
+                    } else {
+                        new rojerusan.RSNotifyAnimated("¡Error!", "El proceso: " + TDetalleProduccion.getValueAt(row, 0) + " no pudo ser reinicializado.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
+                    }
+                }
             }
-
         }
 
     }//GEN-LAST:event_TDetalleProduccionMouseClicked
+
+    private void TDetalleProduccionMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TDetalleProduccionMouseReleased
+        if (evt.isPopupTrigger()) {
+            popMenu.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_TDetalleProduccionMouseReleased
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        cargarTabla();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void cargarTabla() {
         Tabla personalizar = new Tabla();
@@ -129,6 +162,10 @@ public class detalleProyecto extends javax.swing.JDialog {
         if (cargo.cargo == 3 || cargo.cargo == 2) {
             editarTamañoColumnas();
         }
+        TDetalleProduccion.getColumnModel().getColumn(11).setMinWidth(0);
+        TDetalleProduccion.getColumnModel().getColumn(11).setMaxWidth(0);
+        TDetalleProduccion.getTableHeader().getColumnModel().getColumn(11).setMaxWidth(0);
+        TDetalleProduccion.getTableHeader().getColumnModel().getColumn(11).setMinWidth(0);
     }
 
     public void editarTamañoColumnas() {
@@ -182,8 +219,10 @@ public class detalleProyecto extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TDetalleProduccion;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JPopupMenu popMenu;
     // End of variables declaration//GEN-END:variables
  @Override
     protected void finalize() throws Throwable {

@@ -56,6 +56,7 @@ public class Menu extends javax.swing.JFrame {
     int px = 0, cantidad = 0, unidad = 13;
     int py = 0, filas = 1;
     CachedRowSet crs = null;
+    CambiarContraseña obj = null;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -733,8 +734,13 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_rSUsuarioMouseClicked
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        CambiarContraseña obj = new CambiarContraseña();
-        obj.setVisible(true);
+        if (obj == null) {
+            obj = new CambiarContraseña();
+            obj.setVisible(true);
+        } else {
+            obj.setFocusCycleRoot(true);
+        }
+
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -742,6 +748,9 @@ public class Menu extends javax.swing.JFrame {
             if (JOptionPane.showConfirmDialog(null, "¿Seguro desea cerrar sesión?") == 0) {
                 //Cierra el menu y abre el login
                 this.dispose();
+                if (obj != null) {
+                    obj.btnClose.doClick();
+                }
                 try {
                     sesion(0, jDocumento.getText());
                     Thread.sleep(290);

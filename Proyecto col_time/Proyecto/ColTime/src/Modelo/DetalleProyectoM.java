@@ -339,7 +339,27 @@ public class DetalleProyectoM {
 
     public boolean ReiniciarDetalle(int detalle, int negocio) {
         //Cuerpo del procedimiento
-        return true;
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query------------------------------------------------------------>
+            String Qry = "SELECT FU_ReiniciarTiempo(?,?)";
+            ps = con.prepareStatement(Qry);
+            ps.setInt(1, detalle);
+            ps.setInt(2, negocio);
+            rs = ps.executeQuery();
+            rs.next();
+            res=rs.getBoolean(1);
+            //Cierre de conexiones
+            conexion.cerrar(rs);
+            conexion.destruir();
+            ps.close();
+            con.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "¡Error!" + e);
+        }
+        return res;
     }
 
     @Override

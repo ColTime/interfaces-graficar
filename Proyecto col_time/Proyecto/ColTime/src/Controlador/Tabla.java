@@ -19,13 +19,13 @@ public class Tabla {
     public void visualizar(JTable tabla, int detalle, int negocio) {
         this.detalle = detalle;
         this.negocio = negocio;
-        tabla.setDefaultRenderer(Object.class, new Render(7));
-        String encabezado[] = {"IDdetalle", "Proceso", "Fecha inicio", "Fecha fin", "Cantidad procesada", "Tiempo total min", "Tiempo unidad min", "Estado", "Hora de ejecución", "Tiempo Ejecución", "Hora de Terminación", "Reiniciar"};
+        tabla.setDefaultRenderer(Object.class, new Render(6));
+        String encabezado[] = {"Proceso", "Fecha inicio", "Fecha fin", "Cantidad procesada", "Tiempo total min", "Tiempo unidad min", "Estado", "Hora de ejecución", "Tiempo Ejecución", "Hora de Terminación", "Reiniciar","IDdetalle",};
         DefaultTableModel ds = new DefaultTableModel(null, encabezado) {
 
             Class[] types = new Class[]{
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,java.lang.Object.class,
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -39,7 +39,6 @@ public class Tabla {
 
         Object v[] = new Object[12];
         JButton btn = new JButton("Reiniciar");
-
         btn.setName("12");
 
         try {
@@ -48,19 +47,19 @@ public class Tabla {
                 v[0] = crs.getString(1);
                 v[1] = crs.getString(2);
                 v[2] = crs.getString(3);
-                v[3] = crs.getString(4);
-                v[4] = String.valueOf(crs.getInt(5));
+                v[3] = String.valueOf(crs.getInt(4));
+                v[4] = crs.getString(5);
                 v[5] = crs.getString(6);
-                v[6] = crs.getString(7);
-                v[7] = crs.getString(8);//Estado del producto
+                v[6] = crs.getString(7);//Estado del producto
+                v[7] = crs.getString(8);
                 if (crs.getString(10) != null) {
                     v[8] = crs.getString(11);
                 } else {
                     v[8] = crs.getString(9);
                 }
                 v[9] = crs.getString(10);
-                v[10] = crs.getString(11);
-                v[11] = btn;
+                v[10] = btn;
+                v[11]=crs.getString(12);
                 ds.addRow(v);
             }
             tabla.setModel(ds);

@@ -79,6 +79,7 @@ public class FE_TE_INM {
                     rs.next();
                     T_Total = convertirHorasAMinutos(rs.getString(1).split(":"), rs.getString(2).split(":"));
                     Qry = "CALL PA_PausarTomaDeTiempoDeProcesos(?,?,?,?,?,?,?)";
+                    //CALL PA_CambiarEstadoDeProductos(busqueda,detalle);
                     ps = con.prepareStatement(Qry);
                     ps.setInt(1, orden);
                     ps.setInt(2, detalle);

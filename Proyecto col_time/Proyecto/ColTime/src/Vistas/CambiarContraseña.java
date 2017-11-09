@@ -403,7 +403,7 @@ public class CambiarContraseña extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Notificacion1;
     private javax.swing.JLabel Notificacion2;
-    private javax.swing.JButton btnClose;
+    public javax.swing.JButton btnClose;
     private elaprendiz.gui.button.ButtonColoredAction btnGuardar;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
