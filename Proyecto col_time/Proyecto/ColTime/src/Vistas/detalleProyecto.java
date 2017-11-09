@@ -1,13 +1,10 @@
 package Vistas;
 
 import Controlador.DetalleProyecto;
-import Controlador.FormatoTabla;
 import Controlador.Tabla;
 import coltime.Menu;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 public class detalleProyecto extends javax.swing.JDialog {
 
@@ -24,6 +21,7 @@ public class detalleProyecto extends javax.swing.JDialog {
     private CachedRowSet crs = null;
     private int detalle = 0;
     private int negocio = 0;
+    int rows = -1;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -107,7 +105,21 @@ public class detalleProyecto extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TDetalleProduccionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TDetalleProduccionMouseClicked
-        
+        rows = TDetalleProduccion.rowAtPoint(evt.getPoint());
+
+        int column = TDetalleProduccion.getColumnModel().getColumnIndexAtX(evt.getX());
+        int row = evt.getY() / TDetalleProduccion.getRowHeight();
+
+        if (row < TDetalleProduccion.getRowCount() && row >= 0 && column < TDetalleProduccion.getColumnCount() && column >= 0) {
+            Object value = TDetalleProduccion.getValueAt(row, column);
+            if (value instanceof JButton) {
+                ((JButton) value).doClick();
+                JButton boton = (JButton) value;
+                
+            }
+
+        }
+
     }//GEN-LAST:event_TDetalleProduccionMouseClicked
 
     private void cargarTabla() {

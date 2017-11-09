@@ -14,18 +14,18 @@ public class Tabla {
     private boolean[] editable = {false, false, false, false, false, false, false, false, false, false, false};
     private static int detalle = 0, negocio = 0;
     private CachedRowSet crs = null;
-    
+
     //Se encarga de generar la tabla con la informacion traida de la base de datos
-    public void visualizar(JTable tabla,int detalle, int negocio) {
-        this.detalle=detalle;
-        this.negocio=negocio;
-        tabla.setDefaultRenderer(Object.class, new Render(6));
-        String encabezado[] = {"Proceso", "Fecha inicio", "Fecha fin", "Cantidad procesada", "Tiempo total min", "Tiempo unidad min", "Estado", "Hora de ejecución", "Tiempo Ejecución", "Hora de Terminación", "Reiniciar"};
+    public void visualizar(JTable tabla, int detalle, int negocio) {
+        this.detalle = detalle;
+        this.negocio = negocio;
+        tabla.setDefaultRenderer(Object.class, new Render(7));
+        String encabezado[] = {"IDdetalle", "Proceso", "Fecha inicio", "Fecha fin", "Cantidad procesada", "Tiempo total min", "Tiempo unidad min", "Estado", "Hora de ejecución", "Tiempo Ejecución", "Hora de Terminación", "Reiniciar"};
         DefaultTableModel ds = new DefaultTableModel(null, encabezado) {
 
             Class[] types = new Class[]{
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -37,29 +37,30 @@ public class Tabla {
             }
         };
 
-        Object v[] = new Object[11];
+        Object v[] = new Object[12];
         JButton btn = new JButton("Reiniciar");
 
-        btn.setName("11");
-        
+        btn.setName("12");
+
         try {
             crs = consuldateDetalleProduccion();
             while (crs.next()) {
                 v[0] = crs.getString(1);
                 v[1] = crs.getString(2);
                 v[2] = crs.getString(3);
-                v[3] = String.valueOf(crs.getInt(4));
-                v[4] = crs.getString(5);
+                v[3] = crs.getString(4);
+                v[4] = String.valueOf(crs.getInt(5));
                 v[5] = crs.getString(6);
-                v[6] = crs.getString(7);//Estado del producto
-                v[7] = crs.getString(8);
+                v[6] = crs.getString(7);
+                v[7] = crs.getString(8);//Estado del producto
                 if (crs.getString(10) != null) {
                     v[8] = crs.getString(11);
                 } else {
                     v[8] = crs.getString(9);
                 }
                 v[9] = crs.getString(10);
-                v[10] = btn;
+                v[10] = crs.getString(11);
+                v[11] = btn;
                 ds.addRow(v);
             }
             tabla.setModel(ds);
@@ -70,11 +71,11 @@ public class Tabla {
             JOptionPane.showMessageDialog(null, "Error!" + e);
         }
     }
+
     //Se encarga de traer la informacion de la base de datos
     private CachedRowSet consuldateDetalleProduccion() {
         DetalleProyecto obj = new DetalleProyecto();
         return obj.consultarDetalleProduccion(detalle, negocio);
     }
-    
-    
+
 }

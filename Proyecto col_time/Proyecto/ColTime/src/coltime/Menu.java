@@ -498,41 +498,39 @@ public class Menu extends javax.swing.JFrame {
             try {
                 //Buscamos los proyectos de FE que estan en ejecucion.
                 crs = obj.consultarProyectosEnEjecucion(1);
-                ControlDelTiempo agregar1 = new ControlDelTiempo();
                 while (crs.next()) {
                     if (producF == null) {
                         producF = new ControlDelTiempo();
                         producF.setVisible(true);
+                        producF.negocio = 1;
                     }
-                    agregar1.agregarBotones(producF, Integer.parseInt(crs.getString(1)));
+                    producF.agregarBotones(producF, Integer.parseInt(crs.getString(1)));
                 }
-                agregar1.negocio=1;
+
                 //Buscamos los proyectos de TE que estan en ejecucion.
                 crs = obj.consultarProyectosEnEjecucion(2);
-                ControlDelTiempo agregar2 = new ControlDelTiempo();
                 while (crs.next()) {
-                    if (producF == null) {
-                        producF = new ControlDelTiempo();
-                        producF.setVisible(true);
+                    if (producT == null) {
+                        producT = new ControlDelTiempo();
+                        producT.setVisible(true);
+                        producT.negocio = 2;
                     }
-                    agregar2.agregarBotones(producT, Integer.parseInt(crs.getString(1)));
+                    producT.agregarBotones(producT, Integer.parseInt(crs.getString(1)));
                 }
-                agregar2.negocio=2;//Faltan estos negocioiooooodoaosdnajilansjdnja_----------------------------------->
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Error!!" + e);
             }
         } else if (cargo == 3) {
             try {
                 crs = obj.consultarProyectosEnEjecucion(3);
-                ControlDelTiempo agregar3 = new ControlDelTiempo();
                 while (crs.next()) {
-                    if (producF == null) {
-                        producF = new ControlDelTiempo();
-                        producF.setVisible(true);
+                    if (producE == null) {
+                        producE = new ControlDelTiempo();
+                        producE.setVisible(true);
+                        producE.negocio = 3;
                     }
-                    agregar3.agregarBotones(producE, Integer.parseInt(crs.getString(1)));
+                    producE.agregarBotones(producE, Integer.parseInt(crs.getString(1)));
                 }
-                agregar3.negocio=1;
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Error!!" + e);
             }
