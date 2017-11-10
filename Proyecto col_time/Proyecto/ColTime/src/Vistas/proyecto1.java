@@ -466,7 +466,7 @@ public class proyecto1 extends javax.swing.JPanel {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
        DetalleProyecto obj = new DetalleProyecto();
-       obj.eliminarDetallersProyecto(Integer.parseInt(jLDetalle.getText()),Integer.parseInt(jTNorden.getText()),jTNegocio.getText());
+       obj.eliminarDetallersProyecto(Integer.parseInt(jLDetalle.getText()),Integer.parseInt(jTNorden.getText()),jTNegocio.getText(),jTTipoNegocio.getText());
     }//GEN-LAST:event_btnDeleteActionPerformed
 //Metodos-------------------------------------------------------------------->
 

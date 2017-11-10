@@ -275,14 +275,16 @@ public class DetalleProyectoM {
         return crs;
     }
 
-    public boolean eliminarDetallersProyecto(int idDetalle, int numeOrden, String negocio) {
+    public boolean eliminarDetallersProyecto(int idDetalle, int numeOrden, String negocio, String tipo) {
         //Eliminar detalle del proyecto, detalle de formato estandar, detalle de teclado y detalle de ensamble
         try {
             conexion = new Conexion();
             conexion.establecerConexion();
             con = conexion.getConexion();
+            String Qry = "CALL PA_EliminarProductosNoConformes(?,?,?)";
+            
             //Query------------------------------------------------------------>
-            String Qry = "";/////
+            
             switch (negocio) {
                 case "FE":
                     //Quiery para eliminar el detalle de formato estandar
@@ -350,7 +352,7 @@ public class DetalleProyectoM {
             ps.setInt(2, negocio);
             rs = ps.executeQuery();
             rs.next();
-            res=rs.getBoolean(1);
+            res = rs.getBoolean(1);
             //Cierre de conexiones
             conexion.cerrar(rs);
             conexion.destruir();

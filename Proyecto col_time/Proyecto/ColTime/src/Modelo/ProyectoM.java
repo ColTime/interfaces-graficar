@@ -193,9 +193,9 @@ public class ProyectoM {
             String Qry = "CALL PA_InformacionDeTodaElAreaDeProduccion()";
             ps = con.prepareStatement(Qry);
             rs = ps.executeQuery();
-            crsP=new CachedRowSetImpl();
+            crsP = new CachedRowSetImpl();
             crsP.populate(rs);
-            
+
             con.close();
             conexion.destruir();
             conexion.cerrar(rs);
@@ -238,6 +238,28 @@ public class ProyectoM {
             JOptionPane.showMessageDialog(null, "¡Error!" + e);
         }
         return crsP;
+    }
+
+    public boolean validarNumerOrden(int orden) {
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query------------------------------------------------------------>
+            String Qry = "SELECT FU_ValidarNumerOrden(?)";
+            ps = con.prepareStatement(Qry);
+            ps.setInt(1, orden);
+            rs = ps.executeQuery();
+            rs.next();
+            res=rs.getBoolean(1);
+            con.close();
+            conexion.destruir();
+            conexion.cerrar(rs);
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "¡Error!" + e);
+        }
+        return res;
     }
 
     @Override

@@ -94,7 +94,7 @@ public class Proyecto {
         return obj.consultar_Proyecto(idOrden, nombreCliente, nombreProyecto, fecha, tipo);
     }
 
-    public boolean cambiar_Estado_Proyeto() {
+    public boolean cambiar_Estado_Proyeto() {//Falta esta parte del proyecto
 
         return true;
     }
@@ -104,8 +104,13 @@ public class Proyecto {
         return obj.Consultar_informacion_para_el_QR(orden);
     }
 
-    public void generar_Reportes() {
+    public void generar_Reportes() {//Falta generar los reportes
 
+    }
+
+    public boolean validarNumerOrden(int orden) {
+        ProyectoM obj = new ProyectoM();
+        return obj.validarNumerOrden(orden);
     }
 
     public String consultarNumeroOrden() {

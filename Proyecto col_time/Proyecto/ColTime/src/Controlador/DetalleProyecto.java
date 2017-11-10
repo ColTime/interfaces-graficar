@@ -99,14 +99,15 @@ public class DetalleProyecto {
         return true;
     }
 //    Reiniciar toma de tiempo
+
     public boolean ReiniciarDetalle(int detalle, int negocio) {
         DetalleProyectoM obj = new DetalleProyectoM();
         return obj.ReiniciarDetalle(detalle, negocio);
     }
 
-    public boolean eliminarDetallersProyecto(int idDetalle, int numerOrden, String negocio) {
+    public boolean eliminarDetallersProyecto(int idDetalle, int numerOrden, String negocio, String tipo) {
         DetalleProyectoM obj = new DetalleProyectoM();
-        return obj.eliminarDetallersProyecto(idDetalle, numerOrden, negocio);
+        return obj.eliminarDetallersProyecto(idDetalle, numerOrden, negocio, tipo);
     }
 
     public CachedRowSet consultarDetalleProyectoProduccion(int orden, int negocio, int vistaC) {
