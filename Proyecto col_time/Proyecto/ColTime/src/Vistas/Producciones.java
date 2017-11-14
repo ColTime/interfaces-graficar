@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 import paneles.CambiaPanel;
 
 public class Producciones extends javax.swing.JFrame implements ActionListener {
-
+    
     public Producciones() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -30,7 +30,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
     CachedRowSet crs = null;
     int x = 0, y = 0, cantidad = 0, filas = 1, unidad = 11, conta = 5;
     static int negocio = 0;
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -51,6 +51,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         cbTipo = new elaprendiz.gui.comboBox.ComboBoxRound();
+        jButton1 = new javax.swing.JButton();
         Contenido = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -165,6 +166,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(204, 204, 204)), "Busqueda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTOrden.setColorDeBorde(new java.awt.Color(204, 204, 204));
         jTOrden.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
@@ -176,10 +178,12 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                 jTOrdenKeyTyped(evt);
             }
         });
+        jPanel3.add(jTOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 51, 90, 25));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(128, 128, 131));
         jLabel3.setText(" Orden °N:");
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 30, 71, -1));
 
         jTNombre.setColorDeBorde(new java.awt.Color(204, 204, 204));
         jTNombre.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
@@ -191,10 +195,12 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                 jTNombreKeyTyped(evt);
             }
         });
+        jPanel3.add(jTNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 51, 239, 25));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(128, 128, 131));
         jLabel5.setText("Nombre del cliente:");
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 30, 225, -1));
 
         jTProyecto.setColorDeBorde(new java.awt.Color(204, 204, 204));
         jTProyecto.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
@@ -206,14 +212,17 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                 jTProyectoKeyTyped(evt);
             }
         });
+        jPanel3.add(jTProyecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(409, 51, 223, 25));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(128, 128, 131));
         jLabel4.setText("Nombre del proyecto:");
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(409, 30, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(128, 128, 131));
         jLabel6.setText("Tipo de proyecto:");
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 30, 119, -1));
 
         cbTipo.setForeground(new java.awt.Color(102, 102, 102));
         cbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "Normal", "RQT", "Quick" }));
@@ -224,51 +233,18 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                 cbTipoItemStateChanged(evt);
             }
         });
+        jPanel3.add(cbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 51, 162, 25));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jTProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/retro.png"))); // NOI18N
+        jButton1.setToolTipText("");
+        jButton1.setContentAreaFilled(false);
+        jButton1.setFocusable(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 10, 20, 20));
 
         Contenido.setBackground(new java.awt.Color(255, 255, 255));
         Contenido.setName("contenido"); // NOI18N
@@ -369,25 +345,43 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void rSButtonMetro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro2ActionPerformed
-        new CambiaPanel(Contenido, new ProduccionTE());
-        reinicializarVariables();
-        negocio = 2;
-        agregarProyectoEnTabla(2, "", "", "", "");
+        cambiarPanel(2);
     }//GEN-LAST:event_rSButtonMetro2ActionPerformed
 
     private void rSButtonMetro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro1ActionPerformed
-        new CambiaPanel(Contenido, new ProduccionFE());
-        reinicializarVariables();
-        negocio = 1;
-        agregarProyectoEnTabla(1, "", "", "", "");
+        cambiarPanel(1);
     }//GEN-LAST:event_rSButtonMetro1ActionPerformed
 
     private void rSButtonMetro3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro3ActionPerformed
-        new CambiaPanel(Contenido, new ProduccionEN());
-        reinicializarVariables();
-        negocio = 3;
-        agregarProyectoEnTabla(3, "", "", "", "");
+        cambiarPanel(3);
     }//GEN-LAST:event_rSButtonMetro3ActionPerformed
+    
+    public void cambiarPanel(int op) {
+        switch (op) {
+            case 1:
+                new CambiaPanel(Contenido, new ProduccionFE());
+                reinicializarVariables();
+                negocio = 1;
+                agregarProyectoEnTabla(1, "", "", "", "");
+                break;
+            case 2:
+                new CambiaPanel(Contenido, new ProduccionTE());
+                reinicializarVariables();
+                negocio = 2;
+                agregarProyectoEnTabla(2, "", "", "", "");
+                break;
+            case 3:
+                new CambiaPanel(Contenido, new ProduccionEN());
+                reinicializarVariables();
+                negocio = 3;
+                agregarProyectoEnTabla(3, "", "", "", "");
+                break;
+        }
+        jTNombre.setText("");
+        jTOrden.setText("");
+        jTProyecto.setText("");
+        cbTipo.setSelectedIndex(0);
+    }
 
     private void jTOrdenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTOrdenKeyReleased
         busqueda();
@@ -426,11 +420,26 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         busqueda();
     }//GEN-LAST:event_cbTipoItemStateChanged
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String nombre = Contenido.getComponent(0).getName();
+        switch (nombre) {
+            case "FE":
+                cambiarPanel(1);
+                break;
+            case "TE":
+                cambiarPanel(2);
+                break;
+            case "EN":
+                cambiarPanel(3);
+                break;
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 //Metodos
     private void busqueda() {
         agregarProyectoEnTabla(negocio, jTOrden.getText(), jTNombre.getText(), jTProyecto.getText(), cbTipo.getSelectedItem().toString());
     }
-
+    
     public void agregarProyectoEnTabla(int negocio, String orden, String cliente, String proyecto, String tipo) {
         try {
             //Se realiza la consulta para traer en numero de orden de todos los proyectos registrados
@@ -513,7 +522,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
             JOptionPane.showMessageDialog(null, "Error!!! " + e);
         }
     }
-
+    
     private void reinicializarVariables() {
         x = 0;
         y = 0;
@@ -522,11 +531,11 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         unidad = 11;
         conta = 5;
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent e) {//Estas lines me van a mostrar todos los detalles del proyecto sin importar se estan en ejecucion o no "1"
         int orden = Integer.parseInt(e.getActionCommand());
-        detalleProduccion obj = new detalleProduccion(this, true, orden, negocio,1);
+        detalleProduccion obj = new detalleProduccion(this, true, orden, negocio, 1);
         obj.setLocationRelativeTo(null);
         obj.setVisible(true);
         obj.dispose();
@@ -571,6 +580,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Contenido;
     private elaprendiz.gui.comboBox.ComboBoxRound cbTipo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;

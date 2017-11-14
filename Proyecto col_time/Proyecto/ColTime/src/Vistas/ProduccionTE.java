@@ -30,6 +30,8 @@ public class ProduccionTE extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         contenidoTE = new javax.swing.JPanel();
 
+        setName("TE"); // NOI18N
+
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setPreferredSize(new java.awt.Dimension(1094, 300));
 

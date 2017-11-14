@@ -7,12 +7,10 @@ package Vistas;
 
 import Controlador.DetalleProyecto;
 import Controlador.FormatoTabla;
-import coltime.Menu;
 import java.awt.Color;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -35,8 +33,8 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         consultarProyectos("", "", "", "");
         editarColumnasPNC();
         editarColumnasDetalle();
-        System.out.println("width: " + jPEncabezado.getWidth() + "\n"
-                + "Heigth: " + jPEncabezado.getHeight());
+//        System.out.println("width: " + jPEncabezado.getWidth() + "\n"
+//                + "Heigth: " + jPEncabezado.getHeight());
     }
     //VAriables globales
     int posX = 0;

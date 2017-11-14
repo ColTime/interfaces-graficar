@@ -30,6 +30,8 @@ public class ProduccionFE extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         contenidoFE = new javax.swing.JPanel();
 
+        setName("FE"); // NOI18N
+
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setPreferredSize(new java.awt.Dimension(1094, 300));
 

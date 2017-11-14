@@ -18,6 +18,8 @@ public class ProduccionEN extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         contenidoEN = new javax.swing.JPanel();
 
+        setName("EN"); // NOI18N
+
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setPreferredSize(new java.awt.Dimension(1094, 300));
 

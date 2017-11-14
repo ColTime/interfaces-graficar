@@ -98,6 +98,11 @@ public class DetalleProyecto {
 
         return true;
     }
+
+    public boolean validarEliminacionModificar(int negocio,int orden, int tipo,int busqueda) {
+        DetalleProyectoM obj = new DetalleProyectoM();
+        return obj.validarEliminacionModificarM(orden, negocio, tipo,busqueda);
+    }
 //    Reiniciar toma de tiempo
 
     public boolean ReiniciarDetalle(int detalle, int negocio) {

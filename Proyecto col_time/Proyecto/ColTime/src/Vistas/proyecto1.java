@@ -466,7 +466,8 @@ public class proyecto1 extends javax.swing.JPanel {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
        DetalleProyecto obj = new DetalleProyecto();
-       obj.eliminarDetallersProyecto(Integer.parseInt(jLDetalle.getText()),Integer.parseInt(jTNorden.getText()),jTNegocio.getText(),jTTipoNegocio.getText());
+       obj.eliminarDetallersProyecto(Integer.parseInt(jLDetalle.getText()),Integer.parseInt(jTNorden.getText()),jTNegocio.getText(),jTTipoNegocio.getText()
+       );
     }//GEN-LAST:event_btnDeleteActionPerformed
 //Metodos-------------------------------------------------------------------->
 
@@ -524,7 +525,7 @@ public class proyecto1 extends javax.swing.JPanel {
         cbProcedoPNC.setEnabled(false);
     }
 
-    private void RegistrarPNCModificar(int op) {
+    private void RegistrarPNCModificar(int op) {//------------------------------------>
         if (cbProcedoPNC.getSelectedIndex() != 0) {
             DetalleProyecto obj = new DetalleProyecto();
             int cantidad = obj.ValidarCnatidadPNC(jTNorden.getText(), Integer.parseInt(jLDetalle.getText()), op, jTTipoNegocio.getText(), jTNegocio.getText());

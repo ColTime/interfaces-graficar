@@ -8,7 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import rojerusan.RSNotifyAnimated;
 
 public class ConsultarPNC extends javax.swing.JFrame {
-    
+
     public ConsultarPNC(int cargo, int vista, int accion) {
         initComponents();
         this.cargo = cargo;
@@ -26,7 +26,7 @@ public class ConsultarPNC extends javax.swing.JFrame {
     public static int cargo = 0;
     public static int vista = 0;
     public static int accion = 0;
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -267,15 +267,17 @@ public class ConsultarPNC extends javax.swing.JFrame {
         proyecto1.jTTipoNegocio.setText(TDetalle.getValueAt(pos, 2).toString());
         proyecto1.cbProcedoPNC.removeAllItems();
         proyecto1.cbProcedoPNC.addItem("Seleccione...");
-        proyecto1.op = 2;
+
         proyecto1.btnGenerarQR.setEnabled(true);
         //Se valida si la accion va ser crear o modificar
         if (accion == 2) {
-            proyecto1.btnModificarPNC.setEnabled(true);
+            proyecto1.btnModificarPNC.setEnabled(false);
+            proyecto1.op = 2;
         } else {
             proyecto1.btnModificarPNC.setEnabled(false);
+            proyecto1.op = 1;
         }
-        
+
         if (TDetalle.getValueAt(pos, 1).toString().equals("FE")) {
             try {
                 crs = consultarProcesos(Integer.parseInt(TDetalle.getValueAt(pos, 0).toString()));
@@ -309,12 +311,12 @@ public class ConsultarPNC extends javax.swing.JFrame {
             proyecto1.jTCantindad.setText(TDetalle.getValueAt(pos, 3).toString());
         }
     }
-    
+
     private CachedRowSet consultarProcesos(int detalle) {
         DetalleProyecto obj = new DetalleProyecto();
         return obj.consultarProcesosFE(detalle);
     }
-    
+
     private void consutarDetalle() {
         String encabezado1[] = {"idDetalle", "Negocio", "Tipo de negocio", "Cantidad", "Estado", "Material", "Ubicacion"};
         DefaultTableModel model1 = new DefaultTableModel(null, encabezado1);
@@ -355,7 +357,7 @@ public class ConsultarPNC extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error" + e);
         }
     }
-    
+
     private void titulo() {
         if (vista == 1) {
             jLTitulo.setText("Tipo de negocio");
@@ -363,7 +365,7 @@ public class ConsultarPNC extends javax.swing.JFrame {
             jLTitulo.setText("PNC");
         }
     }
-    
+
     private void editarColumnasDetalle() {
         TDetalle.getColumnModel().getColumn(0).setMinWidth(58);
         TDetalle.getColumnModel().getColumn(0).setMaxWidth(58);

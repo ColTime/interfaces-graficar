@@ -155,6 +155,46 @@ public class DetalleProyectoM {
         return res;
     }
 
+    public boolean validarEliminacionModificarM(int orden, int negocio, int tipo, int busqueda) {
+        //PA_EliminarProductosNoConformes(?,?,?)
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+
+            String Qry = "CALL PA_EliminarProductosNoConformes(?,?,?)";
+            ps = con.prepareStatement(Qry);
+            ps.setInt(1, orden);
+            ps.setInt(2, tipo);
+            ps.setInt(3, negocio);
+            rs = ps.executeQuery();
+            ResultSet rs1 = null;
+            while (rs.next()) {
+                Qry = "SELECT FU_validarEliminacion(?,?,?,?)";
+                ps = con.prepareStatement(Qry);
+                ps.setInt(1, rs.getInt(1));
+                ps.setInt(2, orden);
+                ps.setInt(3, tipo);
+                ps.setInt(4, busqueda);
+
+                rs1 = ps.executeQuery();
+                rs1.next();
+                res = rs1.getBoolean(1);
+                if (!res) {
+                    break;
+                }
+            }
+            conexion.cerrar(rs);
+            conexion.cerrar(rs1);
+            conexion.destruir();
+            ps.close();
+            con.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return res;
+    }
+
     private void modificarPNC(String numerOrden, int id, String cantidad, String material, String negocio, String tipoNegocio) {
         //PreparedSteamate y detalle----------------------------------->
         try {
@@ -176,6 +216,10 @@ public class DetalleProyectoM {
                 ps.setInt(2, id);
                 rs = ps.executeQuery();
             }
+            conexion.cerrar(rs);
+            conexion.destruir();
+            ps.close();
+            con.close();
         } catch (Exception e) {
         }
     }
@@ -281,31 +325,73 @@ public class DetalleProyectoM {
             conexion = new Conexion();
             conexion.establecerConexion();
             con = conexion.getConexion();
+            ResultSet rs1 = null;
             String Qry = "CALL PA_EliminarProductosNoConformes(?,?,?)";
-            
-            //Query------------------------------------------------------------>
-            
-            switch (negocio) {
-                case "FE":
-                    //Quiery para eliminar el detalle de formato estandar
-                    Qry = "SELECT FU_EliminarDetalleProyectoFormatoestandar(?,?)";
+            ps = con.prepareStatement(Qry);
+            ps.setInt(1, numeOrden);
+            //Numero del tipo de producto
+            int numeroTipo = 0;
+            switch (tipo) {
+                case "Circuito":
+                    ps.setInt(2, 1);
                     break;
-                case "TE":
-                    Qry = "SELECT FU_EliminarDetalleProyectoTeclados(?,?)";
+                case "Conversor":
+                    ps.setInt(2, 2);
                     break;
-                case "IN":
-                    Qry = "SELECT FU_EliminarDetalleProyectoEnsamble(?,?)";
+                case "Repujado":
+                    ps.setInt(2, 3);
+                    break;
+                case "Troquel":
+                    ps.setInt(2, 4);
+                    break;
+                case "Teclado":
+                    ps.setInt(2, 5);
+                    break;
+                case "Stencil":
+                    ps.setInt(2, 6);
+                    break;
+                case "PCB":
+                    ps.setInt(2, 7);
                     break;
             }
-            ps = con.prepareStatement(Qry);
-            ps.setInt(1, idDetalle);
-            ps.setInt(2, numeOrden);
-            //Ejecucion
+            //numero de tipo de negocio
+            int n = 0;
+            if (negocio.equals("FE")) {
+                n = 1;
+            } else if (negocio.equals("TE")) {
+                n = 2;
+            } else if (negocio.equals("EN")) {
+                n = 3;
+            }
+            ps.setInt(3, n);
+            //Ejecucion del procedimiento almacenado
             rs = ps.executeQuery();
-            rs.next();
-            res = rs.getBoolean(1);
+            while (rs.next()) {
+                //Query------------------------------------------------------------>
+                switch (negocio) {
+                    case "FE":
+                        //Quiery para eliminar el detalle de formato estandar
+                        Qry = "SELECT FU_EliminarDetalleProyectoFormatoestandar(?,?)";
+                        break;
+                    case "TE":
+                        Qry = "SELECT FU_EliminarDetalleProyectoTeclados(?,?)";
+                        break;
+                    case "IN":
+                        Qry = "SELECT FU_EliminarDetalleProyectoEnsamble(?,?)";
+                        break;
+                }
+                ps = con.prepareStatement(Qry);
+                ps.setInt(1, rs.getInt(1));
+                ps.setInt(2, numeOrden);
+                //Ejecucion
+                rs1 = ps.executeQuery();
+                rs1.next();
+                res = rs1.getBoolean(1);
+            }
+
             //Cierre de conexiones
             conexion.cerrar(rs);
+            conexion.cerrar(rs1);
             conexion.destruir();
             ps.close();
             con.close();

@@ -1235,22 +1235,23 @@ public class proyecto extends javax.swing.JPanel {
         //Esta validacion falta por organizar------------------------------------------------------------------------------------------------->
         if (!jDentrega.getDate().equals("") && cbNegocio.getSelectedIndex() != 0 && cbTipo.getSelectedIndex() != 0 && !jTNombreCliente.getText().equals("")
                 && !jTNombreProyecto.getText().equals("") && contarRadiosPresionados() == contarTextoLleno()) {
-            //Validacion de campos
-            if (!jCCircuito.isSelected() == false || !jCPCBTE.isSelected() == false) {
-                //Si solo es seleccionado el circuito.
-                if ((jCCircuito.isSelected() && (cbMaterialCircuito.getSelectedIndex() != 0 && !jTCircuito.getText().equals(""))) && jCPCBTE.isSelected() == false) {
-                    registrarModificarProyecto(op);
-                    //Si solo es seleccionado la PCB.
-                } else if ((jCPCBTE.isSelected() && (cbMaterialPCBTE.getSelectedIndex() != 0 && !jTPCBTE.getText().equals(""))) && jCCircuito.isSelected() == false) {
-                    registrarModificarProyecto(op);
-                    //Sí selecciona los dos (Circuito y PCB).
-                } else if ((jCCircuito.isSelected() && (cbMaterialCircuito.getSelectedIndex() != 0 && !jTCircuito.getText().equals(""))) && (jCPCBTE.isSelected() && (cbMaterialPCBTE.getSelectedIndex() != 0 && !jTPCBTE.getText().equals("")))) {
-                    registrarModificarProyecto(op);
-                    //Si no cumplio ninguna de las condiciones anteriores.
-                }
-            } else {
-                registrarModificarProyecto(op);
-            }
+//            //Validacion de campos
+//            if (!jCCircuito.isSelected() == false || !jCPCBTE.isSelected() == false) {
+//                //Si solo es seleccionado el circuito.
+//                if ((jCCircuito.isSelected() && (cbMaterialCircuito.getSelectedIndex() != 0 && !jTCircuito.getText().equals(""))) && jCPCBTE.isSelected() == false) {
+//                    registrarModificarProyecto(op);
+//                    //Si solo es seleccionado la PCB.
+//                } else if ((jCPCBTE.isSelected() && (cbMaterialPCBTE.getSelectedIndex() != 0 && !jTPCBTE.getText().equals(""))) && jCCircuito.isSelected() == false) {
+//                    registrarModificarProyecto(op);
+//                    //Sí selecciona los dos (Circuito y PCB).
+//                } else if ((jCCircuito.isSelected() && (cbMaterialCircuito.getSelectedIndex() != 0 && !jTCircuito.getText().equals(""))) && (jCPCBTE.isSelected() && (cbMaterialPCBTE.getSelectedIndex() != 0 && !jTPCBTE.getText().equals("")))) {
+//                    registrarModificarProyecto(op);
+//                    //Si no cumplio ninguna de las condiciones anteriores.
+//                }
+//            } else {
+//                registrarModificarProyecto(op);
+//            }
+            registrarModificarProyecto(op);
         } else {
             new rojerusan.RSNotifyAnimated("¡Error!", "Falta algun campo por diligenciar.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
         }
@@ -1300,10 +1301,10 @@ public class proyecto extends javax.swing.JPanel {
         if (!jTStencil.getText().equals("")) {
             cant++;
         }
-        if (!jTCircuito.getText().equals("")) {
+        if (!jTCircuito.getText().equals("") && cbMaterialCircuito.getSelectedIndex() != 0) {
             cant++;
         }
-        if (!jTPCBTE.getText().equals("")) {
+        if (!jTPCBTE.getText().equals("") && cbMaterialPCBTE.getSelectedIndex() != 0) {
             cant++;
         }
         if (!jTTeclado.getText().equals("")) {
@@ -1314,13 +1315,71 @@ public class proyecto extends javax.swing.JPanel {
         }
         return cant;
     }
-//    ((jCConversor.isSelected()==true && !jTConversor.getText().equals("")) && (jCTroquel.isSelected() && !jTTroquel.getText().equals(""))
-//                || (jCRepujado.isSelected() && !jTRepujado.getText().equals("")) || (jCStencil.isSelected() && !jTStencil.getText().equals(""))
-//                || (jCTeclado.isSelected() && !jTTeclado.getText().equals(""))
-//                || (jCCircuito.isSelected()) || (jCPCBTE.isSelected())
-//                || (jCIntegracion.isSelected() && !jTIntegracion.getText().equals("")))
 
     private void registrarModificarProyecto(int op) {
+        if (op == 1) {
+            //Para registrar no se tiene que validar los proyectos que no se pueden eliminar
+            botonRegistrarModificar();
+        } else if (op == 2) {
+            //Validar que los detalles del proyecto puedan ser modificados o si no el proyecto no va a poder ser modificado de ninguna manera.
+            String v[] = new String[8];
+            int i = 0;
+            boolean res = true;
+            DetalleProyecto obj = new DetalleProyecto();
+
+            if (!jLIDCircuito.getText().equals("0") && jCCircuito.isSelected() == false) {
+                v[i] = String.valueOf(obj.validarEliminacionModificar(1, Integer.parseInt(jTNorden.getText()), 1, 1));
+                i++;
+            }
+            if (!jLIDTeclado.getText().equals("0") && jCTeclado.isSelected() == false) {
+                v[i] = String.valueOf(obj.validarEliminacionModificar(2, Integer.parseInt(jTNorden.getText()), 5, 2));
+                i++;
+            }
+            if (!jLIDIntegracion.getText().equals("0") && jCIntegracion.isSelected() == false) {
+                v[i] = String.valueOf(obj.validarEliminacionModificar(3, Integer.parseInt(jTNorden.getText()), 1, 3));
+                i++;
+            }
+            if (!jLIDConversor.getText().equals("0") && jCConversor.isSelected() == false) {
+                v[i] = String.valueOf(obj.validarEliminacionModificar(1, Integer.parseInt(jTNorden.getText()), 2, 1));
+                i++;
+            }
+            if (!jLIDTroquel.getText().equals("0") && jCTroquel.isSelected() == false) {
+                v[i] = String.valueOf(obj.validarEliminacionModificar(1, Integer.parseInt(jTNorden.getText()), 4, 1));
+                i++;
+            }
+            if (!jLIDRepujado.getText().equals("0") && jCRepujado.isSelected() == false) {
+                v[i] = String.valueOf(obj.validarEliminacionModificar(1, Integer.parseInt(jTNorden.getText()), 3, 1));
+                i++;
+            }
+            if (!jLIDStencil.getText().equals("0") && jCStencil.isSelected() == false) {
+                v[i] = String.valueOf(obj.validarEliminacionModificar(1, Integer.parseInt(jTNorden.getText()), 6, 1));
+                i++;
+            }
+            if (!jLIDPCB.getText().equals("0") && jCPCBTE.isSelected() == false) {
+                v[i] = String.valueOf(obj.validarEliminacionModificar(1, Integer.parseInt(jTNorden.getText()), 7, 1));
+                i++;
+            }
+            //Se verifica que todos los proyectos se puedan eliminar, incluso los pnc
+            for (int j = 0; j < v.length; j++) {
+                if (v[j] == null) {
+                    break;
+                } else {
+                    if (v[j].equals("false")) {
+                        res = false;
+                        break;
+                    }
+                }
+            }
+            //si es true se podran eliminar todos los proyectos y podra seguir con la modificacion de la informacion del proyecto
+            if (res) {
+                botonRegistrarModificar();
+            } else {
+                new rojerusan.RSNotifyAnimated("¡Error!", "No se puede modificar este proyecto porque ya esta en ejecucion", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
+            }
+        }
+    }
+
+    private void botonRegistrarModificar() {
         Controlador.Proyecto obj = new Controlador.Proyecto();
         obj.setNombreCliente(jTNombreCliente.getText());
         obj.setNombreProyecto(jTNombreProyecto.getText());
@@ -1328,17 +1387,17 @@ public class proyecto extends javax.swing.JPanel {
         obj.setNegocio(cbNegocio.getSelectedItem().toString());
         DateFormat fecha = new SimpleDateFormat("YYYY/MM/dd");
         obj.setFecha(fecha.format(jDentrega.getDate()));
-        v[0] = jCCircuito.isSelected() ? true : false;
-        v[1] = jCPCBTE.isSelected() ? true : false;
-        v[2] = jCConversor.isSelected() ? true : false;
-        v[3] = jCRepujado.isSelected() ? true : false;
-        v[4] = jCTroquel.isSelected() ? true : false;
-        v[5] = jCStencil.isSelected() ? true : false;
-        v[6] = jCTeclado.isSelected() ? true : false;
-        v[7] = jCRuteoC.isSelected() ? true : false;
-        v[8] = jCAntisolderC.isSelected() ? true : false;
-        v[9] = jCAntisolderP.isSelected() ? true : false;
-        v[10] = jCRuteoP.isSelected() ? true : false;
+        v[0] = jCCircuito.isSelected();
+        v[1] = jCPCBTE.isSelected();
+        v[2] = jCConversor.isSelected();
+        v[3] = jCRepujado.isSelected();
+        v[4] = jCTroquel.isSelected();
+        v[5] = jCStencil.isSelected();
+        v[6] = jCTeclado.isSelected();
+        v[7] = jCRuteoC.isSelected();
+        v[8] = jCAntisolderC.isSelected();
+        v[9] = jCAntisolderP.isSelected();
+        v[10] = jCRuteoP.isSelected();
 //        v[10] = jCIntegracion.isSelected() ? true : false;
         obj.setDetalles(v);
         obj.setIdOrden(Integer.parseInt(jTNorden.getText()));
@@ -1525,7 +1584,7 @@ public class proyecto extends javax.swing.JPanel {
     private void VerificarQueSeElimina(DetalleProyecto obj) {
         if (!jLIDCircuito.getText().equals("0") && jCCircuito.isSelected() == false) {
             //Eliminar el detalle del proyecto si ya no esta seleccionado
-            subEliminardetalle(obj, Integer.parseInt(jLIDCircuito.getText()), Integer.parseInt(jTNorden.getText()), "FE", " Circuito");
+            subEliminardetalle(obj, Integer.parseInt(jLIDCircuito.getText()), Integer.parseInt(jTNorden.getText()), "FE", "Circuito");
         }
         if (!jLIDTeclado.getText().equals("0") && jCTeclado.isSelected() == false) {
             subEliminardetalle(obj, Integer.parseInt(jLIDTeclado.getText()), Integer.parseInt(jTNorden.getText()), "TE", "Teclado");
@@ -1713,6 +1772,7 @@ public class proyecto extends javax.swing.JPanel {
                 //Eliminar el detalle del proyecto si ya no esta seleccionado
                 subEliminardetalle(obj, Integer.parseInt(jLIDTeclado.getText()), Integer.parseInt(jTNorden.getText()), "TE", "Teclado");
             }
+            VerificarQueSeElimina(obj);
         } else if (cbNegocio.getSelectedItem().equals("FE/IN")) {
             //Se registra el detalle del proyecto cuando el negocio es "FE/IN"
             if (jCCircuito.isSelected()) {
@@ -1896,7 +1956,7 @@ public class proyecto extends javax.swing.JPanel {
 
     private void subEliminardetalle(DetalleProyecto obj, int idDetalle, int numerOrden, String negocio, String tipo) {
 
-        if (obj.eliminarDetallersProyecto(idDetalle, numerOrden, negocio,tipo)) {
+        if (obj.eliminarDetallersProyecto(idDetalle, numerOrden, negocio, tipo)) {
             //Mensaje de eliminacion exitosa
             new rojerusan.RSNotifyAnimated("Listo!!", "Se elimino el detalle del proyecto: " + tipo + " " + negocio + " de la orden " + jTNorden.getText(), 5, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
             try {
