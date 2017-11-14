@@ -204,18 +204,30 @@ public class Inicio extends javax.swing.JPanel {
             crs = obj.fechaYdatosProduccion();
             //Hora y formato estandar
             crs.next();
+            cantidadArea(crs);
             jLFecha.setText("Fecha: " + crs.getString(1));
-            jLCantidadF.setText(crs.getString(2));
             jLCantidadP.setText(crs.getString(3));
             //Teclados
             crs.next();
-            jLCantidadT.setText(crs.getString(2));
+            cantidadArea(crs);
             //Ensamble
             crs.next();
-            jLCantidadE.setText(crs.getString(2));
-
+            cantidadArea(crs);
         } catch (Exception e) {
             //Mensaje de alerta
+        }
+    }
+
+    private void cantidadArea(CachedRowSet crsf) {
+        try {
+            if (crsf.getString(4).equals("1")) {
+                jLCantidadF.setText(crsf.getString(2));
+            } else if (crsf.getString(4).equals("2")) {
+                jLCantidadT.setText(crsf.getString(2));
+            } else if (crsf.getString(4).equals("3")) {
+                jLCantidadE.setText(crsf.getString(2));
+            }
+        } catch (Exception e) {
         }
     }
 

@@ -1,10 +1,12 @@
 package Vistas;
 
 import Controlador.DetalleProyecto;
+import Controlador.Proyecto;
 import com.barcodelib.barcode.QRCode;
 import java.awt.Color;
 import java.io.File;
 import java.util.Locale;
+import javax.sql.rowset.CachedRowSet;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -21,7 +23,7 @@ public class proyecto1 extends javax.swing.JPanel {
         if (p == 1) {
             initComponents();
             desactivarComponentes();
-            grafica.setIcon(grafica(1));
+            grafica.setIcon(graficaCantidad(1));
         }
     }
 
@@ -453,21 +455,21 @@ public class proyecto1 extends javax.swing.JPanel {
     }//GEN-LAST:event_graficaMouseReleased
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-       grafica.setIcon(grafica(1));
+        grafica.setIcon(graficaCantidad(1));
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-       grafica.setIcon(grafica(2));
+        grafica.setIcon(graficaCantidad(2));
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-       grafica.setIcon(grafica(3));
+        grafica.setIcon(graficaCantidad(3));
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-       DetalleProyecto obj = new DetalleProyecto();
-       obj.eliminarDetallersProyecto(Integer.parseInt(jLDetalle.getText()),Integer.parseInt(jTNorden.getText()),jTNegocio.getText(),jTTipoNegocio.getText()
-       );
+        DetalleProyecto obj = new DetalleProyecto();
+        obj.eliminarDetallersProyecto(Integer.parseInt(jLDetalle.getText()), Integer.parseInt(jTNorden.getText()), jTNegocio.getText(), jTTipoNegocio.getText()
+        );
     }//GEN-LAST:event_btnDeleteActionPerformed
 //Metodos-------------------------------------------------------------------->
 
@@ -576,14 +578,18 @@ public class proyecto1 extends javax.swing.JPanel {
     }
 //Graficas de la cantidad de proyectos que tiene cada area
 
-    public ImageIcon grafica(int tipoGrafica) {
+    public ImageIcon graficaCantidad(int tipoGrafica) {
         ImageIcon iconG = null;
         try {
+            Proyecto obj = new Proyecto();
+            //Cantidad de proyectos por areas /FE/TE/IN
+            int v[] = cantidadArea(obj.diagrama());
+
             if (tipoGrafica == 1 || tipoGrafica == 2) {
                 DefaultCategoryDataset ds = new DefaultCategoryDataset();
-                ds.addValue(70, "Formato estandar", "FE");
-                ds.addValue(20, "Teclados", "TE");
-                ds.addValue(30, "Ensamble", "EN");
+                ds.addValue(v[0], "Formato estandar", "FE");
+                ds.addValue(v[1], "Teclados", "TE");
+                ds.addValue(v[2], "Ensamble", "EN");
                 if (tipoGrafica == 1) {
                     //Diagrama de barras vertical
                     JFreeChart jf = ChartFactory.createBarChart3D("Cantidad de proyectos por area", "Nombres", "Edades", ds, PlotOrientation.VERTICAL, true, true, true);
@@ -595,9 +601,9 @@ public class proyecto1 extends javax.swing.JPanel {
                 }
             } else if (tipoGrafica == 3) {
                 DefaultPieDataset porciones = new DefaultPieDataset();
-                porciones.setValue("FE: " + 70, 70);
-                porciones.setValue("TE: " + 30, 30);
-                porciones.setValue("EN: " + 20, 20);
+                porciones.setValue("FE: " + v[0], v[0]);//Formato estandar
+                porciones.setValue("TE: " + v[1], v[1]);//Teclado
+                porciones.setValue("EN: " + v[2], v[2]);//Ensamble
                 //Torta
                 JFreeChart jf1 = ChartFactory.createPieChart("Produccion", porciones, true, true, Locale.ITALY);
                 iconG = new ImageIcon(jf1.createBufferedImage(859, 366));
@@ -610,6 +616,29 @@ public class proyecto1 extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Error! " + e);
         }
         return iconG;
+    }
+
+    public int[] cantidadArea(CachedRowSet crs) {
+        int v[] = {0, 0, 0};
+        try {
+            while (crs.next()) {
+                //Formato estandar
+                if (crs.getInt(2) == 1) {
+                    v[0] = crs.getInt(1);
+                }
+                //Teclados
+                if (crs.getInt(2) == 2) {
+                    v[1] = crs.getInt(1);
+                }
+                //Ensamble
+                if (crs.getInt(2) == 3) {
+                    v[2] = crs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error! " + e);
+        }
+        return v;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -24,6 +24,27 @@ public class ProyectoM {
     String fecha = "";
 
     //Metodos y funciones------------------------------------------------>
+    public CachedRowSet diagramaM() {
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query------------------------------------------------------------>
+            String Qry = "CALL PA_Diagramas()";
+            ps = con.prepareStatement(Qry);
+            rs = ps.executeQuery();
+            crsP = new CachedRowSetImpl();
+            crsP.populate(rs);
+            con.close();
+            conexion.destruir();
+            conexion.cerrar(rs);
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error! " + e);
+        }
+        return crsP;
+    }
+
     public boolean registrar_Modificar_Proyecto(int norden, String comercial, String cliente, String proyecto, String tipo, boolean fe, boolean te, boolean in, boolean pcbfe,
             boolean pcbte, boolean conversor, boolean repujado, boolean troquel, boolean stencil, boolean lexan, String fechaEntrega, boolean ruteo, boolean anti,
             int op, boolean antisolderP, boolean ruteoP) {
@@ -107,6 +128,7 @@ public class ProyectoM {
         return crsP;
     }
 
+    //Pendiente
     public boolean cambiar_Estado_Proyeto() {
 
         return true;
@@ -251,7 +273,7 @@ public class ProyectoM {
             ps.setInt(1, orden);
             rs = ps.executeQuery();
             rs.next();
-            res=rs.getBoolean(1);
+            res = rs.getBoolean(1);
             con.close();
             conexion.destruir();
             conexion.cerrar(rs);

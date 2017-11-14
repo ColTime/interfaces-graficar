@@ -155,7 +155,7 @@ public class DetalleProyectoM {
         return res;
     }
 
-    public boolean validarEliminacionModificarM(int orden, int negocio, int tipo, int busqueda) {
+    public boolean validarEliminacionModificarM(int orden, int negocio, int tipo, int busqueda) {//El busqueda no es necesario
         //PA_EliminarProductosNoConformes(?,?,?)
         try {
             conexion = new Conexion();
@@ -194,7 +194,7 @@ public class DetalleProyectoM {
         }
         return res;
     }
-
+----------------------------------------------
     private void modificarPNC(String numerOrden, int id, String cantidad, String material, String negocio, String tipoNegocio) {
         //PreparedSteamate y detalle----------------------------------->
         try {
@@ -360,7 +360,7 @@ public class DetalleProyectoM {
                 n = 1;
             } else if (negocio.equals("TE")) {
                 n = 2;
-            } else if (negocio.equals("EN")) {
+            } else if (negocio.equals("IN")) {
                 n = 3;
             }
             ps.setInt(3, n);

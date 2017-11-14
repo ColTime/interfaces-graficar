@@ -74,6 +74,11 @@ public class Proyecto {
     }
 
     //Metodos y funciones------------------------------------------------>
+    public CachedRowSet diagrama() {
+        ProyectoM obj = new ProyectoM();
+        return obj.diagramaM();
+    }
+
     public boolean registrar_Modificar_Proyecto(String comercial, int op) {
         ProyectoM obj = new ProyectoM();
         String nego[] = negocio.split("/");

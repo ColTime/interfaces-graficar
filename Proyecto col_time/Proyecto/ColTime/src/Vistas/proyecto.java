@@ -1091,7 +1091,7 @@ public class proyecto extends javax.swing.JPanel {
         //Muestra la estadistica de las areas y permitira buscar por rango de fechas
         proyecto1 diagrama = new proyecto1();
         Diagramas vista = new Diagramas(new Menu(), true);
-        vista.jLGrafica.setIcon(diagrama.grafica(1));
+        vista.jLGrafica.setIcon(diagrama.graficaCantidad(1));
         vista.setLocationRelativeTo(null);
         vista.setVisible(true);
     }//GEN-LAST:event_btnGraficaAreaActionPerformed
@@ -1678,9 +1678,6 @@ public class proyecto extends javax.swing.JPanel {
                     op = op1;
                 }
                 //Fin del registro del Conversor
-            } else if (!jLIDConversor.getText().equals("0")) {
-                //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDConversor.getText()), Integer.parseInt(jTNorden.getText()), "FE", "Conversor");
             }
             if (jCTroquel.isSelected()) {
                 //Registrar Troquel-------------------------------------------->
@@ -1693,9 +1690,6 @@ public class proyecto extends javax.swing.JPanel {
                     op = op1;
                 }
                 //Fin del registro del Troquel
-            } else if (!jLIDTroquel.getText().equals("0")) {
-                //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDTroquel.getText()), Integer.parseInt(jTNorden.getText()), "FE", "Troquel");
             }
             if (jCRepujado.isSelected()) {
                 //Registrar Repujado------------------------------------------->
@@ -1708,9 +1702,6 @@ public class proyecto extends javax.swing.JPanel {
                     op = op1;
                 }
                 //Fin del registro del Repujado
-            } else if (!jLIDRepujado.getText().equals("0")) {
-                //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDRepujado.getText()), Integer.parseInt(jTNorden.getText()), "FE", "Repujado");
             }
             if (jCStencil.isSelected()) {
                 //Registrar Stencil-------------------------------------------->
@@ -1723,9 +1714,6 @@ public class proyecto extends javax.swing.JPanel {
                     op = op1;
                 }
                 //Fin del registro del Stencil
-            } else if (!jLIDStencil.getText().equals("0")) {
-                //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDStencil.getText()), Integer.parseInt(jTNorden.getText()), "FE", "Stencil");
             }
             if (jCCircuito.isSelected()) {
                 //Registrar PCB de FE------------------------------------------>
@@ -1738,9 +1726,6 @@ public class proyecto extends javax.swing.JPanel {
                     op = op1;
                 }
                 //Fin del registro del PCB FE
-            } else if (!jLIDCircuito.getText().equals("0")) {
-                //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDCircuito.getText()), Integer.parseInt(jTNorden.getText()), "FE", " Circuito");
             }
             if (jCPCBTE.isSelected()) {
                 //Registrar PCB de TE------------------------------------------>
@@ -1753,9 +1738,6 @@ public class proyecto extends javax.swing.JPanel {
                     op = op1;
                 }
                 //Fin del registro del PCB TE
-            } else if (!jLIDPCB.getText().equals("0")) {
-                //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDPCB.getText()), Integer.parseInt(jTNorden.getText()), "FE", "PCB");
             }
             if (jCTeclado.isSelected()) {
                 //Registrar Teclado-------------------------------------------->
@@ -1768,9 +1750,6 @@ public class proyecto extends javax.swing.JPanel {
                     op = op1;
                 }
                 //Fin del registro del Teclado
-            } else if (!jLIDTeclado.getText().equals("0")) {
-                //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDTeclado.getText()), Integer.parseInt(jTNorden.getText()), "TE", "Teclado");
             }
             VerificarQueSeElimina(obj);
         } else if (cbNegocio.getSelectedItem().equals("FE/IN")) {
@@ -1786,9 +1765,6 @@ public class proyecto extends javax.swing.JPanel {
                     op = op1;
                 }
                 //Fin del registro del PCB FE
-            } else if (!jLIDCircuito.getText().equals("0")) {
-                //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDCircuito.getText()), Integer.parseInt(jTNorden.getText()), "FE", "Circuito");
             }
             if (jCIntegracion.isSelected()) {
                 //REgistrar Integracion---------------------------------------->
@@ -1801,9 +1777,6 @@ public class proyecto extends javax.swing.JPanel {
                     op = op1;
                 }
                 //Fin del registro de Integracion
-            } else if (!jLIDIntegracion.getText().equals("0")) {
-                //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDIntegracion.getText()), Integer.parseInt(jTNorden.getText()), "IN", "Circuito");
             }
             if (jCStencil.isSelected()) {
                 //Registrar Stencil-------------------------------------------->
@@ -1816,10 +1789,8 @@ public class proyecto extends javax.swing.JPanel {
                     op = op1;
                 }
                 //Fin del registro del Stencil
-            } else if (!jLIDStencil.getText().equals("0")) {
-                //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDStencil.getText()), Integer.parseInt(jTNorden.getText()), "FE", "Stencil");
             }
+            VerificarQueSeElimina(obj);
         } else if (cbNegocio.getSelectedItem().equals("FE/TE/IN")) {
             //Se registra el detalle del proyecto cuando el negocio es "FE/TE/IN"
             if (jCConversor.isSelected()) {
@@ -1833,9 +1804,6 @@ public class proyecto extends javax.swing.JPanel {
                     op = op1;
                 }
                 //Fin del registro del Conversor
-            } else if (!jLIDConversor.getText().equals("0")) {
-                //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDConversor.getText()), Integer.parseInt(jTNorden.getText()), "FE", "Conversor");
             }
             if (jCTroquel.isSelected()) {
                 //Registrar Troquel-------------------------------------------->
@@ -1848,9 +1816,6 @@ public class proyecto extends javax.swing.JPanel {
                     op = op1;
                 }
                 //Fin del registro del Troquel
-            } else if (!jLIDTroquel.getText().equals("0")) {
-                //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDTroquel.getText()), Integer.parseInt(jTNorden.getText()), "FE", "Troquel");
             }
             if (jCRepujado.isSelected()) {
                 //Registrar Repujado------------------------------------------->
@@ -1863,9 +1828,6 @@ public class proyecto extends javax.swing.JPanel {
                     op = op1;
                 }
                 //Fin del registro del Repujado
-            } else if (!jLIDRepujado.getText().equals("0")) {
-                //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDRepujado.getText()), Integer.parseInt(jTNorden.getText()), "FE", "Repujado");
             }
             if (jCStencil.isSelected()) {
                 //Registrar Stencil-------------------------------------------->
@@ -1878,9 +1840,6 @@ public class proyecto extends javax.swing.JPanel {
                     op = op1;
                 }
                 //Fin del registro del Stencil
-            } else if (!jLIDStencil.getText().equals("0")) {
-                //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDStencil.getText()), Integer.parseInt(jTNorden.getText()), "FE", "Stencil");
             }
             if (jCCircuito.isSelected()) {
                 //Registrar PCB de FE------------------------------------------>
@@ -1893,9 +1852,6 @@ public class proyecto extends javax.swing.JPanel {
                     op = op1;
                 }
                 //Fin del registro del PCB FE
-            } else if (!jLIDCircuito.getText().equals("0")) {
-                //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDCircuito.getText()), Integer.parseInt(jTNorden.getText()), "FE", "Circuito");
             }
             if (jCPCBTE.isSelected()) {
                 //Registrar PCB de TE------------------------------------------>
@@ -1908,9 +1864,6 @@ public class proyecto extends javax.swing.JPanel {
                     op = op1;
                 }
                 //Fin del registro del PCB TE
-            } else if (!jLIDPCB.getText().equals("0")) {
-                //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDPCB.getText()), Integer.parseInt(jTNorden.getText()), "FE", "PCB");
             }
             if (jCTeclado.isSelected()) {
                 //Registrar Teclado-------------------------------------------->
@@ -1923,9 +1876,6 @@ public class proyecto extends javax.swing.JPanel {
                     op = op1;
                 }
                 //Fin del registro del Teclado
-            } else if (!jLIDTeclado.getText().equals("0")) {
-                //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDTeclado.getText()), Integer.parseInt(jTNorden.getText()), "TE", "Teclado");
             }
             if (jCIntegracion.isSelected()) {
                 //Registrar Integracion---------------------------------------->
@@ -1938,9 +1888,6 @@ public class proyecto extends javax.swing.JPanel {
                     op = op1;
                 }
                 //Fin del registro de Integracion
-            } else if (!jLIDIntegracion.getText().equals("0")) {
-                //Eliminar el detalle del proyecto si ya no esta seleccionado
-                subEliminardetalle(obj, Integer.parseInt(jLIDIntegracion.getText()), Integer.parseInt(jTNorden.getText()), "IN", "Circuito");
             }
         }
         return res;
