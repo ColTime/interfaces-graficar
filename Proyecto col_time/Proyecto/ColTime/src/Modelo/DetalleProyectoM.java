@@ -36,29 +36,9 @@ public class DetalleProyectoM {
             ps.setInt(2, detalle);
             ps.setInt(3, op);
             //Tipo de negocio
-            switch (tipo) {
-                case "Circuito":
-                    ps.setInt(4, 1);
-                    break;
-                case "Conversor":
-                    ps.setInt(4, 2);
-                    break;
-                case "PCB":
-                    ps.setInt(4, 3);
-                    break;
-                case "Repujado":
-                    ps.setInt(4, 4);
-                    break;
-                case "Stencil":
-                    ps.setInt(4, 5);
-                    break;
-                case "Teclado":
-                    ps.setInt(4, 6);
-                    break;
-                case "Troquel":
-                    ps.setInt(4, 7);
-                    break;
-            }
+            int tipoN = numeroDelTipo(tipo);
+
+            ps.setInt(4, tipoN);
             //Negocio
             if (negocio.equals("FE")) {
                 ps.setInt(5, 1);
@@ -117,27 +97,35 @@ public class DetalleProyectoM {
                     rs = ps.executeQuery();
                     rs.next();
                     res = rs.getBoolean(1);
+                    //Tipo de negocio
+                    int tipo = numeroDelTipo(tipoNegocio);
 
                     if (negocio.equals("IN")) {
                         //Se registran los procesos de IN para este subproyecto
                         for (int i = 15; i <= 21; i++) {
-                            Qry = "CALL PA_RegistrarDetalleEnsamble(?)";
+                            Qry = "CALL PA_RegistrarDetalleEnsamble(?,?,?)";
                             ps = con.prepareStatement(Qry);
                             ps.setInt(1, i);
+                            ps.setInt(2, Integer.parseInt(numerOrden));
+                            ps.setInt(3, tipo);
                             ps.execute();
                         }
                     } else if (negocio.equals("TE")) {
                         //Se registran los procesos de TE para este subproyecto 
                         for (int i = 11; i <= 14; i++) {
-                            Qry = "CALL PA_RegistrarDetalleTeclados(?)";
+                            Qry = "CALL PA_RegistrarDetalleTeclados(?,?,?)";
                             ps = con.prepareStatement(Qry);
                             ps.setInt(1, i);
+                            ps.setInt(2, Integer.parseInt(numerOrden));
+                            ps.setInt(1, tipo);
                             ps.execute();
                         }
                     } else if (negocio.equals("FE")) {
                         //Se registran los procesos de FE para este subproyecto 
-                        Qry = "CALL PA_RegistrarDetalleFormatoEstandar()";
+                        Qry = "CALL PA_RegistrarDetalleFormatoEstandar(?,?)";
                         ps = con.prepareStatement(Qry);
+                        ps.setInt(1, Integer.parseInt(numerOrden));
+                        ps.setInt(1, tipo);
                         ps.execute();
                     }
                 }
@@ -153,6 +141,34 @@ public class DetalleProyectoM {
             JOptionPane.showMessageDialog(null, "¡Error!" + e);
         }
         return res;
+    }
+
+    private int numeroDelTipo(String tipoNegocio) {
+        int tipo = 0;
+        switch (tipoNegocio) {
+            case "Circuito":
+                tipo = 1;
+                break;
+            case "Conversor":
+                tipo = 2;
+                break;
+            case "PCB":
+                tipo = 3;
+                break;
+            case "Repujado":
+                tipo = 4;
+                break;
+            case "Stencil":
+                tipo = 5;
+                break;
+            case "Teclado":
+                tipo = 6;
+                break;
+            case "Troquel":
+                tipo = 7;
+                break;
+        }
+        return tipo;
     }
 
     public boolean validarEliminacionModificarM(int orden, int negocio, int tipo, int busqueda) {//El busqueda no es necesario
@@ -194,7 +210,8 @@ public class DetalleProyectoM {
         }
         return res;
     }
-----------------------------------------------
+//----------------------------------------------
+
     private void modificarPNC(String numerOrden, int id, String cantidad, String material, String negocio, String tipoNegocio) {
         //PreparedSteamate y detalle----------------------------------->
         try {
@@ -210,10 +227,11 @@ public class DetalleProyectoM {
             res = rs.getBoolean(1);
             if (negocio.equals("FE") && (tipoNegocio.equals("Circuito") || tipoNegocio.equals("PCB"))) {
                 //Modificar procesos de formato estandar
-                Qry = "CALL PA_ModificarDetalleFormatoEstandar(?,?)";
+                Qry = "CALL PA_ModificarDetalleFormatoEstandar(?,?,?)";
                 ps = con.prepareStatement(Qry);
                 ps.setInt(1, Integer.parseInt(numerOrden));
                 ps.setInt(2, id);
+                ps.setString(3, material.trim());
                 rs = ps.executeQuery();
             }
             conexion.cerrar(rs);
@@ -330,30 +348,9 @@ public class DetalleProyectoM {
             ps = con.prepareStatement(Qry);
             ps.setInt(1, numeOrden);
             //Numero del tipo de producto
-            int numeroTipo = 0;
-            switch (tipo) {
-                case "Circuito":
-                    ps.setInt(2, 1);
-                    break;
-                case "Conversor":
-                    ps.setInt(2, 2);
-                    break;
-                case "Repujado":
-                    ps.setInt(2, 3);
-                    break;
-                case "Troquel":
-                    ps.setInt(2, 4);
-                    break;
-                case "Teclado":
-                    ps.setInt(2, 5);
-                    break;
-                case "Stencil":
-                    ps.setInt(2, 6);
-                    break;
-                case "PCB":
-                    ps.setInt(2, 7);
-                    break;
-            }
+            int numeroTipo = numeroDelTipo(tipo);
+
+            ps.setInt(2, numeroTipo);
             //numero de tipo de negocio
             int n = 0;
             if (negocio.equals("FE")) {
