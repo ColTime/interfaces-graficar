@@ -886,7 +886,6 @@ public class proyecto extends javax.swing.JPanel {
 
         if (seleccion == 0) {
             validarRegistro(2);
-            limpiarID();
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
@@ -900,7 +899,6 @@ public class proyecto extends javax.swing.JPanel {
             new rojerusan.RSNotifyAnimated("¡Alerta!", "Este numero de orden ya existe.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
         } else {
             validarRegistro(1);
-            limpiarID();
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -1408,6 +1406,7 @@ public class proyecto extends javax.swing.JPanel {
                     //Mensaje de exito
                     new rojerusan.RSNotifyAnimated("Listo!!", "El Proyecto con el numero de orden: " + jTNorden.getText() + " fue registrada exitosamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
                     generarQR();
+                    limpiarID();
                 } else {
                     //Mensaje de error
                     new rojerusan.RSNotifyAnimated("¡Error!", "El detalle no pudo ser registrado satisfactoriamente", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
@@ -1418,6 +1417,7 @@ public class proyecto extends javax.swing.JPanel {
                     //Mensaje de exito
                     new rojerusan.RSNotifyAnimated("Listo!!", "El Proyecto con el numero de orden: " + jTNorden.getText() + " fue modificado exitosamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
                     GenerarQR.setEnabled(false);
+                    limpiarID();
                 } else {
                     //Mensaje de error
                 }

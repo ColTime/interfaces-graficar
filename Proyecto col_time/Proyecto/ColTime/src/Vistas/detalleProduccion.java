@@ -128,11 +128,32 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
                 res = true;
                 JButton detalle = new JButton(crs.getString(2));
                 detalle.setName(String.valueOf(crs.getInt(1)));
-                detalle.setBounds(x, y, 110, 98);
+                detalle.setBounds(x, y, 110, 100);
                 detalle.addActionListener(this);
                 //Icono del boton
-                ImageIcon icono = new ImageIcon("src\\img\\detalle.png");
-                Icon imagen = new ImageIcon(icono.getImage().getScaledInstance(detalle.getWidth() - 5, detalle.getHeight() - 5, Image.SCALE_DEFAULT));
+                ImageIcon icono = null;
+                //No se esta utilizando la columna del tipo de producto
+                switch (crs.getInt(3)) {
+                    case 1:
+                        //Por iniciar
+                        icono = new ImageIcon("src\\produccion\\DetalleBegin.png");
+                        break;
+                    case 2:
+                        //Pausado
+                        icono = new ImageIcon("src\\produccion\\DetallePause.png");
+                        break;
+                    case 3:
+                        //Terminado
+                        icono = new ImageIcon("src\\produccion\\DetalleCheck.png");
+                        break;
+                    case 4:
+                        //Ejecucion
+                        icono = new ImageIcon("src\\produccion\\DetalleTime.png");
+                        break;
+                    default:
+                        break;
+                }
+                Icon imagen = new ImageIcon(icono.getImage().getScaledInstance(detalle.getWidth() - 3, detalle.getHeight() - 3, Image.SCALE_DEFAULT));
                 detalle.setIcon(imagen);
                 //Texto del boton
                 detalle.setActionCommand(crs.getString(1));

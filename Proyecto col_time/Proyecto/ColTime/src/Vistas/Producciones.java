@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 import paneles.CambiaPanel;
 
 public class Producciones extends javax.swing.JFrame implements ActionListener {
-    
+
     public Producciones() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -30,7 +30,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
     CachedRowSet crs = null;
     int x = 0, y = 0, cantidad = 0, filas = 1, unidad = 11, conta = 5;
     static int negocio = 0;
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -355,7 +355,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
     private void rSButtonMetro3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro3ActionPerformed
         cambiarPanel(3);
     }//GEN-LAST:event_rSButtonMetro3ActionPerformed
-    
+
     public void cambiarPanel(int op) {
         switch (op) {
             case 1:
@@ -439,7 +439,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
     private void busqueda() {
         agregarProyectoEnTabla(negocio, jTOrden.getText(), jTNombre.getText(), jTProyecto.getText(), cbTipo.getSelectedItem().toString());
     }
-    
+
     public void agregarProyectoEnTabla(int negocio, String orden, String cliente, String proyecto, String tipo) {
         try {
             //Se realiza la consulta para traer en numero de orden de todos los proyectos registrados
@@ -468,7 +468,27 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                 jp.setFont(new Font("Tahoma", 1, 15));
                 jp.setFocusPainted(false);
                 //Icono del boton
-                ImageIcon icon = new ImageIcon("src\\img\\proyect.png");
+                ImageIcon icon = null;
+                switch (crs.getInt(2)) {
+                    case 1:
+                        //Por iniciar
+                        icon = new ImageIcon("src\\produccion\\ProyectBegin.png");
+                        break;
+                    case 2:
+                        //Pausado
+                        icon = new ImageIcon("src\\produccion\\ProyectPause.png");
+                        break;
+                    case 3:
+                        //Terminado
+                        icon = new ImageIcon("src\\produccion\\ProyectCheck.png");
+                        break;
+                    case 4:
+                        //Ejecucion
+                        icon = new ImageIcon("src\\produccion\\ProyecTime.png");
+                        break;
+                    default:
+                        break;
+                }
                 Icon image = new ImageIcon(icon.getImage().getScaledInstance(jp.getWidth(), jp.getHeight(), Image.SECTION));
                 jp.setIcon(image);
                 this.repaint();
@@ -522,7 +542,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
             JOptionPane.showMessageDialog(null, "Error!!! " + e);
         }
     }
-    
+
     private void reinicializarVariables() {
         x = 0;
         y = 0;
@@ -531,7 +551,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         unidad = 11;
         conta = 5;
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {//Estas lines me van a mostrar todos los detalles del proyecto sin importar se estan en ejecucion o no "1"
         int orden = Integer.parseInt(e.getActionCommand());

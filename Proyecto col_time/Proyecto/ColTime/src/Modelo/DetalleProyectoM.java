@@ -117,7 +117,7 @@ public class DetalleProyectoM {
                             ps = con.prepareStatement(Qry);
                             ps.setInt(1, i);
                             ps.setInt(2, Integer.parseInt(numerOrden));
-                            ps.setInt(1, tipo);
+                            ps.setInt(3, tipo);
                             ps.execute();
                         }
                     } else if (negocio.equals("FE")) {
@@ -125,7 +125,7 @@ public class DetalleProyectoM {
                         Qry = "CALL PA_RegistrarDetalleFormatoEstandar(?,?)";
                         ps = con.prepareStatement(Qry);
                         ps.setInt(1, Integer.parseInt(numerOrden));
-                        ps.setInt(1, tipo);
+                        ps.setInt(2, tipo);
                         ps.execute();
                     }
                 }
@@ -153,19 +153,19 @@ public class DetalleProyectoM {
                 tipo = 2;
                 break;
             case "PCB":
-                tipo = 3;
+                tipo = 7;
                 break;
             case "Repujado":
-                tipo = 4;
+                tipo = 3;
                 break;
             case "Stencil":
-                tipo = 5;
-                break;
-            case "Teclado":
                 tipo = 6;
                 break;
+            case "Teclado":
+                tipo = 5;
+                break;
             case "Troquel":
-                tipo = 7;
+                tipo = 4;
                 break;
         }
         return tipo;
@@ -215,13 +215,19 @@ public class DetalleProyectoM {
     private void modificarPNC(String numerOrden, int id, String cantidad, String material, String negocio, String tipoNegocio) {
         //PreparedSteamate y detalle----------------------------------->
         try {
-            String Qry = "SELECT FU_ModificarDetalleProyecto(?,?,?,?)";
+            String Qry = "SELECT FU_ModificarDetalleProyecto(?,?,?,?,?)";
             ps = con.prepareStatement(Qry);
             ps.setInt(1, Integer.parseInt(numerOrden));
             ps.setInt(2, id);
             ps.setString(3, cantidad);
             ps.setString(4, material);
-
+            if (negocio.equals("FE")) {
+                ps.setInt(5, 1);
+            } else if (negocio.equals("TE")) {
+                ps.setInt(5, 2);
+            } else if (negocio.equals("IN")) {
+                ps.setInt(5, 3);
+            }
             rs = ps.executeQuery();
             rs.next();
             res = rs.getBoolean(1);
