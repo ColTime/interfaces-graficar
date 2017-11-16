@@ -88,7 +88,7 @@ public class FE_TE_INM {
                     ps.setString(5, String.valueOf(T_Total));
                     ps.setInt(6, cantidadTerminada + cantidadAntigua);
                     ps.setInt(7, estado);
-                    res = ps.execute();
+                    res = !ps.execute();
                     //Si no cumple la condición va a retornar un falso y monstrara una mensaje de advertencia.
                 } else {
                     res = false;
@@ -102,7 +102,7 @@ public class FE_TE_INM {
                 ps.setInt(2, detalle);
                 ps.setInt(3, lector);
                 ps.setInt(4, negocio);
-                res = ps.execute();
+                res = !ps.execute();
             }
             con.close();
             conexion.destruir();

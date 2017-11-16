@@ -5,6 +5,7 @@ import Controlador.Tabla;
 import coltime.Menu;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import rojerusan.RSNotifyAnimated;
 
 public class detalleProyecto extends javax.swing.JDialog {
@@ -119,7 +120,8 @@ public class detalleProyecto extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TDetalleProduccionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TDetalleProduccionMouseClicked
-
+        //Botones de seguridad
+        String[] botones = {" SI ", " NO "};
         rows = TDetalleProduccion.rowAtPoint(evt.getPoint());
 
         int column = TDetalleProduccion.getColumnModel().getColumnIndexAtX(evt.getX());
@@ -128,21 +130,22 @@ public class detalleProyecto extends javax.swing.JDialog {
         if (row < TDetalleProduccion.getRowCount() && row >= 0 && column < TDetalleProduccion.getColumnCount() && column >= 0) {
             Object value = TDetalleProduccion.getValueAt(row, column);
             if (value instanceof JButton) {
-                ((JButton) value).doClick();
-                JButton boton = (JButton) value;
-                if (boton.getActionCommand().equals("1")) {
-                    String idDetalle = String.valueOf(TDetalleProduccion.getValueAt(row, 11));
-                    DetalleProyecto obj = new DetalleProyecto();
-                    if (obj.ReiniciarDetalle(Integer.parseInt(idDetalle), negocio)) {
-                        new rojerusan.RSNotifyAnimated("¡Listo!", "El proceso: " + TDetalleProduccion.getValueAt(row, 0) + " fue reinicializado corresctamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
-                        cargarTabla();
-                    } else {
-                        new rojerusan.RSNotifyAnimated("¡Error!", "El proceso: " + TDetalleProduccion.getValueAt(row, 0) + " no pudo ser reinicializado.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
+                if (JOptionPane.showOptionDialog(null, "¿Seguro desea reinicializar la toma de tiempo? Perdera toda esta información.", "Seguridad", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null/*icono*/, botones, botones[0]) == 0) {
+                    ((JButton) value).doClick();
+                    JButton boton = (JButton) value;
+                    if (boton.getActionCommand().equals("1")) {
+                        String idDetalle = String.valueOf(TDetalleProduccion.getValueAt(row, 11));
+                        DetalleProyecto obj = new DetalleProyecto();
+                        if (obj.ReiniciarDetalle(Integer.parseInt(idDetalle), negocio)) {
+                            new rojerusan.RSNotifyAnimated("¡Listo!", "El proceso: " + TDetalleProduccion.getValueAt(row, 0) + " fue reinicializado corresctamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+                            cargarTabla();
+                        } else {
+                            new rojerusan.RSNotifyAnimated("¡Error!", "El proceso: " + TDetalleProduccion.getValueAt(row, 0) + " no pudo ser reinicializado.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
+                        }
                     }
                 }
             }
         }
-
     }//GEN-LAST:event_TDetalleProduccionMouseClicked
 
     private void TDetalleProduccionMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TDetalleProduccionMouseReleased

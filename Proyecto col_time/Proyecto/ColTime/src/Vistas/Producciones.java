@@ -244,24 +244,28 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 10, 20, 20));
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1062, 9, 30, 20));
 
         Contenido.setBackground(new java.awt.Color(255, 255, 255));
         Contenido.setName("contenido"); // NOI18N
         Contenido.setLayout(new javax.swing.BoxLayout(Contenido, javax.swing.BoxLayout.LINE_AXIS));
 
+        jPanel2.setName("inicio"); // NOI18N
+
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setName("inicio"); // NOI18N
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesEmpresa/logo1.png"))); // NOI18N
+        jLabel1.setName("logo"); // NOI18N
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(382, 382, 382)
+                .addGap(385, 385, 385)
                 .addComponent(jLabel1)
-                .addContainerGap(401, Short.MAX_VALUE))
+                .addContainerGap(386, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -296,10 +300,10 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Contenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -359,19 +363,25 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
     public void cambiarPanel(int op) {
         switch (op) {
             case 1:
-                new CambiaPanel(Contenido, new ProduccionFE());
+                if (!Contenido.getComponent(0).getName().equals("FE")) {
+                    new CambiaPanel(Contenido, new ProduccionFE());
+                }
                 reinicializarVariables();
                 negocio = 1;
                 agregarProyectoEnTabla(1, "", "", "", "");
                 break;
             case 2:
-                new CambiaPanel(Contenido, new ProduccionTE());
+                if (!Contenido.getComponent(0).getName().equals("TE")) {
+                    new CambiaPanel(Contenido, new ProduccionTE());
+                }
                 reinicializarVariables();
                 negocio = 2;
                 agregarProyectoEnTabla(2, "", "", "", "");
                 break;
             case 3:
-                new CambiaPanel(Contenido, new ProduccionEN());
+                if (!Contenido.getComponent(0).getName().equals("IN")) {
+                    new CambiaPanel(Contenido, new ProduccionEN());
+                }
                 reinicializarVariables();
                 negocio = 3;
                 agregarProyectoEnTabla(3, "", "", "", "");
@@ -429,7 +439,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
             case "TE":
                 cambiarPanel(2);
                 break;
-            case "EN":
+            case "IN":
                 cambiarPanel(3);
                 break;
         }
@@ -472,21 +482,71 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                 switch (crs.getInt(2)) {
                     case 1:
                         //Por iniciar
-                        icon = new ImageIcon("src\\produccion\\ProyectBegin.png");
+                        switch (crs.getString(3)) {
+                            case "Normal":
+                                //Proyecto normal
+                                icon = new ImageIcon("src\\produccion\\ProyectBegin.png");
+                                break;
+                            case "Quick":
+                                //Proyecto Quick
+                                icon = new ImageIcon("src\\produccion\\ProyectBeginQuick.png");
+                                break;
+                            case "RQT":
+                                //Proyecto RQT
+                                icon = new ImageIcon("src\\produccion\\ProyectBeginRQT.png");
+                                break;
+                        }
                         break;
                     case 2:
                         //Pausado
-                        icon = new ImageIcon("src\\produccion\\ProyectPause.png");
+                        switch (crs.getString(3)) {
+                            case "Normal":
+                                //Proyecto normal
+                                icon = new ImageIcon("src\\produccion\\ProyectPause.png");
+                                break;
+                            case "Quick":
+                                //Proyecto Quick
+                                icon = new ImageIcon("src\\produccion\\ProyectPauseQuick.png");
+                                break;
+                            case "RQT":
+                                //Proyecto RQT
+                                icon = new ImageIcon("src\\produccion\\ProyectPauseRQT.png");
+                                break;
+                        }
                         break;
                     case 3:
                         //Terminado
-                        icon = new ImageIcon("src\\produccion\\ProyectCheck.png");
+                        switch (crs.getString(3)) {
+                            case "Normal":
+                                //Proyecto normal
+                                icon = new ImageIcon("src\\produccion\\ProyectCheck.png");
+                                break;
+                            case "Quick":
+                                //Proyecto Quick
+                                icon = new ImageIcon("src\\produccion\\ProyectCheckQuick.png");
+                                break;
+                            case "RQT":
+                                //Proyecto RQT
+                                icon = new ImageIcon("src\\produccion\\ProyectCheckRQT.png");
+                                break;
+                        }
                         break;
                     case 4:
                         //Ejecucion
-                        icon = new ImageIcon("src\\produccion\\ProyecTime.png");
-                        break;
-                    default:
+                        switch (crs.getString(3)) {
+                            case "Normal":
+                                //Proyecto normal
+                                icon = new ImageIcon("src\\produccion\\ProyectTime.png");
+                                break;
+                            case "Quick":
+                                //Proyecto Quick
+                                icon = new ImageIcon("src\\produccion\\ProyectTimeQuick.png");
+                                break;
+                            case "RQT":
+                                //Proyecto RQT
+                                icon = new ImageIcon("src\\produccion\\ProyectTimeRQT.png");
+                                break;
+                        }
                         break;
                 }
                 Icon image = new ImageIcon(icon.getImage().getScaledInstance(jp.getWidth(), jp.getHeight(), Image.SECTION));
@@ -537,6 +597,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                         break;
                 }
             }
+            System.gc();//Garabage collector
             crs.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error!!! " + e);

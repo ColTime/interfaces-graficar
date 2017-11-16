@@ -35,7 +35,7 @@ public class proyecto extends javax.swing.JPanel {
             btnNuevo.setEnabled(true);
             Notificacion1.setVisible(false);
             GenerarQR.setEnabled(false);
-//            visibilidadID();
+            visibilidadID();
             limites();
         }
         op = p;
@@ -814,7 +814,7 @@ public class proyecto extends javax.swing.JPanel {
         });
         jPanel2.add(jTProyectoQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 400, 220, 23));
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Cargar Excel");
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 400, -1, -1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -1230,25 +1230,8 @@ public class proyecto extends javax.swing.JPanel {
 
     private void validarRegistro(int op) {
         //Validar los campos principales del proyecto-------------------------->
-        //Esta validacion falta por organizar------------------------------------------------------------------------------------------------->
-        if (!jDentrega.getDate().equals("") && cbNegocio.getSelectedIndex() != 0 && cbTipo.getSelectedIndex() != 0 && !jTNombreCliente.getText().equals("")
-                && !jTNombreProyecto.getText().equals("") && contarRadiosPresionados() == contarTextoLleno()) {
-//            //Validacion de campos
-//            if (!jCCircuito.isSelected() == false || !jCPCBTE.isSelected() == false) {
-//                //Si solo es seleccionado el circuito.
-//                if ((jCCircuito.isSelected() && (cbMaterialCircuito.getSelectedIndex() != 0 && !jTCircuito.getText().equals(""))) && jCPCBTE.isSelected() == false) {
-//                    registrarModificarProyecto(op);
-//                    //Si solo es seleccionado la PCB.
-//                } else if ((jCPCBTE.isSelected() && (cbMaterialPCBTE.getSelectedIndex() != 0 && !jTPCBTE.getText().equals(""))) && jCCircuito.isSelected() == false) {
-//                    registrarModificarProyecto(op);
-//                    //Sí selecciona los dos (Circuito y PCB).
-//                } else if ((jCCircuito.isSelected() && (cbMaterialCircuito.getSelectedIndex() != 0 && !jTCircuito.getText().equals(""))) && (jCPCBTE.isSelected() && (cbMaterialPCBTE.getSelectedIndex() != 0 && !jTPCBTE.getText().equals("")))) {
-//                    registrarModificarProyecto(op);
-//                    //Si no cumplio ninguna de las condiciones anteriores.
-//                }
-//            } else {
-//                registrarModificarProyecto(op);
-//            }
+        if (jDentrega.getDate() != null && cbNegocio.getSelectedIndex() != 0 && cbTipo.getSelectedIndex() != 0 && !jTNombreCliente.getText().equals("")
+                && !jTNombreProyecto.getText().equals("") && contarRadiosPresionados() == contarTextoLleno() && contarRadiosPresionados() > 0 && contarTextoLleno() > 0) {
             registrarModificarProyecto(op);
         } else {
             new rojerusan.RSNotifyAnimated("¡Error!", "Falta algun campo por diligenciar.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
@@ -1422,10 +1405,10 @@ public class proyecto extends javax.swing.JPanel {
                     //Mensaje de error
                 }
             }
-            System.gc();//Garbage collector
         } else {
             new rojerusan.RSNotifyAnimated("¡Error!", "El proyecto no pudo ser registrado.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
         }
+        System.gc();//Garbage collector
         limpiarCampos();
         cambiarEstadoFalso();
         cambiarEstadoBotones();

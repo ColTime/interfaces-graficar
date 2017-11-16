@@ -28,7 +28,9 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
     boolean res = false;
     ControlDelTiempo vista = null;
     CachedRowSet crs = null;
-    public static int negocio = 0;
+    public static int negocioFE = 0;
+    public static int negocioTE = 0;
+    public static int negocioIN = 0;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -161,19 +163,19 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
         }
     }
 
-        public void RegistrarTomaTiempoNegocio(String datos[], int cargo, ControlDelTiempo vista) {
+    public void RegistrarTomaTiempoNegocio(String datos[], int cargo, ControlDelTiempo vista) {
         FE_TE_IN obj = new FE_TE_IN();
         this.vista = vista;
         if (cargo == 2 && (Integer.parseInt(datos[2]) == 1 || Integer.parseInt(datos[2]) == 2)) {
             res = obj.iniciar_Pausar_Reiniciar_Toma_Tiempo(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]), Integer.parseInt(datos[2]), Integer.parseInt(datos[3]), Integer.parseInt(datos[4]));
             if (Integer.parseInt(datos[2]) == 1) {
-                negocio = 1;//Formato estandar
+                negocioFE = 1;//Formato estandar
             } else {
-                negocio = 2;//Teclados
+                negocioTE = 2;//Teclados
             }
         } else if (cargo == 3 && Integer.parseInt(datos[2]) == 3) {
             res = obj.iniciar_Pausar_Reiniciar_Toma_Tiempo(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]), Integer.parseInt(datos[2]), Integer.parseInt(datos[3]), Integer.parseInt(datos[4]));
-            negocio = 3;
+            negocioIN = 3;
         } else {
             new rojerusan.RSNotifyAnimated("¡Alerta!", "No tienes permiso de leer el QR", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
             if (Menu.producF == vista) {//Se valida que la vista que no se este utilizando se apunte a null y se finalice
@@ -184,7 +186,9 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
                 Menu.producE = null;
             }
             vista.dispose();
-            negocio = 0;
+            negocioFE = 0;
+            negocioTE = 0;
+            negocioIN = 0;
         }
         if (res) {
             validarExitenciadeBotones(Integer.parseInt(datos[2]), vista);
@@ -223,7 +227,15 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
     @Override
     public void actionPerformed(ActionEvent e) {//Estas linean van a mostrar un jDialog pero solo los detalles del proyecto que estan en ejecución "2"
         int orden = Integer.parseInt(e.getActionCommand());
-        detalleProduccion obj = new detalleProduccion(this, true, orden, negocio, 3);
+        int n = 0;
+        if (negocioFE != 0) {//------------------------------------------
+            n = negocioFE;
+        } else if (negocioTE != 0) {
+            n = negocioTE;
+        } else if (negocioIN != 0) {
+            n = negocioIN;
+        }
+        detalleProduccion obj = new detalleProduccion(this, true, orden, n, 3);
         obj.setLocationRelativeTo(null);
         obj.setVisible(true);
         obj.dispose();

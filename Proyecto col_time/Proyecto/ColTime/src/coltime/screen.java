@@ -172,9 +172,9 @@ public class screen extends javax.swing.JFrame implements Runnable {
     public void run() {
         while (tiempo != null) {
             try {
-                Thread.sleep(10000);
+                Thread.sleep(10);
                 this.dispose();
-                Thread.sleep(500);
+                Thread.sleep(50);
                 Menu men = new Menu(Integer.parseInt(jLCargo.getText()));
                 men.setVisible(true);
                 

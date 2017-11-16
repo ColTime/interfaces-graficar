@@ -407,6 +407,11 @@ public class Usuarios1 extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        jTUsuario = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false; //Disallow the editing of any cell
+            }
+        };
         jTUsuario.setAutoCreateRowSorter(true);
         jTUsuario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTUsuario.setForeground(new java.awt.Color(128, 128, 131));
