@@ -1,0 +1,20 @@
+28531;175;2;11;0
+28538;187;1;1;0
+
+28538;193;2;14;0
+28538;192;1;1;0
+
+28539;195;1;1;0
+
+No se pueden generar productos no conformes a un proyecto que ya tenga el estado terminado.
+
+falta el eliminar el proyecto1 (producto no confornme).
+
+falta traer la información necesario para ser visualizada en el la vista detalle del proyecto.
+
+procedimiento para seleccionar solo los proyectos que tengan menos de un dia de terminados (SELECT p.numero_orden,u.nombres,p.nombre_cliente,p.nombre_proyecto,DATE_FORMAT(p.fecha_ingreso,'%d-%M-%Y %h:%i %p') as ingreso,p.fecha_entrega,DATE_FORMAT(p.fecha_salidal,'%d-%M-%Y %h:%i %p') as salida,e.nombre,p.tipo_proyecto,p.FE,p.TE,p.IN,p.ruteoC,p.antisolderC,p.ruteoP,p.antisolderP FROM usuario u JOIN proyecto p ON u.numero_documento=p.usuario_numero_documento LEFT JOIN estado e on p.estado_idestado=e.idestado WHERE "p.fecha_salidal is null AND DATEDIFF('2017-11-17',CURRENT_DATE)=0 AND DATEDIFF('2017-11-17',p.fecha_salidal)is null"), preguntar a fredy si se va a implementar.
+
+
+realizar el boton "detalle de información" de los proyectos terminados en el modulo de proyectos (Se implementara siempre y cuando el punto anterior sea implementado). 
+
+

@@ -470,6 +470,7 @@ public class proyecto1 extends javax.swing.JPanel {
         DetalleProyecto obj = new DetalleProyecto();
         obj.eliminarDetallersProyecto(Integer.parseInt(jLDetalle.getText()), Integer.parseInt(jTNorden.getText()), jTNegocio.getText(), jTTipoNegocio.getText()
         );
+        //Esta pendiente organizar esta parte del codigo----------------------------------------------------------------->
     }//GEN-LAST:event_btnDeleteActionPerformed
 //Metodos-------------------------------------------------------------------->
 

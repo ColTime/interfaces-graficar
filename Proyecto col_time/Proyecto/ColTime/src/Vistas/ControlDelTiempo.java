@@ -176,7 +176,7 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
 //            }
         } else if (cargo == 3 && Integer.parseInt(datos[2]) == 3) {
             res = obj.iniciar_Pausar_Reiniciar_Toma_Tiempo(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]), Integer.parseInt(datos[2]), Integer.parseInt(datos[3]), Integer.parseInt(datos[4]));
-            negocioIN = 3;
+//            negocioIN = 3;
         } else {
             new rojerusan.RSNotifyAnimated("¡Alerta!", "No tienes permiso de leer el QR", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
             if (Menu.producF == vista) {//Se valida que la vista que no se este utilizando se apunte a null y se finalice

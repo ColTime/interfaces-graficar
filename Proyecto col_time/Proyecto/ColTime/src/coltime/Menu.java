@@ -1012,7 +1012,7 @@ public class Menu extends javax.swing.JFrame {
             case 2:
                 if (producT == null) {
                     producT = new ControlDelTiempo();
-                    producF.setName("TE");
+                    producT.setName("TE");
                     producT.setTitle("Teclados");
                     producT.setVisible(true);
                 }
@@ -1021,7 +1021,7 @@ public class Menu extends javax.swing.JFrame {
             case 3:
                 if (producE == null) {
                     producE = new ControlDelTiempo();
-                    producF.setName("IN");
+                    producE.setName("IN");
                     producE.setTitle("Ensamble");
                     producE.setVisible(true);
                 }
