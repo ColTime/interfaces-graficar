@@ -5,6 +5,11 @@
  */
 package Vistas;
 
+import Controlador.Proyecto;
+import javax.sql.rowset.CachedRowSet;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Aprendiz
@@ -30,9 +35,16 @@ public class Diagramas extends javax.swing.JDialog {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
         Diseño = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem3 = new javax.swing.JRadioButtonMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jCheckBoxMenuItem4 = new javax.swing.JCheckBoxMenuItem();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuItem3 = new javax.swing.JCheckBoxMenuItem();
+        GrupoDiseño = new javax.swing.ButtonGroup();
+        GrupoBusqueda = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jDentrega = new com.toedter.calendar.JDateChooser();
         jLGrafica = new javax.swing.JLabel();
@@ -41,17 +53,48 @@ public class Diagramas extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
-        Diseño.setText("jMenu1");
+        Diseño.setText("Diseño");
 
-        jMenuItem1.setText("jMenuItem1");
-        Diseño.add(jMenuItem1);
+        GrupoDiseño.add(jRadioButtonMenuItem1);
+        jRadioButtonMenuItem1.setText("Barras Verticales");
+        jRadioButtonMenuItem1.setActionCommand("");
+        Diseño.add(jRadioButtonMenuItem1);
+
+        GrupoDiseño.add(jRadioButtonMenuItem2);
+        jRadioButtonMenuItem2.setSelected(true);
+        jRadioButtonMenuItem2.setText("Barras Horizontales");
+        jRadioButtonMenuItem2.setActionCommand("");
+        Diseño.add(jRadioButtonMenuItem2);
+
+        GrupoDiseño.add(jRadioButtonMenuItem3);
+        jRadioButtonMenuItem3.setText("Torta");
+        jRadioButtonMenuItem3.setActionCommand("");
+        Diseño.add(jRadioButtonMenuItem3);
 
         jPopupMenu1.add(Diseño);
         jPopupMenu1.add(jSeparator1);
 
-        jCheckBoxMenuItem1.setSelected(true);
-        jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
+        GrupoBusqueda.add(jCheckBoxMenuItem4);
+        jCheckBoxMenuItem4.setSelected(true);
+        jCheckBoxMenuItem4.setText("Cantidad proyectos por area");
+        jPopupMenu1.add(jCheckBoxMenuItem4);
+
+        GrupoBusqueda.add(jCheckBoxMenuItem1);
+        jCheckBoxMenuItem1.setText("Procesos de ejecucion de FE");
         jPopupMenu1.add(jCheckBoxMenuItem1);
+
+        GrupoBusqueda.add(jCheckBoxMenuItem2);
+        jCheckBoxMenuItem2.setText("Procesos de ejecucion de TE");
+        jCheckBoxMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuItem2ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jCheckBoxMenuItem2);
+
+        GrupoBusqueda.add(jCheckBoxMenuItem3);
+        jCheckBoxMenuItem3.setText("Procesos de ejecucion de IN");
+        jPopupMenu1.add(jCheckBoxMenuItem3);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(859, 366));
@@ -163,6 +206,48 @@ public class Diagramas extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jLGraficaMouseReleased
 
+    private void jCheckBoxMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBoxMenuItem2ActionPerformed
+    public ImageIcon graficaCantidad(int tipoGrafica) {
+        ImageIcon iconG = null;
+        try {
+            Proyecto obj = new Proyecto();
+            //Cantidad de proyectos por areas /FE/TE/IN
+            int v[] = cantidadArea(obj.diagrama());
+
+            
+//            ChartFrame f = new ChartFrame("Edades", jf);
+//            f.setSize(1000, 600);
+//            f.setLocationRelativeTo(null);
+//            f.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error! " + e);
+        }
+        return iconG;
+    }
+    public int[] cantidadArea(CachedRowSet crs) {
+        int v[] = {0, 0, 0};
+        try {
+            while (crs.next()) {
+                //Formato estandar
+                if (crs.getInt(2) == 1) {
+                    v[0] = crs.getInt(1);
+                }
+                //Teclados
+                if (crs.getInt(2) == 2) {
+                    v[1] = crs.getInt(1);
+                }
+                //Ensamble
+                if (crs.getInt(2) == 3) {
+                    v[2] = crs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error! " + e);
+        }
+        return v;
+    }
     /**
      * @param args the command line arguments
      */
@@ -207,16 +292,31 @@ public class Diagramas extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu Diseño;
+    private javax.swing.ButtonGroup GrupoBusqueda;
+    private javax.swing.ButtonGroup GrupoDiseño;
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem4;
     public static com.toedter.calendar.JDateChooser jDentrega;
     public static com.toedter.calendar.JDateChooser jDentrega1;
     public static javax.swing.JLabel jLGrafica;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem3;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
 }
+

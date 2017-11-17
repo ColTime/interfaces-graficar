@@ -31,6 +31,7 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
     public static int negocioFE = 0;
     public static int negocioTE = 0;
     public static int negocioIN = 0;
+    Object VistaLeida = null;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -168,11 +169,11 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
         this.vista = vista;
         if (cargo == 2 && (Integer.parseInt(datos[2]) == 1 || Integer.parseInt(datos[2]) == 2)) {
             res = obj.iniciar_Pausar_Reiniciar_Toma_Tiempo(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]), Integer.parseInt(datos[2]), Integer.parseInt(datos[3]), Integer.parseInt(datos[4]));
-            if (Integer.parseInt(datos[2]) == 1) {
-                negocioFE = 1;//Formato estandar
-            } else {
-                negocioTE = 2;//Teclados
-            }
+//            if (Integer.parseInt(datos[2]) == 1) {
+//                negocioFE = 1;//Formato estandar
+//            } else {
+//                negocioTE = 2;//Teclados
+//            }
         } else if (cargo == 3 && Integer.parseInt(datos[2]) == 3) {
             res = obj.iniciar_Pausar_Reiniciar_Toma_Tiempo(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]), Integer.parseInt(datos[2]), Integer.parseInt(datos[3]), Integer.parseInt(datos[4]));
             negocioIN = 3;
@@ -186,9 +187,9 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
                 Menu.producE = null;
             }
             vista.dispose();
-            negocioFE = 0;
-            negocioTE = 0;
-            negocioIN = 0;
+//            negocioFE = 0;
+//            negocioTE = 0;
+//            negocioIN = 0;
         }
         if (res) {
             validarExitenciadeBotones(Integer.parseInt(datos[2]), vista);
@@ -227,13 +228,19 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
     @Override
     public void actionPerformed(ActionEvent e) {//Estas linean van a mostrar un jDialog pero solo los detalles del proyecto que estan en ejecución "2"
         int orden = Integer.parseInt(e.getActionCommand());
+        String name = this.getName();
         int n = 0;
-        if (negocioFE != 0) {//------------------------------------------
-            n = negocioFE;
-        } else if (negocioTE != 0) {
-            n = negocioTE;
-        } else if (negocioIN != 0) {
-            n = negocioIN;
+        switch (name) {
+            case "FE":
+                //------------------------------------------
+                n = 1;
+                break;
+            case "TE":
+                n = 2;
+                break;
+            case "IN":
+                n = 3;
+                break;
         }
         detalleProduccion obj = new detalleProduccion(this, true, orden, n, 3);
         obj.setLocationRelativeTo(null);

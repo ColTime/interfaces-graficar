@@ -578,7 +578,7 @@ public class proyecto1 extends javax.swing.JPanel {
     }
 //Graficas de la cantidad de proyectos que tiene cada area
 
-    public ImageIcon graficaCantidad(int tipoGrafica) {
+        public ImageIcon graficaCantidad(int tipoGrafica) {
         ImageIcon iconG = null;
         try {
             Proyecto obj = new Proyecto();

@@ -103,29 +103,44 @@ public class DetalleProyectoM {
                     if (negocio.equals("IN")) {
                         //Se registran los procesos de IN para este subproyecto
                         for (int i = 15; i <= 21; i++) {
-                            Qry = "CALL PA_RegistrarDetalleEnsamble(?,?,?)";
+                            Qry = "CALL PA_RegistrarDetalleEnsamble(?,?,?,?)";
                             ps = con.prepareStatement(Qry);
                             ps.setInt(1, i);
                             ps.setInt(2, Integer.parseInt(numerOrden));
                             ps.setInt(3, tipo);
+                            if (ubicacion == null) {
+                                ps.setString(4, "");
+                            } else {
+                                ps.setString(4, ubicacion);
+                            }
                             ps.execute();
                         }
                     } else if (negocio.equals("TE")) {
                         //Se registran los procesos de TE para este subproyecto 
                         for (int i = 11; i <= 14; i++) {
-                            Qry = "CALL PA_RegistrarDetalleTeclados(?,?,?)";
+                            Qry = "CALL PA_RegistrarDetalleTeclados(?,?,?,?)";
                             ps = con.prepareStatement(Qry);
                             ps.setInt(1, i);
                             ps.setInt(2, Integer.parseInt(numerOrden));
                             ps.setInt(3, tipo);
+                            if (ubicacion == null) {
+                                ps.setString(4, "");
+                            } else {
+                                ps.setString(4, ubicacion);
+                            }
                             ps.execute();
                         }
                     } else if (negocio.equals("FE")) {
                         //Se registran los procesos de FE para este subproyecto 
-                        Qry = "CALL PA_RegistrarDetalleFormatoEstandar(?,?)";
+                        Qry = "CALL PA_RegistrarDetalleFormatoEstandar(?,?,?)";
                         ps = con.prepareStatement(Qry);
                         ps.setInt(1, Integer.parseInt(numerOrden));
                         ps.setInt(2, tipo);
+                        if (ubicacion == null) {
+                            ps.setString(3, "");
+                        } else {
+                            ps.setString(3, ubicacion);
+                        }
                         ps.execute();
                     }
                 }

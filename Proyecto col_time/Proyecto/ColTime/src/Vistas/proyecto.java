@@ -76,9 +76,9 @@ public class proyecto extends javax.swing.JPanel {
         RestrictedTextField obj7 = new RestrictedTextField(jTPCBTE);
         obj7.setLimit(6);
         RestrictedTextField obj8 = new RestrictedTextField(jTNombreCliente);
-        obj7.setLimit(45);
+        obj8.setLimit(45);
         RestrictedTextField obj9 = new RestrictedTextField(jTNombreProyecto);
-        obj7.setLimit(45);
+        obj9.setLimit(45);
     }
 
     @SuppressWarnings("unchecked")
