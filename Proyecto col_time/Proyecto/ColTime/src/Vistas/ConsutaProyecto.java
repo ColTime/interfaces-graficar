@@ -565,6 +565,22 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                     fechaEntrega = fecha.parse(TProyecto.getValueAt(f, 5).toString());
                     obj.jDentrega.setDate(fechaEntrega);
                     obj.cbTipo.setSelectedItem(TProyecto.getValueAt(f, 8).toString());
+                    //Estado
+                    obj.Notificacion1.setVisible(true);
+                    obj.Notificacion1.setText(TProyecto.getValueAt(f, 7).toString());
+                    if (TProyecto.getValueAt(f, 7).toString().equals("Terminado")) {
+                        obj.Notificacion1.setForeground(Color.GREEN);
+                        obj.btnUpdate.setEnabled(false);
+                    } else if (TProyecto.getValueAt(f, 7).toString().equals("Pausado")) {
+                        obj.Notificacion1.setForeground(Color.ORANGE);
+                        obj.btnUpdate.setEnabled(true);
+                    }else if(TProyecto.getValueAt(f, 7).toString().equals("Por iniciar")){
+                        obj.Notificacion1.setForeground(Color.GRAY);
+                        obj.btnUpdate.setEnabled(true);
+                    }else if(TProyecto.getValueAt(f, 7).toString().equals("Ejecucion")){
+                        obj.Notificacion1.setForeground(Color.GRAY);
+                        obj.btnUpdate.setEnabled(true);
+                    }
                     //Tipos de negocios implicados
                     if (TProyecto.getValueAt(f, 9).toString().equals("true") && TProyecto.getValueAt(f, 10).toString().equals("false") && TProyecto.getValueAt(f, 11).toString().equals("false")) {
                         obj.cbNegocio.setSelectedIndex(1);
@@ -590,7 +606,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                     } else {
                         obj.jCRuteoC.setSelected(false);
                     }
-
+                    
                     if (TProyecto.getValueAt(f, 13).toString().equals("true")) {
                         obj.jCAntisolderC.setSelected(true);
                     } else {
@@ -602,7 +618,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                     } else {
                         obj.jCRuteoP.setSelected(false);
                     }
-
+                    
                     if (TProyecto.getValueAt(f, 15).toString().equals("true")) {
                         obj.jCAntisolderP.setSelected(true);
                     } else {
@@ -617,7 +633,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                     obj.jLIDCircuito.setText("0");
                     obj.jLIDTeclado.setText("0");
                     obj.jLIDIntegracion.setText("0");
-
+                    
                     for (int i = 0; i < TDetalle.getRowCount(); i++) {
                         //Buscamos que detalles tiene este proyecto para enviar a la vista de proyecto
                         if (TDetalle.getValueAt(i, 2).toString().equals("Conversor")) {
@@ -678,7 +694,6 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                             obj.cbMaterialCircuito.setSelectedItem(TDetalle.getValueAt(i, 5).toString());
                         }
                     }
-                    obj.btnUpdate.setEnabled(true);
                     this.dispose();
                 } catch (Exception e) {
                     //Si se genera algun error a la hora del paso de informacion a la vista
@@ -747,7 +762,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
             controlBusqueda();
         }
     }
-
+    
     private void controlBusqueda() {
         String fecha = "";
         if (jDFecha.getDate() != null) {
@@ -756,7 +771,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         }
         consultarProyectos(jTNumerOrden.getText(), jTNombreCliente.getText(), jTNombreProyecto.getText(), fecha);
     }
-
+    
     private void consultarProyectos(String numerOrden, String nombrecliente, String nombreProyecto, String fecha) {
         Controlador.Proyecto obj = new Controlador.Proyecto();
         if (!numerOrden.equals("")) {
@@ -809,7 +824,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "¡Erro! " + e);
         }
     }
-
+    
     private void consultarDetalle(String numerOrden) {
         DetalleProyecto obj = new DetalleProyecto();
         try {
@@ -852,7 +867,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error! " + e);
         }
     }
-
+    
     private void limpiarCampos() {
         jTNumerOrden.setText("");
         jTNombreCliente.setText("");
@@ -862,7 +877,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         jRnulo.setSelected(true);
         jRnulo.setVisible(false);
     }
-
+    
     private void editarColumnasDetalle() {
         TDetalle.getColumnModel().getColumn(0).setMinWidth(58);
         TDetalle.getColumnModel().getColumn(0).setMaxWidth(58);
@@ -889,7 +904,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         TDetalle.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
         TDetalle.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
     }
-
+    
     private void editarColumnasPNC() {
         TPNC.getColumnModel().getColumn(0).setMinWidth(58);
         TPNC.getColumnModel().getColumn(0).setMaxWidth(58);
@@ -916,7 +931,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         TPNC.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(100);
         TPNC.getTableHeader().getColumnModel().getColumn(5).setMinWidth(100);
     }
-
+    
     private void editarColumnasProyecto() {
         TProyecto.getColumnModel().getColumn(0).setMinWidth(65);
         TProyecto.getColumnModel().getColumn(0).setMaxWidth(65);

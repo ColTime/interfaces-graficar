@@ -267,17 +267,21 @@ public class ConsultarPNC extends javax.swing.JFrame {
         proyecto1.jTTipoNegocio.setText(TDetalle.getValueAt(pos, 2).toString());
         proyecto1.cbProcedoPNC.removeAllItems();
         proyecto1.cbProcedoPNC.addItem("Seleccione...");
-
-        proyecto1.btnGenerarQR.setEnabled(true);
-        //Se valida si la accion va ser crear o modificar
-        if (accion == 2) {
-            proyecto1.btnModificarPNC.setEnabled(false);
-            proyecto1.op = 2;
+        if (vista == 2) {
+            proyecto1.btnDelete.setEnabled(true);
+            proyecto1.btnGenerarQR.setEnabled(true);
         } else {
-            proyecto1.btnModificarPNC.setEnabled(false);
-            proyecto1.op = 1;
+            proyecto1.btnDelete.setEnabled(false);
+            proyecto1.btnGenerarQR.setEnabled(false);
         }
 
+        //Se valida si la accion va ser crear o modificar
+        if (accion == 2) {
+            proyecto1.op = 2;
+        } else {
+            proyecto1.op = 1;
+        }
+        proyecto1.btnModificarPNC.setEnabled(true);
         if (TDetalle.getValueAt(pos, 1).toString().equals("FE")) {
             try {
                 crs = consultarProcesos(Integer.parseInt(TDetalle.getValueAt(pos, 0).toString()));

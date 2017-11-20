@@ -10,7 +10,7 @@ import rojerusan.RSNotifyAnimated;
 
 public class detalleProyecto extends javax.swing.JDialog {
 
-    public detalleProyecto(java.awt.Frame parent, boolean modal, int detalle, int negocio, String orden, String tipo) {
+    public detalleProyecto(java.awt.Frame parent, boolean modal, int detalle, int negocio, String orden, String tipo) {//Falta organizar la variable "tipo" para que traiga el valor correspondiente
         super(parent, modal);
         initComponents();
         this.setTitle(orden + " - " + tipo);
@@ -18,6 +18,11 @@ public class detalleProyecto extends javax.swing.JDialog {
         this.negocio = negocio;
         this.setLocationRelativeTo(null);
         cargarTabla();
+        jTNombreCliente.setEnabled(false);
+        jTNombreProyecto.setEnabled(false);
+        jTFechaEntrega.setEnabled(false);
+        jTFechaIngreso.setEnabled(false);
+        jTCantidadTotal.setEnabled(false);
     }
     //variables
     private CachedRowSet crs = null;
@@ -35,6 +40,16 @@ public class detalleProyecto extends javax.swing.JDialog {
         jScrollPane3 = new javax.swing.JScrollPane();
         TDetalleProduccion = new javax.swing.JTable();
         jPInformacion = new javax.swing.JPanel();
+        jTNombreCliente = new elaprendiz.gui.textField.TextFieldRoundBackground();
+        jLabel5 = new javax.swing.JLabel();
+        jTNombreProyecto = new elaprendiz.gui.textField.TextFieldRoundBackground();
+        jLabel4 = new javax.swing.JLabel();
+        jTFechaEntrega = new elaprendiz.gui.textField.TextFieldRoundBackground();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jTFechaIngreso = new elaprendiz.gui.textField.TextFieldRoundBackground();
+        jTCantidadTotal = new elaprendiz.gui.textField.TextFieldRoundBackground();
+        jLabel8 = new javax.swing.JLabel();
 
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/retro.png"))); // NOI18N
         jMenuItem1.setText("Actualizar");
@@ -46,7 +61,7 @@ public class detalleProyecto extends javax.swing.JDialog {
         popMenu.add(jMenuItem1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1285, 416));
+        setMinimumSize(new java.awt.Dimension(1285, 374));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1285, 416));
 
@@ -90,27 +105,114 @@ public class detalleProyecto extends javax.swing.JDialog {
         jScrollPane3.setViewportView(TDetalleProduccion);
 
         jPInformacion.setBackground(new java.awt.Color(255, 255, 255));
-        jPInformacion.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Información del detalle"));
+        jPInformacion.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Información del detalle"));
+
+        jTNombreCliente.setBorder(null);
+        jTNombreCliente.setColorDeBorde(new java.awt.Color(204, 204, 204));
+        jTNombreCliente.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
+        jTNombreCliente.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(128, 128, 131));
+        jLabel5.setText("Nombre del cliente:");
+
+        jTNombreProyecto.setBorder(null);
+        jTNombreProyecto.setColorDeBorde(new java.awt.Color(204, 204, 204));
+        jTNombreProyecto.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
+        jTNombreProyecto.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(128, 128, 131));
+        jLabel4.setText("Nombre del proyecto:");
+
+        jTFechaEntrega.setBorder(null);
+        jTFechaEntrega.setColorDeBorde(new java.awt.Color(204, 204, 204));
+        jTFechaEntrega.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
+        jTFechaEntrega.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(128, 128, 131));
+        jLabel6.setText("Fecha de entrega:");
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(128, 128, 131));
+        jLabel7.setText("Fecha de ingreso:");
+
+        jTFechaIngreso.setBorder(null);
+        jTFechaIngreso.setColorDeBorde(new java.awt.Color(204, 204, 204));
+        jTFechaIngreso.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
+        jTFechaIngreso.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+
+        jTCantidadTotal.setBorder(null);
+        jTCantidadTotal.setColorDeBorde(new java.awt.Color(204, 204, 204));
+        jTCantidadTotal.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
+        jTCantidadTotal.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(128, 128, 131));
+        jLabel8.setText("Cantidad:");
 
         javax.swing.GroupLayout jPInformacionLayout = new javax.swing.GroupLayout(jPInformacion);
         jPInformacion.setLayout(jPInformacionLayout);
         jPInformacionLayout.setHorizontalGroup(
             jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPInformacionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jTNombreProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTCantidadTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(18, 18, 18)
+                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTFechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addContainerGap())
         );
         jPInformacionLayout.setVerticalGroup(
             jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 116, Short.MAX_VALUE)
+            .addGroup(jPInformacionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPInformacionLayout.createSequentialGroup()
+                        .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTNombreProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTFechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTCantidadTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPInformacionLayout.createSequentialGroup()
+                            .addGap(21, 21, 21)
+                            .addComponent(jTNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPInformacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPInformacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1265, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -118,10 +220,10 @@ public class detalleProyecto extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPInformacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -132,7 +234,7 @@ public class detalleProyecto extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
         );
 
         pack();
@@ -180,6 +282,18 @@ public class detalleProyecto extends javax.swing.JDialog {
     private void cargarTabla() {
         Tabla personalizar = new Tabla();
         personalizar.visualizar(TDetalleProduccion, detalle, negocio);
+        try {
+            DetalleProyecto obj = new DetalleProyecto();
+            crs = obj.ConsultarInformacionFiltrariaDelDetalle(detalle);
+            crs.next();
+            jTNombreCliente.setText("  " + crs.getString(1));
+            jTNombreProyecto.setText("  " + crs.getString(2));
+            jTFechaIngreso.setText("  " + crs.getString(3));
+            jTFechaEntrega.setText("  " + crs.getString(4));
+            jTCantidadTotal.setText("  " + crs.getString(5));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Error!! "+e);
+        }
         Menu cargo = new Menu();
         if (cargo.cargo == 3 || cargo.cargo == 2) {
             editarTamañoColumnas();
@@ -241,10 +355,20 @@ public class detalleProyecto extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TDetalleProduccion;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPInformacion;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane3;
+    public static elaprendiz.gui.textField.TextFieldRoundBackground jTCantidadTotal;
+    public static elaprendiz.gui.textField.TextFieldRoundBackground jTFechaEntrega;
+    public static elaprendiz.gui.textField.TextFieldRoundBackground jTFechaIngreso;
+    public static elaprendiz.gui.textField.TextFieldRoundBackground jTNombreCliente;
+    public static elaprendiz.gui.textField.TextFieldRoundBackground jTNombreProyecto;
     private javax.swing.JPopupMenu popMenu;
     // End of variables declaration//GEN-END:variables
  @Override

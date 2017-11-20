@@ -468,8 +468,54 @@ public class proyecto1 extends javax.swing.JPanel {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         DetalleProyecto obj = new DetalleProyecto();
-        obj.eliminarDetallersProyecto(Integer.parseInt(jLDetalle.getText()), Integer.parseInt(jTNorden.getText()), jTNegocio.getText(), jTTipoNegocio.getText()
-        );
+        int negocio = 0;//Negocio
+        if (jTNegocio.getText().equals("FE")) {
+            negocio = 1;
+        } else if (jTNegocio.getText().equals("TE")) {
+            negocio = 2;
+        } else if (jTNegocio.getText().equals("IN")) {
+            negocio = 3;
+        }
+        int tipo = 0;//Tipo de negocio
+        switch (jTTipoNegocio.getText()) {
+            case "Circuito":
+                tipo = 1;
+                break;
+            case "Conversor":
+                tipo = 2;
+                break;
+            case "PCB":
+                tipo = 7;
+                break;
+            case "Repujado":
+                tipo = 3;
+                break;
+            case "Stencil":
+                tipo = 6;
+                break;
+            case "Teclado":
+                tipo = 5;
+                break;
+            case "Troquel":
+                tipo = 4;
+                break;
+        }
+        if (obj.validarEliminacionModificar(negocio, Integer.parseInt(jTNorden.getText()), tipo, Integer.parseInt(jLDetalle.getText()), 2)) {
+            if (JOptionPane.showOptionDialog(null, "¿Seguro desea eliminar el PNC",
+                    "seleccione...", JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
+                    new Object[]{"SI", "NO"}, "SI") == 0) {
+                if (obj.eliminarDetallersProyecto(Integer.parseInt(jLDetalle.getText()), Integer.parseInt(jTNorden.getText()), jTNegocio.getText(), jTTipoNegocio.getText(), 2)) {//Producto no conforme
+                    new rojerusan.RSNotifyAnimated("Listo", "El PNC fue eliminado correctamente.", 6, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+                    limpiar();
+                    desactivarComponentes();
+                }
+            }
+        } else {
+            //Mensaje de no se puede eliminar el PNC
+            new rojerusan.RSNotifyAnimated("Advertencia", "El PNC no puede ser eliminado.", 6, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
+        }
+
         //Esta pendiente organizar esta parte del codigo----------------------------------------------------------------->
     }//GEN-LAST:event_btnDeleteActionPerformed
 //Metodos-------------------------------------------------------------------->
@@ -569,6 +615,7 @@ public class proyecto1 extends javax.swing.JPanel {
         jPInformacion.setBackground(new Color(244, 244, 244));
         btnConsultarDetalle.setEnabled(false);
         btnGuardar.setEnabled(false);
+        btnDelete.setEnabled(false);
         btnModificarPNC.setEnabled(false);
         btnGenerarQR.setEnabled(false);
         jTNorden.setEnabled(false);
@@ -579,7 +626,7 @@ public class proyecto1 extends javax.swing.JPanel {
     }
 //Graficas de la cantidad de proyectos que tiene cada area
 
-        public ImageIcon graficaCantidad(int tipoGrafica) {
+    public ImageIcon graficaCantidad(int tipoGrafica) {
         ImageIcon iconG = null;
         try {
             Proyecto obj = new Proyecto();
@@ -591,9 +638,11 @@ public class proyecto1 extends javax.swing.JPanel {
                 ds.addValue(v[0], "Formato estandar", "FE");
                 ds.addValue(v[1], "Teclados", "TE");
                 ds.addValue(v[2], "Ensamble", "EN");
+
                 if (tipoGrafica == 1) {
                     //Diagrama de barras vertical
                     JFreeChart jf = ChartFactory.createBarChart3D("Cantidad de proyectos por area", "Nombres", "Edades", ds, PlotOrientation.VERTICAL, true, true, true);
+
                     iconG = new ImageIcon(jf.createBufferedImage(859, 366));
                 } else if (tipoGrafica == 2) {
                     //Diagrama de barras Horizontales
@@ -645,7 +694,7 @@ public class proyecto1 extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton btnBuscarPNC;
     public static elaprendiz.gui.button.ButtonColoredAction btnConsultarDetalle;
-    private javax.swing.JButton btnDelete;
+    public static javax.swing.JButton btnDelete;
     public static elaprendiz.gui.button.ButtonColoredAction btnGenerarQR;
     public static javax.swing.JButton btnGuardar;
     public static javax.swing.JButton btnModificarPNC;

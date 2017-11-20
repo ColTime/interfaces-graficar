@@ -79,6 +79,7 @@ public class DetalleProyecto {
         return obj.ValidarCnatidadPNCM(numerOrden, detalle, op, tipo, negocio);
     }
 
+    //Esta linea esta pendiente
     public boolean modificar_Detalle_Proycto(String numerOrden) {
 
         return true;
@@ -94,25 +95,20 @@ public class DetalleProyecto {
         return obj.consultarprocesosFE(detalle);
     }
 
-    public boolean Eliminar_Detalle_PNC() {
-
-        return true;
-    }
-
-    public boolean validarEliminacionModificar(int negocio,int orden, int tipo,int busqueda) {
+    public boolean validarEliminacionModificar(int negocio, int orden, int tipo, int detalle, int accion) {
         DetalleProyectoM obj = new DetalleProyectoM();
-        return obj.validarEliminacionModificarM(orden, negocio, tipo,busqueda);
+        return obj.validarEliminacionModificarM(orden, negocio, tipo, detalle, accion);
     }
-//    Reiniciar toma de tiempo
 
+//  Reiniciar toma de tiempo
     public boolean ReiniciarDetalle(int detalle, int negocio) {
         DetalleProyectoM obj = new DetalleProyectoM();
         return obj.ReiniciarDetalle(detalle, negocio);
     }
 
-    public boolean eliminarDetallersProyecto(int idDetalle, int numerOrden, String negocio, String tipo) {
+    public boolean eliminarDetallersProyecto(int idDetalle, int numerOrden, String negocio, String tipo, int accion) {
         DetalleProyectoM obj = new DetalleProyectoM();
-        return obj.eliminarDetallersProyecto(idDetalle, numerOrden, negocio, tipo);
+        return obj.eliminarDetallersProyecto(idDetalle, numerOrden, negocio, tipo, accion);
     }
 
     public CachedRowSet consultarDetalleProyectoProduccion(int orden, int negocio, int vistaC) {
@@ -123,6 +119,11 @@ public class DetalleProyecto {
     public CachedRowSet consultarDetalleProduccion(int detalle, int negocio) {
         DetalleProyectoM obj = new DetalleProyectoM();
         return obj.consultarDetalleProduccion(detalle, negocio);
+    }
+
+    public CachedRowSet ConsultarInformacionFiltrariaDelDetalle(int detalle) {
+        DetalleProyectoM obj = new DetalleProyectoM();
+        return obj.ConsultarInformacionFiltrariaDelDetalleM(detalle);
     }
 
     @Override

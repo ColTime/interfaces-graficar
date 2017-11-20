@@ -60,7 +60,7 @@ public class Tabla {
                 v[9] = crs.getString(10);
                 v[10] = btn;
                 v[11]=crs.getString(12);
-                ds.addRow(v);
+                ds.addRow(v);//Filas de la tabla
             }
             tabla.setModel(ds);
 //            FormatoTabla ft = new FormatoTabla(6);

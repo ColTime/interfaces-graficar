@@ -99,8 +99,9 @@ public class Proyecto {
         return obj.consultar_Proyecto(idOrden, nombreCliente, nombreProyecto, fecha, tipo);
     }
 
-    public boolean cambiar_Estado_Proyeto() {//Falta esta parte del proyecto
-
+    public boolean EliminarProyecto(int orden) {//Falta esta parte del proyecto
+        ProyectoM obj=new ProyectoM();
+        
         return true;
     }
 

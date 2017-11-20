@@ -37,7 +37,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton9 = new javax.swing.JButton();
+        jBSalir = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         rSButtonMetro1 = new rsbuttom.RSButtonMetro();
         rSButtonMetro2 = new rsbuttom.RSButtonMetro();
@@ -75,15 +75,15 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
             }
         });
 
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/close.png"))); // NOI18N
-        jButton9.setBorderPainted(false);
-        jButton9.setContentAreaFilled(false);
-        jButton9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton9.setFocusPainted(false);
-        jButton9.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/close1.png"))); // NOI18N
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        jBSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/close.png"))); // NOI18N
+        jBSalir.setBorderPainted(false);
+        jBSalir.setContentAreaFilled(false);
+        jBSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBSalir.setFocusPainted(false);
+        jBSalir.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/close1.png"))); // NOI18N
+        jBSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                jBSalirActionPerformed(evt);
             }
         });
 
@@ -145,7 +145,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -158,7 +158,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                         .addComponent(rSButtonMetro2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(rSButtonMetro3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton10)
-                    .addComponent(jButton9))
+                    .addComponent(jBSalir))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -342,9 +342,9 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         this.setLocation(evt.getXOnScreen() - posX, evt.getYOnScreen() - posY);
     }//GEN-LAST:event_jPanel1MouseDragged
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         setExtendedState(JFrame.CROSSHAIR_CURSOR);
@@ -356,7 +356,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_rSButtonMetro2ActionPerformed
 
     private void rSButtonMetro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro1ActionPerformed
-       EstadoDelMenu(true);
+        EstadoDelMenu(true);
         cambiarPanel(1);
     }//GEN-LAST:event_rSButtonMetro1ActionPerformed
 
@@ -676,8 +676,8 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel Contenido;
     private elaprendiz.gui.comboBox.ComboBoxRound cbTipo;
     private javax.swing.JButton jBActualizar;
+    public static javax.swing.JButton jBSalir;
     private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

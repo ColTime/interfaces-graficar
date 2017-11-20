@@ -209,6 +209,7 @@ public class Diagramas extends javax.swing.JDialog {
     private void jCheckBoxMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBoxMenuItem2ActionPerformed
+    //Todo este codigo no es necesario ya que se va almacenar en una clase central
     public ImageIcon graficaCantidad(int tipoGrafica) {
         ImageIcon iconG = null;
         try {

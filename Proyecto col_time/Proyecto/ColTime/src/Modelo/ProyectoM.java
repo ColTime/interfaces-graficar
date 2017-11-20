@@ -128,12 +128,31 @@ public class ProyectoM {
         return crsP;
     }
 
-    //Pendiente
-    public boolean cambiar_Estado_Proyeto() {
-
-        return true;
+    //!!!!!!!!!!!!!!!!!
+    // Esta parte del codigo es muy sencible, se utilizara para proyectos que lleven mas de un cierto tiempo terminados o no hayan comenzado la toma de timepos.
+    public boolean EliminarProyecto(int orden) {
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query------------------------------------------------------------>
+            String Qry = "CALL PA_EliminarNivel3(?)";//----------------------------------------- esta pendiente-----
+            ps = con.prepareStatement(Qry);
+            ps.setInt(1, orden);
+            rs = ps.executeQuery();
+            crsP = new CachedRowSetImpl();
+            crsP.populate(rs);
+            con.close();
+            conexion.destruir();
+            conexion.cerrar(rs);
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error! " + e);
+        }
+        return res;
     }
 
+    //!!!!!!!!!!!!!!
     public CachedRowSet Consultar_informacion_para_el_QR(int orden) {
         try {
             conexion = new Conexion();

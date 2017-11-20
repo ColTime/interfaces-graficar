@@ -73,7 +73,7 @@
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="jButton10" min="-2" pref="23" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jButton9" min="-2" pref="23" max="-2" attributes="0"/>
+                  <Component id="jBSalir" min="-2" pref="23" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -89,7 +89,7 @@
                           <Component id="rSButtonMetro3" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jButton10" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton9" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBSalir" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -97,7 +97,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="jButton9">
+        <Component class="javax.swing.JButton" name="jBSalir">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/img/close.png"/>
@@ -113,8 +113,11 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton9ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBSalirActionPerformed"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="jButton10">
           <Properties>

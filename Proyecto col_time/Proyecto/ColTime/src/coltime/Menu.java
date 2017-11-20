@@ -1,6 +1,5 @@
 package coltime;
 
-import coltime.*;
 import Controlador.FE_TE_IN;
 import Vistas.CambiarContraseña;
 import Vistas.ControlDelTiempo;
@@ -970,8 +969,14 @@ public class Menu extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         if (producE == null && producF == null && producT == null) {
-            if (JOptionPane.showConfirmDialog(null, "¿Seguro desea cerrar sesión?") == 0) {
+            if (JOptionPane.showOptionDialog(null, "¿Seguro desea cerrar la sesión?",
+                    "seleccione...", JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
+                    new Object[]{"SI", "NO"}, "SI") == 0) {
                 //Cierra el menu y abre el login
+                if (bp != null) {
+                    bp.jBSalir.doClick();//La vista de produccion tiene que cerrarce cuando se salga de la aplicación.
+                }
                 this.dispose();
                 if (obj != null) {
                     obj.btnClose.doClick();
