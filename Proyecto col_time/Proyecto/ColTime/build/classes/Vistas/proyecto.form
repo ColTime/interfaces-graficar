@@ -12,6 +12,9 @@
         </LineBorder>
       </Border>
     </Property>
+    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+      <Color id="Cursor Por defecto"/>
+    </Property>
     <Property name="name" type="java.lang.String" value="proyectos" noResource="true"/>
   </Properties>
   <AuxValues>
@@ -58,6 +61,9 @@
               <Color PropertyName="color" blue="83" green="80" red="80" type="rgb"/>
             </LineBorder>
           </Border>
+        </Property>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Cursor Por defecto"/>
         </Property>
       </Properties>
 
@@ -1589,22 +1595,6 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="elaprendiz.gui.button.ButtonColoredAction" name="btnGraficaArea">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="&#xc1;reas"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGraficaAreaActionPerformed"/>
-              </Events>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
-              </AuxValues>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="20" y="460" width="120" height="-1"/>
-                </Constraint>
-              </Constraints>
-            </Component>
             <Component class="elaprendiz.gui.textField.TextFieldRoundBackground" name="jTProyectoQR">
               <Properties>
                 <Property name="colorDeBorde" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -1625,13 +1615,16 @@
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="320" y="400" width="220" height="23"/>
+                  <AbsoluteConstraints x="320" y="400" width="230" height="23"/>
                 </Constraint>
               </Constraints>
             </Component>
             <Component class="javax.swing.JButton" name="jButton1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cargar Excel"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Cursor de Mano"/>
+                </Property>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -1639,19 +1632,19 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="elaprendiz.gui.button.ButtonColoredAction" name="btnGraficaArea1">
+            <Component class="elaprendiz.gui.button.ButtonColoredAction" name="btnTomaTiempos">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Toma de tiempos"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGraficaArea1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTomaTiemposActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="20" y="500" width="150" height="-1"/>
+                  <AbsoluteConstraints x="20" y="460" width="150" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -1677,11 +1670,17 @@
                 <Component class="javax.swing.JButton" name="btnGenerarExcel">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Reporte"/>
+                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                      <Color id="Cursor de Mano"/>
+                    </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnGenerarPDF">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Reporte1"/>
+                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                      <Color id="Cursor de Mano"/>
+                    </Property>
                   </Properties>
                 </Component>
               </SubComponents>

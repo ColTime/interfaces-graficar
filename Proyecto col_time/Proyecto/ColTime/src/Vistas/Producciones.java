@@ -344,6 +344,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
         this.dispose();
+        System.gc();//Garabage collector
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -601,8 +602,8 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                         ProduccionEN.contenidoEN.updateUI();
                         break;
                 }
+                jp = null;
             }
-            System.gc();//Garabage collector
             crs.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error!!! " + e);

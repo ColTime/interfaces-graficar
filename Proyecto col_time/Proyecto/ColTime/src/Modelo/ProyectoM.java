@@ -45,6 +45,41 @@ public class ProyectoM {
         return crsP;
     }
 
+    public CachedRowSet InformacionAreasProduccionM(int accion) {
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query------------------------------------------------------------>
+            String Qry = "";
+            switch (accion) {
+                case 1:
+                    Qry = "CALL PA_CantidadProyectosIngresadosArea()";
+                    break;
+                case 2:
+                    Qry = "CALL PA_CantidadProyectosterminadosHoy()";
+                    break;
+                case 3:
+                    Qry = "CALL PA_CantidadProyectosEjecucion()";
+                    break;
+                case 4:
+                    Qry = "CALL PA_CantidadProyectosPorIniciar()";
+                    break;
+            }
+            ps = con.prepareStatement(Qry);
+            rs = ps.executeQuery();
+            crsP = new CachedRowSetImpl();
+            crsP.populate(rs);
+            con.close();
+            conexion.destruir();
+            conexion.cerrar(rs);
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error! " + e);
+        }
+        return crsP;
+    }
+
     public boolean registrar_Modificar_Proyecto(int norden, String comercial, String cliente, String proyecto, String tipo, boolean fe, boolean te, boolean in, boolean pcbfe,
             boolean pcbte, boolean conversor, boolean repujado, boolean troquel, boolean stencil, boolean lexan, String fechaEntrega, boolean ruteo, boolean anti,
             int op, boolean antisolderP, boolean ruteoP) {
@@ -131,6 +166,7 @@ public class ProyectoM {
     //!!!!!!!!!!!!!!!!!
     // Esta parte del codigo es muy sencible, se utilizara para proyectos que lleven mas de un cierto tiempo terminados o no hayan comenzado la toma de timepos.
     public boolean EliminarProyecto(int orden) {
+        //hay que preguntar si se puede eliminar los proyectos
         try {
             conexion = new Conexion();
             conexion.establecerConexion();

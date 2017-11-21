@@ -1,6 +1,7 @@
 package Controlador;
 
 import Modelo.ProyectoM;
+import com.sun.rowset.CachedRowSetImpl;
 import javax.sql.rowset.CachedRowSet;
 
 public class Proyecto {
@@ -99,10 +100,17 @@ public class Proyecto {
         return obj.consultar_Proyecto(idOrden, nombreCliente, nombreProyecto, fecha, tipo);
     }
 
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public boolean EliminarProyecto(int orden) {//Falta esta parte del proyecto
-        ProyectoM obj=new ProyectoM();
-        
-        return true;
+        ProyectoM obj = new ProyectoM();
+        return obj.EliminarProyecto(orden);
+    }
+
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //Información de las areas de producción
+    public CachedRowSet InformacionAreasProduccion(int accion) {
+        ProyectoM obj = new ProyectoM();
+        return obj.InformacionAreasProduccionM(accion);
     }
 
     public CachedRowSet Consultar_informacion_para_el_QR(int orden) {

@@ -26,7 +26,7 @@ import javax.swing.JOptionPane;
 import rojerusan.RSNotifyAnimated;
 
 public class proyecto extends javax.swing.JPanel {
-
+    
     public proyecto(int p) {
         if (p == 1) {
             initComponents();
@@ -35,6 +35,7 @@ public class proyecto extends javax.swing.JPanel {
             btnNuevo.setEnabled(true);
             Notificacion1.setVisible(false);
             GenerarQR.setEnabled(false);
+            btnTomaTiempos.setVisible(false);
             visibilidadID();
             limites();
         }
@@ -46,7 +47,7 @@ public class proyecto extends javax.swing.JPanel {
     int udm = 0, resol = 100, rot = 0;
     float mi = 0.000f, md = 0.000f, ms = 0.000f, min = 0.000f, tam = 21.000f;
     static String fecha = "";
-
+    
     private void visibilidadID() {
         jLIDConversor.setVisible(false);
         jLIDTroquel.setVisible(false);
@@ -57,7 +58,7 @@ public class proyecto extends javax.swing.JPanel {
         jLIDTeclado.setVisible(false);
         jLIDIntegracion.setVisible(false);
     }
-
+    
     private void limites() {
         RestrictedTextField obj = new RestrictedTextField(jTConversor);
         obj.setLimit(6);
@@ -80,7 +81,7 @@ public class proyecto extends javax.swing.JPanel {
         RestrictedTextField obj9 = new RestrictedTextField(jTNombreProyecto);
         obj9.setLimit(45);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -155,20 +156,21 @@ public class proyecto extends javax.swing.JPanel {
         jLIDTeclado = new javax.swing.JLabel();
         jLIDIntegracion = new javax.swing.JLabel();
         GenerarQR = new elaprendiz.gui.button.ButtonColoredAction();
-        btnGraficaArea = new elaprendiz.gui.button.ButtonColoredAction();
         jTProyectoQR = new elaprendiz.gui.textField.TextFieldRoundBackground();
         jButton1 = new javax.swing.JButton();
-        btnGraficaArea1 = new elaprendiz.gui.button.ButtonColoredAction();
+        btnTomaTiempos = new elaprendiz.gui.button.ButtonColoredAction();
         jPanel3 = new javax.swing.JPanel();
         btnGenerarExcel = new javax.swing.JButton();
         btnGenerarPDF = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(219, 219, 219));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setName("proyectos"); // NOI18N
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(128, 128, 131)));
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Proyecto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18), new java.awt.Color(128, 128, 131))); // NOI18N
@@ -791,14 +793,6 @@ public class proyecto extends javax.swing.JPanel {
         });
         jPanel2.add(GenerarQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 400, -1, -1));
 
-        btnGraficaArea.setText("Áreas");
-        btnGraficaArea.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGraficaAreaActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btnGraficaArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 120, -1));
-
         jTProyectoQR.setColorDeBorde(new java.awt.Color(204, 204, 204));
         jTProyectoQR.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
         jTProyectoQR.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -807,26 +801,29 @@ public class proyecto extends javax.swing.JPanel {
                 jTProyectoQRKeyTyped(evt);
             }
         });
-        jPanel2.add(jTProyectoQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 400, 220, 23));
+        jPanel2.add(jTProyectoQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 400, 230, 23));
 
         jButton1.setText("Cargar Excel");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 400, -1, -1));
 
-        btnGraficaArea1.setText("Toma de tiempos");
-        btnGraficaArea1.addActionListener(new java.awt.event.ActionListener() {
+        btnTomaTiempos.setText("Toma de tiempos");
+        btnTomaTiempos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGraficaArea1ActionPerformed(evt);
+                btnTomaTiemposActionPerformed(evt);
             }
         });
-        jPanel2.add(btnGraficaArea1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, 150, -1));
+        jPanel2.add(btnTomaTiempos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 150, -1));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel3.setLayout(new java.awt.GridLayout());
+        jPanel3.setLayout(new java.awt.GridLayout(1, 0));
 
         btnGenerarExcel.setText("Reporte");
+        btnGenerarExcel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel3.add(btnGenerarExcel);
 
         btnGenerarPDF.setText("Reporte1");
+        btnGenerarPDF.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel3.add(btnGenerarPDF);
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 530, 140, 40));
@@ -1094,25 +1091,17 @@ public class proyecto extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCRuteoCMousePressed
 
-    private void btnGraficaAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficaAreaActionPerformed
-        //Muestra la estadistica de las areas y permitira buscar por rango de fechas
-        proyecto1 diagrama = new proyecto1();
-        Diagramas vista = new Diagramas(new Menu(), true);
-        vista.jLGrafica.setIcon(diagrama.graficaCantidad(1));
-        vista.setLocationRelativeTo(null);
-        vista.setVisible(true);
-    }//GEN-LAST:event_btnGraficaAreaActionPerformed
-
     private void jTProyectoQRKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTProyectoQRKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_jTProyectoQRKeyTyped
 
-    private void btnGraficaArea1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficaArea1ActionPerformed
+    private void btnTomaTiemposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTomaTiemposActionPerformed
         Menu principal = new Menu();
         TomaTiempos obj = new TomaTiempos(principal, true);
+        obj.setTitle(jTNorden.getText() + " - Terminado");
         obj.setLocationRelativeTo(null);
         obj.setVisible(true);
-    }//GEN-LAST:event_btnGraficaArea1ActionPerformed
+    }//GEN-LAST:event_btnTomaTiemposActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         Proyecto obj = new Proyecto();
@@ -1136,7 +1125,7 @@ public class proyecto extends javax.swing.JPanel {
             default:
                 break;
         }
-
+        
         switch (tipo) {
             case 1:
                 tip = "Circuito";
@@ -1167,7 +1156,7 @@ public class proyecto extends javax.swing.JPanel {
         tipoPrpyecto.setSpacingAfter(10);
         return tipoPrpyecto;
     }
-
+    
     private void generarQR() {
         try {
             //Validar o crear carpeta
@@ -1190,7 +1179,7 @@ public class proyecto extends javax.swing.JPanel {
             Image logo = Image.getInstance("src\\imagenesEmpresa\\logo.png");
             logo.scaleAbsolute(300, 125);
             logo.setAlignment(Image.ALIGN_CENTER);
-
+            
             header.setBorder(Rectangle.NO_BORDER);
             header.setColspan(3);
             tabla.addCell(header);
@@ -1211,7 +1200,7 @@ public class proyecto extends javax.swing.JPanel {
                 String texto = jTNorden.getText() + ';' + crs.getInt(1) + ';' + crs.getInt(3);
                 cod.setData(texto);
                 cod.setDataMode(QRCode.MODE_BYTE);
-
+                
                 cod.setUOM(udm);
                 cod.setLeftMargin(mi);
                 cod.setResolution(resol);
@@ -1221,7 +1210,7 @@ public class proyecto extends javax.swing.JPanel {
                 cod.setRotate(rot);
                 cod.setModuleSize(tam);
                 cod.renderBarcode(ruta + "\\ImágenesQR\\" + texto + ".png");
-
+                
                 Image imagenQR = Image.getInstance(ruta + "\\ImágenesQR\\" + texto + ".png");
                 imagenQR.setWidthPercentage(90);
                 imagenQR.setAlignment(Image.ALIGN_CENTER);
@@ -1248,7 +1237,7 @@ public class proyecto extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Error! " + e);
         }
     }
-
+    
     private void validarRegistro(int op) {
         //Validar los campos principales del proyecto-------------------------->
         if (jDentrega.getDate() != null && cbNegocio.getSelectedIndex() != 0 && cbTipo.getSelectedIndex() != 0 && !jTNombreCliente.getText().equals("")
@@ -1258,7 +1247,7 @@ public class proyecto extends javax.swing.JPanel {
             new rojerusan.RSNotifyAnimated("¡Error!", "Falta algun campo por diligenciar.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
         }
     }
-
+    
     public int contarRadiosPresionados() {
         int cant = 0;
         if (jCConversor.isSelected()) {
@@ -1285,10 +1274,10 @@ public class proyecto extends javax.swing.JPanel {
         if (jCIntegracion.isSelected()) {
             cant++;
         }
-
+        
         return cant;
     }
-
+    
     public int contarTextoLleno() {
         int cant = 0;
         if (!jTConversor.getText().equals("")) {
@@ -1317,7 +1306,7 @@ public class proyecto extends javax.swing.JPanel {
         }
         return cant;
     }
-
+    
     private void registrarModificarProyecto(int op) {
         if (op == 1) {
             //Para registrar no se tiene que validar los proyectos que no se pueden eliminar
@@ -1328,7 +1317,7 @@ public class proyecto extends javax.swing.JPanel {
             int i = 0;
             boolean res = true;
             DetalleProyecto obj = new DetalleProyecto();
-
+            
             if (!jLIDCircuito.getText().equals("0") && jCCircuito.isSelected() == false) {
                 v[i] = String.valueOf(obj.validarEliminacionModificar(1, Integer.parseInt(jTNorden.getText()), 1, 0, 1));
                 i++;
@@ -1380,7 +1369,7 @@ public class proyecto extends javax.swing.JPanel {
             }
         }
     }
-
+    
     private void botonRegistrarModificar() {
         Controlador.Proyecto obj = new Controlador.Proyecto();
         obj.setNombreCliente(jTNombreCliente.getText());
@@ -1435,7 +1424,7 @@ public class proyecto extends javax.swing.JPanel {
         cambiarEstadoBotones();
         btnNuevo.setEnabled(true);
     }
-
+    
     private void cambiarEstadoFalso() {
         jPInformacion.setBackground(new Color(244, 244, 244));
         jPDetalles1.setBackground(new Color(244, 244, 244));
@@ -1469,7 +1458,7 @@ public class proyecto extends javax.swing.JPanel {
         jCIntegracion.setEnabled(false);
         jTIntegracion.setEnabled(false);
     }
-
+    
     private void cambiarEstadoBotones() {
         btnDelete.setEnabled(false);
         btnUpdate.setEnabled(false);
@@ -1477,7 +1466,7 @@ public class proyecto extends javax.swing.JPanel {
         btnNuevo.setEnabled(false);
         GenerarQR.setEnabled(false);
     }
-
+    
     private void desactivarBotonesjC() {
         jCAntisolderP.setEnabled(false);
         jCRuteoP.setEnabled(false);
@@ -1504,7 +1493,7 @@ public class proyecto extends javax.swing.JPanel {
         jCIntegracion.setSelected(false);
         jCTeclado.setSelected(false);
     }
-
+    
     public void activarComponentes() {
         jTNombreCliente.setEnabled(true);
         jTNombreProyecto.setEnabled(true);
@@ -1516,13 +1505,13 @@ public class proyecto extends javax.swing.JPanel {
         jPDetalles1.setBackground(new Color(255, 255, 255));
         jPDetalles.setBackground(new Color(255, 255, 255));
     }
-
+    
     private void NumeroDeOrden() {
         Proyecto obj = new Proyecto();
         String numero = obj.consultarNumeroOrden();
         jTNorden.setText(numero);
     }
-
+    
     private void activarjTfilex(JCheckBox cs, TextFieldRoundBackground tx) {
         if (cs.isSelected()) {
             tx.setEnabled(true);
@@ -1533,7 +1522,7 @@ public class proyecto extends javax.swing.JPanel {
             tx.setText("");
         }
     }
-
+    
     private void validarCampos() {
         if (op == 1) {
             if (!jTNombreCliente.getText().equals("") && !jTNombreProyecto.getText().equals("")) {
@@ -1543,13 +1532,13 @@ public class proyecto extends javax.swing.JPanel {
             }
         }
     }
-
+    
     private void fecha() {
         Proyecto obj = new Proyecto();
         jLIngreso.setText(obj.fecha());
         fecha = jLIngreso.getText();
     }
-
+    
     private void limpiarCampos() {
         Notificacion1.setVisible(false);
         jTNorden.setText("");
@@ -1584,7 +1573,7 @@ public class proyecto extends javax.swing.JPanel {
         cbMaterialCircuito.setEnabled(false);
         cbMaterialPCBTE.setEnabled(false);
     }
-
+    
     private void VerificarQueSeElimina(DetalleProyecto obj) {
         if (!jLIDCircuito.getText().equals("0") && jCCircuito.isSelected() == false) {
             //Eliminar el detalle del proyecto si ya no esta seleccionado
@@ -1612,7 +1601,7 @@ public class proyecto extends javax.swing.JPanel {
             subEliminardetalle(obj, Integer.parseInt(jLIDPCB.getText()), Integer.parseInt(jTNorden.getText()), "FE", "PCB");
         }
     }
-
+    
     private boolean RegistrarModificarDetalle(String numeroOrden, int op) {
         DetalleProyecto obj = new DetalleProyecto();
         boolean res = false;
@@ -1896,7 +1885,7 @@ public class proyecto extends javax.swing.JPanel {
         }
         return res;
     }
-
+    
     private boolean subRegistrarModificarProyecto(DetalleProyecto obj, String cantidad, String Negocio, String TipoNegocio, String numeroOrden, String material, int op, int id) {
         obj.setCantidad(cantidad);
         obj.setTipoNegocio(TipoNegocio);
@@ -1904,9 +1893,9 @@ public class proyecto extends javax.swing.JPanel {
         obj.setMaterial(material);
         return obj.registrar_Detalle_Proycto(numeroOrden, op, id);
     }
-
+    
     private void subEliminardetalle(DetalleProyecto obj, int idDetalle, int numerOrden, String negocio, String tipo) {
-
+        
         if (obj.eliminarDetallersProyecto(idDetalle, numerOrden, negocio, tipo, 1)) {//Eliminación por la modificación
             //Mensaje de eliminacion exitosa
             new rojerusan.RSNotifyAnimated("Listo!!", "Se elimino el detalle del proyecto: " + tipo + " " + negocio + " de la orden " + jTNorden.getText(), 5, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
@@ -1919,7 +1908,7 @@ public class proyecto extends javax.swing.JPanel {
             new rojerusan.RSNotifyAnimated("Listo!!", "el detalle " + tipo + " " + negocio + " de la orden" + jTNorden.getText() + " no pudo ser eliminada porque ya esta en ejecución.", 5, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
         }
     }
-
+    
     private void numerosT(java.awt.event.KeyEvent evt) {
         char cara = evt.getKeyChar();
         if (Character.isLetter(cara) || evt.getKeyChar() == '.' || evt.getKeyChar() == '|') {
@@ -1934,10 +1923,9 @@ public class proyecto extends javax.swing.JPanel {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnGenerarExcel;
     private javax.swing.JButton btnGenerarPDF;
-    public static elaprendiz.gui.button.ButtonColoredAction btnGraficaArea;
-    public static elaprendiz.gui.button.ButtonColoredAction btnGraficaArea1;
     private javax.swing.JButton btnGuardar;
     public static javax.swing.JButton btnNuevo;
+    public static elaprendiz.gui.button.ButtonColoredAction btnTomaTiempos;
     public static javax.swing.JButton btnUpdate;
     public static elaprendiz.gui.comboBox.ComboBoxRound cbMaterialCircuito;
     public static elaprendiz.gui.comboBox.ComboBoxRound cbMaterialPCBTE;
