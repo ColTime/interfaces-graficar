@@ -12,7 +12,10 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.chart.renderer.category.BarRenderer3D;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import rojerusan.RSNotifyAnimated;
@@ -23,11 +26,11 @@ public class proyecto1 extends javax.swing.JPanel {
         if (p == 1) {
             initComponents();
             desactivarComponentes();
-            grafica.setIcon(graficaCantidad(1));
+            grafica.setIcon(llamarDiagramas(1, 0));
         }
     }
 
-    public proyecto1() {
+    public proyecto1() {//Constructor vacio
 
     }
 
@@ -455,15 +458,15 @@ public class proyecto1 extends javax.swing.JPanel {
     }//GEN-LAST:event_graficaMouseReleased
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        grafica.setIcon(graficaCantidad(1));
+        grafica.setIcon(llamarDiagramas(1, 0));
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        grafica.setIcon(graficaCantidad(2));
+        grafica.setIcon(llamarDiagramas(2, 0));
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        grafica.setIcon(graficaCantidad(3));
+        grafica.setIcon(llamarDiagramas(3, 0));
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -519,6 +522,11 @@ public class proyecto1 extends javax.swing.JPanel {
         //Esta pendiente organizar esta parte del codigo----------------------------------------------------------------->
     }//GEN-LAST:event_btnDeleteActionPerformed
 //Metodos-------------------------------------------------------------------->
+
+    private ImageIcon llamarDiagramas(int tipoDiagrama, int busqueda) {
+        Controlador.Diagramas obj = new Controlador.Diagramas();
+        return obj.graficaCantidad(tipoDiagrama);
+    }
 
     private String rutaGuardado() {
         //Se obtiene la ruta donde se quiere guardar codigo QR
@@ -624,72 +632,7 @@ public class proyecto1 extends javax.swing.JPanel {
         cbProcedoPNC.setEnabled(false);
         jTCantindad.setEnabled(false);
     }
-//Graficas de la cantidad de proyectos que tiene cada area
 
-    public ImageIcon graficaCantidad(int tipoGrafica) {
-        ImageIcon iconG = null;
-        try {
-            Proyecto obj = new Proyecto();
-            //Cantidad de proyectos por areas /FE/TE/IN
-            int v[] = cantidadArea(obj.diagrama());
-
-            if (tipoGrafica == 1 || tipoGrafica == 2) {
-                DefaultCategoryDataset ds = new DefaultCategoryDataset();
-                ds.addValue(v[0], "Formato estandar", "FE");
-                ds.addValue(v[1], "Teclados", "TE");
-                ds.addValue(v[2], "Ensamble", "EN");
-
-                if (tipoGrafica == 1) {
-                    //Diagrama de barras vertical
-                    JFreeChart jf = ChartFactory.createBarChart3D("Cantidad de proyectos por area", "Nombres", "Edades", ds, PlotOrientation.VERTICAL, true, true, true);
-
-                    iconG = new ImageIcon(jf.createBufferedImage(859, 366));
-                } else if (tipoGrafica == 2) {
-                    //Diagrama de barras Horizontales
-                    JFreeChart jf = ChartFactory.createBarChart3D("Cantidad de proyectos por area", "Nombres", "Edades", ds, PlotOrientation.HORIZONTAL, true, true, true);
-                    iconG = new ImageIcon(jf.createBufferedImage(859, 366));
-                }
-            } else if (tipoGrafica == 3) {
-                DefaultPieDataset porciones = new DefaultPieDataset();
-                porciones.setValue("FE: " + v[0], v[0]);//Formato estandar
-                porciones.setValue("TE: " + v[1], v[1]);//Teclado
-                porciones.setValue("EN: " + v[2], v[2]);//Ensamble
-                //Torta
-                JFreeChart jf1 = ChartFactory.createPieChart("Produccion", porciones, true, true, Locale.ITALY);
-                iconG = new ImageIcon(jf1.createBufferedImage(859, 366));
-            }
-//            ChartFrame f = new ChartFrame("Edades", jf);
-//            f.setSize(1000, 600);
-//            f.setLocationRelativeTo(null);
-//            f.setVisible(true);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error! " + e);
-        }
-        return iconG;
-    }
-
-    public int[] cantidadArea(CachedRowSet crs) {
-        int v[] = {0, 0, 0};
-        try {
-            while (crs.next()) {
-                //Formato estandar
-                if (crs.getInt(2) == 1) {
-                    v[0] = crs.getInt(1);
-                }
-                //Teclados
-                if (crs.getInt(2) == 2) {
-                    v[1] = crs.getInt(1);
-                }
-                //Ensamble
-                if (crs.getInt(2) == 3) {
-                    v[2] = crs.getInt(1);
-                }
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error! " + e);
-        }
-        return v;
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton btnBuscarPNC;

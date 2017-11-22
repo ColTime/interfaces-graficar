@@ -32,10 +32,11 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
             //Detalles del proyecto
             this.setTitle(String.valueOf(orden));
         } else if (vistaC == 2) {
-            //Productos no condormes
+            //Productos no conformes
             this.setTitle(String.valueOf(orden) + " - PNC");
-        } else if (vistaC == 3) {
+        } else if (vistaC == 4) {
             //Proyecto en produccion
+            this.setTitle(String.valueOf(orden) + " - Terminado");
         }
         consultarDetalleProyectoProduccion(vistaC);
     }
@@ -167,10 +168,10 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
                 detalle.setContentAreaFilled(false);
                 detalle.setBackground(Color.white);
                 jDetalle.add(detalle);
-                if (cantidad == 8) {
+                if (cantidad == 5) {//////////////////////////////////////////
                     y = 99;
                     x = 0;
-                    jDetalle.setPreferredSize(new Dimension(633, jDetalle.getHeight() + 100));
+                    jDetalle.setPreferredSize(new Dimension(633, jDetalle.getHeight() + x));
                 } else {
                     x += 111;
                 }
@@ -189,7 +190,7 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e) {//////////////////////////////////
         int detalle = Integer.parseInt(e.getActionCommand());
         Producciones obj1 = new Producciones();
         detalleProyecto obj = new detalleProyecto(obj1, true, detalle, negocio, String.valueOf(orden), e.getSource().getClass().getName());

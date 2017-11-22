@@ -575,17 +575,17 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                     } else if (TProyecto.getValueAt(f, 7).toString().equals("Pausado")) {
                         obj.Notificacion1.setForeground(Color.ORANGE);
                         obj.btnUpdate.setEnabled(true);
-                        obj.btnTomaTiempos.setVisible(false);
+                        obj.btnTomaTiempos.setVisible(true);//Es false
                         obj.GenerarQR.setEnabled(true);
                     }else if(TProyecto.getValueAt(f, 7).toString().equals("Por iniciar")){
                         obj.Notificacion1.setForeground(Color.GRAY);
                         obj.btnUpdate.setEnabled(true);
-                        obj.btnTomaTiempos.setVisible(false);
+                        obj.btnTomaTiempos.setVisible(true);//Es false
                         obj.GenerarQR.setEnabled(true);
                     }else if(TProyecto.getValueAt(f, 7).toString().equals("Ejecucion")){
                         obj.Notificacion1.setForeground(Color.GRAY);
                         obj.btnUpdate.setEnabled(true);
-                        obj.btnTomaTiempos.setVisible(false);
+                        obj.btnTomaTiempos.setVisible(true);//Es false
                         obj.GenerarQR.setEnabled(true);
                     }
                     //Tipos de negocios implicados

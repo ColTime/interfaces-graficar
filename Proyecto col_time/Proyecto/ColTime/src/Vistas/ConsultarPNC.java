@@ -16,6 +16,7 @@ public class ConsultarPNC extends javax.swing.JFrame {
         this.accion = accion;
         titulo();
         editarColumnasDetalle();
+        tamañoColumnas();
         jTNorden.setFocusable(true);
     }
 
@@ -205,7 +206,13 @@ public class ConsultarPNC extends javax.swing.JFrame {
     private void jTNordenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNordenKeyReleased
         if (jTNorden.getText().length() >= 5) {
             consutarDetalle();
+        } else {
+            String encabezado1[] = {"idDetalle", "Negocio", "Tipo de negocio", "Cantidad", "Estado", "Material", "Ubicacion"};
+            TDetalle.setModel(new DefaultTableModel(null, encabezado1));
         }
+        tamañoColumnas();
+    }//GEN-LAST:event_jTNordenKeyReleased
+    private void tamañoColumnas() {
         if (vista == 2) {
             TDetalle.getColumnModel().getColumn(2).setMinWidth(100);
             TDetalle.getColumnModel().getColumn(2).setMaxWidth(100);
@@ -215,9 +222,17 @@ public class ConsultarPNC extends javax.swing.JFrame {
             TDetalle.getColumnModel().getColumn(6).setMaxWidth(150);
             TDetalle.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(150);
             TDetalle.getTableHeader().getColumnModel().getColumn(6).setMinWidth(150);
+        } else {
+            TDetalle.getColumnModel().getColumn(5).setMinWidth(0);
+            TDetalle.getColumnModel().getColumn(5).setMaxWidth(0);
+            TDetalle.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
+            TDetalle.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
+            TDetalle.getColumnModel().getColumn(6).setMinWidth(0);
+            TDetalle.getColumnModel().getColumn(6).setMaxWidth(0);
+            TDetalle.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(0);
+            TDetalle.getTableHeader().getColumnModel().getColumn(6).setMinWidth(0);
         }
-    }//GEN-LAST:event_jTNordenKeyReleased
-
+    }
     private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
         x = evt.getX();
         y = evt.getY();
@@ -228,7 +243,8 @@ public class ConsultarPNC extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel2MouseDragged
 
     private void TDetalleMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TDetalleMousePressed
-        if (evt.getClickCount() == 2) {
+
+        if (evt.getClickCount() == 2 && TDetalle.getSelectedRow() >= 0) {
             int pos = 0;
             String negocio = "";
             if (TDetalle.getRowCount() > 0) {
@@ -246,7 +262,7 @@ public class ConsultarPNC extends javax.swing.JFrame {
                         new rojerusan.RSNotifyAnimated("¡Alerta!", "No tienes permiso para generar un PNC de este producto.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
                     }
                 } else {
-                    if (TDetalle.getValueAt(pos, 1).toString().equals("EN")) {
+                    if (TDetalle.getValueAt(pos, 1).toString().equals("IN")) {//Integración ó ensamble
                         exportarInformacion(pos);
                         this.dispose();
                     } else {
@@ -295,13 +311,14 @@ public class ConsultarPNC extends javax.swing.JFrame {
             proyecto1.cbProcedoPNC.addItem("Lexan");
             proyecto1.cbProcedoPNC.addItem("Acople");
             proyecto1.cbProcedoPNC.addItem("Control Calidad");
-        } else if (TDetalle.getValueAt(pos, 1).toString().equals("EN")) {
+        } else if (TDetalle.getValueAt(pos, 1).toString().equals("IN")) {
             proyecto1.cbProcedoPNC.addItem("Manual");
             proyecto1.cbProcedoPNC.addItem("Limplieza");
             proyecto1.cbProcedoPNC.addItem("Control Calidad");
             proyecto1.cbProcedoPNC.addItem("Empaque");
             proyecto1.cbProcedoPNC.addItem("Stencil");
             proyecto1.cbProcedoPNC.addItem("Linea");
+            proyecto1.cbProcedoPNC.addItem("Arnes");
         }
         if (vista == 1) {
             proyecto1.cbProcedoPNC.setEnabled(true);

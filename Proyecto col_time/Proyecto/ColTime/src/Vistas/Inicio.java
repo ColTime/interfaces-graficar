@@ -3,6 +3,7 @@ package Vistas;
 import Controlador.Proyecto;
 import coltime.Menu;
 import javax.sql.rowset.CachedRowSet;
+import javax.swing.ImageIcon;
 
 public class Inicio extends javax.swing.JPanel {
 
@@ -216,13 +217,19 @@ public class Inicio extends javax.swing.JPanel {
         //Muestra la estadistica de las areas y permitira buscar por rango de fechas
         proyecto1 diagrama = new proyecto1();
         Diagramas vista = new Diagramas(new Menu(), true);
-        vista.jLGrafica.setIcon(diagrama.graficaCantidad(1));
+        vista.jLGrafica.setIcon(llamarDiagramas(1, 0));
         vista.setLocationRelativeTo(null);
         vista.setVisible(true);
     }//GEN-LAST:event_btnGraficaAreaActionPerformed
 
     //Variables
     CachedRowSet crs = null;//Cantidad de proyectos para cada área respectiva
+    //Metodos de la calse inicio
+
+    private ImageIcon llamarDiagramas(int tipoDiagrama, int busqueda) {
+        Controlador.Diagramas obj = new Controlador.Diagramas();
+        return obj.graficaCantidad(tipoDiagrama);
+    }
 
     private void fechaYdatosProduccion() {
         try {

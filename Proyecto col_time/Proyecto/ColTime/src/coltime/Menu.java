@@ -889,6 +889,7 @@ public class Menu extends javax.swing.JFrame {
                 cambiarpanelProyecto("proyectos1");
                 break;
             case 3:
+                proyecto1.cargo = cargo;
                 cambiarpanelProyecto("proyectos2");
                 break;
         }

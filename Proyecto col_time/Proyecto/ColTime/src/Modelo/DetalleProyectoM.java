@@ -345,6 +345,7 @@ public class DetalleProyectoM {
             switch (vistaC) {
                 case 1:
                 case 2:
+                case 4:
                     Qry = "CALL PA_DetalleProyectosProduccion(?,?,?)";
                     break;
                 case 3:
@@ -355,10 +356,10 @@ public class DetalleProyectoM {
             ps = con.prepareStatement(Qry);
             ps.setInt(1, orden);
             ps.setInt(2, negocio);
-            if (vistaC == 1 || vistaC == 3) {
-                ps.setInt(3, 0);
+            if (vistaC == 1 || vistaC == 3 || vistaC == 4) {
+                ps.setInt(3, 0);//Negativo para productos no conforme
             } else {
-                ps.setInt(3, 1);
+                ps.setInt(3, 1);//Positivo para un producto no conforme
             }
             rs = ps.executeQuery();
             crs = new CachedRowSetImpl();
