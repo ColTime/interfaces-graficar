@@ -1105,7 +1105,16 @@ public class proyecto extends javax.swing.JPanel {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         Proyecto obj = new Proyecto();
-        obj.EliminarProyecto(Integer.parseInt(jTNorden.getText()));
+        if (obj.EliminarProyecto(Integer.parseInt(jTNorden.getText()))) {
+            //Eliminación fue realizada correactamente.
+            //Mensaje
+            limpiarCampos();
+            limpiarID();
+            botonRegistrarModificar();
+        } else {
+            //Error al realizar la eliminación del proyecto.
+            //Mensaje
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 //Metodos-------------------------------------------------------------------->
 
@@ -1920,7 +1929,7 @@ public class proyecto extends javax.swing.JPanel {
     public static elaprendiz.gui.button.ButtonColoredAction GenerarQR;
     public static javax.swing.JLabel Notificacion1;
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnDelete;
+    public static javax.swing.JButton btnDelete;
     private javax.swing.JButton btnGenerarExcel;
     private javax.swing.JButton btnGenerarPDF;
     private javax.swing.JButton btnGuardar;

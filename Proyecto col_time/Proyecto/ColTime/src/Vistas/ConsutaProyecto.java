@@ -575,19 +575,20 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                     } else if (TProyecto.getValueAt(f, 7).toString().equals("Pausado")) {
                         obj.Notificacion1.setForeground(Color.ORANGE);
                         obj.btnUpdate.setEnabled(true);
-                        obj.btnTomaTiempos.setVisible(true);//Es false
+                        obj.btnTomaTiempos.setVisible(false);//Es false
                         obj.GenerarQR.setEnabled(true);
-                    }else if(TProyecto.getValueAt(f, 7).toString().equals("Por iniciar")){
+                    } else if (TProyecto.getValueAt(f, 7).toString().equals("Por iniciar")) {
                         obj.Notificacion1.setForeground(Color.GRAY);
                         obj.btnUpdate.setEnabled(true);
-                        obj.btnTomaTiempos.setVisible(true);//Es false
+                        obj.btnTomaTiempos.setVisible(false);//Es false
                         obj.GenerarQR.setEnabled(true);
-                    }else if(TProyecto.getValueAt(f, 7).toString().equals("Ejecucion")){
+                    } else if (TProyecto.getValueAt(f, 7).toString().equals("Ejecucion")) {
                         obj.Notificacion1.setForeground(Color.GRAY);
                         obj.btnUpdate.setEnabled(true);
-                        obj.btnTomaTiempos.setVisible(true);//Es false
+                        obj.btnTomaTiempos.setVisible(false);//Es false
                         obj.GenerarQR.setEnabled(true);
                     }
+                    obj.btnDelete.setEnabled(true);
                     //Tipos de negocios implicados
                     if (TProyecto.getValueAt(f, 9).toString().equals("true") && TProyecto.getValueAt(f, 10).toString().equals("false") && TProyecto.getValueAt(f, 11).toString().equals("false")) {
                         obj.cbNegocio.setSelectedIndex(1);

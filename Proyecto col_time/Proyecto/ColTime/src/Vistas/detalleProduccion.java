@@ -1,6 +1,7 @@
 package Vistas;
 
 import Controlador.DetalleProyecto;
+import coltime.Menu;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -132,7 +133,6 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
             while (crs.next()) {
                 res = true;
                 JButton detalle = new JButton(crs.getString(2));
-                detalle.setName(String.valueOf(crs.getInt(1)));
                 detalle.setBounds(x, y, 110, 100);
                 detalle.addActionListener(this);
                 //Icono del boton
@@ -161,7 +161,7 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
                 Icon imagen = new ImageIcon(icono.getImage().getScaledInstance(detalle.getWidth() - 3, detalle.getHeight() - 3, Image.SCALE_DEFAULT));
                 detalle.setIcon(imagen);
                 //Texto del boton
-                detalle.setActionCommand(crs.getString(1));
+                detalle.setActionCommand(crs.getString(1) + "-" + crs.getInt(4));
                 detalle.setHorizontalTextPosition(JButton.CENTER);
                 detalle.setFont(new Font("Tahoma", 1, 14));
                 detalle.setForeground(Color.black);
@@ -191,9 +191,21 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
 
     @Override
     public void actionPerformed(ActionEvent e) {//////////////////////////////////
-        int detalle = Integer.parseInt(e.getActionCommand());
+        String detalle[] = e.getActionCommand().split("-");
+        int id = Integer.parseInt(detalle[0]);
+        int negocio = Integer.parseInt(detalle[1]);
         Producciones obj1 = new Producciones();
-        detalleProyecto obj = new detalleProyecto(obj1, true, detalle, negocio, String.valueOf(orden), e.getSource().getClass().getName());
+        int permiso;
+        if ((Menu.cargo == 3 || Menu.cargo == 2)) {
+            permiso = 1;
+        } else {
+            if (this.vistaC != 4) {
+                permiso = 0;
+            } else {
+                permiso = 1;
+            }
+        }
+        detalleProyecto obj = new detalleProyecto(obj1, true, id, negocio, String.valueOf(orden), e.getSource().getClass().getName(), permiso);
         obj.setVisible(true);
         obj.setLocationRelativeTo(this);
     }

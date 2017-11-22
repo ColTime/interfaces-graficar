@@ -172,12 +172,28 @@ public class ProyectoM {
             conexion.establecerConexion();
             con = conexion.getConexion();
             //Query------------------------------------------------------------>
-            String Qry = "CALL PA_EliminarNivel3(?)";//----------------------------------------- esta pendiente-----
+            //PA_DetallesAEliminar
+            String Qry = "CALL PA_DetallesAEliminar(?)";//Esta parte del proyecto es critico!!!! Mucho cuidado con loq eu se elimina de la base de datos que no va a tener la posibilidad de recuperarlo.
             ps = con.prepareStatement(Qry);
             ps.setInt(1, orden);
             rs = ps.executeQuery();
-            crsP = new CachedRowSetImpl();
-            crsP.populate(rs);
+            //Primero se consultan todos los proyectos que se van a eliminar.
+            while (rs.next()) {
+                //Se prepara el Qry para eliminar los detalles.
+                Qry = "CALL PA_EliminarNivel3y2(?,?)";
+                ps = con.prepareStatement(Qry);
+                ps.setInt(1, rs.getInt(1));
+                ps.setInt(2, rs.getInt(2));
+                res = !ps.execute();
+            }
+            //Por ultimo se elimina el proyecto del primer nivel y se concluye con la eliminacion.
+            Qry = "CALL PA_EliminarNivel1(?)";
+            ps = con.prepareStatement(Qry);
+            ps.setInt(1,orden);
+            res = !ps.execute();
+            //Se concluye la eliminacion por completo de un proyecto de la base de datos.
+            
+            //Cierre de conexion y finalizacion de variables.
             con.close();
             conexion.destruir();
             conexion.cerrar(rs);

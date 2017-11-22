@@ -365,7 +365,7 @@ public class Menu extends javax.swing.JFrame {
                 agregarActionPerformed(evt);
             }
         });
-        jPMenu.add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 540, 70, -1));
+        jPMenu.add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, 150, -1));
 
         jPContenido.setLayout(new javax.swing.BoxLayout(jPContenido, javax.swing.BoxLayout.LINE_AXIS));
 

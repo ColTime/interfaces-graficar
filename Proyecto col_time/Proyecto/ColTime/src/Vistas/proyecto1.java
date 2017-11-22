@@ -325,6 +325,8 @@ public class proyecto1 extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        jPEstadistica.setBackground(new java.awt.Color(255, 255, 255));
+
         grafica.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         grafica.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {

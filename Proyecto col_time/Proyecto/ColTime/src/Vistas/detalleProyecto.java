@@ -10,13 +10,14 @@ import rojerusan.RSNotifyAnimated;
 
 public class detalleProyecto extends javax.swing.JDialog {
 
-    public detalleProyecto(java.awt.Frame parent, boolean modal, int detalle, int negocio, String orden, String tipo) {//Falta organizar la variable "tipo" para que traiga el valor correspondiente
+    public detalleProyecto(java.awt.Frame parent, boolean modal, int detalle, int negocio, String orden, String tipo, int permiso) {//Falta organizar la variable "tipo" para que traiga el valor correspondiente
         super(parent, modal);
         initComponents();
         this.setTitle(orden + " - " + tipo);
         this.detalle = detalle;
         this.negocio = negocio;
         this.setLocationRelativeTo(null);
+        this.permiso = permiso;
         cargarTabla();
         jTNombreCliente.setEnabled(false);
         jTNombreProyecto.setEnabled(false);
@@ -27,7 +28,7 @@ public class detalleProyecto extends javax.swing.JDialog {
     //variables
     private CachedRowSet crs = null;
     private static int detalle = 0;
-    private static int negocio = 0;
+    private static int negocio = 0, permiso = 0;
     int rows = -1;
 
     @SuppressWarnings("unchecked")
@@ -292,10 +293,10 @@ public class detalleProyecto extends javax.swing.JDialog {
             jTFechaEntrega.setText("  " + crs.getString(4));
             jTCantidadTotal.setText("  " + crs.getString(5));
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Error!! "+e);
+            JOptionPane.showMessageDialog(null, "Error!! " + e);
         }
-        Menu cargo = new Menu();
-        if (cargo.cargo == 3 || cargo.cargo == 2) {
+
+        if (permiso == 1) {
             editarTamañoColumnas();
         }
         TDetalleProduccion.getColumnModel().getColumn(11).setMinWidth(0);
@@ -341,7 +342,7 @@ public class detalleProyecto extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                detalleProyecto dialog = new detalleProyecto(new javax.swing.JFrame(), true, 0, 0, "", "");
+                detalleProyecto dialog = new detalleProyecto(new javax.swing.JFrame(), true, 0, 0, "", "",0);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

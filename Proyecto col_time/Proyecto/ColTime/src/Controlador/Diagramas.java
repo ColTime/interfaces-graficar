@@ -26,7 +26,7 @@ public class Diagramas {
 //Graficas de la cantidad de proyectos que tiene cada area
 
     public Diagramas() {
-        
+
     }
 
     public ImageIcon graficaCantidad(int tipoGrafica) {
@@ -38,17 +38,17 @@ public class Diagramas {
 
             if (tipoGrafica == 1 || tipoGrafica == 2) {
                 DefaultCategoryDataset ds = new DefaultCategoryDataset();
-                ds.addValue(10000, "Proyectos", "Formato estandar");
-                ds.addValue(5000, "Proyectos", "Teclados");
-                ds.addValue(2000, "Proyectos", "Ensamble");
+                ds.addValue(v[0], "Proyectos", "Formato estandar");
+                ds.addValue(v[1], "Proyectos", "Teclados");
+                ds.addValue(v[2], "Proyectos", "Ensamble");
 
                 if (tipoGrafica == 1) {
                     //Diagrama de barras vertical
                     JFreeChart jf = ChartFactory.createBarChart3D("Cantidad de proyectos por area", "Áreas", "Cantidades", ds, PlotOrientation.VERTICAL, false, true, false);
                     CategoryPlot plot = jf.getCategoryPlot();
                     BarRenderer render = (BarRenderer) plot.getRenderer();
-                    render.setSeriesPaint(0, new Color(128, 221, 117));
-                    jf.setBackgroundPaint(new Color(240, 240, 240));
+                    render.setSeriesPaint(0,Color.DARK_GRAY);
+                    jf.setBackgroundPaint(Color.WHITE);
 
                     iconG = new ImageIcon(jf.createBufferedImage(859, 366));
                 } else if (tipoGrafica == 2) {
@@ -56,8 +56,8 @@ public class Diagramas {
                     JFreeChart jf = ChartFactory.createBarChart3D("Cantidad de proyectos por area", "Áreas", "Cantidades", ds, PlotOrientation.HORIZONTAL, true, true, true);
                     CategoryPlot plot = jf.getCategoryPlot();
                     BarRenderer render = (BarRenderer) plot.getRenderer();
-                    render.setSeriesPaint(0, new Color(128, 221, 117));
-                    jf.setBackgroundPaint(new Color(240, 240, 240));
+                    render.setSeriesPaint(0,Color.DARK_GRAY);
+                    jf.setBackgroundPaint(Color.WHITE);
 
                     iconG = new ImageIcon(jf.createBufferedImage(859, 366));
                 }
@@ -68,7 +68,7 @@ public class Diagramas {
                 porciones.setValue("EN: " + v[2], v[2]);//Ensamble
                 //Torta
                 JFreeChart jf1 = ChartFactory.createPieChart3D("Produccion", porciones, true, true, Locale.ITALY);
-
+                jf1.setBackgroundPaint(Color.WHITE);
                 iconG = new ImageIcon(jf1.createBufferedImage(859, 366));
             }
 //            ChartFrame f = new ChartFrame("Edades", jf);
