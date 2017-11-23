@@ -4,16 +4,24 @@ import Controlador.DetalleProyecto;
 import Controlador.Tabla;
 import coltime.Menu;
 import javax.sql.rowset.CachedRowSet;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import rojerusan.RSNotifyAnimated;
 
 public class detalleProyecto extends javax.swing.JDialog {
 
-    public detalleProyecto(java.awt.Frame parent, boolean modal, int detalle, int negocio, String orden, String tipo, int permiso) {//Falta organizar la variable "tipo" para que traiga el valor correspondiente
+    public detalleProyecto(java.awt.Frame parent, boolean modal, int detalle, int negocio, String orden, int permiso) {//Falta organizar la variable "tipo" para que traiga el valor correspondiente
         super(parent, modal);
         initComponents();
-        this.setTitle(orden + " - " + tipo);
+        if (negocio == 1) {
+            this.setTitle(orden + " - " + "Formato estándar");
+        } else if (negocio == 2) {
+            this.setTitle(orden + " - " + "Teclados");
+        } else {
+            this.setTitle(orden + " - " + "Ensamble");
+        }
+
         this.detalle = detalle;
         this.negocio = negocio;
         this.setLocationRelativeTo(null);
@@ -24,6 +32,7 @@ public class detalleProyecto extends javax.swing.JDialog {
         jTFechaEntrega.setEnabled(false);
         jTFechaIngreso.setEnabled(false);
         jTCantidadTotal.setEnabled(false);
+        this.setIconImage(new ImageIcon(getClass().getResource("/imagenesEmpresa/favicon.png")).getImage());
     }
     //variables
     private CachedRowSet crs = null;
@@ -342,7 +351,7 @@ public class detalleProyecto extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                detalleProyecto dialog = new detalleProyecto(new javax.swing.JFrame(), true, 0, 0, "", "",0);
+                detalleProyecto dialog = new detalleProyecto(new javax.swing.JFrame(), true, 0, 0, "", 0);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

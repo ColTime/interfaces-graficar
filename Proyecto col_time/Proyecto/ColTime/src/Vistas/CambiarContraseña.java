@@ -9,6 +9,7 @@ import Atxy2k.CustomTextField.RestrictedTextField;
 import Controlador.Usuario;
 import coltime.Menu;
 import java.awt.Color;
+import javax.swing.ImageIcon;
 import rojerusan.RSNotifyAnimated;
 
 /**
@@ -34,6 +35,7 @@ public class CambiarContraseña extends javax.swing.JFrame {
         Notificacion1.setText("");
         Notificacion2.setText("");
         btnGuardar.setEnabled(false);
+        this.setIconImage(new ImageIcon(getClass().getResource("/imagenesEmpresa/favicon.png")).getImage());
     }
 
     private int posX = 0;

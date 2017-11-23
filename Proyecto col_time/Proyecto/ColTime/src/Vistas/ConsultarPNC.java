@@ -3,6 +3,7 @@ package Vistas;
 import Controlador.DetalleProyecto;
 import java.awt.Color;
 import javax.sql.rowset.CachedRowSet;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import rojerusan.RSNotifyAnimated;
@@ -18,6 +19,7 @@ public class ConsultarPNC extends javax.swing.JFrame {
         editarColumnasDetalle();
         tamañoColumnas();
         jTNorden.setFocusable(true);
+        this.setIconImage(new ImageIcon(getClass().getResource("/imagenesEmpresa/favicon.png")).getImage());
     }
 
     //Variables

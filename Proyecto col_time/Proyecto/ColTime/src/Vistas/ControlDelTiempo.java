@@ -19,6 +19,7 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
     public ControlDelTiempo() {
         initComponents();
         this.setExtendedState(ControlDelTiempo.MAXIMIZED_BOTH);
+        this.setIconImage(new ImageIcon(getClass().getResource("/imagenesEmpresa/favicon.png")).getImage());
     }
 
     //Variables---------------------------------------------------------------->

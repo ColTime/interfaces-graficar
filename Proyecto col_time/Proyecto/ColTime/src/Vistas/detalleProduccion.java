@@ -26,6 +26,7 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
     public detalleProduccion(java.awt.Frame parent, boolean modal, int orden, int negocio, int vistaC) {
         super(parent, modal);
         initComponents();
+        this.setIconImage(new ImageIcon(getClass().getResource("/imagenesEmpresa/favicon.png")).getImage());
         this.orden = orden;
         this.negocio = negocio;
         this.vistaC = vistaC;
@@ -205,7 +206,7 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
                 permiso = 1;
             }
         }
-        detalleProyecto obj = new detalleProyecto(obj1, true, id, negocio, String.valueOf(orden), e.getSource().getClass().getName(), permiso);
+        detalleProyecto obj = new detalleProyecto(obj1, true, id, negocio, String.valueOf(orden), permiso);
         obj.setVisible(true);
         obj.setLocationRelativeTo(this);
     }

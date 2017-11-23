@@ -22,6 +22,7 @@ public class Diagramas extends javax.swing.JDialog {
     public Diagramas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setIconImage(new ImageIcon(getClass().getResource("/imagenesEmpresa/favicon.png")).getImage());
     }
 
     /**

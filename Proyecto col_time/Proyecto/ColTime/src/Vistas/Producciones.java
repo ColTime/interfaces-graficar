@@ -22,6 +22,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         initComponents();
         this.setLocationRelativeTo(null);
         EstadoDelMenu(false);
+        this.setIconImage(new ImageIcon(getClass().getResource("/imagenesEmpresa/favicon.png")).getImage());
 //        new CambiaPanel(Contenido, new ProduccionFE());
 //        generarLabel("28400");
     }

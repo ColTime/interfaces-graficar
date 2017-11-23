@@ -753,6 +753,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenu1.setText("Cuenta");
 
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/password.png"))); // NOI18N
         jMenuItem1.setText("Cambiar contraseña");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -765,6 +766,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenu2.setText("Salir");
 
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/season.png"))); // NOI18N
         jMenuItem2.setText("Cerrar sesión");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

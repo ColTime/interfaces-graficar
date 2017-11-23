@@ -458,6 +458,7 @@ public class proyecto extends javax.swing.JPanel {
 
         jTIntegracion.setColorDeBorde(new java.awt.Color(204, 204, 204));
         jTIntegracion.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
+        jTIntegracion.setDescripcion(".");
         jTIntegracion.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTIntegracion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -1327,7 +1328,7 @@ public class proyecto extends javax.swing.JPanel {
             boolean res = true;
             DetalleProyecto obj = new DetalleProyecto();
 
-            if (!jLIDCircuito.getText().equals("0") && jCCircuito.isSelected() == false) {
+            if (!jLIDCircuito.getText().equals("0") && jCCircuito.isSelected() == false || jCCircuito.isSelected() == true) {
                 v[i] = String.valueOf(obj.validarEliminacionModificar(1, Integer.parseInt(jTNorden.getText()), 1, 0, 1));
                 i++;
             }
@@ -1474,6 +1475,7 @@ public class proyecto extends javax.swing.JPanel {
         btnGuardar.setEnabled(false);
         btnNuevo.setEnabled(false);
         GenerarQR.setEnabled(false);
+        btnTomaTiempos.setVisible(false);
     }
 
     private void desactivarBotonesjC() {
@@ -1550,8 +1552,8 @@ public class proyecto extends javax.swing.JPanel {
 
     private void limpiarCampos() {
         Notificacion1.setVisible(false);
-        jTNorden.setText("");
-        jTNombreCliente.setText("");
+        jTNorden.setText(" ");
+        jTNombreCliente.setText(" ");
         jTNombreProyecto.setText("");
         jDentrega.setCalendar(null);
         jLIngreso.setText("DD-MM-YYYY");
@@ -1568,19 +1570,28 @@ public class proyecto extends javax.swing.JPanel {
         jCPCBTE.setSelected(false);
         jCTeclado.setSelected(false);
         jCStencil.setSelected(false);
-        jTIntegracion.setText("");
-        jTConversor.setText("");
-        jTRepujado.setText("");
-        jTTroquel.setText("");
-        jTCircuito.setText("");
-        jTPCBTE.setText("");
-        jTTeclado.setText("");
-        jTIntegracion.setText("");
-        jTStencil.setText("");
+        jTIntegracion.setText(" ");
+        jTConversor.setText(" ");
+        jTRepujado.setText(" ");
+        jTTroquel.setText(" ");
+        jTCircuito.setText(" ");
+        jTPCBTE.setText(" ");
+        jTTeclado.setText(" ");
+        jTIntegracion.setText(" ");
+        jTStencil.setText(" ");
         cbMaterialCircuito.setSelectedIndex(0);
         cbMaterialPCBTE.setSelectedIndex(0);
         cbMaterialCircuito.setEnabled(false);
         cbMaterialPCBTE.setEnabled(false);
+        jTIntegracion.setEditable(true);
+        jTConversor.setEditable(true);
+        jTRepujado.setEditable(true);
+        jTTroquel.setEditable(true);
+        jTCircuito.setEditable(true);
+        jTPCBTE.setEditable(true);
+        jTTeclado.setEditable(true);
+        jTIntegracion.setEditable(true);
+        jTStencil.setEditable(true);
     }
 
     private void VerificarQueSeElimina(DetalleProyecto obj) {
