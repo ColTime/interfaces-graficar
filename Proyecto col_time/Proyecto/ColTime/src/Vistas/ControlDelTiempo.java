@@ -165,7 +165,7 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
         }
     }
 
-    public void RegistrarTomaTiempoNegocio(String datos[], int cargo, ControlDelTiempo vista) {
+        public void RegistrarTomaTiempoNegocio(String datos[], int cargo, ControlDelTiempo vista) {
         FE_TE_IN obj = new FE_TE_IN();
         this.vista = vista;
         if (cargo == 2 && (Integer.parseInt(datos[2]) == 1 || Integer.parseInt(datos[2]) == 2)) {

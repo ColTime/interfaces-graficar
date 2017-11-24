@@ -101,7 +101,7 @@ public class Proyecto {
     }
 
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    public boolean EliminarProyecto(int orden) {//Falta esta parte del proyecto
+    public boolean EliminarProyecto(int orden) {//Se cambiara el estado del proyecto
         ProyectoM obj = new ProyectoM();
         return obj.EliminarProyecto(orden);
     }

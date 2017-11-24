@@ -157,11 +157,11 @@ public class proyecto extends javax.swing.JPanel {
         jLIDIntegracion = new javax.swing.JLabel();
         GenerarQR = new elaprendiz.gui.button.ButtonColoredAction();
         jTProyectoQR = new elaprendiz.gui.textField.TextFieldRoundBackground();
-        jButton1 = new javax.swing.JButton();
         btnTomaTiempos = new elaprendiz.gui.button.ButtonColoredAction();
         jPanel3 = new javax.swing.JPanel();
         btnGenerarExcel = new javax.swing.JButton();
         btnGenerarPDF = new javax.swing.JButton();
+        Eliminados = new elaprendiz.gui.button.ButtonColoredAction();
 
         setBackground(new java.awt.Color(219, 219, 219));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
@@ -753,7 +753,7 @@ public class proyecto extends javax.swing.JPanel {
             }
         });
         jPanel5.add(btnDelete);
-        btnDelete.setBounds(232, 0, 57, 45);
+        btnDelete.setBounds(232, 0, 58, 49);
 
         jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 292, 50));
 
@@ -802,11 +802,7 @@ public class proyecto extends javax.swing.JPanel {
                 jTProyectoQRKeyTyped(evt);
             }
         });
-        jPanel2.add(jTProyectoQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 400, 230, 23));
-
-        jButton1.setText("Cargar Excel");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 400, -1, -1));
+        jPanel2.add(jTProyectoQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 400, 280, 23));
 
         btnTomaTiempos.setText("Toma de tiempos");
         btnTomaTiempos.addActionListener(new java.awt.event.ActionListener() {
@@ -828,6 +824,14 @@ public class proyecto extends javax.swing.JPanel {
         jPanel3.add(btnGenerarPDF);
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 530, 140, 40));
+
+        Eliminados.setText("Eliminados");
+        Eliminados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminadosActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Eliminados, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, 170, -1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1105,18 +1109,29 @@ public class proyecto extends javax.swing.JPanel {
     }//GEN-LAST:event_btnTomaTiemposActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        Proyecto obj = new Proyecto();
-        if (obj.EliminarProyecto(Integer.parseInt(jTNorden.getText()))) {
-            //Eliminación fue realizada correactamente.
-            //Mensaje
-            limpiarCampos();
-            limpiarID();
-            botonRegistrarModificar();
-        } else {
-            //Error al realizar la eliminación del proyecto.
-            //Mensaje
+        if (JOptionPane.showOptionDialog(null, "¿Seguro desea eliminar este proyecto?",
+                "seleccione...", JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
+                new Object[]{"SI", "NO"}, "SI") == 0) {
+            Proyecto obj = new Proyecto();
+            if (obj.EliminarProyecto(Integer.parseInt(jTNorden.getText()))) {
+                //Eliminación fue realizada correactamente.
+                //Mensaje
+                new rojerusan.RSNotifyAnimated("Listo.", "El proyecto con la orden " + jTNorden.getText() + " fue eliminada exitosamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+                limpiarCampos();
+                limpiarID();
+                cambiarEstadoBotones();
+            } else {
+                //Error al realizar la eliminación del proyecto.
+                //Mensaje
+                new rojerusan.RSNotifyAnimated("¡Alerta!", "El proyecto no pudo ser eliminado correctamente, por favor intentalo de nuevo.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
+            }
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void EliminadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminadosActionPerformed
+    
+    }//GEN-LAST:event_EliminadosActionPerformed
 //Metodos-------------------------------------------------------------------->
 
     private Paragraph tipoProyecto(int tipo, int negocio) {
@@ -1652,7 +1667,7 @@ public class proyecto extends javax.swing.JPanel {
                     op1 = op;
                     op = 1;
                 }
-                res = subRegistrarModificarProyecto(obj, jTTeclado.getText(), "TE", "Teclado", numeroOrden, "Lexan", op, Integer.parseInt(jLIDTeclado.getText()));
+                res = subRegistrarModificarProyecto(obj, jTTeclado.getText(), "TE", "Teclado", numeroOrden, "", op, Integer.parseInt(jLIDTeclado.getText()));
                 if (jLIDTeclado.getText().equals("0")) {
                     op = op1;
                 }
@@ -1758,7 +1773,7 @@ public class proyecto extends javax.swing.JPanel {
                     op1 = op;
                     op = 1;
                 }
-                res = subRegistrarModificarProyecto(obj, jTTeclado.getText(), "TE", "Teclado", numeroOrden, "Lexan", op, Integer.parseInt(jLIDTeclado.getText()));
+                res = subRegistrarModificarProyecto(obj, jTTeclado.getText(), "TE", "Teclado", numeroOrden, "", op, Integer.parseInt(jLIDTeclado.getText()));
                 if (jLIDTeclado.getText().equals("0")) {
                     op = op1;
                 }
@@ -1884,7 +1899,7 @@ public class proyecto extends javax.swing.JPanel {
                     op1 = op;
                     op = 1;
                 }
-                res = subRegistrarModificarProyecto(obj, jTTeclado.getText(), "TE", "Teclado", numeroOrden, "lexan", op, Integer.parseInt(jLIDTeclado.getText()));
+                res = subRegistrarModificarProyecto(obj, jTTeclado.getText(), "TE", "Teclado", numeroOrden, "", op, Integer.parseInt(jLIDTeclado.getText()));
                 if (jLIDTeclado.getText().equals("0")) {
                     op = op1;
                 }
@@ -1937,6 +1952,7 @@ public class proyecto extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static elaprendiz.gui.button.ButtonColoredAction Eliminados;
     public static elaprendiz.gui.button.ButtonColoredAction GenerarQR;
     public static javax.swing.JLabel Notificacion1;
     private javax.swing.JButton btnBuscar;
@@ -1951,7 +1967,6 @@ public class proyecto extends javax.swing.JPanel {
     public static elaprendiz.gui.comboBox.ComboBoxRound cbMaterialPCBTE;
     public static elaprendiz.gui.comboBox.ComboBoxRound cbNegocio;
     public static elaprendiz.gui.comboBox.ComboBoxRound cbTipo;
-    private javax.swing.JButton jButton1;
     public static javax.swing.JCheckBox jCAntisolderC;
     public static javax.swing.JCheckBox jCAntisolderP;
     public static javax.swing.JCheckBox jCCircuito;

@@ -43,6 +43,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
     //VAriables globales
     int posX = 0;
     int posY = 0;
+    int count = 0;
     CachedRowSet crs;
     //Botones de radio
     String encabezado1[] = {"idDetalle", "Negocio", "Tipo de negocio", "Cantidad", "Estado", "Material"};//Detalle del proyecto
@@ -686,6 +687,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
 
     //Este procedimiento va a permitir saber que proyectos se pueden modificar y cuales no
     private void validarEdiciones(proyecto obj) {
+
         for (int i = 0; i < TDetalle.getRowCount(); i++) {
             if (TDetalle.getValueAt(i, 1).toString().equals("FE") && TDetalle.getValueAt(i, 2).toString().equals("Conversor")) {
                 //Se valida el estado del Conversor de FE 
@@ -727,6 +729,13 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                 }
             }
         }
+        if (count == 0) {
+            //Permite editar el tipo de negocío.
+            obj.cbNegocio.setEnabled(true);
+        } else {
+            //No permiti editar el tipo de negocío.
+            obj.cbNegocio.setEnabled(false);
+        }
     }
 
     private void estadoModificacion(int row, JCheckBox check, TextFieldRoundBackground text) {
@@ -734,6 +743,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
             //No se permitira modificar nada del conversor
             check.setEnabled(false);
             text.setEditable(false);
+            count++;
         } else {
             check.setEnabled(true);
             text.setEditable(true);

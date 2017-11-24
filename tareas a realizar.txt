@@ -1,0 +1,12 @@
+La eliminación de la base de datos es solo un cambio de estado.Realizado
+
+Realizar un video capacitación.
+
+preguntar en la empresa si tiene un listado de reportes que necesiten de la produccion.Realizado, esperar respuesta el martes.
+
+Al registrar la toma de tiempos solo se puede ahcer con las ordenes que tiene un estado activo "1".
+
+
+inventar una vista para los proyectos eliminados.
+
+ 

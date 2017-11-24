@@ -1079,6 +1079,7 @@ public class Menu extends javax.swing.JFrame {
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
         String infoP[] = jTLector.getText().split(";");
         switch (Integer.parseInt(infoP[2])) {
+            //Se tiene que validar el estado del proyecto a ver si permite o no registrar la toma de tiempo.
             case 1:
                 if (producF == null) {
                     producF = new ControlDelTiempo();

@@ -164,34 +164,17 @@ public class ProyectoM {
     }
 
     //!!!!!!!!!!!!!!!!!
-    // Esta parte del codigo es muy sencible, se utilizara para proyectos que lleven mas de un cierto tiempo terminados o no hayan comenzado la toma de timepos.
     public boolean EliminarProyecto(int orden) {
-        //hay que preguntar si se puede eliminar los proyectos
         try {
             conexion = new Conexion();
             conexion.establecerConexion();
             con = conexion.getConexion();
             //Query------------------------------------------------------------>
             //PA_DetallesAEliminar
-            String Qry = "CALL PA_DetallesAEliminar(?)";//Esta parte del proyecto es critico!!!! Mucho cuidado con loq eu se elimina de la base de datos que no va a tener la posibilidad de recuperarlo.
+            String Qry = "CALL PA_EliminarCambiarEstadoProyecto(?)";
             ps = con.prepareStatement(Qry);
             ps.setInt(1, orden);
-            rs = ps.executeQuery();
-            //Primero se consultan todos los proyectos que se van a eliminar.
-            while (rs.next()) {
-                //Se prepara el Qry para eliminar los detalles.
-                Qry = "CALL PA_EliminarNivel3y2(?,?)";
-                ps = con.prepareStatement(Qry);
-                ps.setInt(1, rs.getInt(1));
-                ps.setInt(2, rs.getInt(2));
-                res = !ps.execute();
-            }
-            //Por ultimo se elimina el proyecto del primer nivel y se concluye con la eliminacion.
-            Qry = "CALL PA_EliminarNivel1(?)";
-            ps = con.prepareStatement(Qry);
-            ps.setInt(1,orden);
             res = !ps.execute();
-            //Se concluye la eliminacion por completo de un proyecto de la base de datos.
             
             //Cierre de conexion y finalizacion de variables.
             con.close();
