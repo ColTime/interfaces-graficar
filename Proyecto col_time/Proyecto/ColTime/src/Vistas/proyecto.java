@@ -32,7 +32,6 @@ public class proyecto extends javax.swing.JPanel {
             initComponents();
             cambiarEstadoFalso();
             cambiarEstadoBotones();
-            btnNuevo.setEnabled(true);
             Notificacion1.setVisible(false);
             GenerarQR.setEnabled(false);
             btnTomaTiempos.setVisible(false);
@@ -146,6 +145,7 @@ public class proyecto extends javax.swing.JPanel {
         btnBuscar = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        btnActivar = new javax.swing.JButton();
         Notificacion1 = new javax.swing.JLabel();
         jLIDConversor = new javax.swing.JLabel();
         jLIDTroquel = new javax.swing.JLabel();
@@ -161,7 +161,6 @@ public class proyecto extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         btnGenerarExcel = new javax.swing.JButton();
         btnGenerarPDF = new javax.swing.JButton();
-        Eliminados = new elaprendiz.gui.button.ButtonColoredAction();
 
         setBackground(new java.awt.Color(219, 219, 219));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
@@ -755,6 +754,19 @@ public class proyecto extends javax.swing.JPanel {
         jPanel5.add(btnDelete);
         btnDelete.setBounds(232, 0, 58, 49);
 
+        btnActivar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/chek-user.png"))); // NOI18N
+        btnActivar.setBorderPainted(false);
+        btnActivar.setContentAreaFilled(false);
+        btnActivar.setFocusPainted(false);
+        btnActivar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/chek-user1.png"))); // NOI18N
+        btnActivar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActivarActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnActivar);
+        btnActivar.setBounds(230, 0, 60, 50);
+
         jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 292, 50));
 
         Notificacion1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -824,14 +836,6 @@ public class proyecto extends javax.swing.JPanel {
         jPanel3.add(btnGenerarPDF);
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 530, 140, 40));
-
-        Eliminados.setText("Eliminados");
-        Eliminados.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EliminadosActionPerformed(evt);
-            }
-        });
-        jPanel2.add(Eliminados, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, 170, -1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1109,7 +1113,7 @@ public class proyecto extends javax.swing.JPanel {
     }//GEN-LAST:event_btnTomaTiemposActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        if (JOptionPane.showOptionDialog(null, "¿Seguro desea eliminar este proyecto?",
+            if (JOptionPane.showOptionDialog(null, "¿Seguro desea eliminar este proyecto?",
                 "seleccione...", JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
                 new Object[]{"SI", "NO"}, "SI") == 0) {
@@ -1129,9 +1133,9 @@ public class proyecto extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
-    private void EliminadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminadosActionPerformed
-    
-    }//GEN-LAST:event_EliminadosActionPerformed
+    private void btnActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActivarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnActivarActionPerformed
 //Metodos-------------------------------------------------------------------->
 
     private Paragraph tipoProyecto(int tipo, int negocio) {
@@ -1485,10 +1489,12 @@ public class proyecto extends javax.swing.JPanel {
     }
 
     private void cambiarEstadoBotones() {
+        btnActivar.setVisible(false);
+        btnActivar.setEnabled(false);
         btnDelete.setEnabled(false);
         btnUpdate.setEnabled(false);
         btnGuardar.setEnabled(false);
-        btnNuevo.setEnabled(false);
+        btnNuevo.setEnabled(true);
         GenerarQR.setEnabled(false);
         btnTomaTiempos.setVisible(false);
     }
@@ -1952,9 +1958,9 @@ public class proyecto extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static elaprendiz.gui.button.ButtonColoredAction Eliminados;
     public static elaprendiz.gui.button.ButtonColoredAction GenerarQR;
     public static javax.swing.JLabel Notificacion1;
+    public static javax.swing.JButton btnActivar;
     private javax.swing.JButton btnBuscar;
     public static javax.swing.JButton btnDelete;
     private javax.swing.JButton btnGenerarExcel;

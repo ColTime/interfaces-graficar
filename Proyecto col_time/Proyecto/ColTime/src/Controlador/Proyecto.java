@@ -100,13 +100,18 @@ public class Proyecto {
         return obj.consultar_Proyecto(idOrden, nombreCliente, nombreProyecto, fecha, tipo);
     }
 
+    public CachedRowSet consultar_ProyectoEliminados() {
+        Modelo.ProyectoM obj = new Modelo.ProyectoM();
+        return obj.consultar_ProyectoEliminados();
+    }
+
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public boolean EliminarProyecto(int orden) {//Se cambiara el estado del proyecto
         ProyectoM obj = new ProyectoM();
         return obj.EliminarProyecto(orden);
     }
-
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
     //Información de las areas de producción
     public CachedRowSet InformacionAreasProduccion(int accion) {
         ProyectoM obj = new ProyectoM();
@@ -145,6 +150,11 @@ public class Proyecto {
     public CachedRowSet proyectosNegocio(int negocio, String orden, String cliente, String proyecto, String tipo) {
         ProyectoM obj = new ProyectoM();
         return obj.proyectosNegocio(negocio, orden, cliente, proyecto, tipo);
+    }
+
+    public boolean validarEliminacion(int orden) {
+        ProyectoM obj = new ProyectoM();
+        return obj.validarEliminacion(orden);
     }
 
     //Finalizacion de la clase automatica---------------------------------------------------------------->

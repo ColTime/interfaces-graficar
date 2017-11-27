@@ -1078,35 +1078,47 @@ public class Menu extends javax.swing.JFrame {
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
         String infoP[] = jTLector.getText().split(";");
-        switch (Integer.parseInt(infoP[2])) {
-            //Se tiene que validar el estado del proyecto a ver si permite o no registrar la toma de tiempo.
-            case 1:
-                if (producF == null) {
-                    producF = new ControlDelTiempo();
-                    producF.setName("FE");
-                    producF.setTitle("Formato estandar");
-                    producF.setVisible(true);
-                }
-                producF.RegistrarTomaTiempoNegocio(infoP, cargo, producF);
-                break;
-            case 2:
-                if (producT == null) {
-                    producT = new ControlDelTiempo();
-                    producT.setName("TE");
-                    producT.setTitle("Teclados");
-                    producT.setVisible(true);
-                }
-                producT.RegistrarTomaTiempoNegocio(infoP, cargo, producT);
-                break;
-            case 3:
-                if (producE == null) {
-                    producE = new ControlDelTiempo();
-                    producE.setName("IN");
-                    producE.setTitle("Ensamble");
-                    producE.setVisible(true);
-                }
-                producE.RegistrarTomaTiempoNegocio(infoP, cargo, producE);
-                break;
+
+        /*if(){
+        //Validacion del estado del proyecto----------------------------------->
+        }*/
+        Proyecto validar = new Proyecto();
+        if (validar.validarEliminacion(Integer.parseInt(infoP[0]))) {
+            //#--------------------------------------------------------------------------------------------------
+            switch (Integer.parseInt(infoP[2])) {
+                //Se tiene que validar el estado del proyecto a ver si permite o no registrar la toma de tiempo.
+                case 1:
+                    if (producF == null) {
+                        producF = new ControlDelTiempo();
+                        producF.setName("FE");
+                        producF.setTitle("Formato estandar");
+                        producF.setVisible(true);
+                    }
+                    producF.RegistrarTomaTiempoNegocio(infoP, cargo, producF);
+                    break;
+                case 2:
+                    if (producT == null) {
+                        producT = new ControlDelTiempo();
+                        producT.setName("TE");
+                        producT.setTitle("Teclados");
+                        producT.setVisible(true);
+                    }
+                    producT.RegistrarTomaTiempoNegocio(infoP, cargo, producT);
+                    break;
+                case 3:
+                    if (producE == null) {
+                        producE = new ControlDelTiempo();
+                        producE.setName("IN");
+                        producE.setTitle("Ensamble");
+                        producE.setVisible(true);
+                    }
+                    producE.RegistrarTomaTiempoNegocio(infoP, cargo, producE);
+                    break;
+            }
+            //#--------------------------------------------------------------------------------------------------
+        } else {
+            //Este mensaje se retornara al dispositivo móvil.
+            
         }
     }//GEN-LAST:event_agregarActionPerformed
 

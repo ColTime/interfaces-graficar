@@ -33,7 +33,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         jDFecha.setEnabled(false);
         jRnulo.setVisible(false);
         jTtipo.setText("");
-        consultarProyectos("", "", "", "");
+        consultarProyectos("", "", "", "", 0);
         editarColumnasPNC();
         editarColumnasDetalle();
         this.setIconImage(new ImageIcon(getClass().getResource("/imagenesEmpresa/favicon.png")).getImage());
@@ -73,6 +73,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         jRIngreso = new javax.swing.JRadioButton();
         jRSalida = new javax.swing.JRadioButton();
         jRnulo = new javax.swing.JRadioButton();
+        btnEliminados = new elaprendiz.gui.button.ButtonColoredAction();
         jTtipo1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -271,6 +272,14 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         });
         jPanel3.add(jRnulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 20, -1, -1));
 
+        btnEliminados.setText("Eliminados");
+        btnEliminados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminadosActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnEliminados, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 50, 110, -1));
+
         jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 12, 1203, 92));
 
         jTtipo1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -437,7 +446,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
     }//GEN-LAST:event_jPEncabezadoMousePressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        consultarProyectos("", "", "", "");
+        consultarProyectos("", "", "", "", 0);
         TDetalle.setModel(new DefaultTableModel(null, encabezado1));
         TPNC.setModel(new DefaultTableModel(null, encabezado2));
         limpiarCampos();
@@ -478,7 +487,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         jRnulo.setVisible(false);
         jDFecha.setEnabled(false);
         jDFecha.setDate(null);
-        consultarProyectos(jTNumerOrden.getText(), jTNombreCliente.getText(), jTNombreProyecto.getText(), "");
+        consultarProyectos(jTNumerOrden.getText(), jTNombreCliente.getText(), jTNombreProyecto.getText(), "", 0);
     }//GEN-LAST:event_jRnuloMouseClicked
 
     private void jDFechaInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jDFechaInputMethodTextChanged
@@ -754,6 +763,13 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRSalidaActionPerformed
 
+    private void btnEliminadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminadosActionPerformed
+        consultarProyectos("", "", "", "", 1);
+        TDetalle.setModel(new DefaultTableModel(null, encabezado1));
+        TPNC.setModel(new DefaultTableModel(null, encabezado2));
+        editarColumnasDetalle();
+    }//GEN-LAST:event_btnEliminadosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -816,29 +832,35 @@ public class ConsutaProyecto extends javax.swing.JFrame {
             DateFormat formato = new SimpleDateFormat("YYYY-MM-dd");
             fecha = formato.format(jDFecha.getDate());
         }
-        consultarProyectos(jTNumerOrden.getText(), jTNombreCliente.getText(), jTNombreProyecto.getText(), fecha);
+        consultarProyectos(jTNumerOrden.getText(), jTNombreCliente.getText(), jTNombreProyecto.getText(), fecha, 0);
     }
 
-    private void consultarProyectos(String numerOrden, String nombrecliente, String nombreProyecto, String fecha) {
+    private void consultarProyectos(String numerOrden, String nombrecliente, String nombreProyecto, String fecha, int eliminados) {
         Controlador.Proyecto obj = new Controlador.Proyecto();
-        if (!numerOrden.equals("")) {
-            obj.setIdOrden(Integer.parseInt(numerOrden));
+
+        if (eliminados == 1) {
+            //Estan eliminados
+            crs = obj.consultar_ProyectoEliminados();
         } else {
-            obj.setIdOrden(0);
+            if (!numerOrden.equals("")) {
+                obj.setIdOrden(Integer.parseInt(numerOrden));
+            } else {
+                obj.setIdOrden(0);
+            }
+            obj.setNombreCliente(nombrecliente);
+            obj.setNombreProyecto(nombreProyecto);
+            obj.setFecha(fecha);
+            String tipo = "";
+            if (jRIngreso.isSelected()) {
+                tipo = "Ingreso";
+            } else if (jREntrega.isSelected()) {
+                tipo = "Entrega";
+            } else if (jRSalida.isSelected()) {
+                tipo = "Salida";
+            }
+            //No estan eliminados
+            crs = obj.consultar_Proyecto(tipo);
         }
-        obj.setNombreCliente(nombrecliente);
-        obj.setNombreProyecto(nombreProyecto);
-        obj.setFecha(fecha);
-        String tipo = "";
-        if (jRIngreso.isSelected()) {
-            tipo = "Ingreso";
-        } else if (jREntrega.isSelected()) {
-            tipo = "Entrega";
-        } else if (jRSalida.isSelected()) {
-            tipo = "Salida";
-        }
-        //Se ejecuta la sencencia y recibimos los proyectos
-        crs = obj.consultar_Proyecto(tipo);
         try {
             String v[] = {"N° Orden", "Comercial", "Nombre Cliente", "Nombre Proyecto", "Fecha Ingreso", "Fecha Entrega", "Fecha Salida", "Estado", "Tipo", "FE", "TE", "IN", "RuteoC", "AntisolderC", "RuteoP", "AntisolderP"};
             DefaultTableModel model = new DefaultTableModel(null, v);
@@ -1028,6 +1050,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
     private javax.swing.JTable TDetalle;
     private javax.swing.JTable TPNC;
     private javax.swing.JTable TProyecto;
+    public static elaprendiz.gui.button.ButtonColoredAction btnEliminados;
     private javax.swing.ButtonGroup fechas;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;

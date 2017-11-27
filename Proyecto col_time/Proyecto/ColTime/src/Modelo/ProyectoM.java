@@ -163,6 +163,27 @@ public class ProyectoM {
         return crsP;
     }
 
+    public CachedRowSet consultar_ProyectoEliminados() {
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query------------------------------------------------------------>
+            String Qry = Qry = "CALL PA_ConsultarProyectosEliminados()";
+            ps = con.prepareStatement(Qry);
+            rs = ps.executeQuery();
+            crsP = new CachedRowSetImpl();
+            crsP.populate(rs);
+            conexion.cerrar(rs);
+            ps.close();
+            con.close();
+            conexion.destruir();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "¡Error!" + e);
+        }
+        return crsP;
+    }
+
     //!!!!!!!!!!!!!!!!!
     public boolean EliminarProyecto(int orden) {
         try {
@@ -175,7 +196,7 @@ public class ProyectoM {
             ps = con.prepareStatement(Qry);
             ps.setInt(1, orden);
             res = !ps.execute();
-            
+
             //Cierre de conexion y finalizacion de variables.
             con.close();
             conexion.destruir();
@@ -323,6 +344,28 @@ public class ProyectoM {
             con = conexion.getConexion();
             //Query------------------------------------------------------------>
             String Qry = "SELECT FU_ValidarNumerOrden(?)";
+            ps = con.prepareStatement(Qry);
+            ps.setInt(1, orden);
+            rs = ps.executeQuery();
+            rs.next();
+            res = rs.getBoolean(1);
+            con.close();
+            conexion.destruir();
+            conexion.cerrar(rs);
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "¡Error!" + e);
+        }
+        return res;
+    }
+
+    public boolean validarEliminacion(int orden) {
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query------------------------------------------------------------>
+            String Qry = "SELECT FU_ValidarEstadoEliminado(?)";
             ps = con.prepareStatement(Qry);
             ps.setInt(1, orden);
             rs = ps.executeQuery();

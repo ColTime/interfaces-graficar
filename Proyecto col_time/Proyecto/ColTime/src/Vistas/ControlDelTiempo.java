@@ -1,6 +1,7 @@
 package Vistas;
 
 import Controlador.FE_TE_IN;
+import Controlador.Proyecto;
 import coltime.Menu;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -165,9 +166,10 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
         }
     }
 
-        public void RegistrarTomaTiempoNegocio(String datos[], int cargo, ControlDelTiempo vista) {
+    public void RegistrarTomaTiempoNegocio(String datos[], int cargo, ControlDelTiempo vista) {
         FE_TE_IN obj = new FE_TE_IN();
         this.vista = vista;
+        //#------------------------------------------------------------------
         if (cargo == 2 && (Integer.parseInt(datos[2]) == 1 || Integer.parseInt(datos[2]) == 2)) {
             res = obj.iniciar_Pausar_Reiniciar_Toma_Tiempo(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]), Integer.parseInt(datos[2]), Integer.parseInt(datos[3]), Integer.parseInt(datos[4]));
 //            if (Integer.parseInt(datos[2]) == 1) {
@@ -195,6 +197,7 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
         if (res) {
             validarExitenciadeBotones(Integer.parseInt(datos[2]), vista);
         }
+        //#------------------------------------------------------------------
     }
 
     public void agregarBotones(ControlDelTiempo vista, int orden) {

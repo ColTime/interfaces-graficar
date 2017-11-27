@@ -5,6 +5,7 @@ import elaprendiz.gui.label.LabelCustom;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DecimalFormat;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.JOptionPane;
 
@@ -89,6 +90,9 @@ public class FE_TE_INM {
                     ps.setInt(6, cantidadTerminada + cantidadAntigua);
                     ps.setInt(7, estado);
                     res = !ps.execute();
+                    //Promedio de producto por minuto
+                    cantidadProductoMinuto(detalle, negocio, lector);
+
                     //Si no cumple la condición va a retornar un falso y monstrara una mensaje de advertencia.
                 } else {
                     res = false;
@@ -114,6 +118,60 @@ public class FE_TE_INM {
         return res;
     }
 
+    private void cantidadProductoMinuto(int detalle, int negocio, int lector) {
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+//            Query------------------------------------------------------------>
+            String Qry = "CALL PA_PromedioProductoPorMinuto(?,?,?)";
+            ps = con.prepareStatement(Qry);
+            ps.setInt(1, detalle);
+            ps.setInt(2, negocio);
+            ps.setInt(3, lector);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                String timeP = porMinuto(rs.getString(1), Integer.parseInt(rs.getString(2)));
+                //Código...
+                Qry = "CALL PA_ActualizarProductoPorMinuto(?,?,?,?)";
+                ps = con.prepareStatement(Qry);
+                ps.setInt(1, detalle);
+                ps.setInt(2, negocio);
+                ps.setInt(3, lector);
+                ps.setString(4, timeP);
+                ps.execute();
+                //...
+            }
+            con.close();
+            conexion.destruir();
+            conexion.cerrar(rs);
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error! " + e);
+        }
+    }
+
+    public String porMinuto(String timepo, int cantidad) {
+        String ms[] = timepo.split(":");
+        //Se convierte todo en segundos
+        int segundos = (Integer.parseInt(ms[0]) * 60) + Integer.parseInt(ms[1]);
+        //Se realiza el promedio
+        int promedioEntero = (int) Math.ceil(segundos / cantidad);
+        //Se convertira a minutos y segundos otra vez...
+        String resultado = "";
+        int minutos = 0;
+        while (promedioEntero >= 60) {
+
+            minutos++;
+            promedioEntero = promedioEntero - 60;
+
+        }
+        resultado = ((minutos <= 9) ? "0" : "") + minutos + ":" + ((promedioEntero <= 9) ? "0" : "") + promedioEntero;
+
+        return resultado;
+    }
+
     private String convertirHorasAMinutos(String total[], String hora[]) {
         int h = 0, m = 0, s = 0, ma = 0, sa = 0;
         String tiempoMS = "";
@@ -135,7 +193,7 @@ public class FE_TE_INM {
             s = (s - 60);
             m += 1;
         }
-        tiempoMS = ((m < 9) ? "0" : "") + m + ":" + ((s<9)?"0":"")+s;
+        tiempoMS = ((m <= 9) ? "0" : "") + m + ":" + ((s <= 9) ? "0" : "") + s;
 
         return tiempoMS;
     }
