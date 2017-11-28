@@ -208,6 +208,29 @@ public class ProyectoM {
         return res;
     }
 
+    public boolean ReacttivarProyecto(int orden) {//Se cambiara el estado del proyecto
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query------------------------------------------------------------>
+            //PA_DetallesAEliminar
+            String Qry = "CALL PA_ReactivarProyecto(?)";
+            ps = con.prepareStatement(Qry);
+            ps.setInt(1, orden);
+            res = !ps.execute();
+
+            //Cierre de conexion y finalizacion de variables.
+            con.close();
+            conexion.destruir();
+            conexion.cerrar(rs);
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error! " + e);
+        }
+        return res;
+    }
+
     //!!!!!!!!!!!!!!
     public CachedRowSet Consultar_informacion_para_el_QR(int orden) {
         try {

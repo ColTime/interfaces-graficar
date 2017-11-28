@@ -110,6 +110,11 @@ public class Proyecto {
         ProyectoM obj = new ProyectoM();
         return obj.EliminarProyecto(orden);
     }
+
+    public boolean ReacttivarProyecto(int orden) {//Se cambiara el estado del proyecto
+        ProyectoM obj = new ProyectoM();
+        return obj.ReacttivarProyecto(orden);
+    }
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     //Información de las areas de producción

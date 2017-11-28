@@ -1113,7 +1113,7 @@ public class proyecto extends javax.swing.JPanel {
     }//GEN-LAST:event_btnTomaTiemposActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-            if (JOptionPane.showOptionDialog(null, "¿Seguro desea eliminar este proyecto?",
+        if (JOptionPane.showOptionDialog(null, "¿Seguro desea eliminar este proyecto?",
                 "seleccione...", JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
                 new Object[]{"SI", "NO"}, "SI") == 0) {
@@ -1134,7 +1134,24 @@ public class proyecto extends javax.swing.JPanel {
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActivarActionPerformed
-        // TODO add your handling code here:
+        if (JOptionPane.showOptionDialog(null, "¿Seguro desea reactivar este proyecto?",
+                "seleccione...", JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
+                new Object[]{"SI", "NO"}, "SI") == 0) {
+            Proyecto obj = new Proyecto();
+            if (obj.ReacttivarProyecto(Integer.parseInt(jTNorden.getText()))) {
+                //Eliminación fue realizada correactamente.
+                //Mensaje
+                new rojerusan.RSNotifyAnimated("Listo.", "El proyecto con la orden " + jTNorden.getText() + " fue reactivado coreectamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+                limpiarCampos();
+                limpiarID();
+                cambiarEstadoBotones();
+            } else {
+                //Error al realizar la eliminación del proyecto.
+                //Mensaje
+                new rojerusan.RSNotifyAnimated("¡Alerta!", "El proyecto no pudo ser reactivado correctamente, por favor intentalo de nuevo.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
+            }
+        }
     }//GEN-LAST:event_btnActivarActionPerformed
 //Metodos-------------------------------------------------------------------->
 

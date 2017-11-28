@@ -11,8 +11,9 @@ public class ColTime {
 //        AWTUtilities.setWindowOpaque(lo, false);
 //        lo.setVisible(true);
         Login log = new Login();
-        log.setVisible(true);
         log.setLocationRelativeTo(null);
+        log.setVisible(true);
+         //Validación de conectividad con el servidor.
 //        Conexion con = new Conexion();
 //        con.establecerConexion();
     }

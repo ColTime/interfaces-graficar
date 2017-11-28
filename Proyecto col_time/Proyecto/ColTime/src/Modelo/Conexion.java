@@ -13,6 +13,11 @@ public class Conexion {
     //192.168.0.103
 
     public Conexion() {
+
+    }
+
+    public Conexion(int p) {
+
     }
 
     public void establecerConexion() {

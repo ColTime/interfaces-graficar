@@ -44,6 +44,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
     int posX = 0;
     int posY = 0;
     int count = 0;
+    int estado = 1;
     CachedRowSet crs;
     //Botones de radio
     String encabezado1[] = {"idDetalle", "Negocio", "Tipo de negocio", "Cantidad", "Estado", "Material"};//Detalle del proyecto
@@ -451,6 +452,14 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         TPNC.setModel(new DefaultTableModel(null, encabezado2));
         limpiarCampos();
         editarColumnasDetalle();
+        jTNumerOrden.setEnabled(true);
+        jTNombreCliente.setEnabled(true);
+        jTNombreProyecto.setEnabled(true);
+        jREntrega.setEnabled(true);
+        jRSalida.setEnabled(true);
+        jRIngreso.setEnabled(true);
+        jTtipo.setText("");
+        estado = 1;
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTNumerOrdenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNumerOrdenKeyReleased
@@ -510,185 +519,187 @@ public class ConsutaProyecto extends javax.swing.JFrame {
     }//GEN-LAST:event_TProyectoMouseClicked
 
     private void TProyectoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TProyectoMousePressed
-        if (evt.getClickCount() == 1) {
-            if (TProyecto.getRowCount() > 0) {
-                int f = TProyecto.getSelectedRow();
-                String valor = TProyecto.getValueAt(f, 8).toString();
-                jTtipo.setText(valor);
-                if (valor.equals("Normal")) {
-                    jTtipo.setForeground(new Color(128, 128, 131));
-                } else if (valor.equals("Quick")) {
-                    jTtipo.setForeground(Color.blue);
-                } else if (valor.equals("RQT")) {
-                    jTtipo.setForeground(Color.ORANGE);
-                }
-                consultarDetalle(TProyecto.getValueAt(f, 0).toString());
-            }
-        }
-        if (evt.getClickCount() == 2) {
-            if (TProyecto.getRowCount() > 0) {
-                SimpleDateFormat fecha = new SimpleDateFormat("yyyy-MM-dd");
-                Date fechaEntrega = null;
-                proyecto obj = new proyecto(2);
-                obj.setFocusable(true);
-                try {
+        if (TProyecto.getSelectedRow() >= 0) {
+            if (evt.getClickCount() == 1) {
+                if (TProyecto.getRowCount() > 0) {
                     int f = TProyecto.getSelectedRow();
-                    //Activar componentes
-                    activarCamposproyecto(obj);
-                    //Asignar valores a componentes
-                    obj.jTNorden.setText(TProyecto.getValueAt(f, 0).toString());
-                    obj.jTNombreCliente.setText(TProyecto.getValueAt(f, 2).toString());
-                    obj.jTNombreProyecto.setText(TProyecto.getValueAt(f, 3).toString());
-                    String fet[] = TProyecto.getValueAt(f, 4).toString().split(" ");
-                    obj.jLIngreso.setText(fet[0]);
-                    fechaEntrega = fecha.parse(TProyecto.getValueAt(f, 5).toString());
-                    obj.jDentrega.setDate(fechaEntrega);
-                    obj.cbTipo.setSelectedItem(TProyecto.getValueAt(f, 8).toString());
-                    //Estado
-                    obj.Notificacion1.setVisible(true);
-                    obj.Notificacion1.setText(TProyecto.getValueAt(f, 7).toString());
-                    if (TProyecto.getValueAt(f, 7).toString().equals("Terminado")) {
-                        obj.Notificacion1.setForeground(Color.GREEN);
-                        obj.btnUpdate.setEnabled(false);
-                        obj.btnTomaTiempos.setVisible(true);
-                        obj.GenerarQR.setEnabled(false);
-                    } else if (TProyecto.getValueAt(f, 7).toString().equals("Pausado")) {
-                        obj.Notificacion1.setForeground(Color.ORANGE);
-                        obj.btnUpdate.setEnabled(true);
-                        obj.btnTomaTiempos.setVisible(false);//Es false
-                        obj.GenerarQR.setEnabled(true);
-                    } else if (TProyecto.getValueAt(f, 7).toString().equals("Por iniciar")) {
-                        obj.Notificacion1.setForeground(Color.GRAY);
-                        obj.btnUpdate.setEnabled(true);
-                        obj.btnTomaTiempos.setVisible(false);//Es false
-                        obj.GenerarQR.setEnabled(true);
-                    } else if (TProyecto.getValueAt(f, 7).toString().equals("Ejecucion")) {
-                        obj.Notificacion1.setForeground(Color.GRAY);
-                        obj.btnUpdate.setEnabled(true);
-                        obj.btnTomaTiempos.setVisible(false);//Es false
-                        obj.GenerarQR.setEnabled(true);
+                    String valor = TProyecto.getValueAt(f, 8).toString();
+                    jTtipo.setText(valor);
+                    if (valor.equals("Normal")) {
+                        jTtipo.setForeground(new Color(128, 128, 131));
+                    } else if (valor.equals("Quick")) {
+                        jTtipo.setForeground(Color.blue);
+                    } else if (valor.equals("RQT")) {
+                        jTtipo.setForeground(Color.ORANGE);
                     }
-                    obj.btnDelete.setEnabled(true);
-                    //Tipos de negocios implicados
-                    if (TProyecto.getValueAt(f, 9).toString().equals("true") && TProyecto.getValueAt(f, 10).toString().equals("false") && TProyecto.getValueAt(f, 11).toString().equals("false")) {
-                        obj.cbNegocio.setSelectedIndex(1);
-                    }
-                    if (TProyecto.getValueAt(f, 9).toString().equals("false") && TProyecto.getValueAt(f, 10).toString().equals("true") && TProyecto.getValueAt(f, 11).toString().equals("false")) {
-                        obj.cbNegocio.setSelectedIndex(2);
-                    }
-                    if (TProyecto.getValueAt(f, 9).toString().equals("false") && TProyecto.getValueAt(f, 10).toString().equals("false") && TProyecto.getValueAt(f, 11).toString().equals("true")) {
-                        obj.cbNegocio.setSelectedIndex(3);
-                    }
-                    if (TProyecto.getValueAt(f, 9).toString().equals("true") && TProyecto.getValueAt(f, 10).toString().equals("true") && TProyecto.getValueAt(f, 11).toString().equals("false")) {
-                        obj.cbNegocio.setSelectedIndex(4);
-                    }
-                    if (TProyecto.getValueAt(f, 9).toString().equals("true") && TProyecto.getValueAt(f, 10).toString().equals("false") && TProyecto.getValueAt(f, 11).toString().equals("true")) {
-                        obj.cbNegocio.setSelectedIndex(5);
-                    }
-                    if (TProyecto.getValueAt(f, 9).toString().equals("true") && TProyecto.getValueAt(f, 10).toString().equals("true") && TProyecto.getValueAt(f, 11).toString().equals("true")) {
-                        obj.cbNegocio.setSelectedIndex(6);
-                    }
-                    //RuteoC y antisolderC
-                    if (TProyecto.getValueAt(f, 12).toString().equals("true")) {
-                        obj.jCRuteoC.setSelected(true);
-                    } else {
-                        obj.jCRuteoC.setSelected(false);
-                    }
-
-                    if (TProyecto.getValueAt(f, 13).toString().equals("true")) {
-                        obj.jCAntisolderC.setSelected(true);
-                    } else {
-                        obj.jCAntisolderC.setSelected(false);
-                    }
-                    //RuteoP y AntisolderP
-                    if (TProyecto.getValueAt(f, 14).toString().equals("true")) {
-                        obj.jCRuteoP.setSelected(true);
-                    } else {
-                        obj.jCRuteoP.setSelected(false);
-                    }
-
-                    if (TProyecto.getValueAt(f, 15).toString().equals("true")) {
-                        obj.jCAntisolderP.setSelected(true);
-                    } else {
-                        obj.jCAntisolderP.setSelected(false);
-                    }
-                    //Limpiar labes de id de detalle
-                    obj.jLIDConversor.setText("0");
-                    obj.jLIDTroquel.setText("0");
-                    obj.jLIDRepujado.setText("0");
-                    obj.jLIDStencil.setText("0");
-                    obj.jLIDPCB.setText("0");
-                    obj.jLIDCircuito.setText("0");
-                    obj.jLIDTeclado.setText("0");
-                    obj.jLIDIntegracion.setText("0");
-
-                    for (int i = 0; i < TDetalle.getRowCount(); i++) {
-                        //Buscamos que detalles tiene este proyecto para enviar a la vista de proyecto
-                        if (TDetalle.getValueAt(i, 2).toString().equals("Conversor")) {
-                            obj.jLIDConversor.setText(TDetalle.getValueAt(i, 0).toString());
-                            obj.jCConversor.setSelected(true);
-                            obj.jCConversor.setEnabled(true);
-                            obj.jTConversor.setEnabled(true);
-                            obj.jTConversor.setText(TDetalle.getValueAt(i, 3).toString());
-                        } else if (TDetalle.getValueAt(i, 2).toString().equals("Troquel")) {
-                            obj.jLIDTroquel.setText(TDetalle.getValueAt(i, 0).toString());
-                            obj.jCTroquel.setSelected(true);
-                            obj.jCTroquel.setEnabled(true);
-                            obj.jTTroquel.setEnabled(true);
-                            obj.jTTroquel.setText(TDetalle.getValueAt(i, 3).toString());
-                        } else if (TDetalle.getValueAt(i, 2).toString().equals("Repujado")) {
-                            obj.jLIDRepujado.setText(TDetalle.getValueAt(i, 0).toString());
-                            obj.jCRepujado.setSelected(true);
-                            obj.jCRepujado.setEnabled(true);
-                            obj.jTRepujado.setEnabled(true);
-                            obj.jTRepujado.setText(TDetalle.getValueAt(i, 3).toString());
-                        } else if (TDetalle.getValueAt(i, 2).toString().equals("Stencil")) {
-                            obj.jLIDStencil.setText(TDetalle.getValueAt(i, 0).toString());
-                            obj.jCStencil.setSelected(true);
-                            obj.jCStencil.setEnabled(true);
-                            obj.jTStencil.setEnabled(true);
-                            obj.jTStencil.setText(TDetalle.getValueAt(i, 3).toString());
-                        } else if (TDetalle.getValueAt(i, 2).toString().equals("PCB")) {
-                            obj.jLIDPCB.setText(TDetalle.getValueAt(i, 0).toString());
-                            obj.jCRuteoP.setEnabled(true);
-                            obj.jCAntisolderP.setEnabled(true);
-                            obj.jCPCBTE.setSelected(true);
-                            obj.jCPCBTE.setEnabled(true);
-                            obj.jTPCBTE.setEnabled(true);
-                            obj.jTPCBTE.setText(TDetalle.getValueAt(i, 3).toString());
-                            obj.cbMaterialPCBTE.setEnabled(true);
-                            obj.cbMaterialPCBTE.setSelectedItem(TDetalle.getValueAt(i, 5).toString());
-                        } else if (TDetalle.getValueAt(i, 2).toString().equals("Circuito") && TDetalle.getValueAt(i, 1).toString().equals("IN")) {
-                            obj.jLIDIntegracion.setText(TDetalle.getValueAt(i, 0).toString());
-                            obj.jCIntegracion.setSelected(true);
-                            obj.jCIntegracion.setEnabled(true);
-                            obj.jTIntegracion.setEnabled(true);
-                            obj.jTIntegracion.setText(TDetalle.getValueAt(i, 3).toString());
-                        } else if (TDetalle.getValueAt(i, 2).toString().equals("Teclado") && TDetalle.getValueAt(i, 1).toString().equals("TE")) {
-                            obj.jLIDTeclado.setText(TDetalle.getValueAt(i, 0).toString());
-                            obj.jCTeclado.setSelected(true);
-                            obj.jCTeclado.setEnabled(true);
-                            obj.jTTeclado.setEnabled(true);
-                            obj.jTTeclado.setText(TDetalle.getValueAt(i, 3).toString());
-                        } else if (TDetalle.getValueAt(i, 2).toString().equals("Circuito") && TDetalle.getValueAt(i, 1).toString().equals("FE")) {
-                            obj.jLIDCircuito.setText(TDetalle.getValueAt(i, 0).toString());
-                            obj.jCRuteoC.setEnabled(true);
-                            obj.jCAntisolderC.setEnabled(true);
-                            obj.jCCircuito.setSelected(true);
-                            obj.jCCircuito.setEnabled(true);
-                            obj.jTCircuito.setEnabled(true);
-                            obj.jTCircuito.setText(TDetalle.getValueAt(i, 3).toString());
-                            obj.cbMaterialCircuito.setEnabled(true);
-                            obj.cbMaterialCircuito.setSelectedItem(TDetalle.getValueAt(i, 5).toString());
+                    consultarDetalle(TProyecto.getValueAt(f, 0).toString());
+                }
+            }
+            if (evt.getClickCount() == 2) {
+                if (TProyecto.getRowCount() > 0) {
+                    SimpleDateFormat fecha = new SimpleDateFormat("yyyy-MM-dd");
+                    Date fechaEntrega = null;
+                    proyecto obj = new proyecto(2);
+                    obj.setFocusable(true);
+                    try {
+                        int f = TProyecto.getSelectedRow();
+                        //Activar componentes
+                        activarCamposproyecto(obj);
+                        //Asignar valores a componentes
+                        obj.jTNorden.setText(TProyecto.getValueAt(f, 0).toString());
+                        obj.jTNombreCliente.setText(TProyecto.getValueAt(f, 2).toString());
+                        obj.jTNombreProyecto.setText(TProyecto.getValueAt(f, 3).toString());
+                        String fet[] = TProyecto.getValueAt(f, 4).toString().split(" ");
+                        obj.jLIngreso.setText(fet[0]);
+                        fechaEntrega = fecha.parse(TProyecto.getValueAt(f, 5).toString());
+                        obj.jDentrega.setDate(fechaEntrega);
+                        obj.cbTipo.setSelectedItem(TProyecto.getValueAt(f, 8).toString());
+                        //Estado
+                        obj.Notificacion1.setVisible(true);
+                        obj.Notificacion1.setText(TProyecto.getValueAt(f, 7).toString());
+                        if (TProyecto.getValueAt(f, 7).toString().equals("Terminado")) {
+                            obj.Notificacion1.setForeground(Color.GREEN);
+                            obj.btnUpdate.setEnabled(false);
+                            obj.btnTomaTiempos.setVisible(true);
+                            obj.GenerarQR.setEnabled(false);
+                        } else if (TProyecto.getValueAt(f, 7).toString().equals("Pausado")) {
+                            obj.Notificacion1.setForeground(Color.ORANGE);
+                            obj.btnUpdate.setEnabled(true);
+                            obj.btnTomaTiempos.setVisible(false);//Es false
+                            obj.GenerarQR.setEnabled(true);
+                        } else if (TProyecto.getValueAt(f, 7).toString().equals("Por iniciar")) {
+                            obj.Notificacion1.setForeground(Color.GRAY);
+                            obj.btnUpdate.setEnabled(true);
+                            obj.btnTomaTiempos.setVisible(false);//Es false
+                            obj.GenerarQR.setEnabled(true);
+                        } else if (TProyecto.getValueAt(f, 7).toString().equals("Ejecucion")) {
+                            obj.Notificacion1.setForeground(Color.GRAY);
+                            obj.btnUpdate.setEnabled(true);
+                            obj.btnTomaTiempos.setVisible(false);//Es false
+                            obj.GenerarQR.setEnabled(true);
                         }
+                        obj.btnDelete.setEnabled(true);
+                        //Tipos de negocios implicados
+                        if (TProyecto.getValueAt(f, 9).toString().equals("true") && TProyecto.getValueAt(f, 10).toString().equals("false") && TProyecto.getValueAt(f, 11).toString().equals("false")) {
+                            obj.cbNegocio.setSelectedIndex(1);
+                        }
+                        if (TProyecto.getValueAt(f, 9).toString().equals("false") && TProyecto.getValueAt(f, 10).toString().equals("true") && TProyecto.getValueAt(f, 11).toString().equals("false")) {
+                            obj.cbNegocio.setSelectedIndex(2);
+                        }
+                        if (TProyecto.getValueAt(f, 9).toString().equals("false") && TProyecto.getValueAt(f, 10).toString().equals("false") && TProyecto.getValueAt(f, 11).toString().equals("true")) {
+                            obj.cbNegocio.setSelectedIndex(3);
+                        }
+                        if (TProyecto.getValueAt(f, 9).toString().equals("true") && TProyecto.getValueAt(f, 10).toString().equals("true") && TProyecto.getValueAt(f, 11).toString().equals("false")) {
+                            obj.cbNegocio.setSelectedIndex(4);
+                        }
+                        if (TProyecto.getValueAt(f, 9).toString().equals("true") && TProyecto.getValueAt(f, 10).toString().equals("false") && TProyecto.getValueAt(f, 11).toString().equals("true")) {
+                            obj.cbNegocio.setSelectedIndex(5);
+                        }
+                        if (TProyecto.getValueAt(f, 9).toString().equals("true") && TProyecto.getValueAt(f, 10).toString().equals("true") && TProyecto.getValueAt(f, 11).toString().equals("true")) {
+                            obj.cbNegocio.setSelectedIndex(6);
+                        }
+                        //RuteoC y antisolderC
+                        if (TProyecto.getValueAt(f, 12).toString().equals("true")) {
+                            obj.jCRuteoC.setSelected(true);
+                        } else {
+                            obj.jCRuteoC.setSelected(false);
+                        }
+
+                        if (TProyecto.getValueAt(f, 13).toString().equals("true")) {
+                            obj.jCAntisolderC.setSelected(true);
+                        } else {
+                            obj.jCAntisolderC.setSelected(false);
+                        }
+                        //RuteoP y AntisolderP
+                        if (TProyecto.getValueAt(f, 14).toString().equals("true")) {
+                            obj.jCRuteoP.setSelected(true);
+                        } else {
+                            obj.jCRuteoP.setSelected(false);
+                        }
+
+                        if (TProyecto.getValueAt(f, 15).toString().equals("true")) {
+                            obj.jCAntisolderP.setSelected(true);
+                        } else {
+                            obj.jCAntisolderP.setSelected(false);
+                        }
+                        //Limpiar labes de id de detalle
+                        obj.jLIDConversor.setText("0");
+                        obj.jLIDTroquel.setText("0");
+                        obj.jLIDRepujado.setText("0");
+                        obj.jLIDStencil.setText("0");
+                        obj.jLIDPCB.setText("0");
+                        obj.jLIDCircuito.setText("0");
+                        obj.jLIDTeclado.setText("0");
+                        obj.jLIDIntegracion.setText("0");
+
+                        for (int i = 0; i < TDetalle.getRowCount(); i++) {
+                            //Buscamos que detalles tiene este proyecto para enviar a la vista de proyecto
+                            if (TDetalle.getValueAt(i, 2).toString().equals("Conversor")) {
+                                obj.jLIDConversor.setText(TDetalle.getValueAt(i, 0).toString());
+                                obj.jCConversor.setSelected(true);
+                                obj.jCConversor.setEnabled(true);
+                                obj.jTConversor.setEnabled(true);
+                                obj.jTConversor.setText(TDetalle.getValueAt(i, 3).toString());
+                            } else if (TDetalle.getValueAt(i, 2).toString().equals("Troquel")) {
+                                obj.jLIDTroquel.setText(TDetalle.getValueAt(i, 0).toString());
+                                obj.jCTroquel.setSelected(true);
+                                obj.jCTroquel.setEnabled(true);
+                                obj.jTTroquel.setEnabled(true);
+                                obj.jTTroquel.setText(TDetalle.getValueAt(i, 3).toString());
+                            } else if (TDetalle.getValueAt(i, 2).toString().equals("Repujado")) {
+                                obj.jLIDRepujado.setText(TDetalle.getValueAt(i, 0).toString());
+                                obj.jCRepujado.setSelected(true);
+                                obj.jCRepujado.setEnabled(true);
+                                obj.jTRepujado.setEnabled(true);
+                                obj.jTRepujado.setText(TDetalle.getValueAt(i, 3).toString());
+                            } else if (TDetalle.getValueAt(i, 2).toString().equals("Stencil")) {
+                                obj.jLIDStencil.setText(TDetalle.getValueAt(i, 0).toString());
+                                obj.jCStencil.setSelected(true);
+                                obj.jCStencil.setEnabled(true);
+                                obj.jTStencil.setEnabled(true);
+                                obj.jTStencil.setText(TDetalle.getValueAt(i, 3).toString());
+                            } else if (TDetalle.getValueAt(i, 2).toString().equals("PCB")) {
+                                obj.jLIDPCB.setText(TDetalle.getValueAt(i, 0).toString());
+                                obj.jCRuteoP.setEnabled(true);
+                                obj.jCAntisolderP.setEnabled(true);
+                                obj.jCPCBTE.setSelected(true);
+                                obj.jCPCBTE.setEnabled(true);
+                                obj.jTPCBTE.setEnabled(true);
+                                obj.jTPCBTE.setText(TDetalle.getValueAt(i, 3).toString());
+                                obj.cbMaterialPCBTE.setEnabled(true);
+                                obj.cbMaterialPCBTE.setSelectedItem(TDetalle.getValueAt(i, 5).toString());
+                            } else if (TDetalle.getValueAt(i, 2).toString().equals("Circuito") && TDetalle.getValueAt(i, 1).toString().equals("IN")) {
+                                obj.jLIDIntegracion.setText(TDetalle.getValueAt(i, 0).toString());
+                                obj.jCIntegracion.setSelected(true);
+                                obj.jCIntegracion.setEnabled(true);
+                                obj.jTIntegracion.setEnabled(true);
+                                obj.jTIntegracion.setText(TDetalle.getValueAt(i, 3).toString());
+                            } else if (TDetalle.getValueAt(i, 2).toString().equals("Teclado") && TDetalle.getValueAt(i, 1).toString().equals("TE")) {
+                                obj.jLIDTeclado.setText(TDetalle.getValueAt(i, 0).toString());
+                                obj.jCTeclado.setSelected(true);
+                                obj.jCTeclado.setEnabled(true);
+                                obj.jTTeclado.setEnabled(true);
+                                obj.jTTeclado.setText(TDetalle.getValueAt(i, 3).toString());
+                            } else if (TDetalle.getValueAt(i, 2).toString().equals("Circuito") && TDetalle.getValueAt(i, 1).toString().equals("FE")) {
+                                obj.jLIDCircuito.setText(TDetalle.getValueAt(i, 0).toString());
+                                obj.jCRuteoC.setEnabled(true);
+                                obj.jCAntisolderC.setEnabled(true);
+                                obj.jCCircuito.setSelected(true);
+                                obj.jCCircuito.setEnabled(true);
+                                obj.jTCircuito.setEnabled(true);
+                                obj.jTCircuito.setText(TDetalle.getValueAt(i, 3).toString());
+                                obj.cbMaterialCircuito.setEnabled(true);
+                                obj.cbMaterialCircuito.setSelectedItem(TDetalle.getValueAt(i, 5).toString());
+                            }
+                        }
+                        //Validación de edición
+                        validarEdiciones(obj);
+                        //
+                        this.dispose();
+                    } catch (Exception e) {
+                        //Si se genera algun error a la hora del paso de informacion a la vista
+                        JOptionPane.showMessageDialog(null, "Error! " + e);
                     }
-                    //Validación de edición
-                    validarEdiciones(obj);
-                    //
-                    this.dispose();
-                } catch (Exception e) {
-                    //Si se genera algun error a la hora del paso de informacion a la vista
-                    JOptionPane.showMessageDialog(null, "Error! " + e);
                 }
             }
         }
@@ -768,6 +779,14 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         TDetalle.setModel(new DefaultTableModel(null, encabezado1));
         TPNC.setModel(new DefaultTableModel(null, encabezado2));
         editarColumnasDetalle();
+        jTNumerOrden.setEnabled(false);
+        jTNombreCliente.setEnabled(false);
+        jTNombreProyecto.setEnabled(false);
+        jREntrega.setEnabled(false);
+        jRSalida.setEnabled(false);
+        jRIngreso.setEnabled(false);
+        jTtipo.setText("");
+        estado = 0;
     }//GEN-LAST:event_btnEliminadosActionPerformed
 
     /**
@@ -817,6 +836,15 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         obj.jPInformacion.setBackground(new Color(255, 255, 255));
         obj.jPDetalles1.setBackground(new Color(255, 255, 255));
         obj.jPDetalles.setBackground(new Color(255, 255, 255));
+        if (estado == 1) {
+            obj.btnDelete.setEnabled(true);
+            obj.btnDelete.setVisible(true);
+            obj.btnActivar.setVisible(false);
+        } else {
+            obj.btnActivar.setEnabled(true);
+            obj.btnDelete.setVisible(false);
+            obj.btnActivar.setVisible(true);
+        }
     }
 
 //Se valida que si se pueda ejecutar la consulta sin tener ningun problema
