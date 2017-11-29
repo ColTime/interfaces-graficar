@@ -564,19 +564,19 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                             obj.GenerarQR.setEnabled(false);
                         } else if (TProyecto.getValueAt(f, 7).toString().equals("Pausado")) {
                             obj.Notificacion1.setForeground(Color.ORANGE);
-                            obj.btnUpdate.setEnabled(true);
+
                             obj.btnTomaTiempos.setVisible(false);//Es false
-                            obj.GenerarQR.setEnabled(true);
+
                         } else if (TProyecto.getValueAt(f, 7).toString().equals("Por iniciar")) {
                             obj.Notificacion1.setForeground(Color.GRAY);
-                            obj.btnUpdate.setEnabled(true);
+
                             obj.btnTomaTiempos.setVisible(false);//Es false
-                            obj.GenerarQR.setEnabled(true);
+
                         } else if (TProyecto.getValueAt(f, 7).toString().equals("Ejecucion")) {
                             obj.Notificacion1.setForeground(Color.GRAY);
-                            obj.btnUpdate.setEnabled(true);
+
                             obj.btnTomaTiempos.setVisible(false);//Es false
-                            obj.GenerarQR.setEnabled(true);
+
                         }
                         obj.btnDelete.setEnabled(true);
                         //Tipos de negocios implicados
@@ -836,14 +836,18 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         obj.jPInformacion.setBackground(new Color(255, 255, 255));
         obj.jPDetalles1.setBackground(new Color(255, 255, 255));
         obj.jPDetalles.setBackground(new Color(255, 255, 255));
-        if (estado == 1) {
+        if (estado == 1) {//Activo
             obj.btnDelete.setEnabled(true);
             obj.btnDelete.setVisible(true);
             obj.btnActivar.setVisible(false);
-        } else {
+            obj.GenerarQR.setEnabled(true);
+            obj.btnUpdate.setEnabled(true);
+        } else {//Eliminado
             obj.btnActivar.setEnabled(true);
             obj.btnDelete.setVisible(false);
             obj.btnActivar.setVisible(true);
+            obj.GenerarQR.setEnabled(false);
+            obj.btnUpdate.setEnabled(false);
         }
     }
 

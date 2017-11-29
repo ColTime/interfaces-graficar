@@ -95,6 +95,11 @@ public class Proyecto {
         return obj.registrar_Modificar_Proyecto(idOrden, comercial, nombreCliente, nombreProyecto, tipoProyecto, FE, TE, IN, detalles[0], detalles[1], detalles[2], detalles[3], detalles[4], detalles[5], detalles[6], fecha, detalles[7], detalles[8], op, detalles[9], detalles[10]);
     }
 
+    public boolean registrarProyectoQR(String infoP[]) {
+        ProyectoM obj = new ProyectoM();
+        return obj.registrarProyectoQRM(infoP);
+    }
+
     public CachedRowSet consultar_Proyecto(String tipo) {
         Modelo.ProyectoM obj = new Modelo.ProyectoM();
         return obj.consultar_Proyecto(idOrden, nombreCliente, nombreProyecto, fecha, tipo);

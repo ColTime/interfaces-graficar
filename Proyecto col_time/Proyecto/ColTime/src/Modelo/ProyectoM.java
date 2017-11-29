@@ -128,6 +128,11 @@ public class ProyectoM {
         return res;
     }
 
+    public boolean registrarProyectoQRM(String infoP[]) {
+
+        return true;
+    }
+
     public CachedRowSet consultar_Proyecto(int numerOrden, String nombreCliente, String nombreProyecto, String fecha, String TipoFecha) {
         try {
             conexion = new Conexion();

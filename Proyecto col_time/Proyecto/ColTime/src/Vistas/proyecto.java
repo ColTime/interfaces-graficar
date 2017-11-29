@@ -810,6 +810,9 @@ public class proyecto extends javax.swing.JPanel {
         jTProyectoQR.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
         jTProyectoQR.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTProyectoQR.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTProyectoQRKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTProyectoQRKeyTyped(evt);
             }
@@ -1025,7 +1028,6 @@ public class proyecto extends javax.swing.JPanel {
                 jCTroquel.setEnabled(true);
                 jCStencil.setEnabled(true);
                 jCIntegracion.setEnabled(true);
-                jCIntegracion.setSelected(true);
             }
             jTConversor.setText("");
             jTTroquel.setText("");
@@ -1125,6 +1127,7 @@ public class proyecto extends javax.swing.JPanel {
                 limpiarCampos();
                 limpiarID();
                 cambiarEstadoBotones();
+                cambiarEstadoFalso();
             } else {
                 //Error al realizar la eliminación del proyecto.
                 //Mensaje
@@ -1146,6 +1149,7 @@ public class proyecto extends javax.swing.JPanel {
                 limpiarCampos();
                 limpiarID();
                 cambiarEstadoBotones();
+                cambiarEstadoFalso();
             } else {
                 //Error al realizar la eliminación del proyecto.
                 //Mensaje
@@ -1153,6 +1157,20 @@ public class proyecto extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_btnActivarActionPerformed
+
+    private void jTProyectoQRKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTProyectoQRKeyPressed
+        //Registrar proyectos mediante un QR
+        //El vector tiene una longitud máxima de 11 items.
+        String infoP[] = jTProyectoQR.getText().split(";");
+        //Numero orden, área a la que aplica, tipo proyecto, nombre cliente, nombre proyecto, cantidad, ejecución, tipo PCB, lleva antisolder, lleva ruteo, fecha entrega.
+        if (infoP.length == 11) {
+
+            Proyecto obj = new Proyecto();
+
+        } else {
+            //Muestra mensaje de error en el QR...
+        }
+    }//GEN-LAST:event_jTProyectoQRKeyPressed
 //Metodos-------------------------------------------------------------------->
 
     private Paragraph tipoProyecto(int tipo, int negocio) {
@@ -1509,6 +1527,7 @@ public class proyecto extends javax.swing.JPanel {
         btnActivar.setVisible(false);
         btnActivar.setEnabled(false);
         btnDelete.setEnabled(false);
+        btnDelete.setVisible(true);
         btnUpdate.setEnabled(false);
         btnGuardar.setEnabled(false);
         btnNuevo.setEnabled(true);
