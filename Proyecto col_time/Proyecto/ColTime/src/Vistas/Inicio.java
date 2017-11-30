@@ -4,6 +4,8 @@ import Controlador.Proyecto;
 import coltime.Menu;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 public class Inicio extends javax.swing.JPanel {
 
@@ -218,10 +220,59 @@ public class Inicio extends javax.swing.JPanel {
     private void jLabel6MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseReleased
 //Muestra la estadistica de las areas y permitira buscar por rango de fechas
         proyecto1 diagrama = new proyecto1();
-        Diagramas vista = new Diagramas(new Menu(), true);
-        vista.jLGrafica.setIcon(llamarDiagramas(1, 0));
-        vista.setLocationRelativeTo(null);
-        vista.setVisible(true);
+        Object obj[] = null;
+        int bus = 0;
+        int tipo = 1;
+        Object diag = null;
+        Object busqueda = JOptionPane.showInputDialog(new JComboBox(),
+                "Seleccione el diagrama",
+                "Selector de opciones",
+                JOptionPane.QUESTION_MESSAGE,
+                null, // null para icono defecto
+                new Object[]{"Cantidad proyectos área", "Procesos FE", "Procesos TE", "Procesos EN"},
+                "Cantidad proyectos área");
+        if (busqueda != null) {
+            if (busqueda.equals("Cantidad proyectos área")) {
+                if (busqueda.equals("Cantidad proyectos área")) {
+                    obj = new Object[]{"Barras verticales", "Barras horizontal", "Torta"};
+                }
+                diag = JOptionPane.showInputDialog(new JComboBox(),
+                        "Seleccione el estilo del diagrama",
+                        "Selector de opciones",
+                        JOptionPane.QUESTION_MESSAGE,
+                        null, // null para icono defecto
+                        obj,
+                        "Barras verticales");
+                if (diag != null) {
+                    //Tipo de busqueda
+                    if (busqueda.equals("Cantidad proyectos área")) {
+                        bus = 1;
+                        //Tipo de diagrama
+                        tipo = 0;
+                        if (diag.equals("Barras verticales")) {
+                            tipo = 1;
+                        } else if (diag.equals("Barras horizontal")) {
+                            tipo = 2;
+                        } else {
+                            tipo = 3;
+                        }
+                    }
+                }
+            } else {
+                if (busqueda.equals("Procesos FE")) {
+                    bus = 2;
+                    tipo = 1;
+                } else if (busqueda.equals("Procesos TE")) {
+                    bus = 3;
+                    tipo = 1;
+                } else {
+                    bus = 4;
+                    tipo = 1;
+                }
+            }
+            Controlador.Diagramas dia = new Controlador.Diagramas();
+            dia.EnrutamientoProceso(tipo, bus);
+        }
     }//GEN-LAST:event_jLabel6MouseReleased
 
     //Variables
@@ -230,7 +281,7 @@ public class Inicio extends javax.swing.JPanel {
 
     public ImageIcon llamarDiagramas(int tipoDiagrama, int busqueda) {
         Controlador.Diagramas obj = new Controlador.Diagramas();
-        return obj.graficaCantidad(tipoDiagrama);
+        return obj.graficaCantidad(tipoDiagrama, 0);
     }
 
     private void fechaYdatosProduccion() {

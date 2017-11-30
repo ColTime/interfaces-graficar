@@ -527,7 +527,7 @@ public class proyecto1 extends javax.swing.JPanel {
 
     private ImageIcon llamarDiagramas(int tipoDiagrama, int busqueda) {
         Controlador.Diagramas obj = new Controlador.Diagramas();
-        return obj.graficaCantidad(tipoDiagrama);
+        return obj.graficaCantidad(tipoDiagrama, 0);
     }
 
     private String rutaGuardado() {

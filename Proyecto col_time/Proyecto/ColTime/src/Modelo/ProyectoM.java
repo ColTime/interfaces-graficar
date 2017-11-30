@@ -129,7 +129,7 @@ public class ProyectoM {
     }
 
     public boolean registrarProyectoQRM(String infoP[]) {
-
+        //Cuerpo del la función...
         return true;
     }
 
@@ -257,10 +257,6 @@ public class ProyectoM {
             JOptionPane.showMessageDialog(null, "Error! " + e);
         }
         return crsP;
-    }
-
-    public void generar_Reportes() {
-
     }
 
     public String consultarNumeroOrden() {
@@ -407,6 +403,28 @@ public class ProyectoM {
             JOptionPane.showMessageDialog(null, "¡Error!" + e);
         }
         return res;
+    }
+
+    public CachedRowSet consutalarProcesosAreaM(int op) {
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query------------------------------------------------------------>
+            String Qry = "CALL PA_DiagramaFETEEN(?)";
+            ps = con.prepareStatement(Qry);
+            ps.setInt(1, op);
+            rs = ps.executeQuery();
+            crsP = new CachedRowSetImpl();
+            crsP.populate(rs);
+            con.close();
+            conexion.destruir();
+            conexion.cerrar(rs);
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "¡Error!" + e);
+        }
+        return crsP;
     }
 
     @Override

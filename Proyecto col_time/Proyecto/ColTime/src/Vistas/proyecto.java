@@ -1164,9 +1164,9 @@ public class proyecto extends javax.swing.JPanel {
         String infoP[] = jTProyectoQR.getText().split(";");
         //Numero orden, área a la que aplica, tipo proyecto, nombre cliente, nombre proyecto, cantidad, ejecución, tipo PCB, lleva antisolder, lleva ruteo, fecha entrega.
         if (infoP.length == 11) {
-
+            //Validar el QR...
             Proyecto obj = new Proyecto();
-
+            obj.registrarProyectoQR(infoP);
         } else {
             //Muestra mensaje de error en el QR...
         }

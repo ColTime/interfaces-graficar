@@ -100,6 +100,11 @@ public class Proyecto {
         return obj.registrarProyectoQRM(infoP);
     }
 
+    public CachedRowSet consutalarProcesosArea(int op) {
+        ProyectoM obj = new ProyectoM();
+        return obj.consutalarProcesosAreaM(op);
+    }
+
     public CachedRowSet consultar_Proyecto(String tipo) {
         Modelo.ProyectoM obj = new Modelo.ProyectoM();
         return obj.consultar_Proyecto(idOrden, nombreCliente, nombreProyecto, fecha, tipo);
