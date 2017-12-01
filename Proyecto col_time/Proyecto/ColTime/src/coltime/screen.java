@@ -80,7 +80,7 @@ public class screen extends javax.swing.JFrame implements Runnable {
         jLabel6.setBackground(new java.awt.Color(102, 102, 102));
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel6.setText("Software desarrollado por Juan David Marulanda...");
+        jLabel6.setText("Software desarrollado por Juan David Marulanda Paniagua");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -91,8 +91,8 @@ public class screen extends javax.swing.JFrame implements Runnable {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
@@ -172,9 +172,9 @@ public class screen extends javax.swing.JFrame implements Runnable {
     public void run() {
         while (tiempo != null) {
             try {
-                Thread.sleep(10);
+                Thread.sleep(5000);
                 this.dispose();
-                Thread.sleep(50);
+                Thread.sleep(500);
                 Menu men = new Menu(Integer.parseInt(jLCargo.getText()));
                 men.setVisible(true);
                 
