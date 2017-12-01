@@ -728,10 +728,16 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                             if (TDetalle.getValueAt(i, 1).toString().equals("FE") && TDetalle.getValueAt(i, 2).toString().equals("Circuito")) {
                                 //Se valida el estado del Circuito de FE 
                                 estadoModificacion(i, obj.jCCircuito, obj.jTCircuito);
+                                obj.cbMaterialCircuito.setEnabled(false);
+                                obj.jCAntisolderC.setEnabled(false);
+                                obj.jCRuteoC.setEnabled(false);
                             } else {
                                 if (TDetalle.getValueAt(i, 1).toString().equals("FE") && TDetalle.getValueAt(i, 2).toString().equals("PCB")) {
                                     //Se valida el estado del PCB de FE 
                                     estadoModificacion(i, obj.jCPCBTE, obj.jTPCBTE);
+                                    obj.cbMaterialPCBTE.setEnabled(false);
+                                    obj.jCAntisolderP.setEnabled(false);
+                                    obj.jCRuteoP.setEnabled(false);
                                 } else {
                                     if (TDetalle.getValueAt(i, 1).toString().equals("TE") && TDetalle.getValueAt(i, 2).toString().equals("Teclado")) {
                                         //Se valida el estado del Teclado de TE 

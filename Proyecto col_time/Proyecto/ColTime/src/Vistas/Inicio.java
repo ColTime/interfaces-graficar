@@ -219,6 +219,7 @@ public class Inicio extends javax.swing.JPanel {
 
     private void jLabel6MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseReleased
 //Muestra la estadistica de las areas y permitira buscar por rango de fechas
+//Falta el diagrama de cantidad de proyecto de a´reas de produccion con el rango de fechas--------------------------------------------------------------------------->
         proyecto1 diagrama = new proyecto1();
         Object obj[] = null;
         int bus = 0;

@@ -168,7 +168,7 @@ public class Usuarios1 extends javax.swing.JPanel {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setText("Imagen");
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconmonstr-user-5-120.png"))); // NOI18N
         jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 220));
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));

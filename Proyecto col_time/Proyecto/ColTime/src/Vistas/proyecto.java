@@ -290,9 +290,9 @@ public class proyecto extends javax.swing.JPanel {
         jCTeclado.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jCTeclado.setForeground(new java.awt.Color(102, 102, 102));
         jCTeclado.setText("Teclado");
-        jCTeclado.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jCTecladoMouseClicked(evt);
+        jCTeclado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCTecladoActionPerformed(evt);
             }
         });
         jPDetalles1.add(jCTeclado, new org.netbeans.lib.awtextra.AbsoluteConstraints(616, 19, -1, -1));
@@ -341,9 +341,9 @@ public class proyecto extends javax.swing.JPanel {
         jCConversor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jCConversor.setForeground(new java.awt.Color(102, 102, 102));
         jCConversor.setText("Conversor");
-        jCConversor.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jCConversorMouseClicked(evt);
+        jCConversor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCConversorActionPerformed(evt);
             }
         });
         jPDetalles1.add(jCConversor, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 19, -1, -1));
@@ -362,9 +362,9 @@ public class proyecto extends javax.swing.JPanel {
         jCRepujado.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jCRepujado.setForeground(new java.awt.Color(102, 102, 102));
         jCRepujado.setText("Repujado");
-        jCRepujado.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jCRepujadoMouseClicked(evt);
+        jCRepujado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCRepujadoActionPerformed(evt);
             }
         });
         jPDetalles1.add(jCRepujado, new org.netbeans.lib.awtextra.AbsoluteConstraints(296, 19, -1, -1));
@@ -388,9 +388,9 @@ public class proyecto extends javax.swing.JPanel {
         jCTroquel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jCTroquel.setForeground(new java.awt.Color(102, 102, 102));
         jCTroquel.setText("Troquel");
-        jCTroquel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jCTroquelMouseClicked(evt);
+        jCTroquel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCTroquelActionPerformed(evt);
             }
         });
         jPDetalles1.add(jCTroquel, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 19, 80, -1));
@@ -399,9 +399,9 @@ public class proyecto extends javax.swing.JPanel {
         jCCircuito.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jCCircuito.setForeground(new java.awt.Color(102, 102, 102));
         jCCircuito.setText("Circuito");
-        jCCircuito.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jCCircuitoMouseClicked(evt);
+        jCCircuito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCCircuitoActionPerformed(evt);
             }
         });
         jPDetalles1.add(jCCircuito, new org.netbeans.lib.awtextra.AbsoluteConstraints(456, 19, -1, -1));
@@ -415,9 +415,9 @@ public class proyecto extends javax.swing.JPanel {
         jCPCBTE.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jCPCBTE.setForeground(new java.awt.Color(102, 102, 102));
         jCPCBTE.setText("PCB");
-        jCPCBTE.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jCPCBTEMouseClicked(evt);
+        jCPCBTE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCPCBTEActionPerformed(evt);
             }
         });
         jPDetalles1.add(jCPCBTE, new org.netbeans.lib.awtextra.AbsoluteConstraints(538, 19, -1, -1));
@@ -426,9 +426,9 @@ public class proyecto extends javax.swing.JPanel {
         jCStencil.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jCStencil.setForeground(new java.awt.Color(102, 102, 102));
         jCStencil.setText("Stencil");
-        jCStencil.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jCStencilMouseClicked(evt);
+        jCStencil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCStencilActionPerformed(evt);
             }
         });
         jPDetalles1.add(jCStencil, new org.netbeans.lib.awtextra.AbsoluteConstraints(376, 19, -1, -1));
@@ -470,9 +470,9 @@ public class proyecto extends javax.swing.JPanel {
         jCIntegracion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jCIntegracion.setForeground(new java.awt.Color(102, 102, 102));
         jCIntegracion.setText("Integración");
-        jCIntegracion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jCIntegracionMouseClicked(evt);
+        jCIntegracion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCIntegracionActionPerformed(evt);
             }
         });
         jPDetalles1.add(jCIntegracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(695, 19, -1, -1));
@@ -920,62 +920,6 @@ public class proyecto extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void jCConversorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCConversorMouseClicked
-        activarjTfilex(jCConversor, jTConversor);
-    }//GEN-LAST:event_jCConversorMouseClicked
-
-    private void jCTroquelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCTroquelMouseClicked
-        activarjTfilex(jCTroquel, jTTroquel);
-    }//GEN-LAST:event_jCTroquelMouseClicked
-
-    private void jCRepujadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCRepujadoMouseClicked
-        activarjTfilex(jCRepujado, jTRepujado);
-    }//GEN-LAST:event_jCRepujadoMouseClicked
-
-    private void jCStencilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCStencilMouseClicked
-        activarjTfilex(jCStencil, jTStencil);
-    }//GEN-LAST:event_jCStencilMouseClicked
-
-    private void jCCircuitoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCCircuitoMouseClicked
-        activarjTfilex(jCCircuito, jTCircuito);
-        if (jCCircuito.isSelected()) {
-            cbMaterialCircuito.setEnabled(true);
-            jCAntisolderC.setEnabled(true);
-            jCRuteoC.setEnabled(true);
-        } else {
-            cbMaterialCircuito.setSelectedIndex(0);
-            cbMaterialCircuito.setEnabled(false);
-            jCAntisolderC.setEnabled(false);
-            jCRuteoC.setEnabled(false);
-            jCAntisolderC.setSelected(false);
-            jCRuteoC.setSelected(false);
-        }
-    }//GEN-LAST:event_jCCircuitoMouseClicked
-
-    private void jCPCBTEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCPCBTEMouseClicked
-        activarjTfilex(jCPCBTE, jTPCBTE);
-        if (jCPCBTE.isSelected()) {
-            jCAntisolderP.setEnabled(true);
-            jCRuteoP.setEnabled(true);
-            cbMaterialPCBTE.setEnabled(true);
-        } else {
-            cbMaterialPCBTE.setSelectedIndex(0);
-            jCAntisolderP.setEnabled(false);
-            jCRuteoP.setEnabled(false);
-            jCAntisolderP.setSelected(false);
-            jCRuteoP.setSelected(false);
-            cbMaterialPCBTE.setEnabled(false);
-        }
-    }//GEN-LAST:event_jCPCBTEMouseClicked
-
-    private void jCTecladoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCTecladoMouseClicked
-        activarjTfilex(jCTeclado, jTTeclado);
-    }//GEN-LAST:event_jCTecladoMouseClicked
-
-    private void jCIntegracionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCIntegracionMouseClicked
-        activarjTfilex(jCIntegracion, jTIntegracion);
-    }//GEN-LAST:event_jCIntegracionMouseClicked
-
     private void jTNombreClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNombreClienteKeyTyped
         validarCampos();
         char cara = evt.getKeyChar();
@@ -1171,6 +1115,56 @@ public class proyecto extends javax.swing.JPanel {
             //Muestra mensaje de error en el QR...
         }
     }//GEN-LAST:event_jTProyectoQRKeyPressed
+
+    private void jCConversorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCConversorActionPerformed
+        activarjTfilex(jCConversor, jTConversor);
+    }//GEN-LAST:event_jCConversorActionPerformed
+
+    private void jCTroquelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCTroquelActionPerformed
+        activarjTfilex(jCTroquel, jTTroquel);
+    }//GEN-LAST:event_jCTroquelActionPerformed
+
+    private void jCRepujadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCRepujadoActionPerformed
+        activarjTfilex(jCRepujado, jTRepujado);
+    }//GEN-LAST:event_jCRepujadoActionPerformed
+
+    private void jCStencilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCStencilActionPerformed
+        activarjTfilex(jCStencil, jTStencil);
+    }//GEN-LAST:event_jCStencilActionPerformed
+
+    private void jCCircuitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCCircuitoActionPerformed
+        activarjTfilex(jCCircuito, jTCircuito);
+        if (jCCircuito.isSelected()) {
+            cbMaterialCircuito.setEnabled(true);
+            jCAntisolderC.setEnabled(true);
+            jCRuteoC.setEnabled(true);
+        } else {
+            cbMaterialCircuito.setEnabled(false);
+            jCAntisolderC.setEnabled(false);
+            jCRuteoC.setEnabled(false);
+        }
+    }//GEN-LAST:event_jCCircuitoActionPerformed
+
+    private void jCPCBTEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCPCBTEActionPerformed
+        activarjTfilex(jCPCBTE, jTPCBTE);
+        if (jCPCBTE.isSelected()) {
+            cbMaterialPCBTE.setEnabled(true);
+            jCAntisolderP.setEnabled(true);
+            jCRuteoP.setEnabled(true);
+        } else {
+            cbMaterialPCBTE.setEnabled(false);
+            jCAntisolderP.setEnabled(false);
+            jCRuteoP.setEnabled(false);
+        }
+    }//GEN-LAST:event_jCPCBTEActionPerformed
+
+    private void jCTecladoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCTecladoActionPerformed
+        activarjTfilex(jCTeclado, jTTeclado);
+    }//GEN-LAST:event_jCTecladoActionPerformed
+
+    private void jCIntegracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCIntegracionActionPerformed
+        activarjTfilex(jCIntegracion, jTIntegracion);
+    }//GEN-LAST:event_jCIntegracionActionPerformed
 //Metodos-------------------------------------------------------------------->
 
     private Paragraph tipoProyecto(int tipo, int negocio) {

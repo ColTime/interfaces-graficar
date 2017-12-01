@@ -1,8 +1,19 @@
-package Modelo;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package informecoltime;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
+/**
+ *
+ * @author Aprendiz
+ */
 public class Conexion {
 
     private Connection conexion;
@@ -14,10 +25,6 @@ public class Conexion {
 
     public Conexion() {
 
-    }
-
-    public Conexion(int p) {
-        //Con esto vamos a validar la conexion con el servidor...
     }
 
     public void establecerConexion() {
@@ -62,5 +69,4 @@ public class Conexion {
     protected void finalize() throws Throwable {
         super.finalize(); //To change body of generated methods, choose Tools | Templates.
     }
-
 }
