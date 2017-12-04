@@ -29,7 +29,7 @@ public class FE_TE_INM {
     int estado = 0;
 
     //Metodos------------------------------------------------->
-    //No se te olvide tener en cuenta el id del lector y concatenar a la informacion despues de leer el codigo***
+    //No se te olvide tener en cuenta el id del lector y concatenar a la informacion despues de leer el código QR***
     public boolean iniciar_Pausar_Reiniciar_Toma_Tiempo(int orden, int detalle, int negocio, int lector, int cantidadTerminada) {
         try {
             conexion = new Conexion();
@@ -80,7 +80,6 @@ public class FE_TE_INM {
                     rs.next();
                     T_Total = convertirHorasAMinutos(rs.getString(1).split(":"), rs.getString(2).split(":"));
                     Qry = "CALL PA_PausarTomaDeTiempoDeProcesos(?,?,?,?,?,?,?)";
-                    //CALL PA_CambiarEstadoDeProductos(busqueda,detalle);
                     ps = con.prepareStatement(Qry);
                     ps.setInt(1, orden);
                     ps.setInt(2, detalle);
@@ -90,14 +89,14 @@ public class FE_TE_INM {
                     ps.setInt(6, cantidadTerminada + cantidadAntigua);
                     ps.setInt(7, estado);
                     res = !ps.execute();
-                    //Promedio de producto por minuto
+                    //Promedio de producto por minuto.
                     cantidadProductoMinuto(detalle, negocio, lector);
-
+                    //Tiempo total del proceso.
+                    actualizarTotalTiempoProyecto(detalle);
                     //Si no cumple la condición va a retornar un falso y monstrara una mensaje de advertencia.
                 } else {
                     res = false;
                 }
-
             } else {
                 //Si no existe se ejecutara el procedimiento para iniciar o renaudar el tiempo
                 Qry = "CALL PA_IniciarRenaudarTomaDeTiempoProcesos(?,?,?,?)";
@@ -116,6 +115,59 @@ public class FE_TE_INM {
             JOptionPane.showMessageDialog(null, "Error! " + e);
         }
         return res;
+    }
+
+    private String totalTiempoProyecto(ResultSet crsT) {
+        int minutos = 0;
+        int segundos = 0;
+        String tiempo[] = null;
+        String cadena = "";
+        try {
+            while (crsT.next()) {
+                tiempo = crsT.getString(1).split(":");
+                segundos += Integer.parseInt(tiempo[1]);
+                minutos += Integer.parseInt(tiempo[0]);
+            }
+            //Convrtir minutos a segundos
+            while (segundos >= 60) {
+                minutos++;
+                segundos = segundos - 60;
+            }
+            //Cadena
+            cadena = (((minutos <= 9) ? "0" : "") + minutos + ":" + ((segundos <= 9) ? "0" : "") + segundos);
+        } catch (Exception e) {
+            //Mensaje de error---
+        }
+        return cadena;
+    }
+
+    private void actualizarTotalTiempoProyecto(int detalle) {
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+//          Query------------------------------------------------------------>
+            String Qry = "CALL PA_TiempoProceso(?)";
+            ps = con.prepareStatement(Qry);
+            ps.setInt(1, detalle);
+            rs = ps.executeQuery();
+            String cadena = totalTiempoProyecto(rs);
+
+            //Código...
+            Qry = "CALL PA_ActualizarTiempoTotalProducto(?,?)";
+            ps = con.prepareStatement(Qry);
+            ps.setInt(1, detalle);
+            ps.setString(2, cadena);
+            ps.execute();
+            //...
+
+            con.close();
+            conexion.destruir();
+            conexion.cerrar(rs);
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error! " + e);
+        }
     }
 
     private void cantidadProductoMinuto(int detalle, int negocio, int lector) {

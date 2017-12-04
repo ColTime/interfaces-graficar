@@ -72,15 +72,16 @@ public class DetalleProyectoM {
             String Qry = "";
             if (op == 1) {
                 //Se valida si el proyecto ya tenia antecedentes registrados en esa misma ubicacion
-                Qry = "CALL PA_ValidarUbicacionPNC(?,?)";
+                Qry = "CALL PA_ValidarUbicacionPNC(?,?,?)";
                 ps = con.prepareStatement(Qry);
                 ps.setInt(1, Integer.parseInt(numerOrden));
                 ps.setString(2, ubicacion);
+                ps.setInt(3, id);
                 rs = ps.executeQuery();
                 rs.next();
                 if (rs.getInt(1) != 0) {
                     //Se modifica siempre y cuando el proyecto tenga un PNC ya registrado en la misma ubicacion
-                    modificarPNC(numerOrden, rs.getInt(1), cantidad, material, negocio, tipoNegocio);
+                    modificarPNC(numerOrden, rs.getInt(1), cantidad, material, negocio, tipoNegocio, ubicacion);
                 } else {
                     //Si no se registra el producto no conforme desde 0 
                     Qry = "SELECT FU_RegistrarDetalleProyecto(?,?,?,?,?,?,?,?)";
@@ -145,7 +146,7 @@ public class DetalleProyectoM {
                     }
                 }
             } else if (op == 2) {
-                modificarPNC(numerOrden, id, cantidad, material, negocio, tipoNegocio);
+                modificarPNC(numerOrden, id, cantidad, material, negocio, tipoNegocio, ubicacion);
             }
             //Cierre de conexiones
             conexion.cerrar(rs);
@@ -243,10 +244,10 @@ public class DetalleProyectoM {
     }
 //----------------------------------------------
 
-    private void modificarPNC(String numerOrden, int id, String cantidad, String material, String negocio, String tipoNegocio) {
+    private void modificarPNC(String numerOrden, int id, String cantidad, String material, String negocio, String tipoNegocio, String ubicacion) {
         //PreparedSteamate y detalle----------------------------------->
         try {
-            String Qry = "SELECT FU_ModificarDetalleProyecto(?,?,?,?,?)";
+            String Qry = "SELECT FU_ModificarDetalleProyecto(?,?,?,?,?,?)";
             ps = con.prepareStatement(Qry);
             ps.setInt(1, Integer.parseInt(numerOrden));
             ps.setInt(2, id);
@@ -259,6 +260,7 @@ public class DetalleProyectoM {
             } else if (negocio.equals("IN")) {
                 ps.setInt(5, 3);
             }
+            ps.setString(6, ubicacion);
             rs = ps.executeQuery();
             rs.next();
             res = rs.getBoolean(1);
@@ -283,15 +285,16 @@ public class DetalleProyectoM {
 //
 //        return true;
 //    }
-    public CachedRowSet consultar_Detalle_Proyecto(String numeOrden) {
+    public CachedRowSet consultar_Detalle_Proyecto(String numeOrden, int estado) {
         try {
             conexion = new Conexion();
             conexion.establecerConexion();
             con = conexion.getConexion();
             //Query------------------------------------------------------------>
-            String Qry = "CALL PA_ConsultarDetalleProyecto(?)";
+            String Qry = "CALL PA_ConsultarDetalleProyecto(?,?)";
             ps = con.prepareStatement(Qry);
             ps.setInt(1, Integer.parseInt(numeOrden));
+            ps.setInt(2, estado);
             rs = ps.executeQuery();
             crs = new CachedRowSetImpl();
             crs.populate(rs);

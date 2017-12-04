@@ -1078,10 +1078,6 @@ public class Menu extends javax.swing.JFrame {
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
         String infoP[] = jTLector.getText().split(";");
-
-        /*if(){
-        //Validacion del estado del proyecto----------------------------------->
-        }*/
         Proyecto validar = new Proyecto();
         if (validar.validarEliminacion(Integer.parseInt(infoP[0]))) {
             //#--------------------------------------------------------------------------------------------------

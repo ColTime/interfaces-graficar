@@ -75,9 +75,9 @@ public class Proyecto {
     }
 
     //Metodos y funciones------------------------------------------------>
-    public CachedRowSet diagrama() {
+    public CachedRowSet diagrama(String inicio, String fin) {
         ProyectoM obj = new ProyectoM();
-        return obj.diagramaM();
+        return obj.diagramaM(inicio, fin);
     }
 
     public boolean registrar_Modificar_Proyecto(String comercial, int op) {

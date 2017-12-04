@@ -1423,13 +1423,25 @@ public class proyecto extends javax.swing.JPanel {
             if (res) {
                 botonRegistrarModificar();
             } else {
-                new rojerusan.RSNotifyAnimated("¡Error!", "No se puede modificar este proyecto porque ya esta en ejecucion", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
+                //Se modificara solo la información filtraria y el detalle
+                new rojerusan.RSNotifyAnimated("¡Error!", "No se puede modificar el detalle de este proyecto porque ya esta en ejecución.", 8, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
+                Controlador.Proyecto procet = new Controlador.Proyecto();
+                modificarInfoProyecto(procet);
+                if (procet.registrar_Modificar_Proyecto(Menu.jDocumento.getText(), 2)) {//El dos es para poder modificar solo la informacion del proyecto
+                    new rojerusan.RSNotifyAnimated("Listo!!", "La informacion filtraria del proyecto con el numero de orden: " + jTNorden.getText() + " fue modificado exitosamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+                    limpiarID();
+                    limpiarCampos();
+                    cambiarEstadoFalso();
+                    cambiarEstadoBotones();
+                    btnNuevo.setEnabled(true);
+                } else {
+                    new rojerusan.RSNotifyAnimated("Error!", "La informacion filtraria del proyecto con el numero de orden: " + jTNorden.getText() + " no pudo ser modificado exitosamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
+                }
             }
         }
     }
 
-    private void botonRegistrarModificar() {
-        Controlador.Proyecto obj = new Controlador.Proyecto();
+    private void modificarInfoProyecto(Controlador.Proyecto obj) {
         obj.setNombreCliente(jTNombreCliente.getText());
         obj.setNombreProyecto(jTNombreProyecto.getText());
         obj.setTipoProyecto(cbTipo.getSelectedItem().toString());
@@ -1450,6 +1462,11 @@ public class proyecto extends javax.swing.JPanel {
 //        v[10] = jCIntegracion.isSelected() ? true : false;
         obj.setDetalles(v);
         obj.setIdOrden(Integer.parseInt(jTNorden.getText()));
+    }
+
+    private void botonRegistrarModificar() {
+        Controlador.Proyecto obj = new Controlador.Proyecto();
+        modificarInfoProyecto(obj);
         if (obj.registrar_Modificar_Proyecto(Menu.jDocumento.getText(), op)) {
             if (op == 1) {
                 //Registrar el proyecto

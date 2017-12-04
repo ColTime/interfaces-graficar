@@ -2,6 +2,8 @@ package Vistas;
 
 import Controlador.Proyecto;
 import coltime.Menu;
+import com.toedter.calendar.JDateChooser;
+import java.text.SimpleDateFormat;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -13,6 +15,9 @@ public class Inicio extends javax.swing.JPanel {
         initComponents();
         fechaYdatosProduccion();
     }
+    //Variables
+    String inicio = "";
+    String finali = "";
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -86,7 +91,7 @@ public class Inicio extends javax.swing.JPanel {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,6 +230,7 @@ public class Inicio extends javax.swing.JPanel {
         int bus = 0;
         int tipo = 1;
         Object diag = null;
+        Object fech = null;
         Object busqueda = JOptionPane.showInputDialog(new JComboBox(),
                 "Seleccione el diagrama",
                 "Selector de opciones",
@@ -259,6 +265,28 @@ public class Inicio extends javax.swing.JPanel {
                         }
                     }
                 }
+                //Fecha de inicio y fin
+                String s = "";
+                SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
+
+                JDateChooser ini = new JDateChooser();
+                ini.setName("Inicio");
+                String message = "Fecha de inicio:\n";
+                Object[] params = {message, ini};
+                JOptionPane.showConfirmDialog(null, params, "Fechas", JOptionPane.PLAIN_MESSAGE);
+
+                if (ini.getDate() != null) {
+                    inicio = formato.format(ini.getDate());//fecha de inicio
+
+                    JDateChooser fin = new JDateChooser();
+                    fin.setName("Fin");
+                    message = "Fecha de inicio:\n";
+                    Object[] params1 = {message, fin};
+                    JOptionPane.showConfirmDialog(null, params1, "Fechas", JOptionPane.PLAIN_MESSAGE);
+                    if (fin.getDate() != null) {
+                        finali = formato.format(fin.getDate());//Fecha de finalizacion
+                    }
+                }
             } else {
                 if (busqueda.equals("Procesos FE")) {
                     bus = 2;
@@ -272,7 +300,7 @@ public class Inicio extends javax.swing.JPanel {
                 }
             }
             Controlador.Diagramas dia = new Controlador.Diagramas();
-            dia.EnrutamientoProceso(tipo, bus);
+            dia.EnrutamientoProceso(tipo, bus, inicio, finali);
         }
     }//GEN-LAST:event_jLabel6MouseReleased
 
@@ -282,37 +310,33 @@ public class Inicio extends javax.swing.JPanel {
 
     public ImageIcon llamarDiagramas(int tipoDiagrama, int busqueda) {
         Controlador.Diagramas obj = new Controlador.Diagramas();
-        return obj.graficaCantidad(tipoDiagrama, 0);
+        return obj.graficaCantidad(tipoDiagrama, 0, "", "");
     }
 
     private void fechaYdatosProduccion() {
         try {
-            Proyecto obj = new Proyecto();
+                Proyecto obj = new Proyecto();
             crs = obj.fechaYdatosProduccion();
             //Hora y formato estandar
-            crs.next();
-            cantidadArea(crs);
-            jLFecha.setText("Fecha: " + crs.getString(1));
-            jLCantidadP.setText(crs.getString(3));
-            //Teclados
-            crs.next();
-            cantidadArea(crs);
-            //Ensamble
-            crs.next();
             cantidadArea(crs);
         } catch (Exception e) {
             //Mensaje de alerta
+            JOptionPane.showMessageDialog(null, "Error! Fecha y datos de producción" + e);
         }
     }
 
     private void cantidadArea(CachedRowSet crsf) {
         try {
-            if (crsf.getString(4).equals("1")) {
-                jLCantidadF.setText(crsf.getString(2));
-            } else if (crsf.getString(4).equals("2")) {
-                jLCantidadT.setText(crsf.getString(2));
-            } else if (crsf.getString(4).equals("3")) {
-                jLCantidadE.setText(crsf.getString(2));
+            while (crsf.next()) {
+                jLFecha.setText("Fecha: " + crsf.getString(1));
+                jLCantidadP.setText(crsf.getString(3));
+                if (crsf.getString(4).equals("1")) {
+                    jLCantidadF.setText(crsf.getString(2));
+                } else if (crsf.getString(4).equals("2")) {
+                    jLCantidadT.setText(crsf.getString(2));
+                } else if (crsf.getString(4).equals("3")) {
+                    jLCantidadE.setText(crsf.getString(2));
+                }
             }
         } catch (Exception e) {
         }

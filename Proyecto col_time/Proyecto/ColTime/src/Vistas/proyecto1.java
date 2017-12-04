@@ -398,7 +398,19 @@ public class proyecto1 extends javax.swing.JPanel {
     }//GEN-LAST:event_btnConsultarDetalleActionPerformed
 
     private void cbProcedoPNCItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbProcedoPNCItemStateChanged
-
+        if (op == 1) {
+            if (!jTCantindad.getText().equals("")) {
+                btnGuardar.setEnabled(true);
+            } else {
+                btnGuardar.setEnabled(false);
+            }
+        } else {
+            if (!jTCantindad.getText().equals("")) {
+                btnModificarPNC.setEnabled(true);
+            } else {
+                btnModificarPNC.setEnabled(false);
+            }
+        }
     }//GEN-LAST:event_cbProcedoPNCItemStateChanged
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
@@ -406,6 +418,9 @@ public class proyecto1 extends javax.swing.JPanel {
         btnConsultarDetalle.setEnabled(true);
         btnNuevo.setEnabled(false);
         btnModificarPNC.setEnabled(false);
+        btnGenerarQR.setEnabled(false);
+        btnDelete.setEnabled(false);
+        jLDetalle.setText("0");
         op = 1;
         limpiar();
     }//GEN-LAST:event_btnNuevoActionPerformed
@@ -450,7 +465,6 @@ public class proyecto1 extends javax.swing.JPanel {
                 btnModificarPNC.setEnabled(false);
             }
         }
-
     }//GEN-LAST:event_jTCantindadKeyReleased
 
     private void graficaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_graficaMouseReleased
@@ -527,7 +541,7 @@ public class proyecto1 extends javax.swing.JPanel {
 
     private ImageIcon llamarDiagramas(int tipoDiagrama, int busqueda) {
         Controlador.Diagramas obj = new Controlador.Diagramas();
-        return obj.graficaCantidad(tipoDiagrama, 0);
+        return obj.graficaCantidad(tipoDiagrama, 0, "", "");
     }
 
     private String rutaGuardado() {

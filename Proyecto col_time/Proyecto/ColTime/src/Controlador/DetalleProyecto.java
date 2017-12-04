@@ -17,7 +17,7 @@ public class DetalleProyecto {
     private String tipoNegocio = "";
     private int estado = 0;
     private String material = "";
-
+    
     //Set-------------------------------------------------------->
     public String getCantidad() {
         return cantidad;
@@ -85,9 +85,9 @@ public class DetalleProyecto {
         return true;
     }
 
-    public CachedRowSet consultar_Detalle_Proyecto(String numerOrden) {
+    public CachedRowSet consultar_Detalle_Proyecto(String numerOrden,int estado) {
         DetalleProyectoM obj = new DetalleProyectoM();
-        return obj.consultar_Detalle_Proyecto(numerOrden);
+        return obj.consultar_Detalle_Proyecto(numerOrden,estado);
     }
 
     public CachedRowSet consultarProcesosFE(int detalle) {

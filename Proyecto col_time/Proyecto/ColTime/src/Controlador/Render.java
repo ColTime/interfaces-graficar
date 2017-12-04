@@ -2,7 +2,6 @@ package Controlador;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.UIManager;

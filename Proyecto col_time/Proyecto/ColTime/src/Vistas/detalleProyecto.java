@@ -2,7 +2,6 @@ package Vistas;
 
 import Controlador.DetalleProyecto;
 import Controlador.Tabla;
-import coltime.Menu;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -10,7 +9,7 @@ import javax.swing.JOptionPane;
 import rojerusan.RSNotifyAnimated;
 
 public class detalleProyecto extends javax.swing.JDialog {
-
+    
     public detalleProyecto(java.awt.Frame parent, boolean modal, int detalle, int negocio, String orden, int permiso) {//Falta organizar la variable "tipo" para que traiga el valor correspondiente
         super(parent, modal);
         initComponents();
@@ -21,17 +20,18 @@ public class detalleProyecto extends javax.swing.JDialog {
         } else {
             this.setTitle(orden + " - " + "Ensamble");
         }
-
+        
         this.detalle = detalle;
         this.negocio = negocio;
         this.setLocationRelativeTo(null);
         this.permiso = permiso;
         cargarTabla();
-        jTNombreCliente.setEnabled(false);
-        jTNombreProyecto.setEnabled(false);
-        jTFechaEntrega.setEnabled(false);
-        jTFechaIngreso.setEnabled(false);
-        jTCantidadTotal.setEnabled(false);
+        jTNombreCliente.setEditable(false);
+        jTNombreProyecto.setEditable(false);
+        jTFechaEntrega.setEditable(false);
+        jTFechaIngreso.setEditable(false);
+        jTCantidadTotal.setEditable(false);
+        jTTimepoTotal.setEditable(false);
         this.setIconImage(new ImageIcon(getClass().getResource("/imagenesEmpresa/favicon.png")).getImage());
     }
     //variables
@@ -39,7 +39,7 @@ public class detalleProyecto extends javax.swing.JDialog {
     private static int detalle = 0;
     private static int negocio = 0, permiso = 0;
     int rows = -1;
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -60,6 +60,8 @@ public class detalleProyecto extends javax.swing.JDialog {
         jTFechaIngreso = new elaprendiz.gui.textField.TextFieldRoundBackground();
         jTCantidadTotal = new elaprendiz.gui.textField.TextFieldRoundBackground();
         jLabel8 = new javax.swing.JLabel();
+        jTTimepoTotal = new elaprendiz.gui.textField.TextFieldRoundBackground();
+        jLabel9 = new javax.swing.JLabel();
 
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/retro.png"))); // NOI18N
         jMenuItem1.setText("Actualizar");
@@ -162,6 +164,15 @@ public class detalleProyecto extends javax.swing.JDialog {
         jLabel8.setForeground(new java.awt.Color(128, 128, 131));
         jLabel8.setText("Cantidad:");
 
+        jTTimepoTotal.setBorder(null);
+        jTTimepoTotal.setColorDeBorde(new java.awt.Color(204, 204, 204));
+        jTTimepoTotal.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
+        jTTimepoTotal.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(128, 128, 131));
+        jLabel9.setText("Tiempo Total:");
+
         javax.swing.GroupLayout jPInformacionLayout = new javax.swing.GroupLayout(jPInformacion);
         jPInformacion.setLayout(jPInformacionLayout);
         jPInformacionLayout.setHorizontalGroup(
@@ -179,7 +190,13 @@ public class detalleProyecto extends javax.swing.JDialog {
                 .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTCantidadTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTTimepoTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPInformacionLayout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
                 .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
@@ -195,23 +212,28 @@ public class detalleProyecto extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPInformacionLayout.createSequentialGroup()
-                        .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTNombreProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTFechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTCantidadTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPInformacionLayout.createSequentialGroup()
                             .addGap(21, 21, 21)
                             .addComponent(jTNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel4))))
+                            .addComponent(jLabel4)))
+                    .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPInformacionLayout.createSequentialGroup()
+                            .addGap(21, 21, 21)
+                            .addComponent(jTTimepoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPInformacionLayout.createSequentialGroup()
+                            .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel8)
+                                .addComponent(jLabel9))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jTNombreProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTFechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTCantidadTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -254,10 +276,10 @@ public class detalleProyecto extends javax.swing.JDialog {
         //Botones de seguridad
         String[] botones = {" SI ", " NO "};
         rows = TDetalleProduccion.rowAtPoint(evt.getPoint());
-
+        
         int column = TDetalleProduccion.getColumnModel().getColumnIndexAtX(evt.getX());
         int row = evt.getY() / TDetalleProduccion.getRowHeight();
-
+        
         if (row < TDetalleProduccion.getRowCount() && row >= 0 && column < TDetalleProduccion.getColumnCount() && column >= 0) {
             Object value = TDetalleProduccion.getValueAt(row, column);
             if (value instanceof JButton) {
@@ -288,7 +310,7 @@ public class detalleProyecto extends javax.swing.JDialog {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         cargarTabla();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-
+    
     private void cargarTabla() {
         Tabla personalizar = new Tabla();
         personalizar.visualizar(TDetalleProduccion, detalle, negocio);
@@ -301,10 +323,11 @@ public class detalleProyecto extends javax.swing.JDialog {
             jTFechaIngreso.setText("  " + crs.getString(3));
             jTFechaEntrega.setText("  " + crs.getString(4));
             jTCantidadTotal.setText("  " + crs.getString(5));
+            jTTimepoTotal.setText("  " + crs.getString(6));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error!! " + e);
         }
-
+        
         if (permiso == 1) {
             editarTamañoColumnas();
         }
@@ -313,7 +336,7 @@ public class detalleProyecto extends javax.swing.JDialog {
         TDetalleProduccion.getTableHeader().getColumnModel().getColumn(11).setMaxWidth(0);
         TDetalleProduccion.getTableHeader().getColumnModel().getColumn(11).setMinWidth(0);
     }
-
+    
     public void editarTamañoColumnas() {
         TDetalleProduccion.getColumnModel().getColumn(10).setMinWidth(0);
         TDetalleProduccion.getColumnModel().getColumn(10).setMaxWidth(0);
@@ -370,6 +393,7 @@ public class detalleProyecto extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPInformacion;
     private javax.swing.JPanel jPanel1;
@@ -379,6 +403,7 @@ public class detalleProyecto extends javax.swing.JDialog {
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTFechaIngreso;
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTNombreCliente;
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTNombreProyecto;
+    public static elaprendiz.gui.textField.TextFieldRoundBackground jTTimepoTotal;
     private javax.swing.JPopupMenu popMenu;
     // End of variables declaration//GEN-END:variables
  @Override

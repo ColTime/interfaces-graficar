@@ -24,14 +24,16 @@ public class ProyectoM {
     String fecha = "";
 
     //Metodos y funciones------------------------------------------------>
-    public CachedRowSet diagramaM() {
+    public CachedRowSet diagramaM(String inicio, String fin) {
         try {
             conexion = new Conexion();
             conexion.establecerConexion();
             con = conexion.getConexion();
             //Query------------------------------------------------------------>
-            String Qry = "CALL PA_Diagramas()";
+            String Qry = "CALL PA_Diagramas(?,?)";
             ps = con.prepareStatement(Qry);
+            ps.setString(1, inicio);
+            ps.setString(2, fin);
             rs = ps.executeQuery();
             crsP = new CachedRowSetImpl();
             crsP.populate(rs);
@@ -108,7 +110,7 @@ public class ProyectoM {
             ps.setBoolean(16, ruteo);
             ps.setBoolean(17, anti);
             ps.setInt(18, norden);
-            ps.setInt(19, op);
+            ps.setInt(19, op);//1) Registrar, 2)Modificar
             ps.setBoolean(20, ruteoP);
             ps.setBoolean(21, antisolderP);
             //Ejecución del Query---------------------------------------------->

@@ -5,7 +5,6 @@
  */
 package informecoltime;
 
-import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -68,9 +67,9 @@ public class InformeProduccion extends javax.swing.JFrame implements Runnable {
         while (true) {
             try {
                 ConsultarInformacion(0);
-                centrarContenidoCeldas();
-                editarCerlas();
-                JOptionPane.showMessageDialog(null, "Interaccion " + cont);
+//                centrarContenidoCeldas();
+//                editarCerlas();
+//                JOptionPane.showMessageDialog(null, "Interaccion " + cont);
                 cont++;
                 Thread.sleep(60000);//60 segundos
             } catch (Exception e) {
@@ -185,7 +184,8 @@ public class InformeProduccion extends javax.swing.JFrame implements Runnable {
                 }
             }
             ReporteProduccion.setModel(modelo);//Se agrega el modelo a la tabla
-
+            FormatoTabla format = new FormatoTabla(4);
+            ReporteProduccion.setDefaultRenderer(Object.class, format);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error! " + e);
         }

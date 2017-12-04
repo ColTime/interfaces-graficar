@@ -50,6 +50,7 @@ public class ConsultarPNC extends javax.swing.JFrame {
         setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
         jPanel2.setBackground(new java.awt.Color(63, 179, 255));
         jPanel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -179,7 +180,7 @@ public class ConsultarPNC extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -299,7 +300,7 @@ public class ConsultarPNC extends javax.swing.JFrame {
         } else {
             proyecto1.op = 1;
         }
-        proyecto1.btnModificarPNC.setEnabled(true);
+        proyecto1.btnModificarPNC.setEnabled(false);
         if (TDetalle.getValueAt(pos, 1).toString().equals("FE")) {
             try {
                 crs = consultarProcesos(Integer.parseInt(TDetalle.getValueAt(pos, 0).toString()));
@@ -346,7 +347,7 @@ public class ConsultarPNC extends javax.swing.JFrame {
         String v1[] = new String[7];
         try {
             DetalleProyecto obj = new DetalleProyecto();
-            crs = obj.consultar_Detalle_Proyecto(jTNorden.getText());
+            crs = obj.consultar_Detalle_Proyecto(jTNorden.getText(),1);
             while (crs.next()) {
                 if (vista == 1) {
                     if (!crs.getBoolean(6)) {

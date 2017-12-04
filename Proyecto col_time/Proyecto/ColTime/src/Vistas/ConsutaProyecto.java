@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vistas;
 
 import Controlador.DetalleProyecto;
@@ -19,15 +14,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author comunicaciones03
- */
 public class ConsutaProyecto extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ConsutaProyecto
-     */
     public ConsutaProyecto() {
         initComponents();
         jDFecha.setEnabled(false);
@@ -928,14 +916,14 @@ public class ConsutaProyecto extends javax.swing.JFrame {
             FormatoTabla ftProyect = new FormatoTabla(7);
             TProyecto.setDefaultRenderer(Object.class, ftProyect);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "¡Erro! " + e);
+            JOptionPane.showMessageDialog(null, "¡Error! " + e);
         }
     }
 
     private void consultarDetalle(String numerOrden) {
         DetalleProyecto obj = new DetalleProyecto();
         try {
-            crs = obj.consultar_Detalle_Proyecto(numerOrden);
+            crs = obj.consultar_Detalle_Proyecto(numerOrden,0);
             DefaultTableModel model1 = new DefaultTableModel(null, encabezado1);
             DefaultTableModel model2 = new DefaultTableModel(null, encabezado2);
             String v1[] = new String[6];

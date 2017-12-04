@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controlador;
 
 import java.awt.Color;
@@ -20,10 +15,6 @@ import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
-/**
- *
- * @author Aprendiz
- */
 public class Diagramas {
 //Graficas de la cantidad de proyectos que tiene cada area
 //Variables...
@@ -34,12 +25,12 @@ public class Diagramas {
 
     }
 
-    public ImageIcon graficaCantidad(int tipoGrafica, int vista) {
+    public ImageIcon graficaCantidad(int tipoGrafica, int vista, String inicio, String fin) {
         ImageIcon iconG = null;
         try {
             Proyecto obj = new Proyecto();
             //Cantidad de proyectos por areas /FE/TE/IN
-            int v[] = cantidadArea(obj.diagrama());
+            int v[] = cantidadArea(obj.diagrama(inicio, fin));
             JFreeChart jf = null;
             if (tipoGrafica == 1 || tipoGrafica == 2) {
                 DefaultCategoryDataset ds = new DefaultCategoryDataset();
@@ -93,17 +84,17 @@ public class Diagramas {
         return iconG;
     }
 
-    public ImageIcon EnrutamientoProceso(int diseño, int busqueda) {
+    public ImageIcon EnrutamientoProceso(int diseño, int busqueda, String inicio, String fin) {
         ImageIcon diagrama = null;
         //Cuerpo del la función
         if (busqueda == 1) {
             //Cantidad de productos por área
             if (diseño == 1) {
-                graficaCantidad(1, 1);
+                graficaCantidad(1, 1, inicio, fin);
             } else if (diseño == 2) {
-                graficaCantidad(2, 1);
+                graficaCantidad(2, 1, inicio, fin);
             } else {
-                graficaCantidad(3, 1);
+                graficaCantidad(3, 1, inicio, fin);
             }
             //----------------------------------
         } else if (busqueda == 2) {
