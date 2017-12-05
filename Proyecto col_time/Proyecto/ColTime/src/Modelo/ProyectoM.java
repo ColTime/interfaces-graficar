@@ -138,12 +138,52 @@ public class ProyectoM {
             conexion.establecerConexion();
             con = conexion.getConexion();
             //Query------------------------------------------------------------>
-            String Qry = "CALL PA_ValidarProyectoQR(?)";
+            String Qry = "CALL PA_RegistrarDetalleProyectoQR(?,?,?,?,?,?,?)";
             ps = con.prepareStatement(Qry);
             ps.setInt(1, orden);
+            ps.setInt(2, nArea(area));
+            ps.setInt(3, nProducto(producto));
+            ps.setString(4, Cantidad);
+            ps.setString(5, Material);
+            ps.setInt(6, (ruteo.equals("SI") ? 1 : 0));
+            ps.setInt(7, (antisolder.equals("SI") ? 1 : 0));
             rs = ps.executeQuery();
             rs.next();
             res = rs.getBoolean(1);
+            if (res) {
+                //Procesos
+                if (area.equals("FE")) {
+                    //Formato estandar
+                    Qry = "CALL PA_RegistrarDetalleFormatoEstandar(?,?,?)";
+                    ps = con.prepareStatement(Qry);
+                    ps.setInt(1, orden);
+                    ps.setInt(2, nProducto(producto));
+                    ps.setString(3, "");
+                    ps.execute();
+                } else if (area.equals("TE")) {
+                    //Teclados
+                    for (int i = 11; i <= 14; i++) {
+                        Qry = "CALL PA_RegistrarDetalleTeclados(?,?,?,?)";
+                        ps = con.prepareStatement(Qry);
+                        ps.setInt(1, i);
+                        ps.setInt(2, orden);
+                        ps.setInt(3, nProducto(producto));
+                        ps.setString(4, "");
+                        ps.execute();
+                    }
+                } else if (area.equals("IN")) {
+                    //Ensamble
+                    for (int i = 15; i <= 21; i++) {
+                        Qry = "CALL PA_RegistrarDetalleEnsamble(?,?,?,?)";
+                        ps = con.prepareStatement(Qry);
+                        ps.setInt(1, i);
+                        ps.setInt(2, orden);
+                        ps.setInt(3, nProducto(producto));
+                        ps.setString(4, "");
+                        ps.execute();
+                    }
+                }
+            }
             conexion.cerrar(rs);
             ps.close();
             con.close();
@@ -151,7 +191,7 @@ public class ProyectoM {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "¡Error!" + e);
         }
-        return true;
+        return res;
     }
 
     public boolean registrarProyectoQRM(String infoP[], String comercial) {
@@ -251,10 +291,10 @@ public class ProyectoM {
                 n = 1;
                 break;
             case "TE":
-                n = 1;
+                n = 2;
                 break;
             case "IN":
-                n = 1;
+                n = 3;
                 break;
         }
         return n;

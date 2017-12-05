@@ -1117,18 +1117,22 @@ public class proyecto extends javax.swing.JPanel {
                 if (obj.validarProyectoQR(Integer.parseInt(infoP[0]))) {//Se valida primero la existencia del numero de la orden...
                     //Se registra la información necesaria en la tabla proyecto...
                     obj.registrarProyectoQR(infoP, Menu.jDocumento.getText());
+                    new rojerusan.RSNotifyAnimated("Listo.", "El proyecto con la orden " + infoP[0] + " fue registrado exitosamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
                 }
                 //Continúa...
                 if (obj.validarDetalleProyectoQR(Integer.parseInt(infoP[0]), infoP[1], infoP[2])) {//Se valida la existencia del detalle...
-
-                    obj.registrarDetalleProyectoQR(Integer.parseInt(infoP[0]),infoP[1],infoP[2],infoP[5],infoP[7],infoP[9],infoP[8]);//Se registra el detalle del proyeco.
-
+                    if (obj.registrarDetalleProyectoQR(Integer.parseInt(infoP[0]), infoP[1], infoP[2], infoP[5], infoP[7], infoP[9], infoP[8])) {//Se registra el detalle del proyeco.
+                        new rojerusan.RSNotifyAnimated("Listo!.", "El el detalle proyecto con la orden " + infoP[0] + " fue registrada corectamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+                    } else {
+                        new rojerusan.RSNotifyAnimated("Alerta!.", "El el detalle proyecto con la orden " + infoP[0] + " no fue registrada.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
+                    }
                 } else {
-
-                    //Mensaje de que el detalle ya existe...  
+                    //Mensaje de que el detalle ya existe... 
+                    new rojerusan.RSNotifyAnimated("Alerta!.", "El el detalle ya existe.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
                 }
             } else {
                 //Muestra mensaje de error en el QR...
+                new rojerusan.RSNotifyAnimated("Alerta!.", "El código QR no esta bien estructurado.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
             }
         }
     }//GEN-LAST:event_jTProyectoQRKeyPressed

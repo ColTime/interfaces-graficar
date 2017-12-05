@@ -716,16 +716,28 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                             if (TDetalle.getValueAt(i, 1).toString().equals("FE") && TDetalle.getValueAt(i, 2).toString().equals("Circuito")) {
                                 //Se valida el estado del Circuito de FE 
                                 estadoModificacion(i, obj.jCCircuito, obj.jTCircuito);
-                                obj.cbMaterialCircuito.setEnabled(false);
-                                obj.jCAntisolderC.setEnabled(false);
-                                obj.jCRuteoC.setEnabled(false);
+                                if (TDetalle.getValueAt(i, 4).toString().equals("Terminado") || TDetalle.getValueAt(i, 4).toString().equals("Ejecucion") || TDetalle.getValueAt(i, 4).toString().equals("Pausado")) {
+                                    obj.cbMaterialCircuito.setEnabled(false);
+                                    obj.jCAntisolderC.setEnabled(false);
+                                    obj.jCRuteoC.setEnabled(false);
+                                } else {
+                                    obj.cbMaterialCircuito.setEnabled(true);
+                                    obj.jCAntisolderC.setEnabled(true);
+                                    obj.jCRuteoC.setEnabled(true);
+                                }
                             } else {
                                 if (TDetalle.getValueAt(i, 1).toString().equals("FE") && TDetalle.getValueAt(i, 2).toString().equals("PCB")) {
                                     //Se valida el estado del PCB de FE 
                                     estadoModificacion(i, obj.jCPCBTE, obj.jTPCBTE);
-                                    obj.cbMaterialPCBTE.setEnabled(false);
-                                    obj.jCAntisolderP.setEnabled(false);
-                                    obj.jCRuteoP.setEnabled(false);
+                                    if (TDetalle.getValueAt(i, 4).toString().equals("Terminado") || TDetalle.getValueAt(i, 4).toString().equals("Ejecucion") || TDetalle.getValueAt(i, 4).toString().equals("Pausado")) {
+                                        obj.cbMaterialPCBTE.setEnabled(false);
+                                        obj.jCAntisolderP.setEnabled(false);
+                                        obj.jCRuteoP.setEnabled(false);
+                                    } else {
+                                        obj.cbMaterialPCBTE.setEnabled(true);
+                                        obj.jCAntisolderP.setEnabled(true);
+                                        obj.jCRuteoP.setEnabled(true);
+                                    }
                                 } else {
                                     if (TDetalle.getValueAt(i, 1).toString().equals("TE") && TDetalle.getValueAt(i, 2).toString().equals("Teclado")) {
                                         //Se valida el estado del Teclado de TE 
@@ -923,7 +935,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
     private void consultarDetalle(String numerOrden) {
         DetalleProyecto obj = new DetalleProyecto();
         try {
-            crs = obj.consultar_Detalle_Proyecto(numerOrden,0);
+            crs = obj.consultar_Detalle_Proyecto(numerOrden, 0);
             DefaultTableModel model1 = new DefaultTableModel(null, encabezado1);
             DefaultTableModel model2 = new DefaultTableModel(null, encabezado2);
             String v1[] = new String[6];
