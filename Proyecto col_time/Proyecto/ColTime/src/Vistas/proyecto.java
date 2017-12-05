@@ -16,6 +16,7 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import elaprendiz.gui.textField.TextFieldRoundBackground;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.DateFormat;
@@ -1104,15 +1105,31 @@ public class proyecto extends javax.swing.JPanel {
 
     private void jTProyectoQRKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTProyectoQRKeyPressed
         //Registrar proyectos mediante un QR
-        //El vector tiene una longitud máxima de 11 items.
-        String infoP[] = jTProyectoQR.getText().split(";");
-        //Numero orden, área a la que aplica, tipo proyecto, nombre cliente, nombre proyecto, cantidad, ejecución, tipo PCB, lleva antisolder, lleva ruteo, fecha entrega.
-        if (infoP.length == 11) {
-            //Validar el QR...
-            Proyecto obj = new Proyecto();
-            obj.registrarProyectoQR(infoP);
-        } else {
-            //Muestra mensaje de error en el QR...
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            //El vector tiene una longitud máxima de 11 items.
+            String infoP[] = jTProyectoQR.getText().split(";");
+            //       0             1                    2               3              4               5         6        7              8              9            10   
+            //Numero orden, área a la que aplica, tipo proyecto, nombre cliente, nombre proyecto, cantidad, ejecución, tipo PCB, lleva antisolder, lleva ruteo, fecha entrega.
+            //  28940             FE            Conversor          juan david        pruebadelQR     10     Quick        TH             SI             NO        01/12/2017
+            if (infoP.length == 11) {
+                //Validar el QR...Area, validar el tipo de proyecto, cantidad, ejecucion, tipo....
+                Proyecto obj = new Proyecto();
+                if (obj.validarProyectoQR(Integer.parseInt(infoP[0]))) {//Se valida primero la existencia del numero de la orden...
+                    //Se registra la información necesaria en la tabla proyecto...
+                    obj.registrarProyectoQR(infoP, Menu.jDocumento.getText());
+                }
+                //Continúa...
+                if (obj.validarDetalleProyectoQR(Integer.parseInt(infoP[0]), infoP[1], infoP[2])) {//Se valida la existencia del detalle...
+
+                    obj.registrarDetalleProyectoQR(Integer.parseInt(infoP[0]),infoP[1],infoP[2],infoP[5],infoP[7],infoP[9],infoP[8]);//Se registra el detalle del proyeco.
+
+                } else {
+
+                    //Mensaje de que el detalle ya existe...  
+                }
+            } else {
+                //Muestra mensaje de error en el QR...
+            }
         }
     }//GEN-LAST:event_jTProyectoQRKeyPressed
 

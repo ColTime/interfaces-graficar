@@ -4,6 +4,8 @@ import com.sun.rowset.CachedRowSetImpl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.JOptionPane;
 
@@ -130,9 +132,160 @@ public class ProyectoM {
         return res;
     }
 
-    public boolean registrarProyectoQRM(String infoP[]) {
-        //Cuerpo del la función...
+    public boolean registrarDetalleProyectoQRM(int orden, String area, String producto, String Cantidad, String Material, String ruteo, String antisolder) {
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query------------------------------------------------------------>
+            String Qry = "CALL PA_ValidarProyectoQR(?)";
+            ps = con.prepareStatement(Qry);
+            ps.setInt(1, orden);
+            rs = ps.executeQuery();
+            rs.next();
+            res = rs.getBoolean(1);
+            conexion.cerrar(rs);
+            ps.close();
+            con.close();
+            conexion.destruir();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "¡Error!" + e);
+        }
         return true;
+    }
+
+    public boolean registrarProyectoQRM(String infoP[], String comercial) {
+        //Cuerpo del la función...
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query------------------------------------------------------------>
+            String Qry = Qry = "SELECT FU_RegistrarModificarProyecto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            ps = con.prepareStatement(Qry);
+            ps.setString(1, comercial);
+            ps.setString(2, infoP[3]);//Nombre del cliente
+            ps.setString(3, infoP[4]);//Nombre del proyecto
+            ps.setString(4, infoP[6]);//Tipo de ejecución
+            ps.setBoolean(5, false);
+            ps.setBoolean(6, false);
+            ps.setBoolean(7, false);
+            ps.setBoolean(8, false);
+            ps.setBoolean(9, false);
+            ps.setBoolean(10, false);
+            ps.setBoolean(11, false);
+            ps.setBoolean(12, false);
+            ps.setBoolean(13, false);
+            ps.setBoolean(14, false);
+            ps.setString(15, infoP[10]);//Fecha de entrega
+            ps.setBoolean(16, false);
+            ps.setBoolean(17, false);
+            ps.setInt(18, Integer.parseInt(infoP[0]));//Numero de orden
+            ps.setInt(19, 1);//1) Registrar, 2)Modificar
+            ps.setBoolean(20, false);
+            ps.setBoolean(21, false);
+            rs = ps.executeQuery();
+            rs.next();
+            res = rs.getBoolean(1);
+            conexion.cerrar(rs);
+            ps.close();
+            con.close();
+            conexion.destruir();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "¡Error!" + e);
+        }
+        return res;
+    }
+
+    public boolean ValidarProyectoQRM(int orden) {
+        //Cuerpo del la función...
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query------------------------------------------------------------>
+            String Qry = "CALL PA_ValidarProyectoQR(?)";
+            ps = con.prepareStatement(Qry);
+            ps.setInt(1, orden);
+            rs = ps.executeQuery();
+            rs.next();
+            res = rs.getBoolean(1);
+            conexion.cerrar(rs);
+            ps.close();
+            con.close();
+            conexion.destruir();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "¡Error!" + e);
+        }
+        return res;
+    }
+
+    public boolean validarDetalleProyectoQRM(int orden, String area, String producto) {
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query------------------------------------------------------------>
+            String Qry = "CALL PA_ValidarDetalleProyectoQR(?,?,?)";
+            ps = con.prepareStatement(Qry);
+            ps.setInt(1, orden);
+            ps.setInt(2, nArea(area));
+            ps.setInt(3, nProducto(producto));
+            rs = ps.executeQuery();
+            rs.next();
+            res = rs.getBoolean(1);
+            conexion.cerrar(rs);
+            ps.close();
+            con.close();
+            conexion.destruir();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "¡Error!" + e);
+        }
+        return res;
+    }
+
+    private int nArea(String area) {
+        int n = 0;
+        switch (area.toUpperCase()) {
+            case "FE":
+                n = 1;
+                break;
+            case "TE":
+                n = 1;
+                break;
+            case "IN":
+                n = 1;
+                break;
+        }
+        return n;
+    }
+
+    private int nProducto(String producto) {
+        int n = 0;
+        switch (producto.toUpperCase()) {
+            case "CIRCUITO":
+                n = 1;
+                break;
+            case "CONVERSOR":
+                n = 2;
+                break;
+            case "REPUJADO":
+                n = 3;
+                break;
+            case "TROQUEL":
+                n = 4;
+                break;
+            case "TECLADO":
+                n = 5;
+                break;
+            case "STENCIL":
+                n = 6;
+                break;
+            case "PCB":
+                n = 7;
+                break;
+        }
+        return n;
     }
 
     public CachedRowSet consultar_Proyecto(int numerOrden, String nombreCliente, String nombreProyecto, String fecha, String TipoFecha) {

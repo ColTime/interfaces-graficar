@@ -95,11 +95,28 @@ public class Proyecto {
         return obj.registrar_Modificar_Proyecto(idOrden, comercial, nombreCliente, nombreProyecto, tipoProyecto, FE, TE, IN, detalles[0], detalles[1], detalles[2], detalles[3], detalles[4], detalles[5], detalles[6], fecha, detalles[7], detalles[8], op, detalles[9], detalles[10]);
     }
 
-    public boolean registrarProyectoQR(String infoP[]) {
+    //Registrar mediante un lector de QR----------------------------------------
+    public boolean registrarDetalleProyectoQR(int orden,String area,String producto,String Cantidad, String Material,String ruteo, String antisolder) {
         ProyectoM obj = new ProyectoM();
-        return obj.registrarProyectoQRM(infoP);
+        return obj.registrarDetalleProyectoQRM(orden, area, producto, Cantidad, Material, ruteo, antisolder);
     }
 
+    public boolean registrarProyectoQR(String infoP[], String comercial) {
+        ProyectoM obj = new ProyectoM();
+        return obj.registrarProyectoQRM(infoP, comercial);
+    }
+
+    public boolean validarProyectoQR(int orden) {
+        ProyectoM obj = new ProyectoM();
+        return obj.ValidarProyectoQRM(orden);
+    }
+
+    public boolean validarDetalleProyectoQR(int orden, String area, String producto) {
+        ProyectoM obj = new ProyectoM();
+        return obj.validarDetalleProyectoQRM(orden, area, producto);
+    }
+
+    //Registrar mediante un lector de QR----------------------------------------
     public CachedRowSet consutalarProcesosArea(int op) {
         ProyectoM obj = new ProyectoM();
         return obj.consutalarProcesosAreaM(op);
