@@ -92,7 +92,7 @@ public class FE_TE_INM {
                     //Promedio de producto por minuto.
                     cantidadProductoMinuto(detalle, negocio, lector);
                     //Tiempo total del proceso.
-                    actualizarTotalTiempoProyecto(detalle);
+                    actualizarTotalTiempoProyecto(detalle, negocio);
                     //Si no cumple la condición va a retornar un falso y monstrara una mensaje de advertencia.
                 } else {
                     res = false;
@@ -141,15 +141,16 @@ public class FE_TE_INM {
         return cadena;
     }
 
-    private void actualizarTotalTiempoProyecto(int detalle) {
+    private void actualizarTotalTiempoProyecto(int detalle, int negocio) {
         try {
             conexion = new Conexion();
             conexion.establecerConexion();
             con = conexion.getConexion();
 //          Query------------------------------------------------------------>
-            String Qry = "CALL PA_TiempoProceso(?)";
+            String Qry = "CALL PA_TiempoProceso(?,?)";
             ps = con.prepareStatement(Qry);
             ps.setInt(1, detalle);
+            ps.setInt(2, negocio);
             rs = ps.executeQuery();
             String cadena = totalTiempoProyecto(rs);
 

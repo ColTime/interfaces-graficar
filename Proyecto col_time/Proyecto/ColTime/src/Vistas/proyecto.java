@@ -1111,13 +1111,16 @@ public class proyecto extends javax.swing.JPanel {
             //       0             1                    2               3              4               5         6        7              8              9            10   
             //Numero orden, área a la que aplica, tipo proyecto, nombre cliente, nombre proyecto, cantidad, ejecución, tipo PCB, lleva antisolder, lleva ruteo, fecha entrega.
             //  28940             FE            Conversor          juan david        pruebadelQR     10     Quick        TH             SI             NO        01/12/2017
-            if (infoP.length == 11) {
+            if (validarQrDelProyecto(infoP)) {
                 //Validar el QR...Area, validar el tipo de proyecto, cantidad, ejecucion, tipo....
                 Proyecto obj = new Proyecto();
                 if (obj.validarProyectoQR(Integer.parseInt(infoP[0]))) {//Se valida primero la existencia del numero de la orden...
                     //Se registra la información necesaria en la tabla proyecto...
                     obj.registrarProyectoQR(infoP, Menu.jDocumento.getText());
                     new rojerusan.RSNotifyAnimated("Listo.", "El proyecto con la orden " + infoP[0] + " fue registrado exitosamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+                } else {
+                    //Se puede actualizar la informacion... Esta por definir.
+
                 }
                 //Continúa...
                 if (obj.validarDetalleProyectoQR(Integer.parseInt(infoP[0]), infoP[1], infoP[2])) {//Se valida la existencia del detalle...
@@ -1136,7 +1139,125 @@ public class proyecto extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_jTProyectoQRKeyPressed
+    //28943;TE;teclado;juan david marulanda;pruebadelQR;8;Quick;TH;NO;NO;2017/12/01
+    private boolean validarQrDelProyecto(String infoP[]) {
+        if (infoP.length == 11) {
+            if (infoP[1].equals("FE") || infoP[1].equals("TE") || infoP[1].equals("IN")) {//Area a la que aplica.
+                if (infoP[3].length() <= 45 && infoP[4].length() <= 45) {//Nombre del cliente y nombre del proyecto tiene que ser menor a 45 caracteres.
+                    if (validarTipoProducto(infoP[2])) {
+                        if (validarCombinaciones(infoP[1], infoP[2])) {//Valida que no permita ninguna conbinación no valida por el sistema
+                            if (infoP[6].toLowerCase().equals("normal") || infoP[6].toLowerCase().equals("rqt") || infoP[6].toLowerCase().equals("quick")) {//Tipo de ejecución
+                                if (validarFecha(infoP[10])) {//El formato de la fecha siempre tiene que ser en el QR de la forma "yyyy/MM/dd"
+                                    if (Integer.parseInt(infoP[5]) > 0) {
+                                        if (infoP[7].toLowerCase().equals("th") || infoP[7].toLowerCase().equals("fv") || infoP[7].toLowerCase().equals("0")) {//Se valida que el material se TH, FV o que sea 0 cuando no aplica
+                                            if ((infoP[8].toLowerCase().equals("si") || infoP[8].toLowerCase().equals("no")) &&(infoP[9].toLowerCase().equals("si") || infoP[9].toLowerCase().equals("no"))) {//Se valida que el antisolder y el ruteo contenga si o no
+                                                return true;
+                                            } else {
+                                                return false;
+                                            }
+                                        } else {
+                                            return false;
+                                        }
+                                    } else {
+                                        return false;
+                                    }
+                                } else {
+                                    return false;
+                                }
+                            } else {
+                                return false;
+                            }
+                        } else {
+                            return false;
+                        }
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
 
+    private boolean validarFecha(String fecha) {
+        try {
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
+            formato.setLenient(false);
+            formato.parse(fecha);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private boolean validarTipoProducto(String producto) {
+        boolean resp = false;
+        switch (producto.toUpperCase()) {
+            case "CIRCUITO":
+                resp = true;
+                break;
+            case "CONVERSOR":
+                resp = true;
+                break;
+            case "REPUJADO":
+                resp = true;
+                break;
+            case "TROQUEL":
+                resp = true;
+                break;
+            case "TECLADO":
+                resp = true;
+                break;
+            case "STENCIL":
+                resp = true;
+                break;
+            case "PCB":
+                resp = true;
+                break;
+        }
+        return resp;
+    }
+
+    private boolean validarCombinaciones(String area, String producto) {
+        boolean res = false;
+        if (area.toLowerCase().equals("fe") && producto.toLowerCase().equals("circuito")) {
+            res = true;
+        } else {
+            if (area.toLowerCase().equals("in") && producto.toLowerCase().equals("circuito")) {
+                res = true;
+            } else {
+                if (area.toLowerCase().equals("te") && producto.toLowerCase().equals("teclado")) {
+                    res = true;
+                } else {
+                    if (area.toLowerCase().equals("fe") && producto.toLowerCase().equals("conversor")) {
+                        res = true;
+                    } else {
+                        if (area.toLowerCase().equals("fe") && producto.toLowerCase().equals("repujado")) {
+                            res = true;
+                        } else {
+                            if (area.toLowerCase().equals("fe") && producto.toLowerCase().equals("troquel")) {
+                                res = true;
+                            } else {
+                                if (area.toLowerCase().equals("fe") && producto.toLowerCase().equals("stencil")) {
+                                    res = true;
+                                } else {
+                                    if (area.toLowerCase().equals("fe") && producto.toLowerCase().equals("pcb")) {
+                                        res = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return res;
+    }
     private void jCConversorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCConversorActionPerformed
         activarjTfilex(jCConversor, jTConversor);
     }//GEN-LAST:event_jCConversorActionPerformed
