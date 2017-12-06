@@ -1,6 +1,5 @@
 package Modelo;
 
-import Controlador.*;
 import com.sun.rowset.CachedRowSetImpl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -494,6 +493,8 @@ public class DetalleProyectoM {
             rs.next();
             res = rs.getBoolean(1);
             //Cierre de conexiones
+            FE_TE_INM produccion = new FE_TE_INM();
+            produccion.actualizarTotalTiempoProyecto(detalle, negocio);
             conexion.cerrar(rs);
             conexion.destruir();
             ps.close();

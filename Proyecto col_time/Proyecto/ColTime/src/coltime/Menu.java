@@ -12,8 +12,6 @@ import Vistas.proyecto1;
 import java.awt.Color;
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -84,6 +82,7 @@ public class Menu extends javax.swing.JFrame {
         btn3 = new rsbuttom.RSButtonMetro();
         jTLector = new javax.swing.JTextField();
         agregar = new javax.swing.JButton();
+        btn5 = new rsbuttom.RSButtonMetro();
         jPContenido = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -366,6 +365,26 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jPMenu.add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, 150, -1));
+
+        btn5.setForeground(new java.awt.Color(128, 128, 131));
+        btn5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/reportes.png"))); // NOI18N
+        btn5.setText("REPORTES");
+        btn5.setBorderPainted(false);
+        btn5.setColorHover(new java.awt.Color(189, 189, 189));
+        btn5.setColorNormal(new java.awt.Color(219, 219, 219));
+        btn5.setColorPressed(new java.awt.Color(189, 189, 189));
+        btn5.setColorTextHover(new java.awt.Color(128, 128, 131));
+        btn5.setColorTextNormal(new java.awt.Color(128, 128, 131));
+        btn5.setColorTextPressed(new java.awt.Color(128, 128, 131));
+        btn5.setFocusable(false);
+        btn5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btn5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn5ActionPerformed(evt);
+            }
+        });
+        jPMenu.add(btn5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 190, 42));
 
         jPContenido.setLayout(new javax.swing.BoxLayout(jPContenido, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -1114,7 +1133,7 @@ public class Menu extends javax.swing.JFrame {
             //#--------------------------------------------------------------------------------------------------
         } else {
             //Este mensaje se retornara al dispositivo móvil.
-            
+
         }
     }//GEN-LAST:event_agregarActionPerformed
 
@@ -1149,6 +1168,19 @@ public class Menu extends javax.swing.JFrame {
             jPopupMenu1.show(evt.getComponent(), evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_jPSuperiorMouseReleased
+
+    private void btn5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn5ActionPerformed
+        //Los reportes estan pendientes
+        int seleccion = JOptionPane.showOptionDialog(null, "¿Qué reporte desea generar?",
+                "seleccione...", JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
+                new Object[]{"Tiempos de producción", "General"}, "");
+        if (seleccion == 0) {
+
+        } else {
+
+        }
+    }//GEN-LAST:event_btn5ActionPerformed
 //Metodos de la clase menu----------------------------------------------------->
 
     public void limpiarInformacionAreas() {
@@ -1327,6 +1359,7 @@ public class Menu extends javax.swing.JFrame {
     public rsbuttom.RSButtonMetro btn2;
     public rsbuttom.RSButtonMetro btn3;
     public rsbuttom.RSButtonMetro btn4;
+    public rsbuttom.RSButtonMetro btn5;
     public javax.swing.JButton btnMenu;
     public javax.swing.JButton jButton1;
     public javax.swing.JButton jButton2;

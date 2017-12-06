@@ -1,11 +1,9 @@
 package Modelo;
 
 import com.sun.rowset.CachedRowSetImpl;
-import elaprendiz.gui.label.LabelCustom;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.DecimalFormat;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.JOptionPane;
 
@@ -89,6 +87,20 @@ public class FE_TE_INM {
                     ps.setInt(6, cantidadTerminada + cantidadAntigua);
                     ps.setInt(7, estado);
                     res = !ps.execute();
+                    //Timepo total por unidad...
+                    Qry = "CALL PA_ValidarEstadoProyecto(?,?)";
+                    ps = con.prepareStatement(Qry);
+                    ps.setInt(1, detalle);
+                    ps.setInt(2, negocio);
+                    rs = ps.executeQuery();
+                    String tiempoTotalProducto = totalTiempoProyectoyProducto(rs);
+                    if (!tiempoTotalProducto.equals("00:00")) {
+                        Qry = "PA_ActualizarTiempoTotalPorUnidad(?,?)";
+                        ps = con.prepareStatement(Qry);
+                        ps.setInt(1, detalle);
+                        ps.setString(2, tiempoTotalProducto);
+                        ps.execute();
+                    }
                     //Promedio de producto por minuto.
                     cantidadProductoMinuto(detalle, negocio, lector);
                     //Tiempo total del proceso.
@@ -117,11 +129,11 @@ public class FE_TE_INM {
         return res;
     }
 
-    private String totalTiempoProyecto(ResultSet crsT) {
+    private String totalTiempoProyectoyProducto(ResultSet crsT) {
         int minutos = 0;
         int segundos = 0;
         String tiempo[] = null;
-        String cadena = "";
+        String cadena = "00:00";
         try {
             while (crsT.next()) {
                 tiempo = crsT.getString(1).split(":");
@@ -141,7 +153,7 @@ public class FE_TE_INM {
         return cadena;
     }
 
-    private void actualizarTotalTiempoProyecto(int detalle, int negocio) {
+    public void actualizarTotalTiempoProyecto(int detalle, int negocio) {
         try {
             conexion = new Conexion();
             conexion.establecerConexion();
@@ -152,7 +164,7 @@ public class FE_TE_INM {
             ps.setInt(1, detalle);
             ps.setInt(2, negocio);
             rs = ps.executeQuery();
-            String cadena = totalTiempoProyecto(rs);
+            String cadena = totalTiempoProyectoyProducto(rs);
 
             //Código...
             Qry = "CALL PA_ActualizarTiempoTotalProducto(?,?)";

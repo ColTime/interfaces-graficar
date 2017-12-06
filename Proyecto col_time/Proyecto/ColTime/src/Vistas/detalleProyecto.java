@@ -289,7 +289,7 @@ public class detalleProyecto extends javax.swing.JDialog {
                     if (boton.getActionCommand().equals("1")) {
                         String idDetalle = String.valueOf(TDetalleProduccion.getValueAt(row, 11));
                         DetalleProyecto obj = new DetalleProyecto();
-                        if (obj.ReiniciarDetalle(Integer.parseInt(idDetalle), negocio)) {
+                        if (obj.ReiniciarDetalle(Integer.parseInt(idDetalle), negocio)) {///Pendiente
                             new rojerusan.RSNotifyAnimated("¡Listo!", "El proceso: " + TDetalleProduccion.getValueAt(row, 0) + " fue reinicializado corresctamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
                             cargarTabla();
                         } else {

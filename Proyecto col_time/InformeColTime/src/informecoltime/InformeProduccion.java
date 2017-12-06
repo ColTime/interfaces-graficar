@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package informecoltime;
 
 import javax.sql.rowset.CachedRowSet;
@@ -11,15 +7,10 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Aprendiz
- */
+
 public class InformeProduccion extends javax.swing.JFrame implements Runnable {
 
-    /**
-     * Creates new form InformeProduccion
-     */
+   
     public InformeProduccion() {
         initComponents();
         this.setExtendedState(InformeProduccion.MAXIMIZED_BOTH);
@@ -193,6 +184,7 @@ public class InformeProduccion extends javax.swing.JFrame implements Runnable {
                 return false; //Disallow the editing of any cell
             }
         };
+        ReporteProduccion.setAutoCreateRowSorter(true);
         ReporteProduccion.setFont(new java.awt.Font("Arial", 0, 32)); // NOI18N
         ReporteProduccion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

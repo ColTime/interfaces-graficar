@@ -1,7 +1,6 @@
 package Vistas;
 
 import Controlador.FE_TE_IN;
-import Controlador.Proyecto;
 import coltime.Menu;
 import java.awt.Dimension;
 import java.awt.Font;
