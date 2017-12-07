@@ -62,6 +62,7 @@ public class detalleProyecto extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         jTTimepoTotal = new elaprendiz.gui.textField.TextFieldRoundBackground();
         jLabel9 = new javax.swing.JLabel();
+        jLID = new javax.swing.JLabel();
 
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/retro.png"))); // NOI18N
         jMenuItem1.setText("Actualizar");
@@ -173,6 +174,8 @@ public class detalleProyecto extends javax.swing.JDialog {
         jLabel9.setForeground(new java.awt.Color(128, 128, 131));
         jLabel9.setText("Tiempo Total:");
 
+        jLID.setText("jLabel1");
+
         javax.swing.GroupLayout jPInformacionLayout = new javax.swing.GroupLayout(jPInformacion);
         jPInformacion.setLayout(jPInformacionLayout);
         jPInformacionLayout.setHorizontalGroup(
@@ -181,7 +184,10 @@ public class detalleProyecto extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPInformacionLayout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLID)))
                 .addGap(18, 18, 18)
                 .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
@@ -195,7 +201,7 @@ public class detalleProyecto extends javax.swing.JDialog {
                     .addComponent(jTTimepoTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPInformacionLayout.createSequentialGroup()
                         .addComponent(jLabel9)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 26, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -218,7 +224,8 @@ public class detalleProyecto extends javax.swing.JDialog {
                             .addComponent(jTNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel4)))
+                            .addComponent(jLabel4)
+                            .addComponent(jLID)))
                     .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPInformacionLayout.createSequentialGroup()
                             .addGap(21, 21, 21)
@@ -289,7 +296,7 @@ public class detalleProyecto extends javax.swing.JDialog {
                     if (boton.getActionCommand().equals("1")) {
                         String idDetalle = String.valueOf(TDetalleProduccion.getValueAt(row, 11));
                         DetalleProyecto obj = new DetalleProyecto();
-                        if (obj.ReiniciarDetalle(Integer.parseInt(idDetalle), negocio)) {///Pendiente
+                        if (obj.ReiniciarDetalle(Integer.parseInt(idDetalle), negocio,detalle)) {///Pendiente
                             new rojerusan.RSNotifyAnimated("¡Listo!", "El proceso: " + TDetalleProduccion.getValueAt(row, 0) + " fue reinicializado corresctamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
                             cargarTabla();
                         } else {
@@ -388,6 +395,7 @@ public class detalleProyecto extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TDetalleProduccion;
+    public static javax.swing.JLabel jLID;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

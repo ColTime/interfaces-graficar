@@ -87,27 +87,16 @@ public class FE_TE_INM {
                     ps.setInt(6, cantidadTerminada + cantidadAntigua);
                     ps.setInt(7, estado);
                     res = !ps.execute();
-                    //Timepo total por unidad...
-                    Qry = "CALL PA_ValidarEstadoProyecto(?,?)";
-                    ps = con.prepareStatement(Qry);
-                    ps.setInt(1, detalle);
-                    ps.setInt(2, negocio);
-                    rs = ps.executeQuery();
-                    String tiempoTotalProducto = totalTiempoProyectoyProducto(rs);
-                    if (!tiempoTotalProducto.equals("00:00")) {
-                        Qry = "PA_ActualizarTiempoTotalPorUnidad(?,?)";
-                        ps = con.prepareStatement(Qry);
-                        ps.setInt(1, detalle);
-                        ps.setString(2, tiempoTotalProducto);
-                        ps.execute();
-                    }
                     //Promedio de producto por minuto.
                     cantidadProductoMinuto(detalle, negocio, lector);
                     //Tiempo total del proceso.
                     actualizarTotalTiempoProyecto(detalle, negocio);
+                    //Timepo total por unidad...
+                    totalTiempoPorUnidad(detalle, negocio);
                     //Si no cumple la condición va a retornar un falso y monstrara una mensaje de advertencia.
                 } else {
                     res = false;
+                    //Se enviara desde acá el mensaje al lector diciendo que la cantidad para el proyecto no es la adecuada...
                 }
             } else {
                 //Si no existe se ejecutara el procedimiento para iniciar o renaudar el tiempo
@@ -127,6 +116,28 @@ public class FE_TE_INM {
             JOptionPane.showMessageDialog(null, "Error! " + e);
         }
         return res;
+    }
+
+    public void totalTiempoPorUnidad(int detalle, int negocio) {
+        try {
+            String Qry = "CALL PA_ValidarEstadoProyecto(?,?)";
+            ps = con.prepareStatement(Qry);
+            ps.setInt(1, detalle);
+            ps.setInt(2, negocio);
+            rs = ps.executeQuery();
+            String tiempoTotalProducto = totalTiempoProyectoyProducto(rs);
+            if (!tiempoTotalProducto.equals("00:00")) {
+                Qry = "CALL PA_ActualizarTiempoTotalPorUnidad(?,?)";
+                ps = con.prepareStatement(Qry);
+                ps.setInt(1, detalle);
+                ps.setString(2, String.valueOf(tiempoTotalProducto));
+                ps.executeQuery();
+            } else {
+                //Actualizar el tiempo total por unidad a null
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error! " + e);
+        }
     }
 
     private String totalTiempoProyectoyProducto(ResultSet crsT) {
@@ -174,10 +185,6 @@ public class FE_TE_INM {
             ps.execute();
             //...
 
-            con.close();
-            conexion.destruir();
-            conexion.cerrar(rs);
-            ps.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error! " + e);
         }
@@ -208,10 +215,7 @@ public class FE_TE_INM {
                 ps.execute();
                 //...
             }
-            con.close();
-            conexion.destruir();
-            conexion.cerrar(rs);
-            ps.close();
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error! " + e);
         }

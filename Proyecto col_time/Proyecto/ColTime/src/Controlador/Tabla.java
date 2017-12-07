@@ -7,7 +7,6 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import static org.apache.poi.hslf.model.ShapeTypes.types;
 
 public class Tabla {
 

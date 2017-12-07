@@ -191,7 +191,7 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {//////////////////////////////////
+    public void actionPerformed(ActionEvent e) {
         String detalle[] = e.getActionCommand().split("-");
         int id = Integer.parseInt(detalle[0]);
         int negocio = Integer.parseInt(detalle[1]);

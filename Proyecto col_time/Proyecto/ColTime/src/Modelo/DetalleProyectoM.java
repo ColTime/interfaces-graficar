@@ -11,7 +11,7 @@ public class DetalleProyectoM {
 
     //Constructores------------------------------------------------->
     public DetalleProyectoM() {
-
+        
     }
     //Variables------------------------------------------------------>
     Conexion conexion = null;
@@ -36,7 +36,7 @@ public class DetalleProyectoM {
             ps.setInt(3, op);
             //Tipo de negocio
             int tipoN = numeroDelTipo(tipo);
-
+            
             ps.setInt(4, tipoN);
             //Negocio
             if (negocio.equals("FE")) {
@@ -46,7 +46,7 @@ public class DetalleProyectoM {
             } else {
                 ps.setInt(5, 3);
             }
-
+            
             rs = ps.executeQuery();
             rs.next();
             cantidad = rs.getInt(1);
@@ -99,7 +99,7 @@ public class DetalleProyectoM {
                     res = rs.getBoolean(1);
                     //Tipo de negocio
                     int tipo = numeroDelTipo(tipoNegocio);
-
+                    
                     if (negocio.equals("IN")) {
                         //Se registran los procesos de IN para este subproyecto
                         for (int i = 15; i <= 21; i++) {
@@ -157,7 +157,7 @@ public class DetalleProyectoM {
         }
         return res;
     }
-
+    
     private int numeroDelTipo(String tipoNegocio) {
         int tipo = 0;
         switch (tipoNegocio) {
@@ -185,7 +185,7 @@ public class DetalleProyectoM {
         }
         return tipo;
     }
-
+    
     public boolean validarEliminacionModificarM(int orden, int negocio, int tipo, int detalle, int accion) {//El busqueda no es necesario
         //PA_EliminarProductosNoConformes(?,?,?)
         try {
@@ -202,7 +202,7 @@ public class DetalleProyectoM {
                 ps.setInt(2, orden);
                 ps.setInt(3, tipo);
                 ps.setInt(4, negocio);
-
+                
                 rs = ps.executeQuery();
                 rs.next();
                 res = rs.getBoolean(1);
@@ -221,7 +221,7 @@ public class DetalleProyectoM {
                     ps.setInt(2, orden);
                     ps.setInt(3, tipo);
                     ps.setInt(4, negocio);
-
+                    
                     rs1 = ps.executeQuery();
                     rs1.next();
                     res = rs1.getBoolean(1);
@@ -307,7 +307,7 @@ public class DetalleProyectoM {
         }
         return crs;
     }
-
+    
     public CachedRowSet consultarprocesosFE(int detalle) {
         try {
             conexion = new Conexion();
@@ -330,9 +330,9 @@ public class DetalleProyectoM {
         }
         return crs;
     }
-
+    
     public boolean cambiar_Estado_Detalle() {
-
+        
         return true;
     }
 //Este es el detalle del la orden deacuerdo en donde se encuentren los detalles
@@ -376,7 +376,7 @@ public class DetalleProyectoM {
         }
         return crs;
     }
-
+    
     public boolean eliminarDetallersProyecto(int idDetalle, int numeOrden, String negocio, String tipo, int accion) {
         //Eliminar detalle del proyecto, detalle de formato estandar, detalle de teclado y detalle de ensamble
         try {
@@ -394,7 +394,7 @@ public class DetalleProyectoM {
                 ps.setInt(1, numeOrden);
                 //Numero del tipo de producto
                 int numeroTipo = numeroDelTipo(tipo);
-
+                
                 ps.setInt(2, numeroTipo);
                 //numero de tipo de negocio
                 int n = 0;
@@ -423,7 +423,7 @@ public class DetalleProyectoM {
         }
         return res;
     }
-
+    
     private boolean eliminarDetalleProyecto(String negocio, int numeOrden, ResultSet rs1, int detalle) {
         //Query------------------------------------------------------------>
         try {
@@ -447,13 +447,13 @@ public class DetalleProyectoM {
             rs1 = ps.executeQuery();
             rs1.next();
             res = rs1.getBoolean(1);
-
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error! " + e);
         }
         return res;
     }
-
+    
     public CachedRowSet consultarDetalleProduccion(int detalle, int negocio) {
         try {
             conexion = new Conexion();
@@ -477,8 +477,8 @@ public class DetalleProyectoM {
         }
         return crs;
     }
-
-    public boolean ReiniciarDetalle(int detalle, int negocio) {
+    
+    public boolean ReiniciarDetalle(int detalle, int negocio, int detalleproducto) {
         //Cuerpo del procedimiento
         try {
             conexion = new Conexion();
@@ -494,7 +494,10 @@ public class DetalleProyectoM {
             res = rs.getBoolean(1);
             //Cierre de conexiones
             FE_TE_INM produccion = new FE_TE_INM();
-            produccion.actualizarTotalTiempoProyecto(detalle, negocio);
+            //Se actualiza la suma total de tiempos totales de procesos
+            produccion.actualizarTotalTiempoProyecto(detalleproducto, negocio);
+            //Se actualiza el total de producto por minuto siempre y cuando el estado del producto sea terminado
+            produccion.totalTiempoPorUnidad(detalleproducto, negocio);
             conexion.cerrar(rs);
             conexion.destruir();
             ps.close();
@@ -504,7 +507,7 @@ public class DetalleProyectoM {
         }
         return res;
     }
-
+    
     public CachedRowSet ConsultarInformacionFiltrariaDelDetalleM(int detalle) {
         try {
             conexion = new Conexion();
@@ -527,10 +530,10 @@ public class DetalleProyectoM {
         }
         return crs;
     }
-
+    
     @Override
     protected void finalize() throws Throwable {
         super.finalize(); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
 }

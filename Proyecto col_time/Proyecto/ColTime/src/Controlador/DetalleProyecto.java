@@ -17,7 +17,7 @@ public class DetalleProyecto {
     private String tipoNegocio = "";
     private int estado = 0;
     private String material = "";
-    
+
     //Set-------------------------------------------------------->
     public String getCantidad() {
         return cantidad;
@@ -85,9 +85,9 @@ public class DetalleProyecto {
         return true;
     }
 
-    public CachedRowSet consultar_Detalle_Proyecto(String numerOrden,int estado) {
+    public CachedRowSet consultar_Detalle_Proyecto(String numerOrden, int estado) {
         DetalleProyectoM obj = new DetalleProyectoM();
-        return obj.consultar_Detalle_Proyecto(numerOrden,estado);
+        return obj.consultar_Detalle_Proyecto(numerOrden, estado);
     }
 
     public CachedRowSet consultarProcesosFE(int detalle) {
@@ -101,9 +101,9 @@ public class DetalleProyecto {
     }
 
 //  Reiniciar toma de tiempo
-    public boolean ReiniciarDetalle(int detalle, int negocio) {
+    public boolean ReiniciarDetalle(int detalle, int negocio, int detalleproducto) {
         DetalleProyectoM obj = new DetalleProyectoM();
-        return obj.ReiniciarDetalle(detalle, negocio);
+        return obj.ReiniciarDetalle(detalle, negocio, detalleproducto);
     }
 
     public boolean eliminarDetallersProyecto(int idDetalle, int numerOrden, String negocio, String tipo, int accion) {
