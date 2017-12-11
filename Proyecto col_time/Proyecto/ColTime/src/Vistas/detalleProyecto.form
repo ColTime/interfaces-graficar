@@ -133,6 +133,7 @@
                 <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[900, 300]"/>
                 </Property>
+                <Property name="name" type="java.lang.String" value="TDetalleProduccion" noResource="true"/>
                 <Property name="rowHeight" type="int" value="18"/>
                 <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="b3" red="3f" type="rgb"/>
@@ -174,11 +175,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jTNombreCliente" min="-2" pref="248" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="jLabel5" min="-2" pref="135" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLID" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jLabel5" min="-2" pref="135" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -226,7 +223,6 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLID" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="103" alignment="1" groupAlignment="0" attributes="0">
@@ -435,14 +431,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Tiempo Total:"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLID">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="jLabel1"/>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
-              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

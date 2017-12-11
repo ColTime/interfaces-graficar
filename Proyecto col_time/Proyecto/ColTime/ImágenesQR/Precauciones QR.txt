@@ -1,0 +1,42 @@
+Esta es la información necesaria para generar el QR del proyecto correctamente:
+
+_____________________________________________________________________________________________________________________________________________________________
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+1)Numero de orden.(No se aceptara ningun otro valor que no sea numerico).
+
+2)Área a la que aplica(FE,TE,IN).
+
+3)tipo proyecto(Conversor,Circuito(Este es el circuito de FE),Repujado,Troquel,Teclado,Stencil,PCB(este es el circuito de TE))(Ten en cuenta que FE va: Conversor, Circuito, PCB, Repujado, Troquel y Stencil, en TE solo va los Teclados y en IN Solo va Circuito). solo hay 8 combinaciones disponibles.
+
+4)nombre del cliente (máximo de 45 caracteres, no se aceptra carapteres que no sean letras).
+
+5)nombre del Proyecto (máximo de 45 caracteres, se aceptaran caracteres de letras y numericos).
+
+6)cantidad(Máximo de 6 caracteres, Solo se aceptaran caracteres numericos).
+
+7)Ejecución (Quick, RQT, normal.(Abarca toda la orden en general)).
+
+8)Tipo PCB (TH,FV: esto solo aplica para los Circuitos y las PCB, si no es ninguno de estos simplemente se coloca un "0").
+
+9)lleva antisolder (SI, NO)(Aplica solo para el circuito y la PCB,si no es ninguno de estos simplemente se coloca un "null").
+
+10)lleva ruteo (SI, NO)(Aplica solo para el circuito y la PCB,si no es ninguno de estos simplemente se coloca un "null").
+
+11)Fecha de entrega (La abarca todo el proyecto y sus detalles, tiene que ser en este formato ""yyyy/MM/dd"")
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Reconmendaciones:
+
+--------------------------------------------------------------------------------------------------
+Esta información obligatoriamente tiene que ser separada por ";".
+
+La siguiente información solo es necesaria cuando el tipo de proyecto es Circuito-FE o PCB-FE:
+
+-lleva antisolder
+-lleva ruteo
+
+Cuando es TE o EN no es necesario incluirla, pero si es necesario rellenar los espacios con "no".
+--------------------------------------------------------------------------------------------------
+
+El código quedaria así: "28942;FE;Circuito;juan david marulanda;pruebadelQR;12;Quick;TH;NO;NO;2017/12/01"

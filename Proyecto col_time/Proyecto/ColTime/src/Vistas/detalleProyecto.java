@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import rojerusan.RSNotifyAnimated;
 
 public class detalleProyecto extends javax.swing.JDialog {
-    
+
     public detalleProyecto(java.awt.Frame parent, boolean modal, int detalle, int negocio, String orden, int permiso) {//Falta organizar la variable "tipo" para que traiga el valor correspondiente
         super(parent, modal);
         initComponents();
@@ -20,7 +20,7 @@ public class detalleProyecto extends javax.swing.JDialog {
         } else {
             this.setTitle(orden + " - " + "Ensamble");
         }
-        
+
         this.detalle = detalle;
         this.negocio = negocio;
         this.setLocationRelativeTo(null);
@@ -39,7 +39,7 @@ public class detalleProyecto extends javax.swing.JDialog {
     private static int detalle = 0;
     private static int negocio = 0, permiso = 0;
     int rows = -1;
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -62,7 +62,6 @@ public class detalleProyecto extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         jTTimepoTotal = new elaprendiz.gui.textField.TextFieldRoundBackground();
         jLabel9 = new javax.swing.JLabel();
-        jLID = new javax.swing.JLabel();
 
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/retro.png"))); // NOI18N
         jMenuItem1.setText("Actualizar");
@@ -103,6 +102,7 @@ public class detalleProyecto extends javax.swing.JDialog {
         TDetalleProduccion.setGridColor(new java.awt.Color(255, 255, 255));
         TDetalleProduccion.setIntercellSpacing(new java.awt.Dimension(0, 0));
         TDetalleProduccion.setMinimumSize(new java.awt.Dimension(900, 300));
+        TDetalleProduccion.setName("TDetalleProduccion"); // NOI18N
         TDetalleProduccion.setRowHeight(18);
         TDetalleProduccion.setSelectionBackground(new java.awt.Color(63, 179, 255));
         TDetalleProduccion.setShowHorizontalLines(false);
@@ -174,8 +174,6 @@ public class detalleProyecto extends javax.swing.JDialog {
         jLabel9.setForeground(new java.awt.Color(128, 128, 131));
         jLabel9.setText("Tiempo Total:");
 
-        jLID.setText("jLabel1");
-
         javax.swing.GroupLayout jPInformacionLayout = new javax.swing.GroupLayout(jPInformacion);
         jPInformacion.setLayout(jPInformacionLayout);
         jPInformacionLayout.setHorizontalGroup(
@@ -184,10 +182,7 @@ public class detalleProyecto extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPInformacionLayout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLID)))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
@@ -224,8 +219,7 @@ public class detalleProyecto extends javax.swing.JDialog {
                             .addComponent(jTNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel4)
-                            .addComponent(jLID)))
+                            .addComponent(jLabel4)))
                     .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPInformacionLayout.createSequentialGroup()
                             .addGap(21, 21, 21)
@@ -283,20 +277,20 @@ public class detalleProyecto extends javax.swing.JDialog {
         //Botones de seguridad
         String[] botones = {" SI ", " NO "};
         rows = TDetalleProduccion.rowAtPoint(evt.getPoint());
-        
+
         int column = TDetalleProduccion.getColumnModel().getColumnIndexAtX(evt.getX());
         int row = evt.getY() / TDetalleProduccion.getRowHeight();
-        
+
         if (row < TDetalleProduccion.getRowCount() && row >= 0 && column < TDetalleProduccion.getColumnCount() && column >= 0) {
             Object value = TDetalleProduccion.getValueAt(row, column);
             if (value instanceof JButton) {
-                if (JOptionPane.showOptionDialog(null, "¿Seguro desea reinicializar la toma de tiempo? Perdera toda esta información.", "Seguridad", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null/*icono*/, botones, botones[0]) == 0) {
-                    ((JButton) value).doClick();
-                    JButton boton = (JButton) value;
-                    if (boton.getActionCommand().equals("1")) {
+                JButton boton;
+                boton = (JButton) value;
+                if (boton.getActionCommand().equals("1")) {
+                    if (JOptionPane.showOptionDialog(null, "¿Seguro desea reinicializar la toma de tiempo? Perdera toda esta información.", "Seguridad", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null/*icono*/, botones, botones[0]) == 0) {
                         String idDetalle = String.valueOf(TDetalleProduccion.getValueAt(row, 11));
                         DetalleProyecto obj = new DetalleProyecto();
-                        if (obj.ReiniciarDetalle(Integer.parseInt(idDetalle), negocio,detalle)) {///Pendiente
+                        if (obj.ReiniciarDetalle(Integer.parseInt(idDetalle), negocio, detalle)) {///Pendiente???¿¿¿???¿¿¿
                             new rojerusan.RSNotifyAnimated("¡Listo!", "El proceso: " + TDetalleProduccion.getValueAt(row, 0) + " fue reinicializado corresctamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
                             cargarTabla();
                         } else {
@@ -313,11 +307,11 @@ public class detalleProyecto extends javax.swing.JDialog {
             popMenu.show(evt.getComponent(), evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_TDetalleProduccionMouseReleased
-
+//one day baby, i thiking but
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         cargarTabla();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-    
+
     private void cargarTabla() {
         Tabla personalizar = new Tabla();
         personalizar.visualizar(TDetalleProduccion, detalle, negocio);
@@ -334,7 +328,7 @@ public class detalleProyecto extends javax.swing.JDialog {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error!! " + e);
         }
-        
+
         if (permiso == 1) {
             editarTamañoColumnas();
         }
@@ -343,7 +337,7 @@ public class detalleProyecto extends javax.swing.JDialog {
         TDetalleProduccion.getTableHeader().getColumnModel().getColumn(11).setMaxWidth(0);
         TDetalleProduccion.getTableHeader().getColumnModel().getColumn(11).setMinWidth(0);
     }
-    
+
     public void editarTamañoColumnas() {
         TDetalleProduccion.getColumnModel().getColumn(10).setMinWidth(0);
         TDetalleProduccion.getColumnModel().getColumn(10).setMaxWidth(0);
@@ -395,7 +389,6 @@ public class detalleProyecto extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TDetalleProduccion;
-    public static javax.swing.JLabel jLID;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

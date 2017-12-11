@@ -112,6 +112,7 @@ public class FE_TE_INM {
             conexion.destruir();
             conexion.cerrar(rs);
             ps.close();
+            System.gc();//Garbage collector...
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error! " + e);
         }

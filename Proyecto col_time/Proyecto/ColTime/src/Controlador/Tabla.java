@@ -1,7 +1,6 @@
 package Controlador;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Cursor;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -19,13 +18,12 @@ public class Tabla {
         this.detalle = detalle;
         this.negocio = negocio;
         tabla.setDefaultRenderer(Object.class, new Render(6));
-        String encabezado[] = {"Proceso", "Fecha inicio", "Fecha fin", "Cantidad procesada", "Tiempo total min", "Tiempo unidad min", "Estado", "Hora de ejecución", "Tiempo Ejecución", "Hora de Terminación", "Reiniciar","IDdetalle",};
+        String encabezado[] = {"Proceso", "Fecha inicio", "Fecha fin", "Cantidad procesada", "Tiempo total min", "Tiempo unidad min", "Estado", "Hora de ejecución", "Tiempo Ejecución", "Hora de Terminación", "Reiniciar", "IDdetalle",};
         DefaultTableModel ds = new DefaultTableModel(null, encabezado) {
 
             Class[] types = new Class[]{
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,java.lang.Object.class,
-            };
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,};
 
             public Class getColumnClass(int columnIndex) {
                 return types[columnIndex];
@@ -37,12 +35,13 @@ public class Tabla {
         };
 
         Object v[] = new Object[12];
-        JButton btn = new JButton("Reiniciar");
-        btn.setName("12");
 
         try {
             crs = consuldateDetalleProduccion();
             while (crs.next()) {
+                JButton btn = new JButton("Reiniciar");
+//                btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                
                 v[0] = crs.getString(1);
                 v[1] = crs.getString(2);
                 v[2] = crs.getString(3);
@@ -58,7 +57,7 @@ public class Tabla {
                 }
                 v[9] = crs.getString(10);
                 v[10] = btn;
-                v[11]=crs.getString(12);
+                v[11] = crs.getString(12);
                 ds.addRow(v);//Filas de la tabla
             }
             tabla.setModel(ds);

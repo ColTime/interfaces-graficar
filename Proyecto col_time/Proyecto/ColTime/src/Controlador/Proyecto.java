@@ -155,9 +155,10 @@ public class Proyecto {
         return obj.Consultar_informacion_para_el_QR(orden);
     }
 
-    public void generar_Reportes() {//Falta generar los reportes
-
-    }
+//    public CachedRowSet generar_Reportes() {//Falta generar los reportes
+//        ProyectoM obj=new ProyectoM();
+//        
+//    }
 
     public boolean validarNumerOrden(int orden) {
         ProyectoM obj = new ProyectoM();

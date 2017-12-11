@@ -36,10 +36,10 @@ public class Render extends DefaultTableCellRenderer {
             //Sabe que boton se activa y cual no
             if (table.getValueAt(row, columna_patron).equals("Por iniciar") || table.getValueAt(row, columna_patron).equals("Ejecucion")) {
                 btn.setEnabled(false);
-                btn.setActionCommand("2");
+                btn.setActionCommand("2");//2
             } else if (table.getValueAt(row, columna_patron).equals("Terminado") || table.getValueAt(row, columna_patron).equals("Pausado")) {
                 btn.setEnabled(true);
-                btn.setActionCommand("1");
+                btn.setActionCommand("1");//1
             }
 
             if (isSelected) {

@@ -33,6 +33,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
     int posY = 0;
     int count = 0;
     int estado = 1;
+    int cantidadRegistros = 0;
     CachedRowSet crs;
     //Botones de radio
     String encabezado1[] = {"idDetalle", "Negocio", "Tipo de negocio", "Cantidad", "Estado", "Material"};//Detalle del proyecto
@@ -67,6 +68,8 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TProyecto = new javax.swing.JTable();
+        jTCantidadRegistros = new javax.swing.JLabel();
+        jTCantidadRegistros1 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TPNC = new javax.swing.JTable();
@@ -322,7 +325,19 @@ public class ConsutaProyecto extends javax.swing.JFrame {
 
         jPanel2.add(jScrollPane2, "card2");
 
-        jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 122, 1203, 294));
+        jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 122, 1203, 300));
+
+        jTCantidadRegistros.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTCantidadRegistros.setForeground(new java.awt.Color(128, 128, 131));
+        jTCantidadRegistros.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jTCantidadRegistros.setText("1000000");
+        jPanel4.add(jTCantidadRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 417, 70, 30));
+
+        jTCantidadRegistros1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTCantidadRegistros1.setForeground(new java.awt.Color(128, 128, 131));
+        jTCantidadRegistros1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jTCantidadRegistros1.setText("Cantidad de registros:");
+        jPanel4.add(jTCantidadRegistros1, new org.netbeans.lib.awtextra.AbsoluteConstraints(965, 417, 180, 30));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153)), "PNC", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
@@ -359,7 +374,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
 
         jPanel5.add(jScrollPane1, "card2");
 
-        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(654, 422, 560, 193));
+        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 440, 560, 190));
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153)), "Detalles delproyecto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
@@ -396,7 +411,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
 
         jPanel6.add(jScrollPane3, "card2");
 
-        jPanel4.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 422, 600, 193));
+        jPanel4.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 600, 190));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -410,8 +425,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPEncabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE))
         );
 
         pack();
@@ -904,6 +918,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
             DefaultTableModel model = new DefaultTableModel(null, v);
             String v1[] = new String[16];
             while (crs.next()) {
+                cantidadRegistros++;
                 v1[0] = String.valueOf(crs.getInt(1));
                 v1[1] = crs.getString(2);
                 v1[2] = crs.getString(3);
@@ -922,6 +937,9 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                 v1[15] = String.valueOf(crs.getBoolean(16));
                 model.addRow(v1);
             }
+            //Cantidad de registros
+            jTCantidadRegistros.setText(String.valueOf(cantidadRegistros));
+            cantidadRegistros = 0;
             crs.close();
             TProyecto.setModel(model);
             editarColumnasProyecto();
@@ -1111,6 +1129,8 @@ public class ConsutaProyecto extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel jTCantidadRegistros;
+    private javax.swing.JLabel jTCantidadRegistros1;
     private elaprendiz.gui.textField.TextFieldRoundBackground jTNombreCliente;
     private elaprendiz.gui.textField.TextFieldRoundBackground jTNombreProyecto;
     private elaprendiz.gui.textField.TextFieldRoundBackground jTNumerOrden;

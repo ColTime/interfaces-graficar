@@ -1,7 +1,9 @@
 package coltime;
 
+import Controlador.DetalleProyecto;
 import Controlador.FE_TE_IN;
 import Controlador.Proyecto;
+import Controlador.generarXlsx;
 import Vistas.CambiarContraseña;
 import Vistas.ControlDelTiempo;
 import Vistas.Producciones;
@@ -1176,9 +1178,26 @@ public class Menu extends javax.swing.JFrame {
                 JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
                 new Object[]{"Tiempos de producción", "General"}, "");
         if (seleccion == 0) {
-
+            //Reporte de tiempos 
         } else {
-
+            //Reporte general Excel.
+            DetalleProyecto obj = new DetalleProyecto();
+            crs = obj.generar_Reportes();
+            //Ruta de guardado del archivo
+            JFileChooser Chocer = new JFileChooser();
+            Chocer.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            Chocer.setLocation(500, 500);
+            Chocer.showOpenDialog(this);
+            File guardar = Chocer.getSelectedFile();
+            //Generar archivo .xlsx
+            generarXlsx excel = new generarXlsx();
+            if (excel.generarExcel(crs, String.valueOf(guardar))) {
+                //Documento creado correctamente
+                new rojerusan.RSNotifyAnimated("Listo!", "El reporte General de producción fue creado exitosamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+            } else {
+                //Error al crear el documento
+                new rojerusan.RSNotifyAnimated("¡Error!", "No puedo crear el reporte General.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
+            }
         }
     }//GEN-LAST:event_btn5ActionPerformed
 //Metodos de la clase menu----------------------------------------------------->

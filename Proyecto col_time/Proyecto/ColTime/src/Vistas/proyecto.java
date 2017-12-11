@@ -159,9 +159,6 @@ public class proyecto extends javax.swing.JPanel {
         GenerarQR = new elaprendiz.gui.button.ButtonColoredAction();
         jTProyectoQR = new elaprendiz.gui.textField.TextFieldRoundBackground();
         btnTomaTiempos = new elaprendiz.gui.button.ButtonColoredAction();
-        jPanel3 = new javax.swing.JPanel();
-        btnGenerarExcel = new javax.swing.JButton();
-        btnGenerarPDF = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(219, 219, 219));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
@@ -399,7 +396,7 @@ public class proyecto extends javax.swing.JPanel {
         jCCircuito.setBackground(new java.awt.Color(255, 255, 255));
         jCCircuito.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jCCircuito.setForeground(new java.awt.Color(102, 102, 102));
-        jCCircuito.setText("Circuito");
+        jCCircuito.setText("Circuito-FE");
         jCCircuito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCCircuitoActionPerformed(evt);
@@ -415,7 +412,7 @@ public class proyecto extends javax.swing.JPanel {
         jCPCBTE.setBackground(new java.awt.Color(255, 255, 255));
         jCPCBTE.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jCPCBTE.setForeground(new java.awt.Color(102, 102, 102));
-        jCPCBTE.setText("PCB");
+        jCPCBTE.setText("PCB-TE");
         jCPCBTE.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCPCBTEActionPerformed(evt);
@@ -828,19 +825,6 @@ public class proyecto extends javax.swing.JPanel {
         });
         jPanel2.add(btnTomaTiempos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 150, -1));
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel3.setLayout(new java.awt.GridLayout(1, 0));
-
-        btnGenerarExcel.setText("Reporte");
-        btnGenerarExcel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel3.add(btnGenerarExcel);
-
-        btnGenerarPDF.setText("Reporte1");
-        btnGenerarPDF.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel3.add(btnGenerarPDF);
-
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 530, 140, 40));
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -931,10 +915,10 @@ public class proyecto extends javax.swing.JPanel {
 
     private void jTNombreProyectoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNombreProyectoKeyTyped
         validarCampos();
-        char cara = evt.getKeyChar();
-        if (Character.isDigit(cara) || evt.getKeyChar() == '.' || evt.getKeyChar() == '|') {
-            evt.consume();
-        }
+//        char cara = evt.getKeyChar();
+//        if (Character.isDigit(cara) || evt.getKeyChar() == '.' || evt.getKeyChar() == '|') {
+//            evt.consume();
+//        }
     }//GEN-LAST:event_jTNombreProyectoKeyTyped
 
     private void cbNegocioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbNegocioItemStateChanged
@@ -1120,7 +1104,6 @@ public class proyecto extends javax.swing.JPanel {
                     new rojerusan.RSNotifyAnimated("Listo.", "El proyecto con la orden " + infoP[0] + " fue registrado exitosamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
                 } else {
                     //Se puede actualizar la informacion... Esta por definir.
-
                 }
                 //Continúa...
                 if (obj.validarDetalleProyectoQR(Integer.parseInt(infoP[0]), infoP[1], infoP[2])) {//Se valida la existencia del detalle...
@@ -2152,8 +2135,6 @@ public class proyecto extends javax.swing.JPanel {
     public static javax.swing.JButton btnActivar;
     private javax.swing.JButton btnBuscar;
     public static javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnGenerarExcel;
-    private javax.swing.JButton btnGenerarPDF;
     private javax.swing.JButton btnGuardar;
     public static javax.swing.JButton btnNuevo;
     public static elaprendiz.gui.button.ButtonColoredAction btnTomaTiempos;
@@ -2209,7 +2190,6 @@ public class proyecto extends javax.swing.JPanel {
     public static javax.swing.JPanel jPInformacion;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTCircuito;
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTConversor;
