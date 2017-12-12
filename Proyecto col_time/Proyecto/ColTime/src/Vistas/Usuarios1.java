@@ -3,6 +3,8 @@ package Vistas;
 import Atxy2k.CustomTextField.RestrictedTextField;
 import coltime.Menu;
 import java.awt.Color;
+import java.awt.Point;
+import java.awt.event.MouseEvent;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -411,19 +413,33 @@ public class Usuarios1 extends javax.swing.JPanel {
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false; //Disallow the editing of any cell
             }
+            public String getToolTipText(MouseEvent e) {
+                String tip = null;
+                java.awt.Point p = e.getPoint();
+                int rowIndex = rowAtPoint(p);
+                //int colIndex = columnAtPoint(p);
+
+                try {
+                    tip ="Recuperación: "+getValueAt(rowIndex, 7).toString();
+                } catch (RuntimeException e1) {
+                    //catch null pointer exception if mouse is over an empty line
+                }
+
+                return tip;
+            }
         };
         jTUsuario.setAutoCreateRowSorter(true);
         jTUsuario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTUsuario.setForeground(new java.awt.Color(128, 128, 131));
         jTUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nuero de documento", "Tipo documento", "Nombres", "Apellidos", "Cargo", "Imagen", "Estado"
+                "Nuero de documento", "Tipo documento", "Nombres", "Apellidos", "Cargo", "Imagen", "Estado", "recuperaccion"
             }
         ));
         jTUsuario.setFillsViewportHeight(true);
@@ -466,7 +482,7 @@ public class Usuarios1 extends javax.swing.JPanel {
                 .addGap(22, 22, 22)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -499,7 +515,7 @@ public class Usuarios1 extends javax.swing.JPanel {
         jTdocumento.setEnabled(true);
         limpiar();
     }//GEN-LAST:event_btnNuevoActionPerformed
-
+    
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         registrarMdificarUsuario(1, 1);
         consultarUsuarios("", "", 0);
@@ -556,7 +572,7 @@ public class Usuarios1 extends javax.swing.JPanel {
             obj.setDocumento(jTdocumento.getText());
             if (obj.validarSiEstaActivo()) {
                 new rojerusan.RSNotifyAnimated("Alerta!!", "El usuario esta logiado en el sistema de información.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
-            }else{
+            } else {
                 //Si el usuario no esta activo se podra cambiar el estado de la session.
                 boolean res = obj.cambiar_Estado_Usuario(false);
                 new rojerusan.RSNotifyAnimated("Listo!!", "El usuario con el documento:  " + jTdocumento.getText() + " se le cambio el estado a 'inactivo'.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
@@ -689,6 +705,13 @@ public class Usuarios1 extends javax.swing.JPanel {
             obj.setNombres(jTNombre.getText());
             obj.setApellidos(jTApellidos.getText());
             obj.setCargo(cBCargo.getSelectedIndex());
+            if (op == 1) {
+                //Se genera el código para recuperar la contraseña   
+                obj.setRecuperaccion(generarCodigoRecuperacionContraseña());
+            } else {
+                //No se genera el código para recuperar la contraseña pero se llena el campo con una " "
+                obj.setRecuperaccion(" ");
+            }
             Boolean res = obj.registrar_Modificar_Usuario(op, estado);
             if (res) {
                 if (op == 1) {
@@ -714,17 +737,29 @@ public class Usuarios1 extends javax.swing.JPanel {
         cBCargo.setSelectedIndex(0);
     }
 
+    public String generarCodigoRecuperacionContraseña() {
+        char[] elementos = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '-', '@'};
+
+        char[] conjunto = new char[10];
+        String pass;
+        for (int i = 0; i < 10; i++) {
+            int el = (int) (Math.random() * 39);
+            conjunto[i] = (char) elementos[el];
+        }
+        return pass = new String(conjunto);
+    }
+
     public void consultarUsuarios(String doc, String nomape, int cargo) {
         Controlador.Usuario obj = new Controlador.Usuario(doc, nomape, cargo);
         try {
             CachedRowSet crs = obj.consultar_Usuario();
             //Peparación de la tabla(jTUsuario) para insertar valores 
-            String names[] = {"Numero de Documento", "Tipo documento", "Nombres", "Apellidos", "Cargo", "Imagen", "Estado"};
+            String names[] = {"Numero de Documento", "Tipo documento", "Nombres", "Apellidos", "Cargo", "Imagen", "Estado", "Recuperacción"};
             DefaultTableModel ds = new DefaultTableModel(null, names);
             while (crs.next()) {
                 //Filas de la tabla
                 if (!crs.getString(1).equals(Menu.jDocumento.getText())) {
-                    String v[] = new String[7];
+                    String v[] = new String[8];
                     v[0] = crs.getString(1);
                     v[1] = crs.getString(2);
                     v[2] = crs.getString(3);
@@ -732,6 +767,7 @@ public class Usuarios1 extends javax.swing.JPanel {
                     v[4] = crs.getString(5);
                     v[5] = crs.getString(6);
                     v[6] = (crs.getString(7).equals("true") ? "Activo" : "Inactivo");
+                    v[7] = crs.getString(8);
                     ds.addRow(v);
                 }
             }
@@ -758,18 +794,22 @@ public class Usuarios1 extends javax.swing.JPanel {
         jTUsuario.getColumnModel().getColumn(3).setMaxWidth(206);
         jTUsuario.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(206);
         jTUsuario.getTableHeader().getColumnModel().getColumn(3).setMinWidth(206);
-        jTUsuario.getColumnModel().getColumn(4).setMinWidth(159);
-        jTUsuario.getColumnModel().getColumn(4).setMaxWidth(159);
-        jTUsuario.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(159);
-        jTUsuario.getTableHeader().getColumnModel().getColumn(4).setMinWidth(159);
+        jTUsuario.getColumnModel().getColumn(4).setMinWidth(156);
+        jTUsuario.getColumnModel().getColumn(4).setMaxWidth(156);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(156);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(4).setMinWidth(156);
         jTUsuario.getColumnModel().getColumn(5).setMinWidth(0);
         jTUsuario.getColumnModel().getColumn(5).setMaxWidth(0);
         jTUsuario.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
         jTUsuario.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
-        jTUsuario.getColumnModel().getColumn(6).setMinWidth(50);
-        jTUsuario.getColumnModel().getColumn(6).setMaxWidth(50);
-        jTUsuario.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(50);
-        jTUsuario.getTableHeader().getColumnModel().getColumn(6).setMinWidth(50);
+        jTUsuario.getColumnModel().getColumn(6).setMinWidth(53);
+        jTUsuario.getColumnModel().getColumn(6).setMaxWidth(53);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(53);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(6).setMinWidth(53);
+        jTUsuario.getColumnModel().getColumn(7).setMinWidth(0);
+        jTUsuario.getColumnModel().getColumn(7).setMaxWidth(0);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(7).setMaxWidth(0);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(7).setMinWidth(0);
     }
 
     public void limites() {

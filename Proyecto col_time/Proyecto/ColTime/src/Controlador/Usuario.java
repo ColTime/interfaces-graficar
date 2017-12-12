@@ -27,8 +27,17 @@ public class Usuario {
     private int cargo = 0;
     private String contraseña = "";
     private FileInputStream im = null;
-
+    private String recuperaccion = null;
     //Set---------------------------------------------->
+
+    public String getRecuperaccion() {
+        return recuperaccion;
+    }
+
+    public void setRecuperaccion(String recuperaccion) {
+        this.recuperaccion = recuperaccion;
+    }
+
     public void setCrs(CachedRowSet crs) {
         this.crs = crs;
     }
@@ -64,7 +73,12 @@ public class Usuario {
     //Metodos de la clase usuarios--------------------------------------->
     public boolean registrar_Modificar_Usuario(int op, int estado) {
         Modelo.UsuarioM obj = new Modelo.UsuarioM();
-        return obj.registrar_Modificar_Usuario(documento, tipo, nombres, apellidos, cargo, op, true);
+        return obj.registrar_Modificar_Usuario(documento, tipo, nombres, apellidos, cargo, op, true, recuperaccion);
+    }
+
+    public CachedRowSet recuperacionContraseña(String recuperacion) {
+        UsuarioM obj = new UsuarioM();
+        return obj.recuperacionContraseñaM(recuperacion);
     }
 
     public CachedRowSet consultar_Usuario() {

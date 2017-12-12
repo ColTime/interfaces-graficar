@@ -18,6 +18,28 @@ public class UsuarioM {
     boolean res;
 //Metodos---------------------------------------------------------------------->
 
+    public CachedRowSet recuperacionContraseñaM(String recuperacion) {
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query y ejecución------------------------------------------------------------>
+            String Qry = "CALL PA_RecuperaContraseñaUser(?)";
+            ps = con.prepareCall(Qry);
+            ps.setString(1, recuperacion);
+            rs = ps.executeQuery();
+            crs = new CachedRowSetImpl();
+            crs.populate(rs);
+            //Destrucción de conexiones
+            con.close();
+            conexion.destruir();
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "¡Error!" + e);
+        }
+        return crs;
+    }
+
     public void sesion(int sec, String doc) {
         try {
             conexion = new Conexion();
@@ -38,13 +60,13 @@ public class UsuarioM {
         }
     }
 
-    public boolean registrar_Modificar_Usuario(String doc, String tipo, String nombres, String apellidos, int cargo, int op, boolean estado) {
+    public boolean registrar_Modificar_Usuario(String doc, String tipo, String nombres, String apellidos, int cargo, int op, boolean estado, String rec) {
         try {
             conexion = new Conexion();
             conexion.establecerConexion();
             con = conexion.getConexion();
             //Query------------------------------------------------------------>
-            String Qry = "SELECT FU_InsertarModificarUsuar(?,?,?,?,?,?,?)";
+            String Qry = "SELECT FU_InsertarModificarUsuar(?,?,?,?,?,?,?,?)";
             ps = con.prepareStatement(Qry);
             ps.setString(1, doc);
             ps.setString(2, tipo);
@@ -53,6 +75,7 @@ public class UsuarioM {
             ps.setInt(5, cargo);
             ps.setBoolean(6, estado);
             ps.setInt(7, op);
+            ps.setString(8, rec);
             rs = ps.executeQuery();
             if (rs.next()) {
                 res = rs.getBoolean(1);
@@ -75,7 +98,7 @@ public class UsuarioM {
             obj.establecerConexion();
             con = obj.getConexion();
             //Consulta-------
-            String Qry = "call PA_ConsultarUsuarios(?,?,?);";
+            String Qry = "CALL PA_ConsultarUsuarios(?,?,?);";
             ps = con.prepareCall(Qry);
             //Preparación de la consulta---------
             ps.setString(1, doc);

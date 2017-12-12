@@ -386,7 +386,7 @@ public class Menu extends javax.swing.JFrame {
                 btn5ActionPerformed(evt);
             }
         });
-        jPMenu.add(btn5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 190, 42));
+        jPMenu.add(btn5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 278, 190, 42));
 
         jPContenido.setLayout(new javax.swing.BoxLayout(jPContenido, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -1177,26 +1177,29 @@ public class Menu extends javax.swing.JFrame {
                 "seleccione...", JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
                 new Object[]{"Tiempos de producción", "General"}, "");
-        if (seleccion == 0) {
-            //Reporte de tiempos 
-        } else {
-            //Reporte general Excel.
-            DetalleProyecto obj = new DetalleProyecto();
-            crs = obj.generar_Reportes();
-            //Ruta de guardado del archivo
-            JFileChooser Chocer = new JFileChooser();
-            Chocer.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-            Chocer.setLocation(500, 500);
-            Chocer.showOpenDialog(this);
-            File guardar = Chocer.getSelectedFile();
-            //Generar archivo .xlsx
-            generarXlsx excel = new generarXlsx();
-            if (excel.generarExcel(crs, String.valueOf(guardar))) {
-                //Documento creado correctamente
-                new rojerusan.RSNotifyAnimated("Listo!", "El reporte General de producción fue creado exitosamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+        if (seleccion != -1) {
+            if (seleccion == 0) {
+                //Reporte de tiempos 
+                //...
             } else {
-                //Error al crear el documento
-                new rojerusan.RSNotifyAnimated("¡Error!", "No puedo crear el reporte General.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
+                //Reporte general Excel.
+                DetalleProyecto obj = new DetalleProyecto();
+                crs = obj.generar_Reportes();
+                //Ruta de guardado del archivo
+                JFileChooser Chocer = new JFileChooser();
+                Chocer.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                Chocer.setLocation(500, 500);
+                Chocer.showOpenDialog(this);
+                File guardar = Chocer.getSelectedFile();
+                //Generar archivo .xlsx
+                generarXlsx excel = new generarXlsx();
+                if (excel.generarExcel(crs, String.valueOf(guardar))) {
+                    //Documento creado correctamente
+                    new rojerusan.RSNotifyAnimated("Listo!", "El reporte General de producción fue creado exitosamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+                } else {
+                    //Error al crear el documento
+                    new rojerusan.RSNotifyAnimated("¡Error!", "No puedo crear el reporte General.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
+                }
             }
         }
     }//GEN-LAST:event_btn5ActionPerformed

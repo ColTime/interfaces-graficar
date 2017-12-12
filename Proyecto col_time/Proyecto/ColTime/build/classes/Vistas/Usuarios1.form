@@ -104,7 +104,7 @@
                   <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
                   <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane3" pref="137" max="32767" attributes="0"/>
+                  <Component id="jScrollPane3" pref="191" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -781,7 +781,7 @@
                   <Color blue="83" green="80" red="80" type="rgb"/>
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="7" rowCount="4">
+                  <Table columnCount="8" rowCount="4">
                     <Column editable="true" title="Nuero de documento" type="java.lang.Object"/>
                     <Column editable="true" title="Tipo documento" type="java.lang.Object"/>
                     <Column editable="true" title="Nombres" type="java.lang.Object"/>
@@ -789,6 +789,7 @@
                     <Column editable="true" title="Cargo" type="java.lang.Object"/>
                     <Column editable="true" title="Imagen" type="java.lang.Object"/>
                     <Column editable="true" title="Estado" type="java.lang.Object"/>
+                    <Column editable="true" title="recuperaccion" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="fillsViewportHeight" type="boolean" value="true"/>
@@ -815,7 +816,7 @@
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable()"/>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTUsuario = new javax.swing.JTable(){&#xa;    public boolean isCellEditable(int rowIndex, int colIndex) {&#xa;        return false; //Disallow the editing of any cell&#xa;    }&#xa;};"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTUsuario = new javax.swing.JTable(){&#xa;    public boolean isCellEditable(int rowIndex, int colIndex) {&#xa;        return false; //Disallow the editing of any cell&#xa;    }&#xa;    public String getToolTipText(MouseEvent e) {&#xa;                String tip = null;&#xa;                java.awt.Point p = e.getPoint();&#xa;                int rowIndex = rowAtPoint(p);&#xa;                //int colIndex = columnAtPoint(p);&#xa;&#xa;                try {&#xa;                    tip =&quot;Recuperaci&#xf3;n: &quot;+getValueAt(rowIndex, 7).toString();&#xa;                } catch (RuntimeException e1) {&#xa;                    //catch null pointer exception if mouse is over an empty line&#xa;                }&#xa;&#xa;                return tip;&#xa;            }&#xa;};"/>
               </AuxValues>
             </Component>
           </SubComponents>
