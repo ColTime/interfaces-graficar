@@ -26,7 +26,7 @@ public class Menu extends javax.swing.JFrame {
 
     public Color cor = new Color(189, 189, 189);
     public Color corF = new Color(219, 219, 219);
-    Producciones bp = null;
+    public static Producciones bp = null;
     private int longitudByte;
     int cont = 0;
 
@@ -944,7 +944,8 @@ public class Menu extends javax.swing.JFrame {
         if (bp == null) {
             bp = new Producciones();
             bp.setVisible(true);
-            bp = null;
+        } else {
+            bp.isFocusableWindow();
         }
 
     }//GEN-LAST:event_btn4ActionPerformed

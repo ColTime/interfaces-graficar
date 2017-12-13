@@ -286,6 +286,12 @@ public class ConsultarPNC extends javax.swing.JFrame {
         proyecto1.jTTipoNegocio.setText(TDetalle.getValueAt(pos, 2).toString());
         proyecto1.cbProcedoPNC.removeAllItems();
         proyecto1.cbProcedoPNC.addItem("Seleccione...");
+        if (TDetalle.getValueAt(pos, 5) == null) {
+            proyecto1.jLMaterial.setText("NULL");
+        } else {
+            proyecto1.jLMaterial.setText(TDetalle.getValueAt(pos, 5).toString());
+        }
+
         if (vista == 2) {
             proyecto1.btnDelete.setEnabled(true);
             proyecto1.btnGenerarQR.setEnabled(true);
@@ -347,7 +353,7 @@ public class ConsultarPNC extends javax.swing.JFrame {
         String v1[] = new String[7];
         try {
             DetalleProyecto obj = new DetalleProyecto();
-            crs = obj.consultar_Detalle_Proyecto(jTNorden.getText(),1);
+            crs = obj.consultar_Detalle_Proyecto(jTNorden.getText(), 1);
             while (crs.next()) {
                 if (vista == 1) {
                     if (!crs.getBoolean(6)) {

@@ -1,23 +1,13 @@
 package Vistas;
 
 import Controlador.DetalleProyecto;
-import Controlador.Proyecto;
 import com.barcodelib.barcode.QRCode;
 import java.awt.Color;
 import java.io.File;
-import java.util.Locale;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.renderer.category.BarRenderer;
-import org.jfree.chart.renderer.category.BarRenderer3D;
-import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.data.general.DefaultPieDataset;
 import rojerusan.RSNotifyAnimated;
 
 public class proyecto1 extends javax.swing.JPanel {
@@ -27,6 +17,7 @@ public class proyecto1 extends javax.swing.JPanel {
             initComponents();
             desactivarComponentes();
             grafica.setIcon(llamarDiagramas(1, 0));
+            jLDetalle.setVisible(false);
         }
     }
 
@@ -62,6 +53,7 @@ public class proyecto1 extends javax.swing.JPanel {
         jLDetalle = new javax.swing.JLabel();
         btnGenerarQR = new elaprendiz.gui.button.ButtonColoredAction();
         btnDelete = new javax.swing.JButton();
+        jLMaterial = new javax.swing.JLabel();
         jPEstadistica = new javax.swing.JPanel();
         grafica = new javax.swing.JLabel();
 
@@ -234,6 +226,8 @@ public class proyecto1 extends javax.swing.JPanel {
             }
         });
 
+        jLMaterial.setText("Material");
+
         javax.swing.GroupLayout jPInformacionLayout = new javax.swing.GroupLayout(jPInformacion);
         jPInformacion.setLayout(jPInformacionLayout);
         jPInformacionLayout.setHorizontalGroup(
@@ -272,8 +266,13 @@ public class proyecto1 extends javax.swing.JPanel {
                                         .addComponent(jTNegocio, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(39, 39, 39))
                                     .addGroup(jPInformacionLayout.createSequentialGroup()
-                                        .addGap(45, 45, 45)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(jPInformacionLayout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPInformacionLayout.createSequentialGroup()
+                                                .addGap(45, 45, 45)
+                                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addGap(30, 30, 30)))
                                 .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jTTipoNegocio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -298,7 +297,9 @@ public class proyecto1 extends javax.swing.JPanel {
                             .addComponent(btnConsultarDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnGenerarQR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPInformacionLayout.createSequentialGroup()
-                        .addComponent(jLDetalle)
+                        .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLDetalle)
+                            .addComponent(jLMaterial))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
@@ -607,7 +608,7 @@ public class proyecto1 extends javax.swing.JPanel {
                     obj.setCantidad(jTCantindad.getText());
                     obj.setNegocio(jTNegocio.getText());
                     obj.setTipoNegocio(jTTipoNegocio.getText());
-                    obj.setMaterial("");
+                    obj.setMaterial(jLMaterial.getText());//...Pendiente...
                     res = obj.registrarModificarPNC(jTNorden.getText(), op, Integer.parseInt(jLDetalle.getText()), cbProcedoPNC.getSelectedItem().toString());
                     if (res) {
                         desactivarComponentes();
@@ -661,6 +662,7 @@ public class proyecto1 extends javax.swing.JPanel {
     public static elaprendiz.gui.comboBox.ComboBoxRound cbProcedoPNC;
     private javax.swing.JLabel grafica;
     public static javax.swing.JLabel jLDetalle;
+    public static javax.swing.JLabel jLMaterial;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

@@ -1,6 +1,7 @@
 package Vistas;
 
 import Controlador.Proyecto;
+import coltime.Menu;
 import com.itextpdf.text.Image;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -61,6 +62,11 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(63, 179, 255));
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
@@ -102,7 +108,9 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         rSButtonMetro1.setBackground(new java.awt.Color(63, 179, 255));
         rSButtonMetro1.setText("Formato estandar");
         rSButtonMetro1.setBorderPainted(false);
+        rSButtonMetro1.setColorHover(new java.awt.Color(17, 161, 255));
         rSButtonMetro1.setColorNormal(new java.awt.Color(63, 179, 255));
+        rSButtonMetro1.setColorPressed(new java.awt.Color(38, 86, 186));
         rSButtonMetro1.setFocusPainted(false);
         rSButtonMetro1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,7 +121,9 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         rSButtonMetro2.setBackground(new java.awt.Color(63, 179, 255));
         rSButtonMetro2.setText("Teclados");
         rSButtonMetro2.setBorderPainted(false);
+        rSButtonMetro2.setColorHover(new java.awt.Color(17, 161, 255));
         rSButtonMetro2.setColorNormal(new java.awt.Color(63, 179, 255));
+        rSButtonMetro2.setColorPressed(new java.awt.Color(38, 86, 186));
         rSButtonMetro2.setFocusPainted(false);
         rSButtonMetro2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,7 +134,9 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         rSButtonMetro3.setBackground(new java.awt.Color(63, 179, 255));
         rSButtonMetro3.setText("Ensamble");
         rSButtonMetro3.setBorderPainted(false);
+        rSButtonMetro3.setColorHover(new java.awt.Color(17, 161, 255));
         rSButtonMetro3.setColorNormal(new java.awt.Color(63, 179, 255));
+        rSButtonMetro3.setColorPressed(new java.awt.Color(38, 86, 186));
         rSButtonMetro3.setFocusPainted(false);
         rSButtonMetro3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,12 +149,11 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(rSButtonMetro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rSButtonMetro2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(rSButtonMetro2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rSButtonMetro3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(rSButtonMetro3, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -154,13 +165,12 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(rSButtonMetro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(rSButtonMetro2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(rSButtonMetro3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton10)
                     .addComponent(jBSalir))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
+            .addComponent(rSButtonMetro1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(rSButtonMetro3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(rSButtonMetro2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -451,6 +461,10 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                 break;
         }
     }//GEN-LAST:event_jBActualizarActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+           Menu.bp = null;
+    }//GEN-LAST:event_formWindowClosed
 
 //Metodos
     private void busqueda() {
