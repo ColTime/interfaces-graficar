@@ -146,7 +146,7 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
         crs = obj.consultarProyectosEnEjecucion(negocio);
         //Se sulven a posicionar todos los botones.
         try {
-            //Se vuleven a reiniciar las variables con los valores pre determinados
+            //Se vuleven a reiniciar las variables con los valores predeterminados
             px = 0;
             py = 0;
             this.cantidad = 0;
@@ -165,7 +165,7 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
         }
     }
 
-    public void RegistrarTomaTiempoNegocio(String datos[], int cargo, ControlDelTiempo vista) {
+        public void RegistrarTomaTiempoNegocio(String datos[], int cargo, ControlDelTiempo vista) {
         FE_TE_IN obj = new FE_TE_IN();
         this.vista = vista;
         //#------------------------------------------------------------------

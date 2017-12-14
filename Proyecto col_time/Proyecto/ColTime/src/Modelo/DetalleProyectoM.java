@@ -431,16 +431,16 @@ public class DetalleProyectoM {
                 }
             }
             //Validar detalles para validar estado del proyecto
-            Qry = "CALL PA_DetallesparaValidarEstado(?,?)";
+            Qry = "CALL PA_DetallesparaValidarEstado(?)";
             ps = con.prepareStatement(Qry);
             ps.setInt(1, numeOrden);
-            ps.setInt(2, n);
+            //ps.setInt(2, n);
             rs = ps.executeQuery();
             //Detalles  a validar
             while (rs.next()) {
                 Qry = "CALL PA_CambiarEstadoDeProductos(?,?)";
                 ps = con.prepareStatement(Qry);
-                ps.setInt(1, n);
+                ps.setInt(1, rs.getInt(2));
                 ps.setInt(2, rs.getInt(1));
                 ps.execute();
             }

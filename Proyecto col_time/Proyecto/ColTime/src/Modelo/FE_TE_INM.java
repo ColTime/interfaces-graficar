@@ -42,7 +42,7 @@ public class FE_TE_INM {
             ps.setInt(4, negocio);
             rs = ps.executeQuery();
             rs.next();
-            if (rs.getBoolean(1)) {
+            if (rs.getBoolean(1)) {//Pausar O IniciarToma de tiempos
                 //-------------------------------------------------------------->
                 Qry = "CALL PA_ValidarCantidadDetalleProyecto(?,?,?,?)";
                 ps = con.prepareStatement(Qry);
@@ -52,6 +52,7 @@ public class FE_TE_INM {
                 ps.setInt(4, negocio);
                 rs = ps.executeQuery();
                 rs.next();
+                //Tener en cuenta que tienes que mostrar un mensaje en el celular
                 //Si la cantidad terminada ingresada es menos a la cantidad que en total se deben realizar.
                 if (rs.getInt(2) + cantidadTerminada < rs.getInt(1)) {
                     //Si la afirmación es correcta se ejecutara el procedimiento para parar el tiempo.
@@ -86,7 +87,7 @@ public class FE_TE_INM {
                     ps.setString(5, String.valueOf(T_Total));
                     ps.setInt(6, cantidadTerminada + cantidadAntigua);
                     ps.setInt(7, estado);
-                    res = !ps.execute();
+                    res = ps.execute();
                     //Promedio de producto por minuto.
                     cantidadProductoMinuto(detalle, negocio, lector);
                     //Tiempo total del proceso.
@@ -106,7 +107,7 @@ public class FE_TE_INM {
                 ps.setInt(2, detalle);
                 ps.setInt(3, lector);
                 ps.setInt(4, negocio);
-                res = !ps.execute();
+                res = ps.execute();
             }
             con.close();
             conexion.destruir();

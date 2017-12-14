@@ -594,7 +594,7 @@ public class ProyectoM {
             conexion.destruir();
             conexion.cerrar(rs);
             ps.close();
-        } catch (Exception e) {
+        } catch (Exception e){
             JOptionPane.showMessageDialog(null, "¡Error!" + e);
         }
         return res;

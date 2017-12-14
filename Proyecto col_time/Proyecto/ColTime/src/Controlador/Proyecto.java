@@ -88,7 +88,7 @@ public class Proyecto {
                 this.setFE(true);
             } else if (nego[i].equals("TE")) {
                 this.setTE(true);
-            } else if (nego[i].equals("IN")) {
+            } else if (nego[i].equals("EN")) {//EN
                 this.setIN(true);
             }
         }
@@ -96,7 +96,7 @@ public class Proyecto {
     }
 
     //Registrar mediante un lector de QR----------------------------------------
-    public boolean registrarDetalleProyectoQR(int orden,String area,String producto,String Cantidad, String Material,String ruteo, String antisolder) {
+    public boolean registrarDetalleProyectoQR(int orden, String area, String producto, String Cantidad, String Material, String ruteo, String antisolder) {
         ProyectoM obj = new ProyectoM();
         return obj.registrarDetalleProyectoQRM(orden, area, producto, Cantidad, Material, ruteo, antisolder);
     }
@@ -159,7 +159,6 @@ public class Proyecto {
 //        ProyectoM obj=new ProyectoM();
 //        
 //    }
-
     public boolean validarNumerOrden(int orden) {
         ProyectoM obj = new ProyectoM();
         return obj.validarNumerOrden(orden);

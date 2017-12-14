@@ -1136,7 +1136,7 @@ public class Menu extends javax.swing.JFrame {
             //#--------------------------------------------------------------------------------------------------
         } else {
             //Este mensaje se retornara al dispositivo móvil.
-
+            //El proyecto no existe - Esta eliminado
         }
     }//GEN-LAST:event_agregarActionPerformed
 

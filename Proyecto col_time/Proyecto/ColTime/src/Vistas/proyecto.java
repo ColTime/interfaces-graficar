@@ -128,6 +128,13 @@ public class proyecto extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jCRuteoP = new javax.swing.JCheckBox();
+        jDFechaEntregaFE = new com.toedter.calendar.JDateChooser();
+        jDFechaEntregaEN = new com.toedter.calendar.JDateChooser();
+        jDFechaEntregaGF = new com.toedter.calendar.JDateChooser();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jRGranF = new javax.swing.JRadioButton();
         jPDetalles = new javax.swing.JPanel();
         jDentrega = new com.toedter.calendar.JDateChooser();
         jLabel10 = new javax.swing.JLabel();
@@ -467,7 +474,7 @@ public class proyecto extends javax.swing.JPanel {
         jCIntegracion.setBackground(new java.awt.Color(255, 255, 255));
         jCIntegracion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jCIntegracion.setForeground(new java.awt.Color(102, 102, 102));
-        jCIntegracion.setText("Integración");
+        jCIntegracion.setText("Ensamble");
         jCIntegracion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCIntegracionActionPerformed(evt);
@@ -477,8 +484,8 @@ public class proyecto extends javax.swing.JPanel {
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(128, 128, 131));
-        jLabel14.setText("¿Lleva antisolder?");
-        jPDetalles1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, -1));
+        jLabel14.setText("Fecha de entrega GF");
+        jPDetalles1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 170, -1, -1));
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(128, 128, 131));
@@ -539,7 +546,61 @@ public class proyecto extends javax.swing.JPanel {
         });
         jPDetalles1.add(jCRuteoP, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 135, -1, -1));
 
-        jPanel2.add(jPDetalles1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 820, 170));
+        jDFechaEntregaFE.setToolTipText("");
+        jDFechaEntregaFE.setDateFormatString("dd/MM/yyyy");
+        jDFechaEntregaFE.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jDFechaEntregaFE.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+                jDFechaEntregaFECaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
+        });
+        jPDetalles1.add(jDFechaEntregaFE, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 140, -1));
+
+        jDFechaEntregaEN.setToolTipText("");
+        jDFechaEntregaEN.setDateFormatString("dd/MM/yyyy");
+        jDFechaEntregaEN.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jDFechaEntregaEN.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+                jDFechaEntregaENCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
+        });
+        jPDetalles1.add(jDFechaEntregaEN, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 190, 130, -1));
+
+        jDFechaEntregaGF.setToolTipText("");
+        jDFechaEntregaGF.setDateFormatString("dd/MM/yyyy");
+        jDFechaEntregaGF.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jDFechaEntregaGF.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+                jDFechaEntregaGFCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
+        });
+        jPDetalles1.add(jDFechaEntregaGF, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 190, 130, -1));
+
+        jLabel24.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(128, 128, 131));
+        jLabel24.setText("¿Lleva antisolder?");
+        jPDetalles1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, -1));
+
+        jLabel25.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(128, 128, 131));
+        jLabel25.setText("Fecha de entrega FE");
+        jPDetalles1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, -1, -1));
+
+        jLabel26.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(128, 128, 131));
+        jLabel26.setText("Fecha de entrega EN");
+        jPDetalles1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 170, -1, -1));
+
+        jRGranF.setText("GF");
+        jPDetalles1.add(jRGranF, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 50, 40, 20));
+
+        jPanel2.add(jPDetalles1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 820, 222));
 
         jPDetalles.setBackground(new java.awt.Color(255, 255, 255));
         jPDetalles.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Detalles", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
@@ -568,7 +629,7 @@ public class proyecto extends javax.swing.JPanel {
         jLabel18.setText("Fecha de ingreso:");
 
         cbNegocio.setForeground(new java.awt.Color(102, 102, 102));
-        cbNegocio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "FE", "TE", "IN", "FE/TE", "FE/IN", "FE/TE/IN" }));
+        cbNegocio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "FE", "TE", "EN", "FE/TE", "FE/EN", "FE/TE/EN" }));
         cbNegocio.setColorDeBorde(new java.awt.Color(204, 204, 204));
         cbNegocio.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         cbNegocio.addItemListener(new java.awt.event.ItemListener() {
@@ -737,7 +798,7 @@ public class proyecto extends javax.swing.JPanel {
             }
         });
         jPanel5.add(btnUpdate);
-        btnUpdate.setBounds(175, 2, 57, 45);
+        btnUpdate.setBounds(175, 2, 60, 45);
 
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delete.png"))); // NOI18N
         btnDelete.setBorderPainted(false);
@@ -765,7 +826,7 @@ public class proyecto extends javax.swing.JPanel {
         jPanel5.add(btnActivar);
         btnActivar.setBounds(230, 0, 60, 50);
 
-        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 292, 50));
+        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 292, 50));
 
         Notificacion1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         Notificacion1.setForeground(new java.awt.Color(128, 128, 131));
@@ -802,7 +863,7 @@ public class proyecto extends javax.swing.JPanel {
                 GenerarQRActionPerformed(evt);
             }
         });
-        jPanel2.add(GenerarQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 400, -1, -1));
+        jPanel2.add(GenerarQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 450, -1, -1));
 
         jTProyectoQR.setColorDeBorde(new java.awt.Color(204, 204, 204));
         jTProyectoQR.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
@@ -815,7 +876,7 @@ public class proyecto extends javax.swing.JPanel {
                 jTProyectoQRKeyTyped(evt);
             }
         });
-        jPanel2.add(jTProyectoQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 400, 280, 23));
+        jPanel2.add(jTProyectoQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 470, 280, 23));
 
         btnTomaTiempos.setText("Toma de tiempos");
         btnTomaTiempos.addActionListener(new java.awt.event.ActionListener() {
@@ -823,7 +884,7 @@ public class proyecto extends javax.swing.JPanel {
                 btnTomaTiemposActionPerformed(evt);
             }
         });
-        jPanel2.add(btnTomaTiempos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 150, -1));
+        jPanel2.add(btnTomaTiempos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, 150, -1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -930,7 +991,7 @@ public class proyecto extends javax.swing.JPanel {
             } else if (cbNegocio.getSelectedItem().toString().equals("TE")) {
                 //Activa solo los jcheckbos necesarios para ese negocío "TE"
                 jCTeclado.setEnabled(true);
-            } else if (cbNegocio.getSelectedItem().toString().equals("IN")) {
+            } else if (cbNegocio.getSelectedItem().toString().equals("EN")) {
                 //Activa solo los jcheckbos necesarios para ese negocío "IN"
                 jCIntegracion.setEnabled(true);
             } else if (cbNegocio.getSelectedItem().toString().equals("FE/TE")) {
@@ -942,12 +1003,12 @@ public class proyecto extends javax.swing.JPanel {
                 jCRepujado.setEnabled(true);
                 jCTroquel.setEnabled(true);
                 jCStencil.setEnabled(true);
-            } else if (cbNegocio.getSelectedItem().toString().equals("FE/IN")) {
+            } else if (cbNegocio.getSelectedItem().toString().equals("FE/EN")) {
                 //Activa solo los jcheckbos necesarios para ese negocío "FE/IN"
                 jCCircuito.setEnabled(true);
                 jCStencil.setEnabled(true);
                 jCIntegracion.setEnabled(true);
-            } else if (cbNegocio.getSelectedItem().toString().equals("FE/TE/IN")) {
+            } else if (cbNegocio.getSelectedItem().toString().equals("FE/TE/EN")) {
                 //Activa solo los jcheckbos necesarios para ese negocío "FE/TE/IN"
                 jCTeclado.setEnabled(true);
                 jCPCBTE.setEnabled(true);
@@ -1133,7 +1194,7 @@ public class proyecto extends javax.swing.JPanel {
                                 if (validarFecha(infoP[10])) {//El formato de la fecha siempre tiene que ser en el QR de la forma "yyyy/MM/dd"
                                     if (Integer.parseInt(infoP[5]) > 0) {
                                         if (infoP[7].toLowerCase().equals("th") || infoP[7].toLowerCase().equals("fv") || infoP[7].toLowerCase().equals("0")) {//Se valida que el material se TH, FV o que sea 0 cuando no aplica
-                                            if ((infoP[8].toLowerCase().equals("si") || infoP[8].toLowerCase().equals("no")) &&(infoP[9].toLowerCase().equals("si") || infoP[9].toLowerCase().equals("no"))) {//Se valida que el antisolder y el ruteo contenga si o no
+                                            if ((infoP[8].toLowerCase().equals("si") || infoP[8].toLowerCase().equals("no")) && (infoP[9].toLowerCase().equals("si") || infoP[9].toLowerCase().equals("no"))) {//Se valida que el antisolder y el ruteo contenga si o no
                                                 return true;
                                             } else {
                                                 return false;
@@ -1290,6 +1351,18 @@ public class proyecto extends javax.swing.JPanel {
     private void jCIntegracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCIntegracionActionPerformed
         activarjTfilex(jCIntegracion, jTIntegracion);
     }//GEN-LAST:event_jCIntegracionActionPerformed
+
+    private void jDFechaEntregaFECaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jDFechaEntregaFECaretPositionChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jDFechaEntregaFECaretPositionChanged
+
+    private void jDFechaEntregaENCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jDFechaEntregaENCaretPositionChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jDFechaEntregaENCaretPositionChanged
+
+    private void jDFechaEntregaGFCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jDFechaEntregaGFCaretPositionChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jDFechaEntregaGFCaretPositionChanged
 //Metodos-------------------------------------------------------------------->
 
     private Paragraph tipoProyecto(int tipo, int negocio) {
@@ -1500,8 +1573,8 @@ public class proyecto extends javax.swing.JPanel {
             int i = 0;
             boolean res = true;
             DetalleProyecto obj = new DetalleProyecto();
-
-            if (!jLIDCircuito.getText().equals("0") && jCCircuito.isSelected() == false || jCCircuito.isSelected() == true) {
+            //|| jCCircuito.isSelected() == true
+            if (!jLIDCircuito.getText().equals("0") && jCCircuito.isSelected() == false) {
                 v[i] = String.valueOf(obj.validarEliminacionModificar(1, Integer.parseInt(jTNorden.getText()), 1, 0, 1));
                 i++;
             }
@@ -1854,7 +1927,7 @@ public class proyecto extends javax.swing.JPanel {
             //-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
             VerificarQueSeElimina(obj);
             //-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-        } else if (cbNegocio.getSelectedItem().equals("IN")) {
+        } else if (cbNegocio.getSelectedItem().equals("EN")) {
             //Se registra el detalle del proyecto cuando el negocio es "IN"
             if (jCIntegracion.isSelected()) {
                 //Registrar la integracion en EN------------------------------------------>
@@ -1958,7 +2031,7 @@ public class proyecto extends javax.swing.JPanel {
                 //Fin del registro del Teclado
             }
             VerificarQueSeElimina(obj);
-        } else if (cbNegocio.getSelectedItem().equals("FE/IN")) {
+        } else if (cbNegocio.getSelectedItem().equals("FE/EN")) {
             //Se registra el detalle del proyecto cuando el negocio es "FE/IN"
             if (jCCircuito.isSelected()) {
                 //Registrar PCB de FE------------------------------------------>
@@ -1997,7 +2070,7 @@ public class proyecto extends javax.swing.JPanel {
                 //Fin del registro del Stencil
             }
             VerificarQueSeElimina(obj);
-        } else if (cbNegocio.getSelectedItem().equals("FE/TE/IN")) {
+        } else if (cbNegocio.getSelectedItem().equals("FE/TE/EN")) {
             //Se registra el detalle del proyecto cuando el negocio es "FE/TE/IN"
             if (jCConversor.isSelected()) {
                 //Registrar Conversor------------------------------------------>
@@ -2155,6 +2228,9 @@ public class proyecto extends javax.swing.JPanel {
     public static javax.swing.JCheckBox jCStencil;
     public static javax.swing.JCheckBox jCTeclado;
     public static javax.swing.JCheckBox jCTroquel;
+    public static com.toedter.calendar.JDateChooser jDFechaEntregaEN;
+    public static com.toedter.calendar.JDateChooser jDFechaEntregaFE;
+    public static com.toedter.calendar.JDateChooser jDFechaEntregaGF;
     public static com.toedter.calendar.JDateChooser jDentrega;
     public static javax.swing.JLabel jLIDCircuito;
     public static javax.swing.JLabel jLIDConversor;
@@ -2179,6 +2255,9 @@ public class proyecto extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -2191,6 +2270,7 @@ public class proyecto extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JRadioButton jRGranF;
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTCircuito;
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTConversor;
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTIntegracion;
