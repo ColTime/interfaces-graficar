@@ -87,7 +87,7 @@ public class FE_TE_INM {
                     ps.setString(5, String.valueOf(T_Total));
                     ps.setInt(6, cantidadTerminada + cantidadAntigua);
                     ps.setInt(7, estado);
-                    res = ps.execute();
+                    res = !ps.execute();//Respuesta es igual a True para poder agregar los botones
                     //Promedio de producto por minuto.
                     cantidadProductoMinuto(detalle, negocio, lector);
                     //Tiempo total del proceso.
@@ -107,7 +107,7 @@ public class FE_TE_INM {
                 ps.setInt(2, detalle);
                 ps.setInt(3, lector);
                 ps.setInt(4, negocio);
-                res = ps.execute();
+                res = !ps.execute();//Respuesta es igual a True para poder agregar los botones
             }
             con.close();
             conexion.destruir();
@@ -158,7 +158,7 @@ public class FE_TE_INM {
                 minutos++;
                 segundos = segundos - 60;
             }
-            //Cadena
+            //Cadena de String
             cadena = (((minutos <= 9) ? "0" : "") + minutos + ":" + ((segundos <= 9) ? "0" : "") + segundos);
         } catch (Exception e) {
             //Mensaje de error---
