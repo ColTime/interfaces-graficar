@@ -80,6 +80,11 @@ public class Proyecto {
         return obj.diagramaM(inicio, fin);
     }
 
+    public boolean estadoDeOrden(int orden, int op) {
+        ProyectoM obj = new ProyectoM();
+        return obj.estadoDeOrdenM(orden, op);
+    }
+
     public boolean registrar_Modificar_Proyecto(String comercial, int op) {
         ProyectoM obj = new ProyectoM();
         String nego[] = negocio.split("/");
@@ -187,6 +192,11 @@ public class Proyecto {
     public boolean validarEliminacion(int orden) {
         ProyectoM obj = new ProyectoM();
         return obj.validarEliminacion(orden);
+    }
+
+    public boolean validarEjecucionOParada(int orden) {
+        ProyectoM validar = new ProyectoM();
+        return validar.validarEjecucionOParada(orden);
     }
 
     //Finalizacion de la clase automatica---------------------------------------------------------------->

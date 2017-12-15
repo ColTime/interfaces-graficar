@@ -27,7 +27,7 @@ import javax.swing.JOptionPane;
 import rojerusan.RSNotifyAnimated;
 
 public class proyecto extends javax.swing.JPanel {
-
+    
     public proyecto(int p) {
         if (p == 1) {
             initComponents();
@@ -38,6 +38,8 @@ public class proyecto extends javax.swing.JPanel {
             btnTomaTiempos.setVisible(false);
             visibilidadID();
             limites();
+            jREjecucion.setEnabled(false);
+            jRParada.setEnabled(false);
         }
         op = p;
         limpiarCampos();
@@ -47,7 +49,7 @@ public class proyecto extends javax.swing.JPanel {
     int udm = 0, resol = 100, rot = 0;
     float mi = 0.000f, md = 0.000f, ms = 0.000f, min = 0.000f, tam = 21.000f;
     static String fecha = "";
-
+    
     private void visibilidadID() {
         jLIDConversor.setVisible(false);
         jLIDTroquel.setVisible(false);
@@ -58,7 +60,7 @@ public class proyecto extends javax.swing.JPanel {
         jLIDTeclado.setVisible(false);
         jLIDIntegracion.setVisible(false);
     }
-
+    
     private void limites() {
         RestrictedTextField obj = new RestrictedTextField(jTConversor);
         obj.setLimit(6);
@@ -81,11 +83,12 @@ public class proyecto extends javax.swing.JPanel {
         RestrictedTextField obj9 = new RestrictedTextField(jTNombreProyecto);
         obj9.setLimit(45);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        ParadasOEjecucion = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPInformacion = new javax.swing.JPanel();
@@ -147,6 +150,8 @@ public class proyecto extends javax.swing.JPanel {
         cbTipo = new elaprendiz.gui.comboBox.ComboBoxRound();
         jLabel21 = new javax.swing.JLabel();
         jLIngreso = new javax.swing.JLabel();
+        jRParada = new javax.swing.JRadioButton();
+        jREjecucion = new javax.swing.JRadioButton();
         jPanel5 = new javax.swing.JPanel();
         btnNuevo = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
@@ -597,8 +602,9 @@ public class proyecto extends javax.swing.JPanel {
         jLabel26.setText("Fecha de entrega EN");
         jPDetalles1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 170, -1, -1));
 
+        jRGranF.setBackground(new java.awt.Color(255, 255, 255));
         jRGranF.setText("GF");
-        jPDetalles1.add(jRGranF, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 50, 40, 20));
+        jPDetalles1.add(jRGranF, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 60, 40, 20));
 
         jPanel2.add(jPDetalles1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 820, 222));
 
@@ -669,6 +675,24 @@ public class proyecto extends javax.swing.JPanel {
         jLIngreso.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLIngreso.setText("DD-MM-YYYY");
 
+        jRParada.setBackground(new java.awt.Color(255, 255, 255));
+        ParadasOEjecucion.add(jRParada);
+        jRParada.setText("Parada");
+        jRParada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRParadaActionPerformed(evt);
+            }
+        });
+
+        jREjecucion.setBackground(new java.awt.Color(255, 255, 255));
+        ParadasOEjecucion.add(jREjecucion);
+        jREjecucion.setText("Ejecucion");
+        jREjecucion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jREjecucionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPDetallesLayout = new javax.swing.GroupLayout(jPDetalles);
         jPDetalles.setLayout(jPDetallesLayout);
         jPDetallesLayout.setHorizontalGroup(
@@ -677,63 +701,77 @@ public class proyecto extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPDetallesLayout.createSequentialGroup()
-                        .addComponent(cbNegocio, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPDetallesLayout.createSequentialGroup()
                         .addGroup(jPDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPDetallesLayout.createSequentialGroup()
-                                .addGroup(jPDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPDetallesLayout.createSequentialGroup()
-                                        .addComponent(jLabel15)
-                                        .addGap(3, 3, 3)
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPDetallesLayout.createSequentialGroup()
-                                        .addGap(14, 14, 14)
-                                        .addComponent(jLabel18)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE))
+                                .addComponent(jLabel15)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPDetallesLayout.createSequentialGroup()
-                                .addComponent(jLIngreso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(28, 28, 28)))
+                                .addGap(13, 13, 13)
+                                .addComponent(jLabel18)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jDentrega, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPDetallesLayout.createSequentialGroup()
                                 .addComponent(jLabel17)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel10))
-                            .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPDetallesLayout.createSequentialGroup()
                                 .addComponent(jLabel20)
-                                .addGap(3, 3, 3)
-                                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(14, 14, 14))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(39, 39, 39))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPDetallesLayout.createSequentialGroup()
+                        .addComponent(jLIngreso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jDentrega, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPDetallesLayout.createSequentialGroup()
+                        .addComponent(cbNegocio, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                        .addGroup(jPDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPDetallesLayout.createSequentialGroup()
+                                .addComponent(jREjecucion)
+                                .addGap(8, 8, 8)
+                                .addComponent(jRParada))
+                            .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32))))
         );
         jPDetallesLayout.setVerticalGroup(
             jPDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPDetallesLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel17)
-                    .addComponent(jLabel18))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jDentrega, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(jPDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPDetallesLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel18))
+                    .addGroup(jPDetallesLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel17))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDentrega, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPDetallesLayout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(jPDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel15))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbNegocio, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPDetallesLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addGroup(jPDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel21)
                             .addComponent(jLabel20))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPDetallesLayout.createSequentialGroup()
-                        .addGroup(jPDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel15))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cbNegocio, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                        .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jREjecucion, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRParada, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 1, Short.MAX_VALUE))
         );
 
         jPanel2.add(jPDetalles, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, 370, 180));
@@ -831,7 +869,7 @@ public class proyecto extends javax.swing.JPanel {
         Notificacion1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         Notificacion1.setForeground(new java.awt.Color(128, 128, 131));
         Notificacion1.setText("Estado");
-        jPanel2.add(Notificacion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 10, 90, 18));
+        jPanel2.add(Notificacion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 10, 90, 20));
 
         jLIDConversor.setText("0");
         jPanel2.add(jLIDConversor, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, 10, -1));
@@ -1227,7 +1265,7 @@ public class proyecto extends javax.swing.JPanel {
             return false;
         }
     }
-
+    
     private boolean validarFecha(String fecha) {
         try {
             SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
@@ -1238,7 +1276,7 @@ public class proyecto extends javax.swing.JPanel {
             return false;
         }
     }
-
+    
     private boolean validarTipoProducto(String producto) {
         boolean resp = false;
         switch (producto.toUpperCase()) {
@@ -1266,7 +1304,7 @@ public class proyecto extends javax.swing.JPanel {
         }
         return resp;
     }
-
+    
     private boolean validarCombinaciones(String area, String producto) {
         boolean res = false;
         if (area.toLowerCase().equals("fe") && producto.toLowerCase().equals("circuito")) {
@@ -1363,8 +1401,37 @@ public class proyecto extends javax.swing.JPanel {
     private void jDFechaEntregaGFCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jDFechaEntregaGFCaretPositionChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_jDFechaEntregaGFCaretPositionChanged
+
+    private void jRParadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRParadaActionPerformed
+        ejecucionOParada(0);
+    }//GEN-LAST:event_jRParadaActionPerformed
+
+    private void jREjecucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jREjecucionActionPerformed
+        ejecucionOParada(1);
+    }//GEN-LAST:event_jREjecucionActionPerformed
 //Metodos-------------------------------------------------------------------->
 
+    private void ejecucionOParada(int op) {
+        int seleccion = JOptionPane.showOptionDialog(null, (op == 1) ? "¿Seguro desea pner en ejecucion este numero de orden?" : "¿Seguro desea parar este numero de orden?",
+                "seleccione...", JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
+                new Object[]{"SI", "NO"}, "SI");
+        if (seleccion == 0) {
+            if (estadoDeOrden(op)) {
+                //Mensaje de cambio de estado todo un exito.
+                new rojerusan.RSNotifyAnimated("Listo!", "El estado del proyecto fue cambiado exitosamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+                limpiarCampos();
+                cambiarEstadoFalso();
+                cambiarEstadoBotones();
+            }
+        }
+    }
+    
+    private boolean estadoDeOrden(int estado) {
+        Proyecto obj = new Proyecto();
+        return obj.estadoDeOrden(Integer.parseInt(jTNorden.getText()), estado);
+    }
+    
     private Paragraph tipoProyecto(int tipo, int negocio) {
         Paragraph tipoPrpyecto = new Paragraph();
         String tip = "", negoci = "";
@@ -1381,7 +1448,7 @@ public class proyecto extends javax.swing.JPanel {
             default:
                 break;
         }
-
+        
         switch (tipo) {
             case 1:
                 tip = "Circuito";
@@ -1412,7 +1479,7 @@ public class proyecto extends javax.swing.JPanel {
         tipoPrpyecto.setSpacingAfter(10);
         return tipoPrpyecto;
     }
-
+    
     private void generarQR() {
         try {
             //Validar o crear carpeta
@@ -1435,7 +1502,7 @@ public class proyecto extends javax.swing.JPanel {
             Image logo = Image.getInstance("src\\imagenesEmpresa\\logo.png");
             logo.scaleAbsolute(300, 125);
             logo.setAlignment(Image.ALIGN_CENTER);
-
+            
             header.setBorder(Rectangle.NO_BORDER);
             header.setColspan(3);
             tabla.addCell(header);
@@ -1456,7 +1523,7 @@ public class proyecto extends javax.swing.JPanel {
                 String texto = jTNorden.getText() + ';' + crs.getInt(1) + ';' + crs.getInt(3);
                 cod.setData(texto);
                 cod.setDataMode(QRCode.MODE_BYTE);
-
+                
                 cod.setUOM(udm);
                 cod.setLeftMargin(mi);
                 cod.setResolution(resol);
@@ -1466,7 +1533,7 @@ public class proyecto extends javax.swing.JPanel {
                 cod.setRotate(rot);
                 cod.setModuleSize(tam);
                 cod.renderBarcode(ruta + "\\ImágenesQR\\" + texto + ".png");
-
+                
                 Image imagenQR = Image.getInstance(ruta + "\\ImágenesQR\\" + texto + ".png");
                 imagenQR.setWidthPercentage(90);
                 imagenQR.setAlignment(Image.ALIGN_CENTER);
@@ -1493,7 +1560,7 @@ public class proyecto extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Error! " + e);
         }
     }
-
+    
     private void validarRegistro(int op) {
         //Validar los campos principales del proyecto-------------------------->
         if (jDentrega.getDate() != null && cbNegocio.getSelectedIndex() != 0 && cbTipo.getSelectedIndex() != 0 && !jTNombreCliente.getText().equals("")
@@ -1503,7 +1570,7 @@ public class proyecto extends javax.swing.JPanel {
             new rojerusan.RSNotifyAnimated("¡Error!", "Falta algun campo por diligenciar.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
         }
     }
-
+    
     public int contarRadiosPresionados() {
         int cant = 0;
         if (jCConversor.isSelected()) {
@@ -1530,10 +1597,10 @@ public class proyecto extends javax.swing.JPanel {
         if (jCIntegracion.isSelected()) {
             cant++;
         }
-
+        
         return cant;
     }
-
+    
     public int contarTextoLleno() {
         int cant = 0;
         if (!jTConversor.getText().equals("")) {
@@ -1562,7 +1629,7 @@ public class proyecto extends javax.swing.JPanel {
         }
         return cant;
     }
-
+    
     private void registrarModificarProyecto(int op) {
         if (op == 1) {
             //Para registrar no se tiene que validar los proyectos que no se pueden eliminar
@@ -1638,7 +1705,7 @@ public class proyecto extends javax.swing.JPanel {
             }
         }
     }
-
+    
     private void modificarInfoProyecto(Controlador.Proyecto obj) {
         obj.setNombreCliente(jTNombreCliente.getText());
         obj.setNombreProyecto(jTNombreProyecto.getText());
@@ -1661,7 +1728,7 @@ public class proyecto extends javax.swing.JPanel {
         obj.setDetalles(v);
         obj.setIdOrden(Integer.parseInt(jTNorden.getText()));
     }
-
+    
     private void botonRegistrarModificar() {
         Controlador.Proyecto obj = new Controlador.Proyecto();
         modificarInfoProyecto(obj);
@@ -1697,7 +1764,7 @@ public class proyecto extends javax.swing.JPanel {
         cambiarEstadoBotones();
         btnNuevo.setEnabled(true);
     }
-
+    
     private void cambiarEstadoFalso() {
         jPInformacion.setBackground(new Color(244, 244, 244));
         jPDetalles1.setBackground(new Color(244, 244, 244));
@@ -1730,8 +1797,10 @@ public class proyecto extends javax.swing.JPanel {
         jTTeclado.setEnabled(false);
         jCIntegracion.setEnabled(false);
         jTIntegracion.setEnabled(false);
+        jREjecucion.setEnabled(false);
+        jRParada.setEnabled(false);
     }
-
+    
     private void cambiarEstadoBotones() {
         btnActivar.setVisible(false);
         btnActivar.setEnabled(false);
@@ -1743,7 +1812,7 @@ public class proyecto extends javax.swing.JPanel {
         GenerarQR.setEnabled(false);
         btnTomaTiempos.setVisible(false);
     }
-
+    
     private void desactivarBotonesjC() {
         jCAntisolderP.setEnabled(false);
         jCRuteoP.setEnabled(false);
@@ -1770,7 +1839,7 @@ public class proyecto extends javax.swing.JPanel {
         jCIntegracion.setSelected(false);
         jCTeclado.setSelected(false);
     }
-
+    
     public void activarComponentes() {
         jTNombreCliente.setEnabled(true);
         jTNombreProyecto.setEnabled(true);
@@ -1782,13 +1851,13 @@ public class proyecto extends javax.swing.JPanel {
         jPDetalles1.setBackground(new Color(255, 255, 255));
         jPDetalles.setBackground(new Color(255, 255, 255));
     }
-
+    
     private void NumeroDeOrden() {
         Proyecto obj = new Proyecto();
         String numero = obj.consultarNumeroOrden();
         jTNorden.setText(numero);
     }
-
+    
     private void activarjTfilex(JCheckBox cs, TextFieldRoundBackground tx) {
         if (cs.isSelected()) {
             tx.setEnabled(true);
@@ -1799,7 +1868,7 @@ public class proyecto extends javax.swing.JPanel {
             tx.setText("");
         }
     }
-
+    
     private void validarCampos() {
         if (op == 1) {
             if (!jTNombreCliente.getText().equals("") && !jTNombreProyecto.getText().equals("")) {
@@ -1809,13 +1878,13 @@ public class proyecto extends javax.swing.JPanel {
             }
         }
     }
-
+    
     private void fecha() {
         Proyecto obj = new Proyecto();
         jLIngreso.setText(obj.fecha());
         fecha = jLIngreso.getText();
     }
-
+    
     private void limpiarCampos() {
         Notificacion1.setVisible(false);
         jTNorden.setText(" ");
@@ -1859,7 +1928,7 @@ public class proyecto extends javax.swing.JPanel {
         jTIntegracion.setEditable(true);
         jTStencil.setEditable(true);
     }
-
+    
     private void VerificarQueSeElimina(DetalleProyecto obj) {
         if (!jLIDCircuito.getText().equals("0") && jCCircuito.isSelected() == false) {
             //Eliminar el detalle del proyecto si ya no esta seleccionado
@@ -1887,7 +1956,7 @@ public class proyecto extends javax.swing.JPanel {
             subEliminardetalle(obj, Integer.parseInt(jLIDPCB.getText()), Integer.parseInt(jTNorden.getText()), "FE", "PCB");
         }
     }
-
+    
     private boolean RegistrarModificarDetalle(String numeroOrden, int op) {
         DetalleProyecto obj = new DetalleProyecto();
         boolean res = false;
@@ -2171,7 +2240,7 @@ public class proyecto extends javax.swing.JPanel {
         }
         return res;
     }
-
+    
     private boolean subRegistrarModificarProyecto(DetalleProyecto obj, String cantidad, String Negocio, String TipoNegocio, String numeroOrden, String material, int op, int id) {
         obj.setCantidad(cantidad);
         obj.setTipoNegocio(TipoNegocio);
@@ -2179,9 +2248,9 @@ public class proyecto extends javax.swing.JPanel {
         obj.setMaterial(material);
         return obj.registrar_Detalle_Proycto(numeroOrden, op, id);
     }
-
+    
     private void subEliminardetalle(DetalleProyecto obj, int idDetalle, int numerOrden, String negocio, String tipo) {
-
+        
         if (obj.eliminarDetallersProyecto(idDetalle, numerOrden, negocio, tipo, 1)) {//Eliminación por la modificación
             //Mensaje de eliminacion exitosa
             new rojerusan.RSNotifyAnimated("Listo!!", "Se elimino el detalle del proyecto: " + tipo + " " + negocio + " de la orden " + jTNorden.getText(), 5, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
@@ -2194,7 +2263,7 @@ public class proyecto extends javax.swing.JPanel {
             new rojerusan.RSNotifyAnimated("Listo!!", "el detalle " + tipo + " " + negocio + " de la orden" + jTNorden.getText() + " no pudo ser eliminada porque ya esta en ejecución.", 5, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
         }
     }
-
+    
     private void numerosT(java.awt.event.KeyEvent evt) {
         char cara = evt.getKeyChar();
         if (Character.isLetter(cara) || evt.getKeyChar() == '.' || evt.getKeyChar() == '|') {
@@ -2205,6 +2274,7 @@ public class proyecto extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static elaprendiz.gui.button.ButtonColoredAction GenerarQR;
     public static javax.swing.JLabel Notificacion1;
+    private javax.swing.ButtonGroup ParadasOEjecucion;
     public static javax.swing.JButton btnActivar;
     private javax.swing.JButton btnBuscar;
     public static javax.swing.JButton btnDelete;
@@ -2270,7 +2340,9 @@ public class proyecto extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
+    public static javax.swing.JRadioButton jREjecucion;
     private javax.swing.JRadioButton jRGranF;
+    public static javax.swing.JRadioButton jRParada;
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTCircuito;
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTConversor;
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTIntegracion;

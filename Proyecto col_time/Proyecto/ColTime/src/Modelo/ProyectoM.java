@@ -26,6 +26,27 @@ public class ProyectoM {
     String fecha = "";
 
     //Metodos y funciones------------------------------------------------>
+    public boolean estadoDeOrdenM(int orden, int op) {
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query------------------------------------------------------------>
+            String Qry = "CALL PA_EjecucionoParada(?,?)";
+            ps = con.prepareStatement(Qry);
+            ps.setInt(1, orden);
+            ps.setInt(2, op);
+            res = !ps.execute();
+            con.close();
+            conexion.destruir();
+            conexion.cerrar(rs);
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error! " + e);
+        }
+        return res;
+    }
+
     public CachedRowSet diagramaM(String inicio, String fin) {
         try {
             conexion = new Conexion();
@@ -594,7 +615,7 @@ public class ProyectoM {
             conexion.destruir();
             conexion.cerrar(rs);
             ps.close();
-        } catch (Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "¡Error!" + e);
         }
         return res;
@@ -620,6 +641,28 @@ public class ProyectoM {
             JOptionPane.showMessageDialog(null, "¡Error!" + e);
         }
         return crsP;
+    }
+
+    public boolean validarEjecucionOParada(int orden) {
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query------------------------------------------------------------>
+            String Qry = "SELECT FU_ValidarEstadoProyectoEjecucionOParada(?)";
+            ps = con.prepareStatement(Qry);
+            ps.setInt(1, orden);
+            rs = ps.executeQuery();
+            rs.next();
+            res = rs.getBoolean(1);
+            con.close();
+            conexion.destruir();
+            conexion.cerrar(rs);
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "¡Error!" + e);
+        }
+        return res;
     }
 
     @Override
