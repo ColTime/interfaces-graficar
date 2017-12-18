@@ -883,6 +883,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
             obj.btnActivar.setVisible(true);
             obj.GenerarQR.setEnabled(false);
             obj.btnUpdate.setEnabled(false);
+
         }
     }
 

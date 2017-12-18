@@ -47,6 +47,28 @@ public class ProyectoM {
         return res;
     }
 
+    public boolean estadoProyecto(int orden) {
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query------------------------------------------------------------>
+            String Qry = "SELECT FU_EstadoDeProyecto(?)";
+            ps = con.prepareStatement(Qry);
+            ps.setInt(1, orden);
+            rs = ps.executeQuery();
+            rs.next();
+            res = rs.getBoolean(1);
+            con.close();
+            conexion.destruir();
+            conexion.cerrar(rs);
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error! " + e);
+        }
+        return res;
+    }
+
     public CachedRowSet diagramaM(String inicio, String fin) {
         try {
             conexion = new Conexion();

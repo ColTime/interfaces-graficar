@@ -85,6 +85,11 @@ public class Proyecto {
         return obj.estadoDeOrdenM(orden, op);
     }
 
+    public boolean estadoProyecto(int orden) {
+        ProyectoM obj = new ProyectoM();
+        return obj.estadoProyecto(orden);
+    }
+
     public boolean registrar_Modificar_Proyecto(String comercial, int op) {
         ProyectoM obj = new ProyectoM();
         String nego[] = negocio.split("/");

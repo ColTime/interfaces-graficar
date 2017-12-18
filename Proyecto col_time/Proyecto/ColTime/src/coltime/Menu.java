@@ -1101,8 +1101,8 @@ public class Menu extends javax.swing.JFrame {
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
         String infoP[] = jTLector.getText().split(";");
         Proyecto validar = new Proyecto();
-        if (validar.validarEliminacion(Integer.parseInt(infoP[0]))) {//VAlido si la orden esta eliminada o no
-            if (validar.validarEjecucionOParada(Integer.parseInt(infoP[0]))) {
+        if (validar.validarEliminacion(Integer.parseInt(infoP[0]))) {//Valido si la orden esta eliminada o no
+            if (validar.validarEjecucionOParada(Integer.parseInt(infoP[0]))) {//Valida que la orden no este parada
                 //#--------------------------------------------------------------------------------------------------
                 switch (Integer.parseInt(infoP[2])) {
                     //Se tiene que validar el estado del proyecto a ver si permite o no registrar la toma de tiempo.
@@ -1137,10 +1137,12 @@ public class Menu extends javax.swing.JFrame {
                 //#--------------------------------------------------------------------------------------------------
             } else {
                 //El proyecto no puede realizar la toma de tiempo porque esta parada.
+                new rojerusan.RSNotifyAnimated("¡Alerta!", "Esta orden esta parada, no puedes realizar la toma de tiempo de esta orden.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
             }
         } else {
             //Este mensaje se retornara al dispositivo móvil.
             //El proyecto no existe - Esta eliminado
+            new rojerusan.RSNotifyAnimated("¡Alerta!", "Este numero de orden no existe.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
         }
     }//GEN-LAST:event_agregarActionPerformed
 
