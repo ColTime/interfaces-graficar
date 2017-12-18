@@ -1,6 +1,7 @@
 package Vistas;
 
 import Controlador.DetalleProyecto;
+import Controlador.FormatoTabla;
 import java.awt.Color;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.ImageIcon;
@@ -155,6 +156,7 @@ public class ConsultarPNC extends javax.swing.JFrame {
         TDetalle.setFocusable(false);
         TDetalle.setGridColor(new java.awt.Color(255, 255, 255));
         TDetalle.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        TDetalle.setName("PNC"); // NOI18N
         TDetalle.setSelectionBackground(new java.awt.Color(63, 179, 255));
         TDetalle.setShowHorizontalLines(false);
         TDetalle.setShowVerticalLines(false);
@@ -250,27 +252,35 @@ public class ConsultarPNC extends javax.swing.JFrame {
         if (evt.getClickCount() == 2 && TDetalle.getSelectedRow() >= 0) {
             int pos = 0;
             String negocio = "";
+            pos = TDetalle.getSelectedRow();
+
             if (TDetalle.getRowCount() > 0) {
-                pos = TDetalle.getSelectedRow();
-                if (cargo == 2) {
-                    negocio = "FE";
-                } else if (cargo == 3) {
-                    negocio = "EN";
-                }
-                if (negocio.equals("FE")) {
-                    if (TDetalle.getValueAt(pos, 1).toString().equals("FE") || TDetalle.getValueAt(pos, 1).toString().equals("TE")) {
-                        exportarInformacion(pos);
-                        this.dispose();
+                //Se valida que el estado del proyecto no sea parado ni por iniciar para que no permita generar productos no conformes de estas ordenes.
+                if (!TDetalle.getValueAt(pos, 4).toString().equals("Parada") && !TDetalle.getValueAt(pos, 4).toString().equals("Por iniciar")) {
+                    if (cargo == 2) {
+                        negocio = "FE";
+                    } else if (cargo == 3) {
+                        negocio = "EN";
+                    }
+                    if (negocio.equals("FE")) {
+                        if (TDetalle.getValueAt(pos, 1).toString().equals("FE") || TDetalle.getValueAt(pos, 1).toString().equals("TE")) {
+                            exportarInformacion(pos);
+                            this.dispose();
+                        } else {
+                            new rojerusan.RSNotifyAnimated("¡Alerta!", "No tienes permiso para generar un PNC de este producto.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
+                        }
                     } else {
-                        new rojerusan.RSNotifyAnimated("¡Alerta!", "No tienes permiso para generar un PNC de este producto.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
+                        if (TDetalle.getValueAt(pos, 1).toString().equals("IN")) {//Integración ó ensamble
+                            exportarInformacion(pos);
+                            this.dispose();
+                        } else {
+                            new rojerusan.RSNotifyAnimated("¡Alerta!", "No tienes permiso para generar un PNC de este producto.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
+                        }
                     }
                 } else {
-                    if (TDetalle.getValueAt(pos, 1).toString().equals("IN")) {//Integración ó ensamble
-                        exportarInformacion(pos);
-                        this.dispose();
-                    } else {
-                        new rojerusan.RSNotifyAnimated("¡Alerta!", "No tienes permiso para generar un PNC de este producto.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
-                    }
+                    //Mensaje...
+                    //No puedes generar un PNC de esta orden porque esta en estado Parada/Por iniciar.
+                    new rojerusan.RSNotifyAnimated("¡Alerta!", "No puedes generar un PNC de esta orden porque esta en estado: " + TDetalle.getValueAt(pos, 4).toString(), 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
                 }
             }
         }
@@ -362,7 +372,11 @@ public class ConsultarPNC extends javax.swing.JFrame {
                         v1[1] = crs.getString(2);//Negocio
                         v1[2] = crs.getString(3);//Tipo negocio
                         v1[3] = crs.getString(4);//Cantidad
-                        v1[4] = crs.getString(5);//Estado
+                        if (crs.getBoolean(9)) {
+                            v1[4] = crs.getString(5);//Estado
+                        } else {
+                            v1[4] = "Parada";//Estado
+                        }
                         v1[5] = crs.getString(8);//Material
                         v1[6] = crs.getString(7);//Ubicación
                         model1.addRow(v1);
@@ -374,7 +388,11 @@ public class ConsultarPNC extends javax.swing.JFrame {
                         v1[1] = crs.getString(2);//Negocio
                         v1[2] = crs.getString(3);//Tipo negocio
                         v1[3] = crs.getString(4);//Cantidad
-                        v1[4] = crs.getString(5);//Estado
+                        if (crs.getBoolean(9)) {
+                            v1[4] = crs.getString(5);//Estado
+                        } else {
+                            v1[4] = "Parada";//Estado
+                        }
                         v1[5] = crs.getString(8);//Material
                         v1[6] = crs.getString(7);//Ubicación
                         model1.addRow(v1);
@@ -383,6 +401,8 @@ public class ConsultarPNC extends javax.swing.JFrame {
             }
             TDetalle.setModel(model1);
             editarColumnasDetalle();
+            FormatoTabla ft = new FormatoTabla(4);
+            TDetalle.setDefaultRenderer(Object.class, ft);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error" + e);
         }

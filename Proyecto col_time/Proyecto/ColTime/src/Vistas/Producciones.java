@@ -33,6 +33,8 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
     CachedRowSet crs = null;
     int x = 0, y = 0, cantidad = 0, filas = 1, unidad = 11, conta = 5;
     static int negocio = 0;
+    public Color cor = new Color(17, 161, 255);
+    public Color corF = new Color(63,179,255);
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -41,10 +43,10 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         jPanel1 = new javax.swing.JPanel();
         jBSalir = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
-        rSButtonMetro1 = new rsbuttom.RSButtonMetro();
-        rSButtonMetro2 = new rsbuttom.RSButtonMetro();
-        rSButtonMetro3 = new rsbuttom.RSButtonMetro();
-        rSButtonMetro4 = new rsbuttom.RSButtonMetro();
+        btn1 = new rsbuttom.RSButtonMetro();
+        btn2 = new rsbuttom.RSButtonMetro();
+        btn3 = new rsbuttom.RSButtonMetro();
+        btn4 = new rsbuttom.RSButtonMetro();
         jPanel4 = new javax.swing.JPanel();
         jPMenu = new javax.swing.JPanel();
         jTOrden = new elaprendiz.gui.textField.TextFieldRoundBackground();
@@ -82,6 +84,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                 jPanel1MousePressed(evt);
             }
         });
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jBSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/close.png"))); // NOI18N
         jBSalir.setBorderPainted(false);
@@ -94,6 +97,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                 jBSalirActionPerformed(evt);
             }
         });
+        jPanel1.add(jBSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1098, 12, 23, -1));
 
         jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/minus1.png"))); // NOI18N
         jButton10.setBorderPainted(false);
@@ -105,85 +109,78 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                 jButton10ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1069, 12, 23, -1));
 
-        rSButtonMetro1.setBackground(new java.awt.Color(63, 179, 255));
-        rSButtonMetro1.setText("Formato estandar");
-        rSButtonMetro1.setBorderPainted(false);
-        rSButtonMetro1.setColorHover(new java.awt.Color(17, 161, 255));
-        rSButtonMetro1.setColorNormal(new java.awt.Color(63, 179, 255));
-        rSButtonMetro1.setColorPressed(new java.awt.Color(38, 86, 186));
-        rSButtonMetro1.setFocusPainted(false);
-        rSButtonMetro1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonMetro1ActionPerformed(evt);
+        btn1.setBackground(new java.awt.Color(63, 179, 255));
+        btn1.setText("Formato estandar");
+        btn1.setBorderPainted(false);
+        btn1.setColorHover(new java.awt.Color(17, 161, 255));
+        btn1.setColorNormal(new java.awt.Color(63, 179, 255));
+        btn1.setColorPressed(new java.awt.Color(38, 86, 186));
+        btn1.setFocusPainted(false);
+        btn1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn1MousePressed(evt);
             }
         });
-
-        rSButtonMetro2.setBackground(new java.awt.Color(63, 179, 255));
-        rSButtonMetro2.setText("Teclados");
-        rSButtonMetro2.setBorderPainted(false);
-        rSButtonMetro2.setColorHover(new java.awt.Color(17, 161, 255));
-        rSButtonMetro2.setColorNormal(new java.awt.Color(63, 179, 255));
-        rSButtonMetro2.setColorPressed(new java.awt.Color(38, 86, 186));
-        rSButtonMetro2.setFocusPainted(false);
-        rSButtonMetro2.addActionListener(new java.awt.event.ActionListener() {
+        btn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonMetro2ActionPerformed(evt);
+                btn1ActionPerformed(evt);
             }
         });
+        jPanel1.add(btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 57));
 
-        rSButtonMetro3.setBackground(new java.awt.Color(63, 179, 255));
-        rSButtonMetro3.setText("Ensamble");
-        rSButtonMetro3.setBorderPainted(false);
-        rSButtonMetro3.setColorHover(new java.awt.Color(17, 161, 255));
-        rSButtonMetro3.setColorNormal(new java.awt.Color(63, 179, 255));
-        rSButtonMetro3.setColorPressed(new java.awt.Color(38, 86, 186));
-        rSButtonMetro3.setFocusPainted(false);
-        rSButtonMetro3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonMetro3ActionPerformed(evt);
+        btn2.setBackground(new java.awt.Color(63, 179, 255));
+        btn2.setText("Teclados");
+        btn2.setBorderPainted(false);
+        btn2.setColorHover(new java.awt.Color(17, 161, 255));
+        btn2.setColorNormal(new java.awt.Color(63, 179, 255));
+        btn2.setColorPressed(new java.awt.Color(38, 86, 186));
+        btn2.setFocusPainted(false);
+        btn2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn2MousePressed(evt);
             }
         });
+        btn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 140, 57));
 
-        rSButtonMetro4.setBackground(new java.awt.Color(63, 179, 255));
-        rSButtonMetro4.setText("Almacen");
-        rSButtonMetro4.setBorderPainted(false);
-        rSButtonMetro4.setColorHover(new java.awt.Color(17, 161, 255));
-        rSButtonMetro4.setColorNormal(new java.awt.Color(63, 179, 255));
-        rSButtonMetro4.setColorPressed(new java.awt.Color(38, 86, 186));
-        rSButtonMetro4.setFocusPainted(false);
+        btn3.setBackground(new java.awt.Color(63, 179, 255));
+        btn3.setText("Ensamble");
+        btn3.setBorderPainted(false);
+        btn3.setColorHover(new java.awt.Color(17, 161, 255));
+        btn3.setColorNormal(new java.awt.Color(63, 179, 255));
+        btn3.setColorPressed(new java.awt.Color(38, 86, 186));
+        btn3.setFocusPainted(false);
+        btn3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn3MousePressed(evt);
+            }
+        });
+        btn3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 131, 57));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(rSButtonMetro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rSButtonMetro2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rSButtonMetro3, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rSButtonMetro4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton10)
-                    .addComponent(jBSalir))
-                .addContainerGap(22, Short.MAX_VALUE))
-            .addComponent(rSButtonMetro1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(rSButtonMetro3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(rSButtonMetro2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(rSButtonMetro4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        btn4.setBackground(new java.awt.Color(63, 179, 255));
+        btn4.setText("Almacen");
+        btn4.setBorderPainted(false);
+        btn4.setColorHover(new java.awt.Color(17, 161, 255));
+        btn4.setColorNormal(new java.awt.Color(63, 179, 255));
+        btn4.setColorPressed(new java.awt.Color(38, 86, 186));
+        btn4.setFocusPainted(false);
+        btn4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn4MousePressed(evt);
+            }
+        });
+        jPanel1.add(btn4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 0, -1, 57));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
@@ -374,20 +371,21 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         setExtendedState(JFrame.CROSSHAIR_CURSOR);
     }//GEN-LAST:event_jButton10ActionPerformed
 
-    private void rSButtonMetro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro2ActionPerformed
+    private void btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2ActionPerformed
         EstadoDelMenu(true);
         cambiarPanel(2);
-    }//GEN-LAST:event_rSButtonMetro2ActionPerformed
+    }//GEN-LAST:event_btn2ActionPerformed
 
-    private void rSButtonMetro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro1ActionPerformed
+    private void btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn1ActionPerformed
         EstadoDelMenu(true);
         cambiarPanel(1);
-    }//GEN-LAST:event_rSButtonMetro1ActionPerformed
 
-    private void rSButtonMetro3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro3ActionPerformed
+    }//GEN-LAST:event_btn1ActionPerformed
+
+    private void btn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3ActionPerformed
         EstadoDelMenu(true);
         cambiarPanel(3);
-    }//GEN-LAST:event_rSButtonMetro3ActionPerformed
+    }//GEN-LAST:event_btn3ActionPerformed
 
     public void cambiarPanel(int op) {
         switch (op) {
@@ -475,8 +473,104 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jBActualizarActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-           Menu.bp = null;
+        Menu.bp = null;
     }//GEN-LAST:event_formWindowClosed
+
+    private void btn1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn1MousePressed
+        if (!btn1.isSelected()) {
+            btn1.setColorHover(cor);
+            btn1.setColorNormal(cor);
+            btn1.setColorPressed(cor);
+
+            btn2.setColorHover(cor);
+            btn2.setColorNormal(corF);
+            btn2.setColorPressed(cor);
+
+            btn3.setColorHover(cor);
+            btn3.setColorNormal(corF);
+            btn3.setColorPressed(cor);
+
+            btn4.setColorHover(cor);
+            btn4.setColorNormal(corF);
+            btn4.setColorPressed(cor);
+        } else {
+            btn1.setColorHover(cor);
+            btn1.setColorNormal(cor);
+            btn1.setColorPressed(cor);
+        }
+    }//GEN-LAST:event_btn1MousePressed
+
+    private void btn2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn2MousePressed
+        if (!btn2.isSelected()) {
+            btn1.setColorHover(cor);
+            btn1.setColorNormal(corF);
+            btn1.setColorPressed(cor);
+
+            btn2.setColorHover(cor);
+            btn2.setColorNormal(cor);
+            btn2.setColorPressed(cor);
+
+            btn3.setColorHover(cor);
+            btn3.setColorNormal(corF);
+            btn3.setColorPressed(cor);
+
+            btn4.setColorHover(cor);
+            btn4.setColorNormal(corF);
+            btn4.setColorPressed(cor);
+        } else {
+            btn2.setColorHover(cor);
+            btn2.setColorNormal(cor);
+            btn2.setColorPressed(cor);
+        }
+    }//GEN-LAST:event_btn2MousePressed
+
+    private void btn3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn3MousePressed
+        if (!btn3.isSelected()) {
+            btn1.setColorHover(cor);
+            btn1.setColorNormal(corF);
+            btn1.setColorPressed(cor);
+
+            btn2.setColorHover(cor);
+            btn2.setColorNormal(corF);
+            btn2.setColorPressed(cor);
+
+            btn3.setColorHover(cor);
+            btn3.setColorNormal(cor);
+            btn3.setColorPressed(cor);
+
+            btn4.setColorHover(cor);
+            btn4.setColorNormal(corF);
+            btn4.setColorPressed(cor);
+        } else {
+            btn3.setColorHover(cor);
+            btn3.setColorNormal(cor);
+            btn3.setColorPressed(cor);
+        }
+    }//GEN-LAST:event_btn3MousePressed
+
+    private void btn4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn4MousePressed
+        if (!btn4.isSelected()) {
+            btn1.setColorHover(cor);
+            btn1.setColorNormal(corF);
+            btn1.setColorPressed(cor);
+
+            btn2.setColorHover(cor);
+            btn2.setColorNormal(corF);
+            btn2.setColorPressed(cor);
+
+            btn3.setColorHover(cor);
+            btn3.setColorNormal(corF);
+            btn3.setColorPressed(cor);
+
+            btn4.setColorHover(cor);
+            btn4.setColorNormal(cor);
+            btn4.setColorPressed(cor);
+        } else {
+            btn4.setColorHover(cor);
+            btn4.setColorNormal(cor);
+            btn4.setColorPressed(cor);
+        }
+    }//GEN-LAST:event_btn4MousePressed
 
 //Metodos
     private void busqueda() {
@@ -702,6 +796,10 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Contenido;
+    private rsbuttom.RSButtonMetro btn1;
+    private rsbuttom.RSButtonMetro btn2;
+    private rsbuttom.RSButtonMetro btn3;
+    private rsbuttom.RSButtonMetro btn4;
     private elaprendiz.gui.comboBox.ComboBoxRound cbTipo;
     private javax.swing.JButton jBActualizar;
     public static javax.swing.JButton jBSalir;
@@ -719,10 +817,6 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
     private elaprendiz.gui.textField.TextFieldRoundBackground jTNombre;
     private elaprendiz.gui.textField.TextFieldRoundBackground jTOrden;
     private elaprendiz.gui.textField.TextFieldRoundBackground jTProyecto;
-    private rsbuttom.RSButtonMetro rSButtonMetro1;
-    private rsbuttom.RSButtonMetro rSButtonMetro2;
-    private rsbuttom.RSButtonMetro rSButtonMetro3;
-    private rsbuttom.RSButtonMetro rSButtonMetro4;
     // End of variables declaration//GEN-END:variables
 @Override
     protected void finalize() throws Throwable {

@@ -1,6 +1,7 @@
 package Vistas;
 
 import Controlador.DetalleProyecto;
+import Controlador.Proyecto;
 import com.barcodelib.barcode.QRCode;
 import java.awt.Color;
 import java.io.File;
