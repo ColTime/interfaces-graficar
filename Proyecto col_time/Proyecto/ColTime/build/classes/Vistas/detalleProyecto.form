@@ -107,7 +107,7 @@
                   <Color blue="83" green="80" red="80" type="rgb"/>
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="11" rowCount="4">
+                  <Table columnCount="12" rowCount="4">
                     <Column editable="true" title="Proceso" type="java.lang.Object"/>
                     <Column editable="true" title="Fecha inicio" type="java.lang.Object"/>
                     <Column editable="true" title="Fecha fin" type="java.lang.Object"/>
@@ -119,6 +119,7 @@
                     <Column editable="true" title="Tiempo Ejecucion" type="java.lang.Object"/>
                     <Column editable="true" title="Hora Terminacion" type="java.lang.Object"/>
                     <Column editable="true" title="reiniciar" type="java.lang.Object"/>
+                    <Column editable="true" title="Tiempo" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="fillsViewportHeight" type="boolean" value="true"/>
@@ -247,11 +248,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                                           <Component id="jTFechaIngreso" min="-2" pref="25" max="-2" attributes="0"/>
                                           <Group type="102" attributes="0">
                                               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
@@ -266,24 +267,21 @@
                                               <Component id="jTFechaEntrega" min="-2" pref="25" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jTCantidadTotal" min="-2" pref="25" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
+                                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jTCantidadTotal" min="-2" pref="25" max="-2" attributes="0"/>
+                                      <Component id="jTNombreProyecto" min="-2" pref="25" max="-2" attributes="0"/>
                                   </Group>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jTNombreProyecto" min="-2" pref="25" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Component id="jTNombreCliente" alignment="1" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace min="1" pref="1" max="-2" attributes="0"/>

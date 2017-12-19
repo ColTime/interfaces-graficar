@@ -17,8 +17,10 @@ public class detalleProyecto extends javax.swing.JDialog {
             this.setTitle(orden + " - " + "Formato estándar");
         } else if (negocio == 2) {
             this.setTitle(orden + " - " + "Teclados");
-        } else {
+        } else if (negocio == 3) {
             this.setTitle(orden + " - " + "Ensamble");
+        } else {
+            this.setTitle(orden + " - " + "Almacen");
         }
 
         this.detalle = detalle;
@@ -96,13 +98,13 @@ public class detalleProyecto extends javax.swing.JDialog {
         TDetalleProduccion.setForeground(new java.awt.Color(128, 128, 131));
         TDetalleProduccion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Proceso", "Fecha inicio", "Fecha fin", "Cantidad Procesada", "Tiempo total min", "Tiempo por unidad min", "Estado", "Hora Ejecucion", "Tiempo Ejecucion", "Hora Terminacion", "reiniciar"
+                "Proceso", "Fecha inicio", "Fecha fin", "Cantidad Procesada", "Tiempo total min", "Tiempo por unidad min", "Estado", "Hora Ejecucion", "Tiempo Ejecucion", "Hora Terminacion", "reiniciar", "Tiempo"
             }
         ));
         TDetalleProduccion.setFillsViewportHeight(true);
@@ -283,10 +285,10 @@ public class detalleProyecto extends javax.swing.JDialog {
             jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPInformacionLayout.createSequentialGroup()
                 .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPInformacionLayout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPInformacionLayout.createSequentialGroup()
-                                .addContainerGap()
+                            .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jTFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPInformacionLayout.createSequentialGroup()
@@ -297,19 +299,16 @@ public class detalleProyecto extends javax.swing.JDialog {
                                             .addComponent(jLabel6)
                                             .addComponent(jLabel7))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTFechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(jTFechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPInformacionLayout.createSequentialGroup()
+                                    .addComponent(jLabel8)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTCantidadTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPInformacionLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel8)
+                                .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTCantidadTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPInformacionLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jLabel4)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTNombreProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jTNombreProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jTNombreCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPInformacionLayout.createSequentialGroup()
                         .addGap(1, 1, 1)
@@ -389,15 +388,21 @@ public class detalleProyecto extends javax.swing.JDialog {
             if (value instanceof JButton) {
                 JButton boton;
                 boton = (JButton) value;
-                if (boton.getActionCommand().equals("1")) {
-                    if (JOptionPane.showOptionDialog(null, "¿Seguro desea reinicializar la toma de tiempo? Perdera toda esta información.", "Seguridad", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null/*icono*/, botones, botones[0]) == 0) {
-                        String idDetalle = String.valueOf(TDetalleProduccion.getValueAt(row, 11));
-                        DetalleProyecto obj = new DetalleProyecto();
-                        if (obj.ReiniciarDetalle(Integer.parseInt(idDetalle), negocio, detalle)) {///Pendiente???¿¿¿???¿¿¿
-                            new rojerusan.RSNotifyAnimated("¡Listo!", "El proceso: " + TDetalleProduccion.getValueAt(row, 0) + " fue reinicializado corresctamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
-                            cargarTabla();
-                        } else {
-                            new rojerusan.RSNotifyAnimated("¡Error!", "El proceso: " + TDetalleProduccion.getValueAt(row, 0) + " no pudo ser reinicializado.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
+                if (boton.getText().equals("Tiempo")) {
+                    //Finalizar la toma de tiempo de los procesos del almacen...
+                    //------------------------------------------------------------
+                } else {
+                    //Boton para reiniciar la toma de tiempo
+                    if (boton.getActionCommand().equals("1")) {
+                        if (JOptionPane.showOptionDialog(null, "¿Seguro desea reinicializar la toma de tiempo? Perdera toda esta información.", "Seguridad", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null/*icono*/, botones, botones[0]) == 0) {
+                            String idDetalle = String.valueOf(TDetalleProduccion.getValueAt(row, 11));
+                            DetalleProyecto obj = new DetalleProyecto();
+                            if (obj.ReiniciarDetalle(Integer.parseInt(idDetalle), negocio, detalle)) {///Pendiente???¿¿¿???¿¿¿
+                                new rojerusan.RSNotifyAnimated("¡Listo!", "El proceso: " + TDetalleProduccion.getValueAt(row, 0) + " fue reinicializado corresctamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+                                cargarTabla();
+                            } else {
+                                new rojerusan.RSNotifyAnimated("¡Error!", "El proceso: " + TDetalleProduccion.getValueAt(row, 0) + " no pudo ser reinicializado.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
+                            }
                         }
                     }
                 }
@@ -432,8 +437,14 @@ public class detalleProyecto extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Error!! " + e);
         }
 
-        if (permiso == 1) {
+        if (permiso == 1 || negocio == 4) {
             editarTamañoColumnas();
+            if (negocio == 4) {
+                TDetalleProduccion.getColumnModel().getColumn(5).setMinWidth(0);
+                TDetalleProduccion.getColumnModel().getColumn(5).setMaxWidth(0);
+                TDetalleProduccion.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
+                TDetalleProduccion.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
+            }
         }
         TDetalleProduccion.getColumnModel().getColumn(11).setMinWidth(0);
         TDetalleProduccion.getColumnModel().getColumn(11).setMaxWidth(0);

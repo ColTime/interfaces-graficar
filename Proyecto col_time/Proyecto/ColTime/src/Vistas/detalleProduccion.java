@@ -114,7 +114,6 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
             obj.btnPNC.setVisible(false);
             obj.setLocationRelativeTo(null);
             obj.setVisible(true);
-
         }
     }//GEN-LAST:event_btnPNCActionPerformed
 

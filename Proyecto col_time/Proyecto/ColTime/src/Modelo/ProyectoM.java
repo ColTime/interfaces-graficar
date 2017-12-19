@@ -382,7 +382,7 @@ public class ProyectoM {
                 //Query para buscar por fecha de Ingreso
                 Qry = "CALL PA_ConsultarProyectosIngreso(?,?,?,?)";
             } else if (TipoFecha.equals("Entrega")) {
-                //Query para buscar por fecha de Entrega
+                //Query para buscar por fecha de Entrega''                
                 Qry = "CALL PA_ConsultarProyectosEntrega(?,?,?,?)";
             } else if (TipoFecha.equals("Salida")) {
                 //Query para buscar por fecha de Salida

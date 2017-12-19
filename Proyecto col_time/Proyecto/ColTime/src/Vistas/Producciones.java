@@ -34,7 +34,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
     int x = 0, y = 0, cantidad = 0, filas = 1, unidad = 11, conta = 5;
     static int negocio = 0;
     public Color cor = new Color(17, 161, 255);
-    public Color corF = new Color(63,179,255);
+    public Color corF = new Color(63, 179, 255);
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -178,6 +178,11 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         btn4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btn4MousePressed(evt);
+            }
+        });
+        btn4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn4ActionPerformed(evt);
             }
         });
         jPanel1.add(btn4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 0, -1, 57));
@@ -379,7 +384,6 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
     private void btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn1ActionPerformed
         EstadoDelMenu(true);
         cambiarPanel(1);
-
     }//GEN-LAST:event_btn1ActionPerformed
 
     private void btn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3ActionPerformed
@@ -390,6 +394,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
     public void cambiarPanel(int op) {
         switch (op) {
             case 1:
+                //Vista de formato estandar
                 if (!Contenido.getComponent(0).getName().equals("FE")) {
                     new CambiaPanel(Contenido, new ProduccionFE());
                 }
@@ -398,6 +403,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                 agregarProyectoEnTabla(1, "", "", "", "");
                 break;
             case 2:
+                //Vista de teclados
                 if (!Contenido.getComponent(0).getName().equals("TE")) {
                     new CambiaPanel(Contenido, new ProduccionTE());
                 }
@@ -406,12 +412,22 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                 agregarProyectoEnTabla(2, "", "", "", "");
                 break;
             case 3:
+                //Vista de Ensamble
                 if (!Contenido.getComponent(0).getName().equals("IN")) {
                     new CambiaPanel(Contenido, new ProduccionEN());
                 }
                 reinicializarVariables();
                 negocio = 3;
                 agregarProyectoEnTabla(3, "", "", "", "");
+                break;
+            case 4:
+                //Vista de almacen
+                if (!Contenido.getComponent(0).getName().equals("FE")) {
+                    new CambiaPanel(Contenido, new ProduccionFE());
+                }
+                reinicializarVariables();
+                negocio = 4;
+                agregarProyectoEnTabla(4, "", "", "", "");
                 break;
         }
         jTNombre.setText("");
@@ -572,6 +588,11 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         }
     }//GEN-LAST:event_btn4MousePressed
 
+    private void btn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn4ActionPerformed
+        EstadoDelMenu(true);
+        cambiarPanel(4);
+    }//GEN-LAST:event_btn4ActionPerformed
+
 //Metodos
     private void busqueda() {
         agregarProyectoEnTabla(negocio, jTOrden.getText(), jTNombre.getText(), jTProyecto.getText(), cbTipo.getSelectedItem().toString());
@@ -596,6 +617,10 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                 case 3:
                     ProduccionEN.contenidoEN.removeAll();
                     ProduccionEN.contenidoEN.updateUI();
+                    break;
+                case 4:
+                    ProduccionFE.contenidoFE.removeAll();
+                    ProduccionFE.contenidoFE.updateUI();
                     break;
             }
             while (crs.next()) {
@@ -711,6 +736,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                 jp.setBackground(Color.WHITE);
                 switch (negocio) {
                     case 1:
+                    case 4:
                         ProduccionFE.contenidoFE.add(jp);
                         ProduccionFE.contenidoFE.updateUI();
                         break;
@@ -753,6 +779,9 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {//Estas lines me van a mostrar todos los detalles del proyecto sin importar se estan en ejecucion o no "1"
         int orden = Integer.parseInt(e.getActionCommand());
         detalleProduccion obj = new detalleProduccion(this, true, orden, negocio, 1);
+        if (negocio == 4) {
+            obj.btnPNC.setVisible(false);
+        }
         obj.setLocationRelativeTo(null);
         obj.setVisible(true);
         obj.dispose();

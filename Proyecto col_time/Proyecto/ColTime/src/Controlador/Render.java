@@ -34,12 +34,22 @@ public class Render extends DefaultTableCellRenderer {
         if (value instanceof JButton) {
             JButton btn = (JButton) value;
             //Sabe que boton se activa y cual no
-            if (table.getValueAt(row, columna_patron).equals("Por iniciar") || table.getValueAt(row, columna_patron).equals("Ejecucion")) {
-                btn.setEnabled(false);
-                btn.setActionCommand("2");//2
-            } else if (table.getValueAt(row, columna_patron).equals("Terminado") || table.getValueAt(row, columna_patron).equals("Pausado")) {
-                btn.setEnabled(true);
-                btn.setActionCommand("1");//1
+            if (btn.getText().equals("Tiempo")) {
+                if (table.getValueAt(row, columna_patron).equals("Terminado")) {
+                    btn.setEnabled(false);
+                    btn.setActionCommand("2");
+                } else if (table.getValueAt(row, columna_patron).equals("Ejecucion")) {
+                    btn.setEnabled(true);
+                    btn.setActionCommand("1");
+                }
+            } else {
+                if (table.getValueAt(row, columna_patron).equals("Por iniciar") || table.getValueAt(row, columna_patron).equals("Ejecucion")) {
+                    btn.setEnabled(false);
+                    btn.setActionCommand("2");//2
+                } else if (table.getValueAt(row, columna_patron).equals("Terminado") || table.getValueAt(row, columna_patron).equals("Pausado")) {
+                    btn.setEnabled(true);
+                    btn.setActionCommand("1");//1
+                }
             }
 
             if (isSelected) {

@@ -45,6 +45,7 @@ public class proyecto extends javax.swing.JPanel {
         limpiarCampos();
     }
     static int op = 0;
+    static int componentes = 0;
     boolean v[] = new boolean[12];
     int udm = 0, resol = 100, rot = 0;
     float mi = 0.000f, md = 0.000f, ms = 0.000f, min = 0.000f, tam = 21.000f;
@@ -137,6 +138,7 @@ public class proyecto extends javax.swing.JPanel {
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
+        jRadioButton1 = new javax.swing.JRadioButton();
         jPDetalles = new javax.swing.JPanel();
         jDentrega = new com.toedter.calendar.JDateChooser();
         jLabel10 = new javax.swing.JLabel();
@@ -610,6 +612,9 @@ public class proyecto extends javax.swing.JPanel {
         jLabel26.setForeground(new java.awt.Color(128, 128, 131));
         jLabel26.setText("Fecha de entrega EN");
         jPDetalles1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 170, -1, -1));
+
+        jRadioButton1.setText("COM");
+        jPDetalles1.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 90, -1, 30));
 
         jPanel2.add(jPDetalles1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 820, 222));
 
@@ -1360,7 +1365,7 @@ public class proyecto extends javax.swing.JPanel {
 
     private void jCCircuitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCCircuitoActionPerformed
         activarjTfilex(jCCircuito, jTCircuito);
-        if (jCCircuito.isSelected() && jCIntegracion.isSelected()) {
+        if (jCCircuito.isSelected()) {
             cbMaterialCircuito.setEnabled(true);
             jCAntisolderC.setEnabled(true);
             jCRuteoC.setEnabled(true);
@@ -2170,6 +2175,12 @@ public class proyecto extends javax.swing.JPanel {
                     op1 = op;
                     op = 1;
                 }
+                if (cbMaterialCircuito.getSelectedItem().toString().equals("GF")) {//Pendiente!!!! registrar los componenetes
+                    componentes = 1;//Componentes del circuito GF
+                } else {
+                    componentes = 0;
+                }
+                
                 res = subRegistrarModificarProyecto(obj, jTIntegracion.getText(), "IN", "Circuito", numeroOrden, "", op, Integer.parseInt(jLIDIntegracion.getText()));
                 if (jLIDIntegracion.getText().equals("0")) {
                     op = op1;
@@ -2296,7 +2307,7 @@ public class proyecto extends javax.swing.JPanel {
         obj.setTipoNegocio(TipoNegocio);
         obj.setNegocio(Negocio);
         obj.setMaterial(material);
-        return obj.registrar_Detalle_Proycto(numeroOrden, op, id);
+        return obj.registrar_Detalle_Proycto(numeroOrden, op, id, componentes);
     }
 
     private void subEliminardetalle(DetalleProyecto obj, int idDetalle, int numerOrden, String negocio, String tipo) {
@@ -2392,6 +2403,7 @@ public class proyecto extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     public static javax.swing.JRadioButton jREjecucion;
     public static javax.swing.JRadioButton jRParada;
+    private javax.swing.JRadioButton jRadioButton1;
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTCircuito;
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTConversor;
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTIntegracion;
