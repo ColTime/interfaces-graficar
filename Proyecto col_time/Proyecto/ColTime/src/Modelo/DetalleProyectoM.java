@@ -62,9 +62,8 @@ public class DetalleProyectoM {
     }
 
     //Este metodo también funcionara para registrar y modificar los productos no conformes PNC.
-    public boolean registrar_Detalle_Proycto(String cantidad, String negocio, String tipoNegocio, int estado, String numerOrden, String material, int op, int id, int pnc, String ubicacion,int componentes) {
+    public boolean registrar_Detalle_Proycto(String cantidad, String negocio, String tipoNegocio, int estado, String numerOrden, String material, int op, int id, int pnc, String ubicacion, int componentes) {
         try {
-            
             conexion = new Conexion();
             conexion.establecerConexion();
             con = conexion.getConexion();
@@ -115,7 +114,7 @@ public class DetalleProyectoM {
                     res = rs.getBoolean(1);
                     //Tipo de negocio
                     int tipo = numeroDelTipo(tipoNegocio);
-                    
+
                     if (negocio.equals("IN")) {
                         //Se registran los procesos de IN para este subproyecto.
                         //falta controlar que el si hay FE/GF siempre lleva componentes.
@@ -164,7 +163,7 @@ public class DetalleProyectoM {
                                 ps.setInt(2, 8);
                                 //componentesC = 1;//Esata variable ayudara a saber si se registra los componentes o no de Circuito GF
                             }
-                            ps.setInt(3,22);//Proceso de GF
+                            ps.setInt(3, 22);//Proceso de GF
                             ps.execute();
                         } else {
                             //Si es TH o FV
@@ -180,6 +179,8 @@ public class DetalleProyectoM {
                             ps.execute();
                         }
                     }
+                    //Registro de componentes
+                    regitrarComponenetes();////////Esto queda pendiente por la logica
                 }
             } else if (op == 2) {
                 modificarPNC(numerOrden, id, cantidad, material, negocio, tipoNegocio, ubicacion);
@@ -193,6 +194,15 @@ public class DetalleProyectoM {
             JOptionPane.showMessageDialog(null, "¡Error!" + e);
         }
         return res;
+    }
+
+    private boolean regitrarComponenetes() {
+        try {
+
+        } catch (Exception e) {
+            //mensaje
+        }
+        return true;
     }
 
     private int numeroDelTipo(String tipoNegocio) {
@@ -583,6 +593,8 @@ public class DetalleProyectoM {
         }
         return res;
     }
+
+    
 
     public CachedRowSet ConsultarInformacionFiltrariaDelDetalleM(int detalle) {
         try {

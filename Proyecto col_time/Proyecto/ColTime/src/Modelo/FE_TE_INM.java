@@ -120,6 +120,27 @@ public class FE_TE_INM {
         return res;
     }
 
+    public boolean pararTiempoAlmacen(int detalle, int cantidad, int detalleproducto, int proceso) {
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Falta calcular el estado
+            String Qry = "CALL PA_PararTomaDeTiempoAlmacen(?,?,?,?)";
+            ps = con.prepareStatement(Qry);
+            ps.setInt(1, detalle);
+            ps.setInt(2, proceso);
+            ps.setInt(3, cantidad);
+            ps.setInt(4, 4);
+            rs = ps.executeQuery();
+
+            //Cerrar conexiones
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error! " + e);
+        }
+        return true;
+    }
+
     public void totalTiempoPorUnidad(int detalle, int negocio) {
         try {
             String Qry = "CALL PA_ValidarEstadoProyecto(?,?)";

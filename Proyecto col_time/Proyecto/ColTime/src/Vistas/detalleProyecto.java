@@ -1,6 +1,7 @@
 package Vistas;
 
 import Controlador.DetalleProyecto;
+import Controlador.FE_TE_IN;
 import Controlador.Tabla;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.ImageIcon;
@@ -390,6 +391,15 @@ public class detalleProyecto extends javax.swing.JDialog {
                 boton = (JButton) value;
                 if (boton.getText().equals("Tiempo")) {
                     //Finalizar la toma de tiempo de los procesos del almacen...
+                    FE_TE_IN almacen = new FE_TE_IN();
+                    String idDetalle = String.valueOf(TDetalleProduccion.getValueAt(row, 11));
+                    int proceso = 0;
+                    if (TDetalleProduccion.getValueAt(row, 0).toString().equals("GF")) {
+                        proceso = 22;
+                    } else {
+                        proceso = 23;
+                    }                                                   //Cantidad   
+                    almacen.pararTiempoAlmacen(Integer.parseInt(idDetalle),25, detalle,proceso);//
                     //------------------------------------------------------------
                 } else {
                     //Boton para reiniciar la toma de tiempo
@@ -411,8 +421,10 @@ public class detalleProyecto extends javax.swing.JDialog {
     }//GEN-LAST:event_TDetalleProduccionMouseClicked
 
     private void TDetalleProduccionMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TDetalleProduccionMouseReleased
-        if (evt.isPopupTrigger()) {
-            popMenu.show(evt.getComponent(), evt.getX(), evt.getY());
+        if (negocio != 4) {
+            if (evt.isPopupTrigger()) {
+                popMenu.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
         }
     }//GEN-LAST:event_TDetalleProduccionMouseReleased
 //one day baby, i thiking but
@@ -445,6 +457,12 @@ public class detalleProyecto extends javax.swing.JDialog {
                 TDetalleProduccion.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
                 TDetalleProduccion.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
             }
+        }
+        if (negocio != 4) {
+            TDetalleProduccion.getColumnModel().getColumn(12).setMinWidth(0);
+            TDetalleProduccion.getColumnModel().getColumn(12).setMaxWidth(0);
+            TDetalleProduccion.getTableHeader().getColumnModel().getColumn(12).setMaxWidth(0);
+            TDetalleProduccion.getTableHeader().getColumnModel().getColumn(12).setMinWidth(0);
         }
         TDetalleProduccion.getColumnModel().getColumn(11).setMinWidth(0);
         TDetalleProduccion.getColumnModel().getColumn(11).setMaxWidth(0);

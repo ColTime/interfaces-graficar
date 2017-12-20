@@ -26,6 +26,11 @@ public class FE_TE_IN {
         return obj.consultarProyectosEnEjecucion(negocio);
     }
 
+    public boolean pararTiempoAlmacen(int detalle, int cantidad, int detalleproducto, int proceso) {
+        FE_TE_INM obj = new FE_TE_INM();
+        return obj.pararTiempoAlmacen(detalle, cantidad, detalleproducto,proceso);
+    }
+
     @Override
     protected void finalize() throws Throwable {
         super.finalize(); //Este metodo obliga a la intancia se elimine sola y libere el espacio en el puntero.
