@@ -26,9 +26,9 @@ public class FE_TE_IN {
         return obj.consultarProyectosEnEjecucion(negocio);
     }
 
-    public boolean pararTiempoAlmacen(int detalle, int cantidad, int detalleproducto, int proceso) {
+    public boolean pararTiempoAlmacen(int orden,int detalle, int cantidad, int detalleproducto, int proceso) {
         FE_TE_INM obj = new FE_TE_INM();
-        return obj.pararTiempoAlmacen(detalle, cantidad, detalleproducto,proceso);
+        return obj.pararTiempoAlmacen(orden,detalle, cantidad, detalleproducto,proceso);
     }
 
     @Override

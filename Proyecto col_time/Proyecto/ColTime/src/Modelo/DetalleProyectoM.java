@@ -62,7 +62,7 @@ public class DetalleProyectoM {
     }
 
     //Este metodo también funcionara para registrar y modificar los productos no conformes PNC.
-    public boolean registrar_Detalle_Proycto(String cantidad, String negocio, String tipoNegocio, int estado, String numerOrden, String material, int op, int id, int pnc, String ubicacion, int componentes) {
+    public boolean registrar_Detalle_Proycto(String cantidad, String negocio, String tipoNegocio, int estado, String numerOrden, String material, int op, int id, int pnc, String ubicacion) {
         try {
             conexion = new Conexion();
             conexion.establecerConexion();
@@ -112,20 +112,15 @@ public class DetalleProyectoM {
                     rs = ps.executeQuery();
                     rs.next();
                     res = rs.getBoolean(1);
+                    //Ebadir esta función siemmpre y cuando el negocio sea Almacen.
                     //Tipo de negocio
-                    int tipo = numeroDelTipo(tipoNegocio);
+                    int tipo = 0;
+                    if (!negocio.equals("ALMACEN")) {
+                        tipo = numeroDelTipo(tipoNegocio);
+                    }
 
                     if (negocio.equals("IN")) {
                         //Se registran los procesos de IN para este subproyecto.
-                        //falta controlar que el si hay FE/GF siempre lleva componentes.
-//                        if (componentesC == 1) {//Se registran los componentes de Circuito GF
-//                            Qry = "CALL PA_RegistrarDetalleAlmacen(?,?,?)";
-//                            ps = con.prepareStatement(Qry);
-//                            ps.setInt(1, Integer.parseInt(numerOrden));
-//                            ps.setInt(2, 8);////Esata variable ayudara a saber si se registra los componentes o no de Circuito GF
-//                            ps.setInt(3, 23);//Proceso de componentes
-//                            ps.execute();
-//                        }
                         Qry = "CALL PA_RegistrarDetalleEnsamble(?,?,?)";
                         ps = con.prepareStatement(Qry);
                         ps.setInt(1, Integer.parseInt(numerOrden));
@@ -151,17 +146,15 @@ public class DetalleProyectoM {
                     } else if (negocio.equals("FE")) {
                         //Se registran los procesos de FE para este subproyecto.
                         //Se valida que sea GF.
-                        if (material.equals("GF")) {
+                        if (material.equals("GF")) {//Negocio del almacen
                             //Se registran los procesos de GF en el almacen y se inicia la toma de tiempos. 
                             Qry = "CALL PA_RegistrarDetalleAlmacen(?,?,?)";
                             ps = con.prepareStatement(Qry);
                             ps.setInt(1, Integer.parseInt(numerOrden));
                             if (negocio.equals("FE") && tipoNegocio.equals("PCB")) {//Gran formato de la PCB del teclado
                                 ps.setInt(2, 9);
-                                //Tener en cuenta----//componentesP = 1;//Esata variable ayudara a saber si se registra los componentes o no de circuito GF
                             } else if (negocio.equals("FE") && tipoNegocio.equals("Circuito")) {
                                 ps.setInt(2, 8);
-                                //componentesC = 1;//Esata variable ayudara a saber si se registra los componentes o no de Circuito GF
                             }
                             ps.setInt(3, 22);//Proceso de GF
                             ps.execute();
@@ -178,9 +171,18 @@ public class DetalleProyectoM {
                             }
                             ps.execute();
                         }
+                    } else {//Negocio del almacen Para registrar los compoennetes
+                        Qry = "CALL PA_RegistrarDetalleAlmacen(?,?,?)";
+                        ps = con.prepareStatement(Qry);
+                        ps.setInt(1, Integer.parseInt(numerOrden));
+                        if (tipoNegocio.equals("Circuito COM")) {//Componentes de circuito.
+                            ps.setInt(2, 10);
+                        } else if (tipoNegocio.equals("PCB COM")) {//Componentes de PCB.
+                            ps.setInt(2, 11);
+                        }
+                        ps.setInt(3, 23);//Proceso de componentes.
+                        ps.execute();
                     }
-                    //Registro de componentes
-                    regitrarComponenetes();////////Esto queda pendiente por la logica
                 }
             } else if (op == 2) {
                 modificarPNC(numerOrden, id, cantidad, material, negocio, tipoNegocio, ubicacion);
@@ -194,15 +196,6 @@ public class DetalleProyectoM {
             JOptionPane.showMessageDialog(null, "¡Error!" + e);
         }
         return res;
-    }
-
-    private boolean regitrarComponenetes() {
-        try {
-
-        } catch (Exception e) {
-            //mensaje
-        }
-        return true;
     }
 
     private int numeroDelTipo(String tipoNegocio) {
@@ -593,8 +586,6 @@ public class DetalleProyectoM {
         }
         return res;
     }
-
-    
 
     public CachedRowSet ConsultarInformacionFiltrariaDelDetalleM(int detalle) {
         try {

@@ -391,15 +391,29 @@ public class detalleProyecto extends javax.swing.JDialog {
                 boton = (JButton) value;
                 if (boton.getText().equals("Tiempo")) {
                     //Finalizar la toma de tiempo de los procesos del almacen...
-                    FE_TE_IN almacen = new FE_TE_IN();
-                    String idDetalle = String.valueOf(TDetalleProduccion.getValueAt(row, 11));
-                    int proceso = 0;
-                    if (TDetalleProduccion.getValueAt(row, 0).toString().equals("GF")) {
-                        proceso = 22;
-                    } else {
-                        proceso = 23;
-                    }                                                   //Cantidad   
-                    almacen.pararTiempoAlmacen(Integer.parseInt(idDetalle),25, detalle,proceso);//
+                    if (boton.getActionCommand().equals("1")) {
+                        FE_TE_IN almacen = new FE_TE_IN();
+
+                        if (TDetalleProduccion.getValueAt(row, 0).toString().equals("GF")) {
+                            //Se pide la cantidad que se recibio del gran formato.
+                            String cantidad = JOptionPane.showInputDialog("Cantidades recibidas:");
+                            if (cantidad != null) {
+                                if (!cantidad.equals("")) {
+                                    String idDetalle = String.valueOf(TDetalleProduccion.getValueAt(row, 11));
+                                    int proceso = 0;
+                                    if (TDetalleProduccion.getValueAt(row, 0).toString().equals("GF")) {
+                                        proceso = 22;
+                                    } else {
+                                        proceso = 23;
+                                    }                           
+                                    String orden[]= this.getTitle().split("-");                                                  //Cantidad//   
+                                    almacen.pararTiempoAlmacen(Integer.parseInt(orden[0].trim()),Integer.parseInt(idDetalle), Integer.parseInt(cantidad), detalle, proceso);//
+                                }else{
+                                    //Mensaje de ingresar una cantidad.
+                                }
+                            }
+                        }
+                    }
                     //------------------------------------------------------------
                 } else {
                     //Boton para reiniciar la toma de tiempo
@@ -456,6 +470,10 @@ public class detalleProyecto extends javax.swing.JDialog {
                 TDetalleProduccion.getColumnModel().getColumn(5).setMaxWidth(0);
                 TDetalleProduccion.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
                 TDetalleProduccion.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
+                TDetalleProduccion.getColumnModel().getColumn(7).setMinWidth(0);
+                TDetalleProduccion.getColumnModel().getColumn(7).setMaxWidth(0);
+                TDetalleProduccion.getTableHeader().getColumnModel().getColumn(7).setMaxWidth(0);
+                TDetalleProduccion.getTableHeader().getColumnModel().getColumn(7).setMinWidth(0);
             }
         }
         if (negocio != 4) {

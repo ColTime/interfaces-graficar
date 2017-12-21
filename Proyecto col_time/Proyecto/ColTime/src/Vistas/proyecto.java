@@ -138,9 +138,13 @@ public class proyecto extends javax.swing.JPanel {
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        jRPCBCOM = new javax.swing.JRadioButton();
         jDFechaEntregaGF1 = new com.toedter.calendar.JDateChooser();
         jLabel27 = new javax.swing.JLabel();
+        jLIDCircuitoGF = new javax.swing.JLabel();
+        jLIDCircuitoCOM = new javax.swing.JLabel();
+        jLIDPCBCOM = new javax.swing.JLabel();
+        jLIDPCBGF = new javax.swing.JLabel();
         jPDetalles = new javax.swing.JPanel();
         jDentrega = new com.toedter.calendar.JDateChooser();
         jLabel10 = new javax.swing.JLabel();
@@ -185,11 +189,11 @@ public class proyecto extends javax.swing.JPanel {
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Proyecto", 0, 0, new java.awt.Font("Tahoma", 1, 18), new java.awt.Color(128, 128, 131))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Proyecto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18), new java.awt.Color(128, 128, 131))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPInformacion.setBackground(new java.awt.Color(255, 255, 255));
-        jPInformacion.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Información filtraria", 0, 0, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
+        jPInformacion.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Información filtraria", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
 
         jTNorden.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTNorden.setColorDeBorde(new java.awt.Color(204, 204, 204));
@@ -286,7 +290,7 @@ public class proyecto extends javax.swing.JPanel {
         jPanel2.add(jPInformacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 430, 180));
 
         jPDetalles1.setBackground(new java.awt.Color(255, 255, 255));
-        jPDetalles1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Detalles", 0, 0, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
+        jPDetalles1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Detalles", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
         jPDetalles1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTTeclado.setColorDeBorde(new java.awt.Color(204, 204, 204));
@@ -568,10 +572,10 @@ public class proyecto extends javax.swing.JPanel {
         jDFechaEntregaFE.setDateFormatString("dd/MM/yyyy");
         jDFechaEntregaFE.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jDFechaEntregaFE.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jDFechaEntregaFECaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jPDetalles1.add(jDFechaEntregaFE, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 140, -1));
@@ -580,10 +584,10 @@ public class proyecto extends javax.swing.JPanel {
         jDFechaEntregaEN.setDateFormatString("dd/MM/yyyy");
         jDFechaEntregaEN.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jDFechaEntregaEN.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jDFechaEntregaENCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jPDetalles1.add(jDFechaEntregaEN, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 130, -1));
@@ -592,10 +596,10 @@ public class proyecto extends javax.swing.JPanel {
         jDFechaEntregaGF.setDateFormatString("dd/MM/yyyy");
         jDFechaEntregaGF.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jDFechaEntregaGF.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jDFechaEntregaGFCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jPDetalles1.add(jDFechaEntregaGF, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, 130, -1));
@@ -615,17 +619,17 @@ public class proyecto extends javax.swing.JPanel {
         jLabel26.setText("Fecha de entrega COM Circuito");
         jPDetalles1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, -1, -1));
 
-        jRadioButton1.setText("COM");
-        jPDetalles1.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 90, -1, 30));
+        jRPCBCOM.setText("COM");
+        jPDetalles1.add(jRPCBCOM, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 90, -1, 30));
 
         jDFechaEntregaGF1.setToolTipText("");
         jDFechaEntregaGF1.setDateFormatString("dd/MM/yyyy");
         jDFechaEntregaGF1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jDFechaEntregaGF1.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jDFechaEntregaGF1CaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jPDetalles1.add(jDFechaEntregaGF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 190, 130, -1));
@@ -635,19 +639,31 @@ public class proyecto extends javax.swing.JPanel {
         jLabel27.setText("Fecha de entrega GF");
         jPDetalles1.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 170, -1, -1));
 
+        jLIDCircuitoGF.setText("0");
+        jPDetalles1.add(jLIDCircuitoGF, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, 10, -1));
+
+        jLIDCircuitoCOM.setText("0");
+        jPDetalles1.add(jLIDCircuitoCOM, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 100, 10, -1));
+
+        jLIDPCBCOM.setText("0");
+        jPDetalles1.add(jLIDPCBCOM, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 70, 10, -1));
+
+        jLIDPCBGF.setText("0");
+        jPDetalles1.add(jLIDPCBGF, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 130, 10, -1));
+
         jPanel2.add(jPDetalles1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 820, 222));
 
         jPDetalles.setBackground(new java.awt.Color(255, 255, 255));
-        jPDetalles.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Detalles", 0, 0, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
+        jPDetalles.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Detalles", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
 
         jDentrega.setToolTipText("");
         jDentrega.setDateFormatString("dd/MM/yyyy");
         jDentrega.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jDentrega.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jDentregaCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
 
@@ -803,7 +819,7 @@ public class proyecto extends javax.swing.JPanel {
         jPanel2.add(jPDetalles, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, 370, 180));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", 0, 0, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(204, 204, 204))); // NOI18N
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(204, 204, 204))); // NOI18N
         jPanel5.setLayout(null);
 
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add_Proyect.png"))); // NOI18N
@@ -1004,6 +1020,10 @@ public class proyecto extends javax.swing.JPanel {
         jLIDPCB.setText("0");
         jLIDTeclado.setText("0");
         jLIDIntegracion.setText("0");
+        jLIDPCBGF.setText("0");
+        jLIDPCBCOM.setText("0");
+        jLIDCircuitoGF.setText("0");
+        jLIDCircuitoCOM.setText("0");
     }
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         ConsutaProyecto obj = new ConsutaProyecto();
@@ -2184,9 +2204,13 @@ public class proyecto extends javax.swing.JPanel {
             VerificarQueSeElimina(obj);
         } else if (cbNegocio.getSelectedItem().equals("FE/EN")) {
             //Se registra el detalle del proyecto cuando el negocio es "FE/IN"
-            //Registro de componentes
+            //Registro de componentes Circuito COM
             if (jCCircuito.isSelected() && jCIntegracion.isSelected()) {
                 componentes = 1;
+                res = subRegistrarModificarProyecto(obj, "", "ALMACEN", "Circuito COM", numeroOrden, "", op, Integer.parseInt(jLIDCircuitoCOM.getText()));
+            } else {
+                //Validar si los componenetes estan registrados, y si estan registrados eliminarlos.
+
             }
             //Registro de componentes
             if (jCCircuito.isSelected()) {
@@ -2235,6 +2259,22 @@ public class proyecto extends javax.swing.JPanel {
             VerificarQueSeElimina(obj);
         } else if (cbNegocio.getSelectedItem().equals("FE/TE/EN")) {
             //Se registra el detalle del proyecto cuando el negocio es "FE/TE/IN"
+            //Registro de componentes Circuito COM
+            if (jCCircuito.isSelected() && jCIntegracion.isSelected()) {
+
+                res = subRegistrarModificarProyecto(obj, "", "ALMACEN", "Circuito COM", numeroOrden, "", op, Integer.parseInt(jLIDCircuitoCOM.getText()));
+            } else {
+                //Validar si los componenetes estan registrados, y si estan registrados eliminarlos.
+
+            }
+            //Registro de componentes PCB COM
+            if (jCPCBTE.isSelected() && jRPCBCOM.isSelected()) {
+
+                res = subRegistrarModificarProyecto(obj, "", "ALMACEN", "PCB COM", numeroOrden, "", op, Integer.parseInt(jLIDCircuitoCOM.getText()));
+            } else {
+                //Validar si los componenetes estan registrados, y si estan registrados eliminarlos.
+
+            }
             if (jCConversor.isSelected()) {
                 //Registrar Conversor------------------------------------------>
                 if (jLIDConversor.getText().equals("0")) {
@@ -2340,7 +2380,7 @@ public class proyecto extends javax.swing.JPanel {
         obj.setTipoNegocio(TipoNegocio);
         obj.setNegocio(Negocio);
         obj.setMaterial(material);
-        return obj.registrar_Detalle_Proycto(numeroOrden, op, id, componentes);
+        return obj.registrar_Detalle_Proycto(numeroOrden, op, id);
     }
 
     private void subEliminardetalle(DetalleProyecto obj, int idDetalle, int numerOrden, String negocio, String tipo) {
@@ -2398,9 +2438,13 @@ public class proyecto extends javax.swing.JPanel {
     public static com.toedter.calendar.JDateChooser jDFechaEntregaGF1;
     public static com.toedter.calendar.JDateChooser jDentrega;
     public static javax.swing.JLabel jLIDCircuito;
+    public static javax.swing.JLabel jLIDCircuitoCOM;
+    public static javax.swing.JLabel jLIDCircuitoGF;
     public static javax.swing.JLabel jLIDConversor;
     public static javax.swing.JLabel jLIDIntegracion;
     public static javax.swing.JLabel jLIDPCB;
+    public static javax.swing.JLabel jLIDPCBCOM;
+    public static javax.swing.JLabel jLIDPCBGF;
     public static javax.swing.JLabel jLIDRepujado;
     public static javax.swing.JLabel jLIDStencil;
     public static javax.swing.JLabel jLIDTeclado;
@@ -2437,8 +2481,8 @@ public class proyecto extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
     public static javax.swing.JRadioButton jREjecucion;
+    public static javax.swing.JRadioButton jRPCBCOM;
     public static javax.swing.JRadioButton jRParada;
-    private javax.swing.JRadioButton jRadioButton1;
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTCircuito;
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTConversor;
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTIntegracion;

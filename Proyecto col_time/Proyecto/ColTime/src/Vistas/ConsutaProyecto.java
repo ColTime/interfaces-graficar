@@ -648,6 +648,12 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                         obj.jLIDCircuito.setText("0");
                         obj.jLIDTeclado.setText("0");
                         obj.jLIDIntegracion.setText("0");
+                        obj.jLIDPCBCOM.setText("0");
+                        obj.jLIDPCBGF.setText("0");
+                        obj.jLIDCircuitoCOM.setText("0");
+                        obj.jLIDCircuitoGF.setText("0");
+
+                        obj.jRPCBCOM.setSelected(false);
 
                         for (int i = 0; i < TDetalle.getRowCount(); i++) {
                             //Buscamos que detalles tiene este proyecto para enviar a la vista de proyecto
@@ -675,8 +681,12 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                                 obj.jCStencil.setEnabled(true);
                                 obj.jTStencil.setEnabled(true);
                                 obj.jTStencil.setText(TDetalle.getValueAt(i, 3).toString());
-                            } else if (TDetalle.getValueAt(i, 2).toString().equals("PCB")) {
-                                obj.jLIDPCB.setText(TDetalle.getValueAt(i, 0).toString());
+                            } else if (TDetalle.getValueAt(i, 2).toString().equals("PCB") || TDetalle.getValueAt(i, 2).toString().equals("PCB GF")) {
+                                if (TDetalle.getValueAt(i, 2).toString().equals("PCB GF")) {
+                                    obj.jLIDPCBGF.setText(TDetalle.getValueAt(i, 0).toString());
+                                } else {
+                                    obj.jLIDPCB.setText(TDetalle.getValueAt(i, 0).toString());
+                                }
                                 obj.jCRuteoP.setEnabled(true);
                                 obj.jCAntisolderP.setEnabled(true);
                                 obj.jCPCBTE.setSelected(true);
@@ -697,8 +707,12 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                                 obj.jCTeclado.setEnabled(true);
                                 obj.jTTeclado.setEnabled(true);
                                 obj.jTTeclado.setText(TDetalle.getValueAt(i, 3).toString());
-                            } else if (TDetalle.getValueAt(i, 2).toString().equals("Circuito") && TDetalle.getValueAt(i, 1).toString().equals("FE")) {
-                                obj.jLIDCircuito.setText(TDetalle.getValueAt(i, 0).toString());
+                            } else if ((TDetalle.getValueAt(i, 2).toString().equals("Circuito") || TDetalle.getValueAt(i, 2).toString().equals("Circuito GF")) && (TDetalle.getValueAt(i, 1).toString().equals("ALMACEN") || TDetalle.getValueAt(i, 1).toString().equals("FE"))) {
+                                if (TDetalle.getValueAt(i, 2).toString().equals("Circuito GF")) {
+                                    obj.jLIDCircuitoGF.setText(TDetalle.getValueAt(i, 0).toString());//Detalle de proyecto
+                                } else {
+                                    obj.jLIDCircuito.setText(TDetalle.getValueAt(i, 0).toString());//Detalle de proyecto
+                                }
                                 obj.jCRuteoC.setEnabled(true);
                                 obj.jCAntisolderC.setEnabled(true);
                                 obj.jCCircuito.setSelected(true);
@@ -707,6 +721,14 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                                 obj.jTCircuito.setText(TDetalle.getValueAt(i, 3).toString());
                                 obj.cbMaterialCircuito.setEnabled(true);
                                 obj.cbMaterialCircuito.setSelectedItem(TDetalle.getValueAt(i, 5).toString());
+                            } else {//Componentes del almacen
+
+                                if (TDetalle.getValueAt(i, 2).toString().equals("Circuito COM")) {
+                                    obj.jLIDCircuitoCOM.setText(TDetalle.getValueAt(i, 0).toString());//Detalle de proyecto
+                                } else if (TDetalle.getValueAt(i, 2).toString().equals("PCB COM")) {
+                                    obj.jRPCBCOM.setSelected(true);
+                                    obj.jLIDPCBCOM.setText(TDetalle.getValueAt(i, 0).toString());//Detalle de proyecto
+                                }
                             }
                         }
                         //Validación de edición

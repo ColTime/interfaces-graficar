@@ -188,7 +188,7 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
         if (res) {
             validarExitenciadeBotones(Integer.parseInt(datos[2]), vista);
         }
-        //#------------------------------------------------------------------
+//#------------------------------------------------------------------
 
     }
 
