@@ -127,47 +127,54 @@ public class FE_TE_INM {
             conexion.establecerConexion();
             con = conexion.getConexion();
             //Falta calcular el estado
-            String Qry = "CALL PA_ValidarCantidadDetalleProyecto(?,?,?,?)";
-            ps = con.prepareStatement(Qry);
-            ps.setInt(1, orden);
-            ps.setInt(2, detalleproducto);
-            ps.setInt(3, proceso);
-            ps.setInt(4, 4);//Negocio de almacen
-            rs = ps.executeQuery();
-            rs.next();
-            //Si la cantidad terminada ingresada es menos a la cantidad que en total se deben realizar.
-            if (rs.getInt(2) + cantidad < rs.getInt(1)) {
-                //Si la afirmación es correcta se ejecutara el procedimiento para parar el tiempo.
-                cantidadAntigua = rs.getInt(2);
-                estado = 2;
-                //Si la cantidad terminada ingresada es igual a la cantidad que en total se deben realizar.
-            } else if (rs.getInt(2) + cantidad == rs.getInt(1)) {
-                cantidadAntigua = rs.getInt(2);
-                estado = 3;
-                //Si la cantidad terminada ingresada es mayor a la cantidad que en total se deben realizar.
+            String Qry = "";
+            if (proceso == 22) {
+                Qry = "CALL PA_ValidarCantidadDetalleProyecto(?,?,?,?)";
+                ps = con.prepareStatement(Qry);
+                ps.setInt(1, orden);
+                ps.setInt(2, detalleproducto);
+                ps.setInt(3, proceso);
+                ps.setInt(4, 4);//Negocio de almacen
+                rs = ps.executeQuery();
+                rs.next();
+                //Si la cantidad terminada ingresada es menos a la cantidad que en total se deben realizar.
+                if (rs.getInt(2) + cantidad < rs.getInt(1)) {
+                    //Si la afirmación es correcta se ejecutara el procedimiento para parar el tiempo.
+                    cantidadAntigua = rs.getInt(2);
+                    estado = 2;
+                    //Si la cantidad terminada ingresada es igual a la cantidad que en total se deben realizar.
+                } else if (rs.getInt(2) + cantidad == rs.getInt(1)) {
+                    cantidadAntigua = rs.getInt(2);
+                    estado = 3;
+                    //Si la cantidad terminada ingresada es mayor a la cantidad que en total se deben realizar.
+                } else {
+                    cantidadAntigua = rs.getInt(2);
+                    estado = 0;
+                }
             } else {
-                cantidadAntigua = rs.getInt(2);
-                estado = 0;
+                //estado terminado de los componentes del almacen.
+                estado = 3;
             }
+
             if (estado != 0) {
                 Qry = "CALL PA_PararTomaDeTiempoAlmacen(?,?,?,?)";
                 ps = con.prepareStatement(Qry);
                 ps.setInt(1, detalleproducto);
                 ps.setInt(2, proceso);
-                ps.setInt(3, cantidad+cantidadAntigua);
+                ps.setInt(3, cantidad + cantidadAntigua);
                 ps.setInt(4, estado);
-                rs = ps.executeQuery();
-                
+                res = !ps.execute();
+
             } else {
                 //Mensaje que la cantidad no es la optima para realizar el procedimiento.............................
-                
+
             }
             //Pendiente.........................................................
             //Cerrar conexiones
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error! " + e);
         }
-        return true;
+        return res;//Falta asignarle este tru a una variable
     }
 
     public void totalTiempoPorUnidad(int detalle, int negocio) {

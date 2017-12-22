@@ -1501,7 +1501,7 @@ public class proyecto extends javax.swing.JPanel {
 //Metodos-------------------------------------------------------------------->
 
     private void ejecucionOParada(int op) {
-        int seleccion = JOptionPane.showOptionDialog(null, (op == 1) ? "¿Seguro desea pner en ejecucion este numero de orden?" : "¿Seguro desea parar este numero de orden?",
+        int seleccion = JOptionPane.showOptionDialog(null, (op == 1) ? "¿Seguro desea poner en ejecucion este numero de orden?" : "¿Seguro desea parar este numero de orden?",
                 "seleccione...", JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
                 new Object[]{"SI", "NO"}, "SI");

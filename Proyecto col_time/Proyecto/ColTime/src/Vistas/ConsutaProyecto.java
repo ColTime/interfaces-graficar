@@ -746,7 +746,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
 
     //Este procedimiento va a permitir saber que proyectos se pueden modificar y cuales no
     private void validarEdiciones(proyecto obj) {
-
+        //Componentes del almacen
         for (int i = 0; i < TDetalle.getRowCount(); i++) {
             if (TDetalle.getValueAt(i, 1).toString().equals("FE") && TDetalle.getValueAt(i, 2).toString().equals("Conversor")) {
                 //Se valida el estado del Conversor de FE 
@@ -777,9 +777,18 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                                     obj.jCRuteoC.setEnabled(true);
                                 }
                             } else {
-                                if (TDetalle.getValueAt(i, 1).toString().equals("FE") && TDetalle.getValueAt(i, 2).toString().equals("PCB")) {
+                                if ((TDetalle.getValueAt(i, 1).toString().equals("FE") || TDetalle.getValueAt(i, 1).toString().equals("ALMACEN")) && (TDetalle.getValueAt(i, 2).toString().equals("PCB") || TDetalle.getValueAt(i, 2).toString().equals("PCB GF") || TDetalle.getValueAt(i, 2).toString().equals("PCB COM"))) {
                                     //Se valida el estado del PCB de FE 
                                     estadoModificacion(i, obj.jCPCBTE, obj.jTPCBTE);
+                                    if (TDetalle.getValueAt(i, 4).toString().equals("Terminado") && TDetalle.getValueAt(i, 2).toString().equals("PCB COM")) {
+                                        //No se permitira modificar nada del conversor
+                                        check.setEnabled(false);
+                                        text.setEditable(false);
+                                        count++;
+                                    } else {
+                                        check.setEnabled(true);
+                                        text.setEditable(true);
+                                    }
                                     if (TDetalle.getValueAt(i, 4).toString().equals("Terminado") || TDetalle.getValueAt(i, 4).toString().equals("Ejecucion") || TDetalle.getValueAt(i, 4).toString().equals("Pausado")) {
                                         obj.cbMaterialPCBTE.setEnabled(false);
                                         obj.jCAntisolderP.setEnabled(false);

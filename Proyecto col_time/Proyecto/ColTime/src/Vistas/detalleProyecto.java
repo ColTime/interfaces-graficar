@@ -393,26 +393,32 @@ public class detalleProyecto extends javax.swing.JDialog {
                     //Finalizar la toma de tiempo de los procesos del almacen...
                     if (boton.getActionCommand().equals("1")) {
                         FE_TE_IN almacen = new FE_TE_IN();
-
+                        String idDetalle = "";
                         if (TDetalleProduccion.getValueAt(row, 0).toString().equals("GF")) {
                             //Se pide la cantidad que se recibio del gran formato.
                             String cantidad = JOptionPane.showInputDialog("Cantidades recibidas:");
                             if (cantidad != null) {
                                 if (!cantidad.equals("")) {
-                                    String idDetalle = String.valueOf(TDetalleProduccion.getValueAt(row, 11));
+                                    idDetalle = String.valueOf(TDetalleProduccion.getValueAt(row, 11));
                                     int proceso = 0;
                                     if (TDetalleProduccion.getValueAt(row, 0).toString().equals("GF")) {
                                         proceso = 22;
-                                    } else {
-                                        proceso = 23;
-                                    }                           
-                                    String orden[]= this.getTitle().split("-");                                                  //Cantidad//   
-                                    almacen.pararTiempoAlmacen(Integer.parseInt(orden[0].trim()),Integer.parseInt(idDetalle), Integer.parseInt(cantidad), detalle, proceso);//
-                                }else{
+                                    }
+                                    String orden[] = this.getTitle().split("-");                                                  //Cantidad//   
+                                    almacen.pararTiempoAlmacen(Integer.parseInt(orden[0].trim()), Integer.parseInt(idDetalle), Integer.parseInt(cantidad), detalle, proceso);//
+                                } else {
                                     //Mensaje de ingresar una cantidad.
                                 }
                             }
+                        } else {
+                            //Registro te tiempo de componentes
+                            if (JOptionPane.showOptionDialog(null, "¿Seguro desea terminar la toma de tiempos de los componentes.", "Seguridad", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null/*icono*/, botones, botones[0]) == 0) {
+                                idDetalle = String.valueOf(TDetalleProduccion.getValueAt(row, 11));
+                                String orden[] = this.getTitle().split("-");                                         //Cantidad//   
+                                almacen.pararTiempoAlmacen(Integer.parseInt(orden[0].trim()), Integer.parseInt(idDetalle), 0, detalle, 23);//
+                            }
                         }
+                        cargarTabla();
                     }
                     //------------------------------------------------------------
                 } else {
@@ -470,10 +476,10 @@ public class detalleProyecto extends javax.swing.JDialog {
                 TDetalleProduccion.getColumnModel().getColumn(5).setMaxWidth(0);
                 TDetalleProduccion.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
                 TDetalleProduccion.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
-                TDetalleProduccion.getColumnModel().getColumn(7).setMinWidth(0);
-                TDetalleProduccion.getColumnModel().getColumn(7).setMaxWidth(0);
-                TDetalleProduccion.getTableHeader().getColumnModel().getColumn(7).setMaxWidth(0);
-                TDetalleProduccion.getTableHeader().getColumnModel().getColumn(7).setMinWidth(0);
+                TDetalleProduccion.getColumnModel().getColumn(8).setMinWidth(0);
+                TDetalleProduccion.getColumnModel().getColumn(8).setMaxWidth(0);
+                TDetalleProduccion.getTableHeader().getColumnModel().getColumn(8).setMaxWidth(0);
+                TDetalleProduccion.getTableHeader().getColumnModel().getColumn(8).setMinWidth(0);
             }
         }
         if (negocio != 4) {

@@ -396,7 +396,9 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
             case 1:
                 //Vista de formato estandar
                 if (!Contenido.getComponent(0).getName().equals("FE")) {
-                    new CambiaPanel(Contenido, new ProduccionFE());
+                    ProduccionFE obj = new ProduccionFE();
+                    obj.setName("FE");
+                    new CambiaPanel(Contenido, obj);
                 }
                 reinicializarVariables();
                 negocio = 1;
@@ -422,8 +424,10 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                 break;
             case 4:
                 //Vista de almacen
-                if (!Contenido.getComponent(0).getName().equals("FE")) {
-                    new CambiaPanel(Contenido, new ProduccionFE());
+                if (!Contenido.getComponent(0).getName().equals("Almacen")) {
+                    ProduccionFE obj = new ProduccionFE();
+                    obj.setName("Almacen");
+                    new CambiaPanel(Contenido, obj);
                 }
                 reinicializarVariables();
                 negocio = 4;
@@ -484,6 +488,9 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                 break;
             case "IN":
                 cambiarPanel(3);
+                break;
+            case "Almacen":
+                cambiarPanel(4);
                 break;
         }
     }//GEN-LAST:event_jBActualizarActionPerformed

@@ -45,7 +45,7 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
     //Variables
     static int orden = 0, negocio = 0;
     static CachedRowSet crs = null;
-    int x = 0, y = 0, cantidad = 0;
+    int x = 0, y = 0, cantidad = 1;
     static boolean res = false;
     static int vistaC = 0;
 
@@ -58,10 +58,15 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
         btnPNC = new elaprendiz.gui.button.ButtonColoredAction();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(656, 263));
-        setMinimumSize(new java.awt.Dimension(656, 263));
+        setMaximumSize(new java.awt.Dimension(632, 276));
+        setMinimumSize(new java.awt.Dimension(632, 276));
+
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         jDetalle.setBackground(new java.awt.Color(255, 255, 255));
+        jDetalle.setMaximumSize(new java.awt.Dimension(632, 276));
+        jDetalle.setMinimumSize(new java.awt.Dimension(632, 276));
         jDetalle.setPreferredSize(new java.awt.Dimension(656, 263));
 
         btnPNC.setText("PNC");
@@ -76,14 +81,14 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
         jDetalleLayout.setHorizontalGroup(
             jDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDetalleLayout.createSequentialGroup()
-                .addContainerGap(542, Short.MAX_VALUE)
+                .addContainerGap(510, Short.MAX_VALUE)
                 .addComponent(btnPNC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(30, 30, 30))
         );
         jDetalleLayout.setVerticalGroup(
             jDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDetalleLayout.createSequentialGroup()
-                .addContainerGap(217, Short.MAX_VALUE)
+                .addContainerGap(228, Short.MAX_VALUE)
                 .addComponent(btnPNC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -94,13 +99,11 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 632, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
         );
 
         pack();
@@ -133,7 +136,7 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
             while (crs.next()) {
                 res = true;
                 JButton detalle = new JButton(crs.getString(2));
-                detalle.setBounds(x, y, 110, 100);
+                detalle.setBounds(x, y, 126, 100);
                 detalle.addActionListener(this);
                 //Icono del boton
                 ImageIcon icono = null;
@@ -173,7 +176,7 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
                     x = 0;
                     jDetalle.setPreferredSize(new Dimension(633, jDetalle.getHeight() + x));
                 } else {
-                    x += 111;
+                    x += 127;
                 }
                 cantidad += 1;
             }
