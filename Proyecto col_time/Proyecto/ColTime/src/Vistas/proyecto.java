@@ -507,7 +507,7 @@ public class proyecto extends javax.swing.JPanel {
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(128, 128, 131));
         jLabel14.setText("Fecha de entrega GF");
-        jPDetalles1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 170, -1, -1));
+        jPDetalles1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 170, -1, -1));
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(128, 128, 131));
@@ -578,7 +578,7 @@ public class proyecto extends javax.swing.JPanel {
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
-        jPDetalles1.add(jDFechaEntregaFE, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 140, -1));
+        jPDetalles1.add(jDFechaEntregaFE, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 140, -1));
 
         jDFechaEntregaEN.setToolTipText("");
         jDFechaEntregaEN.setDateFormatString("dd/MM/yyyy");
@@ -590,7 +590,7 @@ public class proyecto extends javax.swing.JPanel {
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
-        jPDetalles1.add(jDFechaEntregaEN, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 130, -1));
+        jPDetalles1.add(jDFechaEntregaEN, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 130, 20));
 
         jDFechaEntregaGF.setToolTipText("");
         jDFechaEntregaGF.setDateFormatString("dd/MM/yyyy");
@@ -602,7 +602,7 @@ public class proyecto extends javax.swing.JPanel {
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
-        jPDetalles1.add(jDFechaEntregaGF, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, 130, -1));
+        jPDetalles1.add(jDFechaEntregaGF, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 190, 130, -1));
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(128, 128, 131));
@@ -611,13 +611,13 @@ public class proyecto extends javax.swing.JPanel {
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(128, 128, 131));
-        jLabel25.setText("Fecha de entrega FE");
-        jPDetalles1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
+        jLabel25.setText("Fecha de entrega FE Circuito");
+        jPDetalles1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, -1));
 
         jLabel26.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(128, 128, 131));
         jLabel26.setText("Fecha de entrega COM Circuito");
-        jPDetalles1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, -1, -1));
+        jPDetalles1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, -1, -1));
 
         jRPCBCOM.setText("COM");
         jPDetalles1.add(jRPCBCOM, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 90, -1, 30));
@@ -632,12 +632,12 @@ public class proyecto extends javax.swing.JPanel {
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
-        jPDetalles1.add(jDFechaEntregaGF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 190, 130, -1));
+        jPDetalles1.add(jDFechaEntregaGF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 190, 130, -1));
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(128, 128, 131));
         jLabel27.setText("Fecha de entrega GF");
-        jPDetalles1.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 170, -1, -1));
+        jPDetalles1.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 170, -1, -1));
 
         jLIDCircuitoGF.setText("0");
         jPDetalles1.add(jLIDCircuitoGF, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, 10, -1));
@@ -1511,11 +1511,18 @@ public class proyecto extends javax.swing.JPanel {
                     //Mensaje de cambio de estado todo un exito.
                     new rojerusan.RSNotifyAnimated("Listo!", "El estado del proyecto fue cambiado exitosamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
                     limpiarCampos();
+                    limpiarID();
                     cambiarEstadoFalso();
                     cambiarEstadoBotones();
                 }
             } else {
                 new rojerusan.RSNotifyAnimated("Alerta!", "No se puede cambiar el estado del proyecto porque esta en ejecución.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
+            }
+        } else {
+            if (op == 1) {//No esta parada
+                jRParada.setSelected(true);
+            }else{//esta parada
+                jREjecucion.setSelected(true);
             }
         }
     }
@@ -1580,6 +1587,7 @@ public class proyecto extends javax.swing.JPanel {
 
     private void generarQR() {
         try {
+            int cont = 0;
             //Validar o crear carpeta
             File folder = new File("ImágenesQR");
             if (!folder.exists()) {
@@ -1617,33 +1625,37 @@ public class proyecto extends javax.swing.JPanel {
             doc.add(new Paragraph("Generado: " + fecha));
             while (crs.next()) {
                 //Creo la cadena de texto que contendra el QR
-                QRCode cod = new QRCode();
-                String texto = jTNorden.getText() + ';' + crs.getInt(1) + ';' + crs.getInt(3);
-                cod.setData(texto);
-                cod.setDataMode(QRCode.MODE_BYTE);
+                if (crs.getInt(3) != 4) {
+                    QRCode cod = new QRCode();
+                    //Numero de orden         //Detalle             //Negocio 
+                    String texto = jTNorden.getText() + ';' + crs.getInt(1) + ';' + crs.getInt(3);
+                    cod.setData(texto);
+                    cod.setDataMode(QRCode.MODE_BYTE);
 
-                cod.setUOM(udm);
-                cod.setLeftMargin(mi);
-                cod.setResolution(resol);
-                cod.setRightMargin(md);
-                cod.setTopMargin(ms);
-                cod.setBottomMargin(min);
-                cod.setRotate(rot);
-                cod.setModuleSize(tam);
-                cod.renderBarcode(ruta + "\\ImágenesQR\\" + texto + ".png");
+                    cod.setUOM(udm);
+                    cod.setLeftMargin(mi);
+                    cod.setResolution(resol);
+                    cod.setRightMargin(md);
+                    cod.setTopMargin(ms);
+                    cod.setBottomMargin(min);
+                    cod.setRotate(rot);
+                    cod.setModuleSize(tam);
+                    cod.renderBarcode(ruta + "\\ImágenesQR\\" + texto + ".png");
 
-                Image imagenQR = Image.getInstance(ruta + "\\ImágenesQR\\" + texto + ".png");
-                imagenQR.setWidthPercentage(90);
-                imagenQR.setAlignment(Image.ALIGN_CENTER);
-                //Personalizar cell
-                PdfPCell celda = new PdfPCell();
-                celda.setBorder(Rectangle.NO_BORDER);
-                celda.addElement(tipoProyecto(crs.getInt(2), crs.getInt(3)));
-                celda.addElement(imagenQR);
-                tabla.addCell(celda);
+                    Image imagenQR = Image.getInstance(ruta + "\\ImágenesQR\\" + texto + ".png");
+                    imagenQR.setWidthPercentage(90);
+                    imagenQR.setAlignment(Image.ALIGN_CENTER);
+                    //Personalizar cell
+                    PdfPCell celda = new PdfPCell();
+                    celda.setBorder(Rectangle.NO_BORDER);
+                    celda.addElement(tipoProyecto(crs.getInt(2), crs.getInt(3)));
+                    celda.addElement(imagenQR);
+                    tabla.addCell(celda);
 
 //                File QRdelet = new File(ruta + "\\ImágenesQR\\" + texto + ".png");
 //                QRdelet.delete();
+                    cont++;
+                }
             }
             crs.close();
             header.setBorder(Rectangle.NO_BORDER);
@@ -1652,8 +1664,13 @@ public class proyecto extends javax.swing.JPanel {
             tabla.addCell(header);
             doc.add(tabla);
             doc.close();
+            if (cont == 0) {
+                File PDF = new File(ruta + "\\PDF\\" + jTNorden.getText() + ".pdf");
+                PDF.delete();
+            } else {
+                new rojerusan.RSNotifyAnimated("¡Listo!", "Los codigos QR de la orden N°" + jTNorden.getText() + " fueron generados exitosamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+            }
 //            Thread.sleep(7000);
-            new rojerusan.RSNotifyAnimated("¡Listo!", "Los codigos QR de la orden N°" + jTNorden.getText() + " fueron generados exitosamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error! " + e);
         }
@@ -1900,7 +1917,7 @@ public class proyecto extends javax.swing.JPanel {
         jDFechaEntregaFE.setEnabled(false);
         jDFechaEntregaEN.setEnabled(false);
         jDFechaEntregaGF.setEnabled(false);
-
+        jRPCBCOM.setEnabled(false);
     }
 
     private void cambiarEstadoBotones() {
@@ -1949,9 +1966,12 @@ public class proyecto extends javax.swing.JPanel {
         cbNegocio.setEnabled(true);
         cbTipo.setEnabled(true);
         jTIntegracion.setEnabled(true);
+        jRPCBCOM.setEnabled(true);
         jPInformacion.setBackground(new Color(255, 255, 255));
         jPDetalles1.setBackground(new Color(255, 255, 255));
         jPDetalles.setBackground(new Color(255, 255, 255));
+        jREjecucion.setEnabled(false);
+        jRParada.setEnabled(false);
     }
 
     private void NumeroDeOrden() {
@@ -2066,6 +2086,10 @@ public class proyecto extends javax.swing.JPanel {
         //Falta validar que antes de eliminar un su proyecto si se puede eliminar o no
         if (cbNegocio.getSelectedItem().equals("FE")) {
             //Se registra el detalle del proyecto con negocio "FE"
+            if (!jLIDCircuitoGF.getText().equals("0") && cbMaterialCircuito.getSelectedIndex() != 3) {
+                //Se eliminara el fran formato y se registrara la otra forma de circuito.
+
+            }
             if (jCCircuito.isSelected()) {
                 //Registrar PCB de FE------------------------------------------>
                 if (jLIDCircuito.getText().equals("0")) {
@@ -2205,11 +2229,21 @@ public class proyecto extends javax.swing.JPanel {
         } else if (cbNegocio.getSelectedItem().equals("FE/EN")) {
             //Se registra el detalle del proyecto cuando el negocio es "FE/IN"
             //Registro de componentes Circuito COM
-            if (jCCircuito.isSelected() && jCIntegracion.isSelected()) {
-                componentes = 1;
+            if (jCCircuito.isSelected() && jCIntegracion.isSelected() && jLIDCircuitoCOM.getText().equals("0")) {
                 res = subRegistrarModificarProyecto(obj, "", "ALMACEN", "Circuito COM", numeroOrden, "", op, Integer.parseInt(jLIDCircuitoCOM.getText()));
             } else {
+                //Validar que se pueda eliminar.
+
+            }
+            //Registro de componentes PCB COM
+            if (jCPCBTE.isSelected() && jRPCBCOM.isSelected() && jLIDPCBCOM.getText().equals("0")) {
+                res = subRegistrarModificarProyecto(obj, "", "ALMACEN", "PCB COM", numeroOrden, "", op, Integer.parseInt(jLIDCircuitoCOM.getText()));
+            } else {
                 //Validar si los componenetes estan registrados, y si estan registrados eliminarlos.
+
+            }
+            if (!jLIDCircuitoGF.getText().equals("0") && cbMaterialCircuito.getSelectedIndex() != 3) {
+                //Se eliminara el fran formato y se registrara la otra forma de circuito.
 
             }
             //Registro de componentes
@@ -2232,11 +2266,11 @@ public class proyecto extends javax.swing.JPanel {
                     op1 = op;
                     op = 1;
                 }
-                if (cbMaterialCircuito.getSelectedItem().toString().equals("GF")) {//Pendiente!!!! registrar los componenetes
-                    componentes = 1;//Componentes del circuito GF
-                } else {
-                    componentes = 0;
-                }
+//                if (cbMaterialCircuito.getSelectedItem().toString().equals("GF")) {//Pendiente!!!! registrar los componenetes
+//                    componentes = 1;//Componentes del circuito GF
+//                } else {
+//                    componentes = 0;
+//                }
 
                 res = subRegistrarModificarProyecto(obj, jTIntegracion.getText(), "IN", "Circuito", numeroOrden, "", op, Integer.parseInt(jLIDIntegracion.getText()));
                 if (jLIDIntegracion.getText().equals("0")) {
@@ -2260,19 +2294,21 @@ public class proyecto extends javax.swing.JPanel {
         } else if (cbNegocio.getSelectedItem().equals("FE/TE/EN")) {
             //Se registra el detalle del proyecto cuando el negocio es "FE/TE/IN"
             //Registro de componentes Circuito COM
-            if (jCCircuito.isSelected() && jCIntegracion.isSelected()) {
-
+            if (jCCircuito.isSelected() && jCIntegracion.isSelected() && jLIDCircuitoCOM.getText().equals("0")) {
                 res = subRegistrarModificarProyecto(obj, "", "ALMACEN", "Circuito COM", numeroOrden, "", op, Integer.parseInt(jLIDCircuitoCOM.getText()));
+            } else {
+                //Validar que se pueda eliminar.
+
+            }
+            //Registro de componentes PCB COM
+            if (jCPCBTE.isSelected() && jRPCBCOM.isSelected() && jLIDPCBCOM.getText().equals("0")) {
+                res = subRegistrarModificarProyecto(obj, "", "ALMACEN", "PCB COM", numeroOrden, "", op, Integer.parseInt(jLIDCircuitoCOM.getText()));
             } else {
                 //Validar si los componenetes estan registrados, y si estan registrados eliminarlos.
 
             }
-            //Registro de componentes PCB COM
-            if (jCPCBTE.isSelected() && jRPCBCOM.isSelected()) {
-
-                res = subRegistrarModificarProyecto(obj, "", "ALMACEN", "PCB COM", numeroOrden, "", op, Integer.parseInt(jLIDCircuitoCOM.getText()));
-            } else {
-                //Validar si los componenetes estan registrados, y si estan registrados eliminarlos.
+            if (!jLIDCircuitoGF.getText().equals("0") && cbMaterialCircuito.getSelectedIndex() != 3) {
+                //Se eliminara el fran formato y se registrara la otra forma de circuito.
 
             }
             if (jCConversor.isSelected()) {

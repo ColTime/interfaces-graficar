@@ -389,36 +389,45 @@ public class detalleProyecto extends javax.swing.JDialog {
             if (value instanceof JButton) {
                 JButton boton;
                 boton = (JButton) value;
-                if (boton.getText().equals("Tiempo")) {
+                if (boton.getText().equals("Tiempo") && !TDetalleProduccion.getValueAt(row, 6).toString().equals("Pausado")) {
                     //Finalizar la toma de tiempo de los procesos del almacen...
                     if (boton.getActionCommand().equals("1")) {
                         FE_TE_IN almacen = new FE_TE_IN();
                         String idDetalle = "";
+                        //<Gran formato>
                         if (TDetalleProduccion.getValueAt(row, 0).toString().equals("GF")) {
                             //Se pide la cantidad que se recibio del gran formato.
                             String cantidad = JOptionPane.showInputDialog("Cantidades recibidas:");
-                            if (cantidad != null) {
-                                if (!cantidad.equals("")) {
+                            if (cantidad != null) {//Presiona el botono "NO"
+                                if (!cantidad.equals("") && Integer.parseInt(cantidad) >= 1) {//Validar la cantidad cuendo presiona el boton "SI"
                                     idDetalle = String.valueOf(TDetalleProduccion.getValueAt(row, 11));
                                     int proceso = 0;
                                     if (TDetalleProduccion.getValueAt(row, 0).toString().equals("GF")) {
                                         proceso = 22;
                                     }
                                     String orden[] = this.getTitle().split("-");                                                  //Cantidad//   
-                                    almacen.pararTiempoAlmacen(Integer.parseInt(orden[0].trim()), Integer.parseInt(idDetalle), Integer.parseInt(cantidad), detalle, proceso);//
+                                    if (almacen.pararTiempoAlmacen(Integer.parseInt(orden[0].trim()), Integer.parseInt(idDetalle), Integer.parseInt(cantidad), detalle, proceso)) {
+                                        //Mensaje de confirmación.
+                                        new rojerusan.RSNotifyAnimated("¡Listo!", "Mensaje", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+                                        cargarTabla();
+                                    }
                                 } else {
-                                    //Mensaje de ingresar una cantidad.
+                                    //Mensaje de ingresar una cantidad valida.
+                                    new rojerusan.RSNotifyAnimated("¡Alerta!", "Por favor ingrese una cantidad validad.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
                                 }
                             }
                         } else {
+                            //<Componentes>
                             //Registro te tiempo de componentes
                             if (JOptionPane.showOptionDialog(null, "¿Seguro desea terminar la toma de tiempos de los componentes.", "Seguridad", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null/*icono*/, botones, botones[0]) == 0) {
                                 idDetalle = String.valueOf(TDetalleProduccion.getValueAt(row, 11));
                                 String orden[] = this.getTitle().split("-");                                         //Cantidad//   
                                 almacen.pararTiempoAlmacen(Integer.parseInt(orden[0].trim()), Integer.parseInt(idDetalle), 0, detalle, 23);//
+                                //Mensaje de confirmación de la terminación de la toma de tiempo
+                                new rojerusan.RSNotifyAnimated("¡Listo!", "Mensaje___.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+                                cargarTabla();
                             }
                         }
-                        cargarTabla();
                     }
                     //------------------------------------------------------------
                 } else {
@@ -476,10 +485,10 @@ public class detalleProyecto extends javax.swing.JDialog {
                 TDetalleProduccion.getColumnModel().getColumn(5).setMaxWidth(0);
                 TDetalleProduccion.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
                 TDetalleProduccion.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
-                TDetalleProduccion.getColumnModel().getColumn(8).setMinWidth(0);
-                TDetalleProduccion.getColumnModel().getColumn(8).setMaxWidth(0);
-                TDetalleProduccion.getTableHeader().getColumnModel().getColumn(8).setMaxWidth(0);
-                TDetalleProduccion.getTableHeader().getColumnModel().getColumn(8).setMinWidth(0);
+//                TDetalleProduccion.getColumnModel().getColumn(8).setMinWidth(0);
+//                TDetalleProduccion.getColumnModel().getColumn(8).setMaxWidth(0);
+//                TDetalleProduccion.getTableHeader().getColumnModel().getColumn(8).setMaxWidth(0);
+//                TDetalleProduccion.getTableHeader().getColumnModel().getColumn(8).setMinWidth(0);
             }
         }
         if (negocio != 4) {

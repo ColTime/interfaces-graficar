@@ -32,7 +32,22 @@ public class ProyectoM {
             conexion.establecerConexion();
             con = conexion.getConexion();
             //Query------------------------------------------------------------>
-            String Qry = "CALL PA_EjecucionoParada(?,?)";
+            String Qry = "";
+            if (op == 1) {
+                Qry = "CALL PA_DetallesEnEjecucion(?,?)";
+                ps = con.prepareStatement(Qry);
+                ps.setInt(1, orden);
+                ps.setInt(2, 2);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    //Activas detalles del almacen...  
+                    Qry = "CALL PA_IniciarTomaTiempoDetalleAlmacen(?)";
+                    ps = con.prepareStatement(Qry);
+                    ps.setInt(1, rs.getInt(1));
+                    ps.execute();
+                }
+            }
+            Qry = "CALL PA_EjecucionoParada(?,?)";
             ps = con.prepareStatement(Qry);
             ps.setInt(1, orden);
             ps.setInt(2, op);
@@ -53,7 +68,42 @@ public class ProyectoM {
             conexion.establecerConexion();
             con = conexion.getConexion();
             //Query------------------------------------------------------------>
-            String Qry = "SELECT FU_EstadoDeProyecto(?)";
+            //PA_DetallesEnEjecucion
+            String Qry = "CALL PA_DetallesEnEjecucion(?,?)";
+            ps = con.prepareStatement(Qry);
+            ps.setInt(1, orden);
+            ps.setInt(2, 4);
+            rs = ps.executeQuery();
+            res = true;
+            int cont = 0;
+            int v[] = new int[4];
+            while (rs.next()) {
+                if (rs.getInt(2) == 4) {
+                    res = true;
+                    v[cont] = rs.getInt(1);
+                    cont++;
+                } else {
+                    res = false;
+                    break;
+                }
+            }
+            if (res) {
+                //Se cambia el estado de los detalles de almacen a paunsados.
+                for (int i = 0; i < v.length; i++) {
+                    if (v[i] != 0) {
+                        Qry = "CALL PA_PararTomaDeTiempoAlmacen(?,?,?,?)";
+                        ps = con.prepareStatement(Qry);
+                        ps.setInt(1, v[i]);//Detalle
+                        ps.setInt(2, 0);//Proceso
+                        ps.setInt(3, 0);//Cantidad
+                        ps.setInt(4, 2);//Estado pausado
+                        ps.execute();
+                    } else {
+                        break;
+                    }
+                }
+            }
+            Qry = "SELECT FU_EstadoDeProyecto(?)";
             ps = con.prepareStatement(Qry);
             ps.setInt(1, orden);
             rs = ps.executeQuery();

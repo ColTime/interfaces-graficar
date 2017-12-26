@@ -236,7 +236,7 @@
                           <Component id="jLFecha" min="-2" pref="187" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jLabel7" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLCantidadE1" alignment="0" min="-2" pref="165" max="-2" attributes="0"/>
+                              <Component id="jLCantidadA" alignment="0" min="-2" pref="165" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -262,7 +262,7 @@
                           <Group type="102" attributes="0">
                               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                              <Component id="jLCantidadE1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLCantidadA" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
@@ -364,7 +364,7 @@
                 <Property name="text" type="java.lang.String" value="Proyectos de Almacen:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLCantidadE1">
+            <Component class="javax.swing.JLabel" name="jLCantidadA">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="18" style="1"/>

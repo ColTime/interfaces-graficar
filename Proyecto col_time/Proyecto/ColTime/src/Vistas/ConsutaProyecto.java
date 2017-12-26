@@ -781,13 +781,9 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                                     //Se valida el estado del PCB de FE 
                                     estadoModificacion(i, obj.jCPCBTE, obj.jTPCBTE);
                                     if (TDetalle.getValueAt(i, 4).toString().equals("Terminado") && TDetalle.getValueAt(i, 2).toString().equals("PCB COM")) {
-                                        //No se permitira modificar nada del conversor
-                                        check.setEnabled(false);
-                                        text.setEditable(false);
-                                        count++;
+                                        obj.jRPCBCOM.setEnabled(false);
                                     } else {
-                                        check.setEnabled(true);
-                                        text.setEditable(true);
+                                        obj.jRPCBCOM.setEnabled(true);
                                     }
                                     if (TDetalle.getValueAt(i, 4).toString().equals("Terminado") || TDetalle.getValueAt(i, 4).toString().equals("Ejecucion") || TDetalle.getValueAt(i, 4).toString().equals("Pausado")) {
                                         obj.cbMaterialPCBTE.setEnabled(false);

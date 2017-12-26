@@ -39,7 +39,7 @@ public class Inicio extends javax.swing.JPanel {
         jLCantidadE = new javax.swing.JLabel();
         jLCantidadP = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLCantidadE1 = new javax.swing.JLabel();
+        jLCantidadA = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(219, 219, 219));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
@@ -50,7 +50,7 @@ public class Inicio extends javax.swing.JPanel {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(128, 128, 131)));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Inicio", 0, 0, new java.awt.Font("Tahoma", 1, 18), new java.awt.Color(128, 128, 131))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Inicio", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18), new java.awt.Color(128, 128, 131))); // NOI18N
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -140,9 +140,9 @@ public class Inicio extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("Proyectos de Almacen:");
 
-        jLCantidadE1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLCantidadE1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLCantidadE1.setText("0");
+        jLCantidadA.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLCantidadA.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLCantidadA.setText("0");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -173,7 +173,7 @@ public class Inicio extends javax.swing.JPanel {
                     .addComponent(jLFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLCantidadE1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLCantidadA, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -193,7 +193,7 @@ public class Inicio extends javax.swing.JPanel {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(8, 8, 8)
-                        .addComponent(jLCantidadE1))
+                        .addComponent(jLCantidadA))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(8, 8, 8)
@@ -337,7 +337,7 @@ public class Inicio extends javax.swing.JPanel {
 
     private void fechaYdatosProduccion() {
         try {
-                Proyecto obj = new Proyecto();
+            Proyecto obj = new Proyecto();
             crs = obj.fechaYdatosProduccion();
             //Hora y formato estandar
             cantidadArea(crs);
@@ -358,15 +358,18 @@ public class Inicio extends javax.swing.JPanel {
                     jLCantidadT.setText(crsf.getString(2));
                 } else if (crsf.getString(4).equals("3")) {
                     jLCantidadE.setText(crsf.getString(2));
+                } else {
+                    jLCantidadA.setText(crsf.getString(2));
                 }
             }
         } catch (Exception e) {
+            //Mensaje de error del proceso...
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLCantidadA;
     private javax.swing.JLabel jLCantidadE;
-    private javax.swing.JLabel jLCantidadE1;
     private javax.swing.JLabel jLCantidadF;
     private javax.swing.JLabel jLCantidadP;
     private javax.swing.JLabel jLCantidadT;

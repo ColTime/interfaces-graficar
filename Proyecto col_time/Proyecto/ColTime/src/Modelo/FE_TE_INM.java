@@ -141,7 +141,7 @@ public class FE_TE_INM {
                 if (rs.getInt(2) + cantidad < rs.getInt(1)) {
                     //Si la afirmación es correcta se ejecutara el procedimiento para parar el tiempo.
                     cantidadAntigua = rs.getInt(2);
-                    estado = 2;
+                    estado = 4;
                     //Si la cantidad terminada ingresada es igual a la cantidad que en total se deben realizar.
                 } else if (rs.getInt(2) + cantidad == rs.getInt(1)) {
                     cantidadAntigua = rs.getInt(2);

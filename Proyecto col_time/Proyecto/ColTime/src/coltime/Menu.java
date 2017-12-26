@@ -127,12 +127,10 @@ public class Menu extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        TIngresadosHoy2 = new javax.swing.JLabel();
-        TTerminadosHoy2 = new javax.swing.JLabel();
-        TEjecucion2 = new javax.swing.JLabel();
+        AIngresadosHoy = new javax.swing.JLabel();
+        ATerminadosHoy = new javax.swing.JLabel();
+        Ajecucion = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
-        TPorIniciar2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -411,7 +409,7 @@ public class Menu extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 670, Short.MAX_VALUE)
+            .addGap(0, 620, Short.MAX_VALUE)
         );
 
         jPContenido.add(jPanel2);
@@ -717,19 +715,14 @@ public class Menu extends javax.swing.JFrame {
 
         jLabel21.setText("---------------------------------");
 
-        TIngresadosHoy2.setText("0");
+        AIngresadosHoy.setText("0");
 
-        TTerminadosHoy2.setText("0");
+        ATerminadosHoy.setText("0");
 
-        TEjecucion2.setText("0");
+        Ajecucion.setText("0");
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel25.setText("P. Ejecucion:");
-
-        jLabel30.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel30.setText("P. por iniciar:");
-
-        TPorIniciar2.setText("0");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -742,24 +735,19 @@ public class Menu extends javax.swing.JFrame {
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addComponent(jLabel19)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TIngresadosHoy2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(AIngresadosHoy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel21)
                             .addGroup(jPanel10Layout.createSequentialGroup()
                                 .addComponent(jLabel20)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(TTerminadosHoy2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(ATerminadosHoy, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel10Layout.createSequentialGroup()
                                 .addComponent(jLabel25)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(TEjecucion2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel30)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(TPorIniciar2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(Ajecucion, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
@@ -772,19 +760,15 @@ public class Menu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
-                    .addComponent(TIngresadosHoy2))
+                    .addComponent(AIngresadosHoy))
                 .addGap(10, 10, 10)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
-                    .addComponent(TTerminadosHoy2))
+                    .addComponent(ATerminadosHoy))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25)
-                    .addComponent(TEjecucion2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel30)
-                    .addComponent(TPorIniciar2))
+                    .addComponent(Ajecucion))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -810,7 +794,7 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -838,7 +822,7 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPContenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPContenido, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addContainerGap())))
         );
 
@@ -1317,8 +1301,10 @@ public class Menu extends javax.swing.JFrame {
                                 FIngresadosHoy.setText(crs.getString(1));
                             } else if (crs.getInt(2) == 2) {//<Teclados>
                                 TIngresadosHoy.setText(crs.getString(1));
-                            } else {//<Ensamble>
+                            } else if(crs.getInt(2) == 3) {//<Ensamble>
                                 EIngresadosHoy.setText(crs.getString(1));
+                            }else{
+                                AIngresadosHoy.setText(crs.getString(1));
                             }
                         }
                         crs.close();
@@ -1330,6 +1316,7 @@ public class Menu extends javax.swing.JFrame {
                         FTerminadosHoy.setText(crs.getString(1));
                         TTerminadosHoy.setText(crs.getString(2));
                         ETerminadosHoy.setText(crs.getString(3));
+                        ATerminadosHoy.setText(crs.getString(4));
                         crs.close();
                         //Proyectos terminados hoy por area------------------------>
                         break;
@@ -1340,8 +1327,10 @@ public class Menu extends javax.swing.JFrame {
                                 FEjecucion.setText(crs.getString(1));
                             } else if (crs.getInt(2) == 2) {//<Teclados>
                                 TEjecucion.setText(crs.getString(1));
-                            } else {//<Ensamble>
+                            } else if(crs.getInt(2) == 3) {//<Ensamble>
                                 EEjecucion.setText(crs.getString(1));
+                            }else{
+                                Ajecucion.setText(crs.getString(1));
                             }
                         }
                         crs.close();
@@ -1354,7 +1343,7 @@ public class Menu extends javax.swing.JFrame {
                                 FPorIniciar.setText(crs.getString(1));
                             } else if (crs.getInt(2) == 2) {//<Teclados>
                                 TPorIniciar.setText(crs.getString(1));
-                            } else {//<Ensamble>
+                            } else if(crs.getInt(2) == 3) {//<Ensamble>
                                 EPorIniciar.setText(crs.getString(1));
                             }
                         }
@@ -1446,6 +1435,9 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JLabel AIngresadosHoy;
+    public javax.swing.JLabel ATerminadosHoy;
+    public javax.swing.JLabel Ajecucion;
     public javax.swing.JLabel EEjecucion;
     public javax.swing.JLabel EIngresadosHoy;
     public javax.swing.JLabel EPorIniciar;
@@ -1455,17 +1447,9 @@ public class Menu extends javax.swing.JFrame {
     public javax.swing.JLabel FPorIniciar;
     public javax.swing.JLabel FTerminadosHoy;
     public javax.swing.JLabel TEjecucion;
-    public javax.swing.JLabel TEjecucion1;
-    public javax.swing.JLabel TEjecucion2;
     public javax.swing.JLabel TIngresadosHoy;
-    public javax.swing.JLabel TIngresadosHoy1;
-    public javax.swing.JLabel TIngresadosHoy2;
     public javax.swing.JLabel TPorIniciar;
-    public javax.swing.JLabel TPorIniciar1;
-    public javax.swing.JLabel TPorIniciar2;
     public javax.swing.JLabel TTerminadosHoy;
-    public javax.swing.JLabel TTerminadosHoy1;
-    public javax.swing.JLabel TTerminadosHoy2;
     public javax.swing.JButton agregar;
     public rsbuttom.RSButtonMetro btn1;
     public rsbuttom.RSButtonMetro btn2;
@@ -1482,25 +1466,18 @@ public class Menu extends javax.swing.JFrame {
     public javax.swing.JLabel jLabel11;
     public javax.swing.JLabel jLabel12;
     public javax.swing.JLabel jLabel13;
-    public javax.swing.JLabel jLabel14;
-    public javax.swing.JLabel jLabel15;
-    public javax.swing.JLabel jLabel16;
-    public javax.swing.JLabel jLabel17;
     public javax.swing.JLabel jLabel18;
     public javax.swing.JLabel jLabel19;
     public javax.swing.JLabel jLabel2;
     public javax.swing.JLabel jLabel20;
     public javax.swing.JLabel jLabel21;
     public javax.swing.JLabel jLabel22;
-    public javax.swing.JLabel jLabel23;
     public javax.swing.JLabel jLabel24;
     public javax.swing.JLabel jLabel25;
     public javax.swing.JLabel jLabel26;
     public javax.swing.JLabel jLabel27;
-    public javax.swing.JLabel jLabel28;
     public javax.swing.JLabel jLabel29;
     public javax.swing.JLabel jLabel3;
-    public javax.swing.JLabel jLabel30;
     public javax.swing.JLabel jLabel4;
     public javax.swing.JLabel jLabel5;
     public javax.swing.JLabel jLabel6;
@@ -1525,7 +1502,6 @@ public class Menu extends javax.swing.JFrame {
     public javax.swing.JPanel jPanel6;
     public javax.swing.JPanel jPanel7;
     public javax.swing.JPanel jPanel8;
-    public javax.swing.JPanel jPanel9;
     public javax.swing.JPopupMenu jPopupMenu1;
     public javax.swing.JTextField jTLector;
     public rojerusan.RSFotoCircle rSUsuario;

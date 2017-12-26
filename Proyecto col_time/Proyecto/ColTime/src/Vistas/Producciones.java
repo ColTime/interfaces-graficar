@@ -128,7 +128,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                 btn1ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 57));
+        jPanel1.add(btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 149, 55));
 
         btn2.setBackground(new java.awt.Color(63, 179, 255));
         btn2.setText("Teclados");
@@ -147,7 +147,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                 btn2ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 140, 57));
+        jPanel1.add(btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 1, 140, 55));
 
         btn3.setBackground(new java.awt.Color(63, 179, 255));
         btn3.setText("Ensamble");
@@ -166,7 +166,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                 btn3ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 131, 57));
+        jPanel1.add(btn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 1, 131, 55));
 
         btn4.setBackground(new java.awt.Color(63, 179, 255));
         btn4.setText("Almacen");
@@ -185,7 +185,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                 btn4ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 0, -1, 57));
+        jPanel1.add(btn4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 1, -1, 55));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
@@ -350,8 +350,8 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
