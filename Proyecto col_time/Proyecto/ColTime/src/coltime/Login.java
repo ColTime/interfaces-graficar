@@ -9,6 +9,7 @@ import Atxy2k.CustomTextField.RestrictedTextField;
 import Vistas.RecuperarContraseña;
 import com.sun.awt.AWTUtilities;
 import com.sun.glass.events.KeyEvent;
+import java.awt.KeyboardFocusManager;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import rojerusan.RSNotifyAnimated;
@@ -35,7 +36,7 @@ public class Login extends javax.swing.JFrame {
     }
     private int posX = 0;
     private int posY = 0;
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -209,6 +210,7 @@ public class Login extends javax.swing.JFrame {
             }
         } else {
             new rojerusan.RSNotifyAnimated("Alerta!!", "debes llenar los dos campos que son obligatorios.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
+            jTUser.requestFocus();
         }
     }//GEN-LAST:event_btnIniciarActionPerformed
 
@@ -229,11 +231,21 @@ public class Login extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             btnIniciar.doClick();
         }
+        jTUser.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS,
+                java.util.Collections.EMPTY_SET);
+        if (evt.getKeyCode() == KeyEvent.VK_TAB) {
+            jTPassword.requestFocus();
+        }
     }//GEN-LAST:event_jTUserKeyPressed
 
     private void jTPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTPasswordKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             btnIniciar.doClick();
+        }
+        jTPassword.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS,
+                java.util.Collections.EMPTY_SET);
+        if (evt.getKeyCode() == KeyEvent.VK_TAB) {
+            jTUser.requestFocus();
         }
     }//GEN-LAST:event_jTPasswordKeyPressed
 
@@ -271,7 +283,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
     }
-    
+
     @Override
     protected void finalize() throws Throwable {
         super.finalize(); //To change body of generated methods, choose Tools | Templates.
@@ -299,7 +311,7 @@ public class Login extends javax.swing.JFrame {
         Controlador.Usuario obj = new Controlador.Usuario();
         return obj.iniciarSesion(user, pasw);
     }
-    
+
     public void sesion(int sec, String doc) {
         Controlador.Usuario obj = new Controlador.Usuario();
         obj.sesion(sec, doc);

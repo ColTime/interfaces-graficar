@@ -162,7 +162,7 @@ public class Usuarios1 extends javax.swing.JPanel {
         cbTipo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         cBCargo.setForeground(new java.awt.Color(102, 102, 102));
-        cBCargo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "Gestor Comercial", "Encargado de FE y TE", "Encargado de EN", "Administrador", " " }));
+        cBCargo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "Gestor Comercial", "Encargado de FE y TE", "Encargado de EN", "Administrador", "Almacen" }));
         cBCargo.setColorDeBorde(new java.awt.Color(204, 204, 204));
         cBCargo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 

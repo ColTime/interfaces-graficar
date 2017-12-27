@@ -222,6 +222,12 @@ public class DetalleProyectoM {
             case "Troquel":
                 tipo = 4;
                 break;
+            case "Circuito GF":
+                tipo = 8;
+                break;
+            case "PCB GF":
+                tipo = 9;
+                break;
         }
         return tipo;
     }
@@ -292,25 +298,31 @@ public class DetalleProyectoM {
             ps.setInt(2, id);
             ps.setString(3, cantidad);
             ps.setString(4, material);
-            if (negocio.equals("FE")) {
-                ps.setInt(5, 1);
-            } else if (negocio.equals("TE")) {
-                ps.setInt(5, 2);
-            } else if (negocio.equals("IN")) {
-                ps.setInt(5, 3);
+            if (material.equals("GF")) {
+                ps.setInt(5, 4);
+            } else {
+                if (negocio.equals("FE")) {
+                    ps.setInt(5, 1);
+                } else if (negocio.equals("TE")) {
+                    ps.setInt(5, 2);
+                } else if (negocio.equals("IN")) {
+                    ps.setInt(5, 3);
+                }
             }
             ps.setString(6, ubicacion);
             rs = ps.executeQuery();
             rs.next();
             res = rs.getBoolean(1);
-            if (negocio.equals("FE") && (tipoNegocio.equals("Circuito") || tipoNegocio.equals("PCB"))) {
-                //Modificar procesos de formato estandar
-                Qry = "CALL PA_ModificarDetalleFormatoEstandar(?,?,?)";
-                ps = con.prepareStatement(Qry);
-                ps.setInt(1, Integer.parseInt(numerOrden));
-                ps.setInt(2, id);
-                ps.setString(3, material.trim());
-                rs = ps.executeQuery();
+            if (!material.equals("GF")) {
+                if (negocio.equals("FE") && (tipoNegocio.equals("Circuito") || tipoNegocio.equals("PCB"))) {
+                    //Modificar procesos de formato estandar
+                    Qry = "CALL PA_ModificarDetalleFormatoEstandar(?,?,?)";
+                    ps = con.prepareStatement(Qry);
+                    ps.setInt(1, Integer.parseInt(numerOrden));
+                    ps.setInt(2, id);
+                    ps.setString(3, material.trim());
+                    rs = ps.executeQuery();
+                }
             }
             conexion.cerrar(rs);
             conexion.destruir();
@@ -452,6 +464,8 @@ public class DetalleProyectoM {
                 n = 2;
             } else if (negocio.equals("IN")) {
                 n = 3;
+            } else if (negocio.equals("ALMACEN")) {
+                n = 4;
             }
             if (accion == 2) {
                 //Eliminar un solo detalle de PNC
@@ -516,7 +530,11 @@ public class DetalleProyectoM {
                     break;
                 case "IN":
                     Qry = "SELECT FU_EliminarDetalleProyectoEnsamble(?,?)";
-                    n = 2;
+                    n = 3;
+                    break;
+                case "ALMACEN":
+                    Qry = "SELECT FU_EliminarDetalleProyectoAlmacen(?,?)";
+                    n = 4;
                     break;
             }
             ps = con.prepareStatement(Qry);

@@ -260,6 +260,7 @@ public class Inicio extends javax.swing.JPanel {
                 null, // null para icono defecto
                 new Object[]{"Cantidad proyectos área", "Procesos FE", "Procesos TE", "Procesos EN"},
                 "Cantidad proyectos área");
+
         if (busqueda != null) {
             if (busqueda.equals("Cantidad proyectos área")) {
                 if (busqueda.equals("Cantidad proyectos área")) {
@@ -286,27 +287,27 @@ public class Inicio extends javax.swing.JPanel {
                             tipo = 3;
                         }
                     }
-                }
-                //Fecha de inicio y fin
-                String s = "";
-                SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
+                    //Fecha de inicio y fin
+                    String s = "";
+                    SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
 
-                JDateChooser ini = new JDateChooser();
-                ini.setName("Inicio");
-                String message = "Fecha de inicio:\n";
-                Object[] params = {message, ini};
-                JOptionPane.showConfirmDialog(null, params, "Fechas", JOptionPane.PLAIN_MESSAGE);
+                    JDateChooser ini = new JDateChooser();
+                    ini.setName("Inicio");
+                    String message = "Fecha de inicio:\n";
+                    Object[] params = {message, ini};
+                    JOptionPane.showConfirmDialog(null, params, "Fechas", JOptionPane.PLAIN_MESSAGE);
 
-                if (ini.getDate() != null) {
-                    inicio = formato.format(ini.getDate());//fecha de inicio
+                    if (ini.getDate() != null) {
+                        inicio = formato.format(ini.getDate());//fecha de inicio
 
-                    JDateChooser fin = new JDateChooser();
-                    fin.setName("Fin");
-                    message = "Fecha de inicio:\n";
-                    Object[] params1 = {message, fin};
-                    JOptionPane.showConfirmDialog(null, params1, "Fechas", JOptionPane.PLAIN_MESSAGE);
-                    if (fin.getDate() != null) {
-                        finali = formato.format(fin.getDate());//Fecha de finalizacion
+                        JDateChooser fin = new JDateChooser();
+                        fin.setName("Fin");
+                        message = "Fecha de inicio:\n";
+                        Object[] params1 = {message, fin};
+                        JOptionPane.showConfirmDialog(null, params1, "Fechas", JOptionPane.PLAIN_MESSAGE);
+                        if (fin.getDate() != null) {
+                            finali = formato.format(fin.getDate());//Fecha de finalizacion
+                        }
                     }
                 }
             } else {

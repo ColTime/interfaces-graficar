@@ -593,6 +593,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                             obj.jREjecucion.setSelected(false);
                             obj.jREjecucion.setEnabled(true);
                             obj.jRParada.setSelected(true);
+                            obj.btnUpdate.setEnabled(false);
                         }
 
                         obj.btnDelete.setEnabled(true);
@@ -779,13 +780,12 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                             } else {
                                 if ((TDetalle.getValueAt(i, 1).toString().equals("FE") || TDetalle.getValueAt(i, 1).toString().equals("ALMACEN")) && (TDetalle.getValueAt(i, 2).toString().equals("PCB") || TDetalle.getValueAt(i, 2).toString().equals("PCB GF") || TDetalle.getValueAt(i, 2).toString().equals("PCB COM"))) {
                                     //Se valida el estado del PCB de FE 
-                                    estadoModificacion(i, obj.jCPCBTE, obj.jTPCBTE);
                                     if (TDetalle.getValueAt(i, 4).toString().equals("Terminado") && TDetalle.getValueAt(i, 2).toString().equals("PCB COM")) {
                                         obj.jRPCBCOM.setEnabled(false);
                                     } else {
                                         obj.jRPCBCOM.setEnabled(true);
                                     }
-                                    if (TDetalle.getValueAt(i, 4).toString().equals("Terminado") || TDetalle.getValueAt(i, 4).toString().equals("Ejecucion") || TDetalle.getValueAt(i, 4).toString().equals("Pausado")) {
+                                    if (TDetalle.getValueAt(i, 4).toString().equals("Terminado") || TDetalle.getValueAt(i, 4).toString().equals("Pausado")) {
                                         obj.cbMaterialPCBTE.setEnabled(false);
                                         obj.jCAntisolderP.setEnabled(false);
                                         obj.jCRuteoP.setEnabled(false);

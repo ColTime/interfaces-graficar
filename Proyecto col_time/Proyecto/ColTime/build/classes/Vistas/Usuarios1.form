@@ -420,7 +420,7 @@
                         <StringItem index="2" value="Encargado de FE y TE"/>
                         <StringItem index="3" value="Encargado de EN"/>
                         <StringItem index="4" value="Administrador"/>
-                        <StringItem index="5" value=" "/>
+                        <StringItem index="5" value="Almacen"/>
                       </StringArray>
                     </Property>
                     <Property name="colorDeBorde" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">

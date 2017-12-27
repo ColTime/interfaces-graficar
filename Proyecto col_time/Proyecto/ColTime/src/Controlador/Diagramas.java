@@ -37,6 +37,7 @@ public class Diagramas {
                 ds.addValue(v[0], "Proyectos", "Formato estandar");
                 ds.addValue(v[1], "Proyectos", "Teclados");
                 ds.addValue(v[2], "Proyectos", "Ensamble");
+                ds.addValue(v[3], "Proyectos", "Almacen");
 
                 if (tipoGrafica == 1) {
                     //Diagrama de barras vertical
@@ -62,6 +63,7 @@ public class Diagramas {
                 porciones.setValue("FE: " + v[0], v[0]);//Formato estandar
                 porciones.setValue("TE: " + v[1], v[1]);//Teclado
                 porciones.setValue("EN: " + v[2], v[2]);//Ensamble
+                porciones.setValue("AL: " + v[3], v[3]);//Almacen
                 //Torta
                 jf = ChartFactory.createPieChart3D("Produccion", porciones, true, true, Locale.ITALY);
                 jf.setBackgroundPaint(Color.WHITE);
@@ -525,20 +527,20 @@ public class Diagramas {
     }
 
     public int[] cantidadArea(CachedRowSet crs) {
-        int v[] = {0, 0, 0};
+        int v[] = {0, 0, 0, 0};
         try {
             while (crs.next()) {
-                //Formato estandar
-                if (crs.getInt(2) == 1) {
+                if (crs.getInt(2) == 1) {//Formato estandar
                     v[0] = crs.getInt(1);
                 }
-                //Teclados
-                if (crs.getInt(2) == 2) {
+                if (crs.getInt(2) == 2) {//Teclados
                     v[1] = crs.getInt(1);
                 }
-                //Ensamble
-                if (crs.getInt(2) == 3) {
+                if (crs.getInt(2) == 3) {//Ensamble
                     v[2] = crs.getInt(1);
+                }
+                if (crs.getInt(2) == 4) {//Almacen
+                    v[3] = crs.getInt(1);
                 }
             }
         } catch (Exception e) {

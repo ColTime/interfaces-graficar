@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-12-2017 a las 22:02:28
+-- Tiempo de generación: 27-12-2017 a las 21:54:46
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -551,7 +551,7 @@ ELSE
 SELECT p.nombre_proceso,Date_Format(f.fecha_inicio,'%d-%M-%Y'),Date_format(f.fecha_fin,'%d-%M-%Y'),f.cantidad_terminada,f.tiempo_total_por_proceso,f.tiempo_por_unidad,e.nombre,TIME_FORMAT(f.hora_ejecucion,'%r'),TIME_FORMAT(TIMEDIFF(CURRENT_TIME,f.hora_ejecucion),'%H:%i:%s'),TIME_FORMAT(f.hora_terminacion,'%r'),TIME_FORMAT(TIMEDIFF(f.hora_terminacion,f.hora_ejecucion),'%H:%i:%s'),f.idDetalle_ensamble FROM detalle_ensamble f JOIN procesos p on f.Procesos_idproceso=p.idproceso JOIN estado e on f.estado_idestado=e.idestado where f.detalle_proyecto_idDetalle_proyecto=detalle ORDER BY f.Procesos_idproceso ASC;
    ELSE
     IF negocio=4 THEN
-    SELECT p.nombre_proceso,Date_Format(al.fecha_inicio,'%d-%M-%Y'),Date_format(al.fecha_fin,'%d-%M-%Y'),al.cantidad_recibida,al.tiempo_total_proceso,al.tiempo_total_proceso,e.nombre,TIME_FORMAT(al.hora_registro,'%r'),datediff(CURRENT_DATE,al.fecha_inicio) as dias,TIME_FORMAT(al.hora_llegada,'%r'),TIME_FORMAT(TIMEDIFF(al.hora_llegada,al.hora_registro),'%H:%i:%s'),al.idalmacen FROM almacen al JOIN procesos p on al.Procesos_idproceso=p.idproceso JOIN estado e on al.estado_idestado=e.idestado where al.detalle_proyecto_idDetalle_proyecto=detalle ORDER BY al.Procesos_idproceso ASC;
+    SELECT p.nombre_proceso,Date_Format(al.fecha_inicio,'%d-%M-%Y'),Date_format(al.fecha_fin,'%d-%M-%Y'),al.cantidad_recibida,al.tiempo_total_proceso,al.tiempo_total_proceso,e.nombre,TIME_FORMAT(al.hora_registro,'%r'),datediff(CURRENT_DATE,al.fecha_inicio) as dias,TIME_FORMAT(al.hora_llegada,'%r'),datediff(al.fecha_fin,al.fecha_inicio),al.idalmacen FROM almacen al JOIN procesos p on al.Procesos_idproceso=p.idproceso JOIN estado e on al.estado_idestado=e.idestado where al.detalle_proyecto_idDetalle_proyecto=detalle ORDER BY al.Procesos_idproceso ASC;
     END IF;
    END IF;
   END IF;
@@ -1665,6 +1665,19 @@ RETURN 0;
 END IF;
 END$$
 
+CREATE DEFINER=`root`@`localhost` FUNCTION `FU_EliminarDetalleProyectoAlmacen` (`iddetalle` INT, `orden` INT) RETURNS INT(11) NO SQL
+BEGIN
+
+DELETE FROM almacen WHERE detalle_proyecto_idDetalle_proyecto=iddetalle;
+
+DELETE FROM `detalle_proyecto` WHERE idDetalle_proyecto=iddetalle;
+ 
+CALL PA_CambiarEstadoDeProyecto(orden);
+
+RETURN 1;
+
+END$$
+
 CREATE DEFINER=`root`@`localhost` FUNCTION `FU_EliminarDetalleProyectoEnsamble` (`iddetalle` INT, `orden` INT) RETURNS TINYINT(1) NO SQL
 BEGIN
 DECLARE cantidad int;
@@ -1674,7 +1687,8 @@ IF cantidad=0 THEN
 DELETE FROM `detalle_ensamble` WHERE detalle_proyecto_idDetalle_proyecto=iddetalle;
 
 DELETE FROM `detalle_proyecto` WHERE idDetalle_proyecto=iddetalle;
-#CALL PA_CambiarEstadoDeProductos(3,iddetalle);RETURN 1;
+#CALL PA_CambiarEstadoDeProductos(3,iddetalle);CALL PA_CambiarEstadoDeProyecto(orden);
+RETURN 1;
 ELSE
 RETURN 0;
 END IF;
@@ -1689,7 +1703,8 @@ IF cantidad=0 THEN
 DELETE FROM `detalle_formato_estandar` WHERE detalle_proyecto_idDetalle_proyecto=iddetalle;
 
 DELETE FROM `detalle_proyecto` WHERE idDetalle_proyecto=iddetalle;
-#CALL PA_CambiarEstadoDeProductos(1,iddetalle);RETURN 1;
+#CALL PA_CambiarEstadoDeProductos(1,iddetalle);CALL PA_CambiarEstadoDeProyecto(orden);
+RETURN 1;
 ELSE
 RETURN 0;
 END IF;
@@ -1704,7 +1719,8 @@ IF cantidad=0 THEN
 DELETE FROM `detalle_teclados` WHERE detalle_proyecto_idDetalle_proyecto=iddetalle;
 
 DELETE FROM `detalle_proyecto` WHERE idDetalle_proyecto=iddetalle;
-#CALL PA_CambiarEstadoDeProductos(2,iddetalle);RETURN 1;
+#CALL PA_CambiarEstadoDeProductos(2,iddetalle);CALL PA_CambiarEstadoDeProyecto(orden);
+RETURN 1;
 ELSE
 RETURN 0;
 END IF;
@@ -1757,7 +1773,7 @@ END$$
 CREATE DEFINER=`root`@`localhost` FUNCTION `FU_ModificarDetalleProyecto` (`orden` INT, `idDetalle` INT, `cantidad` VARCHAR(6), `material` VARCHAR(6), `negocio` INT, `ubicacion` VARCHAR(25)) RETURNS TINYINT(1) NO SQL
 BEGIN
 UPDATE detalle_proyecto dp SET dp.canitadad_total=cantidad,dp.material=material,dp.ubicacion=ubicacion WHERE idDetalle_proyecto=idDetalle and proyecto_numero_orden=orden;
-CALL PA_CambiarEstadoDeProductos(negocio,idDetalle);
+#Valida el cambio de estado...CALL PA_CambiarEstadoDeProductos(negocio,idDetalle);
 RETURN 1;
 END$$
 
@@ -2003,9 +2019,8 @@ INSERT INTO `almacen` (`idalmacen`, `tiempo_total_proceso`, `cantidad_recibida`,
 (24, '0', '10', '2017-12-21', '2017-12-21', 389, 22, 3, '11:15:44', '15:18:19'),
 (25, '0', '0', '2017-12-22', NULL, 391, 23, 4, '08:04:18', NULL),
 (26, '0', '0', '2017-12-22', NULL, 400, 23, 4, '08:21:49', NULL),
-(27, '0', '0', '2017-12-22', NULL, 401, 23, 4, '08:21:50', NULL),
-(28, '0', '0', '2017-12-22', NULL, 406, 22, 4, '08:21:52', NULL),
-(29, '0', '0', '2017-12-22', NULL, 407, 22, 4, '08:21:53', NULL),
+(27, '5', '0', '2017-12-22', '2017-12-27', 401, 23, 3, '08:21:50', '07:58:28'),
+(29, '5', '10', '2017-12-22', '2017-12-27', 407, 22, 3, '08:21:53', '07:47:41'),
 (30, '4', '0', '2017-12-22', '2017-12-26', 410, 23, 3, '08:28:51', '13:04:14'),
 (31, '4', '0', '2017-12-22', '2017-12-26', 411, 23, 3, '08:28:51', '13:02:18'),
 (32, '4', '10', '2017-12-22', '2017-12-26', 416, 22, 3, '08:28:54', '13:02:06'),
@@ -2014,8 +2029,12 @@ INSERT INTO `almacen` (`idalmacen`, `tiempo_total_proceso`, `cantidad_recibida`,
 (35, '0', '0', '2017-12-22', NULL, 421, 22, 4, '13:36:28', NULL),
 (36, '0', '0', '2017-12-26', NULL, 424, 22, 4, '13:59:25', NULL),
 (37, '0', '0', '2017-12-26', NULL, 425, 22, 4, '14:26:36', NULL),
-(38, '0', '0', '2017-12-26', NULL, 426, 22, 4, '14:51:08', NULL),
-(39, '0', '0', '2017-12-26', NULL, 427, 22, 4, '14:56:24', NULL);
+(39, '1', '17', '2017-12-26', '2017-12-27', 427, 22, 3, '14:56:24', '07:42:09'),
+(46, '0', '0', '2017-12-27', NULL, 440, 22, 4, '14:14:23', NULL),
+(47, '0', '0', '2017-12-27', NULL, 445, 23, 4, '14:56:21', NULL),
+(48, '0', '0', '2017-12-27', NULL, 446, 23, 4, '14:56:22', NULL),
+(50, '0', '0', '2017-12-27', NULL, 456, 22, 4, '14:57:56', NULL),
+(51, '0', '0', '2017-12-27', NULL, 457, 22, 4, '15:17:35', NULL);
 
 -- --------------------------------------------------------
 
@@ -2118,7 +2137,14 @@ INSERT INTO `detalle_ensamble` (`idDetalle_ensamble`, `tiempo_por_unidad`, `tiem
 (235, '00:00', '00:00', '0', NULL, NULL, 419, 18, 1, NULL, NULL),
 (236, '00:00', '00:00', '0', NULL, NULL, 419, 19, 1, NULL, NULL),
 (237, '00:00', '00:00', '0', NULL, NULL, 419, 20, 1, NULL, NULL),
-(238, '00:00', '00:00', '0', NULL, NULL, 419, 21, 1, NULL, NULL);
+(238, '00:00', '00:00', '0', NULL, NULL, 419, 21, 1, NULL, NULL),
+(239, '00:00', '00:00', '0', NULL, NULL, 454, 15, 1, NULL, NULL),
+(240, '00:00', '00:00', '0', NULL, NULL, 454, 16, 1, NULL, NULL),
+(241, '00:00', '00:00', '0', NULL, NULL, 454, 17, 1, NULL, NULL),
+(242, '00:00', '00:00', '0', NULL, NULL, 454, 18, 1, NULL, NULL),
+(243, '00:00', '00:00', '0', NULL, NULL, 454, 19, 1, NULL, NULL),
+(244, '00:00', '00:00', '0', NULL, NULL, 454, 20, 1, NULL, NULL),
+(245, '00:00', '00:00', '0', NULL, NULL, 454, 21, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2221,7 +2247,34 @@ INSERT INTO `detalle_formato_estandar` (`idDetalle_formato_estandar`, `tiempo_po
 (1549, '00:00', '00:00', '0', NULL, NULL, 413, 4, 1, NULL, NULL),
 (1550, '00:00', '00:00', '0', NULL, NULL, 414, 1, 1, NULL, NULL),
 (1551, '00:00', '00:00', '0', NULL, NULL, 414, 4, 1, NULL, NULL),
-(1552, '00:00', '00:00', '0', NULL, NULL, 415, 1, 1, NULL, NULL);
+(1552, '00:00', '00:00', '0', NULL, NULL, 415, 1, 1, NULL, NULL),
+(1596, '00:00', '00:00', '0', NULL, NULL, 444, 1, 1, NULL, NULL),
+(1597, '00:00', '00:00', '0', NULL, NULL, 444, 3, 1, NULL, NULL),
+(1598, '00:00', '00:00', '0', NULL, NULL, 444, 4, 1, NULL, NULL),
+(1599, '00:00', '00:00', '0', NULL, NULL, 444, 5, 1, NULL, NULL),
+(1600, '00:00', '00:00', '0', NULL, NULL, 444, 7, 1, NULL, NULL),
+(1601, '00:00', '00:00', '0', NULL, NULL, 444, 8, 1, NULL, NULL),
+(1602, '00:00', '00:00', '0', NULL, NULL, 444, 10, 1, NULL, NULL),
+(1603, '00:00', '00:00', '0', NULL, NULL, 447, 1, 1, NULL, NULL),
+(1604, '00:00', '00:00', '0', NULL, NULL, 447, 3, 1, NULL, NULL),
+(1605, '00:00', '00:00', '0', NULL, NULL, 447, 4, 1, NULL, NULL),
+(1606, '00:00', '00:00', '0', NULL, NULL, 447, 5, 1, NULL, NULL),
+(1607, '00:00', '00:00', '0', NULL, NULL, 447, 7, 1, NULL, NULL),
+(1608, '00:00', '00:00', '0', NULL, NULL, 447, 8, 1, NULL, NULL),
+(1609, '00:00', '00:00', '0', NULL, NULL, 447, 9, 1, NULL, NULL),
+(1610, '00:00', '00:00', '0', NULL, NULL, 447, 10, 1, NULL, NULL),
+(1611, '00:00', '00:00', '0', NULL, NULL, 448, 1, 1, NULL, NULL),
+(1612, '00:00', '00:00', '0', NULL, NULL, 448, 4, 1, NULL, NULL),
+(1613, '00:00', '00:00', '0', NULL, NULL, 449, 1, 1, NULL, NULL),
+(1614, '00:00', '00:00', '0', NULL, NULL, 449, 4, 1, NULL, NULL),
+(1615, '00:00', '00:00', '0', NULL, NULL, 450, 1, 1, NULL, NULL),
+(1616, '00:00', '00:00', '0', NULL, NULL, 452, 1, 1, NULL, NULL),
+(1617, '00:00', '00:00', '0', NULL, NULL, 452, 3, 1, NULL, NULL),
+(1618, '00:00', '00:00', '0', NULL, NULL, 452, 4, 1, NULL, NULL),
+(1619, '00:00', '00:00', '0', NULL, NULL, 452, 5, 1, NULL, NULL),
+(1620, '00:00', '00:00', '0', NULL, NULL, 452, 7, 1, NULL, NULL),
+(1621, '00:00', '00:00', '0', NULL, NULL, 452, 8, 1, NULL, NULL),
+(1622, '00:00', '00:00', '0', NULL, NULL, 452, 10, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2252,14 +2305,14 @@ CREATE TABLE `detalle_proyecto` (
 --
 
 INSERT INTO `detalle_proyecto` (`idDetalle_proyecto`, `tipo_negocio_idtipo_negocio`, `canitadad_total`, `material`, `proyecto_numero_orden`, `negocio_idnegocio`, `estado_idestado`, `PNC`, `ubicacion`, `pro_porIniciar`, `pro_Ejecucion`, `pro_Pausado`, `pro_Terminado`, `tiempo_total`, `Total_timepo_Unidad`) VALUES
-(369, 10, '0', NULL, 29034, 4, 1, 0, NULL, 0, 0, 0, 0, NULL, NULL),
+(369, 10, '', NULL, 29034, 4, 1, 0, NULL, 0, 0, 0, 0, NULL, NULL),
 (370, 1, '10', 'TH', 29034, 1, 1, 0, NULL, 8, 0, 0, 0, NULL, NULL),
 (371, 1, '10', NULL, 29034, 3, 1, 0, NULL, 7, 0, 0, 0, NULL, NULL),
-(372, 10, '0', NULL, 29035, 4, 4, 0, NULL, 0, 1, 0, 0, NULL, NULL),
+(372, 10, '', NULL, 29035, 4, 4, 0, NULL, 0, 1, 0, 0, NULL, NULL),
 (373, 1, '15', 'TH', 29035, 1, 1, 0, NULL, 8, 0, 0, 0, NULL, NULL),
 (374, 1, '12', NULL, 29035, 3, 1, 0, NULL, 7, 0, 0, 0, NULL, NULL),
 (375, 8, '10', 'GF', 29036, 4, 4, 0, NULL, 0, 1, 0, 0, NULL, NULL),
-(376, 10, '0', NULL, 29037, 4, 4, 0, NULL, 0, 1, 0, 0, NULL, NULL),
+(376, 10, '', NULL, 29037, 4, 4, 0, NULL, 0, 1, 0, 0, NULL, NULL),
 (377, 8, '12', 'GF', 29037, 4, 4, 0, NULL, 0, 1, 0, 0, NULL, NULL),
 (378, 1, '10', NULL, 29037, 3, 1, 0, NULL, 7, 0, 0, 0, NULL, NULL),
 (379, 11, '', NULL, 29038, 4, 4, 0, NULL, 0, 1, 0, 0, NULL, NULL),
@@ -2284,15 +2337,14 @@ INSERT INTO `detalle_proyecto` (`idDetalle_proyecto`, `tipo_negocio_idtipo_negoc
 (398, 5, '10', NULL, 29041, 2, 1, 0, NULL, 4, 0, 0, 0, NULL, NULL),
 (399, 1, '10', NULL, 29041, 3, 1, 0, NULL, 7, 0, 0, 0, NULL, NULL),
 (400, 10, '', NULL, 29042, 4, 4, 0, NULL, 0, 1, 0, 0, NULL, NULL),
-(401, 11, '', NULL, 29042, 4, 4, 0, NULL, 0, 1, 0, 0, NULL, NULL),
+(401, 11, '', NULL, 29042, 4, 3, 0, NULL, 0, 0, 0, 1, '5', NULL),
 (402, 2, '10', 'FV', 29042, 1, 1, 0, NULL, 8, 0, 0, 0, NULL, NULL),
 (403, 4, '1', 'FV', 29042, 1, 1, 0, NULL, 2, 0, 0, 0, NULL, NULL),
 (404, 3, '1', 'FV', 29042, 1, 1, 0, NULL, 2, 0, 0, 0, NULL, NULL),
-(405, 6, '1', NULL, 29042, 1, 1, 0, NULL, 1, 0, 0, 0, NULL, NULL),
-(406, 8, '10', 'GF', 29042, 4, 4, 0, NULL, 0, 1, 0, 0, NULL, NULL),
-(407, 9, '10', 'GF', 29042, 4, 4, 0, NULL, 0, 1, 0, 0, NULL, NULL),
-(408, 5, '10', NULL, 29042, 2, 1, 0, NULL, 4, 0, 0, 0, NULL, NULL),
-(409, 1, '10', NULL, 29042, 3, 1, 0, NULL, 7, 0, 0, 0, NULL, NULL),
+(405, 6, '1', '', 29042, 1, 1, 0, NULL, 1, 0, 0, 0, NULL, NULL),
+(407, 9, '10', 'GF', 29042, 4, 3, 0, NULL, 0, 0, 0, 1, '5', NULL),
+(408, 5, '10', '', 29042, 2, 1, 0, NULL, 4, 0, 0, 0, NULL, NULL),
+(409, 1, '10', '', 29042, 3, 1, 0, NULL, 7, 0, 0, 0, NULL, NULL),
 (410, 10, '', NULL, 29043, 4, 3, 0, NULL, 0, 0, 0, 1, '4', NULL),
 (411, 11, '', NULL, 29043, 4, 3, 0, NULL, 0, 0, 0, 1, '4', NULL),
 (412, 2, '10', 'FV', 29043, 1, 1, 0, NULL, 8, 0, 0, 0, NULL, NULL),
@@ -2307,8 +2359,20 @@ INSERT INTO `detalle_proyecto` (`idDetalle_proyecto`, `tipo_negocio_idtipo_negoc
 (421, 8, '10', 'GF', 29045, 4, 4, 0, NULL, 0, 1, 0, 0, NULL, NULL),
 (424, 8, '10', 'GF', 29047, 4, 4, 0, NULL, 0, 1, 0, 0, NULL, NULL),
 (425, 8, '10', 'GF', 29048, 4, 4, 0, NULL, 0, 1, 0, 0, NULL, NULL),
-(426, 8, '15', 'GF', 29049, 4, 4, 0, NULL, 0, 1, 0, 0, NULL, NULL),
-(427, 8, '17', 'GF', 29050, 4, 4, 0, NULL, 0, 1, 0, 0, NULL, NULL);
+(427, 8, '17', 'GF', 29050, 4, 3, 0, NULL, 0, 0, 0, 1, '1', NULL),
+(440, 8, '10', 'GF', 29049, 4, 4, 0, NULL, 0, 1, 0, 0, NULL, NULL),
+(444, 1, '10', 'FV', 29042, 1, 1, 0, NULL, 7, 0, 0, 0, NULL, NULL),
+(445, 10, '', NULL, 29051, 4, 4, 0, NULL, 0, 1, 0, 0, NULL, NULL),
+(446, 11, '', NULL, 29051, 4, 4, 0, NULL, 0, 1, 0, 0, NULL, NULL),
+(447, 2, '10', 'FV', 29051, 1, 1, 0, NULL, 8, 0, 0, 0, NULL, NULL),
+(448, 4, '10', 'FV', 29051, 1, 1, 0, NULL, 2, 0, 0, 0, NULL, NULL),
+(449, 3, '10', 'FV', 29051, 1, 1, 0, NULL, 2, 0, 0, 0, NULL, NULL),
+(450, 6, '1', '', 29051, 1, 1, 0, NULL, 1, 0, 0, 0, NULL, NULL),
+(452, 7, '15', 'FV', 29051, 1, 1, 0, NULL, 7, 0, 0, 0, NULL, NULL),
+(453, 5, '10', '', 29051, 2, 1, 0, NULL, 4, 0, 0, 0, NULL, NULL),
+(454, 1, '10', '', 29051, 3, 1, 0, NULL, 7, 0, 0, 0, NULL, NULL),
+(456, 8, '12', 'GF', 29051, 4, 4, 0, NULL, 0, 1, 0, 0, NULL, NULL),
+(457, 9, '20', 'GF', 29051, 4, 4, 0, NULL, 0, 1, 0, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2346,7 +2410,11 @@ INSERT INTO `detalle_teclados` (`idDetalle_teclados`, `tiempo_por_unidad`, `tiem
 (9, '00:00', '00:00', '0', NULL, NULL, 418, 11, 1, NULL, NULL),
 (10, '00:00', '00:00', '0', NULL, NULL, 418, 12, 1, NULL, NULL),
 (11, '00:00', '00:00', '0', NULL, NULL, 418, 13, 1, NULL, NULL),
-(12, '00:00', '00:00', '0', NULL, NULL, 418, 14, 1, NULL, NULL);
+(12, '00:00', '00:00', '0', NULL, NULL, 418, 14, 1, NULL, NULL),
+(13, '00:00', '00:00', '0', NULL, NULL, 453, 11, 1, NULL, NULL),
+(14, '00:00', '00:00', '0', NULL, NULL, 453, 12, 1, NULL, NULL),
+(15, '00:00', '00:00', '0', NULL, NULL, 453, 13, 1, NULL, NULL),
+(16, '00:00', '00:00', '0', NULL, NULL, 453, 14, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2490,8 +2558,9 @@ INSERT INTO `proyecto` (`numero_orden`, `usuario_numero_documento`, `nombre_clie
 (29046, '981130', ' juan david marulanda', 'prueba de registro de GF', 'Quick', 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, '2017-12-26 13:39:20', '2017-12-27', NULL, 0, 0, 1, 0, 0, 0, 1, NULL, NULL, NULL),
 (29047, '981130', ' juan david marulanda', 'preuba de registrar', 'Normal', 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, '2017-12-26 13:59:00', '2017-12-27', NULL, 0, 0, 4, 0, 0, 1, 1, NULL, NULL, NULL),
 (29048, '981130', ' juan david marulanda', 'prueba de registro de gran formato', 'Normal', 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, '2017-12-26 14:26:36', '2017-12-27', NULL, 0, 0, 4, 0, 0, 1, 1, NULL, NULL, NULL),
-(29049, '981130', 'juan david marulanda paniagua', 'prueba de generador de codigos QR', 'Quick', 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, '2017-12-26 14:50:59', '2017-12-27', NULL, 0, 0, 4, 0, 0, 1, 1, NULL, NULL, NULL),
-(29050, '981130', ' juan david marulanda paniagua', 'prueba de desarrollo del los codigos QR', 'Normal', 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, '2017-12-26 14:56:24', '2017-12-20', NULL, 0, 0, 4, 0, 0, 1, 1, NULL, NULL, NULL);
+(29049, '981130', 'juan david marulanda paniagua', 'prueba de generador de codigos QR', 'RQT', 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, '2017-12-26 14:50:59', '2017-12-27', NULL, 0, 0, 4, 0, 0, 1, 1, NULL, NULL, NULL),
+(29050, '981130', ' juan david marulanda paniagua', 'prueba de desarrollo del los codigos QR', 'Normal', 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, '2017-12-26 14:56:24', '2017-12-20', '2017-12-27 07:42:09', 0, 0, 3, 0, 0, 1, 1, NULL, NULL, NULL),
+(29051, '981130', ' juan david marulanda', 'prueba de registro de GF', 'Normal', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2017-12-27 14:56:21', '2017-12-29', NULL, 0, 0, 4, 0, 0, 1, 1, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2661,7 +2730,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `almacen`
 --
 ALTER TABLE `almacen`
-  MODIFY `idalmacen` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `idalmacen` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 --
 -- AUTO_INCREMENT de la tabla `cargo`
 --
@@ -2671,22 +2740,22 @@ ALTER TABLE `cargo`
 -- AUTO_INCREMENT de la tabla `detalle_ensamble`
 --
 ALTER TABLE `detalle_ensamble`
-  MODIFY `idDetalle_ensamble` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=239;
+  MODIFY `idDetalle_ensamble` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=246;
 --
 -- AUTO_INCREMENT de la tabla `detalle_formato_estandar`
 --
 ALTER TABLE `detalle_formato_estandar`
-  MODIFY `idDetalle_formato_estandar` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1553;
+  MODIFY `idDetalle_formato_estandar` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1630;
 --
 -- AUTO_INCREMENT de la tabla `detalle_proyecto`
 --
 ALTER TABLE `detalle_proyecto`
-  MODIFY `idDetalle_proyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=429;
+  MODIFY `idDetalle_proyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=458;
 --
 -- AUTO_INCREMENT de la tabla `detalle_teclados`
 --
 ALTER TABLE `detalle_teclados`
-  MODIFY `idDetalle_teclados` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idDetalle_teclados` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT de la tabla `estado`
 --
@@ -2706,7 +2775,7 @@ ALTER TABLE `procesos`
 -- AUTO_INCREMENT de la tabla `proyecto`
 --
 ALTER TABLE `proyecto`
-  MODIFY `numero_orden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29051;
+  MODIFY `numero_orden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29052;
 --
 -- AUTO_INCREMENT de la tabla `tipo_negocio`
 --

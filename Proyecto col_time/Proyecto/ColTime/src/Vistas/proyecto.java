@@ -1521,7 +1521,7 @@ public class proyecto extends javax.swing.JPanel {
         } else {
             if (op == 1) {//No esta parada
                 jRParada.setSelected(true);
-            }else{//esta parada
+            } else {//esta parada
                 jREjecucion.setSelected(true);
             }
         }
@@ -2056,6 +2056,9 @@ public class proyecto extends javax.swing.JPanel {
             //Eliminar el detalle del proyecto si ya no esta seleccionado
             subEliminardetalle(obj, Integer.parseInt(jLIDCircuito.getText()), Integer.parseInt(jTNorden.getText()), "FE", "Circuito");
         }
+        if (!jLIDCircuito.getText().equals("0") && cbMaterialCircuito.getSelectedIndex() == 3) {
+            subEliminardetalle(obj, Integer.parseInt(jLIDCircuito.getText()), Integer.parseInt(jTNorden.getText()), "FE", "Circuito");
+        }
         if (!jLIDTeclado.getText().equals("0") && jCTeclado.isSelected() == false) {
             subEliminardetalle(obj, Integer.parseInt(jLIDTeclado.getText()), Integer.parseInt(jTNorden.getText()), "TE", "Teclado");
         }
@@ -2077,6 +2080,14 @@ public class proyecto extends javax.swing.JPanel {
         if (!jLIDPCB.getText().equals("0") && jCPCBTE.isSelected() == false) {
             subEliminardetalle(obj, Integer.parseInt(jLIDPCB.getText()), Integer.parseInt(jTNorden.getText()), "FE", "PCB");
         }
+        if (!jLIDCircuitoGF.getText().equals("0") && cbMaterialCircuito.getSelectedIndex() != 3) {
+            //Se eliminara el gran formato y se registrara la otra forma de circuito.
+            subEliminardetalle(obj, Integer.parseInt(jLIDCircuitoGF.getText()), Integer.parseInt(jTNorden.getText()), "ALMACEN", "Circuito GF");
+        }
+        if (!jLIDPCBGF.getText().equals("0") && cbMaterialPCBTE.getSelectedIndex() != 3) {
+            //Se eliminara el gran formato y se registrara la otra forma de circuito.
+            subEliminardetalle(obj, Integer.parseInt(jLIDPCBGF.getText()), Integer.parseInt(jTNorden.getText()), "ALMACEN", "PCB GF");
+        }
     }
 
     private boolean RegistrarModificarDetalle(String numeroOrden, int op) {
@@ -2084,28 +2095,37 @@ public class proyecto extends javax.swing.JPanel {
         boolean res = false;
         int op1 = 0;
         //Falta validar que antes de eliminar un su proyecto si se puede eliminar o no
-        if (cbNegocio.getSelectedItem().equals("FE")) {
+        if (cbNegocio.getSelectedItem().equals("FE")) {///////////////////////////////////////////////////////////////////////////////////////////////////////////
             //Se registra el detalle del proyecto con negocio "FE"
-            if (!jLIDCircuitoGF.getText().equals("0") && cbMaterialCircuito.getSelectedIndex() != 3) {
-                //Se eliminara el fran formato y se registrara la otra forma de circuito.
-
-            }
             if (jCCircuito.isSelected()) {
-                //Registrar PCB de FE------------------------------------------>
-                if (jLIDCircuito.getText().equals("0")) {
-                    op1 = op;
-                    op = 1;
+                //Registrar Circuito de FE------------------------------------------>
+                if (cbMaterialCircuito.getSelectedIndex() == 3) {
+                    //Registro de circuito GF al almacen
+                    if (jLIDCircuitoGF.getText().equals("0")) {
+                        op1 = op;
+                        op = 1;
+                    }
+                    res = subRegistrarModificarProyecto(obj, jTCircuito.getText(), "FE", "Circuito", numeroOrden, cbMaterialCircuito.getSelectedItem().toString(), op, Integer.parseInt(jLIDCircuitoGF.getText()));
+                    if (jLIDCircuitoGF.getText().equals("0")) {
+                        op = op1;
+                    }
+                } else {
+                    //Refitro de Circuito FE a formato estandar
+                    if (jLIDCircuito.getText().equals("0")) {
+                        op1 = op;
+                        op = 1;
+                    }
+                    res = subRegistrarModificarProyecto(obj, jTCircuito.getText(), "FE", "Circuito", numeroOrden, cbMaterialCircuito.getSelectedItem().toString(), op, Integer.parseInt(jLIDCircuito.getText()));
+                    if (jLIDCircuito.getText().equals("0")) {
+                        op = op1;
+                    }
                 }
-                res = subRegistrarModificarProyecto(obj, jTCircuito.getText(), "FE", "Circuito", numeroOrden, cbMaterialCircuito.getSelectedItem().toString(), op, Integer.parseInt(jLIDCircuito.getText()));
-                if (jLIDCircuito.getText().equals("0")) {
-                    op = op1;
-                }
-                //Fin del registro del PCB FE
+                //Fin del registro del Circuito FE
             }
             //-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
             VerificarQueSeElimina(obj);
             //-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-        } else if (cbNegocio.getSelectedItem().equals("TE")) {
+        } else if (cbNegocio.getSelectedItem().equals("TE")) {////////////////////////////////////////////////////////////////////////////////////////////////////
             //Se registra el detalle del proyecto con negocio "TE"
             if (jCTeclado.isSelected()) {
                 //Registrar El teclado en TE------------------------------------------>
@@ -2122,7 +2142,7 @@ public class proyecto extends javax.swing.JPanel {
             //-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
             VerificarQueSeElimina(obj);
             //-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-        } else if (cbNegocio.getSelectedItem().equals("EN")) {
+        } else if (cbNegocio.getSelectedItem().equals("EN")) {///////////////////////////////////////////////////////////////////////////////////////////////////
             //Se registra el detalle del proyecto cuando el negocio es "IN"
             if (jCIntegracion.isSelected()) {
                 //Registrar la integracion en EN------------------------------------------>
@@ -2139,8 +2159,15 @@ public class proyecto extends javax.swing.JPanel {
             //-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
             VerificarQueSeElimina(obj);
             //-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-        } else if (cbNegocio.getSelectedItem().equals("FE/TE")) {
+        } else if (cbNegocio.getSelectedItem().equals("FE/TE")) {//////////////////////////////////////////////////////////////////////////////////////////////
             //Se registra el detalle del proyecto cuando el negocio es "FE/TE"
+            //Registro de componentes de la PCB del teclado.
+            if (jCPCBTE.isSelected() && jRPCBCOM.isSelected() && jLIDPCBCOM.getText().equals("0")) {
+                res = subRegistrarModificarProyecto(obj, "", "ALMACEN", "PCB COM", numeroOrden, "", op, Integer.parseInt(jLIDCircuitoCOM.getText()));
+            } else {
+                //Validar si los componenetes estan registrados, y si estan registrados eliminarlos.
+
+            }
             if (jCConversor.isSelected()) {
                 //Registrar Conversor------------------------------------------>
                 if (jLIDConversor.getText().equals("0")) {
@@ -2191,25 +2218,48 @@ public class proyecto extends javax.swing.JPanel {
             }
             if (jCCircuito.isSelected()) {
                 //Registrar PCB de FE------------------------------------------>
-                if (jLIDCircuito.getText().equals("0")) {
-                    op1 = op;
-                    op = 1;
-                }
-                res = subRegistrarModificarProyecto(obj, jTCircuito.getText(), "FE", "Circuito", numeroOrden, cbMaterialCircuito.getSelectedItem().toString(), op, Integer.parseInt(jLIDCircuito.getText()));
-                if (jLIDCircuito.getText().equals("0")) {
-                    op = op1;
+                if (cbMaterialCircuito.getSelectedIndex() == 3) {
+                    //Registro de circuito GF al almacen
+                    if (jLIDCircuitoGF.getText().equals("0")) {
+                        op1 = op;
+                        op = 1;
+                    }
+                    res = subRegistrarModificarProyecto(obj, jTCircuito.getText(), "FE", "Circuito", numeroOrden, cbMaterialCircuito.getSelectedItem().toString(), op, Integer.parseInt(jLIDCircuitoGF.getText()));
+                    if (jLIDCircuitoGF.getText().equals("0")) {
+                        op = op1;
+                    }
+                } else {
+                    if (jLIDCircuito.getText().equals("0")) {
+                        op1 = op;
+                        op = 1;
+                    }
+                    res = subRegistrarModificarProyecto(obj, jTCircuito.getText(), "FE", "Circuito", numeroOrden, cbMaterialCircuito.getSelectedItem().toString(), op, Integer.parseInt(jLIDCircuito.getText()));
+                    if (jLIDCircuito.getText().equals("0")) {
+                        op = op1;
+                    }
                 }
                 //Fin del registro del PCB FE
             }
             if (jCPCBTE.isSelected()) {
                 //Registrar PCB de TE------------------------------------------>
-                if (jLIDPCB.getText().equals("0")) {
-                    op1 = op;
-                    op = 1;
-                }
-                res = subRegistrarModificarProyecto(obj, jTPCBTE.getText(), "FE", "PCB", numeroOrden, cbMaterialPCBTE.getSelectedItem().toString(), op, Integer.parseInt(jLIDPCB.getText()));
-                if (jLIDPCB.getText().equals("0")) {
-                    op = op1;
+                if (cbMaterialPCBTE.getSelectedIndex() == 3) {
+                    if (jLIDPCBGF.getText().equals("0")) {
+                        op1 = op;
+                        op = 1;
+                    }
+                    res = subRegistrarModificarProyecto(obj, jTPCBTE.getText(), "FE", "PCB", numeroOrden, cbMaterialPCBTE.getSelectedItem().toString(), op, Integer.parseInt(jLIDPCBGF.getText()));
+                    if (jLIDPCBGF.getText().equals("0")) {
+                        op = op1;
+                    }
+                } else {
+                    if (jLIDPCB.getText().equals("0")) {
+                        op1 = op;
+                        op = 1;
+                    }
+                    res = subRegistrarModificarProyecto(obj, jTPCBTE.getText(), "FE", "PCB", numeroOrden, cbMaterialPCBTE.getSelectedItem().toString(), op, Integer.parseInt(jLIDPCB.getText()));
+                    if (jLIDPCB.getText().equals("0")) {
+                        op = op1;
+                    }
                 }
                 //Fin del registro del PCB TE
             }
@@ -2225,8 +2275,10 @@ public class proyecto extends javax.swing.JPanel {
                 }
                 //Fin del registro del Teclado
             }
+            //-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
             VerificarQueSeElimina(obj);
-        } else if (cbNegocio.getSelectedItem().equals("FE/EN")) {
+            //-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+        } else if (cbNegocio.getSelectedItem().equals("FE/EN")) {//////////////////////////////////////////////////////////////////////////////////////////
             //Se registra el detalle del proyecto cuando el negocio es "FE/IN"
             //Registro de componentes Circuito COM
             if (jCCircuito.isSelected() && jCIntegracion.isSelected() && jLIDCircuitoCOM.getText().equals("0")) {
@@ -2242,22 +2294,33 @@ public class proyecto extends javax.swing.JPanel {
                 //Validar si los componenetes estan registrados, y si estan registrados eliminarlos.
 
             }
-            if (!jLIDCircuitoGF.getText().equals("0") && cbMaterialCircuito.getSelectedIndex() != 3) {
-                //Se eliminara el fran formato y se registrara la otra forma de circuito.
-
-            }
             //Registro de componentes
             if (jCCircuito.isSelected()) {
-                //Registrar PCB de FE------------------------------------------>
-                if (jLIDCircuito.getText().equals("0")) {
-                    op1 = op;
-                    op = 1;
+                //Registrar Circuito de FE------------------------------------------>             
+                if (cbMaterialCircuito.getSelectedIndex() == 3) {
+                    //Registro de circuito GF al almacen
+                    if (jLIDCircuitoGF.getText().equals("0")) {
+                        op1 = op;
+                        op = 1;
+                    }
+                    res = subRegistrarModificarProyecto(obj, jTCircuito.getText(), "FE", "Circuito", numeroOrden, cbMaterialCircuito.getSelectedItem().toString(), op, Integer.parseInt(jLIDCircuitoGF.getText()));
+                    if (jLIDCircuitoGF.getText().equals("0")) {
+                        op = op1;
+                    }
+                    //Fine del registro de Circuito GF al almacen
+                } else {
+                    //Registro de circuito FE
+                    if (jLIDCircuito.getText().equals("0")) {
+                        op1 = op;
+                        op = 1;
+                    }
+                    res = subRegistrarModificarProyecto(obj, jTCircuito.getText(), "FE", "Circuito", numeroOrden, cbMaterialCircuito.getSelectedItem().toString(), op, Integer.parseInt(jLIDCircuito.getText()));
+                    if (jLIDCircuito.getText().equals("0")) {
+                        op = op1;
+                    }
+                    //Fin del registro
                 }
-                res = subRegistrarModificarProyecto(obj, jTCircuito.getText(), "FE", "Circuito", numeroOrden, cbMaterialCircuito.getSelectedItem().toString(), op, Integer.parseInt(jLIDCircuito.getText()));
-                if (jLIDCircuito.getText().equals("0")) {
-                    op = op1;
-                }
-                //Fin del registro del PCB FE
+                //Fin del registro del Circuito FE
             }
 
             if (jCIntegracion.isSelected()) {
@@ -2266,11 +2329,6 @@ public class proyecto extends javax.swing.JPanel {
                     op1 = op;
                     op = 1;
                 }
-//                if (cbMaterialCircuito.getSelectedItem().toString().equals("GF")) {//Pendiente!!!! registrar los componenetes
-//                    componentes = 1;//Componentes del circuito GF
-//                } else {
-//                    componentes = 0;
-//                }
 
                 res = subRegistrarModificarProyecto(obj, jTIntegracion.getText(), "IN", "Circuito", numeroOrden, "", op, Integer.parseInt(jLIDIntegracion.getText()));
                 if (jLIDIntegracion.getText().equals("0")) {
@@ -2290,8 +2348,10 @@ public class proyecto extends javax.swing.JPanel {
                 }
                 //Fin del registro del Stencil
             }
+            //-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
             VerificarQueSeElimina(obj);
-        } else if (cbNegocio.getSelectedItem().equals("FE/TE/EN")) {
+            //-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+        } else if (cbNegocio.getSelectedItem().equals("FE/TE/EN")) {//////////////////////////////////////////////////////////////////////////////////////////////
             //Se registra el detalle del proyecto cuando el negocio es "FE/TE/IN"
             //Registro de componentes Circuito COM
             if (jCCircuito.isSelected() && jCIntegracion.isSelected() && jLIDCircuitoCOM.getText().equals("0")) {
@@ -2361,25 +2421,48 @@ public class proyecto extends javax.swing.JPanel {
             }
             if (jCCircuito.isSelected()) {
                 //Registrar PCB de FE------------------------------------------>
-                if (jLIDCircuito.getText().equals("0")) {
-                    op1 = op;
-                    op = 1;
-                }
-                res = subRegistrarModificarProyecto(obj, jTCircuito.getText(), "FE", "Circuito", numeroOrden, cbMaterialCircuito.getSelectedItem().toString(), op, Integer.parseInt(jLIDCircuito.getText()));
-                if (jLIDCircuito.getText().equals("0")) {
-                    op = op1;
+                if (cbMaterialCircuito.getSelectedIndex() == 3) {
+                    //Registro de circuito GF al almacen
+                    if (jLIDCircuitoGF.getText().equals("0")) {
+                        op1 = op;
+                        op = 1;
+                    }
+                    res = subRegistrarModificarProyecto(obj, jTCircuito.getText(), "FE", "Circuito", numeroOrden, cbMaterialCircuito.getSelectedItem().toString(), op, Integer.parseInt(jLIDCircuitoGF.getText()));
+                    if (jLIDCircuitoGF.getText().equals("0")) {
+                        op = op1;
+                    }
+                } else {
+                    if (jLIDCircuito.getText().equals("0")) {
+                        op1 = op;
+                        op = 1;
+                    }
+                    res = subRegistrarModificarProyecto(obj, jTCircuito.getText(), "FE", "Circuito", numeroOrden, cbMaterialCircuito.getSelectedItem().toString(), op, Integer.parseInt(jLIDCircuito.getText()));
+                    if (jLIDCircuito.getText().equals("0")) {
+                        op = op1;
+                    }
                 }
                 //Fin del registro del PCB FE
             }
             if (jCPCBTE.isSelected()) {
                 //Registrar PCB de TE------------------------------------------>
-                if (jLIDPCB.getText().equals("0")) {
-                    op1 = op;
-                    op = 1;
-                }
-                res = subRegistrarModificarProyecto(obj, jTPCBTE.getText(), "FE", "PCB", numeroOrden, cbMaterialPCBTE.getSelectedItem().toString(), op, Integer.parseInt(jLIDPCB.getText()));
-                if (jLIDPCB.getText().equals("0")) {
-                    op = op1;
+                if (cbMaterialPCBTE.getSelectedIndex() == 3) {
+                    if (jLIDPCBGF.getText().equals("0")) {
+                        op1 = op;
+                        op = 1;
+                    }
+                    res = subRegistrarModificarProyecto(obj, jTPCBTE.getText(), "FE", "PCB", numeroOrden, cbMaterialPCBTE.getSelectedItem().toString(), op, Integer.parseInt(jLIDPCBGF.getText()));
+                    if (jLIDPCBGF.getText().equals("0")) {
+                        op = op1;
+                    }
+                } else {
+                    if (jLIDPCB.getText().equals("0")) {
+                        op1 = op;
+                        op = 1;
+                    }
+                    res = subRegistrarModificarProyecto(obj, jTPCBTE.getText(), "FE", "PCB", numeroOrden, cbMaterialPCBTE.getSelectedItem().toString(), op, Integer.parseInt(jLIDPCB.getText()));
+                    if (jLIDPCB.getText().equals("0")) {
+                        op = op1;
+                    }
                 }
                 //Fin del registro del PCB TE
             }
@@ -2407,6 +2490,9 @@ public class proyecto extends javax.swing.JPanel {
                 }
                 //Fin del registro de Integracion
             }
+            //-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+            VerificarQueSeElimina(obj);
+            //-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
         }
         return res;
     }
