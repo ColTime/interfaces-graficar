@@ -190,6 +190,7 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jPSuperior.setBackground(new java.awt.Color(63, 179, 255));
+        jPSuperior.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPSuperior.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jPSuperiorMouseDragged(evt);
@@ -1068,7 +1069,7 @@ public class Menu extends javax.swing.JFrame {
             btn4.setColorHover(cor);
             btn4.setColorNormal(corF);
             btn4.setColorPressed(cor);
-        } else {
+        } else {    
             btn3.setColorHover(cor);
             btn3.setColorNormal(cor);
             btn3.setColorPressed(cor);
@@ -1083,12 +1084,16 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowDeactivated
 
     private void jPSuperiorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPSuperiorMousePressed
+
         posX = evt.getX();
         posY = evt.getY();
+
     }//GEN-LAST:event_jPSuperiorMousePressed
 
     private void jPSuperiorMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPSuperiorMouseDragged
+
         this.setLocation((evt.getXOnScreen() - posX), (evt.getYOnScreen() - posY - 25));
+
     }//GEN-LAST:event_jPSuperiorMouseDragged
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
@@ -1301,9 +1306,9 @@ public class Menu extends javax.swing.JFrame {
                                 FIngresadosHoy.setText(crs.getString(1));
                             } else if (crs.getInt(2) == 2) {//<Teclados>
                                 TIngresadosHoy.setText(crs.getString(1));
-                            } else if(crs.getInt(2) == 3) {//<Ensamble>
+                            } else if (crs.getInt(2) == 3) {//<Ensamble>
                                 EIngresadosHoy.setText(crs.getString(1));
-                            }else{
+                            } else {
                                 AIngresadosHoy.setText(crs.getString(1));
                             }
                         }
@@ -1327,9 +1332,9 @@ public class Menu extends javax.swing.JFrame {
                                 FEjecucion.setText(crs.getString(1));
                             } else if (crs.getInt(2) == 2) {//<Teclados>
                                 TEjecucion.setText(crs.getString(1));
-                            } else if(crs.getInt(2) == 3) {//<Ensamble>
+                            } else if (crs.getInt(2) == 3) {//<Ensamble>
                                 EEjecucion.setText(crs.getString(1));
-                            }else{
+                            } else {
                                 Ajecucion.setText(crs.getString(1));
                             }
                         }
@@ -1343,7 +1348,7 @@ public class Menu extends javax.swing.JFrame {
                                 FPorIniciar.setText(crs.getString(1));
                             } else if (crs.getInt(2) == 2) {//<Teclados>
                                 TPorIniciar.setText(crs.getString(1));
-                            } else if(crs.getInt(2) == 3) {//<Ensamble>
+                            } else if (crs.getInt(2) == 3) {//<Ensamble>
                                 EPorIniciar.setText(crs.getString(1));
                             }
                         }

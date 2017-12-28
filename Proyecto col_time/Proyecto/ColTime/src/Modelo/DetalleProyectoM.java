@@ -228,6 +228,12 @@ public class DetalleProyectoM {
             case "PCB GF":
                 tipo = 9;
                 break;
+            case "Circuito COM":
+                tipo = 10;
+                break;
+            case "PCB COM":
+                tipo = 11;
+                break;
         }
         return tipo;
     }

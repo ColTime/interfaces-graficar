@@ -2088,6 +2088,12 @@ public class proyecto extends javax.swing.JPanel {
             //Se eliminara el gran formato y se registrara la otra forma de circuito.
             subEliminardetalle(obj, Integer.parseInt(jLIDPCBGF.getText()), Integer.parseInt(jTNorden.getText()), "ALMACEN", "PCB GF");
         }
+        if (jRPCBCOM.isSelected() == false && !jLIDPCBCOM.getText().equals("0")) {
+            subEliminardetalle(obj, Integer.parseInt(jLIDPCBCOM.getText()), Integer.parseInt(jTNorden.getText()), "ALMACEN", "PCB COM");
+        }
+        if (jCCircuito.isSelected() == false || jCIntegracion.isSelected() == false && !jLIDCircuitoCOM.getText().equals("0")) {
+            subEliminardetalle(obj, Integer.parseInt(jLIDCircuitoCOM.getText()), Integer.parseInt(jTNorden.getText()), "ALMACEN", "Circuito COM");
+        }
     }
 
     private boolean RegistrarModificarDetalle(String numeroOrden, int op) {
@@ -2163,11 +2169,12 @@ public class proyecto extends javax.swing.JPanel {
             //Se registra el detalle del proyecto cuando el negocio es "FE/TE"
             //Registro de componentes de la PCB del teclado.
             if (jCPCBTE.isSelected() && jRPCBCOM.isSelected() && jLIDPCBCOM.getText().equals("0")) {
+                op1 = op;
+                op = 1;
                 res = subRegistrarModificarProyecto(obj, "", "ALMACEN", "PCB COM", numeroOrden, "", op, Integer.parseInt(jLIDCircuitoCOM.getText()));
-            } else {
-                //Validar si los componenetes estan registrados, y si estan registrados eliminarlos.
-
+                op = op1;
             }
+
             if (jCConversor.isSelected()) {
                 //Registrar Conversor------------------------------------------>
                 if (jLIDConversor.getText().equals("0")) {
@@ -2282,17 +2289,17 @@ public class proyecto extends javax.swing.JPanel {
             //Se registra el detalle del proyecto cuando el negocio es "FE/IN"
             //Registro de componentes Circuito COM
             if (jCCircuito.isSelected() && jCIntegracion.isSelected() && jLIDCircuitoCOM.getText().equals("0")) {
+                op1 = op;
+                op = 1;
                 res = subRegistrarModificarProyecto(obj, "", "ALMACEN", "Circuito COM", numeroOrden, "", op, Integer.parseInt(jLIDCircuitoCOM.getText()));
-            } else {
-                //Validar que se pueda eliminar.
-
+                op = op1;
             }
             //Registro de componentes PCB COM
             if (jCPCBTE.isSelected() && jRPCBCOM.isSelected() && jLIDPCBCOM.getText().equals("0")) {
+                op1 = op;
+                op = 1;
                 res = subRegistrarModificarProyecto(obj, "", "ALMACEN", "PCB COM", numeroOrden, "", op, Integer.parseInt(jLIDCircuitoCOM.getText()));
-            } else {
-                //Validar si los componenetes estan registrados, y si estan registrados eliminarlos.
-
+                op = op1;
             }
             //Registro de componentes
             if (jCCircuito.isSelected()) {
@@ -2355,21 +2362,17 @@ public class proyecto extends javax.swing.JPanel {
             //Se registra el detalle del proyecto cuando el negocio es "FE/TE/IN"
             //Registro de componentes Circuito COM
             if (jCCircuito.isSelected() && jCIntegracion.isSelected() && jLIDCircuitoCOM.getText().equals("0")) {
+                op1 = op;
+                op = 1;
                 res = subRegistrarModificarProyecto(obj, "", "ALMACEN", "Circuito COM", numeroOrden, "", op, Integer.parseInt(jLIDCircuitoCOM.getText()));
-            } else {
-                //Validar que se pueda eliminar.
-
+                op = op1;
             }
             //Registro de componentes PCB COM
             if (jCPCBTE.isSelected() && jRPCBCOM.isSelected() && jLIDPCBCOM.getText().equals("0")) {
+                op1 = op;
+                op = 1;
                 res = subRegistrarModificarProyecto(obj, "", "ALMACEN", "PCB COM", numeroOrden, "", op, Integer.parseInt(jLIDCircuitoCOM.getText()));
-            } else {
-                //Validar si los componenetes estan registrados, y si estan registrados eliminarlos.
-
-            }
-            if (!jLIDCircuitoGF.getText().equals("0") && cbMaterialCircuito.getSelectedIndex() != 3) {
-                //Se eliminara el fran formato y se registrara la otra forma de circuito.
-
+                op = op1;
             }
             if (jCConversor.isSelected()) {
                 //Registrar Conversor------------------------------------------>
