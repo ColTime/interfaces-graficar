@@ -1455,14 +1455,14 @@ public class proyecto extends javax.swing.JPanel {
             cbMaterialPCBTE.setEnabled(true);
             jCAntisolderP.setEnabled(true);
             jCRuteoP.setEnabled(true);
-            jRPCBCOM.setEnabled(true);
-            jRPIntegracion.setEnabled(true);
+//            jRPCBCOM.setEnabled(true);
+//            jRPIntegracion.setEnabled(true);
         } else {
             cbMaterialPCBTE.setEnabled(false);
             jCAntisolderP.setEnabled(false);
             jCRuteoP.setEnabled(false);
-            jRPCBCOM.setEnabled(false);
-            jRPIntegracion.setEnabled(false);
+//            jRPCBCOM.setEnabled(false);
+//            jRPIntegracion.setEnabled(false);
         }
     }//GEN-LAST:event_jCPCBTEActionPerformed
 
@@ -1502,7 +1502,7 @@ public class proyecto extends javax.swing.JPanel {
     }//GEN-LAST:event_jREjecucionActionPerformed
 
     private void cbMaterialCircuitoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbMaterialCircuitoItemStateChanged
-        if (cbMaterialCircuito.getSelectedIndex() == 3 ||cbMaterialCircuito.getSelectedIndex() == 0) {//Gran formato
+        if (cbMaterialCircuito.getSelectedIndex() == 3 || cbMaterialCircuito.getSelectedIndex() == 0) {//Gran formato
             jCAntisolderC.setEnabled(false);
             jCAntisolderC.setSelected(false);
             jCRuteoC.setEnabled(false);
@@ -1520,14 +1520,22 @@ public class proyecto extends javax.swing.JPanel {
     }//GEN-LAST:event_cbMaterialCircuitoItemStateChanged
 
     private void cbMaterialPCBTEItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbMaterialPCBTEItemStateChanged
-        if (cbMaterialPCBTE.getSelectedIndex() == 3) {
-            jCAntisolderP.setEnabled(false);
-            jCAntisolderP.setSelected(false);
-            jCRuteoP.setEnabled(false);
-            jCRuteoP.setSelected(false);
+        if (cbMaterialPCBTE.getSelectedIndex() != 0) {
+            if (cbMaterialPCBTE.getSelectedIndex() == 3) {
+                jCAntisolderP.setEnabled(false);
+                jCAntisolderP.setSelected(false);
+                jCRuteoP.setEnabled(false);
+                jCRuteoP.setSelected(false);
+
+            } else {
+                jCAntisolderP.setEnabled(true);
+                jCRuteoP.setEnabled(true);
+            }
+            jRPCBCOM.setEnabled(true);
+            jRPIntegracion.setEnabled(true);
         } else {
-            jCAntisolderP.setEnabled(true);
-            jCRuteoP.setEnabled(true);
+            jRPCBCOM.setEnabled(false);
+            jRPIntegracion.setEnabled(false);
         }
     }//GEN-LAST:event_cbMaterialPCBTEItemStateChanged
 
@@ -1536,7 +1544,13 @@ public class proyecto extends javax.swing.JPanel {
     }//GEN-LAST:event_jDFechaEntregaPCBCOMGFCaretPositionChanged
 
     private void jRPCBCOMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRPCBCOMActionPerformed
+
         if (jRPCBCOM.isSelected()) {
+            if (cbMaterialPCBTE.getSelectedItem().toString().equals("TH") || cbMaterialPCBTE.getSelectedItem().toString().equals("FV")) {
+                jLpcbGF.setText("Fecha de entrega COM PCB FE");
+            }else if(cbMaterialPCBTE.getSelectedItem().toString().equals("GF")){
+                jLpcbGF.setText("Fecha de entrega COM PCB GF");
+            }
             jLpcbGF.setVisible(true);
             jDFechaEntregaPCBCOMGF.setVisible(true);
         } else {
@@ -1547,6 +1561,11 @@ public class proyecto extends javax.swing.JPanel {
 
     private void jRPIntegracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRPIntegracionActionPerformed
         if (jRPIntegracion.isSelected()) {
+            if (cbMaterialPCBTE.getSelectedItem().toString().equals("TH") || cbMaterialPCBTE.getSelectedItem().toString().equals("FV")) {
+                jLCircuitoGF.setText("Fecha de entrega PCB FE");
+            }else if(cbMaterialPCBTE.getSelectedItem().toString().equals("GF")){
+                jLCircuitoGF.setText("Fecha de entrega PCB GF");
+            }
             jLCircuitoGF.setVisible(true);
             jDFechaEntregaPCBGF.setVisible(true);
         } else {
