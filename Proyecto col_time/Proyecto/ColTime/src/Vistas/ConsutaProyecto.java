@@ -569,23 +569,26 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                                 obj.btnUpdate.setEnabled(false);
                                 obj.btnTomaTiempos.setVisible(true);
                                 obj.GenerarQR.setEnabled(false);
+                                obj.btnDelete.setEnabled(true);
+                                obj.jRParada.setEnabled(true);
                             } else if (TProyecto.getValueAt(f, 7).toString().equals("Pausado")) {
                                 obj.Notificacion1.setForeground(Color.ORANGE);
                                 obj.btnTomaTiempos.setVisible(false);//Es false
-
+                                obj.btnDelete.setEnabled(true);
+                                obj.jRParada.setEnabled(true);
                             } else if (TProyecto.getValueAt(f, 7).toString().equals("Por iniciar")) {
                                 obj.Notificacion1.setForeground(Color.GRAY);
                                 obj.btnTomaTiempos.setVisible(false);//Es false
-
+                                obj.btnDelete.setEnabled(true);
+                                obj.jRParada.setEnabled(true);
                             } else if (TProyecto.getValueAt(f, 7).toString().equals("Ejecucion")) {
                                 obj.Notificacion1.setForeground(Color.GRAY);
                                 obj.btnTomaTiempos.setVisible(false);//Es false
+                                obj.btnDelete.setEnabled(false);
+                                obj.jRParada.setEnabled(false);
                             }
                             //Estado en ejecución
                             obj.jREjecucion.setSelected(true);
-                            obj.jRParada.setEnabled(false);
-                            obj.jRParada.setEnabled(true);
-
                         } else {
                             //Estado parado
                             obj.Notificacion1.setText("Parada");
@@ -596,7 +599,6 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                             obj.btnUpdate.setEnabled(false);
                         }
 
-                        obj.btnDelete.setEnabled(true);
                         //Tipos de negocios implicados
                         if (TProyecto.getValueAt(f, 9).toString().equals("true") && TProyecto.getValueAt(f, 10).toString().equals("false") && TProyecto.getValueAt(f, 11).toString().equals("false")) {
                             obj.cbNegocio.setSelectedIndex(1);

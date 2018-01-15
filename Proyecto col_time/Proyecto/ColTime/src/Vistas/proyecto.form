@@ -871,7 +871,7 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel14">
+                <Component class="javax.swing.JLabel" name="jLCircuitoGF">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="12" style="1"/>
@@ -879,11 +879,11 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="83" green="80" red="80" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Fecha de entrega GF"/>
+                    <Property name="text" type="java.lang.String" value="Fecha de entrega PCB GF"/>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="480" y="170" width="-1" height="-1"/>
+                      <AbsoluteConstraints x="470" y="170" width="-1" height="-1"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -1055,7 +1055,7 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="com.toedter.calendar.JDateChooser" name="jDFechaEntregaEN">
+                <Component class="com.toedter.calendar.JDateChooser" name="jDFechaEntregaFECOM">
                   <Properties>
                     <Property name="toolTipText" type="java.lang.String" value=""/>
                     <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
@@ -1064,7 +1064,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="caretPositionChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="jDFechaEntregaENCaretPositionChanged"/>
+                    <EventHandler event="caretPositionChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="jDFechaEntregaFECOMCaretPositionChanged"/>
                   </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
@@ -1075,7 +1075,7 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="com.toedter.calendar.JDateChooser" name="jDFechaEntregaGF">
+                <Component class="com.toedter.calendar.JDateChooser" name="jDFechaEntregaPCBGF">
                   <Properties>
                     <Property name="toolTipText" type="java.lang.String" value=""/>
                     <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
@@ -1084,14 +1084,14 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="caretPositionChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="jDFechaEntregaGFCaretPositionChanged"/>
+                    <EventHandler event="caretPositionChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="jDFechaEntregaPCBGFCaretPositionChanged"/>
                   </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="480" y="190" width="130" height="-1"/>
+                      <AbsoluteConstraints x="470" y="190" width="130" height="-1"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -1111,7 +1111,7 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel25">
+                <Component class="javax.swing.JLabel" name="jLCircuitoFE">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="12" style="1"/>
@@ -1127,7 +1127,7 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel26">
+                <Component class="javax.swing.JLabel" name="jLComCircuitos">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="12" style="1"/>
@@ -1147,16 +1147,19 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="COM"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRPCBCOMActionPerformed"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="760" y="90" width="-1" height="30"/>
+                      <AbsoluteConstraints x="760" y="80" width="-1" height="20"/>
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="com.toedter.calendar.JDateChooser" name="jDFechaEntregaGF1">
+                <Component class="com.toedter.calendar.JDateChooser" name="jDFechaEntregaPCBCOMGF">
                   <Properties>
                     <Property name="toolTipText" type="java.lang.String" value=""/>
                     <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
@@ -1165,18 +1168,18 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="caretPositionChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="jDFechaEntregaGF1CaretPositionChanged"/>
+                    <EventHandler event="caretPositionChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="jDFechaEntregaPCBCOMGFCaretPositionChanged"/>
                   </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="670" y="190" width="130" height="-1"/>
+                      <AbsoluteConstraints x="650" y="190" width="130" height="-1"/>
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel27">
+                <Component class="javax.swing.JLabel" name="jLpcbGF">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="12" style="1"/>
@@ -1184,11 +1187,11 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="83" green="80" red="80" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Fecha de entrega GF"/>
+                    <Property name="text" type="java.lang.String" value="Fecha de entrega COM GF"/>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="670" y="170" width="-1" height="-1"/>
+                      <AbsoluteConstraints x="650" y="170" width="-1" height="-1"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -1227,7 +1230,7 @@
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="780" y="70" width="10" height="-1"/>
+                      <AbsoluteConstraints x="780" y="60" width="10" height="-1"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -1240,7 +1243,23 @@
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="780" y="130" width="10" height="-1"/>
+                      <AbsoluteConstraints x="800" y="60" width="10" height="-1"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="jRPIntegracion">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="IN"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRPIntegracionActionPerformed"/>
+                  </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                  </AuxValues>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="760" y="110" width="50" height="20"/>
                     </Constraint>
                   </Constraints>
                 </Component>

@@ -43,7 +43,7 @@ public class Menu extends javax.swing.JFrame {
         funcionalidades(cargo);
         EnCasodeFallaDeLuz();
         InformacionAreasProduccion();
-        new rojerusan.RSNotifyAnimated("Bienvenido", "Tienes 5 nuevas notificaciones", 6, RSNotifyAnimated.PositionNotify.BottomLeft, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+        new rojerusan.RSNotifyAnimated("Bienvenido", "Nombre del empleado", 6, RSNotifyAnimated.PositionNotify.BottomLeft, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
     }
 
     public Menu() {
