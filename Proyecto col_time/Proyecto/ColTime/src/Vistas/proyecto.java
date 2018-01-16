@@ -57,6 +57,7 @@ public class proyecto extends javax.swing.JPanel {
     int udm = 0, resol = 100, rot = 0;
     float mi = 0.000f, md = 0.000f, ms = 0.000f, min = 0.000f, tam = 21.000f;
     static String fecha = "";
+    int opmaterial = 1;
 
     private void visibilidadID() {
         jLIDConversor.setVisible(false);
@@ -153,6 +154,7 @@ public class proyecto extends javax.swing.JPanel {
         jLIDPCBCOM = new javax.swing.JLabel();
         jLIDPCBGF = new javax.swing.JLabel();
         jRPIntegracion = new javax.swing.JRadioButton();
+        jLIDPCBEN = new javax.swing.JLabel();
         jPDetalles = new javax.swing.JPanel();
         jDentrega = new com.toedter.calendar.JDateChooser();
         jLabel10 = new javax.swing.JLabel();
@@ -186,6 +188,7 @@ public class proyecto extends javax.swing.JPanel {
         GenerarQR = new elaprendiz.gui.button.ButtonColoredAction();
         jTProyectoQR = new elaprendiz.gui.textField.TextFieldRoundBackground();
         btnTomaTiempos = new elaprendiz.gui.button.ButtonColoredAction();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(219, 219, 219));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
@@ -580,10 +583,10 @@ public class proyecto extends javax.swing.JPanel {
         jDFechaEntregaFE.setDateFormatString("dd/MM/yyyy");
         jDFechaEntregaFE.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jDFechaEntregaFE.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jDFechaEntregaFECaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jPDetalles1.add(jDFechaEntregaFE, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 140, -1));
@@ -592,10 +595,10 @@ public class proyecto extends javax.swing.JPanel {
         jDFechaEntregaFECOM.setDateFormatString("dd/MM/yyyy");
         jDFechaEntregaFECOM.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jDFechaEntregaFECOM.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jDFechaEntregaFECOMCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jPDetalles1.add(jDFechaEntregaFECOM, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 130, 20));
@@ -604,10 +607,10 @@ public class proyecto extends javax.swing.JPanel {
         jDFechaEntregaPCBGF.setDateFormatString("dd/MM/yyyy");
         jDFechaEntregaPCBGF.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jDFechaEntregaPCBGF.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jDFechaEntregaPCBGFCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jPDetalles1.add(jDFechaEntregaPCBGF, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, 130, -1));
@@ -639,10 +642,10 @@ public class proyecto extends javax.swing.JPanel {
         jDFechaEntregaPCBCOMGF.setDateFormatString("dd/MM/yyyy");
         jDFechaEntregaPCBCOMGF.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jDFechaEntregaPCBCOMGF.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jDFechaEntregaPCBCOMGFCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jPDetalles1.add(jDFechaEntregaPCBCOMGF, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 190, 130, -1));
@@ -672,6 +675,9 @@ public class proyecto extends javax.swing.JPanel {
         });
         jPDetalles1.add(jRPIntegracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 110, 50, 20));
 
+        jLIDPCBEN.setText("0");
+        jPDetalles1.add(jLIDPCBEN, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 130, 10, -1));
+
         jPanel2.add(jPDetalles1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 820, 222));
 
         jPDetalles.setBackground(new java.awt.Color(255, 255, 255));
@@ -681,10 +687,10 @@ public class proyecto extends javax.swing.JPanel {
         jDentrega.setDateFormatString("dd/MM/yyyy");
         jDentrega.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jDentrega.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jDentregaCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
 
@@ -986,6 +992,9 @@ public class proyecto extends javax.swing.JPanel {
             }
         });
         jPanel2.add(btnTomaTiempos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, 150, -1));
+
+        jLabel1.setText("Registro de proyecto mediante codigo QR: ");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(337, 450, 250, -1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1502,6 +1511,7 @@ public class proyecto extends javax.swing.JPanel {
     }//GEN-LAST:event_jREjecucionActionPerformed
 
     private void cbMaterialCircuitoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbMaterialCircuitoItemStateChanged
+        //Necesito controlar esto
         if (cbMaterialCircuito.getSelectedIndex() == 3 || cbMaterialCircuito.getSelectedIndex() == 0) {//Gran formato
             jCAntisolderC.setEnabled(false);
             jCAntisolderC.setSelected(false);
@@ -1516,7 +1526,10 @@ public class proyecto extends javax.swing.JPanel {
             jCAntisolderC.setEnabled(true);
             jCRuteoC.setEnabled(true);
         }
+
         fechaEntregaFEoGF();
+
+
     }//GEN-LAST:event_cbMaterialCircuitoItemStateChanged
 
     private void cbMaterialPCBTEItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbMaterialPCBTEItemStateChanged
@@ -1548,7 +1561,7 @@ public class proyecto extends javax.swing.JPanel {
         if (jRPCBCOM.isSelected()) {
             if (cbMaterialPCBTE.getSelectedItem().toString().equals("TH") || cbMaterialPCBTE.getSelectedItem().toString().equals("FV")) {
                 jLpcbGF.setText("Fecha de entrega COM PCB FE");
-            }else if(cbMaterialPCBTE.getSelectedItem().toString().equals("GF")){
+            } else if (cbMaterialPCBTE.getSelectedItem().toString().equals("GF")) {
                 jLpcbGF.setText("Fecha de entrega COM PCB GF");
             }
             jLpcbGF.setVisible(true);
@@ -1563,7 +1576,7 @@ public class proyecto extends javax.swing.JPanel {
         if (jRPIntegracion.isSelected()) {
             if (cbMaterialPCBTE.getSelectedItem().toString().equals("TH") || cbMaterialPCBTE.getSelectedItem().toString().equals("FV")) {
                 jLCircuitoGF.setText("Fecha de entrega PCB FE");
-            }else if(cbMaterialPCBTE.getSelectedItem().toString().equals("GF")){
+            } else if (cbMaterialPCBTE.getSelectedItem().toString().equals("GF")) {
                 jLCircuitoGF.setText("Fecha de entrega PCB GF");
             }
             jLCircuitoGF.setVisible(true);
@@ -1791,11 +1804,50 @@ public class proyecto extends javax.swing.JPanel {
     private void validarRegistro(int op) {
         //Validar los campos principales del proyecto-------------------------->
         if (jDentrega.getDate() != null && cbNegocio.getSelectedIndex() != 0 && cbTipo.getSelectedIndex() != 0 && !jTNombreCliente.getText().equals("")
-                && !jTNombreProyecto.getText().equals("") && contarRadiosPresionados() == contarTextoLleno() && contarRadiosPresionados() > 0 && contarTextoLleno() > 0) {
+                && !jTNombreProyecto.getText().equals("") && contarRadiosPresionados() == contarTextoLleno() && contarRadiosPresionados() > 0 && contarTextoLleno() > 0 && validarFechaEntregaSiguienteProceso() && validarFechaEntregaPCB()) {
+            //Ten en cuenta que se tiene que validar cuando se vaya a modificar estos mismos campos para saber si se elimina las fechas o no se eliminan.
             registrarModificarProyecto(op);
         } else {
             new rojerusan.RSNotifyAnimated("¡Error!", "Falta algun campo por diligenciar.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
         }
+    }
+
+    private boolean validarFechaEntregaSiguienteProceso() {//Este metodo valida los campos de fecha para evitar que esten vacios
+        boolean respuesta = true;
+        if (jCCircuito.isSelected() && jCIntegracion.isSelected()) {
+            if (jDFechaEntregaFECOM.getDate() != null && jDFechaEntregaFE.getDate() != null) {
+                respuesta = true;
+            } else {
+                respuesta = false;
+            }
+        }
+        return respuesta;
+    }
+
+    private boolean validarFechaEntregaPCB() {
+        boolean respues = true;
+        if (jCPCBTE.isSelected()) {
+            if (jRPIntegracion.isSelected() && jCPCBTE.isSelected()) {
+                if (jDFechaEntregaPCBCOMGF.getDate() != null && jDFechaEntregaPCBGF.getDate() != null) {
+                    respues = true;
+                } else {
+                    respues = false;
+                }
+            } else if (jRPIntegracion.isSelected()) {
+                if (jDFechaEntregaPCBGF.getDate() != null) {
+                    respues = true;
+                } else {
+                    respues = false;
+                }
+            } else if (jRPCBCOM.isSelected()) {
+                if (jDFechaEntregaPCBCOMGF.getDate() != null) {
+                    respues = true;
+                } else {
+                    respues = false;
+                }
+            }
+        }
+        return respues;
     }
 
     public int contarRadiosPresionados() {
@@ -1954,6 +2006,27 @@ public class proyecto extends javax.swing.JPanel {
 //        v[10] = jCIntegracion.isSelected() ? true : false;
         obj.setDetalles(v);
         obj.setIdOrden(Integer.parseInt(jTNorden.getText()));
+        //Fechas para el control de tiempos de entrega
+        if (jDFechaEntregaFE.getDate() != null) {//Fecha de entrega de Circuito de FE a EN
+            obj.setFechaCiccuitoFEoGF(fecha.format(jDFechaEntregaFE.getDate()));
+        } else {
+            obj.setFechaCiccuitoFEoGF(null);
+        }
+        if (jDFechaEntregaFECOM.getDate() != null) {//Fecha de entrega de los componentes del circuito (sea suministrados por la empresa o el cliente)
+            obj.setFechaCiccuitoCOMFEoGF(fecha.format(jDFechaEntregaFECOM.getDate()));
+        } else {
+            obj.setFechaCiccuitoCOMFEoGF(null);
+        }
+        if (jDFechaEntregaPCBGF.getDate() != null) {//Fecha de la PCB del teclado a EN
+            obj.setFechaPCBFEoGF(fecha.format(jDFechaEntregaPCBGF.getDate()));
+        } else {
+            obj.setFechaPCBFEoGF(null);
+        }
+        if (jDFechaEntregaPCBCOMGF.getDate() != null) {//Fecha de los componentes de la PCB (sea suministrados por la empresa o el cliente)
+            obj.setFechaPCBCOMFEoGF(fecha.format(jDFechaEntregaPCBCOMGF.getDate()));
+        } else {
+            obj.setFechaPCBCOMFEoGF(null);
+        }
     }
 
     private void botonRegistrarModificar() {
@@ -2671,9 +2744,9 @@ public class proyecto extends javax.swing.JPanel {
     public static com.toedter.calendar.JDateChooser jDFechaEntregaPCBCOMGF;
     public static com.toedter.calendar.JDateChooser jDFechaEntregaPCBGF;
     public static com.toedter.calendar.JDateChooser jDentrega;
-    private javax.swing.JLabel jLCircuitoFE;
-    private javax.swing.JLabel jLCircuitoGF;
-    private javax.swing.JLabel jLComCircuitos;
+    public static javax.swing.JLabel jLCircuitoFE;
+    public static javax.swing.JLabel jLCircuitoGF;
+    public static javax.swing.JLabel jLComCircuitos;
     public static javax.swing.JLabel jLIDCircuito;
     public static javax.swing.JLabel jLIDCircuitoCOM;
     public static javax.swing.JLabel jLIDCircuitoGF;
@@ -2681,12 +2754,14 @@ public class proyecto extends javax.swing.JPanel {
     public static javax.swing.JLabel jLIDIntegracion;
     public static javax.swing.JLabel jLIDPCB;
     public static javax.swing.JLabel jLIDPCBCOM;
+    public static javax.swing.JLabel jLIDPCBEN;
     public static javax.swing.JLabel jLIDPCBGF;
     public static javax.swing.JLabel jLIDRepujado;
     public static javax.swing.JLabel jLIDStencil;
     public static javax.swing.JLabel jLIDTeclado;
     public static javax.swing.JLabel jLIDTroquel;
     public static javax.swing.JLabel jLIngreso;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -2707,7 +2782,7 @@ public class proyecto extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel jLpcbGF;
+    public static javax.swing.JLabel jLpcbGF;
     public static javax.swing.JPanel jPDetalles;
     public static javax.swing.JPanel jPDetalles1;
     public static javax.swing.JPanel jPInformacion;

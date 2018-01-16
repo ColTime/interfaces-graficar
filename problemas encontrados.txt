@@ -1,0 +1,14 @@
+
+
+1-El sistema no permite la toma de tiempo de un mismo proceso más de una vez. Corregir.
+
+Solución: //Esta solución no se va a llevar a cabo//
+
+En la base de datos: Se va a crear una nueva columna en las tablas de detalle del detalle del proyecto
+que se va a llamar "origien"que por defecto va a ser "1", con el fin de saber cual es le proceso original, 
+para así, poder sumarle los tiempos de las otras tomas de tiempo del mismo proceso. Cada vez que se comience a tomar el tiempo
+de un proceso que ya esta en ejecución, el numero del origen va a cambiar por un consecutivo para saber
+cuales son las copias del tiempo que se van a sumar al origen.Cuando se cierre una toma de tiempo se va a pedir 
+el numero del consecutivo para así saber cual es la toma que se va a cerrar y se va a sumar al origen.
+ 
+ 

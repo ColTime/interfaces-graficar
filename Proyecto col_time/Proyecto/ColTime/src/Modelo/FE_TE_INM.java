@@ -28,7 +28,8 @@ public class FE_TE_INM {
 
     //Metodos------------------------------------------------->
     //No se te olvide tener en cuenta el id del lector y concatenar a la informacion despues de leer el código QR***
-    public boolean iniciar_Pausar_Reiniciar_Toma_Tiempo(int orden, int detalle, int negocio, int lector, int cantidadTerminada) {
+    public boolean iniciar_Pausar_Reiniciar_Toma_Tiempo(int orden, int detalle, int negocio, int lector, int cantidadTerminada) {//Agregar un identificador por persona!!
+        //Falta hacer que se puedan poner varias tomas de tiempo del mismo proceso al mismo tiempo.
         try {
             conexion = new Conexion();
             conexion.establecerConexion();

@@ -8,6 +8,7 @@ import Vistas.CambiarContraseña;
 import Vistas.ControlDelTiempo;
 import Vistas.Producciones;
 import Vistas.Inicio;
+import Vistas.Procesos;
 import Vistas.Usuarios1;
 import Vistas.proyecto;
 import Vistas.proyecto1;
@@ -85,6 +86,7 @@ public class Menu extends javax.swing.JFrame {
         jTLector = new javax.swing.JTextField();
         agregar = new javax.swing.JButton();
         btn5 = new rsbuttom.RSButtonMetro();
+        btn6 = new rsbuttom.RSButtonMetro();
         jPContenido = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -393,7 +395,27 @@ public class Menu extends javax.swing.JFrame {
                 btn5ActionPerformed(evt);
             }
         });
-        jPMenu.add(btn5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 278, 190, 42));
+        jPMenu.add(btn5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 190, 42));
+
+        btn6.setForeground(new java.awt.Color(128, 128, 131));
+        btn6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/reportes.png"))); // NOI18N
+        btn6.setText("PROCESOS");
+        btn6.setBorderPainted(false);
+        btn6.setColorHover(new java.awt.Color(189, 189, 189));
+        btn6.setColorNormal(new java.awt.Color(219, 219, 219));
+        btn6.setColorPressed(new java.awt.Color(189, 189, 189));
+        btn6.setColorTextHover(new java.awt.Color(128, 128, 131));
+        btn6.setColorTextNormal(new java.awt.Color(128, 128, 131));
+        btn6.setColorTextPressed(new java.awt.Color(128, 128, 131));
+        btn6.setFocusable(false);
+        btn6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btn6.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn6ActionPerformed(evt);
+            }
+        });
+        jPMenu.add(btn6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 278, 190, 42));
 
         jPContenido.setLayout(new javax.swing.BoxLayout(jPContenido, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -957,6 +979,10 @@ public class Menu extends javax.swing.JFrame {
             btn4.setColorHover(cor);
             btn4.setColorNormal(corF);
             btn4.setColorPressed(cor);
+
+            btn6.setColorHover(cor);
+            btn6.setColorNormal(corF);
+            btn6.setColorPressed(cor);
         } else {
             btn2.setColorHover(cor);
             btn2.setColorNormal(cor);
@@ -996,6 +1022,11 @@ public class Menu extends javax.swing.JFrame {
             btn4.setColorHover(cor);
             btn4.setColorNormal(cor);
             btn4.setColorPressed(cor);
+            
+            btn6.setColorHover(cor);
+            btn6.setColorNormal(corF);
+            btn6.setColorPressed(cor);
+
         } else {
             btn3.setColorHover(cor);
             btn3.setColorNormal(cor);
@@ -1041,6 +1072,11 @@ public class Menu extends javax.swing.JFrame {
             btn4.setColorHover(cor);
             btn4.setColorNormal(corF);
             btn4.setColorPressed(cor);
+
+            btn6.setColorHover(cor);
+            btn6.setColorNormal(corF);
+            btn6.setColorPressed(cor);
+
         } else {
             btn1.setColorHover(cor);
             btn1.setColorNormal(cor);
@@ -1069,7 +1105,11 @@ public class Menu extends javax.swing.JFrame {
             btn4.setColorHover(cor);
             btn4.setColorNormal(corF);
             btn4.setColorPressed(cor);
-        } else {    
+
+            btn6.setColorHover(cor);
+            btn6.setColorNormal(corF);
+            btn6.setColorPressed(cor);
+        } else {
             btn3.setColorHover(cor);
             btn3.setColorNormal(cor);
             btn3.setColorPressed(cor);
@@ -1243,7 +1283,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jPSuperiorMouseReleased
 
     private void btn5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn5ActionPerformed
-        //Los reportes estan pendientes
+        //Los reportes estan pendientes------
         int seleccion = JOptionPane.showOptionDialog(null, "¿Qué reporte desea generar?",
                 "seleccione...", JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
@@ -1251,6 +1291,7 @@ public class Menu extends javax.swing.JFrame {
         if (seleccion != -1) {
             if (seleccion == 0) {
                 //Reporte de tiempos 
+                //Cuerpo del algoritmo esta pendiente.
                 //...
             } else {
                 //Reporte general Excel.
@@ -1274,6 +1315,38 @@ public class Menu extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btn5ActionPerformed
+
+    private void btn6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn6ActionPerformed
+        btnMenu.setEnabled(false);
+        if (!btn4.isSelected()) {
+            btn1.setColorHover(cor);
+            btn1.setColorNormal(corF);
+            btn1.setColorPressed(cor);
+
+            btn2.setColorHover(cor);
+            btn2.setColorNormal(corF);
+            btn2.setColorPressed(cor);
+
+            btn3.setColorHover(cor);
+            btn3.setColorNormal(corF);
+            btn3.setColorPressed(cor);
+
+            btn4.setColorHover(cor);
+            btn4.setColorNormal(corF);
+            btn4.setColorPressed(cor);
+
+            btn6.setColorHover(cor);
+            btn6.setColorNormal(cor);
+            btn6.setColorPressed(cor);
+        } else {
+            btn6.setColorHover(cor);
+            btn6.setColorNormal(cor);
+            btn6.setColorPressed(cor);
+        }
+        if (!jPContenido.getComponent(0).getName().equals("Procesos")) {
+            new CambiaPanel(jPContenido, new Procesos());
+        }
+    }//GEN-LAST:event_btn6ActionPerformed
 //Metodos de la clase menu----------------------------------------------------->
 
     public void limpiarInformacionAreas() {
@@ -1461,6 +1534,7 @@ public class Menu extends javax.swing.JFrame {
     public rsbuttom.RSButtonMetro btn3;
     public rsbuttom.RSButtonMetro btn4;
     public rsbuttom.RSButtonMetro btn5;
+    public rsbuttom.RSButtonMetro btn6;
     public javax.swing.JButton btnMenu;
     public javax.swing.JButton jButton1;
     public javax.swing.JButton jButton2;

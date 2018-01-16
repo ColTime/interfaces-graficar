@@ -24,6 +24,10 @@ public class Proyecto {
     private boolean IN = false;
     private boolean detalles[] = new boolean[9];//Converosr,Repujado
     private int estado;
+    private String fechaCiccuitoFEoGF = "";
+    private String fechaCiccuitoCOMFEoGF = "";
+    private String fechaPCBFEoGF = "";
+    private String fechaPCBCOMFEoGF = "";
 
     //Get and set------------------------------------------------>
     public void setCrsP(CachedRowSet crsP) {
@@ -74,6 +78,22 @@ public class Proyecto {
         this.estado = estado;
     }
 
+    public void setFechaCiccuitoFEoGF(String fechaCiccuitoFEoGF) {
+        this.fechaCiccuitoFEoGF = fechaCiccuitoFEoGF;
+    }
+
+    public void setFechaCiccuitoCOMFEoGF(String fechaCiccuitoCOMFEoGF) {
+        this.fechaCiccuitoCOMFEoGF = fechaCiccuitoCOMFEoGF;
+    }
+
+    public void setFechaPCBFEoGF(String fechaPCBFEoGF) {
+        this.fechaPCBFEoGF = fechaPCBFEoGF;
+    }
+
+    public void setFechaPCBCOMFEoGF(String fechaPCBCOMFEoGF) {
+        this.fechaPCBCOMFEoGF = fechaPCBCOMFEoGF;
+    }
+
     //Metodos y funciones------------------------------------------------>
     public CachedRowSet diagrama(String inicio, String fin) {
         ProyectoM obj = new ProyectoM();
@@ -102,7 +122,8 @@ public class Proyecto {
                 this.setIN(true);
             }
         }
-        return obj.registrar_Modificar_Proyecto(idOrden, comercial, nombreCliente, nombreProyecto, tipoProyecto, FE, TE, IN, detalles[0], detalles[1], detalles[2], detalles[3], detalles[4], detalles[5], detalles[6], fecha, detalles[7], detalles[8], op, detalles[9], detalles[10]);
+        return obj.registrar_Modificar_Proyecto(idOrden, comercial, nombreCliente, nombreProyecto, tipoProyecto, FE, TE, IN, detalles[0], detalles[1], detalles[2], detalles[3], detalles[4], detalles[5], detalles[6], fecha, detalles[7], detalles[8], op, detalles[9], detalles[10],
+                fechaCiccuitoFEoGF, fechaCiccuitoCOMFEoGF, fechaPCBFEoGF, fechaPCBCOMFEoGF);
     }
 
     //Registrar mediante un lector de QR----------------------------------------

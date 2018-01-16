@@ -124,7 +124,7 @@ public class Diagramas {
                 FE_TE_IN produccion = new FE_TE_IN();
                 fe.add(produccion);
             }
-            while (crs.next()) {
+            while (crs.next()) {//Esto es lo pendiente que hay que corregir en todas las áreas.
                 if (crs.getInt(1) == 1) {//Proceso Perforado.
                     if (crs.getInt(3) == 1) {//estado por iniciar.
                         fe.get(0).porIniciar = crs.getInt(2);

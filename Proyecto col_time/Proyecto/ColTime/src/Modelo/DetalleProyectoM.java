@@ -119,7 +119,7 @@ public class DetalleProyectoM {
                         tipo = numeroDelTipo(tipoNegocio);
                     }
 
-                    if (negocio.equals("IN")) {
+                    if (negocio.equals("IN")) {//tener en cuenta que los procesos se ban a traer de la tabla procesos dependiendo del tipo de negocio!!
                         //Se registran los procesos de IN para este subproyecto.
                         Qry = "CALL PA_RegistrarDetalleEnsamble(?,?,?)";
                         ps = con.prepareStatement(Qry);
@@ -131,7 +131,7 @@ public class DetalleProyectoM {
                             ps.setString(3, ubicacion);
                         }
                         ps.execute();
-                    } else if (negocio.equals("TE")) {
+                    } else if (negocio.equals("TE")) {//tener en cuenta que los procesos se ban a traer de la tabla procesos dependiendo del tipo de negocio!!
                         //Se registran los procesos de TE para este subproyecto. 
                         Qry = "CALL PA_RegistrarDetalleTeclados(?,?,?)";
                         ps = con.prepareStatement(Qry);
@@ -143,7 +143,7 @@ public class DetalleProyectoM {
                             ps.setString(3, ubicacion);
                         }
                         ps.execute();
-                    } else if (negocio.equals("FE")) {
+                    } else if (negocio.equals("FE")) {//tener en cuenta que los procesos se ban a traer de la tabla procesos dependiendo del tipo de negocio!!
                         //Se registran los procesos de FE para este subproyecto.
                         //Se valida que sea GF.
                         if (material.equals("GF")) {//Negocio del almacen
@@ -158,7 +158,7 @@ public class DetalleProyectoM {
                             }
                             ps.setInt(3, 22);//Proceso de GF
                             ps.execute();
-                        } else {
+                        } else {//tener en cuenta que los procesos se ban a traer de la tabla procesos dependiendo del tipo de negocio!!
                             //Si es TH o FV
                             Qry = "CALL PA_RegistrarDetalleFormatoEstandar(?,?,?)";
                             ps = con.prepareStatement(Qry);
@@ -172,6 +172,7 @@ public class DetalleProyectoM {
                             ps.execute();
                         }
                     } else {//Negocio del almacen Para registrar los compoennetes
+                        //tener en cuenta que los procesos se ban a traer de la tabla procesos dependiendo del tipo de negocio!!
                         Qry = "CALL PA_RegistrarDetalleAlmacen(?,?,?)";
                         ps = con.prepareStatement(Qry);
                         ps.setInt(1, Integer.parseInt(numerOrden));
