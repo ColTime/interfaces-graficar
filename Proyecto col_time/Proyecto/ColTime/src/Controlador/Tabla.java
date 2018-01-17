@@ -9,7 +9,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class Tabla {
 
-    private boolean[] editable = {false, false, false, false, false, false, false, false, false, false, false,false};//Que celdas son editables
+    private boolean[] editable = {false, false, false, false, false, false, false, false, false, false, false, false};//Que celdas son editables
     private static int detalle = 0, negocio = 0;
     private CachedRowSet crs = null;
 
@@ -17,13 +17,13 @@ public class Tabla {
     public void visualizar(JTable tabla, int detalle, int negocio) {
         this.detalle = detalle;
         this.negocio = negocio;
-        tabla.setDefaultRenderer(Object.class, new Render(6));
-        String encabezado[] = {"Proceso", "Fecha inicio", "Fecha fin", "Cantidad procesada", "Tiempo total min", "Tiempo unidad min", "Estado", "Hora de ejecución", "Tiempo Ejecución", "Hora de Terminación", "Reiniciar", "IDdetalle","Tiempo"};
+        tabla.setDefaultRenderer(Object.class, new Render(7));
+        String encabezado[] = {"Proceso", "Fecha inicio", "Fecha fin", "Restante", "Cantidad procesada", "Tiempo total min", "Tiempo unidad min", "Estado", "Hora de ejecución", "Tiempo Ejecución", "Hora de Terminación","N°OP", "Reiniciar", "IDdetalle", "Tiempo"};
         DefaultTableModel ds = new DefaultTableModel(null, encabezado) {
 
             Class[] types = new Class[]{
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,java.lang.Object.class};
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class};
 
             public Class getColumnClass(int columnIndex) {
                 return types[columnIndex];
@@ -34,7 +34,7 @@ public class Tabla {
             }
         };
 
-        Object v[] = new Object[13];
+        Object v[] = new Object[15];
 
         try {
             crs = consuldateDetalleProduccion();
@@ -42,24 +42,26 @@ public class Tabla {
                 JButton btn = new JButton("Reiniciar");
                 JButton tiempo = new JButton("Tiempo");
 //                btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-                
+
                 v[0] = crs.getString(1);
                 v[1] = crs.getString(2);
                 v[2] = crs.getString(3);
-                v[3] = String.valueOf(crs.getInt(4));
-                v[4] = crs.getString(5);
-                v[5] = crs.getString(6);
-                v[6] = crs.getString(7);//Estado del producto
-                v[7] = crs.getString(8);
-                if (crs.getString(10) != null) {
-                    v[8] = crs.getString(11);
+                v[3] = crs.getString(13);
+                v[4] = String.valueOf(crs.getInt(4));
+                v[5] = crs.getString(5);
+                v[6] = crs.getString(6);
+                v[7] = crs.getString(7);//Estado del producto
+                v[8] = crs.getString(8);
+                if (crs.getString(11) != null) {
+                    v[9] = crs.getString(11);
                 } else {
-                    v[8] = crs.getString(9);
+                    v[9] = crs.getString(9);
                 }
-                v[9] = crs.getString(10);
-                v[10] = btn;//Este boton se utiliza para que el administrador pueda reiniciar la toma de tiempo de los procesos de  FE/TE/EN
-                v[11] = crs.getString(12);
-                v[12] = tiempo;//Este boton se utiliza para parar el tiempo de los procesos de almacen.
+                v[10] = crs.getString(10);
+                v[11] = crs.getString(14);//Numero de operarios---
+                v[12] = btn;//Este boton se utiliza para que el administrador pueda reiniciar la toma de tiempo de los procesos de  FE/TE/EN
+                v[13] = crs.getString(12);//IDDetalle
+                v[14] = tiempo;//Este boton se utiliza para parar el tiempo de los procesos de almacen.
                 ds.addRow(v);//Filas de la tabla
             }
             tabla.setModel(ds);

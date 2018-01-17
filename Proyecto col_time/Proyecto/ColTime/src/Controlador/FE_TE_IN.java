@@ -16,9 +16,9 @@ public class FE_TE_IN {
 
     //Metodos------------------------------------------------->
     //Ten en cuenta el identificador del lector***
-    public boolean iniciar_Pausar_Reiniciar_Toma_Tiempo(int orden, int detalle, int negocio, int lector, int cantidad) {
+    public boolean iniciar_Pausar_Reiniciar_Toma_Tiempo(int orden, int detalle, int negocio, int lector, int cantidad, int operario) {
         FE_TE_INM obj = new FE_TE_INM();
-        return obj.iniciar_Pausar_Reiniciar_Toma_Tiempo(orden, detalle, negocio, lector, cantidad);
+        return obj.iniciar_Pausar_Reiniciar_Toma_Tiempo(orden, detalle, negocio, lector, cantidad, operario);
     }
 
     public CachedRowSet consultarProyectosEnEjecucion(int negocio) {
@@ -26,9 +26,9 @@ public class FE_TE_IN {
         return obj.consultarProyectosEnEjecucion(negocio);
     }
 
-    public boolean pararTiempoAlmacen(int orden,int detalle, int cantidad, int detalleproducto, int proceso) {
+    public boolean pararTiempoAlmacen(int orden, int detalle, int cantidad, int detalleproducto, int proceso) {
         FE_TE_INM obj = new FE_TE_INM();
-        return obj.pararTiempoAlmacen(orden,detalle, cantidad, detalleproducto,proceso);
+        return obj.pararTiempoAlmacen(orden, detalle, cantidad, detalleproducto, proceso);
     }
 
     @Override

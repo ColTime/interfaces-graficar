@@ -698,6 +698,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                                 obj.jTPCBTE.setText(TDetalle.getValueAt(i, 3).toString());
                                 obj.cbMaterialPCBTE.setEnabled(true);
                                 obj.cbMaterialPCBTE.setSelectedItem(TDetalle.getValueAt(i, 5).toString());
+//                                obj.jLMaterialPCB.setText(TDetalle.getValueAt(i, 5).toString());
                             } else if (TDetalle.getValueAt(i, 2).toString().equals("Circuito") && TDetalle.getValueAt(i, 1).toString().equals("IN")) {
                                 obj.jLIDIntegracion.setText(TDetalle.getValueAt(i, 0).toString());
                                 obj.jCIntegracion.setSelected(true);
@@ -724,6 +725,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                                 obj.jTCircuito.setText(TDetalle.getValueAt(i, 3).toString());
                                 obj.cbMaterialCircuito.setEnabled(true);
                                 obj.cbMaterialCircuito.setSelectedItem(TDetalle.getValueAt(i, 5).toString());
+//                                obj.jLMaterialCircuito.setText(TDetalle.getValueAt(i, 5).toString());
                             } else {//Componentes del almacen
 
                                 if (TDetalle.getValueAt(i, 2).toString().equals("Circuito COM")) {

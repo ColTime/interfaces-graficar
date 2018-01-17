@@ -36,7 +36,7 @@ public class proyecto extends javax.swing.JPanel {
             Notificacion1.setVisible(false);
             GenerarQR.setEnabled(false);
             btnTomaTiempos.setVisible(false);
-            visibilidadID();
+//            visibilidadID();//Pendiente para realizar mañana!
             limites();
             jREjecucion.setEnabled(false);
             jRParada.setEnabled(false);
@@ -44,11 +44,7 @@ public class proyecto extends javax.swing.JPanel {
         }
         op = p;
         limpiarCampos();
-        //Identificadores de productos de almacen
-        jLIDCircuitoGF.setVisible(false);
-        jLIDCircuitoCOM.setVisible(false);
-        jLIDPCBGF.setVisible(false);
-        jLIDPCBCOM.setVisible(false);
+
         //---------------------------------------
     }
     static int op = 0;
@@ -68,6 +64,11 @@ public class proyecto extends javax.swing.JPanel {
         jLIDPCB.setVisible(false);
         jLIDTeclado.setVisible(false);
         jLIDIntegracion.setVisible(false);
+        //Identificadores de productos de almacen
+        jLIDCircuitoGF.setVisible(false);//ID del Circuito Cuando es GF
+        jLIDCircuitoCOM.setVisible(false);//ID de los componenetes del circuito
+        jLIDPCBGF.setVisible(false);//ID de la PCB cuando es GF
+        jLIDPCBCOM.setVisible(false);//ID de los componentes del circuito
     }
 
     private void limites() {
@@ -155,6 +156,8 @@ public class proyecto extends javax.swing.JPanel {
         jLIDPCBGF = new javax.swing.JLabel();
         jRPIntegracion = new javax.swing.JRadioButton();
         jLIDPCBEN = new javax.swing.JLabel();
+        jLMaterialPCB = new javax.swing.JLabel();
+        jLMaterialCircuito = new javax.swing.JLabel();
         jPDetalles = new javax.swing.JPanel();
         jDentrega = new com.toedter.calendar.JDateChooser();
         jLabel10 = new javax.swing.JLabel();
@@ -200,11 +203,11 @@ public class proyecto extends javax.swing.JPanel {
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Proyecto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18), new java.awt.Color(128, 128, 131))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Proyecto", 0, 0, new java.awt.Font("Tahoma", 1, 18), new java.awt.Color(128, 128, 131))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPInformacion.setBackground(new java.awt.Color(255, 255, 255));
-        jPInformacion.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Información filtraria", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
+        jPInformacion.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Información filtraria", 0, 0, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
 
         jTNorden.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTNorden.setColorDeBorde(new java.awt.Color(204, 204, 204));
@@ -301,7 +304,7 @@ public class proyecto extends javax.swing.JPanel {
         jPanel2.add(jPInformacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 430, 180));
 
         jPDetalles1.setBackground(new java.awt.Color(255, 255, 255));
-        jPDetalles1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Detalles", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
+        jPDetalles1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Detalles", 0, 0, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
         jPDetalles1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTTeclado.setColorDeBorde(new java.awt.Color(204, 204, 204));
@@ -583,10 +586,10 @@ public class proyecto extends javax.swing.JPanel {
         jDFechaEntregaFE.setDateFormatString("dd/MM/yyyy");
         jDFechaEntregaFE.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jDFechaEntregaFE.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jDFechaEntregaFECaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jPDetalles1.add(jDFechaEntregaFE, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 140, -1));
@@ -595,10 +598,10 @@ public class proyecto extends javax.swing.JPanel {
         jDFechaEntregaFECOM.setDateFormatString("dd/MM/yyyy");
         jDFechaEntregaFECOM.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jDFechaEntregaFECOM.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jDFechaEntregaFECOMCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jPDetalles1.add(jDFechaEntregaFECOM, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 130, 20));
@@ -607,10 +610,10 @@ public class proyecto extends javax.swing.JPanel {
         jDFechaEntregaPCBGF.setDateFormatString("dd/MM/yyyy");
         jDFechaEntregaPCBGF.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jDFechaEntregaPCBGF.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jDFechaEntregaPCBGFCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jPDetalles1.add(jDFechaEntregaPCBGF, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, 130, -1));
@@ -642,10 +645,10 @@ public class proyecto extends javax.swing.JPanel {
         jDFechaEntregaPCBCOMGF.setDateFormatString("dd/MM/yyyy");
         jDFechaEntregaPCBCOMGF.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jDFechaEntregaPCBCOMGF.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jDFechaEntregaPCBCOMGFCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jPDetalles1.add(jDFechaEntregaPCBCOMGF, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 190, 130, -1));
@@ -678,19 +681,25 @@ public class proyecto extends javax.swing.JPanel {
         jLIDPCBEN.setText("0");
         jPDetalles1.add(jLIDPCBEN, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 130, 10, -1));
 
+        jLMaterialPCB.setText("M");
+        jPDetalles1.add(jLMaterialPCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 40, -1, -1));
+
+        jLMaterialCircuito.setText("M");
+        jPDetalles1.add(jLMaterialCircuito, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, -1, -1));
+
         jPanel2.add(jPDetalles1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 820, 222));
 
         jPDetalles.setBackground(new java.awt.Color(255, 255, 255));
-        jPDetalles.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Detalles", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
+        jPDetalles.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Detalles", 0, 0, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
 
         jDentrega.setToolTipText("");
         jDentrega.setDateFormatString("dd/MM/yyyy");
         jDentrega.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jDentrega.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jDentregaCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
 
@@ -846,7 +855,7 @@ public class proyecto extends javax.swing.JPanel {
         jPanel2.add(jPDetalles, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, 370, 180));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(204, 204, 204))); // NOI18N
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", 0, 0, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(204, 204, 204))); // NOI18N
         jPanel5.setLayout(null);
 
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add_Proyect.png"))); // NOI18N
@@ -1055,6 +1064,8 @@ public class proyecto extends javax.swing.JPanel {
         jLIDPCBCOM.setText("0");
         jLIDCircuitoGF.setText("0");
         jLIDCircuitoCOM.setText("0");
+        jLMaterialPCB.setText("M");
+        jLMaterialCircuito.setText("M");
     }
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         ConsutaProyecto obj = new ConsutaProyecto();
@@ -1468,10 +1479,19 @@ public class proyecto extends javax.swing.JPanel {
 //            jRPIntegracion.setEnabled(true);
         } else {
             cbMaterialPCBTE.setEnabled(false);
+            cbMaterialPCBTE.setSelectedIndex(0);
             jCAntisolderP.setEnabled(false);
             jCRuteoP.setEnabled(false);
-//            jRPCBCOM.setEnabled(false);
-//            jRPIntegracion.setEnabled(false);
+            jRPCBCOM.setEnabled(false);
+            jRPIntegracion.setEnabled(false);
+            jRPCBCOM.setSelected(false);
+            jRPIntegracion.setSelected(false);
+            jDFechaEntregaPCBGF.setDate(null);
+            jDFechaEntregaPCBGF.setVisible(false);
+            jLCircuitoGF.setVisible(false);
+            jDFechaEntregaPCBCOMGF.setDate(null);
+            jDFechaEntregaPCBCOMGF.setVisible(false);
+            jLpcbGF.setVisible(false);
         }
     }//GEN-LAST:event_jCPCBTEActionPerformed
 
@@ -1568,6 +1588,7 @@ public class proyecto extends javax.swing.JPanel {
         } else {
             jLpcbGF.setVisible(false);
             jDFechaEntregaPCBCOMGF.setVisible(false);
+            jDFechaEntregaPCBCOMGF.setDate(null);
         }
     }//GEN-LAST:event_jRPCBCOMActionPerformed
 
@@ -1583,6 +1604,7 @@ public class proyecto extends javax.swing.JPanel {
         } else {
             jLCircuitoGF.setVisible(false);
             jDFechaEntregaPCBGF.setVisible(false);
+            jDFechaEntregaPCBGF.setDate(null);
         }
     }//GEN-LAST:event_jRPIntegracionActionPerformed
 //Metodos-------------------------------------------------------------------->
@@ -1689,8 +1711,10 @@ public class proyecto extends javax.swing.JPanel {
         } else {
             jLComCircuitos.setVisible(false);
             jDFechaEntregaFECOM.setVisible(false);
+            jDFechaEntregaFECOM.setDate(null);
             jLCircuitoFE.setVisible(false);
             jDFechaEntregaFE.setVisible(false);
+            jDFechaEntregaFE.setDate(null);
         }
     }
 
@@ -2232,12 +2256,12 @@ public class proyecto extends javax.swing.JPanel {
         jTStencil.setEditable(true);
     }
 
-    private void VerificarQueSeElimina(DetalleProyecto obj) {
+    private void VerificarQueSeElimina(DetalleProyecto obj) {//Falata la eliminacion Cuando se presenta una integración
         if (!jLIDCircuito.getText().equals("0") && jCCircuito.isSelected() == false) {
             //Eliminar el detalle del proyecto si ya no esta seleccionado
             subEliminardetalle(obj, Integer.parseInt(jLIDCircuito.getText()), Integer.parseInt(jTNorden.getText()), "FE", "Circuito");
         }
-        if (!jLIDCircuito.getText().equals("0") && cbMaterialCircuito.getSelectedIndex() == 3) {
+        if (!jLIDCircuito.getText().equals("0") && (jLMaterialCircuito.getText().equals("GF") || cbMaterialCircuito.getSelectedItem().toString().equals("GF"))) {//Probelmas al saber que variable de material de utiliza pra le elminacion
             subEliminardetalle(obj, Integer.parseInt(jLIDCircuito.getText()), Integer.parseInt(jTNorden.getText()), "FE", "Circuito");
         }
         if (!jLIDTeclado.getText().equals("0") && jCTeclado.isSelected() == false) {
@@ -2261,19 +2285,31 @@ public class proyecto extends javax.swing.JPanel {
         if (!jLIDPCB.getText().equals("0") && jCPCBTE.isSelected() == false) {
             subEliminardetalle(obj, Integer.parseInt(jLIDPCB.getText()), Integer.parseInt(jTNorden.getText()), "FE", "PCB");
         }
-        if (!jLIDCircuitoGF.getText().equals("0") && cbMaterialCircuito.getSelectedIndex() != 3) {
-            //Se eliminara el gran formato y se registrara la otra forma de circuito.
-            subEliminardetalle(obj, Integer.parseInt(jLIDCircuitoGF.getText()), Integer.parseInt(jTNorden.getText()), "ALMACEN", "Circuito GF");
+        if (!jLIDPCB.getText().equals("0") && jLMaterialPCB.getText().equals("GF")) {
+            subEliminardetalle(obj, Integer.parseInt(jLIDPCB.getText()), Integer.parseInt(jTNorden.getText()), "FE", "PCB");
         }
-        if (!jLIDPCBGF.getText().equals("0") && cbMaterialPCBTE.getSelectedIndex() != 3) {
+        if (!jLIDCircuitoGF.getText().equals("0") && !jLMaterialCircuito.getText().equals("GF")) {
+            //Se eliminara el gran formato y se registrara la otra forma de circuito.
+            subEliminardetalle(obj, Integer.parseInt(jLIDCircuito.getText()), Integer.parseInt(jTNorden.getText()), "ALMACEN", "Circuito GF");
+        }
+        if (!jLIDPCBGF.getText().equals("0") && !jLMaterialPCB.getText().equals("GF")) {
             //Se eliminara el gran formato y se registrara la otra forma de circuito.
             subEliminardetalle(obj, Integer.parseInt(jLIDPCBGF.getText()), Integer.parseInt(jTNorden.getText()), "ALMACEN", "PCB GF");
         }
         if (jRPCBCOM.isSelected() == false && !jLIDPCBCOM.getText().equals("0")) {
             subEliminardetalle(obj, Integer.parseInt(jLIDPCBCOM.getText()), Integer.parseInt(jTNorden.getText()), "ALMACEN", "PCB COM");
         }
-        if (jCCircuito.isSelected() == false || jCIntegracion.isSelected() == false && !jLIDCircuitoCOM.getText().equals("0")) {
+        if ((jCCircuito.isSelected() == false || jCIntegracion.isSelected() == false) && !jLIDCircuitoCOM.getText().equals("0")) {
             subEliminardetalle(obj, Integer.parseInt(jLIDCircuitoCOM.getText()), Integer.parseInt(jTNorden.getText()), "ALMACEN", "Circuito COM");
+        }
+        //Eliminación de toda la información si los check-box no estan seleccionados.
+        if (!jCPCBTE.isSelected() && jLMaterialPCB.getText().equals("GF")) {
+            if (!jLIDPCBGF.getText().equals("0")) {
+                subEliminardetalle(obj, Integer.parseInt(jLIDPCBGF.getText()), Integer.parseInt(jTNorden.getText()), "ALMACEN", "PCB GF");
+            }
+            if (!jLIDPCBCOM.getText().equals("0")) {
+                subEliminardetalle(obj, Integer.parseInt(jLIDPCBCOM.getText()), Integer.parseInt(jTNorden.getText()), "ALMACEN", "PCB COM");
+            }
         }
     }
 
@@ -2699,7 +2735,7 @@ public class proyecto extends javax.swing.JPanel {
             } catch (Exception e) {
             }
         } else {
-            //Mensaje de la eliminacion no se pudo realizar por que ya comenzo su ejecucion
+            //Mensaje de la eliminacion no se pudo realizar por que ya comenzo su ejecucion (Esto solo se pone por seguridad) de resto no va a funcionar
             new rojerusan.RSNotifyAnimated("Listo!!", "el detalle " + tipo + " " + negocio + " de la orden" + jTNorden.getText() + " no pudo ser eliminada porque ya esta en ejecución.", 5, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
         }
     }
@@ -2760,6 +2796,8 @@ public class proyecto extends javax.swing.JPanel {
     public static javax.swing.JLabel jLIDTeclado;
     public static javax.swing.JLabel jLIDTroquel;
     public static javax.swing.JLabel jLIngreso;
+    public static javax.swing.JLabel jLMaterialCircuito;
+    public static javax.swing.JLabel jLMaterialPCB;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

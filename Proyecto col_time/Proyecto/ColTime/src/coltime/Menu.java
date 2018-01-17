@@ -13,6 +13,7 @@ import Vistas.Usuarios1;
 import Vistas.proyecto;
 import Vistas.proyecto1;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import javax.sql.rowset.CachedRowSet;
@@ -367,6 +368,12 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jPMenu.add(btn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 194, 190, 42));
+
+        jTLector.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTLectorKeyPressed(evt);
+            }
+        });
         jPMenu.add(jTLector, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 570, 150, 20));
 
         agregar.setText("agregar");
@@ -1022,7 +1029,7 @@ public class Menu extends javax.swing.JFrame {
             btn4.setColorHover(cor);
             btn4.setColorNormal(cor);
             btn4.setColorPressed(cor);
-            
+
             btn6.setColorHover(cor);
             btn6.setColorNormal(corF);
             btn6.setColorPressed(cor);
@@ -1203,51 +1210,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosed
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
-        String infoP[] = jTLector.getText().split(";");
-        Proyecto validar = new Proyecto();
-        if (validar.validarEliminacion(Integer.parseInt(infoP[0]))) {//Valido si la orden esta eliminada o no
-            if (validar.validarEjecucionOParada(Integer.parseInt(infoP[0]))) {//Valida que la orden no este parada
-                //#--------------------------------------------------------------------------------------------------
-                switch (Integer.parseInt(infoP[2])) {
-                    //Se tiene que validar el estado del proyecto a ver si permite o no registrar la toma de tiempo.
-                    case 1:
-                        if (producF == null) {
-                            producF = new ControlDelTiempo();
-                            producF.setName("FE");
-                            producF.setTitle("Formato estandar");
-                            producF.setVisible(true);
-                        }
-                        producF.RegistrarTomaTiempoNegocio(infoP, cargo, producF);
-                        break;
-                    case 2:
-                        if (producT == null) {
-                            producT = new ControlDelTiempo();
-                            producT.setName("TE");
-                            producT.setTitle("Teclados");
-                            producT.setVisible(true);
-                        }
-                        producT.RegistrarTomaTiempoNegocio(infoP, cargo, producT);
-                        break;
-                    case 3:
-                        if (producE == null) {
-                            producE = new ControlDelTiempo();
-                            producE.setName("IN");
-                            producE.setTitle("Ensamble");
-                            producE.setVisible(true);
-                        }
-                        producE.RegistrarTomaTiempoNegocio(infoP, cargo, producE);
-                        break;
-                }
-                //#--------------------------------------------------------------------------------------------------
-            } else {
-                //El proyecto no puede realizar la toma de tiempo porque esta parada.
-                new rojerusan.RSNotifyAnimated("¡Alerta!", "Esta orden esta parada, no puedes realizar la toma de tiempo de esta orden.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
-            }
-        } else {
-            //Este mensaje se retornara al dispositivo móvil.
-            //El proyecto no existe - Esta eliminado
-            new rojerusan.RSNotifyAnimated("¡Alerta!", "Este numero de orden no existe.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
-        }
+        LecturaCodigoQR();
     }//GEN-LAST:event_agregarActionPerformed
 
     private void jPanel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MousePressed
@@ -1347,7 +1310,61 @@ public class Menu extends javax.swing.JFrame {
             new CambiaPanel(jPContenido, new Procesos());
         }
     }//GEN-LAST:event_btn6ActionPerformed
+
+    private void jTLectorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTLectorKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            LecturaCodigoQR();
+        }
+    }//GEN-LAST:event_jTLectorKeyPressed
 //Metodos de la clase menu----------------------------------------------------->
+
+    private void LecturaCodigoQR() {
+        String infoP[] = jTLector.getText().split(";");
+        Proyecto validar = new Proyecto();
+        if (validar.validarEliminacion(Integer.parseInt(infoP[0]))) {//Valido si la orden esta eliminada o no
+            if (validar.validarEjecucionOParada(Integer.parseInt(infoP[0]))) {//Valida que la orden no este parada
+                //#--------------------------------------------------------------------------------------------------
+                switch (Integer.parseInt(infoP[2])) {
+                    //Se tiene que validar el estado del proyecto a ver si permite o no registrar la toma de tiempo.
+                    case 1:
+                        if (producF == null) {
+                            producF = new ControlDelTiempo();
+                            producF.setName("FE");
+                            producF.setTitle("Formato estandar");
+                            producF.setVisible(true);
+                        }
+                        producF.RegistrarTomaTiempoNegocio(infoP, cargo, producF);
+                        break;
+                    case 2:
+                        if (producT == null) {
+                            producT = new ControlDelTiempo();
+                            producT.setName("TE");
+                            producT.setTitle("Teclados");
+                            producT.setVisible(true);
+                        }
+                        producT.RegistrarTomaTiempoNegocio(infoP, cargo, producT);
+                        break;
+                    case 3:
+                        if (producE == null) {
+                            producE = new ControlDelTiempo();
+                            producE.setName("IN");
+                            producE.setTitle("Ensamble");
+                            producE.setVisible(true);
+                        }
+                        producE.RegistrarTomaTiempoNegocio(infoP, cargo, producE);
+                        break;
+                }
+                //#--------------------------------------------------------------------------------------------------
+            } else {
+                //El proyecto no puede realizar la toma de tiempo porque esta parada.
+                new rojerusan.RSNotifyAnimated("¡Alerta!", "Esta orden esta parada, no puedes realizar la toma de tiempo de esta orden.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
+            }
+        } else {
+            //Este mensaje se retornara al dispositivo móvil.
+            //El proyecto no existe - Esta eliminado
+            new rojerusan.RSNotifyAnimated("¡Alerta!", "Este numero de orden no existe.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
+        }
+    }
 
     public void limpiarInformacionAreas() {
         FIngresadosHoy.setText("0");

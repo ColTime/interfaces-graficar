@@ -28,7 +28,7 @@ public class FE_TE_INM {
 
     //Metodos------------------------------------------------->
     //No se te olvide tener en cuenta el id del lector y concatenar a la informacion despues de leer el código QR***
-    public boolean iniciar_Pausar_Reiniciar_Toma_Tiempo(int orden, int detalle, int negocio, int lector, int cantidadTerminada) {//Agregar un identificador por persona!!
+    public boolean iniciar_Pausar_Reiniciar_Toma_Tiempo(int orden, int detalle, int negocio, int lector, int cantidadTerminada, int operarios) {//Agregar un identificador por persona!!
         //Falta hacer que se puedan poner varias tomas de tiempo del mismo proceso al mismo tiempo.
         try {
             conexion = new Conexion();
@@ -68,6 +68,8 @@ public class FE_TE_INM {
                     cantidadAntigua = rs.getInt(2);
                     estado = 0;
                 }
+                int restante = rs.getInt(1) - (cantidadTerminada + cantidadAntigua);
+                operarios = rs.getInt(3);
                 // si el estado es dos o tres (2 o 3) procedera a realizar la actualización.
                 if (estado != 0) {
                     Qry = "CALL PA_CalcularTiempoMinutos(?,?,?,?)";
@@ -78,8 +80,8 @@ public class FE_TE_INM {
                     ps.setInt(4, negocio);
                     rs = ps.executeQuery();
                     rs.next();
-                    T_Total = convertirHorasAMinutos(rs.getString(1).split(":"), rs.getString(2).split(":"));
-                    Qry = "CALL PA_PausarTomaDeTiempoDeProcesos(?,?,?,?,?,?,?)";
+                    T_Total = convertirHorasAMinutos(rs.getString(1).split(":"), rs.getString(2).split(":"), operarios);
+                    Qry = "CALL PA_PausarTomaDeTiempoDeProcesos(?,?,?,?,?,?,?,?)";
                     ps = con.prepareStatement(Qry);
                     ps.setInt(1, orden);
                     ps.setInt(2, detalle);
@@ -88,6 +90,7 @@ public class FE_TE_INM {
                     ps.setString(5, String.valueOf(T_Total));
                     ps.setInt(6, cantidadTerminada + cantidadAntigua);
                     ps.setInt(7, estado);
+                    ps.setInt(8, restante);//Cantidad de productos restantes!!
                     res = !ps.execute();//Respuesta es igual a True para poder agregar los botones
                     //Promedio de producto por minuto.
                     cantidadProductoMinuto(detalle, negocio, lector);
@@ -103,12 +106,13 @@ public class FE_TE_INM {
                 }
             } else {
                 //Si no existe se ejecutara el procedimiento para iniciar o renaudar el tiempo
-                Qry = "CALL PA_IniciarRenaudarTomaDeTiempoProcesos(?,?,?,?)";
+                Qry = "CALL PA_IniciarRenaudarTomaDeTiempoProcesos(?,?,?,?,?)";
                 ps = con.prepareStatement(Qry);
                 ps.setInt(1, orden);
                 ps.setInt(2, detalle);
                 ps.setInt(3, lector);
                 ps.setInt(4, negocio);
+                ps.setInt(5, operarios);
                 res = !ps.execute();//Respuesta es igual a True para poder agregar los botones
             }
             con.close();
@@ -301,7 +305,7 @@ public class FE_TE_INM {
         return resultado;
     }
 
-    private String convertirHorasAMinutos(String total[], String hora[]) {
+    private String convertirHorasAMinutos(String total[], String hora[], int operarios) {
         int h = 0, m = 0, s = 0, ma = 0, sa = 0;
         String tiempoMS = "";
         //Horas, minutos y segundos
@@ -312,9 +316,13 @@ public class FE_TE_INM {
         ma = Integer.parseInt(total[0]);
         sa = Integer.parseInt(total[1]);
         if (h >= 1) {
-            //Vamos a convertir las horas en minutos siempre y cuando sean mayores a 0 y sumarle los minutos antiguos
+            //Vamos a convertir las horas en minutos siempre y cuando las horas sean mayores a 0 le sumaremos los minutos antiguos.
             m += (h * 60);
         }
+        //Tiempo * Numero de operarios----------------------------------------->
+        m = m * operarios;//Se multiplican los minutos trabajados por la cantidad de operarios que trabajaron en ese proceso de un proyecto asignado.
+        s = s * operarios;//Igualmente se hace con los segundos.
+        //--------------------------------------------------------------------->
         //Sumamos los segundos nuevos con los segundos antiguos
         s += sa;
         m += ma;

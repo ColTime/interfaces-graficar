@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import rojerusan.RSNotifyAnimated;
 
 public class detalleProyecto extends javax.swing.JDialog {
-
+    
     public detalleProyecto(java.awt.Frame parent, boolean modal, int detalle, int negocio, String orden, int permiso) {//Falta organizar la variable "tipo" para que traiga el valor correspondiente
         super(parent, modal);
         initComponents();
@@ -23,18 +23,19 @@ public class detalleProyecto extends javax.swing.JDialog {
         } else {
             this.setTitle(orden + " - " + "Almacen");
         }
-
+        
         this.detalle = detalle;
         this.negocio = negocio;
         this.setLocationRelativeTo(null);
         this.permiso = permiso;
         cargarTabla();
-        jTNombreCliente.setEditable(false);
-        jTNombreProyecto.setEditable(false);
-        jTFechaEntrega.setEditable(false);
-        jTFechaIngreso.setEditable(false);
-        jTCantidadTotal.setEditable(false);
-        jTTimepoTotal.setEditable(false);
+        jTNombreCliente.setEnabled(false);
+        jTNombreProyecto.setEnabled(false);
+        jTFechaEntrega.setEnabled(false);
+        jTFechaIngreso.setEnabled(false);
+        jTCantidadTotal.setEnabled(false);
+        jTTimepoTotal.setEnabled(false);
+        jTTimepoTotalUnidad.setEnabled(false);
         this.setIconImage(new ImageIcon(getClass().getResource("/imagenesEmpresa/favicon.png")).getImage());
     }
     //variables
@@ -42,7 +43,7 @@ public class detalleProyecto extends javax.swing.JDialog {
     private static int detalle = 0;
     private static int negocio = 0, permiso = 0;
     int rows = -1;
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -65,15 +66,16 @@ public class detalleProyecto extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         jTTimepoTotal = new elaprendiz.gui.textField.TextFieldRoundBackground();
         jLabel9 = new javax.swing.JLabel();
-        jTTimepoTotal1 = new elaprendiz.gui.textField.TextFieldRoundBackground();
+        jTTimepoTotalUnidad = new elaprendiz.gui.textField.TextFieldRoundBackground();
         jLabel10 = new javax.swing.JLabel();
         jTFechaIngreso1 = new elaprendiz.gui.textField.TextFieldRoundBackground();
         jLabel11 = new javax.swing.JLabel();
         jTFechaIngreso2 = new elaprendiz.gui.textField.TextFieldRoundBackground();
         jLabel12 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jTFechaIngreso3 = new elaprendiz.gui.textField.TextFieldRoundBackground();
         jLabel13 = new javax.swing.JLabel();
+        jTFechaIngreso4 = new elaprendiz.gui.textField.TextFieldRoundBackground();
+        jLabel14 = new javax.swing.JLabel();
 
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/retro.png"))); // NOI18N
         jMenuItem1.setText("Actualizar");
@@ -85,7 +87,6 @@ public class detalleProyecto extends javax.swing.JDialog {
         popMenu.add(jMenuItem1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1285, 374));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1285, 416));
 
@@ -99,13 +100,13 @@ public class detalleProyecto extends javax.swing.JDialog {
         TDetalleProduccion.setForeground(new java.awt.Color(128, 128, 131));
         TDetalleProduccion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Proceso", "Fecha inicio", "Fecha fin", "Cantidad Procesada", "Tiempo total min", "Tiempo por unidad min", "Estado", "Hora Ejecucion", "Tiempo Ejecucion", "Hora Terminacion", "reiniciar", "Tiempo"
+                "Proceso", "Fecha inicio", "Fecha fin", "Restantes", "Cantidad Procesada", "Tiempo total min", "Tiempo por unidad min", "Estado", "Hora Ejecucion", "Tiempo Ejecucion", "Hora Terminacion", "N°Op", "reiniciar", "IDdetalle", "Tiempo"
             }
         ));
         TDetalleProduccion.setFillsViewportHeight(true);
@@ -187,10 +188,10 @@ public class detalleProyecto extends javax.swing.JDialog {
         jLabel9.setForeground(new java.awt.Color(128, 128, 131));
         jLabel9.setText("Tiempo Total:");
 
-        jTTimepoTotal1.setBorder(null);
-        jTTimepoTotal1.setColorDeBorde(new java.awt.Color(204, 204, 204));
-        jTTimepoTotal1.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
-        jTTimepoTotal1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jTTimepoTotalUnidad.setBorder(null);
+        jTTimepoTotalUnidad.setColorDeBorde(new java.awt.Color(204, 204, 204));
+        jTTimepoTotalUnidad.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
+        jTTimepoTotalUnidad.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(128, 128, 131));
@@ -203,7 +204,7 @@ public class detalleProyecto extends javax.swing.JDialog {
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(128, 128, 131));
-        jLabel11.setText("Fecha de entrega FE:");
+        jLabel11.setText("Fecha de entrega COM Circuito");
 
         jTFechaIngreso2.setBorder(null);
         jTFechaIngreso2.setColorDeBorde(new java.awt.Color(204, 204, 204));
@@ -212,10 +213,7 @@ public class detalleProyecto extends javax.swing.JDialog {
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(128, 128, 131));
-        jLabel12.setText("Fecha de entrega FE:");
-
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Imagen");
+        jLabel12.setText("Fecha de entrega COM Circuito");
 
         jTFechaIngreso3.setBorder(null);
         jTFechaIngreso3.setColorDeBorde(new java.awt.Color(204, 204, 204));
@@ -224,7 +222,16 @@ public class detalleProyecto extends javax.swing.JDialog {
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(128, 128, 131));
-        jLabel13.setText("Fecha de entrega FE:");
+        jLabel13.setText("Fecha de entrega PCB GF:");
+
+        jTFechaIngreso4.setBorder(null);
+        jTFechaIngreso4.setColorDeBorde(new java.awt.Color(204, 204, 204));
+        jTFechaIngreso4.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
+        jTFechaIngreso4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(128, 128, 131));
+        jLabel14.setText("Fecha de entrega PCB GF:");
 
         javax.swing.GroupLayout jPInformacionLayout = new javax.swing.GroupLayout(jPInformacion);
         jPInformacion.setLayout(jPInformacionLayout);
@@ -234,53 +241,54 @@ public class detalleProyecto extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPInformacionLayout.createSequentialGroup()
-                        .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPInformacionLayout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jTNombreCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTNombreProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTCantidadTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTFechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addContainerGap())
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 244, Short.MAX_VALUE))
+                    .addComponent(jTNombreCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTNombreProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTCantidadTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addGap(18, 18, 18)
+                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(18, 18, 18)
+                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTFechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addContainerGap())
+            .addGroup(jPInformacionLayout.createSequentialGroup()
+                .addGap(159, 159, 159)
+                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTTimepoTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
                     .addGroup(jPInformacionLayout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTTimepoTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
-                            .addGroup(jPInformacionLayout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(jTTimepoTotal1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTFechaIngreso1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTFechaIngreso2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTFechaIngreso3, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13))
-                        .addGap(77, 77, 77))))
+                        .addGap(21, 21, 21)
+                        .addComponent(jTTimepoTotalUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTFechaIngreso1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTFechaIngreso2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTFechaIngreso3, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTFechaIngreso4, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPInformacionLayout.setVerticalGroup(
             jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -310,10 +318,8 @@ public class detalleProyecto extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTNombreProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jTNombreCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPInformacionLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPInformacionLayout.createSequentialGroup()
@@ -327,18 +333,22 @@ public class detalleProyecto extends javax.swing.JDialog {
                                     .addGap(31, 31, 31)))
                             .addGroup(jPInformacionLayout.createSequentialGroup()
                                 .addGap(21, 21, 21)
-                                .addComponent(jTTimepoTotal1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTTimepoTotalUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel10))
-                        .addComponent(jTFechaIngreso2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTFechaIngreso4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPInformacionLayout.createSequentialGroup()
-                            .addComponent(jLabel12)
-                            .addGap(31, 31, 31)))
-                    .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel14)
+                            .addGap(31, 31, 31))
                         .addComponent(jTFechaIngreso3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPInformacionLayout.createSequentialGroup()
                             .addComponent(jLabel13)
+                            .addGap(31, 31, 31)))
+                    .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jTFechaIngreso2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPInformacionLayout.createSequentialGroup()
+                            .addComponent(jLabel12)
                             .addGap(31, 31, 31))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -348,8 +358,8 @@ public class detalleProyecto extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPInformacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1265, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1324, Short.MAX_VALUE)
+                    .addComponent(jPInformacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -366,11 +376,11 @@ public class detalleProyecto extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1348, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
         );
 
         pack();
@@ -380,17 +390,17 @@ public class detalleProyecto extends javax.swing.JDialog {
         //Botones de seguridad
         String[] botones = {" SI ", " NO "};
         rows = TDetalleProduccion.rowAtPoint(evt.getPoint());
-
+        
         int column = TDetalleProduccion.getColumnModel().getColumnIndexAtX(evt.getX());
         int row = evt.getY() / TDetalleProduccion.getRowHeight();
-
+        
         if (row < TDetalleProduccion.getRowCount() && row >= 0 && column < TDetalleProduccion.getColumnCount() && column >= 0) {
             Object value = TDetalleProduccion.getValueAt(row, column);
             if (value instanceof JButton) {
                 JButton boton;
                 boton = (JButton) value;
-                if (boton.getText().equals("Tiempo") && !TDetalleProduccion.getValueAt(row, 6).toString().equals("Pausado")) {
-                    //Finalizar la toma de tiempo de los procesos del almacen...
+                if (boton.getText().equals("Tiempo") && !TDetalleProduccion.getValueAt(row, 7).toString().equals("Pausado")) {
+                    //Finalizar la toma de tiempo de los procesos del almacen(Solo lo pueden realizar los encargado de almacen)
                     if (boton.getActionCommand().equals("1")) {
                         FE_TE_IN almacen = new FE_TE_IN();
                         String idDetalle = "";
@@ -400,7 +410,7 @@ public class detalleProyecto extends javax.swing.JDialog {
                             String cantidad = JOptionPane.showInputDialog("Cantidades recibidas:");
                             if (cantidad != null) {//Presiona el botono "NO"
                                 if (!cantidad.equals("") && Integer.parseInt(cantidad) >= 1) {//Validar la cantidad cuendo presiona el boton "SI"
-                                    idDetalle = String.valueOf(TDetalleProduccion.getValueAt(row, 11));
+                                    idDetalle = String.valueOf(TDetalleProduccion.getValueAt(row, 13));
                                     int proceso = 0;
                                     if (TDetalleProduccion.getValueAt(row, 0).toString().equals("GF")) {
                                         proceso = 22;
@@ -420,7 +430,7 @@ public class detalleProyecto extends javax.swing.JDialog {
                             //<Componentes>
                             //Registro te tiempo de componentes
                             if (JOptionPane.showOptionDialog(null, "¿Seguro desea terminar la toma de tiempos de los componentes.", "Seguridad", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null/*icono*/, botones, botones[0]) == 0) {
-                                idDetalle = String.valueOf(TDetalleProduccion.getValueAt(row, 11));
+                                idDetalle = String.valueOf(TDetalleProduccion.getValueAt(row, 13));
                                 String orden[] = this.getTitle().split("-");                                         //Cantidad//   
                                 almacen.pararTiempoAlmacen(Integer.parseInt(orden[0].trim()), Integer.parseInt(idDetalle), 0, detalle, 23);//
                                 //Mensaje de confirmación de la terminación de la toma de tiempo
@@ -431,12 +441,12 @@ public class detalleProyecto extends javax.swing.JDialog {
                     }
                     //------------------------------------------------------------
                 } else {
-                    //Boton para reiniciar la toma de tiempo
+                    //Boton para reiniciar la toma de tiempo(Solo lo puede realizar el administrador)
                     if (boton.getActionCommand().equals("1")) {
                         if (JOptionPane.showOptionDialog(null, "¿Seguro desea reinicializar la toma de tiempo? Perdera toda esta información.", "Seguridad", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null/*icono*/, botones, botones[0]) == 0) {
                             String idDetalle = String.valueOf(TDetalleProduccion.getValueAt(row, 11));
                             DetalleProyecto obj = new DetalleProyecto();
-                            if (obj.ReiniciarDetalle(Integer.parseInt(idDetalle), negocio, detalle)) {///Pendiente???¿¿¿???¿¿¿
+                            if (obj.ReiniciarDetalle(Integer.parseInt(idDetalle), negocio, detalle)) {///Pendiente???¿¿¿???¿¿¿XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
                                 new rojerusan.RSNotifyAnimated("¡Listo!", "El proceso: " + TDetalleProduccion.getValueAt(row, 0) + " fue reinicializado corresctamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
                                 cargarTabla();
                             } else {
@@ -460,7 +470,7 @@ public class detalleProyecto extends javax.swing.JDialog {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         cargarTabla();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-
+    
     private void cargarTabla() {
         Tabla personalizar = new Tabla();
         personalizar.visualizar(TDetalleProduccion, detalle, negocio);
@@ -477,14 +487,14 @@ public class detalleProyecto extends javax.swing.JDialog {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error!! " + e);
         }
-
+        
         if (permiso == 1 || negocio == 4) {
             editarTamañoColumnas();
             if (negocio == 4) {
-                TDetalleProduccion.getColumnModel().getColumn(5).setMinWidth(0);
-                TDetalleProduccion.getColumnModel().getColumn(5).setMaxWidth(0);
-                TDetalleProduccion.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
-                TDetalleProduccion.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
+                TDetalleProduccion.getColumnModel().getColumn(6).setMinWidth(0);
+                TDetalleProduccion.getColumnModel().getColumn(6).setMaxWidth(0);
+                TDetalleProduccion.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(0);
+                TDetalleProduccion.getTableHeader().getColumnModel().getColumn(6).setMinWidth(0);
 //                TDetalleProduccion.getColumnModel().getColumn(8).setMinWidth(0);
 //                TDetalleProduccion.getColumnModel().getColumn(8).setMaxWidth(0);
 //                TDetalleProduccion.getTableHeader().getColumnModel().getColumn(8).setMaxWidth(0);
@@ -492,22 +502,22 @@ public class detalleProyecto extends javax.swing.JDialog {
             }
         }
         if (negocio != 4) {
-            TDetalleProduccion.getColumnModel().getColumn(12).setMinWidth(0);
-            TDetalleProduccion.getColumnModel().getColumn(12).setMaxWidth(0);
-            TDetalleProduccion.getTableHeader().getColumnModel().getColumn(12).setMaxWidth(0);
-            TDetalleProduccion.getTableHeader().getColumnModel().getColumn(12).setMinWidth(0);
+            TDetalleProduccion.getColumnModel().getColumn(14).setMinWidth(0);
+            TDetalleProduccion.getColumnModel().getColumn(14).setMaxWidth(0);
+            TDetalleProduccion.getTableHeader().getColumnModel().getColumn(14).setMaxWidth(0);
+            TDetalleProduccion.getTableHeader().getColumnModel().getColumn(14).setMinWidth(0);
         }
-        TDetalleProduccion.getColumnModel().getColumn(11).setMinWidth(0);
-        TDetalleProduccion.getColumnModel().getColumn(11).setMaxWidth(0);
-        TDetalleProduccion.getTableHeader().getColumnModel().getColumn(11).setMaxWidth(0);
-        TDetalleProduccion.getTableHeader().getColumnModel().getColumn(11).setMinWidth(0);
+        TDetalleProduccion.getColumnModel().getColumn(13).setMinWidth(0);
+        TDetalleProduccion.getColumnModel().getColumn(13).setMaxWidth(0);
+        TDetalleProduccion.getTableHeader().getColumnModel().getColumn(13).setMaxWidth(0);
+        TDetalleProduccion.getTableHeader().getColumnModel().getColumn(13).setMinWidth(0);
     }
-
+    
     public void editarTamañoColumnas() {
-        TDetalleProduccion.getColumnModel().getColumn(10).setMinWidth(0);
-        TDetalleProduccion.getColumnModel().getColumn(10).setMaxWidth(0);
-        TDetalleProduccion.getTableHeader().getColumnModel().getColumn(10).setMaxWidth(0);
-        TDetalleProduccion.getTableHeader().getColumnModel().getColumn(10).setMinWidth(0);
+        TDetalleProduccion.getColumnModel().getColumn(12).setMinWidth(0);
+        TDetalleProduccion.getColumnModel().getColumn(12).setMaxWidth(0);
+        TDetalleProduccion.getTableHeader().getColumnModel().getColumn(12).setMaxWidth(0);
+        TDetalleProduccion.getTableHeader().getColumnModel().getColumn(12).setMinWidth(0);
     }
 
     /**
@@ -554,11 +564,11 @@ public class detalleProyecto extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TDetalleProduccion;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -575,10 +585,11 @@ public class detalleProyecto extends javax.swing.JDialog {
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTFechaIngreso1;
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTFechaIngreso2;
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTFechaIngreso3;
+    public static elaprendiz.gui.textField.TextFieldRoundBackground jTFechaIngreso4;
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTNombreCliente;
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTNombreProyecto;
     public static elaprendiz.gui.textField.TextFieldRoundBackground jTTimepoTotal;
-    public static elaprendiz.gui.textField.TextFieldRoundBackground jTTimepoTotal1;
+    public static elaprendiz.gui.textField.TextFieldRoundBackground jTTimepoTotalUnidad;
     private javax.swing.JPopupMenu popMenu;
     // End of variables declaration//GEN-END:variables
  @Override
