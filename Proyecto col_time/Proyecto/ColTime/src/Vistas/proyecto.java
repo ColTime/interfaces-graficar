@@ -1539,7 +1539,6 @@ public class proyecto extends javax.swing.JPanel {
                 jCAntisolderP.setSelected(false);
                 jCRuteoP.setEnabled(false);
                 jCRuteoP.setSelected(false);
-
             } else {
                 jCAntisolderP.setEnabled(true);
                 jCRuteoP.setEnabled(true);
