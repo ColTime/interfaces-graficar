@@ -1210,7 +1210,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosed
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
-        LecturaCodigoQR();
+            LecturaCodigoQR();
     }//GEN-LAST:event_agregarActionPerformed
 
     private void jPanel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MousePressed

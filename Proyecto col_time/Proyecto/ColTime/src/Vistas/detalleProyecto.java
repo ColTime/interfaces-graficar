@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import rojerusan.RSNotifyAnimated;
 
 public class detalleProyecto extends javax.swing.JDialog {
-    
+
     public detalleProyecto(java.awt.Frame parent, boolean modal, int detalle, int negocio, String orden, int permiso) {//Falta organizar la variable "tipo" para que traiga el valor correspondiente
         super(parent, modal);
         initComponents();
@@ -23,19 +23,25 @@ public class detalleProyecto extends javax.swing.JDialog {
         } else {
             this.setTitle(orden + " - " + "Almacen");
         }
-        
+
         this.detalle = detalle;
         this.negocio = negocio;
         this.setLocationRelativeTo(null);
         this.permiso = permiso;
         cargarTabla();
-        jTNombreCliente.setEnabled(false);
-        jTNombreProyecto.setEnabled(false);
-        jTFechaEntrega.setEnabled(false);
-        jTFechaIngreso.setEnabled(false);
-        jTCantidadTotal.setEnabled(false);
-        jTTimepoTotal.setEnabled(false);
-        jTTimepoTotalUnidad.setEnabled(false);
+        jTNombreCliente.setEditable(false);
+        jTNombreProyecto.setEditable(false);
+        jTFechaEntrega.setEditable(false);
+        jTFechaIngreso.setEditable(false);
+        jTCantidadTotal.setEditable(false);
+        jTTimepoTotal.setEditable(false);
+        jTTimepoTotalUnidad.setEditable(false);
+        jTFechaIngreso1.setEditable(false);
+        jTFechaIngreso2.setEditable(false);
+        jTFechaIngreso3.setEditable(false);
+        jTFechaIngreso4.setEditable(false);
+        
+        //jTTimepoTotalUnidad
         this.setIconImage(new ImageIcon(getClass().getResource("/imagenesEmpresa/favicon.png")).getImage());
     }
     //variables
@@ -43,7 +49,7 @@ public class detalleProyecto extends javax.swing.JDialog {
     private static int detalle = 0;
     private static int negocio = 0, permiso = 0;
     int rows = -1;
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -66,7 +72,6 @@ public class detalleProyecto extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         jTTimepoTotal = new elaprendiz.gui.textField.TextFieldRoundBackground();
         jLabel9 = new javax.swing.JLabel();
-        jTTimepoTotalUnidad = new elaprendiz.gui.textField.TextFieldRoundBackground();
         jLabel10 = new javax.swing.JLabel();
         jTFechaIngreso1 = new elaprendiz.gui.textField.TextFieldRoundBackground();
         jLabel11 = new javax.swing.JLabel();
@@ -76,6 +81,7 @@ public class detalleProyecto extends javax.swing.JDialog {
         jLabel13 = new javax.swing.JLabel();
         jTFechaIngreso4 = new elaprendiz.gui.textField.TextFieldRoundBackground();
         jLabel14 = new javax.swing.JLabel();
+        jTTimepoTotalUnidad = new elaprendiz.gui.textField.TextFieldRoundBackground();
 
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/retro.png"))); // NOI18N
         jMenuItem1.setText("Actualizar");
@@ -188,11 +194,6 @@ public class detalleProyecto extends javax.swing.JDialog {
         jLabel9.setForeground(new java.awt.Color(128, 128, 131));
         jLabel9.setText("Tiempo Total:");
 
-        jTTimepoTotalUnidad.setBorder(null);
-        jTTimepoTotalUnidad.setColorDeBorde(new java.awt.Color(204, 204, 204));
-        jTTimepoTotalUnidad.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
-        jTTimepoTotalUnidad.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(128, 128, 131));
         jLabel10.setText("Tiempo total por unidad :");
@@ -233,6 +234,11 @@ public class detalleProyecto extends javax.swing.JDialog {
         jLabel14.setForeground(new java.awt.Color(128, 128, 131));
         jLabel14.setText("Fecha de entrega PCB GF:");
 
+        jTTimepoTotalUnidad.setBorder(null);
+        jTTimepoTotalUnidad.setColorDeBorde(new java.awt.Color(204, 204, 204));
+        jTTimepoTotalUnidad.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
+        jTTimepoTotalUnidad.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+
         javax.swing.GroupLayout jPInformacionLayout = new javax.swing.GroupLayout(jPInformacion);
         jPInformacion.setLayout(jPInformacionLayout);
         jPInformacionLayout.setHorizontalGroup(
@@ -262,17 +268,18 @@ public class detalleProyecto extends javax.swing.JDialog {
                     .addComponent(jLabel6))
                 .addContainerGap())
             .addGroup(jPInformacionLayout.createSequentialGroup()
-                .addGap(159, 159, 159)
-                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTTimepoTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10)
+                .addGap(171, 171, 171)
+                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPInformacionLayout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jTTimepoTotalUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTTimepoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTTimepoTotalUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32))
+                    .addGroup(jPInformacionLayout.createSequentialGroup()
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTFechaIngreso1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
@@ -323,25 +330,24 @@ public class detalleProyecto extends javax.swing.JDialog {
                     .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPInformacionLayout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTTimepoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(21, 21, 21)
+                                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTTimepoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTTimepoTotalUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jTFechaIngreso1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jPInformacionLayout.createSequentialGroup()
-                                    .addComponent(jLabel11)
-                                    .addGap(31, 31, 31)))
-                            .addGroup(jPInformacionLayout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(jTTimepoTotalUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel10))
+                                    .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel11)
+                                        .addComponent(jLabel10)
+                                        .addComponent(jLabel9))
+                                    .addGap(31, 31, 31))))
                         .addComponent(jTFechaIngreso4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPInformacionLayout.createSequentialGroup()
-                            .addComponent(jLabel14)
-                            .addGap(31, 31, 31))
                         .addComponent(jTFechaIngreso3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPInformacionLayout.createSequentialGroup()
-                            .addComponent(jLabel13)
+                            .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel14)
+                                .addComponent(jLabel13))
                             .addGap(31, 31, 31)))
                     .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jTFechaIngreso2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -390,10 +396,10 @@ public class detalleProyecto extends javax.swing.JDialog {
         //Botones de seguridad
         String[] botones = {" SI ", " NO "};
         rows = TDetalleProduccion.rowAtPoint(evt.getPoint());
-        
+
         int column = TDetalleProduccion.getColumnModel().getColumnIndexAtX(evt.getX());
         int row = evt.getY() / TDetalleProduccion.getRowHeight();
-        
+
         if (row < TDetalleProduccion.getRowCount() && row >= 0 && column < TDetalleProduccion.getColumnCount() && column >= 0) {
             Object value = TDetalleProduccion.getValueAt(row, column);
             if (value instanceof JButton) {
@@ -470,7 +476,7 @@ public class detalleProyecto extends javax.swing.JDialog {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         cargarTabla();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-    
+
     private void cargarTabla() {
         Tabla personalizar = new Tabla();
         personalizar.visualizar(TDetalleProduccion, detalle, negocio);
@@ -484,10 +490,14 @@ public class detalleProyecto extends javax.swing.JDialog {
             jTFechaEntrega.setText("  " + crs.getString(4));
             jTCantidadTotal.setText("  " + crs.getString(5));
             jTTimepoTotal.setText("  " + crs.getString(6));
+            jTFechaIngreso1.setText("  " + (crs.getString(7) == null ? "" : crs.getString(7)));
+            jTFechaIngreso2.setText("  " + (crs.getString(8) == null ? "" : crs.getString(7)));
+            jTFechaIngreso3.setText("  " + (crs.getString(9) == null ? "" : crs.getString(7)));
+            jTFechaIngreso4.setText("  " + (crs.getString(10) == null ? "" : crs.getString(7)));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error!! " + e);
         }
-        
+
         if (permiso == 1 || negocio == 4) {
             editarTamañoColumnas();
             if (negocio == 4) {
@@ -512,7 +522,7 @@ public class detalleProyecto extends javax.swing.JDialog {
         TDetalleProduccion.getTableHeader().getColumnModel().getColumn(13).setMaxWidth(0);
         TDetalleProduccion.getTableHeader().getColumnModel().getColumn(13).setMinWidth(0);
     }
-    
+
     public void editarTamañoColumnas() {
         TDetalleProduccion.getColumnModel().getColumn(12).setMinWidth(0);
         TDetalleProduccion.getColumnModel().getColumn(12).setMaxWidth(0);

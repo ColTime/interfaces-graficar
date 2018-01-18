@@ -11,4 +11,10 @@ de un proceso que ya esta en ejecución, el numero del origen va a cambiar por un
 cuales son las copias del tiempo que se van a sumar al origen.Cuando se cierre una toma de tiempo se va a pedir 
 el numero del consecutivo para así saber cual es la toma que se va a cerrar y se va a sumar al origen.
  
+Plus
+
+Esto queda pendiente por hacer, solo si da el tiempo:
+Mostrar la cantidad de proyectos ingresados en cada areas por cada mes, indepentiente mente del tipo de producto.
+Hacer una vista mas detallada pasa saber la cantidad de cada pruducto que ingreso por mes.
+
  

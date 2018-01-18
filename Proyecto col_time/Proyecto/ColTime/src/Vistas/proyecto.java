@@ -54,6 +54,7 @@ public class proyecto extends javax.swing.JPanel {
     float mi = 0.000f, md = 0.000f, ms = 0.000f, min = 0.000f, tam = 21.000f;
     static String fecha = "";
     int opmaterial = 1;
+    int modificacion = 0;
 
     private void visibilidadID() {
         jLIDConversor.setVisible(false);
@@ -1285,7 +1286,7 @@ public class proyecto extends javax.swing.JPanel {
             //El vector tiene una longitud máxima de 11 items.
             String infoP[] = jTProyectoQR.getText().split(";");
             //       0             1                    2               3              4               5         6        7              8              9            10   
-            //Numero orden, área a la que aplica, tipo proyecto, nombre cliente, nombre proyecto, cantidad, ejecución, tipo PCB, lleva antisolder, lleva ruteo, fecha entrega.
+            //Numero orden, área a la que aplica, tipo proyecto, nombre cliente, nombre proyecto, cantidad, ejecución, tipo PCB, lleva antisolder, lleva ruteo, fecha entrega.//<<Este formato del QR va a cambiar>>.
             //  28940             FE            Conversor          juan david        pruebadelQR     10     Quick        TH             SI             NO        01/12/2017
             if (validarQrDelProyecto(infoP)) {
                 //Validar el QR...Area, validar el tipo de proyecto, cantidad, ejecucion, tipo....
@@ -1314,7 +1315,8 @@ public class proyecto extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_jTProyectoQRKeyPressed
-    //28943;TE;teclado;juan david marulanda;pruebadelQR;8;Quick;TH;NO;NO;2017/12/01
+
+//28943;TE;teclado;juan david marulanda;pruebadelQR;8;Quick;TH;NO;NO;2017/12/01
     private boolean validarQrDelProyecto(String infoP[]) {
         if (infoP.length == 11) {
             if (infoP[1].equals("FE") || infoP[1].equals("TE") || infoP[1].equals("IN")) {//Area a la que aplica.
@@ -2288,9 +2290,16 @@ public class proyecto extends javax.swing.JPanel {
         if (!jLIDPCB.getText().equals("0") && jLMaterialPCB.getText().equals("GF")) {
             subEliminardetalle(obj, Integer.parseInt(jLIDPCB.getText()), Integer.parseInt(jTNorden.getText()), "FE", "PCB");
         }
-        if (!jLIDCircuitoGF.getText().equals("0") && !jLMaterialCircuito.getText().equals("GF")) {
-            //Se eliminara el gran formato y se registrara la otra forma de circuito.
-            subEliminardetalle(obj, Integer.parseInt(jLIDCircuito.getText()), Integer.parseInt(jTNorden.getText()), "ALMACEN", "Circuito GF");
+        if (jCCircuito.isSelected()) {
+            if (!jLIDCircuitoGF.getText().equals("0") && (cbMaterialCircuito.getSelectedItem().toString().equals("TH") || cbMaterialCircuito.getSelectedItem().toString().equals("FV"))) {
+                //Se eliminara el gran formato y se registrara la otra forma de circuito.
+                subEliminardetalle(obj, Integer.parseInt(jLIDCircuito.getText()), Integer.parseInt(jTNorden.getText()), "ALMACEN", "Circuito GF");
+            }
+        } else {
+            if (!jLIDCircuitoGF.getText().equals("0") && jLMaterialCircuito.getText().equals("GF")) {
+                //Se eliminara el gran formato y se registrara la otra forma de circuito.
+                subEliminardetalle(obj, Integer.parseInt(jLIDCircuito.getText()), Integer.parseInt(jTNorden.getText()), "ALMACEN", "Circuito GF");
+            }
         }
         if (!jLIDPCBGF.getText().equals("0") && !jLMaterialPCB.getText().equals("GF")) {
             //Se eliminara el gran formato y se registrara la otra forma de circuito.
