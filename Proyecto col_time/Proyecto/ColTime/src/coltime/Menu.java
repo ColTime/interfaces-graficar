@@ -1,5 +1,6 @@
 package coltime;
 
+import Controlador.ConexionPS;
 import Controlador.DetalleProyecto;
 import Controlador.FE_TE_IN;
 import Controlador.Proyecto;
@@ -24,13 +25,14 @@ import javax.swing.JOptionPane;
 import paneles.CambiaPanel;
 import rojerusan.RSNotifyAnimated;
 
-public class Menu extends javax.swing.JFrame {
+public class Menu extends javax.swing.JFrame implements Runnable {
 
     public Color cor = new Color(189, 189, 189);
     public Color corF = new Color(219, 219, 219);
     public static Producciones bp = null;
     private int longitudByte;
     int cont = 0;
+    static int soloUnaVez = 0;
 
     public Menu(int cargo) {
         initComponents();
@@ -46,6 +48,15 @@ public class Menu extends javax.swing.JFrame {
         EnCasodeFallaDeLuz();
         InformacionAreasProduccion();
         new rojerusan.RSNotifyAnimated("Bienvenido", "Nombre del empleado", 6, RSNotifyAnimated.PositionNotify.BottomLeft, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+        soloUnaVez++;
+        //Toma de tiempos automatica
+        if (cargo == 2 || cargo == 3) {
+            if (soloUnaVez == 1) {
+                Thread tomaTiempo = new Thread(this);
+                tomaTiempo.start();
+            }
+        }
+        //Fin de toma de tiempos automatica
     }
 
     public Menu() {
@@ -84,8 +95,6 @@ public class Menu extends javax.swing.JFrame {
         btn1 = new rsbuttom.RSButtonMetro();
         btn4 = new rsbuttom.RSButtonMetro();
         btn3 = new rsbuttom.RSButtonMetro();
-        jTLector = new javax.swing.JTextField();
-        agregar = new javax.swing.JButton();
         btn5 = new rsbuttom.RSButtonMetro();
         btn6 = new rsbuttom.RSButtonMetro();
         jPContenido = new javax.swing.JPanel();
@@ -368,21 +377,6 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jPMenu.add(btn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 194, 190, 42));
-
-        jTLector.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTLectorKeyPressed(evt);
-            }
-        });
-        jPMenu.add(jTLector, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 570, 150, 20));
-
-        agregar.setText("agregar");
-        agregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                agregarActionPerformed(evt);
-            }
-        });
-        jPMenu.add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, 150, -1));
 
         btn5.setForeground(new java.awt.Color(128, 128, 131));
         btn5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/reportes.png"))); // NOI18N
@@ -1209,10 +1203,6 @@ public class Menu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_formWindowClosed
 
-    private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
-            LecturaCodigoQR();
-    }//GEN-LAST:event_agregarActionPerformed
-
     private void jPanel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MousePressed
 
     }//GEN-LAST:event_jPanel3MousePressed
@@ -1310,16 +1300,10 @@ public class Menu extends javax.swing.JFrame {
             new CambiaPanel(jPContenido, new Procesos());
         }
     }//GEN-LAST:event_btn6ActionPerformed
-
-    private void jTLectorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTLectorKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            LecturaCodigoQR();
-        }
-    }//GEN-LAST:event_jTLectorKeyPressed
 //Metodos de la clase menu----------------------------------------------------->
 
-    private void LecturaCodigoQR() {
-        String infoP[] = jTLector.getText().split(";");
+    public void LecturaCodigoQR(String codigo) {
+        String infoP[] = codigo.split(";");
         Proyecto validar = new Proyecto();
         if (validar.validarEliminacion(Integer.parseInt(infoP[0]))) {//Valido si la orden esta eliminada o no
             if (validar.validarEjecucionOParada(Integer.parseInt(infoP[0]))) {//Valida que la orden no este parada
@@ -1380,7 +1364,17 @@ public class Menu extends javax.swing.JFrame {
         ETerminadosHoy.setText("0");
         EPorIniciar.setText("0");
     }
+//Toma de tiempo automatica---------------------------------------------------->
 
+    @Override
+    public void run() {
+        ConexionPS obj = new ConexionPS();//Establecemos la conecion con el puerto serial(COM)
+        while (true) {
+            obj.enlacePuertos();//Si detecta algo en el puerto COM va a tomar o detener el tiempo!!
+        }
+    }
+
+//Fien de toma de tiempo automatica-------------------------------------------->
     public void InformacionAreasProduccion() {
         Proyecto obj = new Proyecto();
         int accion = 1;
@@ -1454,13 +1448,12 @@ public class Menu extends javax.swing.JFrame {
     }
 
     //Este procedimiento es para validar quienes tienen permiso de utilizar el lector (Encargados FE-TE-EN)
-    public void permisoUtilizarLector() {
-        if (cargo != 1 || cargo != 4) {
-            jTLector.setEnabled(false);
-            jTLector.setVisible(false);
-        }
-    }
-
+//    public void permisoUtilizarLector() {
+//        if (cargo != 1 || cargo != 4) {
+//            jTLector.setEnabled(false);
+//            jTLector.setVisible(false);
+//        }
+//    }
     public void sesion(int sec, String doc) {
         Controlador.Usuario obj = new Controlador.Usuario();
         obj.sesion(sec, doc);
@@ -1545,7 +1538,6 @@ public class Menu extends javax.swing.JFrame {
     public javax.swing.JLabel TIngresadosHoy;
     public javax.swing.JLabel TPorIniciar;
     public javax.swing.JLabel TTerminadosHoy;
-    public javax.swing.JButton agregar;
     public rsbuttom.RSButtonMetro btn1;
     public rsbuttom.RSButtonMetro btn2;
     public rsbuttom.RSButtonMetro btn3;
@@ -1599,7 +1591,6 @@ public class Menu extends javax.swing.JFrame {
     public javax.swing.JPanel jPanel7;
     public javax.swing.JPanel jPanel8;
     public javax.swing.JPopupMenu jPopupMenu1;
-    public javax.swing.JTextField jTLector;
     public rojerusan.RSFotoCircle rSUsuario;
     // End of variables declaration//GEN-END:variables
     @Override

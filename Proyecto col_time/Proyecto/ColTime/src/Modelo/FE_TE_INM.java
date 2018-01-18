@@ -102,7 +102,7 @@ public class FE_TE_INM {
                 } else {
                     res = false;
                     //Se enviara desde acá el mensaje al lector diciendo que la cantidad para el proyecto no es la adecuada...................................
-
+                    
                 }
             } else {
                 //Si no existe se ejecutara el procedimiento para iniciar o renaudar el tiempo
