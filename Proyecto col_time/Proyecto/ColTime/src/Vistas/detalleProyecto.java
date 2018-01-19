@@ -40,7 +40,7 @@ public class detalleProyecto extends javax.swing.JDialog {
         jTFechaIngreso2.setEditable(false);
         jTFechaIngreso3.setEditable(false);
         jTFechaIngreso4.setEditable(false);
-        
+
         //jTTimepoTotalUnidad
         this.setIconImage(new ImageIcon(getClass().getResource("/imagenesEmpresa/favicon.png")).getImage());
     }
@@ -411,13 +411,13 @@ public class detalleProyecto extends javax.swing.JDialog {
                     if (boton.getActionCommand().equals("1")) {
                         FE_TE_IN almacen = new FE_TE_IN();
                         String idDetalle = "";
-                        //<Gran formato>
+                        //<Gran formato>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
                         if (TDetalleProduccion.getValueAt(row, 0).toString().equals("GF")) {
                             //Se pide la cantidad que se recibio del gran formato.
                             String cantidad = JOptionPane.showInputDialog("Cantidades recibidas:");
                             if (cantidad != null) {//Presiona el botono "NO"
                                 if (!cantidad.equals("") && Integer.parseInt(cantidad) >= 1) {//Validar la cantidad cuendo presiona el boton "SI"
-                                    idDetalle = String.valueOf(TDetalleProduccion.getValueAt(row, 13));
+                                    idDetalle = String.valueOf(TDetalleProduccion.getValueAt(row, 13));//Identificador
                                     int proceso = 0;
                                     if (TDetalleProduccion.getValueAt(row, 0).toString().equals("GF")) {
                                         proceso = 22;
@@ -433,11 +433,11 @@ public class detalleProyecto extends javax.swing.JDialog {
                                     new rojerusan.RSNotifyAnimated("¡Alerta!", "Por favor ingrese una cantidad validad.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
                                 }
                             }
-                        } else {
-                            //<Componentes>
+                        } else {//Si presiona el boton SI
+                            //<Componentes>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
                             //Registro te tiempo de componentes
                             if (JOptionPane.showOptionDialog(null, "¿Seguro desea terminar la toma de tiempos de los componentes.", "Seguridad", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null/*icono*/, botones, botones[0]) == 0) {
-                                idDetalle = String.valueOf(TDetalleProduccion.getValueAt(row, 13));
+                                idDetalle = String.valueOf(TDetalleProduccion.getValueAt(row, 13));//Identificador
                                 String orden[] = this.getTitle().split("-");                                         //Cantidad//   
                                 almacen.pararTiempoAlmacen(Integer.parseInt(orden[0].trim()), Integer.parseInt(idDetalle), 0, detalle, 23);//
                                 //Mensaje de confirmación de la terminación de la toma de tiempo
@@ -451,7 +451,7 @@ public class detalleProyecto extends javax.swing.JDialog {
                     //Boton para reiniciar la toma de tiempo(Solo lo puede realizar el administrador)
                     if (boton.getActionCommand().equals("1")) {
                         if (JOptionPane.showOptionDialog(null, "¿Seguro desea reinicializar la toma de tiempo? Perdera toda esta información.", "Seguridad", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null/*icono*/, botones, botones[0]) == 0) {
-                            String idDetalle = String.valueOf(TDetalleProduccion.getValueAt(row, 11));
+                            String idDetalle = String.valueOf(TDetalleProduccion.getValueAt(row, 13));//Identificador!!
                             DetalleProyecto obj = new DetalleProyecto();
                             if (obj.ReiniciarDetalle(Integer.parseInt(idDetalle), negocio, detalle)) {///Pendiente???¿¿¿???¿¿¿XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
                                 new rojerusan.RSNotifyAnimated("¡Listo!", "El proceso: " + TDetalleProduccion.getValueAt(row, 0) + " fue reinicializado corresctamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);

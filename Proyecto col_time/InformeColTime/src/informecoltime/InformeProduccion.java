@@ -1,4 +1,3 @@
-
 package informecoltime;
 
 import javax.sql.rowset.CachedRowSet;
@@ -7,10 +6,8 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-
 public class InformeProduccion extends javax.swing.JFrame implements Runnable {
 
-   
     public InformeProduccion() {
         initComponents();
         this.setExtendedState(InformeProduccion.MAXIMIZED_BOTH);
@@ -49,8 +46,8 @@ public class InformeProduccion extends javax.swing.JFrame implements Runnable {
     private void ConsultarInformacion(int orden) {
         //Concultar
         Logica obj = new Logica();
-        String encabezado[] = {"N°Orden", "Área", "Producto", "Proceso de ubicación", "Estado de tiempo", "estado"};
-        String cuerpo[] = new String[6];
+        String encabezado[] = {"N°Orden", "Ubicaciòn", "Estado"};
+        String cuerpo[] = new String[3];
         String proceso = "";
         DefaultTableModel modelo = new DefaultTableModel(null, encabezado);
         try {
@@ -62,7 +59,7 @@ public class InformeProduccion extends javax.swing.JFrame implements Runnable {
                 while (crs.next()) {
                     cuerpo[0] = crs.getString(1);//Numero de la orden
                     cuerpo[1] = crs.getString(2);//Área de negocio
-                    cuerpo[2] = crs.getString(3);//Producto
+                    cuerpo[2] = "A tiempo";//Producto
                     switch (i) {
                         //Formato estandar
                         case 1:
@@ -146,13 +143,13 @@ public class InformeProduccion extends javax.swing.JFrame implements Runnable {
                             }
                             break;
                     }
-                    cuerpo[3] = proceso;//Proceso de ubicación
-                    if (Integer.parseInt(crs.getString(5)) < 0) {
-                        cuerpo[4] = "Retrasado: " + crs.getString(5);//Tiempo de entrega
-                    } else {
-                        cuerpo[4] = crs.getString(5);//Tiempo de entrega
-                    }
-                    cuerpo[5] = crs.getString(5);
+//                    cuerpo[3] = proceso;//Proceso de ubicación
+//                    if (Integer.parseInt(crs.getString(5)) < 0) {
+//                        cuerpo[4] = "Retrasado: " + crs.getString(5);//Tiempo de entrega
+//                    } else {
+//                        cuerpo[4] = crs.getString(5);//Tiempo de entrega
+//                    }
+//                    cuerpo[5] = crs.getString(5);
                     modelo.addRow(cuerpo);
                 }
             }
@@ -188,29 +185,29 @@ public class InformeProduccion extends javax.swing.JFrame implements Runnable {
         ReporteProduccion.setFont(new java.awt.Font("Arial", 0, 32)); // NOI18N
         ReporteProduccion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"", "", "", "", "", null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {"", null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "N°Orden", "Área", "Producto", "Proceso de ubicación", "Estado de tiempo", "estado"
+                "N°Orden", "Ubicaciòn", "Estado"
             }
         ));
         ReporteProduccion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -218,7 +215,7 @@ public class InformeProduccion extends javax.swing.JFrame implements Runnable {
         ReporteProduccion.setEditingRow(0);
         ReporteProduccion.setFillsViewportHeight(true);
         ReporteProduccion.setGridColor(new java.awt.Color(0, 0, 0));
-        ReporteProduccion.setIntercellSpacing(new java.awt.Dimension(1, 0));
+        ReporteProduccion.setIntercellSpacing(new java.awt.Dimension(0, 0));
         ReporteProduccion.setRowHeight(60);
         ReporteProduccion.setSelectionBackground(new java.awt.Color(97, 176, 255));
         ReporteProduccion.setSelectionForeground(new java.awt.Color(0, 0, 0));

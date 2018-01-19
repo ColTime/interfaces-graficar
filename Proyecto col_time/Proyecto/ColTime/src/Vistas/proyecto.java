@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
@@ -1282,159 +1283,217 @@ public class proyecto extends javax.swing.JPanel {
 
     private void jTProyectoQRKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTProyectoQRKeyPressed
         //Registrar proyectos mediante un QR
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            //El vector tiene una longitud máxima de 11 items.
-            String infoP[] = jTProyectoQR.getText().split(";");
-            //       0             1                    2               3              4               5         6        7              8              9            10   
-            //Numero orden, área a la que aplica, tipo proyecto, nombre cliente, nombre proyecto, cantidad, ejecución, tipo PCB, lleva antisolder, lleva ruteo, fecha entrega.//<<Este formato del QR va a cambiar>>.
-            //  28940             FE            Conversor          juan david        pruebadelQR     10     Quick        TH             SI             NO        01/12/2017
-            if (validarQrDelProyecto(infoP)) {
-                //Validar el QR...Area, validar el tipo de proyecto, cantidad, ejecucion, tipo....
-                Proyecto obj = new Proyecto();
-                if (obj.validarProyectoQR(Integer.parseInt(infoP[0]))) {//Se valida primero la existencia del numero de la orden...
-                    //Se registra la información necesaria en la tabla proyecto...
-                    obj.registrarProyectoQR(infoP, Menu.jDocumento.getText());
-                    new rojerusan.RSNotifyAnimated("Listo.", "El proyecto con la orden " + infoP[0] + " fue registrado exitosamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
-                } else {
-                    //Se puede actualizar la informacion... Esta por definir.
+//        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+//            //El vector tiene una longitud máxima de 11 items.
+//            String infoP[] = jTProyectoQR.getText().split(";");
+//            //       0             1                    2               3              4               5         6        7              8              9            10   
+//            //Numero orden, área a la que aplica, tipo proyecto, nombre cliente, nombre proyecto, cantidad, ejecución, tipo PCB, lleva antisolder, lleva ruteo, fecha entrega.//<<Este formato del QR va a cambiar>>.
+//            //  28940             FE            Conversor          juan david        pruebadelQR     10     Quick        TH             SI             NO        01/12/2017
+//            if (validarQrDelProyecto(infoP)) {
+//                //Validar el QR...Area, validar el tipo de proyecto, cantidad, ejecucion, tipo....
+//                Proyecto obj = new Proyecto();
+//                if (obj.validarProyectoQR(Integer.parseInt(infoP[0]))) {//Se valida primero la existencia del numero de la orden...
+//                    //Se registra la información necesaria en la tabla proyecto...
+//                    obj.registrarProyectoQR(infoP, Menu.jDocumento.getText());
+//                    new rojerusan.RSNotifyAnimated("Listo.", "El proyecto con la orden " + infoP[0] + " fue registrado exitosamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+//                } else {
+//                    //Se puede actualizar la informacion... Esta por definir.
+//                }
+//                //Continúa...
+//                if (obj.validarDetalleProyectoQR(Integer.parseInt(infoP[0]), infoP[1], infoP[2])) {//Se valida la existencia del detalle...
+//                    if (obj.registrarDetalleProyectoQR(Integer.parseInt(infoP[0]), infoP[1], infoP[2], infoP[5], infoP[7], infoP[9], infoP[8])) {//Se registra el detalle del proyeco.
+//                        new rojerusan.RSNotifyAnimated("Listo!.", "El el detalle proyecto con la orden " + infoP[0] + " fue registrada corectamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+//                    } else {
+//                        new rojerusan.RSNotifyAnimated("Alerta!.", "El el detalle proyecto con la orden " + infoP[0] + " no fue registrada.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
+//                    }
+//                } else {
+//                    //Mensaje de que el detalle ya existe... 
+//                    new rojerusan.RSNotifyAnimated("Alerta!.", "El el detalle ya existe.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
+//                }
+//            } else {
+//                //Muestra mensaje de error en el QR...
+//                new rojerusan.RSNotifyAnimated("Alerta!.", "El código QR no esta bien estructurado.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
+//            }
+//        }
+
+//Registro de proyecto mediante lectura de codigo QR (Actual)
+        try {
+            String InformacionProyecto[] = jTProyectoQR.getText().split(";");
+            if (InformacionProyecto.length == 1) {
+                jTNorden.setText(InformacionProyecto[0]);//Numero de orden
+                jTNombreCliente.setText(InformacionProyecto[1]);//Nombre del cliente
+                jTNombreProyecto.setText(InformacionProyecto[2]);//Nombre del proyecto
+                cbNegocio.setSelectedItem(InformacionProyecto[3]);//Negocios implicados
+                cbTipo.setSelectedItem(InformacionProyecto[4]);//Tipo de proyecto
+                DateFormat formato = new SimpleDateFormat("YYYY-mm-dd");
+                jDentrega.setDate(formato.parse(InformacionProyecto[5]));//Fecha de entrega al cliente
+                if (!InformacionProyecto[6].equals("null")) {//Conversor
+                    jCConversor.setSelected(true);
+                    jTConversor.setText(InformacionProyecto[6]);
                 }
-                //Continúa...
-                if (obj.validarDetalleProyectoQR(Integer.parseInt(infoP[0]), infoP[1], infoP[2])) {//Se valida la existencia del detalle...
-                    if (obj.registrarDetalleProyectoQR(Integer.parseInt(infoP[0]), infoP[1], infoP[2], infoP[5], infoP[7], infoP[9], infoP[8])) {//Se registra el detalle del proyeco.
-                        new rojerusan.RSNotifyAnimated("Listo!.", "El el detalle proyecto con la orden " + infoP[0] + " fue registrada corectamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
-                    } else {
-                        new rojerusan.RSNotifyAnimated("Alerta!.", "El el detalle proyecto con la orden " + infoP[0] + " no fue registrada.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
-                    }
-                } else {
-                    //Mensaje de que el detalle ya existe... 
-                    new rojerusan.RSNotifyAnimated("Alerta!.", "El el detalle ya existe.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
+                if (!InformacionProyecto[7].equals("null")) {//Troquel
+                    jCTroquel.setSelected(true);
+                    jTTroquel.setText(InformacionProyecto[7]);
                 }
+                if (!InformacionProyecto[8].equals("null")) {//Repujado
+                    jCRepujado.setSelected(true);
+                    jTRepujado.setText(InformacionProyecto[8]);
+                }
+                if (!InformacionProyecto[9].equals("null")) {//Stencil
+                    jCStencil.setSelected(true);
+                    jTStencil.setText(InformacionProyecto[9]);
+                }
+                if (!InformacionProyecto[10].equals("null")) {//Circuito de FE
+                    jCCircuito.setSelected(true);
+                    jTCircuito.setText(InformacionProyecto[10]);
+                    cbMaterialCircuito.setSelectedItem(InformacionProyecto[11]);
+                    jCAntisolderC.setSelected(InformacionProyecto[12].toUpperCase().equals("SI"));
+                    jCRuteoC.setSelected(InformacionProyecto[13].toUpperCase().equals("SI"));
+                }
+                if (!InformacionProyecto[14].equals("null")) {//PCB TE
+                    jCPCBTE.setSelected(true);
+                    jTPCBTE.setText(InformacionProyecto[14]);
+                    cbMaterialPCBTE.setSelectedItem(InformacionProyecto[15]);
+                    jCAntisolderP.setSelected(InformacionProyecto[16].toUpperCase().equals("SI"));
+                    jCRuteoP.setSelected(InformacionProyecto[17].toUpperCase().equals("SI"));
+                    jRPCBCOM.setSelected(InformacionProyecto[18].toUpperCase().equals("SI"));
+                    jRPCBCOM.setSelected(InformacionProyecto[19].toUpperCase().equals("SI"));
+                }
+                if (!InformacionProyecto[20].equals("null")) {//Teclado
+                    jCTeclado.setSelected(true);
+                    jTTeclado.setText(InformacionProyecto[20]);
+                }
+                if (!InformacionProyecto[21].equals("null")) {//Ensamble
+                    jCIntegracion.setSelected(true);
+                    jTIntegracion.setText(InformacionProyecto[21]);
+                }
+                //Continuara
             } else {
-                //Muestra mensaje de error en el QR...
-                new rojerusan.RSNotifyAnimated("Alerta!.", "El código QR no esta bien estructurado.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
+//Al QR del proyecto le falta información para poder realizar el registro
             }
+        } catch (Exception e) {
         }
+
+//Registro Finalizado.
+
     }//GEN-LAST:event_jTProyectoQRKeyPressed
 
 //28943;TE;teclado;juan david marulanda;pruebadelQR;8;Quick;TH;NO;NO;2017/12/01
-    private boolean validarQrDelProyecto(String infoP[]) {
-        if (infoP.length == 11) {
-            if (infoP[1].equals("FE") || infoP[1].equals("TE") || infoP[1].equals("IN")) {//Area a la que aplica.
-                if (infoP[3].length() <= 45 && infoP[4].length() <= 45) {//Nombre del cliente y nombre del proyecto tiene que ser menor a 45 caracteres.
-                    if (validarTipoProducto(infoP[2])) {
-                        if (validarCombinaciones(infoP[1], infoP[2])) {//Valida que no permita ninguna conbinación no valida por el sistema
-                            if (infoP[6].toLowerCase().equals("normal") || infoP[6].toLowerCase().equals("rqt") || infoP[6].toLowerCase().equals("quick")) {//Tipo de ejecución
-                                if (validarFecha(infoP[10])) {//El formato de la fecha siempre tiene que ser en el QR de la forma "yyyy/MM/dd"
-                                    if (Integer.parseInt(infoP[5]) > 0) {
-                                        if (infoP[7].toLowerCase().equals("th") || infoP[7].toLowerCase().equals("fv") || infoP[7].toLowerCase().equals("0")) {//Se valida que el material se TH, FV o que sea 0 cuando no aplica
-                                            if ((infoP[8].toLowerCase().equals("si") || infoP[8].toLowerCase().equals("no")) && (infoP[9].toLowerCase().equals("si") || infoP[9].toLowerCase().equals("no"))) {//Se valida que el antisolder y el ruteo contenga si o no
-                                                return true;
-                                            } else {
-                                                return false;
-                                            }
-                                        } else {
-                                            return false;
-                                        }
-                                    } else {
-                                        return false;
-                                    }
-                                } else {
-                                    return false;
-                                }
-                            } else {
-                                return false;
-                            }
-                        } else {
-                            return false;
-                        }
-                    } else {
-                        return false;
-                    }
-                } else {
-                    return false;
-                }
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
-
-    private boolean validarFecha(String fecha) {
-        try {
-            SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
-            formato.setLenient(false);
-            formato.parse(fecha);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    private boolean validarTipoProducto(String producto) {//Esto hace parte de la validacion del registro de proyecto mediante lector QR
-        boolean resp = false;
-        switch (producto.toUpperCase()) {
-            case "CIRCUITO":
-                resp = true;
-                break;
-            case "CONVERSOR":
-                resp = true;
-                break;
-            case "REPUJADO":
-                resp = true;
-                break;
-            case "TROQUEL":
-                resp = true;
-                break;
-            case "TECLADO":
-                resp = true;
-                break;
-            case "STENCIL":
-                resp = true;
-                break;
-            case "PCB":
-                resp = true;
-                break;
-        }
-        return resp;
-    }
-
-    private boolean validarCombinaciones(String area, String producto) {
-        boolean res = false;
-        if (area.toLowerCase().equals("fe") && producto.toLowerCase().equals("circuito")) {
-            res = true;
-        } else {
-            if (area.toLowerCase().equals("in") && producto.toLowerCase().equals("circuito")) {
-                res = true;
-            } else {
-                if (area.toLowerCase().equals("te") && producto.toLowerCase().equals("teclado")) {
-                    res = true;
-                } else {
-                    if (area.toLowerCase().equals("fe") && producto.toLowerCase().equals("conversor")) {
-                        res = true;
-                    } else {
-                        if (area.toLowerCase().equals("fe") && producto.toLowerCase().equals("repujado")) {
-                            res = true;
-                        } else {
-                            if (area.toLowerCase().equals("fe") && producto.toLowerCase().equals("troquel")) {
-                                res = true;
-                            } else {
-                                if (area.toLowerCase().equals("fe") && producto.toLowerCase().equals("stencil")) {
-                                    res = true;
-                                } else {
-                                    if (area.toLowerCase().equals("fe") && producto.toLowerCase().equals("pcb")) {
-                                        res = true;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return res;
-    }
+//    private boolean validarQrDelProyecto(String infoP[]) {
+//        if (infoP.length == 11) {
+//            if (infoP[1].equals("FE") || infoP[1].equals("TE") || infoP[1].equals("IN")) {//Area a la que aplica.
+//                if (infoP[3].length() <= 45 && infoP[4].length() <= 45) {//Nombre del cliente y nombre del proyecto tiene que ser menor a 45 caracteres.
+//                    if (validarTipoProducto(infoP[2])) {
+//                        if (validarCombinaciones(infoP[1], infoP[2])) {//Valida que no permita ninguna conbinación no valida por el sistema
+//                            if (infoP[6].toLowerCase().equals("normal") || infoP[6].toLowerCase().equals("rqt") || infoP[6].toLowerCase().equals("quick")) {//Tipo de ejecución
+//                                if (validarFecha(infoP[10])) {//El formato de la fecha siempre tiene que ser en el QR de la forma "yyyy/MM/dd"
+//                                    if (Integer.parseInt(infoP[5]) > 0) {
+//                                        if (infoP[7].toLowerCase().equals("th") || infoP[7].toLowerCase().equals("fv") || infoP[7].toLowerCase().equals("0")) {//Se valida que el material se TH, FV o que sea 0 cuando no aplica
+//                                            if ((infoP[8].toLowerCase().equals("si") || infoP[8].toLowerCase().equals("no")) && (infoP[9].toLowerCase().equals("si") || infoP[9].toLowerCase().equals("no"))) {//Se valida que el antisolder y el ruteo contenga si o no
+//                                                return true;
+//                                            } else {
+//                                                return false;
+//                                            }
+//                                        } else {
+//                                            return false;
+//                                        }
+//                                    } else {
+//                                        return false;
+//                                    }
+//                                } else {
+//                                    return false;
+//                                }
+//                            } else {
+//                                return false;
+//                            }
+//                        } else {
+//                            return false;
+//                        }
+//                    } else {
+//                        return false;
+//                    }
+//                } else {
+//                    return false;
+//                }
+//            } else {
+//                return false;
+//            }
+//        } else {
+//            return false;
+//        }
+//    }
+//    private boolean validarFecha(String fecha) {
+//        try {
+//            SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
+//            formato.setLenient(false);
+//            formato.parse(fecha);
+//            return true;
+//        } catch (Exception e) {
+//            return false;
+//        }
+//    }
+//    private boolean validarTipoProducto(String producto) {//Esto hace parte de la validacion del registro de proyecto mediante lector QR
+//        boolean resp = false;
+//        switch (producto.toUpperCase()) {
+//            case "CIRCUITO":
+//                resp = true;
+//                break;
+//            case "CONVERSOR":
+//                resp = true;
+//                break;
+//            case "REPUJADO":
+//                resp = true;
+//                break;
+//            case "TROQUEL":
+//                resp = true;
+//                break;
+//            case "TECLADO":
+//                resp = true;
+//                break;
+//            case "STENCIL":
+//                resp = true;
+//                break;
+//            case "PCB":
+//                resp = true;
+//                break;
+//        }
+//        return resp;
+//    }
+//    private boolean validarCombinaciones(String area, String producto) {
+//        boolean res = false;
+//        if (area.toLowerCase().equals("fe") && producto.toLowerCase().equals("circuito")) {
+//            res = true;
+//        } else {
+//            if (area.toLowerCase().equals("in") && producto.toLowerCase().equals("circuito")) {
+//                res = true;
+//            } else {
+//                if (area.toLowerCase().equals("te") && producto.toLowerCase().equals("teclado")) {
+//                    res = true;
+//                } else {
+//                    if (area.toLowerCase().equals("fe") && producto.toLowerCase().equals("conversor")) {
+//                        res = true;
+//                    } else {
+//                        if (area.toLowerCase().equals("fe") && producto.toLowerCase().equals("repujado")) {
+//                            res = true;
+//                        } else {
+//                            if (area.toLowerCase().equals("fe") && producto.toLowerCase().equals("troquel")) {
+//                                res = true;
+//                            } else {
+//                                if (area.toLowerCase().equals("fe") && producto.toLowerCase().equals("stencil")) {
+//                                    res = true;
+//                                } else {
+//                                    if (area.toLowerCase().equals("fe") && producto.toLowerCase().equals("pcb")) {
+//                                        res = true;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        return res;
+//    }
     private void jCConversorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCConversorActionPerformed
         activarjTfilex(jCConversor, jTConversor);
     }//GEN-LAST:event_jCConversorActionPerformed
@@ -2860,3 +2919,6 @@ public class proyecto extends javax.swing.JPanel {
         super.finalize(); //To change body of generated methods, choose Tools | Templates.
     }
 }
+//Orden del codigo A generar con toda la informaciòn
+
+//NumOrden; Nombre Cliente; Nombre Proyecto; Negocios implicados; Tipo de proyecto; Fecha de entrega al cliente; Cantidad del Conversos; Cantidad del Troque; Cantidad del Repujado; Cantidad del Stencil; Cantidad del Circuito_FE; Material del Circuito; ¿Antisolder del circuito_FE?; ¿Ruteo del circuito_FE?; Cantidad de la PCB_TE; Material de la PCB; ¿Antisolder de la PCB_TE?; ¿Ruteo de la PCB_TE?; Componentes de la PCB_TE; Integraciòn del PCB_TE; Cantidad de Teclados; Cantidad de ensamble; Fecha de entrega del Circuito_FE(TH,FV,GF) a ensamble; Fecha de entrega de los componentes del circuito_FE; Fecha de entrega de la PCB_TE(TH,FV,GF); Fecha de entrega de componentes de la PCB_TE  
