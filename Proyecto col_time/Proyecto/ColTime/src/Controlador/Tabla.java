@@ -18,7 +18,7 @@ public class Tabla {
         this.detalle = detalle;
         this.negocio = negocio;
         tabla.setDefaultRenderer(Object.class, new Render(7));
-        String encabezado[] = {"Proceso", "Fecha inicio", "Fecha fin", "Restante", "Cantidad procesada", "Tiempo total min", "Tiempo unidad min", "Estado", "Hora de ejecución", "Tiempo Ejecución", "Hora de Terminación","N°OP", "Reiniciar", "IDdetalle", "Tiempo"};
+        String encabezado[] = {"Proceso", "Fecha inicio", "Fecha fin", "Restante", "Cantidad procesada", "Tiempo total min", "Tiempo unidad min", "Estado", "Hora de ejecución", "Tiempo Ejecución", "Hora de Terminación", "N°OP", "Reiniciar", "IDdetalle", "Tiempo"};
         DefaultTableModel ds = new DefaultTableModel(null, encabezado) {
 
             Class[] types = new Class[]{
@@ -46,7 +46,7 @@ public class Tabla {
                 v[0] = crs.getString(1);
                 v[1] = crs.getString(2);
                 v[2] = crs.getString(3);
-                v[3] = crs.getString(13);
+                v[3] = negocio != 4 ? crs.getString(13) : "0";
                 v[4] = String.valueOf(crs.getInt(4));
                 v[5] = crs.getString(5);
                 v[6] = crs.getString(6);
@@ -58,7 +58,7 @@ public class Tabla {
                     v[9] = crs.getString(9);
                 }
                 v[10] = crs.getString(10);
-                v[11] = crs.getString(14);//Numero de operarios---
+                v[11] = negocio != 4 ? crs.getString(14) : "0";//Numero de operarios---
                 v[12] = btn;//Este boton se utiliza para que el administrador pueda reiniciar la toma de tiempo de los procesos de  FE/TE/EN
                 v[13] = crs.getString(12);//IDDetalle
                 v[14] = tiempo;//Este boton se utiliza para parar el tiempo de los procesos de almacen.

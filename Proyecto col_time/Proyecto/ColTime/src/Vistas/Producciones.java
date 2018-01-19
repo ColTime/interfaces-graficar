@@ -638,75 +638,92 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                 jp.setFocusPainted(false);
                 //Icono del boton
                 ImageIcon icon = null;
-                switch (crs.getInt(2)) {
-                    case 1:
-                        //Por iniciar
-                        switch (crs.getString(3)) {
-                            case "Normal":
-                                //Proyecto normal
-                                icon = new ImageIcon("src\\produccion\\ProyectBegin.png");
-                                break;
-                            case "Quick":
-                                //Proyecto Quick
-                                icon = new ImageIcon("src\\produccion\\ProyectBeginQuick.png");
-                                break;
-                            case "RQT":
-                                //Proyecto RQT
-                                icon = new ImageIcon("src\\produccion\\ProyectBeginRQT.png");
-                                break;
-                        }
-                        break;
-                    case 2:
-                        //Pausado
-                        switch (crs.getString(3)) {
-                            case "Normal":
-                                //Proyecto normal
-                                icon = new ImageIcon("src\\produccion\\ProyectPause.png");
-                                break;
-                            case "Quick":
-                                //Proyecto Quick
-                                icon = new ImageIcon("src\\produccion\\ProyectPauseQuick.png");
-                                break;
-                            case "RQT":
-                                //Proyecto RQT
-                                icon = new ImageIcon("src\\produccion\\ProyectPauseRQT.png");
-                                break;
-                        }
-                        break;
-                    case 3:
-                        //Terminado
-                        switch (crs.getString(3)) {
-                            case "Normal":
-                                //Proyecto normal
-                                icon = new ImageIcon("src\\produccion\\ProyectCheck.png");
-                                break;
-                            case "Quick":
-                                //Proyecto Quick
-                                icon = new ImageIcon("src\\produccion\\ProyectCheckQuick.png");
-                                break;
-                            case "RQT":
-                                //Proyecto RQT
-                                icon = new ImageIcon("src\\produccion\\ProyectCheckRQT.png");
-                                break;
-                        }
-                        break;
-                    case 4:
-                        //Ejecucion
-                        switch (crs.getString(3)) {
-                            case "Normal":
-                                //Proyecto normal
-                                icon = new ImageIcon("src\\produccion\\ProyectTime.png");
-                                break;
-                            case "Quick":
-                                //Proyecto Quick
-                                icon = new ImageIcon("src\\produccion\\ProyectTimeQuick.png");
-                                break;
-                            case "RQT":
-                                //Proyecto RQT
-                                icon = new ImageIcon("src\\produccion\\ProyectTimeRQT.png");
-                                break;
-                        }
-                        break;
+                if (crs.getBoolean(4)) {//Si la orden no esta para va hacer esto, sino va hacer lo otro.
+                    switch (crs.getInt(2)) {
+                        case 1:
+                            //Por iniciar
+                            switch (crs.getString(3)) {
+                                case "Normal":
+                                    //Proyecto normal
+                                    icon = new ImageIcon("src\\produccion\\ProyectBegin.png");
+                                    break;
+                                case "Quick":
+                                    //Proyecto Quick
+                                    icon = new ImageIcon("src\\produccion\\ProyectBeginQuick.png");
+                                    break;
+                                case "RQT":
+                                    //Proyecto RQT
+                                    icon = new ImageIcon("src\\produccion\\ProyectBeginRQT.png");
+                                    break;
+                            }
+                            break;
+                        case 2:
+                            //Pausado
+                            switch (crs.getString(3)) {
+                                case "Normal":
+                                    //Proyecto normal
+                                    icon = new ImageIcon("src\\produccion\\ProyectPause.png");
+                                    break;
+                                case "Quick":
+                                    //Proyecto Quick
+                                    icon = new ImageIcon("src\\produccion\\ProyectPauseQuick.png");
+                                    break;
+                                case "RQT":
+                                    //Proyecto RQT
+                                    icon = new ImageIcon("src\\produccion\\ProyectPauseRQT.png");
+                                    break;
+                            }
+                            break;
+                        case 3:
+                            //Terminado
+                            switch (crs.getString(3)) {
+                                case "Normal":
+                                    //Proyecto normal
+                                    icon = new ImageIcon("src\\produccion\\ProyectCheck.png");
+                                    break;
+                                case "Quick":
+                                    //Proyecto Quick
+                                    icon = new ImageIcon("src\\produccion\\ProyectCheckQuick.png");
+                                    break;
+                                case "RQT":
+                                    //Proyecto RQT
+                                    icon = new ImageIcon("src\\produccion\\ProyectCheckRQT.png");
+                                    break;
+                            }
+                            break;
+                        case 4:
+                            //Ejecucion
+                            switch (crs.getString(3)) {
+                                case "Normal":
+                                    //Proyecto normal
+                                    icon = new ImageIcon("src\\produccion\\ProyectTime.png");
+                                    break;
+                                case "Quick":
+                                    //Proyecto Quick
+                                    icon = new ImageIcon("src\\produccion\\ProyectTimeQuick.png");
+                                    break;
+                                case "RQT":
+                                    //Proyecto RQT
+                                    icon = new ImageIcon("src\\produccion\\ProyectTimeRQT.png");
+                                    break;
+                            }
+                            break;
+                    }
+                } else {
+                    switch (crs.getString(3)) {
+                        case "Normal":
+                            //Proyecto normal
+                            icon = new ImageIcon("src\\produccion\\proyectStop.png");
+                            break;
+                        case "Quick":
+                            //Proyecto Quick
+                            icon = new ImageIcon("src\\produccion\\proyectStopQuick.png");
+                            break;
+                        case "RQT":
+                            //Proyecto RQT
+                            icon = new ImageIcon("src\\produccion\\proyectStopRQT.png");
+                            break;
+                    }
                 }
                 Icon image = new ImageIcon(icon.getImage().getScaledInstance(jp.getWidth(), jp.getHeight(), Image.SECTION));
                 jp.setIcon(image);

@@ -93,6 +93,7 @@ public class detalleProyecto extends javax.swing.JDialog {
         popMenu.add(jMenuItem1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1348, 432));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1285, 416));
 

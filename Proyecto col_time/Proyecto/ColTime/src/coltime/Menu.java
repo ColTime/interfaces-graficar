@@ -33,6 +33,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     private int longitudByte;
     int cont = 0;
     static int soloUnaVez = 0;
+    ConexionPS CPS = null;
 
     public Menu(int cargo) {
         initComponents();
@@ -1317,7 +1318,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
                             producF.setTitle("Formato estandar");
                             producF.setVisible(true);
                         }
-                        producF.RegistrarTomaTiempoNegocio(infoP, cargo, producF);
+                        producF.RegistrarTomaTiempoNegocio(infoP, cargo, producF, CPS);
                         break;
                     case 2:
                         if (producT == null) {
@@ -1326,7 +1327,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
                             producT.setTitle("Teclados");
                             producT.setVisible(true);
                         }
-                        producT.RegistrarTomaTiempoNegocio(infoP, cargo, producT);
+                        producT.RegistrarTomaTiempoNegocio(infoP, cargo, producT, CPS);
                         break;
                     case 3:
                         if (producE == null) {
@@ -1335,19 +1336,25 @@ public class Menu extends javax.swing.JFrame implements Runnable {
                             producE.setTitle("Ensamble");
                             producE.setVisible(true);
                         }
-                        producE.RegistrarTomaTiempoNegocio(infoP, cargo, producE);
+                        producE.RegistrarTomaTiempoNegocio(infoP, cargo, producE, CPS);
                         break;
                 }
                 //#--------------------------------------------------------------------------------------------------
             } else {
                 //El proyecto no puede realizar la toma de tiempo porque esta parada.
+                enviarMensajeCelular("¡Alerta!" + "n/" + "Esta orden esta parada, no puedes realizar la toma de tiempo de esta orden.");
                 new rojerusan.RSNotifyAnimated("¡Alerta!", "Esta orden esta parada, no puedes realizar la toma de tiempo de esta orden.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
             }
         } else {
             //Este mensaje se retornara al dispositivo móvil.
             //El proyecto no existe - Esta eliminado
+            enviarMensajeCelular("¡Alerta!" + "n/" + "Este numero de orden no existe.");
             new rojerusan.RSNotifyAnimated("¡Alerta!", "Este numero de orden no existe.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
         }
+    }
+
+    private void enviarMensajeCelular(String mensaje) {
+        CPS.enviarMensaje(mensaje);
     }
 
     public void limpiarInformacionAreas() {
@@ -1368,9 +1375,9 @@ public class Menu extends javax.swing.JFrame implements Runnable {
 
     @Override
     public void run() {
-        ConexionPS obj = new ConexionPS();//Establecemos la conecion con el puerto serial(COM)
+        CPS = new ConexionPS();//Establecemos la conecion con el puerto serial(COM)
         while (true) {
-            obj.enlacePuertos();//Si detecta algo en el puerto COM va a tomar o detener el tiempo!!
+            CPS.enlacePuertos();//Si detecta algo en el puerto COM va a tomar o detener el tiempo!!
         }
     }
 

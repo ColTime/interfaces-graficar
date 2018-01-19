@@ -20,12 +20,15 @@ import javax.swing.JOptionPane;
  */
 public class ConexionPS {
 
-    public String mensaje = "";
+    public String mensaje = null;
+
+    public ConexionPS() {//Constructos
+    }
 
     public void enviarMensaje(String mensaje) {
         this.mensaje = mensaje;
     }
-
+//Falta validar que el puerto este abierto y disponible para poder mandar informacion, y de no ser asì se va a notificar al usuario que no puede realizar la toma de tiempo correspondiente a si àrea de producciòn.
     public void enlacePuertos() {
         CommPort puerto = null;
         String valor = "";
@@ -61,6 +64,7 @@ public class ConexionPS {
             obj.LecturaCodigoQR(valor);//Se encargara de ler el codigo QR
 
             myPS.print(mensaje);//Valor de dalida
+            mensaje = null;
             puerto.close();
 
         } catch (Exception e) {

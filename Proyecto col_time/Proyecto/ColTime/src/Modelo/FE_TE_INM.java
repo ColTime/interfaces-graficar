@@ -1,5 +1,6 @@
 package Modelo;
 
+import Controlador.ConexionPS;
 import com.sun.rowset.CachedRowSetImpl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,7 +29,7 @@ public class FE_TE_INM {
 
     //Metodos------------------------------------------------->
     //No se te olvide tener en cuenta el id del lector y concatenar a la informacion despues de leer el código QR***
-    public boolean iniciar_Pausar_Reiniciar_Toma_Tiempo(int orden, int detalle, int negocio, int lector, int cantidadTerminada, int operarios) {//Agregar un identificador por persona!!
+    public boolean iniciar_Pausar_Reiniciar_Toma_Tiempo(int orden, int detalle, int negocio, int lector, int cantidadTerminada, int operarios, ConexionPS cps) {
         //Falta hacer que se puedan poner varias tomas de tiempo del mismo proceso al mismo tiempo.
         try {
             conexion = new Conexion();
@@ -101,8 +102,8 @@ public class FE_TE_INM {
                     //Si no cumple la condición va a retornar un falso y monstrara una mensaje de advertencia.
                 } else {
                     res = false;
-                    //Se enviara desde acá el mensaje al lector diciendo que la cantidad para el proyecto no es la adecuada...................................
-                    
+                    //Se enviara desde acá el mensaje al lector diciendo que la cantidad para el proyecto no es la adecuada(Al celular)...................................
+                    enviarMensajeCelular("Mensaje", cps);//Mensaje para el celular
                 }
             } else {
                 //Si no existe se ejecutara el procedimiento para iniciar o renaudar el tiempo
@@ -124,6 +125,10 @@ public class FE_TE_INM {
             JOptionPane.showMessageDialog(null, "Error! " + e);
         }
         return res;
+    }
+
+    private void enviarMensajeCelular(String mensaje, ConexionPS cps) {
+        cps.enviarMensaje(mensaje);
     }
 
     public boolean pararTiempoAlmacen(int orden, int detalle, int cantidad, int detalleproducto, int proceso) {
@@ -171,7 +176,7 @@ public class FE_TE_INM {
                 res = !ps.execute();
 
             } else {
-                //Mensaje que la cantidad no es la optima para realizar el procedimiento.............................
+                //Mensaje que la cantidad no es la optima para realizar el procedimiento(Al computador).............................
 
             }
             //Pendiente.........................................................

@@ -1372,7 +1372,7 @@ public class proyecto extends javax.swing.JPanel {
         }
     }
 
-    private boolean validarTipoProducto(String producto) {
+    private boolean validarTipoProducto(String producto) {//Esto hace parte de la validacion del registro de proyecto mediante lector QR
         boolean resp = false;
         switch (producto.toUpperCase()) {
             case "CIRCUITO":
@@ -2290,6 +2290,9 @@ public class proyecto extends javax.swing.JPanel {
         if (!jLIDPCB.getText().equals("0") && jLMaterialPCB.getText().equals("GF")) {
             subEliminardetalle(obj, Integer.parseInt(jLIDPCB.getText()), Integer.parseInt(jTNorden.getText()), "FE", "PCB");
         }
+        if (!jLIDPCB.getText().equals("0") && (jLMaterialPCB.getText().equals("TH") || jLMaterialPCB.getText().equals("FV")) && cbMaterialPCBTE.getSelectedItem().toString().equals("GF")) {
+            subEliminardetalle(obj, Integer.parseInt(jLIDPCB.getText()), Integer.parseInt(jTNorden.getText()), "FE", "PCB");
+        }
         if (jCCircuito.isSelected()) {
             if (!jLIDCircuitoGF.getText().equals("0") && (cbMaterialCircuito.getSelectedItem().toString().equals("TH") || cbMaterialCircuito.getSelectedItem().toString().equals("FV"))) {
                 //Se eliminara el gran formato y se registrara la otra forma de circuito.
@@ -2301,7 +2304,7 @@ public class proyecto extends javax.swing.JPanel {
                 subEliminardetalle(obj, Integer.parseInt(jLIDCircuito.getText()), Integer.parseInt(jTNorden.getText()), "ALMACEN", "Circuito GF");
             }
         }
-        if (!jLIDPCBGF.getText().equals("0") && !jLMaterialPCB.getText().equals("GF")) {
+        if (!jLIDPCBGF.getText().equals("0") && jLMaterialPCB.getText().equals("GF") && !jLMaterialPCB.getText().equals(cbMaterialPCBTE.getSelectedItem().toString())) {
             //Se eliminara el gran formato y se registrara la otra forma de circuito.
             subEliminardetalle(obj, Integer.parseInt(jLIDPCBGF.getText()), Integer.parseInt(jTNorden.getText()), "ALMACEN", "PCB GF");
         }
