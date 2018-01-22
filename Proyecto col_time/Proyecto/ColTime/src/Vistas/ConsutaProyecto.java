@@ -570,7 +570,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                                 obj.btnTomaTiempos.setVisible(true);
                                 obj.GenerarQR.setEnabled(false);
                                 obj.btnDelete.setEnabled(true);
-                                obj.jRParada.setEnabled(true);
+                                obj.jRParada.setEnabled(false);
                             } else if (TProyecto.getValueAt(f, 7).toString().equals("Pausado")) {
                                 obj.Notificacion1.setForeground(Color.ORANGE);
                                 obj.btnTomaTiempos.setVisible(false);//Es false
@@ -799,15 +799,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                             if (TDetalle.getValueAt(i, 1).toString().equals("FE") && TDetalle.getValueAt(i, 2).toString().equals("Circuito")) {
                                 //Se valida el estado del Circuito de FE 
                                 estadoModificacion(i, obj.jCCircuito, obj.jTCircuito);
-//                                if (TDetalle.getValueAt(i, 4).toString().equals("Terminado") || TDetalle.getValueAt(i, 4).toString().equals("Ejecucion") || TDetalle.getValueAt(i, 4).toString().equals("Pausado")) {
-//                                    obj.cbMaterialCircuito.setEnabled(false);
-//                                    obj.jCAntisolderC.setEnabled(false);
-//                                    obj.jCRuteoC.setEnabled(false);
-//                                } else {
-//                                    obj.cbMaterialCircuito.setEnabled(true);
-//                                    obj.jCAntisolderC.setEnabled(true);
-//                                    obj.jCRuteoC.setEnabled(true);
-//                                }
+
                             } else {
                                 if ((TDetalle.getValueAt(i, 1).toString().equals("FE") || TDetalle.getValueAt(i, 1).toString().equals("ALMACEN")) && (TDetalle.getValueAt(i, 2).toString().equals("PCB") || TDetalle.getValueAt(i, 2).toString().equals("PCB GF") || TDetalle.getValueAt(i, 2).toString().equals("PCB COM"))) {
                                     //Se valida el estado del PCB de FE 
@@ -816,15 +808,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                                     } else {
                                         obj.jRPCBCOM.setEnabled(true);
                                     }
-//                                    if (TDetalle.getValueAt(i, 4).toString().equals("Terminado") || TDetalle.getValueAt(i, 4).toString().equals("Pausado")) {
-//                                        obj.cbMaterialPCBTE.setEnabled(false);
-//                                        obj.jCAntisolderP.setEnabled(false);
-//                                        obj.jCRuteoP.setEnabled(false);
-//                                    } else {
-//                                        obj.cbMaterialPCBTE.setEnabled(true);
-//                                        obj.jCAntisolderP.setEnabled(true);
-//                                        obj.jCRuteoP.setEnabled(true);
-//                                    }
+
                                 } else {
                                     if (TDetalle.getValueAt(i, 1).toString().equals("TE") && TDetalle.getValueAt(i, 2).toString().equals("Teclado")) {
                                         //Se valida el estado del Teclado de TE 
@@ -1260,3 +1244,8 @@ public class ConsutaProyecto extends javax.swing.JFrame {
     private javax.swing.JLabel jTtipo1;
     // End of variables declaration//GEN-END:variables
 }
+/*
+00 01 02
+10 11 12
+20 21 22
+*/

@@ -676,6 +676,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                             break;
                         case 3:
                             //Terminado
+                            //Eliminar----------------------------------------------------------------------------
                             switch (crs.getString(3)) {
                                 case "Normal":
                                     //Proyecto normal
@@ -691,6 +692,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                                     break;
                             }
                             break;
+                        //Eliminar------------------------------------------------------------------------------
                         case 4:
                             //Ejecucion
                             switch (crs.getString(3)) {
@@ -744,13 +746,14 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                     if (cantidad == unidad * conta) {
                         switch (negocio) {
                             case 1:
-                                ProduccionFE.contenidoFE.setPreferredSize(new Dimension(1128, ProduccionFE.contenidoFE.getHeight() + 496));
+//                                ProduccionFE.contenidoFE.setAutoscrolls(true);
+                                ProduccionFE.contenidoFE.setPreferredSize(new Dimension(1128, /*ProduccionFE.contenidoFE.getHeight()->*/ 530 + 400));
                                 break;
                             case 2:
-                                ProduccionTE.contenidoTE.setPreferredSize(new Dimension(1128, ProduccionTE.contenidoTE.getHeight() + 496));
+                                ProduccionTE.contenidoTE.setPreferredSize(new Dimension(1128, /*ProduccionTE.contenidoTE.getHeight()->*/ 530 + 400));
                                 break;
                             case 3:
-                                ProduccionEN.contenidoEN.setPreferredSize(new Dimension(1128, ProduccionEN.contenidoEN.getHeight() + 496));
+                                ProduccionEN.contenidoEN.setPreferredSize(new Dimension(1128, /*ProduccionEN.contenidoEN.getHeight()*/ 530 + 400));
                                 break;
                         }
                         conta += 5;
