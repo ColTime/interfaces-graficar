@@ -15,6 +15,9 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import elaprendiz.gui.textField.TextFieldRoundBackground;
+import gnu.io.CommPort;
+import gnu.io.CommPortIdentifier;
+import gnu.io.SerialPort;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -22,12 +25,14 @@ import java.io.FileOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Enumeration;
+import java.util.Scanner;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import rojerusan.RSNotifyAnimated;
 
-public class proyecto extends javax.swing.JPanel {
+public class proyecto extends javax.swing.JPanel implements Runnable {
 
     public proyecto(int p) {
         if (p == 1) {
@@ -37,7 +42,7 @@ public class proyecto extends javax.swing.JPanel {
             Notificacion1.setVisible(false);
             GenerarQR.setEnabled(false);
             btnTomaTiempos.setVisible(false);
-//            visibilidadID();//Pendiente para realizar mañana!
+            visibilidadID();//Pendiente para realizar mañana!
             limites();
             jREjecucion.setEnabled(false);
             jRParada.setEnabled(false);
@@ -57,6 +62,7 @@ public class proyecto extends javax.swing.JPanel {
     static String fecha = "";
     int opmaterial = 1;
     int modificacion = 0;
+    int puertoProyecto = 0;
     DateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
     private void visibilidadID() {
@@ -73,6 +79,8 @@ public class proyecto extends javax.swing.JPanel {
         jLIDCircuitoCOM.setVisible(false);//ID de los componenetes del circuito
         jLIDPCBGF.setVisible(false);//ID de la PCB cuando es GF
         jLIDPCBCOM.setVisible(false);//ID de los componentes del circuito
+        jLMaterialPCB.setVisible(false);
+        jLMaterialCircuito.setVisible(false);
     }
 
     private void limites() {
@@ -1057,7 +1065,53 @@ public class proyecto extends javax.swing.JPanel {
         fecha();
         limpiarID();
         ocultarFechas();
+        Thread QRProyecto = new Thread(this);
+        QRProyecto.start();
     }//GEN-LAST:event_btnNuevoActionPerformed
+    @Override
+    public void run() {
+        String valor = proyectoQR();
+        if (puertoProyecto == 1) {
+            puertoProyecto = 0;
+            llenarCamporProyecto(valor);
+        } else {
+            //No se pudo establecer la conexión con el puerto COM, desea cambiarlo o volver a intentar? 
+            JOptionPane.showMessageDialog(null, "No se pudo establecer la conexión con el puerto COM");
+        }
+    }
+
+    private String proyectoQR() {
+        CommPort puerto = null;
+        String valor = "";
+        int op = 0;
+        try {
+            Enumeration commports = CommPortIdentifier.getPortIdentifiers();//Enumeracion de todos los puertos.
+            CommPortIdentifier myCPI = null;
+            Scanner mySC;
+            while (commports.hasMoreElements()) {
+                myCPI = (CommPortIdentifier) commports.nextElement();
+                if (myCPI.getName().equals("COM4")) {//Localización del puerto 
+                    puertoProyecto = 1;
+                    puerto = myCPI.open("Puerto serial Proyecto", 100);//Apertura y nombre del puerto
+                    SerialPort mySP = (SerialPort) puerto;
+                    //Configuracion del puerto
+                    mySP.setSerialPortParams(9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
+                    //
+                    mySC = new Scanner(mySP.getInputStream());//Datos de entrada al puerto
+                    while (!mySC.hasNext()) {//Valida la informacion que va a ingresar!!
+                        mySC.close();
+                        mySC = null;
+                        mySC = new Scanner(mySP.getInputStream());
+                    }
+                    valor = mySC.next();
+                }
+            }
+        } catch (Exception e) {
+            //Error al leer por el puerto serial.
+        }
+        return valor;
+    }
+
     private void limpiarID() {
         jLIDConversor.setText("0");
         jLIDRepujado.setText("0");
@@ -1230,7 +1284,6 @@ public class proyecto extends javax.swing.JPanel {
         detalleProduccion obj = new detalleProduccion(principal, true, Integer.parseInt(jTNorden.getText()), 4, 4);
         obj.setLocationRelativeTo(null);
         obj.setVisible(true);
-
     }//GEN-LAST:event_btnTomaTiemposActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -1277,111 +1330,112 @@ public class proyecto extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnActivarActionPerformed
 
-    private void jTProyectoQRKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTProyectoQRKeyPressed
-//Registro de proyecto mediante lectura de codigo QR (Actual)
-//29359;Micro Hom Cali S.A.S;Control Planta;FE;Normal;15/01/2018;null;null;null;null;25;TH;SI;SI;null;null;NO;NO;null;null;null;null;null;null;null;null
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            try {
-                String InformacionProyecto[] = jTProyectoQR.getText().split(";");
-                if (InformacionProyecto.length == 26) {
-                    jTNorden.setText(InformacionProyecto[0]);//Numero de orden
-                    jTNombreCliente.setText(InformacionProyecto[1]);//Nombre del cliente
-                    jTNombreProyecto.setText(InformacionProyecto[2]);//Nombre del proyecto
-                    cbNegocio.setSelectedItem(InformacionProyecto[3]);//Negocios implicados
-                    cbTipo.setSelectedItem(InformacionProyecto[4]);//Tipo de proyecto
-                    jDentrega.setDate(formato.parse(InformacionProyecto[5]));//Fecha de entrega al cliente
-                    if (!InformacionProyecto[6].equals("null")) {//Conversor
-                        jCConversor.setSelected(true);
-                        jTConversor.setText(InformacionProyecto[6]);
-                        jTConversor.setEnabled(true);
-                    }
-                    if (!InformacionProyecto[7].equals("null")) {//Troquel
-                        jCTroquel.setSelected(true);
-                        jTTroquel.setText(InformacionProyecto[7]);
-                        jTTroquel.setEnabled(true);
-                    }
-                    if (!InformacionProyecto[8].equals("null")) {//Repujado
-                        jCRepujado.setSelected(true);
-                        jTRepujado.setText(InformacionProyecto[8]);
-                        jTRepujado.setEnabled(true);
-                    }
-                    if (!InformacionProyecto[9].equals("null")) {//Stencil
-                        jCStencil.setSelected(true);
-                        jTStencil.setText(InformacionProyecto[9]);
-                        jTStencil.setEnabled(true);
-                    }
-                    if (!InformacionProyecto[10].equals("null")) {//Circuito de FE
-                        jCCircuito.setSelected(true);
-                        jTCircuito.setText(InformacionProyecto[10]);
-                        jTCircuito.setEnabled(true);
-                        cbMaterialCircuito.setSelectedItem(InformacionProyecto[11]);
-                        cbMaterialCircuito.setEnabled(true);
-                        jCAntisolderC.setSelected(InformacionProyecto[12].toUpperCase().equals("SI"));
-                        jCRuteoC.setSelected(InformacionProyecto[13].toUpperCase().equals("SI"));
-                    }
-                    if (!InformacionProyecto[14].equals("null")) {//PCB TE
-                        jCPCBTE.setSelected(true);
-                        jTPCBTE.setText(InformacionProyecto[14]);
-                        jTPCBTE.setEnabled(true);
-                        cbMaterialPCBTE.setSelectedItem(InformacionProyecto[15]);
-                        cbMaterialPCBTE.setEnabled(true);
-                        jCAntisolderP.setSelected(InformacionProyecto[16].toUpperCase().equals("SI"));
-                        jCRuteoP.setSelected(InformacionProyecto[17].toUpperCase().equals("SI"));
-                        jRPCBCOM.setSelected(InformacionProyecto[18].toUpperCase().equals("SI"));
-                        jRPCBCOM.setEnabled(true);
-                        jRPIntegracion.setSelected(InformacionProyecto[19].toUpperCase().equals("SI"));
-                        jRPIntegracion.setEnabled(true);
-                        if (jRPCBCOM.isSelected()) {//Componentes de la PCB del teclado
-                            jDFechaEntregaPCBCOMGF.setVisible(true);
-                            if (!InformacionProyecto[25].equals("null")) {
-                                jDFechaEntregaPCBCOMGF.setDate(formato.parse(InformacionProyecto[25]));//Fecha de entrega de componentes de la PCB_TE:
-                            }
-                            jLpcbGF.setVisible(true);
-                        }
-                        if (jRPIntegracion.isSelected()) {//Integración de la PCB del teclado 
-                            jDFechaEntregaPCBGF.setVisible(true);
-                            if (!InformacionProyecto[24].equals("null")) {
-                                jDFechaEntregaPCBGF.setDate(formato.parse(InformacionProyecto[24]));//Fecha de entrega de la PCB_TE(TH,FV,GF):
-                            }
-                            jLCircuitoGF.setVisible(true);
-                        }
-                    }
-                    if (!InformacionProyecto[20].equals("null")) {//Teclado
-                        jCTeclado.setSelected(true);
-                        jTTeclado.setText(InformacionProyecto[20]);
-                        jTTeclado.setEnabled(true);
-                    }
-                    if (!InformacionProyecto[21].equals("null")) {//Ensamble
-                        jCIntegracion.setSelected(true);
-                        jTIntegracion.setText(InformacionProyecto[21]);
-                        jTIntegracion.setEnabled(true);
-                    }
-                    if (jCCircuito.isSelected() && jCIntegracion.isSelected()) {//Esto se le conoce como integración.
-                        jLComCircuitos.setVisible(true);
-                        if (!InformacionProyecto[23].equals("null")) {
-                            jDFechaEntregaFECOM.setDate(formato.parse(InformacionProyecto[23]));//Fecha de entrega de los componentes del circuito_FE:
-                        }
-                        jDFechaEntregaFECOM.setVisible(true);
-                        jLCircuitoFE.setVisible(true);
-                        if (!InformacionProyecto[22].equals("null")) {
-                            jDFechaEntregaFE.setDate(formato.parse(InformacionProyecto[22]));//Fecha de entrega del Circuito_FE(TH,FV,GF) a ensamble:
-                        }
-                        jDFechaEntregaFE.setVisible(true);
-                    }
-                    if (jTNombreCliente.getText().length() > 0 && jTNombreProyecto.getText().length() > 0 && jDentrega.getDate() != null && !cbNegocio.getSelectedItem().toString().equals("Seleccione...")
-                            && !cbTipo.getSelectedItem().toString().equals("Seleccione...")) {
-                        btnGuardar.setEnabled(true);
-                    }
-                } else {
-                    //Mensaje...
-                    //Al QR del proyecto le falta información para poder realizar el registro
-                    new rojerusan.RSNotifyAnimated("¡Alerta!", "El código QR esta mal estructurado.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
+    public void llenarCamporProyecto(String QRProyecto) {
+        //Registro de proyecto mediante lectura de codigo QR (Actual)
+        //29359;Micro Hom Cali S.A.S;Control Planta;FE;Normal;15/01/2018;null;null;null;null;25;TH;SI;SI;null;null;NO;NO;null;null;null;null;null;null;null;null
+        try {
+            String InformacionProyecto[] = QRProyecto.split(";");
+            if (InformacionProyecto.length == 26) {
+                jTNorden.setText(InformacionProyecto[0]);//Numero de orden
+                jTNombreCliente.setText(InformacionProyecto[1]);//Nombre del cliente
+                jTNombreProyecto.setText(InformacionProyecto[2]);//Nombre del proyecto
+                cbNegocio.setSelectedItem(InformacionProyecto[3]);//Negocios implicados
+                cbTipo.setSelectedItem(InformacionProyecto[4]);//Tipo de proyecto
+                jDentrega.setDate(formato.parse(InformacionProyecto[5]));//Fecha de entrega al cliente
+                if (!InformacionProyecto[6].equals("null")) {//Conversor
+                    jCConversor.setSelected(true);
+                    jTConversor.setText(InformacionProyecto[6]);
+                    jTConversor.setEnabled(true);
                 }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Error: " + e);
+                if (!InformacionProyecto[7].equals("null")) {//Troquel
+                    jCTroquel.setSelected(true);
+                    jTTroquel.setText(InformacionProyecto[7]);
+                    jTTroquel.setEnabled(true);
+                }
+                if (!InformacionProyecto[8].equals("null")) {//Repujado
+                    jCRepujado.setSelected(true);
+                    jTRepujado.setText(InformacionProyecto[8]);
+                    jTRepujado.setEnabled(true);
+                }
+                if (!InformacionProyecto[9].equals("null")) {//Stencil
+                    jCStencil.setSelected(true);
+                    jTStencil.setText(InformacionProyecto[9]);
+                    jTStencil.setEnabled(true);
+                }
+                if (!InformacionProyecto[10].equals("null")) {//Circuito de FE
+                    jCCircuito.setSelected(true);
+                    jTCircuito.setText(InformacionProyecto[10]);
+                    jTCircuito.setEnabled(true);
+                    cbMaterialCircuito.setSelectedItem(InformacionProyecto[11]);
+                    cbMaterialCircuito.setEnabled(true);
+                    jCAntisolderC.setSelected(InformacionProyecto[12].toUpperCase().equals("SI"));
+                    jCRuteoC.setSelected(InformacionProyecto[13].toUpperCase().equals("SI"));
+                }
+                if (!InformacionProyecto[14].equals("null")) {//PCB TE
+                    jCPCBTE.setSelected(true);
+                    jTPCBTE.setText(InformacionProyecto[14]);
+                    jTPCBTE.setEnabled(true);
+                    cbMaterialPCBTE.setSelectedItem(InformacionProyecto[15]);
+                    cbMaterialPCBTE.setEnabled(true);
+                    jCAntisolderP.setSelected(InformacionProyecto[16].toUpperCase().equals("SI"));
+                    jCRuteoP.setSelected(InformacionProyecto[17].toUpperCase().equals("SI"));
+                    jRPCBCOM.setSelected(InformacionProyecto[18].toUpperCase().equals("SI"));
+                    jRPCBCOM.setEnabled(true);
+                    jRPIntegracion.setSelected(InformacionProyecto[19].toUpperCase().equals("SI"));
+                    jRPIntegracion.setEnabled(true);
+                    if (jRPCBCOM.isSelected()) {//Componentes de la PCB del teclado
+                        jDFechaEntregaPCBCOMGF.setVisible(true);
+                        if (!InformacionProyecto[25].equals("null")) {
+                            jDFechaEntregaPCBCOMGF.setDate(formato.parse(InformacionProyecto[25]));//Fecha de entrega de componentes de la PCB_TE:
+                        }
+                        jLpcbGF.setVisible(true);
+                    }
+                    if (jRPIntegracion.isSelected()) {//Integración de la PCB del teclado 
+                        jDFechaEntregaPCBGF.setVisible(true);
+                        if (!InformacionProyecto[24].equals("null")) {
+                            jDFechaEntregaPCBGF.setDate(formato.parse(InformacionProyecto[24]));//Fecha de entrega de la PCB_TE(TH,FV,GF):
+                        }
+                        jLCircuitoGF.setVisible(true);
+                    }
+                }
+                if (!InformacionProyecto[20].equals("null")) {//Teclado
+                    jCTeclado.setSelected(true);
+                    jTTeclado.setText(InformacionProyecto[20]);
+                    jTTeclado.setEnabled(true);
+                }
+                if (!InformacionProyecto[21].equals("null")) {//Ensamble
+                    jCIntegracion.setSelected(true);
+                    jTIntegracion.setText(InformacionProyecto[21]);
+                    jTIntegracion.setEnabled(true);
+                }
+                if (jCCircuito.isSelected() && jCIntegracion.isSelected()) {//Esto se le conoce como integración.
+                    jLComCircuitos.setVisible(true);
+                    if (!InformacionProyecto[23].equals("null")) {
+                        jDFechaEntregaFECOM.setDate(formato.parse(InformacionProyecto[23]));//Fecha de entrega de los componentes del circuito_FE:
+                    }
+                    jDFechaEntregaFECOM.setVisible(true);
+                    jLCircuitoFE.setVisible(true);
+                    if (!InformacionProyecto[22].equals("null")) {
+                        jDFechaEntregaFE.setDate(formato.parse(InformacionProyecto[22]));//Fecha de entrega del Circuito_FE(TH,FV,GF) a ensamble:
+                    }
+                    jDFechaEntregaFE.setVisible(true);
+                }
+                if (jTNombreCliente.getText().length() > 0 && jTNombreProyecto.getText().length() > 0 && jDentrega.getDate() != null && !cbNegocio.getSelectedItem().toString().equals("Seleccione...")
+                        && !cbTipo.getSelectedItem().toString().equals("Seleccione...")) {
+                    btnGuardar.setEnabled(true);
+                }
+            } else {
+                //Mensaje...
+                //Al QR del proyecto le falta información para poder realizar el registro
+                new rojerusan.RSNotifyAnimated("¡Alerta!", "El código QR esta mal estructurado.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
             }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e);
         }
-//Registro Finalizado.
+        //Fin de la lectura del Código QR del proyecto.
+    }
+    private void jTProyectoQRKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTProyectoQRKeyPressed
+
     }//GEN-LAST:event_jTProyectoQRKeyPressed
 
 

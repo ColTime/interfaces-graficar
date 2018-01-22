@@ -613,21 +613,21 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
             reinicializarVariables();
             //Se valida cual de los tres contenedores se valida primero
             switch (negocio) {
+                case 4:
                 case 1:
                     ProduccionFE.contenidoFE.removeAll();
                     ProduccionFE.contenidoFE.updateUI();
+                    ProduccionFE.contenidoFE.setPreferredSize(new Dimension(1128, /*ProduccionFE.contenidoFE.getHeight()->*/ 530));
                     break;
                 case 2:
                     ProduccionTE.contenidoTE.removeAll();
                     ProduccionTE.contenidoTE.updateUI();
+                    ProduccionTE.contenidoTE.setPreferredSize(new Dimension(1128, /*ProduccionFE.contenidoFE.getHeight()->*/ 530));
                     break;
                 case 3:
                     ProduccionEN.contenidoEN.removeAll();
                     ProduccionEN.contenidoEN.updateUI();
-                    break;
-                case 4:
-                    ProduccionFE.contenidoFE.removeAll();
-                    ProduccionFE.contenidoFE.updateUI();
+                    ProduccionEN.contenidoEN.setPreferredSize(new Dimension(1128, /*ProduccionFE.contenidoFE.getHeight()->*/ 530));
                     break;
             }
             while (crs.next()) {
@@ -746,7 +746,6 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                     if (cantidad == unidad * conta) {
                         switch (negocio) {
                             case 1:
-//                                ProduccionFE.contenidoFE.setAutoscrolls(true);
                                 ProduccionFE.contenidoFE.setPreferredSize(new Dimension(1128, /*ProduccionFE.contenidoFE.getHeight()->*/ 530 + 400));
                                 break;
                             case 2:

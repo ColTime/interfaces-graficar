@@ -42,7 +42,7 @@ public class ConexionPS {
             while (commports.hasMoreElements()) {//Se valida que el puerto que necesito este disponible
                 myCPI = (CommPortIdentifier) commports.nextElement();
                 if (myCPI.getName().equals("COM3")) {
-                    puerto = myCPI.open("Puerto Serial", 100);//Abro el puerto y le mando dos parametros que son el nombre de la apertura y el tiempo de respuesta
+                    puerto = myCPI.open("Puerto Serial operario", 100);//Abro el puerto y le mando dos parametros que son el nombre de la apertura y el tiempo de respuesta
                     SerialPort mySP = (SerialPort) puerto;
                     //
                     mySP.setSerialPortParams(9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);

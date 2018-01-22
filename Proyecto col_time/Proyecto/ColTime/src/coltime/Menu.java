@@ -147,6 +147,8 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
 
@@ -869,6 +871,14 @@ public class Menu extends javax.swing.JFrame implements Runnable {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu3.setText("Configuración");
+
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/configuracion.png"))); // NOI18N
+        jMenuItem4.setText("Puertos COM");
+        jMenu3.add(jMenuItem4);
+
+        jMenuBar1.add(jMenu3);
+
         jMenu2.setText("Salir");
 
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/season.png"))); // NOI18N
@@ -1581,10 +1591,12 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     public javax.swing.JLabel jLabel9;
     public javax.swing.JMenu jMenu1;
     public javax.swing.JMenu jMenu2;
+    public javax.swing.JMenu jMenu3;
     public javax.swing.JMenuBar jMenuBar1;
     public javax.swing.JMenuItem jMenuItem1;
     public javax.swing.JMenuItem jMenuItem2;
     public javax.swing.JMenuItem jMenuItem3;
+    public javax.swing.JMenuItem jMenuItem4;
     public javax.swing.JPanel jPContenido;
     public javax.swing.JPanel jPMenu;
     public javax.swing.JPanel jPSuperior;
