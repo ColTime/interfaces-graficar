@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class ConsutaProyecto extends javax.swing.JFrame {
-
+    
     public ConsutaProyecto() {
         initComponents();
         jDFecha.setEnabled(false);
@@ -528,7 +528,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
             if (evt.getClickCount() == 1) {
                 if (TProyecto.getRowCount() > 0) {
                     row = TProyecto.getSelectedRow();
-
+                    
                     String valor = TProyecto.getValueAt(row, 8).toString();
                     jTtipo.setText(valor);
                     if (valor.equals("Normal")) {
@@ -624,7 +624,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                         } else {
                             obj.jCRuteoC.setSelected(false);
                         }
-
+                        
                         if (TProyecto.getValueAt(f, 13).toString().equals("true")) {
                             obj.jCAntisolderC.setSelected(true);
                         } else {
@@ -636,7 +636,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                         } else {
                             obj.jCRuteoP.setSelected(false);
                         }
-
+                        
                         if (TProyecto.getValueAt(f, 15).toString().equals("true")) {
                             obj.jCAntisolderP.setSelected(true);
                         } else {
@@ -655,9 +655,9 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                         obj.jLIDPCBGF.setText("0");
                         obj.jLIDCircuitoCOM.setText("0");
                         obj.jLIDCircuitoGF.setText("0");
-
+                        
                         obj.jRPCBCOM.setSelected(false);
-
+                        
                         for (int i = 0; i < TDetalle.getRowCount(); i++) {
                             //Buscamos que detalles tiene este proyecto para enviar a la vista de proyecto
                             if (TDetalle.getValueAt(i, 2).toString().equals("Conversor")) {
@@ -749,14 +749,14 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                             obj.jDFechaEntregaFECOM.setVisible(true);
                             obj.jLComCircuitos.setVisible(true);
                         }
-
+                        
                         if (!TProyecto.getValueAt(f, 19).toString().equals("null")) {
                             fechaEntrega = fecha.parse(TProyecto.getValueAt(f, 19).toString());//Fecha de entrega PCB GF
                             obj.jDFechaEntregaPCBGF.setDate(fechaEntrega);
                             obj.jDFechaEntregaPCBGF.setVisible(true);
                             obj.jLCircuitoGF.setVisible(true);
                         }
-
+                        
                         if (!TProyecto.getValueAt(f, 20).toString().equals("null")) {
                             fechaEntrega = fecha.parse(TProyecto.getValueAt(f, 20).toString());//Fecha de entrega COM GF
                             obj.jDFechaEntregaPCBCOMGF.setDate(fechaEntrega);
@@ -766,6 +766,10 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                         //Validación de edición
                         validarEdiciones(obj);
                         //
+                        obj.jLNovedades.setVisible(true);
+                        obj.jTNovedades.setVisible(true);
+//                        jScrollPane1.setVisible(true);
+                        obj.jTNovedades.setText("asdaaaaaaasdahgjdsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
                         this.dispose();
                     } catch (Exception e) {
                         //Si se genera algun error a la hora del paso de informacion a la vista
@@ -799,7 +803,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                             if (TDetalle.getValueAt(i, 1).toString().equals("FE") && TDetalle.getValueAt(i, 2).toString().equals("Circuito")) {
                                 //Se valida el estado del Circuito de FE 
                                 estadoModificacion(i, obj.jCCircuito, obj.jTCircuito);
-
+                                
                             } else {
                                 if ((TDetalle.getValueAt(i, 1).toString().equals("FE") || TDetalle.getValueAt(i, 1).toString().equals("ALMACEN")) && (TDetalle.getValueAt(i, 2).toString().equals("PCB") || TDetalle.getValueAt(i, 2).toString().equals("PCB GF") || TDetalle.getValueAt(i, 2).toString().equals("PCB COM"))) {
                                     //Se valida el estado del PCB de FE 
@@ -808,7 +812,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                                     } else {
                                         obj.jRPCBCOM.setEnabled(true);
                                     }
-
+                                    
                                 } else {
                                     if (TDetalle.getValueAt(i, 1).toString().equals("TE") && TDetalle.getValueAt(i, 2).toString().equals("Teclado")) {
                                         //Se valida el estado del Teclado de TE 
@@ -834,7 +838,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
             obj.cbNegocio.setEnabled(false);
         }
     }
-
+    
     private void estadoModificacion(int row, JCheckBox check, TextFieldRoundBackground text) {
         if (TDetalle.getValueAt(row, 4).toString().equals("Terminado") || TDetalle.getValueAt(row, 4).toString().equals("Ejecucion") || TDetalle.getValueAt(row, 4).toString().equals("Pausado")) {
             //No se permitira modificar nada del conversor
@@ -925,7 +929,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
             obj.btnActivar.setVisible(true);
             obj.GenerarQR.setEnabled(false);
             obj.btnUpdate.setEnabled(false);
-
+            
         }
     }
 
@@ -935,7 +939,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
             controlBusqueda();
         }
     }
-
+    
     private void controlBusqueda() {
         String fecha = "";
         if (jDFecha.getDate() != null) {
@@ -944,7 +948,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         }
         consultarProyectos(jTNumerOrden.getText(), jTNombreCliente.getText(), jTNombreProyecto.getText(), fecha, 0);
     }
-
+    
     private void consultarProyectos(String numerOrden, String nombrecliente, String nombreProyecto, String fecha, int eliminados) {
         Controlador.Proyecto obj = new Controlador.Proyecto();
         if (eliminados == 1) {
@@ -1015,7 +1019,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "¡Error! " + e);
         }
     }
-
+    
     private void consultarDetalle(String numerOrden) {
         DetalleProyecto obj = new DetalleProyecto();
         try {
@@ -1066,7 +1070,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error! " + e);
         }
     }
-
+    
     private void limpiarCampos() {
         jTNumerOrden.setText("");
         jTNombreCliente.setText("");
@@ -1076,7 +1080,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         jRnulo.setSelected(true);
         jRnulo.setVisible(false);
     }
-
+    
     private void editarColumnasDetalle() {
         TDetalle.getColumnModel().getColumn(0).setMinWidth(58);
         TDetalle.getColumnModel().getColumn(0).setMaxWidth(58);
@@ -1103,7 +1107,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         TDetalle.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
         TDetalle.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
     }
-
+    
     private void editarColumnasPNC() {
         TPNC.getColumnModel().getColumn(0).setMinWidth(58);
         TPNC.getColumnModel().getColumn(0).setMaxWidth(58);
@@ -1130,7 +1134,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         TPNC.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(100);
         TPNC.getTableHeader().getColumnModel().getColumn(5).setMinWidth(100);
     }
-
+    
     private void editarColumnasProyecto() {
         TProyecto.getColumnModel().getColumn(0).setMinWidth(65);
         TProyecto.getColumnModel().getColumn(0).setMaxWidth(65);
@@ -1248,4 +1252,4 @@ public class ConsutaProyecto extends javax.swing.JFrame {
 00 01 02
 10 11 12
 20 21 22
-*/
+ */

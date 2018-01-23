@@ -28,8 +28,14 @@ public class Proyecto {
     private String fechaCiccuitoCOMFEoGF = "";
     private String fechaPCBFEoGF = "";
     private String fechaPCBCOMFEoGF = "";
+    private String novedadProyecto = "";
 
     //Get and set------------------------------------------------>
+    
+    public void setNovedadProyecto(String novedadProyecto) {
+        this.novedadProyecto = novedadProyecto;
+    }
+
     public void setCrsP(CachedRowSet crsP) {
         this.crsP = crsP;
     }

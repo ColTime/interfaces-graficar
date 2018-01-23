@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 public class ConexionPS {
 
     public String mensaje = null;
+    private int existePuerto = 0;
 
     public ConexionPS() {//Constructos
     }
@@ -40,9 +41,10 @@ public class ConexionPS {
             Scanner mySC;
             PrintStream myPS;
             while (commports.hasMoreElements()) {//Se valida que el puerto que necesito este disponible
+                existePuerto = 1;
                 myCPI = (CommPortIdentifier) commports.nextElement();
                 if (myCPI.getName().equals("COM3")) {
-                    puerto = myCPI.open("Puerto Serial operario", 100);//Abro el puerto y le mando dos parametros que son el nombre de la apertura y el tiempo de respuesta
+                    puerto = myCPI.open("Puerto Serial Operario", 100);//Abro el puerto y le mando dos parametros que son el nombre de la apertura y el tiempo de respuesta
                     SerialPort mySP = (SerialPort) puerto;
                     //
                     mySP.setSerialPortParams(9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
@@ -51,13 +53,13 @@ public class ConexionPS {
                     myPS = new PrintStream(mySP.getOutputStream());//Datos de salia del puerto
 
                     conexion = 1;
-                    while (!mySC.hasNext()) {//Valida la informacion que va a ingresar!!
+                    while (!mySC.hasNext()) {//Valida que en el puerto serial exista alguna linea de información
                         mySC.close();
                         mySC = null;
                         mySC = new Scanner(mySP.getInputStream());
                     }
                     valor = mySC.next();//Valor de entrada
-
+                    
                     Menu obj = new Menu();
 
                     obj.LecturaCodigoQR(valor);//Se encargara de ler el codigo QR
@@ -71,7 +73,11 @@ public class ConexionPS {
                     JOptionPane.showMessageDialog(null, "Error: " + "No se pudo conectar al puerto serial COM3.");
                 }
             }
-
+            if (existePuerto == 0) {//Se mostrara un mensaje diciendo que no existe ningun puerto serial disponible
+                JOptionPane.showMessageDialog(null, "No existe ningun puerto serial disponible, por favor conecte el dispotitivo");
+            } else {
+                existePuerto = 0;
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e);
             puerto.close();

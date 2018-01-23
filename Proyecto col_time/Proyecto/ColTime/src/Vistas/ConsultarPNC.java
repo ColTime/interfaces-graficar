@@ -252,11 +252,12 @@ public class ConsultarPNC extends javax.swing.JFrame {
         if (evt.getClickCount() == 2 && TDetalle.getSelectedRow() >= 0) {
             int pos = 0;
             String negocio = "";
-            pos = TDetalle.getSelectedRow();
+            pos = TDetalle.getSelectedRow();//Numero de la fila donde se selecciono
 
             if (TDetalle.getRowCount() > 0) {
                 //Se valida que el estado del proyecto no sea parado ni por iniciar para que no permita generar productos no conformes de estas ordenes.
-                if (!TDetalle.getValueAt(pos, 4).toString().equals("Parada") && !TDetalle.getValueAt(pos, 4).toString().equals("Por iniciar")) {
+                //Esto solo aplica para la vista numero 1 Cuando se va a registrar un PNC
+                if (!TDetalle.getValueAt(pos, 4).toString().equals("Parada") && vista == 1 ? !TDetalle.getValueAt(pos, 4).toString().equals("Por iniciar") : true) {
                     if (cargo == 2) {
                         negocio = "FE";
                     } else if (cargo == 3) {

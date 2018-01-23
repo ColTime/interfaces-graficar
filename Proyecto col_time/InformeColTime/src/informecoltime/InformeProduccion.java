@@ -169,7 +169,6 @@ public class InformeProduccion extends javax.swing.JFrame implements Runnable {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         ReporteProduccion = new javax.swing.JTable();
-        jTOden = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1456, 1456));
@@ -222,15 +221,6 @@ public class InformeProduccion extends javax.swing.JFrame implements Runnable {
         ReporteProduccion.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(ReporteProduccion);
 
-        jTOden.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTOdenKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTOdenKeyTyped(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -239,18 +229,13 @@ public class InformeProduccion extends javax.swing.JFrame implements Runnable {
                 .addGap(10, 10, 10)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 799, Short.MAX_VALUE)
                 .addGap(10, 10, 10))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTOden, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTOden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -266,20 +251,6 @@ public class InformeProduccion extends javax.swing.JFrame implements Runnable {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTOdenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTOdenKeyPressed
-        if (!jTOden.getText().equals("")) {
-            ConsultarInformacion(Integer.parseInt(jTOden.getText()));
-            centrarContenidoCeldas();
-        }
-    }//GEN-LAST:event_jTOdenKeyPressed
-
-    private void jTOdenKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTOdenKeyTyped
-        char c = evt.getKeyChar();
-        if (Character.isLetter(c)) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_jTOdenKeyTyped
 
     /**
      * @param args the command line arguments
@@ -320,7 +291,6 @@ public class InformeProduccion extends javax.swing.JFrame implements Runnable {
     private javax.swing.JTable ReporteProduccion;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTOden;
     // End of variables declaration//GEN-END:variables
 
     @Override

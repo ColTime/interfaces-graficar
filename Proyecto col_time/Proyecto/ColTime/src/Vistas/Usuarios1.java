@@ -46,7 +46,7 @@ public class Usuarios1 extends javax.swing.JPanel {
         jTNombre = new elaprendiz.gui.textField.TextFieldRoundBackground();
         cbTipo = new elaprendiz.gui.comboBox.ComboBoxRound();
         cBCargo = new elaprendiz.gui.comboBox.ComboBoxRound();
-        jPanel3 = new javax.swing.JPanel();
+        jPImagenU = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         btnNuevo = new javax.swing.JButton();
@@ -157,7 +157,7 @@ public class Usuarios1 extends javax.swing.JPanel {
         });
 
         cbTipo.setForeground(new java.awt.Color(102, 102, 102));
-        cbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "CE", "CC", "TI", " " }));
+        cbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "CE", "CC", "TI" }));
         cbTipo.setColorDeBorde(new java.awt.Color(204, 204, 204));
         cbTipo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
@@ -166,12 +166,12 @@ public class Usuarios1 extends javax.swing.JPanel {
         cBCargo.setColorDeBorde(new java.awt.Color(204, 204, 204));
         cBCargo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPImagenU.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+        jPImagenU.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconmonstr-user-5-120.png"))); // NOI18N
-        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 220));
+        jPImagenU.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 220));
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
@@ -273,7 +273,7 @@ public class Usuarios1 extends javax.swing.JPanel {
                     .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPImagenU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jpUserLayout.setVerticalGroup(
@@ -313,7 +313,7 @@ public class Usuarios1 extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpUserLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPImagenU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -359,7 +359,7 @@ public class Usuarios1 extends javax.swing.JPanel {
         });
 
         cBCargoB.setForeground(new java.awt.Color(102, 102, 102));
-        cBCargoB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccióne...", "Gestor Comercial", "Encargado de FE y TE", "Encargado de EN", "Administrador", "" }));
+        cBCargoB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccióne...", "Gestor Comercial", "Encargado de FE y TE", "Encargado de EN", "Administrador" }));
         cBCargoB.setColorDeBorde(new java.awt.Color(204, 204, 204));
         cBCargoB.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         cBCargoB.addItemListener(new java.awt.event.ItemListener() {
@@ -453,8 +453,8 @@ public class Usuarios1 extends javax.swing.JPanel {
         jTUsuario.setShowHorizontalLines(false);
         jTUsuario.setShowVerticalLines(false);
         jTUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTUsuarioMouseClicked(evt);
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTUsuarioMouseReleased(evt);
             }
         });
         jScrollPane3.setViewportView(jTUsuario);
@@ -511,11 +511,11 @@ public class Usuarios1 extends javax.swing.JPanel {
         btnDelete.setVisible(true);
         btnActivar.setVisible(false);
         btnActivar.setEnabled(false);
-        btnNuevo.setEnabled(false);
         jTdocumento.setEnabled(true);
+        jPImagenU.setBackground(Color.WHITE);
         limpiar();
     }//GEN-LAST:event_btnNuevoActionPerformed
-    
+
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         registrarMdificarUsuario(1, 1);
         consultarUsuarios("", "", 0);
@@ -530,39 +530,6 @@ public class Usuarios1 extends javax.swing.JPanel {
             btnGuardar.setEnabled(false);
         }
     }//GEN-LAST:event_jTdocumentoKeyReleased
-
-    private void jTUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTUsuarioMouseClicked
-        int users = jTUsuario.getRowCount();
-        if (users > 0) {
-            int fila = jTUsuario.getSelectedRow();
-            estadoComponentes(true, new Color(255, 255, 255));
-            jTdocumento.setText(jTUsuario.getValueAt(fila, 0).toString());
-            cbTipo.setSelectedItem(jTUsuario.getValueAt(fila, 1).toString().toUpperCase());
-            jTNombre.setText(jTUsuario.getValueAt(fila, 2).toString());
-            jTApellidos.setText(jTUsuario.getValueAt(fila, 3).toString());
-            cBCargo.setSelectedItem(jTUsuario.getValueAt(fila, 4).toString());
-            if (jTUsuario.getValueAt(fila, 5) != null) {
-                //Agregar la imagen al panel!!
-            }
-            if (jTUsuario.getValueAt(fila, 6).toString().equals("Activo")) {
-                btnDelete.setEnabled(true);
-                btnDelete.setVisible(true);
-                btnActivar.setVisible(false);
-                btnActivar.setEnabled(false);
-                btnUpdate.setEnabled(true);
-                btnUpdate.setVisible(true);
-            } else {
-                btnDelete.setEnabled(false);
-                btnDelete.setVisible(false);
-                btnActivar.setVisible(true);
-                btnActivar.setEnabled(true);
-                btnUpdate.setEnabled(false);
-                btnUpdate.setVisible(true);
-            }
-            jTdocumento.setEnabled(false);
-            btnNuevo.setEnabled(true);
-        }
-    }//GEN-LAST:event_jTUsuarioMouseClicked
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         if (JOptionPane.showConfirmDialog(null, "¿Seguro desea cambiar el estado de esta persona?,"
@@ -644,6 +611,41 @@ public class Usuarios1 extends javax.swing.JPanel {
         consultarUsuarios(jTdocumentoB.getText(), jTNombreApellido.getText(), cBCargoB.getSelectedIndex());
     }//GEN-LAST:event_cBCargoBItemStateChanged
 
+    private void jTUsuarioMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTUsuarioMouseReleased
+    if (!evt.isPopupTrigger()) {
+            int users = jTUsuario.getRowCount();
+            if (users > 0) {
+                int fila = jTUsuario.getSelectedRow();
+                estadoComponentes(true, new Color(255, 255, 255));
+                jTdocumento.setText(jTUsuario.getValueAt(fila, 0).toString());
+                cbTipo.setSelectedItem(jTUsuario.getValueAt(fila, 1).toString().toUpperCase());
+                jTNombre.setText(jTUsuario.getValueAt(fila, 2).toString());
+                jTApellidos.setText(jTUsuario.getValueAt(fila, 3).toString());
+                cBCargo.setSelectedItem(jTUsuario.getValueAt(fila, 4).toString());
+                if (jTUsuario.getValueAt(fila, 5) != null) {
+                    //Agregar la imagen al panel!!
+                }
+                if (jTUsuario.getValueAt(fila, 6).toString().equals("Activo")) {
+                    btnDelete.setEnabled(true);
+                    btnDelete.setVisible(true);
+                    btnActivar.setVisible(false);
+                    btnActivar.setEnabled(false);
+                    btnUpdate.setEnabled(true);
+                    btnUpdate.setVisible(true);
+                } else {
+                    btnDelete.setEnabled(false);
+                    btnDelete.setVisible(false);
+                    btnActivar.setVisible(true);
+                    btnActivar.setEnabled(true);
+                    btnUpdate.setEnabled(false);
+                    btnUpdate.setVisible(true);
+                }
+                jTdocumento.setEnabled(false);
+                btnNuevo.setEnabled(true);
+            }
+        }       
+    }//GEN-LAST:event_jTUsuarioMouseReleased
+
     public void estadoComponentes(boolean estado, Color es) {
         jTdocumento.setEnabled(estado);
         jTNombre.setEnabled(estado);
@@ -675,9 +677,9 @@ public class Usuarios1 extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPImagenU;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane2;
