@@ -17,6 +17,7 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.PrintStream;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -53,8 +54,8 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         //Toma de tiempos automatica
         if (cargo == 2 || cargo == 3) {
             if (soloUnaVez == 1) {
-//                Thread tomaTiempo = new Thread(this);
-//                tomaTiempo.start();
+                Thread tomaTiempo = new Thread(this);
+                tomaTiempo.start();
             }
         }
         //Fin de toma de tiempos automatica
@@ -75,6 +76,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     int py = 0, filas = 1;
     CachedRowSet crs = null;
     CambiarContraseña obj = null;
+    public static PrintStream myPS;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -1473,7 +1475,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
                             producF.setTitle("Formato estandar");
                             producF.setVisible(true);
                         }
-                        producF.RegistrarTomaTiempoNegocio(infoP, cargo, producF, CPS);
+                        producF.RegistrarTomaTiempoNegocio(infoP, cargo, producF, myPS);
                         break;
                     case 2:
                         if (producT == null) {
@@ -1482,7 +1484,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
                             producT.setTitle("Teclados");
                             producT.setVisible(true);
                         }
-                        producT.RegistrarTomaTiempoNegocio(infoP, cargo, producT, CPS);
+                        producT.RegistrarTomaTiempoNegocio(infoP, cargo, producT, myPS);
                         break;
                     case 3:
                         if (producE == null) {
@@ -1491,25 +1493,21 @@ public class Menu extends javax.swing.JFrame implements Runnable {
                             producE.setTitle("Ensamble");
                             producE.setVisible(true);
                         }
-                        producE.RegistrarTomaTiempoNegocio(infoP, cargo, producE, CPS);
+                        producE.RegistrarTomaTiempoNegocio(infoP, cargo, producE, myPS);
                         break;
                 }
                 //#--------------------------------------------------------------------------------------------------
             } else {
                 //El proyecto no puede realizar la toma de tiempo porque esta parada.
-                enviarMensajeCelular("¡Alerta!" + "n/" + "Esta orden esta parada, no puedes realizar la toma de tiempo de esta orden.");
+//                enviarMensajeCelular("¡Alerta!" + "n/" + "Esta orden esta parada, no puedes realizar la toma de tiempo de esta orden.");
                 new rojerusan.RSNotifyAnimated("¡Alerta!", "Esta orden esta parada, no puedes realizar la toma de tiempo de esta orden.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
             }
         } else {
             //Este mensaje se retornara al dispositivo móvil.
             //El proyecto no existe - Esta eliminado
-            enviarMensajeCelular("¡Alerta!" + "n/" + "Este numero de orden no existe.");
+//            enviarMensajeCelular("¡Alerta!" + "n/" + "Este numero de orden no existe.");
             new rojerusan.RSNotifyAnimated("¡Alerta!", "Este numero de orden no existe.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
         }
-    }
-
-    private void enviarMensajeCelular(String mensaje) {
-        CPS.enviarMensaje(mensaje);
     }
 
     public void limpiarInformacionAreas() {

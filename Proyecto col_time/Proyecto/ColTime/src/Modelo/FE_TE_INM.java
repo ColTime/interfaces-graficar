@@ -2,6 +2,7 @@ package Modelo;
 
 import Controlador.ConexionPS;
 import com.sun.rowset.CachedRowSetImpl;
+import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,7 +30,7 @@ public class FE_TE_INM {
 
     //Metodos------------------------------------------------->
     //No se te olvide tener en cuenta el id del lector y concatenar a la informacion despues de leer el código QR***
-    public boolean iniciar_Pausar_Reiniciar_Toma_Tiempo(int orden, int detalle, int negocio, int lector, int cantidadTerminada, int operarios, ConexionPS cps) {
+    public boolean iniciar_Pausar_Reiniciar_Toma_Tiempo(int orden, int detalle, int negocio, int lector, int cantidadTerminada, int operarios, PrintStream myPS) {
         //Falta hacer que se puedan poner varias tomas de tiempo del mismo proceso al mismo tiempo.
         try {
             conexion = new Conexion();
@@ -103,7 +104,8 @@ public class FE_TE_INM {
                 } else {
                     res = false;
                     //Se enviara desde acá el mensaje al lector diciendo que la cantidad para el proyecto no es la adecuada(Al celular)...................................
-                    enviarMensajeCelular("Mensaje", cps);//Mensaje para el celular
+//                    enviarMensajeCelular("Mensaje", cps);//Mensaje para el celular
+
                 }
             } else {
                 //Si no existe se ejecutara el procedimiento para iniciar o renaudar el tiempo
@@ -125,10 +127,6 @@ public class FE_TE_INM {
             JOptionPane.showMessageDialog(null, "Error! " + e);
         }
         return res;
-    }
-
-    private void enviarMensajeCelular(String mensaje, ConexionPS cps) {
-        cps.enviarMensaje(mensaje);
     }
 
     public boolean pararTiempoAlmacen(int orden, int detalle, int cantidad, int detalleproducto, int proceso) {

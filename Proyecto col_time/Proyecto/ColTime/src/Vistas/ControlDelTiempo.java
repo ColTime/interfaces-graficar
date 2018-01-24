@@ -9,6 +9,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.PrintStream;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -167,14 +168,14 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
         }
     }
 
-    public void RegistrarTomaTiempoNegocio(String datos[], int cargo, ControlDelTiempo vista, ConexionPS cps) {
+    public void RegistrarTomaTiempoNegocio(String datos[], int cargo, ControlDelTiempo vista, PrintStream myPS) {
         FE_TE_IN obj = new FE_TE_IN();
         this.vista = vista;
 //#------------------------------------------------------------------
         if (cargo == 2 && (Integer.parseInt(datos[2]) == 1 || Integer.parseInt(datos[2]) == 2)) {
-            res = obj.iniciar_Pausar_Reiniciar_Toma_Tiempo(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]), Integer.parseInt(datos[2]), Integer.parseInt(datos[3]), Integer.parseInt(datos[4]), Integer.parseInt(datos[5]), cps);
+            res = obj.iniciar_Pausar_Reiniciar_Toma_Tiempo(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]), Integer.parseInt(datos[2]), Integer.parseInt(datos[3]), Integer.parseInt(datos[4]), Integer.parseInt(datos[5]), myPS);
         } else if (cargo == 3 && Integer.parseInt(datos[2]) == 3) {
-            res = obj.iniciar_Pausar_Reiniciar_Toma_Tiempo(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]), Integer.parseInt(datos[2]), Integer.parseInt(datos[3]), Integer.parseInt(datos[4]), Integer.parseInt(datos[5]), cps);
+            res = obj.iniciar_Pausar_Reiniciar_Toma_Tiempo(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]), Integer.parseInt(datos[2]), Integer.parseInt(datos[3]), Integer.parseInt(datos[4]), Integer.parseInt(datos[5]), myPS);
         } else {
             new rojerusan.RSNotifyAnimated("¡Alerta!", "No tienes permiso de leer el QR", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
             if (Menu.producF == vista) {//Se valida que la vista que no se este utilizando se apunte a null y se finalice

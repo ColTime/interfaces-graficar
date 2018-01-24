@@ -129,7 +129,7 @@ public class Proyecto {
             }
         }
         return obj.registrar_Modificar_Proyecto(idOrden, comercial, nombreCliente, nombreProyecto, tipoProyecto, FE, TE, IN, detalles[0], detalles[1], detalles[2], detalles[3], detalles[4], detalles[5], detalles[6], fecha, detalles[7], detalles[8], op, detalles[9], detalles[10],
-                fechaCiccuitoFEoGF, fechaCiccuitoCOMFEoGF, fechaPCBFEoGF, fechaPCBCOMFEoGF);
+                fechaCiccuitoFEoGF, fechaCiccuitoCOMFEoGF, fechaPCBFEoGF, fechaPCBCOMFEoGF,novedadProyecto);
     }
 
     //Registrar mediante un lector de QR----------------------------------------

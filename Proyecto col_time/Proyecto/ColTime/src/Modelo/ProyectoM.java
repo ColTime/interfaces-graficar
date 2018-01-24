@@ -179,13 +179,13 @@ public class ProyectoM {
 
     public boolean registrar_Modificar_Proyecto(int norden, String comercial, String cliente, String proyecto, String tipo, boolean fe, boolean te, boolean in, boolean pcbfe,
             boolean pcbte, boolean conversor, boolean repujado, boolean troquel, boolean stencil, boolean lexan, String fechaEntrega, boolean ruteo, boolean anti,
-            int op, boolean antisolderP, boolean ruteoP, String fechaCircuito1, String fechaCircuito2, String fechaPCB1, String fechaPCB2) {
+            int op, boolean antisolderP, boolean ruteoP, String fechaCircuito1, String fechaCircuito2, String fechaPCB1, String fechaPCB2, String novedades) {
         try {
             conexion = new Conexion();
             conexion.establecerConexion();
             con = conexion.getConexion();
             //Query------------------------------------------------------------>
-            String Qry = " SELECT FU_RegistrarModificarProyecto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String Qry = " SELECT FU_RegistrarModificarProyecto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             ps = con.prepareStatement(Qry);
             ps.setString(1, comercial);
             ps.setString(2, cliente);
@@ -213,7 +213,7 @@ public class ProyectoM {
             ps.setString(23, fechaCircuito2);
             ps.setString(24, fechaPCB1);
             ps.setString(25, fechaPCB2);
-
+            ps.setString(26, novedades);
             //Ejecución del Query---------------------------------------------->
             rs = ps.executeQuery();
             if (rs.next()) {
